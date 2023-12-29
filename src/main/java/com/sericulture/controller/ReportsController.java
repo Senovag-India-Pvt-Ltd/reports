@@ -9,6 +9,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +33,15 @@ import java.util.Map;
 public class ReportsController {
 
     private final ApiService apiService;
-
+    private static final Logger logger = LoggerFactory.getLogger(ReportsController.class);
     public ReportsController(ApiService apiService) {
         this.apiService = apiService;
     }
     @PostMapping("/gettripletpdf")
     public ResponseEntity<byte[]> gettripletpdf(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
-
+        try {
+            logger.info("enter to gettripletpdf");
         String destFileName = "report.pdf";
         JasperReport jasperReport = getJasperReport(requestDto);
 
@@ -61,8 +64,12 @@ public class ReportsController {
         pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
         pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
         pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
 
-        return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
 
 
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
