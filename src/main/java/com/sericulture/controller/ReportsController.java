@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/reports")
+@RequestMapping("reports")
 public class ReportsController {
 
     private final ApiService apiService;
@@ -67,7 +67,6 @@ public class ReportsController {
 
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
 
-        //return "Hi";
     }
     private JasperReport getJasperReport(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
         File template = ResourceUtils.getFile("classpath:triplet.jrxml");
