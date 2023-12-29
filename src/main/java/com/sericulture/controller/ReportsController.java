@@ -41,6 +41,7 @@ public class ReportsController {
     public ResponseEntity<byte[]> gettripletpdf(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
+            System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
         String destFileName = "report.pdf";
         JasperReport jasperReport = getJasperReport(requestDto);
@@ -67,6 +68,7 @@ public class ReportsController {
             return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
 
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             logger.info(ex.getMessage() + ex.getStackTrace());
             return  null;
             //throw new RuntimeException("fail export file: " + ex.getMessage());
