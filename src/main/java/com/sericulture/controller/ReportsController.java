@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +71,9 @@ public class ReportsController {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             logger.info(ex.getMessage() + ex.getStackTrace());
-            return  null;
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
             //throw new RuntimeException("fail export file: " + ex.getMessage());
         }
 
