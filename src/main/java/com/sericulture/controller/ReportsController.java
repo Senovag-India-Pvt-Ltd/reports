@@ -39,7 +39,7 @@ public class ReportsController {
         this.apiService = apiService;
     }
     @PostMapping("/gettripletpdf")
-    public ResponseEntity<byte[]> gettripletpdf(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    public ResponseEntity<?> gettripletpdf(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
             System.out.println("enter to gettripletpdf");
@@ -96,9 +96,19 @@ public class ReportsController {
         ContentRoot apiResponse = apiService.fetchDataFromApi(requestDto);
 
         List<Content> countries = new LinkedList<>();
+        String formatfees = apiResponse.content.getFarmerMarketFee() + "+" + apiResponse.content.getReelerMarketFee() + "=" + (apiResponse.content.getFarmerMarketFee()+apiResponse.content.getReelerMarketFee());
+        apiResponse.content.setFeespaid(formatfees);
+
+        Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
+        Double farmerfee = apiResponse.content.getFarmerMarketFee();
+        Double realerfee = apiResponse.content.getReelerMarketFee();
+        String farmeramout = ""+ (total - farmerfee);
+        String relaramout = ""+ (total - realerfee);
+        apiResponse.content.setAmountfarmer(farmeramout);
+        apiResponse.content.setAmountrealar(relaramout);
+        apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
         countries.add(apiResponse.content);
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
-
         return new JRBeanCollectionDataSource(countries);
     }
 

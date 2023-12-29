@@ -37,19 +37,19 @@ public class Content {
 
     private String reelerAddress;
 
-    private int allottedLotId;
+    private String allottedLotId;
 
     private String auctionDate;
 
-    private float lotWeight;
+    private String lotWeight;
 
     private double farmerMarketFee;
 
     private double reelerMarketFee;
 
-    private float lotSoldOutAmount;
+    private String lotSoldOutAmount;
 
-    private float bidAmount;
+    private String bidAmount;
 
     private double reelerCurrentBalance;
 
@@ -58,4 +58,12 @@ public class Content {
     private List<Float> lotWeightDetail;
 
     private String logurl;
+
+    private String feespaid;
+    private String amountfarmer;
+    private String amountrealar;
+    private String marketName;
+    private String race;
+    private String source;
+
 }
