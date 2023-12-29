@@ -82,7 +82,7 @@ public class ReportsController {
 
     }
     private JasperReport getJasperReport(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
-        File template = ResourceUtils.getFile("classpath:triplet.jrxml");
+        File template = ResourceUtils.getFile("/reports/triplet.jrxml");
         return JasperCompileManager.compileReport(template.getAbsolutePath());
     }
     private  Map<String, Object> getParameters(){
