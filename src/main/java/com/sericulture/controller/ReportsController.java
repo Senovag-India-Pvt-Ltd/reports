@@ -68,7 +68,8 @@ public class ReportsController {
 
         } catch (Exception ex) {
             logger.info(ex.getMessage() + ex.getStackTrace());
-            throw new RuntimeException("fail export file: " + ex.getMessage());
+            return  null;
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
         }
 
 
