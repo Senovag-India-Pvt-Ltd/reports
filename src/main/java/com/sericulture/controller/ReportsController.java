@@ -106,6 +106,10 @@ public class ReportsController {
 
             // Set font path
 
+            //net.sf.jasperreports.extensions..factory.fonts=net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory;
+            //net.sf.jasperreports.extension.simple.font.families.myfontfamily="fonts/fonts.xml";
+
+
             // 3. datasource "java object"
             JRDataSource dataSource = getDataSource(requestDto);
 
