@@ -31,9 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("reports")
+@RequestMapping("marketreport")
 public class ReportsController {
-
     private final ApiService apiService;
     private static final Logger logger = LoggerFactory.getLogger(ReportsController.class);
     public ReportsController(ApiService apiService) {
@@ -46,7 +45,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
         String destFileName = "report.pdf";
-        JasperReport jasperReport = getJasperReport(requestDto);
+        JasperReport jasperReport = getJasperReport("triplet.jrxml");
 
         // 2. parameters "empty"
         Map<String, Object> parameters = getParameters();
@@ -82,6 +81,47 @@ public class ReportsController {
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
 
     }
+
+    @PostMapping("/getfarmercopy")
+    public ResponseEntity<?> getfarmercopy(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to gettripletpdf");
+            logger.info("enter to gettripletpdf");
+            String destFileName = "report.pdf";
+            JasperReport jasperReport = getJasperReport("farmercopy.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSource(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
     @PostMapping("/gettripletpdfkannada")
     public ResponseEntity<?> gettripletpdfkannada(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -89,7 +129,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
             String destFileName = "report.pdf";
-            JasperReport jasperReport = getJasperReportkannada(requestDto);
+            JasperReport jasperReport = getJasperReport("BidSlipTriplicate_kannada.jrxml");
 
             String ttfFontFilePath = "C:/reports/NIRMALAB.ttf";
 
@@ -141,12 +181,8 @@ public class ReportsController {
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
 
     }
-    private JasperReport getJasperReport(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
-        File template = ResourceUtils.getFile("/reports/triplet.jrxml");
-        return JasperCompileManager.compileReport(template.getAbsolutePath());
-    }
-    private JasperReport getJasperReportkannada(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
-        File template = ResourceUtils.getFile("/reports/BidSlipTriplicate_kannada.jrxml");
+    private JasperReport getJasperReport(String reportpath) throws FileNotFoundException, JRException {
+        File template = ResourceUtils.getFile("/reports/"+reportpath);
         return JasperCompileManager.compileReport(template.getAbsolutePath());
     }
     private  Map<String, Object> getParameters(){
