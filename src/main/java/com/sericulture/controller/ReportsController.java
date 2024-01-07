@@ -7,6 +7,7 @@ import com.sericulture.model.MarketAuctionForPrintRequest;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.slf4j.Logger;
@@ -81,8 +82,67 @@ public class ReportsController {
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
 
     }
+    @PostMapping("/gettripletpdfkannada")
+    public ResponseEntity<?> gettripletpdfkannada(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to gettripletpdf");
+            logger.info("enter to gettripletpdf");
+            String destFileName = "report.pdf";
+            JasperReport jasperReport = getJasperReportkannada(requestDto);
+
+            String ttfFontFilePath = "C:/reports/NIRMALAB.ttf";
+
+            //JRLoader.loadLibrary("JasperReportsFonts", ttfFontFilePath);
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            //parameters.put("net.sf.jasperreports.awt.ignore.missing.font", "true");
+            //parameters.put("net.sf.jasperreports.default.font.name", "Nirmala UI Semilight");
+            //parameters.put("net.sf.jasperreports.default.font.pdf.embedded", "true");
+            //parameters.put("net.sf.jasperreports.default.font.pdf.encoding", "Identity-H");
+            //parameters.put("net.sf.jasperreports.export.pdf.font.path", ttfFontFilePath);
+
+            // Set font path
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSource(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            //jasperPrint.setProperty("net.sf.jasperreports.export.pdf.font.path", ttfFontFilePath);
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
     private JasperReport getJasperReport(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
         File template = ResourceUtils.getFile("/reports/triplet.jrxml");
+        return JasperCompileManager.compileReport(template.getAbsolutePath());
+    }
+    private JasperReport getJasperReportkannada(MarketAuctionForPrintRequest requestDto) throws FileNotFoundException, JRException {
+        File template = ResourceUtils.getFile("/reports/BidSlipTriplicate_kannada.jrxml");
         return JasperCompileManager.compileReport(template.getAbsolutePath());
     }
     private  Map<String, Object> getParameters(){
@@ -107,6 +167,8 @@ public class ReportsController {
         apiResponse.content.setAmountfarmer(farmeramout);
         apiResponse.content.setAmountrealar(relaramout);
         apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        apiResponse.content.setFarmerFirstName("ದಿನಾಂಕ");
         countries.add(apiResponse.content);
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(countries);
