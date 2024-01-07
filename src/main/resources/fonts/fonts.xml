@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fontFamilies>
-    <fontFamily name="Nirmala UI Semilight">
-        <normal><![CDATA[fonts/NirmalaUISemilight/NIRMALAB.TTF]]></normal>
-        <bold><![CDATA[fonts/NirmalaUISemilight/NIRMALAB.TTF]]>
+    <fontFamily name="Nirmala UI">
+        <normal><![CDATA[/reports/fonts/NirmalaUISemilight/NIRMALAB.TTF]]></normal>
+        <bold><![CDATA[/reports/fonts/NirmalaUISemilight/NIRMALAB.TTF]]>
         </bold>
         <pdfEncoding>Identity-H</pdfEncoding>
         <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
