@@ -14,6 +14,7 @@ import lombok.*;
 
 public class Content {
     private String farmerNumber;
+    private String serialNumber;
 
     private String farmerFirstName;
 

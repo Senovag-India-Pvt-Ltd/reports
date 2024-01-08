@@ -207,8 +207,6 @@ public class ReportsController {
         apiResponse.content.setAmountfarmer(farmeramout);
         apiResponse.content.setAmountrealar(relaramout);
         apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
-
-        apiResponse.content.setFarmerFirstName("ದಿನಾಂಕ");
         countries.add(apiResponse.content);
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(countries);
