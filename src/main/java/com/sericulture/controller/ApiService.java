@@ -1,6 +1,7 @@
 package com.sericulture.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sericulture.helper.Util;
 import com.sericulture.model.ContentRoot;
 import com.sericulture.model.MarketAuctionForPrintRequest;
 import com.sericulture.model.MarketAuctionForPrintResponse;
@@ -28,6 +29,7 @@ public class ApiService {
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<MarketAuctionForPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
         MarketAuctionForPrintResponse response = new MarketAuctionForPrintResponse();
