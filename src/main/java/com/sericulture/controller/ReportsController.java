@@ -297,33 +297,44 @@ public class ReportsController {
         apiResponse.content.setAccountnumber_ifsccode("Bank - " +apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
         apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee() )+ "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" +slip1Amount.toString());
         apiResponse.content.setReeleramount(relaramout);
-
-        String inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+        String inputDateTime ="";
+        if(apiResponse.content.getAuctionDateWithTime() != null) {
+            inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+        }
         // Parse the input date and time
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
         Date parsedDate;
         try {
-            parsedDate = inputFormat.parse(inputDateTime);
+            if(inputDateTime != null && !inputDateTime.equals("")) {
+                parsedDate = inputFormat.parse(inputDateTime);
+                // Format the output date and time
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+                String formattedDateTime = outputFormat.format(parsedDate);
+                apiResponse.content.setAuctionDate_time(formattedDateTime);
+            }
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing input date and time", e);
         }
-        // Format the output date and time
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
-        String formattedDateTime = outputFormat.format(parsedDate);
-        apiResponse.content.setAuctionDate_time(formattedDateTime);
+
+        String smallBins = "";
+        String bigBins ="";
 
         apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
         apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" +apiResponse.content.getSerialNumber() + ")" +apiResponse.content.getFarmerNameKannada());
 
-        List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
-        String smallBins = String.join(",", smallBinList);
+        if(apiResponse.content.getSmallBinList() != null) {
+            List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
+                    .map(Object::toString)
+                    .collect(Collectors.toList());
+            smallBins = String.join(",", smallBinList);
+        }
 
-        List<String> bigBinList = apiResponse.content.getBigBinList().stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
-        String bigBins = String.join(",", bigBinList);
+        if(apiResponse.content.getBigBinList() != null) {
+            List<String> bigBinList = apiResponse.content.getBigBinList().stream()
+                    .map(Object::toString)
+                    .collect(Collectors.toList());
+            bigBins = String.join(",", bigBinList);
+        }
         apiResponse.content.setBinno("Big: "+bigBins + " Small: "+smallBins);
 
 

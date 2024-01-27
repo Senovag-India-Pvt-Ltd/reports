@@ -48,7 +48,7 @@ public class BeanConfiguration implements WebMvcConfigurer {
         };
     }
 
-    @Override
+  /*  @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
@@ -73,5 +73,5 @@ public class BeanConfiguration implements WebMvcConfigurer {
         source.setBasename("messages");
         source.setCacheSeconds(3600); // Refresh cache once per hour.
         return source;
-    }
+    }*/
 }
