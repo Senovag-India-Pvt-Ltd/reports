@@ -90,7 +90,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("kannada_triplicate_with_variable.jrxml");
+            JasperReport jasperReport = getJasperReport("kannada_triplicate_with_variable_1.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -135,6 +135,46 @@ public class ReportsController {
             logger.info("enter to gettripletpdf");
             String destFileName = "report.pdf";
             JasperReport jasperReport = getJasperReport("farmercopy.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSource(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+    @PostMapping("/gatepass")
+    public ResponseEntity<?> gatepass(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to gettripletpdf");
+            logger.info("enter to gettripletpdf");
+            String destFileName = "report.pdf";
+            JasperReport jasperReport = getJasperReport("Gate_pass.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -337,6 +377,116 @@ public class ReportsController {
         }
         apiResponse.content.setBinno("Big: "+bigBins + " Small: "+smallBins);
 
+        for (int i = 0; i < 15; i++) {
+            switch (i) {
+                case 0:
+                    apiResponse.content.setLotDetail0("");
+                    break;
+                case 1:
+                    apiResponse.content.setLotDetail1("");
+                    break;
+                case 2:
+                    apiResponse.content.setLotDetail2("");
+                    break;
+                case 3:
+                    apiResponse.content.setLotDetail3("");
+                    break;
+                case 4:
+                    apiResponse.content.setLotDetail4("");
+                    break;
+                case 5:
+                    apiResponse.content.setLotDetail5("");
+                    break;
+                case 6:
+                    apiResponse.content.setLotDetail6("");
+                    break;
+                case 7:
+                    apiResponse.content.setLotDetail7("");
+                    break;
+                case 8:
+                    apiResponse.content.setLotDetail8("");
+                    break;
+                case 9:
+                    apiResponse.content.setLotDetail9("");
+                    break;
+                case 10:
+                    apiResponse.content.setLotDetail10("");
+                    break;
+                case 11:
+                    apiResponse.content.setLotDetail11("");
+                    break;
+                case 12:
+                    apiResponse.content.setLotDetail12("");
+                    break;
+                case 13:
+                    apiResponse.content.setLotDetail13("");
+                    break;
+                case 14:
+                    apiResponse.content.setLotDetail14("");
+                    break;
+                default:
+                    System.out.println("Default case");
+            }
+        }
+
+        if(apiResponse.content.getLotWeightDetail() != null){
+            if(apiResponse.content.getLotWeightDetail().size()>0){
+                for(int i=0; i<apiResponse.content.getLotWeightDetail().size(); i++){
+                    switch (i) {
+                        case 0:
+                            apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 1:
+                            apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 2:
+                            apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 3:
+                            apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 4:
+                            apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 5:
+                            apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 6:
+                            apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 7:
+                            apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 8:
+                            apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 9:
+                            apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 10:
+                            apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 11:
+                            apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 12:
+                            apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 13:
+                            apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        case 14:
+                            apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
+                            break;
+                        default:
+                            System.out.println("Default case");
+                    }
+                }
+            }
+        }
+
+        apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+        apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
 
         apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
         countries.add(apiResponse.content);

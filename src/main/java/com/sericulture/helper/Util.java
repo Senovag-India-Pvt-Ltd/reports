@@ -94,6 +94,12 @@ public final class Util {
         String token = ((UserInfoDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getJwtToken();
         return TokenDecrypterUtil.extractJwtPayload(token);
     }
+
+    public static String getTokenData() {
+        Principal principal = SecurityContextHolder.getContext().getAuthentication();
+        String token = ((UserInfoDetails)((UsernamePasswordAuthenticationToken) principal).getPrincipal()).getJwtToken();
+        return token;
+    }
     public static Integer getMarketId(JwtPayloadData jwtPayloadData) {
         return jwtPayloadData.getMarketId();
     }

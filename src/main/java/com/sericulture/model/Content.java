@@ -93,4 +93,20 @@ public class Content {
     private List<Integer> bigBinList;
     private String loginName;
     private String farmerNameKannadaWithSerialNumber;
+
+    private String lotDetail0;
+    private String lotDetail1;
+    private String lotDetail2;
+    private String lotDetail3;
+    private String lotDetail4;
+    private String lotDetail5;
+    private String lotDetail6;
+    private String lotDetail7;
+    private String lotDetail8;
+    private String lotDetail9;
+    private String lotDetail10;
+    private String lotDetail11;
+    private String lotDetail12;
+    private String lotDetail13;
+    private String lotDetail14;
 }
