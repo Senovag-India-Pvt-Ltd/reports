@@ -319,177 +319,179 @@ public class ReportsController {
     private  JRDataSource getDataSource(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
 
         ContentRoot apiResponse = apiService.fetchDataFromApi(requestDto);
-
         List<Content> countries = new LinkedList<>();
-        String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee()+apiResponse.content.getReelerMarketFee()));
-        apiResponse.content.setFeespaid(formatfees);
+        if(apiResponse.content != null) {
 
-        Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
-        Double farmerfee = apiResponse.content.getFarmerMarketFee();
-        Double realerfee = apiResponse.content.getReelerMarketFee();
-        String farmeramout = ""+ roundToTwoDecimalPlaces((total - farmerfee));
-        String relaramout = ""+ roundToTwoDecimalPlaces((total - realerfee));
-        Double slip1Amount = 0.0;
-        slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
-        apiResponse.content.setAmountfarmer(farmeramout);
-        apiResponse.content.setAmountrealar(relaramout);
-        apiResponse.content.setLoginname_accountnumber_ifsccode("(" + apiResponse.content.getLoginName() +")" + "//Bank - " +apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
-        apiResponse.content.setAccountnumber_ifsccode("Bank - " +apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
-        apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee() )+ "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" +slip1Amount.toString());
-        apiResponse.content.setReeleramount(relaramout);
-        String inputDateTime ="";
-        if(apiResponse.content.getAuctionDateWithTime() != null) {
-            inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
-        }
-        // Parse the input date and time
-        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-        Date parsedDate;
-        try {
-            if(inputDateTime != null && !inputDateTime.equals("")) {
-                parsedDate = inputFormat.parse(inputDateTime);
-                // Format the output date and time
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
-                String formattedDateTime = outputFormat.format(parsedDate);
-                apiResponse.content.setAuctionDate_time(formattedDateTime);
+            String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
+            apiResponse.content.setFeespaid(formatfees);
+
+            Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
+            Double farmerfee = apiResponse.content.getFarmerMarketFee();
+            Double realerfee = apiResponse.content.getReelerMarketFee();
+            String farmeramout = "" + roundToTwoDecimalPlaces((total - farmerfee));
+            String relaramout = "" + roundToTwoDecimalPlaces((total - realerfee));
+            Double slip1Amount = 0.0;
+            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
+            apiResponse.content.setAmountfarmer(farmeramout);
+            apiResponse.content.setAmountrealar(relaramout);
+            apiResponse.content.setLoginname_accountnumber_ifsccode("(" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
+            apiResponse.content.setAccountnumber_ifsccode("Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
+            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
+            apiResponse.content.setReeleramount(relaramout);
+            String inputDateTime = "";
+            if (apiResponse.content.getAuctionDateWithTime() != null) {
+                inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
             }
-        } catch (ParseException e) {
-            throw new RuntimeException("Error parsing input date and time", e);
-        }
-
-        String smallBins = "";
-        String bigBins ="";
-
-        apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
-        apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" +apiResponse.content.getSerialNumber() + ")" +apiResponse.content.getFarmerNameKannada());
-
-        if(apiResponse.content.getSmallBinList() != null) {
-            List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
-                    .map(Object::toString)
-                    .collect(Collectors.toList());
-            smallBins = String.join(",", smallBinList);
-        }
-
-        if(apiResponse.content.getBigBinList() != null) {
-            List<String> bigBinList = apiResponse.content.getBigBinList().stream()
-                    .map(Object::toString)
-                    .collect(Collectors.toList());
-            bigBins = String.join(",", bigBinList);
-        }
-        apiResponse.content.setBinno("Big: "+bigBins + " Small: "+smallBins);
-
-        for (int i = 0; i < 15; i++) {
-            switch (i) {
-                case 0:
-                    apiResponse.content.setLotDetail0("");
-                    break;
-                case 1:
-                    apiResponse.content.setLotDetail1("");
-                    break;
-                case 2:
-                    apiResponse.content.setLotDetail2("");
-                    break;
-                case 3:
-                    apiResponse.content.setLotDetail3("");
-                    break;
-                case 4:
-                    apiResponse.content.setLotDetail4("");
-                    break;
-                case 5:
-                    apiResponse.content.setLotDetail5("");
-                    break;
-                case 6:
-                    apiResponse.content.setLotDetail6("");
-                    break;
-                case 7:
-                    apiResponse.content.setLotDetail7("");
-                    break;
-                case 8:
-                    apiResponse.content.setLotDetail8("");
-                    break;
-                case 9:
-                    apiResponse.content.setLotDetail9("");
-                    break;
-                case 10:
-                    apiResponse.content.setLotDetail10("");
-                    break;
-                case 11:
-                    apiResponse.content.setLotDetail11("");
-                    break;
-                case 12:
-                    apiResponse.content.setLotDetail12("");
-                    break;
-                case 13:
-                    apiResponse.content.setLotDetail13("");
-                    break;
-                case 14:
-                    apiResponse.content.setLotDetail14("");
-                    break;
-                default:
-                    System.out.println("Default case");
+            // Parse the input date and time
+            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            Date parsedDate;
+            try {
+                if (inputDateTime != null && !inputDateTime.equals("")) {
+                    parsedDate = inputFormat.parse(inputDateTime);
+                    // Format the output date and time
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+                    String formattedDateTime = outputFormat.format(parsedDate);
+                    apiResponse.content.setAuctionDate_time(formattedDateTime);
+                }
+            } catch (ParseException e) {
+                throw new RuntimeException("Error parsing input date and time", e);
             }
-        }
 
-        if(apiResponse.content.getLotWeightDetail() != null){
-            if(apiResponse.content.getLotWeightDetail().size()>0){
-                for(int i=0; i<apiResponse.content.getLotWeightDetail().size(); i++){
-                    switch (i) {
-                        case 0:
-                            apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 1:
-                            apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 2:
-                            apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 3:
-                            apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 4:
-                            apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 5:
-                            apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 6:
-                            apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 7:
-                            apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 8:
-                            apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 9:
-                            apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 10:
-                            apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 11:
-                            apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 12:
-                            apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 13:
-                            apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        case 14:
-                            apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
-                            break;
-                        default:
-                            System.out.println("Default case");
+            String smallBins = "";
+            String bigBins = "";
+
+            apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getSerialNumber() + ")" + apiResponse.content.getFarmerNameKannada());
+
+            if (apiResponse.content.getSmallBinList() != null) {
+                List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.toList());
+                smallBins = String.join(",", smallBinList);
+            }
+
+            if (apiResponse.content.getBigBinList() != null) {
+                List<String> bigBinList = apiResponse.content.getBigBinList().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.toList());
+                bigBins = String.join(",", bigBinList);
+            }
+            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
+
+            for (int i = 0; i < 15; i++) {
+                switch (i) {
+                    case 0:
+                        apiResponse.content.setLotDetail0("");
+                        break;
+                    case 1:
+                        apiResponse.content.setLotDetail1("");
+                        break;
+                    case 2:
+                        apiResponse.content.setLotDetail2("");
+                        break;
+                    case 3:
+                        apiResponse.content.setLotDetail3("");
+                        break;
+                    case 4:
+                        apiResponse.content.setLotDetail4("");
+                        break;
+                    case 5:
+                        apiResponse.content.setLotDetail5("");
+                        break;
+                    case 6:
+                        apiResponse.content.setLotDetail6("");
+                        break;
+                    case 7:
+                        apiResponse.content.setLotDetail7("");
+                        break;
+                    case 8:
+                        apiResponse.content.setLotDetail8("");
+                        break;
+                    case 9:
+                        apiResponse.content.setLotDetail9("");
+                        break;
+                    case 10:
+                        apiResponse.content.setLotDetail10("");
+                        break;
+                    case 11:
+                        apiResponse.content.setLotDetail11("");
+                        break;
+                    case 12:
+                        apiResponse.content.setLotDetail12("");
+                        break;
+                    case 13:
+                        apiResponse.content.setLotDetail13("");
+                        break;
+                    case 14:
+                        apiResponse.content.setLotDetail14("");
+                        break;
+                    default:
+                        System.out.println("Default case");
+                }
+            }
+
+            if (apiResponse.content.getLotWeightDetail() != null) {
+                if (apiResponse.content.getLotWeightDetail().size() > 0) {
+                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
+                        switch (i) {
+                            case 0:
+                                apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 1:
+                                apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 2:
+                                apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 3:
+                                apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 4:
+                                apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 5:
+                                apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 6:
+                                apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 7:
+                                apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 8:
+                                apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 9:
+                                apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 10:
+                                apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 11:
+                                apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 12:
+                                apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 13:
+                                apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 14:
+                                apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            default:
+                                System.out.println("Default case");
+                        }
                     }
                 }
             }
+
+            apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+            apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
+
+            apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            countries.add(apiResponse.content);
         }
-
-        apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-        apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
-
-        apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        countries.add(apiResponse.content);
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(countries);
     }
