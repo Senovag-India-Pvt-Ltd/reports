@@ -341,6 +341,8 @@ public class ReportsController {
             String inputDateTime = "";
             if (apiResponse.content.getAuctionDateWithTime() != null) {
                 inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+            }else{
+                apiResponse.content.setAuctionDate_time("");
             }
             // Parse the input date and time
             SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
@@ -359,6 +361,16 @@ public class ReportsController {
 
             String smallBins = "";
             String bigBins = "";
+
+            if(apiResponse.content.getReelerNameKannada() == null){
+                apiResponse.content.setReelerNameKannada("");
+            }
+            if(apiResponse.content.getFarmerNameKannada() == null){
+                apiResponse.content.setFarmerNameKannada("");
+            }
+            if(apiResponse.content.getReelerLicense() == null){
+                apiResponse.content.setReelerLicense("");
+            }
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
             apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getSerialNumber() + ")" + apiResponse.content.getFarmerNameKannada());
@@ -484,11 +496,9 @@ public class ReportsController {
                         }
                     }
                 }
+                apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+                apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
             }
-
-            apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-            apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
-
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
             countries.add(apiResponse.content);
         }
