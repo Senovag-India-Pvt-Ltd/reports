@@ -337,7 +337,7 @@ public class ReportsController {
             apiResponse.content.setLoginname_accountnumber_ifsccode("(" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
             apiResponse.content.setAccountnumber_ifsccode("Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
             apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
-            apiResponse.content.setReeleramount(relaramout);
+          //  apiResponse.content.setReeleramount(relaramout);
             String inputDateTime = "";
             if (apiResponse.content.getAuctionDateWithTime() != null) {
                 inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
@@ -373,7 +373,8 @@ public class ReportsController {
             }
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getSerialNumber() + ")" + apiResponse.content.getFarmerNameKannada());
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getFarmerNumber() + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
+            apiResponse.content.setReelerDetails("(" + apiResponse.content.getReelerNumber() + ")" + apiResponse.content.getReelerNameKannada() +" " + apiResponse.content.getReelerAddress());
 
             if (apiResponse.content.getSmallBinList() != null) {
                 List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
@@ -500,6 +501,23 @@ public class ReportsController {
                 apiResponse.content.setTotalamount(apiResponse.content.getLotSoldOutAmount());
             }
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            if(apiResponse.content.getBidAmount().equals("0.0")){
+                apiResponse.content.setBidAmount("");
+            }
+            if(apiResponse.content.getLotWeight().equals("0.0")){
+                apiResponse.content.setLotWeight("");
+            }
+            if(apiResponse.content.getLotSoldOutAmount().equals("0.0")){
+                apiResponse.content.setLotSoldOutAmount("");
+            }
+            if(apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")){
+                apiResponse.content.setFeespaid("");
+            }
+            if(!apiResponse.content.getBidAmount().equals("")) {
+                apiResponse.content.setReeleramount(String.valueOf(Double.parseDouble(apiResponse.content.getBidAmount()) + apiResponse.content.getReelerMarketFee()));
+            }else{
+                apiResponse.content.setReeleramount("");
+            }
             countries.add(apiResponse.content);
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));

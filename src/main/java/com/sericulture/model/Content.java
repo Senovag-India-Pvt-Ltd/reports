@@ -109,4 +109,6 @@ public class Content {
     private String lotDetail12;
     private String lotDetail13;
     private String lotDetail14;
+    private String reelerDetails;
+    private String reelerNumber;
 }
