@@ -374,7 +374,15 @@ public class ReportsController {
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
             apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getFarmerNumber() + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
-            apiResponse.content.setReelerDetails("(" + apiResponse.content.getReelerNumber() + ")" + apiResponse.content.getReelerNameKannada() +" " + apiResponse.content.getReelerAddress());
+            String reelerNumberText = "";
+            String reelerAddressText = "";
+            if(apiResponse.content.getReelerNumber()!= null){
+                reelerNumberText = "(" + apiResponse.content.getReelerNumber() + ")";
+            }
+            if(apiResponse.content.getReelerAddress()!= null){
+                reelerAddressText = apiResponse.content.getReelerNumber();
+            }
+            apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerNameKannada() +" " + reelerAddressText);
 
             if (apiResponse.content.getSmallBinList() != null) {
                 List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
