@@ -383,7 +383,7 @@ public class ReportsController {
                 reelerNumberText = "(" + apiResponse.content.getReelerNumber() + ")";
             }
             if(apiResponse.content.getReelerAddress()!= null){
-                reelerAddressText = apiResponse.content.getReelerNumber();
+                reelerAddressText = apiResponse.content.getReelerAddress();
             }
             apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerNameKannada() +" " + reelerAddressText);
 
