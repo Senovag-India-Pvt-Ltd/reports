@@ -522,13 +522,13 @@ public class ReportsController {
             if(apiResponse.content.getLotSoldOutAmount().equals("0.0")){
                 apiResponse.content.setLotSoldOutAmount("");
             }else{
-                apiResponse.content.setLotSoldOutAmount(String.valueOf(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
             }
             if(apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")){
                 apiResponse.content.setFeespaid("");
             }
             if(!apiResponse.content.getBidAmount().equals("")) {
-                apiResponse.content.setReeleramount(String.valueOf(Double.parseDouble(apiResponse.content.getTotalamount()) + apiResponse.content.getReelerMarketFee()));
+                apiResponse.content.setReeleramount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getTotalamount()) + apiResponse.content.getReelerMarketFee())));
             }else{
                 apiResponse.content.setReeleramount("");
             }
