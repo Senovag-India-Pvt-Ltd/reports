@@ -111,4 +111,5 @@ public class Content {
     private String lotDetail14;
     private String reelerDetails;
     private String reelerNumber;
+    private String acknowledgmentString;
 }

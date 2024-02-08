@@ -214,7 +214,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("farmer_copy_with_variable.jrxml");
+            JasperReport jasperReport = getJasperReport("farmer_copy_with_variable - Copy.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -352,8 +352,11 @@ public class ReportsController {
                     parsedDate = inputFormat.parse(inputDateTime);
                     // Format the output date and time
                     SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+                    SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
                     String formattedDateTime = outputFormat.format(parsedDate);
+                    String formattedDateTime1 = outputFormat1.format(parsedDate);
                     apiResponse.content.setAuctionDate_time(formattedDateTime);
+                    apiResponse.content.setAuctionDate(formattedDateTime1);
                 }
             } catch (ParseException e) {
                 throw new RuntimeException("Error parsing input date and time", e);
@@ -390,6 +393,7 @@ public class ReportsController {
                         .collect(Collectors.toList());
                 smallBins = String.join(",", smallBinList);
             }
+            apiResponse.content.setAcknowledgmentString("ಈ ಮೇಲೆ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು " +apiResponse.content.getAuctionDate() + " ದಿನ _______ ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.");
 
             if (apiResponse.content.getBigBinList() != null) {
                 List<String> bigBinList = apiResponse.content.getBigBinList().stream()
