@@ -1,9 +1,7 @@
 package com.sericulture.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sericulture.model.Content;
-import com.sericulture.model.ContentRoot;
-import com.sericulture.model.MarketAuctionForPrintRequest;
+import com.sericulture.model.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -28,6 +26,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -544,4 +543,77 @@ public class ReportsController {
         bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
         return bd.doubleValue();
     }
+
+    @PostMapping("/dtr-online-report")
+    public ResponseEntity<?> dtrOnlineReport(@RequestBody DTROnlineRequest request){
+
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            JasperReport jasperReport = getJasperReport("dtr_online_report.jrxml");
+
+            // 2. datasource "java object"
+            JRBeanCollectionDataSource dataSource = getDtrOnlineReportData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getDtrOnlineReportData(DTROnlineRequest requestDto) throws JsonProcessingException {
+        DTRReportResponse apiResponse = apiService.dtrReport(requestDto);
+        List<DTROnlineReportUnitDetail> contentList = new LinkedList<>();
+        for(DTROnlineReportUnitDetail dtrOnlineReportUnitDetail: apiResponse.getContent().getDtrOnlineReportUnitDetailList()) {
+
+            String farmerAddress = "";
+            if(dtrOnlineReportUnitDetail.getFarmerAddress() != null){
+                farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() +",";
+            }
+
+            String marketNameKannada = "";
+            if(dtrOnlineReportUnitDetail.getMarketNameKannada() != null){
+                marketNameKannada = dtrOnlineReportUnitDetail.getMarketNameKannada();
+            }
+            // Define date format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            // Format LocalDate to desired format
+            String formattedDate = requestDto.getToDate().format(formatter);
+
+            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " +dtrOnlineReportUnitDetail.getFarmerMiddleName() +" " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() +")");
+            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() +")");
+            dtrOnlineReportUnitDetail.setMarketFee(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerMarketFee() + dtrOnlineReportUnitDetail.getReelerMarketFee()));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount((float) roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getLotSoldOutAmount()));
+            dtrOnlineReportUnitDetail.setFarmerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerAmount()));
+            dtrOnlineReportUnitDetail.setReelerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getReelerAmount()));
+            dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
+            contentList.add(dtrOnlineReportUnitDetail);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
 }
