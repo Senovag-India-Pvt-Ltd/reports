@@ -63,5 +63,51 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+
+    public BiddingReportResponse biddingReport(BiddingReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
+
+        String finalapiurl = apiUrl + "auction/report/getBiddingReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<BiddingReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        BiddingReportResponse response = new BiddingReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        BiddingReportResponse response2 = objectMapper.readValue(response1, BiddingReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public BiddingReportResponse reelerBiddingReport(ReelerBiddingReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+     //   String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerBiddingReport";
+
+        String finalapiurl = apiUrl + "auction/report/getReelerBiddingReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ReelerBiddingReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        BiddingReportResponse response = new BiddingReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        BiddingReportResponse response2 = objectMapper.readValue(response1, BiddingReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 }
 
