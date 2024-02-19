@@ -616,4 +616,124 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(contentList);
     }
 
+    @PostMapping("/get-bidding-report")
+    public ResponseEntity<?> getBiddingReport(@RequestBody BiddingReportRequest request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("bidding_report_reeler.jrxml");
+
+            // 2. datasource "java object"
+            JRBeanCollectionDataSource dataSource = getBiddingReportData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws JsonProcessingException {
+        BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
+        List<LotReportResponse> contentList = new LinkedList<>();
+        LotReportResponse lotReportResponse1 = new LotReportResponse();
+        lotReportResponse1.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+requestDto.getReportFromDate());
+        contentList.add(lotReportResponse1);
+        for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            lotReportResponse.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
+            lotReportResponse.setHeaderText2("Lot Number = "+lotReportResponse.getLotId() +" and Bid Date = "+lotReportResponse.getAcceptedTime());
+            if(lotReportResponse.getAcceptedBy() == null){
+                lotReportResponse.setAcceptedBy("");
+            }
+            if(lotReportResponse.getAcceptedTime() == null){
+                lotReportResponse.setAcceptedTime("");
+            }
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
+    @PostMapping("/get-reeler-bidding-report")
+    public ResponseEntity<?> getReelerBiddingReport(@RequestBody ReelerBiddingReportRequest request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("bidding_report_reeler.jrxml");
+
+            // 2. datasource "java object"
+            JRBeanCollectionDataSource dataSource = getReelerBiddingReportData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getReelerBiddingReportData(ReelerBiddingReportRequest requestDto) throws JsonProcessingException {
+        BiddingReportResponse apiResponse = apiService.reelerBiddingReport(requestDto);
+        List<LotReportResponse> contentList = new LinkedList<>();
+        LotReportResponse lotReportResponse1 = new LotReportResponse();
+        lotReportResponse1.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+requestDto.getReportFromDate());
+        contentList.add(lotReportResponse1);
+        for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            lotReportResponse.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
+            lotReportResponse.setHeaderText2("Reeler Id = "+lotReportResponse.getReelerNumber() +" and Bid Date = "+lotReportResponse.getAcceptedTime());
+            if(lotReportResponse.getAcceptedBy() == null){
+                lotReportResponse.setAcceptedBy("");
+            }
+            if(lotReportResponse.getAcceptedTime() == null){
+                lotReportResponse.setAcceptedTime("");
+            }
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
 }
