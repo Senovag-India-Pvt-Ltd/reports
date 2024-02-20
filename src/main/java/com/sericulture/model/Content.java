@@ -119,4 +119,5 @@ public class Content {
     private String reeler_amount;
     private String bankDetails;
     private String accpetedBy;
+    private String shed;
 }

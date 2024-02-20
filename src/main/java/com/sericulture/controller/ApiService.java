@@ -66,9 +66,9 @@ public class ApiService {
 
     public BiddingReportResponse biddingReport(BiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
 
-        String finalapiurl = apiUrl + "auction/report/getBiddingReport";
+       // String finalapiurl = apiUrl + "auction/report/getBiddingReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -89,9 +89,9 @@ public class ApiService {
 
     public BiddingReportResponse reelerBiddingReport(ReelerBiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-     //   String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerBiddingReport";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerBiddingReport";
 
-        String finalapiurl = apiUrl + "auction/report/getReelerBiddingReport";
+        //String finalapiurl = apiUrl + "auction/report/getReelerBiddingReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -112,9 +112,9 @@ public class ApiService {
 
     public PendingReportResponse pendingReportList(PendingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getPendingLotReport";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getPendingLotReport";
 
-        String finalapiurl = apiUrl + "auction/report/getPendingLotReport";
+       // String finalapiurl = apiUrl + "auction/report/getPendingLotReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -135,9 +135,9 @@ public class ApiService {
 
     public FarmerTxnResponse farmerTxnReportList(FarmerTxnRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getFarmerTxnReport";
+         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getFarmerTxnReport";
 
-        String finalapiurl = apiUrl + "auction/report/getFarmerTxnReport";
+      //  String finalapiurl = apiUrl + "auction/report/getFarmerTxnReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();

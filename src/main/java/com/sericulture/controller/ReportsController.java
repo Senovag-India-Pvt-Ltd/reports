@@ -655,21 +655,26 @@ public class ReportsController {
         }
     }
 
-    private  JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws JsonProcessingException {
+    private  JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws Exception {
         BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+requestDto.getReportFromDate());
+        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(lotReportResponse1);
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
-            lotReportResponse.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
-            lotReportResponse.setHeaderText2("Lot Number = "+lotReportResponse.getLotId() +" and Bid Date = "+lotReportResponse.getAcceptedTime());
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
             if(lotReportResponse.getAcceptedTime() == null){
                 lotReportResponse.setAcceptedTime("");
+            }else{
+                lotReportResponse.setAcceptedTime(convertToTime(lotReportResponse.getAcceptedTime()));
+            }
+            if(lotReportResponse.getBidTime() == null){
+                lotReportResponse.setBidTime("");
+            }else{
+                lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
             }
             contentList.add(lotReportResponse);
         }
@@ -715,21 +720,26 @@ public class ReportsController {
         }
     }
 
-    private  JRBeanCollectionDataSource getReelerBiddingReportData(ReelerBiddingReportRequest requestDto) throws JsonProcessingException {
+    private  JRBeanCollectionDataSource getReelerBiddingReportData(ReelerBiddingReportRequest requestDto) throws Exception {
         BiddingReportResponse apiResponse = apiService.reelerBiddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+requestDto.getReportFromDate());
+        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(lotReportResponse1);
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
-            lotReportResponse.setHeaderText("Government Cocoon Market, : \n BIDDING REPORT" );
-            lotReportResponse.setHeaderText2("Reeler Id = "+lotReportResponse.getReelerNumber() +" and Bid Date = "+lotReportResponse.getAcceptedTime());
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
             if(lotReportResponse.getAcceptedTime() == null){
                 lotReportResponse.setAcceptedTime("");
+            }else{
+                lotReportResponse.setAcceptedTime(convertToTime(lotReportResponse.getAcceptedTime()));
+            }
+            if(lotReportResponse.getBidTime() == null){
+                lotReportResponse.setBidTime("");
+            }else{
+                lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
             }
             contentList.add(lotReportResponse);
         }
@@ -779,9 +789,10 @@ public class ReportsController {
         PendingReportResponse apiResponse = apiService.pendingReportList(requestDto);
         List<Content> contentList = new LinkedList<>();
         Content lotReportResponse1 = new Content();
-        lotReportResponse1.setHeaderText("Pending report for "+requestDto.getReportFromDate());
+        lotReportResponse1.setHeaderText("Pending report for "+convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(lotReportResponse1);
         for(Content lotReportResponse: apiResponse.getContent()) {
+            lotReportResponse.setShed("");
             if(lotReportResponse.getReelerNumber() == null){
                 lotReportResponse.setReelerNumber("");
             }
@@ -796,7 +807,7 @@ public class ReportsController {
             }else{
                 lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
             }
-            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName() + " " +lotReportResponse.getFarmerAddress());
+            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName());
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
@@ -845,30 +856,17 @@ public class ReportsController {
         FarmerTxnResponse apiResponse = apiService.farmerTxnReportList(requestDto);
         List<FarmerTxnInfo> contentList = new LinkedList<>();
         FarmerTxnInfo lotReportResponse1 = new FarmerTxnInfo();
-        lotReportResponse1.setHeaderText("e-Haraju Farmer Transaction Report 3085 \n From "+requestDto.getReportFromDate() + " to "+requestDto.getReportToDate());
+        lotReportResponse1.setHeaderText("e-Haraju Farmer Transaction Report - " +requestDto.getFarmerNumber()+ " \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
         lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName());
         lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total sale amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalSaleAmount()));
         lotReportResponse1.setTotal_market_fee_farmer_transaction("Total market fee: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalMarketFee()));
         lotReportResponse1.setTotal_amount_farmer_transaction("Total amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
         contentList.add(lotReportResponse1);
         for(FarmerTxnInfo lotReportResponse: apiResponse.getContent().getFarmerTxnInfoList()) {
-//            if(lotReportResponse.getReelerNumber() == null){
-//                lotReportResponse.setReelerNumber("");
-//            }
-//            if(lotReportResponse.getReelerMobileNumber() == null){
-//                lotReportResponse.setReelerMobileNumber("");
-//            }
-//            if(lotReportResponse.getAccpetedBy() == null){
-//                lotReportResponse.setAccpetedBy("");
-//            }
-//            if(lotReportResponse.getReeler_amount() == null){
-//                lotReportResponse.setReeler_amount("");
-//            }else{
-//                lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
-//            }
+            lotReportResponse.setLotTransactionDate(convertDate(lotReportResponse.getLotTransactionDate()));
             lotReportResponse.setFarmerDetails("");
             lotReportResponse.setFarmerAmount(roundToTwoDecimalPlaces(lotReportResponse.getFarmerAmount()));
-            lotReportResponse.setFarmerMarketFee(roundToTwoDecimalPlaces(lotReportResponse1.getFarmerMarketFee()));
+            lotReportResponse.setFarmerMarketFee(roundToTwoDecimalPlaces(lotReportResponse.getFarmerMarketFee()));
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
@@ -957,4 +955,11 @@ public class ReportsController {
         return day + "-" + month + "-" + year;
     }
 
+    public static String convertToTime(String timeString) throws ParseException {
+        SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss.SSS");
+        SimpleDateFormat sdfOutput = new SimpleDateFormat("HH:mm:ss");
+
+        Date date = sdfInput.parse(timeString);
+        return sdfOutput.format(date);
+    }
 }
