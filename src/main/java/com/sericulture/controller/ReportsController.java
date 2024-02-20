@@ -874,4 +874,87 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(contentList);
     }
 
+    @PostMapping("/get-reeler-txn-report")
+    public ResponseEntity<?> getReelerTxnReport(@RequestBody ReelerTxnRequest request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("reeler_transaction.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getReelerTxnReportsData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getReelerTxnReportsData(ReelerTxnRequest requestDto) throws JsonProcessingException {
+        ReelerTxnResponse apiResponse = apiService.reelerTxnReportList(requestDto);
+        List<ReelerTransactionReport> contentList = new LinkedList<>();
+        ReelerTransactionReport lotReportResponse1 = new ReelerTransactionReport();
+        lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total purchase Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalPurchase()));
+        lotReportResponse1.setFarmer_details_farmer_transaction("Deposited Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalDeposits()));
+        lotReportResponse1.setHeaderText("e-Haraju Reeler Transaction Report " + requestDto.getReelerNumber() +" \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
+        lotReportResponse1.setReeler_amount_balance("Opening Balance of Reeler Id " + requestDto.getReelerNumber() +", Name REELER_NAME as on "  +convertDate(requestDto.getReportFromDate().toString()) + " is Rs." +apiResponse.getContent().getOpeningBalance());
+        contentList.add(lotReportResponse1);
+        for(ReelerTransactionReport lotReportResponse: apiResponse.getContent().getReelerTransactionReports()) {
+            if(lotReportResponse.getDepositAmount() != null) {
+                lotReportResponse.setDepositAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(lotReportResponse.getDepositAmount()))));
+            }else{
+                lotReportResponse.setDepositAmount("");
+            }
+            if(lotReportResponse.getPaymentAmount() != null) {
+                lotReportResponse.setPaymentAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(lotReportResponse.getPaymentAmount()))));
+            }else{
+                lotReportResponse.setPaymentAmount("");
+            }
+            if(lotReportResponse.getBalance() != null) {
+                lotReportResponse.setBalance(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(lotReportResponse.getBalance()))));
+            }else{
+                lotReportResponse.setBalance("");
+            }
+            if(lotReportResponse.getTransactionDate() != null && !lotReportResponse.getTransactionDate().equals("")) {
+                lotReportResponse.setTransactionDate(convertDate(lotReportResponse.getTransactionDate()));
+            }
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
+    public static String convertDate(String dateString) {
+        // Split the date string into year, month, and day
+        String[] parts = dateString.split("-");
+        String year = parts[0];
+        String month = parts[1];
+        String day = parts[2];
+
+        // Return the date string in "DD-MM-YYYY" format
+        return day + "-" + month + "-" + year;
+    }
+
 }

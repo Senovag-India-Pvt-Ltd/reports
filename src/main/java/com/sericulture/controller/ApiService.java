@@ -135,9 +135,9 @@ public class ApiService {
 
     public FarmerTxnResponse farmerTxnReportList(FarmerTxnRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getFarmerTxnReport";
+        // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getFarmerTxnReport";
 
-       // String finalapiurl = apiUrl + "auction/report/getFarmerTxnReport";
+        String finalapiurl = apiUrl + "auction/report/getFarmerTxnReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -150,6 +150,29 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         FarmerTxnResponse response2 = objectMapper.readValue(response1, FarmerTxnResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public ReelerTxnResponse reelerTxnReportList(ReelerTxnRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+      //   String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerTxnReport";
+
+        String finalapiurl = apiUrl + "auction/report/getReelerTxnReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ReelerTxnRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        ReelerTxnResponse response = new ReelerTxnResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ReelerTxnResponse response2 = objectMapper.readValue(response1, ReelerTxnResponse.class);
 
         return response2;
         // Process the API response as needed
