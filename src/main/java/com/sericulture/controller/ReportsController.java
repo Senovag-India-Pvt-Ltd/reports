@@ -802,4 +802,76 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(contentList);
     }
 
+    @PostMapping("/get-farmer-txn-report")
+    public ResponseEntity<?> getFarmerTxnReport(@RequestBody FarmerTxnRequest request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("farmer_transaction.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getFarmerTxnReportsData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getFarmerTxnReportsData(FarmerTxnRequest requestDto) throws JsonProcessingException {
+        FarmerTxnResponse apiResponse = apiService.farmerTxnReportList(requestDto);
+        List<FarmerTxnInfo> contentList = new LinkedList<>();
+        FarmerTxnInfo lotReportResponse1 = new FarmerTxnInfo();
+        lotReportResponse1.setHeaderText("e-Haraju Farmer Transaction Report 3085 \n From "+requestDto.getReportFromDate() + " to "+requestDto.getReportToDate());
+        lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName());
+        lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total sale amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalSaleAmount()));
+        lotReportResponse1.setTotal_market_fee_farmer_transaction("Total market fee: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalMarketFee()));
+        lotReportResponse1.setTotal_amount_farmer_transaction("Total amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
+        contentList.add(lotReportResponse1);
+        for(FarmerTxnInfo lotReportResponse: apiResponse.getContent().getFarmerTxnInfoList()) {
+//            if(lotReportResponse.getReelerNumber() == null){
+//                lotReportResponse.setReelerNumber("");
+//            }
+//            if(lotReportResponse.getReelerMobileNumber() == null){
+//                lotReportResponse.setReelerMobileNumber("");
+//            }
+//            if(lotReportResponse.getAccpetedBy() == null){
+//                lotReportResponse.setAccpetedBy("");
+//            }
+//            if(lotReportResponse.getReeler_amount() == null){
+//                lotReportResponse.setReeler_amount("");
+//            }else{
+//                lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
+//            }
+            lotReportResponse.setFarmerDetails("");
+            lotReportResponse.setFarmerAmount(roundToTwoDecimalPlaces(lotReportResponse.getFarmerAmount()));
+            lotReportResponse.setFarmerMarketFee(roundToTwoDecimalPlaces(lotReportResponse1.getFarmerMarketFee()));
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
 }

@@ -132,5 +132,28 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+
+    public FarmerTxnResponse farmerTxnReportList(FarmerTxnRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getFarmerTxnReport";
+
+       // String finalapiurl = apiUrl + "auction/report/getFarmerTxnReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<FarmerTxnRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        FarmerTxnResponse response = new FarmerTxnResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        FarmerTxnResponse response2 = objectMapper.readValue(response1, FarmerTxnResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 }
 
