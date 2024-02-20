@@ -736,4 +736,70 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(contentList);
     }
 
+    @PostMapping("/get-pending-report")
+    public ResponseEntity<?> getPendingReports(@RequestBody PendingReportRequest request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("pending_report.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getPendingReportsData(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getPendingReportsData(PendingReportRequest requestDto) throws JsonProcessingException {
+        PendingReportResponse apiResponse = apiService.pendingReportList(requestDto);
+        List<Content> contentList = new LinkedList<>();
+        Content lotReportResponse1 = new Content();
+        lotReportResponse1.setHeaderText("Pending report for "+requestDto.getReportFromDate());
+        contentList.add(lotReportResponse1);
+        for(Content lotReportResponse: apiResponse.getContent()) {
+            if(lotReportResponse.getReelerNumber() == null){
+                lotReportResponse.setReelerNumber("");
+            }
+            if(lotReportResponse.getReelerMobileNumber() == null){
+                lotReportResponse.setReelerMobileNumber("");
+            }
+            if(lotReportResponse.getAccpetedBy() == null){
+                lotReportResponse.setAccpetedBy("");
+            }
+            if(lotReportResponse.getReeler_amount() == null){
+                lotReportResponse.setReeler_amount("");
+            }else{
+                lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
+            }
+            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName() + " " +lotReportResponse.getFarmerAddress());
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
 }

@@ -112,4 +112,11 @@ public class Content {
     private String reelerDetails;
     private String reelerNumber;
     private String acknowledgmentString;
+
+    private String headerText;
+    private String farmerDetails;
+    private String marketFee;
+    private String reeler_amount;
+    private String bankDetails;
+    private String accpetedBy;
 }
