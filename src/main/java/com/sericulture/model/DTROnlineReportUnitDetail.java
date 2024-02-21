@@ -39,4 +39,10 @@ public class DTROnlineReportUnitDetail {
     private String headerText;
     private String farmerAddress;
     private String marketNameKannada;
+
+    private String reeler_transaction_amt;
+    private String mf_amount;
+    private String farmer_cheque;
+    private String total_lots;
+    private String total_weight_with_amount_details;
 }

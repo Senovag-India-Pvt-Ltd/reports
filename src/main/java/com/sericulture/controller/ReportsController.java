@@ -611,6 +611,11 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setFarmerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerAmount()));
             dtrOnlineReportUnitDetail.setReelerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getReelerAmount()));
             dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
+            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: , Amount: 0, Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+            dtrOnlineReportUnitDetail.setTotal_lots("Total lots: "+apiResponse.getContent().getTotalLots());
+            dtrOnlineReportUnitDetail.setFarmer_cheque("Farmer cheque Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
+            dtrOnlineReportUnitDetail.setMf_amount("MF Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
+            dtrOnlineReportUnitDetail.setReeler_transaction_amt("Reeler transaction Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             contentList.add(dtrOnlineReportUnitDetail);
         }
         return new JRBeanCollectionDataSource(contentList);
