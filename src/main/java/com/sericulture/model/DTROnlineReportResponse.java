@@ -21,4 +21,9 @@ public class DTROnlineReportResponse extends ResponseBody {
     private double totalReelerAmount;
     private double totalReelerMarketFee;
     private double totalFarmerMarketFee;
+
+    private int totalBidAmount;
+    private float totalWeight;
+    private float totallotSoldOutAmount;
+    private String marketNameKannada;
 }

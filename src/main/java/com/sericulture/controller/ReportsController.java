@@ -586,6 +586,10 @@ public class ReportsController {
     private  JRBeanCollectionDataSource getDtrOnlineReportData(DTROnlineRequest requestDto) throws JsonProcessingException {
         DTRReportResponse apiResponse = apiService.dtrReport(requestDto);
         List<DTROnlineReportUnitDetail> contentList = new LinkedList<>();
+        String marketNameKannada = "";
+        if(apiResponse.getContent().getMarketNameKannada() != null){
+            marketNameKannada = apiResponse.getContent().getMarketNameKannada();
+        }
         for(DTROnlineReportUnitDetail dtrOnlineReportUnitDetail: apiResponse.getContent().getDtrOnlineReportUnitDetailList()) {
 
             String farmerAddress = "";
@@ -593,10 +597,6 @@ public class ReportsController {
                 farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() +",";
             }
 
-            String marketNameKannada = "";
-            if(dtrOnlineReportUnitDetail.getMarketNameKannada() != null){
-                marketNameKannada = dtrOnlineReportUnitDetail.getMarketNameKannada();
-            }
             // Define date format
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -611,7 +611,7 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setFarmerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerAmount()));
             dtrOnlineReportUnitDetail.setReelerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getReelerAmount()));
             dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
-            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: , Amount: 0, Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             dtrOnlineReportUnitDetail.setTotal_lots("Total lots: "+apiResponse.getContent().getTotalLots());
             dtrOnlineReportUnitDetail.setFarmer_cheque("Farmer cheque Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
             dtrOnlineReportUnitDetail.setMf_amount("MF Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
@@ -798,11 +798,12 @@ public class ReportsController {
 
     private  JRBeanCollectionDataSource getPendingReportsData(PendingReportRequest requestDto) throws JsonProcessingException {
         PendingReportResponse apiResponse = apiService.pendingReportList(requestDto);
-        List<Content> contentList = new LinkedList<>();
-        Content lotReportResponse1 = new Content();
+        List<LotPendingReportResponse> contentList = new LinkedList<>();
+        LotPendingReportResponse lotReportResponse1 = new LotPendingReportResponse();
         lotReportResponse1.setHeaderText("Pending report for "+convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(lotReportResponse1);
-        for(Content lotReportResponse: apiResponse.getContent()) {
+        for(LotPendingReportResponse lotReportResponse: apiResponse.getContent()) {
+            lotReportResponse.setAccpetedBy(lotReportResponse.getAcceptedBy());
             lotReportResponse.setShed("");
             if(lotReportResponse.getReelerNumber() == null){
                 lotReportResponse.setReelerNumber("");
@@ -813,12 +814,12 @@ public class ReportsController {
             if(lotReportResponse.getAccpetedBy() == null){
                 lotReportResponse.setAccpetedBy("");
             }
-            if(lotReportResponse.getReeler_amount() == null){
-                lotReportResponse.setReeler_amount("");
-            }else{
-                lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
-            }
+
+            lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReelerAmount()));
+
             lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName());
+
+            lotReportResponse.setSerialNumber(String.valueOf(lotReportResponse.getSerailNumberForPagination()));
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
