@@ -804,7 +804,9 @@ public class ReportsController {
         contentList.add(lotReportResponse1);
         for(LotPendingReportResponse lotReportResponse: apiResponse.getContent()) {
             lotReportResponse.setAccpetedBy(lotReportResponse.getAcceptedBy());
-            lotReportResponse.setShed("");
+            if(lotReportResponse.getShed() == null){
+                lotReportResponse.setShed("");
+            }
             if(lotReportResponse.getReelerNumber() == null){
                 lotReportResponse.setReelerNumber("");
             }
