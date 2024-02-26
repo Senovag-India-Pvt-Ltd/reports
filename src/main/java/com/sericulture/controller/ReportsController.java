@@ -923,7 +923,7 @@ public class ReportsController {
         lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total purchase Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalPurchase()));
         lotReportResponse1.setFarmer_details_farmer_transaction("Deposited Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalDeposits()));
         lotReportResponse1.setHeaderText("e-Haraju Reeler Transaction Report " + requestDto.getReelerNumber() +" \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
-        lotReportResponse1.setReeler_amount_balance("Opening Balance of Reeler Id " + requestDto.getReelerNumber() +", Name REELER_NAME as on "  +convertDate(requestDto.getReportFromDate().toString()) + " is Rs." +apiResponse.getContent().getOpeningBalance());
+        lotReportResponse1.setReeler_amount_balance("Opening Balance of Reeler Id " + requestDto.getReelerNumber() +", Name "+ apiResponse.getContent().getName() +" as on "  +convertDate(requestDto.getReportFromDate().toString()) + " is Rs." +apiResponse.getContent().getOpeningBalance());
         contentList.add(lotReportResponse1);
         for(ReelerTransactionReport lotReportResponse: apiResponse.getContent().getReelerTransactionReports()) {
             if(lotReportResponse.getDepositAmount() != null) {
