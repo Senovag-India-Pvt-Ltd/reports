@@ -862,7 +862,7 @@ public class ReportsController {
         List<FarmerTxnInfo> contentList = new LinkedList<>();
         FarmerTxnInfo lotReportResponse1 = new FarmerTxnInfo();
         lotReportResponse1.setHeaderText("e-Haraju Farmer Transaction Report - " +requestDto.getFarmerNumber()+ " \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
-        lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName());
+        lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName() + ","+apiResponse.getContent().getVillage());
         lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total sale amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalSaleAmount()));
         lotReportResponse1.setTotal_market_fee_farmer_transaction("Total market fee: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalMarketFee()));
         lotReportResponse1.setTotal_amount_farmer_transaction("Total amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));

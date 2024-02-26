@@ -17,6 +17,7 @@ public class FarmerTxnReportResponse extends ResponseBody {
     private double totalSaleAmount;
     private double totalMarketFee;
     private double totalFarmerAmount;
+    private String village;
     List<FarmerTxnInfo> farmerTxnInfoList;
 
     private String headerText;
