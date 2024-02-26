@@ -26,4 +26,6 @@ public class LotReportResponse extends ResponseBody {
     private String headerText2;
 
     private String reelerNumber;
+
+    private String marketName;
 }

@@ -661,13 +661,14 @@ public class ReportsController {
     }
 
     private  JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws Exception {
+        String marketName = "";
         BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
-        contentList.add(lotReportResponse1);
+
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            marketName = lotReportResponse.getMarketName();
+
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
@@ -683,6 +684,9 @@ public class ReportsController {
             }
             contentList.add(lotReportResponse);
         }
+        lotReportResponse1.setHeaderText("Government Cocoon Market, "+marketName+"\n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
+        contentList.add(0,lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
 
@@ -726,13 +730,12 @@ public class ReportsController {
     }
 
     private  JRBeanCollectionDataSource getReelerBiddingReportData(ReelerBiddingReportRequest requestDto) throws Exception {
+        String marketName = "";
         BiddingReportResponse apiResponse = apiService.reelerBiddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
-        contentList.add(lotReportResponse1);
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            marketName = lotReportResponse.getMarketName();
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
@@ -748,6 +751,9 @@ public class ReportsController {
             }
             contentList.add(lotReportResponse);
         }
+        lotReportResponse1.setHeaderText("Government Cocoon Market, "+marketName+"\n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
+        contentList.add(0,lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
 
