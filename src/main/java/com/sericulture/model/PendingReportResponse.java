@@ -15,6 +15,6 @@ import java.util.List;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PendingReportResponse extends ResponseBody {
-    private List<Content> content = new ArrayList<>();
+    private List<LotPendingReportResponse> content = new ArrayList<>();
     private String headerText;
 }

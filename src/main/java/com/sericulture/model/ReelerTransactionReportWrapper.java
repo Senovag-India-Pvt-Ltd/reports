@@ -15,5 +15,6 @@ public class ReelerTransactionReportWrapper {
     List<ReelerTransactionReport> reelerTransactionReports;
     Double totalDeposits;
     Double totalPurchase;
+    String name;
 
 }

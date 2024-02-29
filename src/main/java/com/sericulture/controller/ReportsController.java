@@ -586,6 +586,10 @@ public class ReportsController {
     private  JRBeanCollectionDataSource getDtrOnlineReportData(DTROnlineRequest requestDto) throws JsonProcessingException {
         DTRReportResponse apiResponse = apiService.dtrReport(requestDto);
         List<DTROnlineReportUnitDetail> contentList = new LinkedList<>();
+        String marketNameKannada = "";
+        if(apiResponse.getContent().getMarketNameKannada() != null){
+            marketNameKannada = apiResponse.getContent().getMarketNameKannada();
+        }
         for(DTROnlineReportUnitDetail dtrOnlineReportUnitDetail: apiResponse.getContent().getDtrOnlineReportUnitDetailList()) {
 
             String farmerAddress = "";
@@ -593,10 +597,6 @@ public class ReportsController {
                 farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() +",";
             }
 
-            String marketNameKannada = "";
-            if(dtrOnlineReportUnitDetail.getMarketNameKannada() != null){
-                marketNameKannada = dtrOnlineReportUnitDetail.getMarketNameKannada();
-            }
             // Define date format
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -611,7 +611,7 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setFarmerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerAmount()));
             dtrOnlineReportUnitDetail.setReelerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getReelerAmount()));
             dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
-            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: , Amount: 0, Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             dtrOnlineReportUnitDetail.setTotal_lots("Total lots: "+apiResponse.getContent().getTotalLots());
             dtrOnlineReportUnitDetail.setFarmer_cheque("Farmer cheque Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
             dtrOnlineReportUnitDetail.setMf_amount("MF Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
@@ -661,13 +661,14 @@ public class ReportsController {
     }
 
     private  JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws Exception {
+        String marketName = "";
         BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
-        contentList.add(lotReportResponse1);
+
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            marketName = lotReportResponse.getMarketName();
+
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
@@ -683,6 +684,9 @@ public class ReportsController {
             }
             contentList.add(lotReportResponse);
         }
+        lotReportResponse1.setHeaderText("Government Cocoon Market, "+marketName+"\n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Lot Number = "+requestDto.getLotId() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
+        contentList.add(0,lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
 
@@ -726,13 +730,12 @@ public class ReportsController {
     }
 
     private  JRBeanCollectionDataSource getReelerBiddingReportData(ReelerBiddingReportRequest requestDto) throws Exception {
+        String marketName = "";
         BiddingReportResponse apiResponse = apiService.reelerBiddingReport(requestDto);
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
-        lotReportResponse1.setHeaderText("Government Cocoon Market, \n BIDDING REPORT" );
-        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
-        contentList.add(lotReportResponse1);
         for(LotReportResponse lotReportResponse: apiResponse.getContent()) {
+            marketName = lotReportResponse.getMarketName();
             if(lotReportResponse.getAcceptedBy() == null){
                 lotReportResponse.setAcceptedBy("");
             }
@@ -748,6 +751,9 @@ public class ReportsController {
             }
             contentList.add(lotReportResponse);
         }
+        lotReportResponse1.setHeaderText("Government Cocoon Market, "+marketName+"\n BIDDING REPORT" );
+        lotReportResponse1.setHeaderText2("Reeler Id = "+requestDto.getReelerNumber() +" and Bid Date = "+convertDate(requestDto.getReportFromDate().toString()));
+        contentList.add(0,lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
 
@@ -792,12 +798,15 @@ public class ReportsController {
 
     private  JRBeanCollectionDataSource getPendingReportsData(PendingReportRequest requestDto) throws JsonProcessingException {
         PendingReportResponse apiResponse = apiService.pendingReportList(requestDto);
-        List<Content> contentList = new LinkedList<>();
-        Content lotReportResponse1 = new Content();
+        List<LotPendingReportResponse> contentList = new LinkedList<>();
+        LotPendingReportResponse lotReportResponse1 = new LotPendingReportResponse();
         lotReportResponse1.setHeaderText("Pending report for "+convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(lotReportResponse1);
-        for(Content lotReportResponse: apiResponse.getContent()) {
-            lotReportResponse.setShed("");
+        for(LotPendingReportResponse lotReportResponse: apiResponse.getContent()) {
+            lotReportResponse.setAccpetedBy(lotReportResponse.getAcceptedBy());
+            if(lotReportResponse.getShed() == null){
+                lotReportResponse.setShed("");
+            }
             if(lotReportResponse.getReelerNumber() == null){
                 lotReportResponse.setReelerNumber("");
             }
@@ -807,12 +816,12 @@ public class ReportsController {
             if(lotReportResponse.getAccpetedBy() == null){
                 lotReportResponse.setAccpetedBy("");
             }
-            if(lotReportResponse.getReeler_amount() == null){
-                lotReportResponse.setReeler_amount("");
-            }else{
-                lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReeleramount()));
-            }
+
+            lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReelerAmount()));
+
             lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName());
+
+            lotReportResponse.setSerialNumber(String.valueOf(lotReportResponse.getSerailNumberForPagination()));
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
@@ -862,7 +871,7 @@ public class ReportsController {
         List<FarmerTxnInfo> contentList = new LinkedList<>();
         FarmerTxnInfo lotReportResponse1 = new FarmerTxnInfo();
         lotReportResponse1.setHeaderText("e-Haraju Farmer Transaction Report - " +requestDto.getFarmerNumber()+ " \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
-        lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName());
+        lotReportResponse1.setFarmer_details_farmer_transaction("Farmer Details: " +apiResponse.getContent().getFarmerNumber() + " " +apiResponse.getContent().getFarmerFirstName() + " " +apiResponse.getContent().getFarmerMiddleName() + " " +apiResponse.getContent().getFarmerLastName() + ","+apiResponse.getContent().getVillage());
         lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total sale amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalSaleAmount()));
         lotReportResponse1.setTotal_market_fee_farmer_transaction("Total market fee: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalMarketFee()));
         lotReportResponse1.setTotal_amount_farmer_transaction("Total amount: Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
@@ -923,7 +932,7 @@ public class ReportsController {
         lotReportResponse1.setTotal_sale_amount_farmer_transaction("Total purchase Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalPurchase()));
         lotReportResponse1.setFarmer_details_farmer_transaction("Deposited Rs."+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalDeposits()));
         lotReportResponse1.setHeaderText("e-Haraju Reeler Transaction Report " + requestDto.getReelerNumber() +" \n From "+convertDate(requestDto.getReportFromDate().toString()) + " to "+convertDate(requestDto.getReportToDate().toString()));
-        lotReportResponse1.setReeler_amount_balance("Opening Balance of Reeler Id " + requestDto.getReelerNumber() +", Name REELER_NAME as on "  +convertDate(requestDto.getReportFromDate().toString()) + " is Rs." +apiResponse.getContent().getOpeningBalance());
+        lotReportResponse1.setReeler_amount_balance("Opening Balance of Reeler Id " + requestDto.getReelerNumber() +", Name "+ apiResponse.getContent().getName() +" as on "  +convertDate(requestDto.getReportFromDate().toString()) + " is Rs." +apiResponse.getContent().getOpeningBalance());
         contentList.add(lotReportResponse1);
         for(ReelerTransactionReport lotReportResponse: apiResponse.getContent().getReelerTransactionReports()) {
             if(lotReportResponse.getDepositAmount() != null) {
