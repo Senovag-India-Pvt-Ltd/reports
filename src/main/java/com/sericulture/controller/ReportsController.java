@@ -585,11 +585,23 @@ public class ReportsController {
 
     private  JRBeanCollectionDataSource getDtrOnlineReportData(DTROnlineRequest requestDto) throws JsonProcessingException {
         DTRReportResponse apiResponse = apiService.dtrReport(requestDto);
-        List<DTROnlineReportUnitDetail> contentList = new LinkedList<>();
+        DTROnlineReportUnitDetail content = new DTROnlineReportUnitDetail();
         String marketNameKannada = "";
         if(apiResponse.getContent().getMarketNameKannada() != null){
             marketNameKannada = apiResponse.getContent().getMarketNameKannada();
         }
+        // Define date format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = requestDto.getToDate().format(formatter);
+        content.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
+        content.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+        content.setTotal_lots("Total lots: "+apiResponse.getContent().getTotalLots());
+        content.setFarmer_cheque("Farmer cheque Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
+        content.setMf_amount("MF Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
+        content.setReeler_transaction_amt("Reeler transaction Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+        List<DTROnlineReportUnitDetail> contentList = new LinkedList<>();
+        contentList.add(content);
+
         for(DTROnlineReportUnitDetail dtrOnlineReportUnitDetail: apiResponse.getContent().getDtrOnlineReportUnitDetailList()) {
 
             String farmerAddress = "";
@@ -598,10 +610,10 @@ public class ReportsController {
             }
 
             // Define date format
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-            // Format LocalDate to desired format
-            String formattedDate = requestDto.getToDate().format(formatter);
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//
+//            // Format LocalDate to desired format
+//            String formattedDate = requestDto.getToDate().format(formatter);
 
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " +dtrOnlineReportUnitDetail.getFarmerMiddleName() +" " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() +")");
