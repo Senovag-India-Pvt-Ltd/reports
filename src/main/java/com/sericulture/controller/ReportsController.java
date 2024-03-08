@@ -878,6 +878,66 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/get-dashboard-report")
+    public ResponseEntity<?> getDashboardCountReports(@RequestBody DashboardReportRequest request){
+
+        try {
+            System.out.println("enter to dashboard report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("dashboard_report.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getDashboardReportCount(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private  JRBeanCollectionDataSource getDashboardReportCount(DashboardReportRequest requestDto) throws JsonProcessingException {
+        DashboardResponse apiResponse = apiService.getDashboardReport(requestDto);
+        List<DashboardReportInfo> contentList = new LinkedList<>();
+        DashboardReportInfo lotReportResponse1 = new DashboardReportInfo();
+        String bidStarted = "Not started";
+        if(apiResponse.getContent().getAuctionStarted().equals("true")){
+            bidStarted = "Started";
+        }
+        String acceptanceStarted = "Not started";
+        if(apiResponse.getContent().getAcceptanceStarted().equals("true")){
+            acceptanceStarted = "Started";
+        }
+        lotReportResponse1.setHeaderText("Dashboard " + apiResponse.getContent().getMarketName() +"- "+requestDto.getDashboardReportDate()+"\n Bidding Status: "+bidStarted + "\n Acceptance Status: "+acceptanceStarted);
+        contentList.add(lotReportResponse1);
+        for(DashboardReportInfo lotReportResponse: apiResponse.getContent().getDashboardReportInfoList()) {
+            lotReportResponse.setWeighedLots(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(lotReportResponse.getWeighedLots()))));
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
     private  JRBeanCollectionDataSource getFarmerTxnReportsData(FarmerTxnRequest requestDto) throws JsonProcessingException {
         FarmerTxnResponse apiResponse = apiService.farmerTxnReportList(requestDto);
         List<FarmerTxnInfo> contentList = new LinkedList<>();

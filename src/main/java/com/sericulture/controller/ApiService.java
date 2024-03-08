@@ -112,7 +112,7 @@ public class ApiService {
 
     public PendingReportResponse pendingReportList(PendingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getPendingLotReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getPendingLotReport";
 
         String finalapiurl = apiUrl + "auction/report/getPendingLotReport";
 
@@ -150,6 +150,29 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         FarmerTxnResponse response2 = objectMapper.readValue(response1, FarmerTxnResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public DashboardResponse getDashboardReport(DashboardReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReport";
+
+       // String finalapiurl = apiUrl + "auction/report/getDashboardReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<DashboardReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        DashboardReport response = new DashboardReport();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DashboardResponse response2 = objectMapper.readValue(response1, DashboardResponse.class);
 
         return response2;
         // Process the API response as needed
