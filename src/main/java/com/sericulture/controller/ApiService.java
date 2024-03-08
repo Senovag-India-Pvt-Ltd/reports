@@ -158,9 +158,9 @@ public class ApiService {
 
     public DashboardResponse getDashboardReport(DashboardReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReport";
+       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReport";
 
-       // String finalapiurl = apiUrl + "auction/report/getDashboardReport";
+        String finalapiurl = apiUrl + "auction/report/getDashboardReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
