@@ -929,7 +929,7 @@ public class ReportsController {
         if(apiResponse.getContent().getAcceptanceStarted().equals("true")){
             acceptanceStarted = "Started";
         }
-        lotReportResponse1.setHeaderText("Dashboard " + apiResponse.getContent().getMarketName() +"- "+requestDto.getDashboardReportDate()+"\n Bidding Status: "+bidStarted + "\n Acceptance Status: "+acceptanceStarted);
+        lotReportResponse1.setHeaderText("Dashboard " + apiResponse.getContent().getMarketName() +"- "+convertDate(String.valueOf(requestDto.getDashboardReportDate()))+"\n Bidding Status: "+bidStarted + "\n Acceptance Status: "+acceptanceStarted);
         contentList.add(lotReportResponse1);
         for(DashboardReportInfo lotReportResponse: apiResponse.getContent().getDashboardReportInfoList()) {
             lotReportResponse.setWeighedLots(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(lotReportResponse.getWeighedLots()))));
