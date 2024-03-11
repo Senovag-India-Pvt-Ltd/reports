@@ -95,7 +95,7 @@ public class ReportsController {
             Map<String, Object> parameters = getParameters();
 
             // 3. datasource "java object"
-            JRDataSource dataSource = getDataSource(requestDto);
+            JRDataSource dataSource = getDataSourceForTriplet(requestDto);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -535,6 +535,278 @@ public class ReportsController {
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(countries);
+    }
+
+    private  JRDataSource getDataSourceForTriplet(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+
+        ContentRoot apiResponse = apiService.fetchDataFromApi(requestDto);
+        List<Content> countries = new LinkedList<>();
+        if(apiResponse.content != null) {
+
+            String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
+            apiResponse.content.setFeespaid(formatfees);
+
+            Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
+            Double farmerfee = apiResponse.content.getFarmerMarketFee();
+            Double realerfee = apiResponse.content.getReelerMarketFee();
+            String farmeramout = "" + roundToTwoDecimalPlaces((total - farmerfee));
+            String relaramout = "" + roundToTwoDecimalPlaces((total - realerfee));
+            Double slip1Amount = 0.0;
+            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
+            apiResponse.content.setAmountfarmer(farmeramout);
+            apiResponse.content.setAmountrealar(relaramout);
+            apiResponse.content.setLoginname_accountnumber_ifsccode("(" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
+            apiResponse.content.setAccountnumber_ifsccode("Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
+            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
+            //  apiResponse.content.setReeleramount(relaramout);
+            String inputDateTime = "";
+            if (apiResponse.content.getAuctionDateWithTime() != null) {
+                inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+            }else{
+                apiResponse.content.setAuctionDate_time("");
+            }
+            // Parse the input date and time
+            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            Date parsedDate;
+            try {
+                if (inputDateTime != null && !inputDateTime.equals("")) {
+                    parsedDate = inputFormat.parse(inputDateTime);
+                    // Format the output date and time
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+                    SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+                    String formattedDateTime = outputFormat.format(parsedDate);
+                    String formattedDateTime1 = outputFormat1.format(parsedDate);
+                    apiResponse.content.setAuctionDate_time(formattedDateTime);
+                    apiResponse.content.setAuctionDate(formattedDateTime1);
+                }
+            } catch (ParseException e) {
+                throw new RuntimeException("Error parsing input date and time", e);
+            }
+
+            String smallBins = "";
+            String bigBins = "";
+
+            if(apiResponse.content.getReelerNameKannada() == null){
+                apiResponse.content.setReelerNameKannada("");
+            }
+            if(apiResponse.content.getFarmerNameKannada() == null){
+                apiResponse.content.setFarmerNameKannada("");
+            }
+            if(apiResponse.content.getReelerLicense() == null){
+                apiResponse.content.setReelerLicense("");
+            }
+
+            apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getFarmerNumber() + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
+            String reelerNumberText = "";
+            String reelerAddressText = "";
+            if(apiResponse.content.getReelerNumber()!= null){
+                reelerNumberText = "(" + apiResponse.content.getReelerNumber() + ")";
+            }
+            if(apiResponse.content.getReelerAddress()!= null){
+                reelerAddressText = apiResponse.content.getReelerAddress();
+            }
+            apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerNameKannada() +" " + reelerAddressText);
+
+            if (apiResponse.content.getSmallBinList() != null) {
+                List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.toList());
+                smallBins = String.join(",", smallBinList);
+            }
+            apiResponse.content.setAcknowledgmentString("ಈ ಮೇಲೆ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು " +apiResponse.content.getAuctionDate() + " ದಿನ _______ ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.");
+
+            if (apiResponse.content.getBigBinList() != null) {
+                List<String> bigBinList = apiResponse.content.getBigBinList().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.toList());
+                bigBins = String.join(",", bigBinList);
+            }
+            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
+
+            for (int i = 0; i < 15; i++) {
+                switch (i) {
+                    case 0:
+                        apiResponse.content.setLotDetail0("");
+                        break;
+                    case 1:
+                        apiResponse.content.setLotDetail1("");
+                        break;
+                    case 2:
+                        apiResponse.content.setLotDetail2("");
+                        break;
+                    case 3:
+                        apiResponse.content.setLotDetail3("");
+                        break;
+                    case 4:
+                        apiResponse.content.setLotDetail4("");
+                        break;
+                    case 5:
+                        apiResponse.content.setLotDetail5("");
+                        break;
+                    case 6:
+                        apiResponse.content.setLotDetail6("");
+                        break;
+                    case 7:
+                        apiResponse.content.setLotDetail7("");
+                        break;
+                    case 8:
+                        apiResponse.content.setLotDetail8("");
+                        break;
+                    case 9:
+                        apiResponse.content.setLotDetail9("");
+                        break;
+                    case 10:
+                        apiResponse.content.setLotDetail10("");
+                        break;
+                    case 11:
+                        apiResponse.content.setLotDetail11("");
+                        break;
+                    case 12:
+                        apiResponse.content.setLotDetail12("");
+                        break;
+                    case 13:
+                        apiResponse.content.setLotDetail13("");
+                        break;
+                    case 14:
+                        apiResponse.content.setLotDetail14("");
+                        break;
+                    default:
+                        System.out.println("Default case");
+                }
+            }
+
+            if (apiResponse.content.getLotWeightDetail() != null) {
+                if (apiResponse.content.getLotWeightDetail().size() > 0) {
+                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
+                        switch (i) {
+                            case 0:
+                                apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 1:
+                                apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 2:
+                                apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 3:
+                                apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 4:
+                                apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 5:
+                                apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 6:
+                                apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 7:
+                                apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 8:
+                                apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 9:
+                                apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 10:
+                                apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 11:
+                                apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 12:
+                                apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 13:
+                                apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            case 14:
+                                apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
+                                break;
+                            default:
+                                System.out.println("Default case");
+                        }
+                    }
+                }
+                apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getLotSoldOutAmount()))));
+            }
+            apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            if(apiResponse.content.getBidAmount().equals("0.0")){
+                apiResponse.content.setBidAmount("");
+            }
+            if(apiResponse.content.getLotWeight().equals("0.0")){
+                apiResponse.content.setLotWeight("");
+            }else{
+                double doubleValue = Double.parseDouble(apiResponse.content.getLotWeight());
+                String formattedValue = String.format("%.3f", doubleValue);
+                apiResponse.content.setLotWeight(formattedValue);
+            }
+            if(apiResponse.content.getLotSoldOutAmount().equals("0.0")){
+                apiResponse.content.setLotSoldOutAmount("");
+            }else{
+                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
+            }
+            if(apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")){
+                apiResponse.content.setFeespaid("");
+            }else{
+                System.out.println("Enter the first value:");
+                String[] components = apiResponse.content.getFeespaid().split("[+=]");
+
+                // Extract the symbols
+                String additionSymbol = components[1]; // The addition symbol
+                String equalitySymbol = components[2];
+                int value1 = roundToWholeNumber(Double.parseDouble(additionSymbol));
+
+                System.out.println("Enter the second value:");
+                int value2 = roundToWholeNumber(Double.parseDouble(equalitySymbol));
+
+                // Perform the addition
+                double result = value1 + value2;
+
+                // Round the result to the nearest integer
+                int roundedResult = (int) Math.round(result);
+
+                // Print the rounded result
+                System.out.println("Rounded result: " + roundedResult);
+                apiResponse.content.setFeespaid(String.valueOf(roundedResult));
+            }
+            if(!apiResponse.content.getBidAmount().equals("")) {
+                apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
+            }else{
+                apiResponse.content.setReeleramount("");
+            }
+            String markFee = "0";
+            if(apiResponse.content.getMarketFee() != null && !apiResponse.content.getMarketFee().equals("")) {
+               markFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getMarketFee())));
+            }
+            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())) + roundToWholeNumber(Double.parseDouble(markFee)));
+            apiResponse.content.setReelerbalance("Lot value: " +roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())) + "+" +roundToWholeNumber(Double.parseDouble(markFee)) + "=" +tot_amt);
+
+            countries.add(apiResponse.content);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(countries);
+    }
+
+    private static int roundToWholeNumber(double value) {
+        // Use BigDecimal for rounding to 2 decimal places
+
+
+        // Extracting the fractional part
+        double fractionalPart = value - Math.floor(value);
+
+        // Rounding based on the fractional part
+        int roundedNumber;
+        if (fractionalPart < 0.5) {
+            roundedNumber = (int) Math.floor(value);
+        } else {
+            roundedNumber = (int) Math.ceil(value);
+        }
+
+        return roundedNumber;
     }
 
     private static double roundToTwoDecimalPlaces(double value) {
