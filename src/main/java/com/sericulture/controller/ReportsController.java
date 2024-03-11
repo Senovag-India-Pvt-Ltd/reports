@@ -892,18 +892,33 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " +dtrOnlineReportUnitDetail.getFarmerMiddleName() +" " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() +")");
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() +")");
-            dtrOnlineReportUnitDetail.setMarketFee(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerMarketFee() + dtrOnlineReportUnitDetail.getReelerMarketFee()));
-            dtrOnlineReportUnitDetail.setLotSoldOutAmount((float) roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getLotSoldOutAmount()));
-            dtrOnlineReportUnitDetail.setFarmerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getFarmerAmount()));
-            dtrOnlineReportUnitDetail.setReelerAmount(roundToTwoDecimalPlaces(dtrOnlineReportUnitDetail.getReelerAmount()));
+            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
             dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, "+marketNameKannada+" ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : "+formattedDate);
-            dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+         //   dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             dtrOnlineReportUnitDetail.setTotal_lots("Total lots: "+apiResponse.getContent().getTotalLots());
             dtrOnlineReportUnitDetail.setFarmer_cheque("Farmer cheque Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
             dtrOnlineReportUnitDetail.setMf_amount("MF Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
             dtrOnlineReportUnitDetail.setReeler_transaction_amt("Reeler transaction Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             contentList.add(dtrOnlineReportUnitDetail);
         }
+        DTROnlineReportUnitDetail contentLastColumn = new DTROnlineReportUnitDetail();
+        contentLastColumn.setSerialNumber("");
+        contentLastColumn.setAllottedLotId("");
+        contentLastColumn.setFarmerDetails("");
+        contentLastColumn.setWeight("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight()));
+        contentLastColumn.setBidAmount("");
+        contentLastColumn.setLotSoldOutAmount("Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount()));
+        contentLastColumn.setFarmerAmount("F Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
+        contentLastColumn.setMarketFee("MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee()));
+        contentLastColumn.setReelerAmount("R Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
+        contentLastColumn.setReelerDetails("");
+        contentLastColumn.setBankDetails("");
+        contentLastColumn.setIfscCode("");
+        contentLastColumn.setAccountNumber("");
+        contentList.add(contentLastColumn);
         return new JRBeanCollectionDataSource(contentList);
     }
 

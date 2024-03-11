@@ -10,20 +10,20 @@ import lombok.*;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DTROnlineReportUnitDetail {
-    private int serialNumber;
-    private int allottedLotId;
+    private String serialNumber;
+    private String allottedLotId;
     private String farmerFirstName;
     private String farmerMiddleName;
     private String farmerLastName;
     private String farmerNumber;
     private String farmerMobileNumber;
-    private float weight;
-    private int bidAmount;
-    private double farmerAmount;
-    private double reelerAmount;
-    private float lotSoldOutAmount;
-    private double farmerMarketFee;
-    private double reelerMarketFee;
+    private String weight;
+    private String bidAmount;
+    private String farmerAmount;
+    private String reelerAmount;
+    private String lotSoldOutAmount;
+    private String farmerMarketFee;
+    private String reelerMarketFee;
     private String reelerLicense;
     private String reelerName;
     private String reelerMobile;
@@ -35,7 +35,7 @@ public class DTROnlineReportUnitDetail {
     private String farmerDetails;
     private String reelerDetails;
     private String bankDetails;
-    private double marketFee;
+    private String marketFee;
     private String headerText;
     private String farmerAddress;
     private String marketNameKannada;
