@@ -736,6 +736,8 @@ public class ReportsController {
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
             if(apiResponse.content.getBidAmount().equals("0.0")){
                 apiResponse.content.setBidAmount("");
+            }else{
+                apiResponse.content.setBidAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getBidAmount()))));
             }
             if(apiResponse.content.getLotWeight().equals("0.0")){
                 apiResponse.content.setLotWeight("");
@@ -771,7 +773,7 @@ public class ReportsController {
 
                 // Print the rounded result
                 System.out.println("Rounded result: " + roundedResult);
-                apiResponse.content.setFeespaid(String.valueOf(roundedResult));
+                apiResponse.content.setFeespaid(value1 + "+" +value2+ "=" +String.valueOf(roundedResult));
             }
             if(!apiResponse.content.getBidAmount().equals("")) {
                 apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
