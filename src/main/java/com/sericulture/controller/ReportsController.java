@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -1179,6 +1180,45 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/get-reeler-pending-report")
+    public ResponseEntity<?> getFarmerTxnReport(@RequestBody com.sericulture.model.RequestBody request){
+
+        try {
+            System.out.println("enter to bidding report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("reeler_pending_report.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getReelerPendingReport(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
     @PostMapping("/get-dashboard-report")
     public ResponseEntity<?> getDashboardCountReports(@RequestBody DashboardReportRequest request){
 
@@ -1254,6 +1294,23 @@ public class ReportsController {
             lotReportResponse.setFarmerDetails("");
             lotReportResponse.setFarmerAmount(roundToTwoDecimalPlaces(lotReportResponse.getFarmerAmount()));
             lotReportResponse.setFarmerMarketFee(roundToTwoDecimalPlaces(lotReportResponse.getFarmerMarketFee()));
+            contentList.add(lotReportResponse);
+        }
+        return new JRBeanCollectionDataSource(contentList);
+    }
+
+    private  JRBeanCollectionDataSource getReelerPendingReport(com.sericulture.model.RequestBody requestDto) throws JsonProcessingException {
+        ReelerPendingReposne apiResponse = apiService.getReelerPendingReport(requestDto);
+        List<ReelerPendingInfo> contentList = new LinkedList<>();
+        ReelerPendingInfo lotReportResponse1 = new ReelerPendingInfo();
+        if(apiResponse.getContent().getReelerPendingInfoList().size()>0) {
+            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getReelerPendingInfoList().get(0).getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setGrandTotalAmount("Total amount by reelers: " + apiResponse.getContent().getGrandTotalAmount());
+            contentList.add(lotReportResponse1);
+        }
+        for(ReelerPendingInfo lotReportResponse: apiResponse.getContent().getReelerPendingInfoList()) {
+            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getReelerPendingInfoList().get(0).getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setGrandTotalAmount("Total amount by reelers: " +apiResponse.getContent().getGrandTotalAmount());
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
