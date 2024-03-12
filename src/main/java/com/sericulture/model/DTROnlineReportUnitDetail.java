@@ -45,4 +45,6 @@ public class DTROnlineReportUnitDetail {
     private String farmer_cheque;
     private String total_lots;
     private String total_weight_with_amount_details;
+    private String transacted_lots;
+    private String not_transacted_lots;
 }

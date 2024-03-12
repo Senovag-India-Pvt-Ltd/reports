@@ -17,6 +17,7 @@ import java.util.List;
 public class DTROnlineReportResponse extends ResponseBody {
     private List<DTROnlineReportUnitDetail> dtrOnlineReportUnitDetailList = new ArrayList<>();
     private int totalLots;
+    private int paymentSuccessLots;
     private double totalFarmerAmount;
     private double totalReelerAmount;
     private double totalReelerMarketFee;
