@@ -1317,13 +1317,17 @@ public class ReportsController {
         List<ReelerPendingInfo> contentList = new LinkedList<>();
         ReelerPendingInfo lotReportResponse1 = new ReelerPendingInfo();
         if(apiResponse.getContent().getReelerPendingInfoList().size()>0) {
-            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getReelerPendingInfoList().get(0).getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
-            lotReportResponse1.setGrandTotalAmount("Total amount by reelers: " + apiResponse.getContent().getGrandTotalAmount());
+            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setDebit("Reeler deposit today: " + ((apiResponse.getContent().getCreditTotal() != null) ? apiResponse.getContent().getCreditTotal() : ""));
+            lotReportResponse1.setCredit("Reeler credit balance: " + ((apiResponse.getContent().getBalance() != null) ? apiResponse.getContent().getBalance() : ""));
+            lotReportResponse1.setDeposit("Reeler debit balance: " + ((apiResponse.getContent().getDebitTotal() != null ) ? apiResponse.getContent().getDebitTotal() : ""));
             contentList.add(lotReportResponse1);
         }
         for(ReelerPendingInfo lotReportResponse: apiResponse.getContent().getReelerPendingInfoList()) {
-            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getReelerPendingInfoList().get(0).getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
-            lotReportResponse1.setGrandTotalAmount("Total amount by reelers: " +apiResponse.getContent().getGrandTotalAmount());
+            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setDebit("Reeler deposit today: " + ((apiResponse.getContent().getCreditTotal() != null) ? apiResponse.getContent().getCreditTotal() : ""));
+            lotReportResponse1.setCredit("Reeler credit balance: " + ((apiResponse.getContent().getBalance() != null) ? apiResponse.getContent().getBalance() : ""));
+            lotReportResponse1.setDeposit("Reeler debit balance: " + ((apiResponse.getContent().getDebitTotal() != null ) ? apiResponse.getContent().getDebitTotal() : ""));
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
@@ -1399,6 +1403,100 @@ public class ReportsController {
             contentList.add(lotReportResponse);
         }
         return new JRBeanCollectionDataSource(contentList);
+    }
+
+    /*@PostMapping("/get-form-13-report")
+    public ResponseEntity<?> getForm13Report(@RequestBody Form13Request request){
+
+        try {
+            System.out.println("enter to dashboard report pdf");
+            logger.info("enter to bidding report pdf");
+            JasperReport jasperReport = getJasperReport("form_13_report.jrxml");
+
+            // 2. datasource "java object"
+            JRDataSource dataSource = getForm13Data(request);
+
+            // 3. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+            parameters.put("CollectionBeanParam2", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }*/
+
+    @PostMapping("/get-form-13-report")
+    public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request) {
+        try {
+            logger.info("Generating Form 13 report");
+
+            JasperReport jasperReport = getJasperReport("form_13_report.jrxml");
+            JRDataSource dataSource = getForm13Data(request);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", dataSource);
+            parameters.put("CollectionBeanParam2", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+        } catch (JRException ex) {
+            logger.error("Error generating Form 13 report", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private  JRBeanCollectionDataSource getForm13Data(Form13Request requestDto) throws JsonProcessingException {
+        Form13ReportResponse apiResponse = apiService.getForm13Report(requestDto);
+        List<Form13ReportResponse> contentList = new LinkedList<>();
+        List<BreakdownLotStatus> breakdownLotStatus0to350List = new LinkedList<>();
+
+        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom0to351()) {
+            lotReportResponse.setHeaderText("Hzeader.............................................");
+            breakdownLotStatus0to350List.add(lotReportResponse);
+        }
+
+//        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom201to300()) {
+//            lotReportResponse.setHeaderText("Hzeader.............................................");
+//            breakdownLotStatus0to350List.add(lotReportResponse);
+//        }
+        //  contentList.add(breakdownLotStatus0to350List);
+        return new JRBeanCollectionDataSource(breakdownLotStatus0to350List);
     }
 
     public static String convertDate(String dateString) {
