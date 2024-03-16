@@ -28,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -1317,14 +1318,14 @@ public class ReportsController {
         List<ReelerPendingInfo> contentList = new LinkedList<>();
         ReelerPendingInfo lotReportResponse1 = new ReelerPendingInfo();
         if(apiResponse.getContent().getReelerPendingInfoList().size()>0) {
-            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setHeaderText("Government Cocoon Market, " + apiResponse.getContent().getMarketName() + "\n Reeler balance report " + convertDate(String.valueOf(LocalDate.now())));
             lotReportResponse1.setDebit("Reeler deposit today: " + ((apiResponse.getContent().getCreditTotal() != null) ? apiResponse.getContent().getCreditTotal() : ""));
             lotReportResponse1.setCredit("Reeler credit balance: " + ((apiResponse.getContent().getBalance() != null) ? apiResponse.getContent().getBalance() : ""));
             lotReportResponse1.setDeposit("Reeler debit balance: " + ((apiResponse.getContent().getDebitTotal() != null ) ? apiResponse.getContent().getDebitTotal() : ""));
             contentList.add(lotReportResponse1);
         }
         for(ReelerPendingInfo lotReportResponse: apiResponse.getContent().getReelerPendingInfoList()) {
-            lotReportResponse1.setHeaderText("Reeler pending report (" + apiResponse.getContent().getMarketName() + ")" + convertDate(String.valueOf(LocalDate.now())));
+            lotReportResponse1.setHeaderText("Government Cocoon Market, " + apiResponse.getContent().getMarketName() + "\n Reeler balance report " + convertDate(String.valueOf(LocalDate.now())));
             lotReportResponse1.setDebit("Reeler deposit today: " + ((apiResponse.getContent().getCreditTotal() != null) ? apiResponse.getContent().getCreditTotal() : ""));
             lotReportResponse1.setCredit("Reeler credit balance: " + ((apiResponse.getContent().getBalance() != null) ? apiResponse.getContent().getBalance() : ""));
             lotReportResponse1.setDeposit("Reeler debit balance: " + ((apiResponse.getContent().getDebitTotal() != null ) ? apiResponse.getContent().getDebitTotal() : ""));
