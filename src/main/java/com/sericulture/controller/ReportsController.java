@@ -11,6 +11,7 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
@@ -376,7 +377,13 @@ public class ReportsController {
             }
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getFarmerNumber() + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
+            String farmerNumber = "";
+            if(apiResponse.content.getFruitsId() != null && !apiResponse.content.getFruitsId().equals("")){
+                farmerNumber = apiResponse.content.getFruitsId();
+            }else{
+                farmerNumber = apiResponse.content.getFarmerNumber();
+            }
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
             String reelerNumberText = "";
             String reelerAddressText = "";
             if(apiResponse.content.getReelerNumber()!= null){
@@ -598,7 +605,13 @@ public class ReportsController {
             }
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + apiResponse.content.getFarmerNumber() + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
+            String farmerNumber = "";
+            if(apiResponse.content.getFruitsId() != null && !apiResponse.content.getFruitsId().equals("")){
+                farmerNumber = apiResponse.content.getFruitsId();
+            }else{
+                farmerNumber = apiResponse.content.getFarmerNumber();
+            }
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() +" " + apiResponse.content.getFarmerAddress());
             String reelerNumberText = "";
             String reelerAddressText = "";
             if(apiResponse.content.getReelerNumber()!= null){

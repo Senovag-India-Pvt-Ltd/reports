@@ -120,4 +120,5 @@ public class Content {
     private String bankDetails;
     private String accpetedBy;
     private String shed;
+    private String fruitsId;
 }
