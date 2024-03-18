@@ -1446,59 +1446,59 @@ public class ReportsController {
         }
     }*/
 
-    @PostMapping("/get-form-13-report")
-    public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request) {
-        try {
-            logger.info("Generating Form 13 report");
+//    @PostMapping("/get-form-13-report")
+//    public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request) {
+//        try {
+//            logger.info("Generating Form 13 report");
+//
+//            JasperReport jasperReport = getJasperReport("form_13_report.jrxml");
+//            JRDataSource dataSource = getForm13Data(request);
+//
+//            Map<String, Object> parameters = new HashMap<>();
+//            parameters.put("CollectionBeanParam", dataSource);
+//            parameters.put("CollectionBeanParam2", dataSource);
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", "report.pdf");
+//
+//            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+//        } catch (JRException ex) {
+//            logger.error("Error generating Form 13 report", ex);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
-            JasperReport jasperReport = getJasperReport("form_13_report.jrxml");
-            JRDataSource dataSource = getForm13Data(request);
 
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("CollectionBeanParam", dataSource);
-            parameters.put("CollectionBeanParam2", dataSource);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
-
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
-        } catch (JRException ex) {
-            logger.error("Error generating Form 13 report", ex);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    private  JRBeanCollectionDataSource getForm13Data(Form13Request requestDto) throws JsonProcessingException {
-        Form13ReportResponse apiResponse = apiService.getForm13Report(requestDto);
-        List<Form13ReportResponse> contentList = new LinkedList<>();
-        List<BreakdownLotStatus> breakdownLotStatus0to350List = new LinkedList<>();
-
-        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom0to351()) {
-            lotReportResponse.setHeaderText("Hzeader.............................................");
-            breakdownLotStatus0to350List.add(lotReportResponse);
-        }
-
-//        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom201to300()) {
+//    private  JRBeanCollectionDataSource getForm13Data(Form13Request requestDto) throws JsonProcessingException {
+//        Form13ReportResponse apiResponse = apiService.getForm13Report(requestDto);
+//        List<Form13ReportResponse> contentList = new LinkedList<>();
+//        List<BreakdownLotStatus> breakdownLotStatus0to350List = new LinkedList<>();
+//
+//        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom0to351()) {
 //            lotReportResponse.setHeaderText("Hzeader.............................................");
 //            breakdownLotStatus0to350List.add(lotReportResponse);
 //        }
-        //  contentList.add(breakdownLotStatus0to350List);
-        return new JRBeanCollectionDataSource(breakdownLotStatus0to350List);
-    }
+//
+////        for(BreakdownLotStatus lotReportResponse: apiResponse.getContent().getLotsFrom201to300()) {
+////            lotReportResponse.setHeaderText("Hzeader.............................................");
+////            breakdownLotStatus0to350List.add(lotReportResponse);
+////        }
+//        //  contentList.add(breakdownLotStatus0to350List);
+//        return new JRBeanCollectionDataSource(breakdownLotStatus0to350List);
+//    }
 
     public static String convertDate(String dateString) {
         // Split the date string into year, month, and day
