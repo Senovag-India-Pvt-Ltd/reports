@@ -1415,7 +1415,7 @@ public class ReportsController {
             System.out.println("enter to form 14");
             logger.info("enter to form 13");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("kannada_triplicate_with_variable_1 - Copy.jrxml");
+            JasperReport jasperReport = getJasperReport("form_13_cb_report.jrxml");
 
             Form13ReportResponse apiResponse = apiService.getForm13Report(request);
             List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
