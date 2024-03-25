@@ -240,7 +240,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Quantity and Average Rate of Cocoons  transacted( month wise/year wise)  from " +requestDto.getStartYear() +"-"+ (requestDto.getStartYear()+1) +" to "+(requestDto.getEndYear()-1)+"-"+requestDto.getEndYear());
+        headerRow.createCell(0).setCellValue("Quantity and Average Rate of Cocoons  transacted( month wise/year wise)  from " +requestDto.getStartYear().getYear() +"-"+ (requestDto.getStartYear().getYear()+1) +" to "+(requestDto.getEndYear().getYear()-1)+"-"+requestDto.getEndYear().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");

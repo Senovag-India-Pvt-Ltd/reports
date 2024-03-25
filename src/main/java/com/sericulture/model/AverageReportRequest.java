@@ -2,6 +2,8 @@ package com.sericulture.model;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -9,6 +11,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class AverageReportRequest extends RequestBody {
 
-    private int startYear;
-    private int endYear;
+    private LocalDate startYear;
+    private LocalDate endYear;
 }
