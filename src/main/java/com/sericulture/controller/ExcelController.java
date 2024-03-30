@@ -3,6 +3,9 @@ package com.sericulture.controller;
 
 import com.sericulture.helper.Util;
 import com.sericulture.model.*;
+import com.sericulture.model.AudioVisual.AudioVisualReportRequest;
+import com.sericulture.model.AudioVisual.AudioVisualResponse;
+import com.sericulture.model.AudioVisual.MonthWiseReport;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -368,6 +371,73 @@ public class ExcelController {
         // Auto-size all columns
         for (int columnIndex = 1; columnIndex <= dynamicColumnStartsFrom + 1; columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Write the workbook content to a file
+        // Specify the directory where the file will be saved
+        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("sample.xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
+
+    @PostMapping("/audio-visual-report")
+    public ResponseEntity<?> audioVisualReport(@RequestBody AudioVisualReportRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            generateAudioVisualExcel(request);
+
+            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"audio_visual_report"+ Util.getISTLocalDate()+".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private void generateAudioVisualExcel(AudioVisualReportRequest requestDto) throws Exception {
+        AudioVisualResponse reportDataResponse = apiService.audioVisualReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Audio visual header");
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(1).setCellValue("Market");
+        subHeaderRow.createCell(2).setCellValue("Race");
+
+        //Dynamic data binds here
+        //Starting 0th and 1st column cells are hardcoded, So dynamic data column starts from 2nd column
+
+        int dynamicColumnStartsFrom = 4;
+        double totalWeight = 0.0;
+        double totalAmount = 0.0;
+        for (int j = 0; j < reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().size(); j++) {
+            MonthWiseReport response = reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().get(j);
+            subHeaderRow.createCell(3).setCellValue("Race");
+
         }
 
         // Write the workbook content to a file
