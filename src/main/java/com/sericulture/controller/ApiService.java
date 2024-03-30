@@ -3,6 +3,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sericulture.helper.Util;
 import com.sericulture.model.*;
+import com.sericulture.model.DTRAllMarket.DTRAllMarketResponse;
+import com.sericulture.model.DTRAllMarket.DTRInfoResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -250,7 +252,7 @@ public class ApiService {
 
     public AverageReportDataResponse averageReport(AverageReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/averageReportForYearsReport";
+       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/averageReportForYearsReport";
 
         String finalapiurl = apiUrl + "auction/report/averageReportForYearsReport";
 
@@ -286,6 +288,28 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         CocoonReport response2 = objectMapper.readValue(response1, CocoonReport.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public DTRAllMarketResponse dtrAllReport(Form13Request requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/dtrReport";
+
+        String finalapiurl = apiUrl + "auction/report/dtrReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<Form13Request> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DTRAllMarketResponse response2 = objectMapper.readValue(response1, DTRAllMarketResponse.class);
 
         return response2;
         // Process the API response as needed

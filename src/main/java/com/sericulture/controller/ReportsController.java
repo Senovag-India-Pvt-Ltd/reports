@@ -2,6 +2,7 @@ package com.sericulture.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sericulture.model.*;
+import com.sericulture.model.DTRAllMarket.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -1583,6 +1584,205 @@ public class ReportsController {
         apiResponse.setAverageRate("Average Rate Rs."+roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageRate())));
         form13ReportResponses.add(apiResponse);
         return new JRBeanCollectionDataSource(form13ReportResponses);
+    }
+
+    @PostMapping("/get-dtr-all-market-report")
+    public ResponseEntity<byte[]> getDTRAllMarketReport(@RequestBody Form13Request request) {
+        try {
+            System.out.println("enter to form 14");
+            logger.info("enter to form 13");
+            String destFileName = "report_kannada.pdf";
+//            JasperReport jasperReport = getJasperReport("dtr_all_market.jrxml");
+            JasperReport jasperReport = getJasperReport("dtr_mark.jrxml");
+
+            DTRAllMarketResponse apiResponse = apiService.dtrAllReport(request);
+
+            List<DTRRaceWithDetails> dtrRaceWithDetails = new ArrayList<>();
+
+            for(int i=0; i<apiResponse.getContent().getDtrDataResponse().getDtrMarketResponses().size(); i++){
+                DTRMarketResponse dtrMarketResponse = apiResponse.getContent().getDtrDataResponse().getDtrMarketResponses().get(i);
+                for(int j=0; j<dtrMarketResponse.getDtrRaceResponses().size(); j++){
+                    DTRRaceWithDetails dtrRaceWithDetails1 = new DTRRaceWithDetails();
+                    dtrRaceWithDetails1.setMarketNameInKannada(i+"."+dtrMarketResponse.getMarketNameInKannada());
+
+//                    dtrRaceWithDetails1.setMarketNameInKannada(dtrMarketResponse.getMarketNameInKannada());
+                    dtrRaceWithDetails1.setRaceNameInKannada(dtrMarketResponse.getDtrRaceResponses().get(j).getRaceNameInKannada());
+                    if(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses() != null) {
+                        for (int k = 0; k < dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().size(); k++) {
+                            dtrRaceWithDetails1.setWeight(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getWeight());
+                            dtrRaceWithDetails1.setAvgAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getAvgAmount());
+                            dtrRaceWithDetails1.setMaxAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getMaxAmount());
+                            dtrRaceWithDetails1.setMinAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getMinAmount());
+
+                            if(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses() != null) {
+                                dtrRaceWithDetails1.setPrevWeight(String.valueOf(Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getWeight()) - Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses().get(k).getWeight())));
+                                dtrRaceWithDetails1.setPrevAvg(String.valueOf(Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getAvgAmount()) - Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses().get(k).getAvgAmount())));
+                            }else{
+                                dtrRaceWithDetails1.setPrevWeight("0.000");
+                            }
+
+                            if(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses() != null) {
+                                dtrRaceWithDetails1.setWeight(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getWeight());
+                                dtrRaceWithDetails1.setAvgAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getAvgAmount());
+                                dtrRaceWithDetails1.setMaxAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getMaxAmount());
+                                dtrRaceWithDetails1.setMinAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getMinAmount());
+                            }else{
+                                dtrRaceWithDetails1.setLastWeight("0.000");
+                            }
+
+                            dtrRaceWithDetails.add(dtrRaceWithDetails1);
+
+                        }
+                    }else{
+                        dtrRaceWithDetails1.setWeight("0.000");
+                        if(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses() != null) {
+                            for (int k = 0; k < dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses().size(); k++) {
+                                if (dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses() != null) {
+                                    dtrRaceWithDetails1.setPrevWeight(String.valueOf(Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getWeight()) - Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses().get(k).getWeight())));
+                                    dtrRaceWithDetails1.setPrevAvg(String.valueOf(Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getDtrResponses().get(k).getAvgAmount()) - Float.parseFloat(dtrMarketResponse.getDtrRaceResponses().get(j).getPrevResponses().get(k).getAvgAmount())));
+                                } else {
+                                    dtrRaceWithDetails1.setPrevWeight("0.000");
+                                }
+                            }
+                        }else{
+                            dtrRaceWithDetails1.setPrevWeight("0.000");
+                        }
+                        if(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses() != null) {
+                            for (int k = 0; k < dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().size(); k++) {
+                                if (dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses() != null) {
+                                    dtrRaceWithDetails1.setWeight(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getWeight());
+                                    dtrRaceWithDetails1.setAvgAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getAvgAmount());
+                                    dtrRaceWithDetails1.setMaxAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getMaxAmount());
+                                    dtrRaceWithDetails1.setMinAmount(dtrMarketResponse.getDtrRaceResponses().get(j).getLastYearResponses().get(k).getMinAmount());
+                                } else {
+                                    dtrRaceWithDetails1.setLastWeight("0.000");
+                                }
+                            }
+                        }else{
+                            dtrRaceWithDetails1.setLastWeight("0.000");
+                        }
+
+                        dtrRaceWithDetails1.setLastDiff(String.format("%.3f", Double.parseDouble(dtrRaceWithDetails1.getWeight()) - Double.parseDouble(dtrRaceWithDetails1.getLastWeight())));
+
+                        dtrRaceWithDetails.add(dtrRaceWithDetails1);
+                    }
+                }
+            }
+
+            List<DTRResponse> raceByToday = apiResponse.getContent().getDtrDataResponse().getRaceByToday();
+            List<DTRResponse> raceByPrevYear = apiResponse.getContent().getDtrDataResponse().getRaceByPrevYear();
+
+            List<DTRAllMarketResponse> dataSource1Response = new ArrayList<>();
+            for(int i=0; i<raceByToday.size(); i++){
+                DTRAllMarketResponse dtrAllMarketResponse = new DTRAllMarketResponse();
+                dtrAllMarketResponse.setRaceNameInKannada1(i +"."+raceByToday.get(i).getRaceName());
+                dtrAllMarketResponse.setWeight1(raceByToday.get(i).getWeight());
+                if(raceByPrevYear.size()>0){
+                    if(raceByPrevYear.get(i) != null){
+                        dtrAllMarketResponse.setLastWeight1(raceByPrevYear.get(i).getWeight());
+                    }else{
+                        dtrAllMarketResponse.setLastWeight1("0.000");
+                    }
+                }else{
+                    dtrAllMarketResponse.setLastWeight1("0.000");
+                }
+                dtrAllMarketResponse.setMinAmount1(raceByToday.get(i).getMinAmount());
+                if(raceByPrevYear.size()>0){
+                    if(raceByPrevYear.get(i) != null){
+                        dtrAllMarketResponse.setLastMinAmount1(raceByPrevYear.get(i).getMinAmount());
+                    }
+                }
+                dtrAllMarketResponse.setMaxAmount1(raceByToday.get(i).getMaxAmount());
+                if(raceByPrevYear.size()>0){
+                    if(raceByPrevYear.get(i) != null){
+                        dtrAllMarketResponse.setLastMaxAmount1(raceByPrevYear.get(i).getMaxAmount());
+                    }
+                }
+                dtrAllMarketResponse.setAvgAmount1(raceByToday.get(i).getAvgAmount());
+                if(raceByPrevYear.size()>0){
+                    if(raceByPrevYear.get(i) != null){
+                        dtrAllMarketResponse.setLastAvgAmount1(raceByPrevYear.get(i).getAvgAmount());
+                    }
+                }
+                dataSource1Response.add(dtrAllMarketResponse);
+            }
+
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDTRAllMarket(request);
+            parameters.put("datasource1", dataSource1Response);
+            parameters.put("datasource2", dtrRaceWithDetails);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (JRException ex) {
+            logger.error("Error generating Form 13 report", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private JRBeanCollectionDataSource getDTRAllMarket(Form13Request requestDto) throws JsonProcessingException {
+        DTRAllMarketResponse apiResponse = apiService.dtrAllReport(requestDto);
+
+        DTRDataResponse dtrDataResponse = apiResponse.getContent().getDtrDataResponse();
+        apiResponse.setTotalWeight(dtrDataResponse.getSumOfToday().getWeight());
+        apiResponse.setTotalMin(dtrDataResponse.getSumOfToday().getMinAmount());
+        apiResponse.setTotalMax(dtrDataResponse.getSumOfToday().getMaxAmount());
+        apiResponse.setTotalAvg(dtrDataResponse.getSumOfToday().getAvgAmount());
+
+        apiResponse.setLastTotalWeight(dtrDataResponse.getSumOfPreviousYear().getWeight());
+        apiResponse.setLastAvg(dtrDataResponse.getSumOfPreviousYear().getAvgAmount());
+        apiResponse.setLastMax(dtrDataResponse.getSumOfPreviousYear().getMaxAmount());
+        apiResponse.setLastMin(dtrDataResponse.getSumOfPreviousYear().getMinAmount());
+
+        apiResponse.setFinalDiff(dtrDataResponse.getTotalWeightDiff());
+
+        apiResponse.setThisYearWeight(dtrDataResponse.getThisYearWeight());
+        apiResponse.setThisYearAmount(dtrDataResponse.getThisYearAmount());
+        apiResponse.setPrevYearAmount(dtrDataResponse.getPrevYearAmount());
+        apiResponse.setPrevYearWeight(dtrDataResponse.getPrevYearWeight());
+
+        apiResponse.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        apiResponse.setHeader1("ಕರ್ನಾಟಕ ರಾಜ್ಯದ ಪ್ರಮುಖ ವಾಣಿಜ್ಯ ರೇಷ್ಮೆ ಗೂಡು \nಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ ವಹಿವಾಟಾದ ರೇಷ್ಮೆ ಗೂಡಿನ ವಿವರ \n" + convertDate(requestDto.getAuctionDate().toString()));
+        apiResponse.setYear1(requestDto.getAuctionDate().minusYears(1).getYear() +"-" + requestDto.getAuctionDate().getYear());
+        apiResponse.setYear2(requestDto.getAuctionDate().minusYears(2).getYear() +"-" + requestDto.getAuctionDate().minusYears(1).getYear());
+        apiResponse.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+
+        if(apiResponse.getThisYearWeight().equals("")) {
+            apiResponse.setThisYearAmount("0");
+        }
+        if(apiResponse.getPrevYearWeight().equals("")){
+            apiResponse.setPrevYearWeight("0");
+        }
+
+        apiResponse.setWeightMonthDiff(String.format("%.3f", Double.parseDouble(apiResponse.getThisYearWeight()) - Double.parseDouble(apiResponse.getPrevYearWeight())));
+
+
+        List<DTRAllMarketResponse> response = new LinkedList<>();
+        response.add(apiResponse);
+        return new JRBeanCollectionDataSource(response);
     }
 
     public static String convertDate(String dateString) {
