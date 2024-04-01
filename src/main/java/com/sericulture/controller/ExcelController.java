@@ -6,6 +6,8 @@ import com.sericulture.model.*;
 import com.sericulture.model.AudioVisual.AudioVisualReportRequest;
 import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.AudioVisual.MonthWiseReport;
+import com.sericulture.model.DTRAllMarket.DTRMarketResponse;
+import com.sericulture.model.DTRAllMarket.DTRRaceResponse;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -23,6 +25,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("excel-report")
@@ -428,16 +432,152 @@ public class ExcelController {
         subHeaderRow.createCell(1).setCellValue("Market");
         subHeaderRow.createCell(2).setCellValue("Race");
 
-        //Dynamic data binds here
-        //Starting 0th and 1st column cells are hardcoded, So dynamic data column starts from 2nd column
+        Row belowSubHeaderRow = sheet.createRow(2);
 
-        int dynamicColumnStartsFrom = 4;
-        double totalWeight = 0.0;
-        double totalAmount = 0.0;
+        int dynamicColumnStartsFrom = 3;
+        int dynamicRowStartsFrom = 3;
+        Set<Integer> createdRows = new HashSet<>();
+        Set<Integer> innerRows = new HashSet<>();
+        int weightDataCount = 3;
         for (int j = 0; j < reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().size(); j++) {
             MonthWiseReport response = reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().get(j);
-            subHeaderRow.createCell(3).setCellValue("Race");
+            subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(response.getMonth());
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue("Weight");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+1).setCellValue("Min");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+2).setCellValue("Max");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+3).setCellValue("Avg");
 
+            int updateRaceWiseRowCount = dynamicRowStartsFrom;
+            for(int k=0; k<response.getDtrMarketResponses().size(); k++){
+                Row currentRow;
+                if (createdRows.contains(updateRaceWiseRowCount)) {
+                    // If the row has already been created, get it from the sheet
+                    currentRow = sheet.getRow(updateRaceWiseRowCount);
+                } else {
+                    // Otherwise, create a new row and add its index to the set
+                    currentRow = sheet.createRow(updateRaceWiseRowCount);
+                    createdRows.add(updateRaceWiseRowCount);
+                }
+               // Row currentRow = sheet.createRow(updateRaceWiseRowCount);
+                currentRow.createCell(0).setCellValue(k+1);
+
+                DTRMarketResponse dtrMarketResponse = response.getDtrMarketResponses().get(k);
+                currentRow.createCell(1).setCellValue(dtrMarketResponse.getMarketNameInKannada());
+
+                int raceWiseRowCount = updateRaceWiseRowCount+1;
+                for(int l=0; l<dtrMarketResponse.getDtrRaceResponses().size(); l++){
+                    DTRRaceResponse dtrRaceResponse = dtrMarketResponse.getDtrRaceResponses().get(l);
+                    if(l==0) {
+                        currentRow.createCell(2).setCellValue(dtrRaceResponse.getRaceNameInKannada());
+                        if(dtrRaceResponse.getDtrResponses() != null) {
+                            if (dtrRaceResponse.getDtrResponses().size() > 0) {
+                                for (int m = 0; m < dtrRaceResponse.getDtrResponses().size(); m++) {
+                                    currentRow.createCell(weightDataCount).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getWeight());
+                                    currentRow.createCell(weightDataCount+1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
+                                    currentRow.createCell(weightDataCount+2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
+                                    currentRow.createCell(weightDataCount+3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
+                                }
+                            }
+                        }
+                    }else{
+                        Row currentRowRace;
+                        if (innerRows.contains(raceWiseRowCount)) {
+                            // If the row has already been created, get it from the sheet
+                            currentRowRace = sheet.getRow(raceWiseRowCount);
+                        } else {
+                            // Otherwise, create a new row and add its index to the set
+                            currentRowRace = sheet.createRow(raceWiseRowCount);
+                            innerRows.add(raceWiseRowCount);
+                        }
+                        //Row currentRowRace = sheet.createRow(raceWiseRowCount);
+                        currentRowRace.createCell(2).setCellValue(dtrRaceResponse.getRaceNameInKannada());
+                        if(dtrRaceResponse.getDtrResponses() != null) {
+                            if (dtrRaceResponse.getDtrResponses().size() > 0) {
+                                for (int m = 0; m < dtrRaceResponse.getDtrResponses().size(); m++) {
+                                    currentRowRace.createCell(weightDataCount).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getWeight());
+                                    currentRowRace.createCell(weightDataCount+1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
+                                    currentRowRace.createCell(weightDataCount+2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
+                                    currentRowRace.createCell(weightDataCount+3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
+                                }
+                            }
+                        }
+                        raceWiseRowCount = raceWiseRowCount+1;
+                    }
+                }
+                updateRaceWiseRowCount = updateRaceWiseRowCount + dtrMarketResponse.getDtrRaceResponses().size();
+            }
+            weightDataCount = weightDataCount+ 4;
+            dynamicColumnStartsFrom = dynamicColumnStartsFrom+4;
+        }
+        // Get the index of the last row
+        int lastRowIndex = sheet.getLastRowNum();
+        Row lastRow = sheet.createRow(lastRowIndex + 1);
+        lastRow.createCell(2).setCellValue("Total");
+
+        // Initialize the total sum
+        int sumColumnIndex = 3;
+        int minColumnIndex = 4;
+        int maxColumnIndex = 5;
+        int averageColumnIndex = 6;
+        int totalColumnStartsFrom = 3;
+
+        for (int j = 0; j < reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().size(); j++) {
+            double sum = 0.0;
+            int count = 0;
+            double maxValue = Double.MIN_VALUE;
+            double minValue = Double.MAX_VALUE;
+            double totalSum = 0.0;
+            // Iterate through rows starting from row index 3
+            for (int rowIndex = 3; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                Row currentRow = sheet.getRow(rowIndex);
+                if (currentRow != null) {
+                    Cell cell = currentRow.getCell(sumColumnIndex);
+                    if (cell != null && cell.getCellType() == CellType.STRING) {
+                        // Add the cell value to the total sum
+                        totalSum += Double.parseDouble(cell.getStringCellValue());
+                    }
+
+                    Cell minCell = currentRow.getCell(minColumnIndex);
+                    if (minCell != null && minCell.getCellType() == CellType.STRING) {
+                        // Compare the cell value with the current minimum value
+                        double cellValue = Double.parseDouble(minCell.getStringCellValue());
+                        if (cellValue < minValue) {
+                            minValue = cellValue; // Update the minimum value
+                        }
+                    }
+
+                    Cell maxCell = currentRow.getCell(maxColumnIndex);
+                    if (maxCell != null && maxCell.getCellType() == CellType.STRING) {
+                        // Compare the cell value with the current minimum value
+                        double cellValue = Double.parseDouble(maxCell.getStringCellValue());
+                        if (cellValue > maxValue) {
+                            maxValue = cellValue; // Update the maximum value
+                        }
+                    }
+
+                    Cell avgCell = currentRow.getCell(averageColumnIndex);
+                    if (avgCell != null && avgCell.getCellType() == CellType.STRING) {
+                        // Add the cell value to the sum and increment count
+                        sum += Double.parseDouble(avgCell.getStringCellValue());
+                        count++;
+                    }
+                }
+            }
+            double average = count > 0 ? sum / count : 0.0;
+            lastRow.createCell(totalColumnStartsFrom).setCellValue(totalSum);
+            lastRow.createCell(totalColumnStartsFrom+1).setCellValue(minValue);
+            lastRow.createCell(totalColumnStartsFrom+2).setCellValue(maxValue);
+            lastRow.createCell(totalColumnStartsFrom+3).setCellValue(average);
+            totalColumnStartsFrom = totalColumnStartsFrom+4;
+            averageColumnIndex = averageColumnIndex +4;
+            maxColumnIndex = maxColumnIndex +4;
+            minColumnIndex = minColumnIndex +4;
+            sumColumnIndex = sumColumnIndex +4;
+        }
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= lastRow.getLastCellNum(); columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
         }
 
         // Write the workbook content to a file
