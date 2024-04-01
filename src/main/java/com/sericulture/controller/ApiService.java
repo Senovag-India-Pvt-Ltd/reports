@@ -7,6 +7,11 @@ import com.sericulture.model.AudioVisual.AudioVisualReportRequest;
 import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.DTRAllMarket.DTRAllMarketResponse;
 import com.sericulture.model.DTRAllMarket.DTRInfoResponse;
+import com.sericulture.model.MarketReport.MarketResponse;
+import com.sericulture.model.MarketWiseReport.DivisionResponse;
+import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
+import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
+import com.sericulture.model.VahivaatuReport.Report27bResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -320,9 +325,9 @@ public class ApiService {
 
     public AudioVisualResponse audioVisualReport(AudioVisualReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/audioVisualReport";
+        // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/audioVisualReport";
 
-        //String finalapiurl = apiUrl + "auction/report/audioVisualReport";
+        String finalapiurl = apiUrl + "auction/report/audioVisualReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -334,6 +339,94 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         AudioVisualResponse response2 = objectMapper.readValue(response1, AudioVisualResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public Report27bResponse get27bReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/27bReport";
+
+       // String finalapiurl = apiUrl + "auction/report/27bReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Report27bResponse response2 = objectMapper.readValue(response1, Report27bResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public ReportMonthlyResponse getMonthlyReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/monthlyReport";
+
+        // String finalapiurl = apiUrl + "auction/report/monthlyReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ReportMonthlyResponse response2 = objectMapper.readValue(response1, ReportMonthlyResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public MarketResponse getMarketReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/marketReport";
+
+        // String finalapiurl = apiUrl + "auction/report/marketReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        MarketResponse response2 = objectMapper.readValue(response1, MarketResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public DivisionResponse getDistrictWiseReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/districtWiseReport";
+
+        // String finalapiurl = apiUrl + "auction/report/districtWiseReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DivisionResponse response2 = objectMapper.readValue(response1, DivisionResponse.class);
 
         return response2;
         // Process the API response as needed

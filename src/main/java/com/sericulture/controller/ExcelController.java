@@ -8,6 +8,11 @@ import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.AudioVisual.MonthWiseReport;
 import com.sericulture.model.DTRAllMarket.DTRMarketResponse;
 import com.sericulture.model.DTRAllMarket.DTRRaceResponse;
+import com.sericulture.model.MarketReport.MarketResponse;
+import com.sericulture.model.MarketWiseReport.DivisionResponse;
+import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
+import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
+import com.sericulture.model.VahivaatuReport.Report27bResponse;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -594,4 +599,219 @@ public class ExcelController {
         workbook.close();
     }
 
+    @PostMapping("/27-b-report")
+    public ResponseEntity<?> get27bReport(@RequestBody MonthlyReportRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            generate27bReport(request);
+
+            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"27_b_report"+ Util.getISTLocalDate()+".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private void generate27bReport(MonthlyReportRequest requestDto) throws Exception {
+        Report27bResponse reportDataResponse = apiService.get27bReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(1).setCellValue("District");
+
+        // Write the workbook content to a file
+        // Specify the directory where the file will be saved
+        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("sample.xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
+
+    @PostMapping("/monthly-report")
+    public ResponseEntity<?> getMonthlyReport(@RequestBody MonthlyReportRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            generateMonthlyReport(request);
+
+            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"monthly_report"+ Util.getISTLocalDate()+".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private void generateMonthlyReport(MonthlyReportRequest requestDto) throws Exception {
+        ReportMonthlyResponse reportDataResponse = apiService.getMonthlyReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(1).setCellValue("Race");
+
+        // Write the workbook content to a file
+        // Specify the directory where the file will be saved
+        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("sample.xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
+
+    @PostMapping("/market-report")
+    public ResponseEntity<?> getMarketReport(@RequestBody MonthlyReportRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            generateMarketReport(request);
+
+            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"market_report"+ Util.getISTLocalDate()+".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private void generateMarketReport(MonthlyReportRequest requestDto) throws Exception {
+        MarketResponse reportDataResponse = apiService.getMarketReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(1).setCellValue("Race");
+
+        // Write the workbook content to a file
+        // Specify the directory where the file will be saved
+        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("sample.xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
+
+    @PostMapping("/district-report")
+    public ResponseEntity<?> getDistrictReport(@RequestBody MonthlyReportRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            generateDistrictReport(request);
+
+            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"district_report"+ Util.getISTLocalDate()+".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private void generateDistrictReport(MonthlyReportRequest requestDto) throws Exception {
+        DivisionResponse reportDataResponse = apiService.getDistrictWiseReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(1).setCellValue("Race");
+
+        // Write the workbook content to a file
+        // Specify the directory where the file will be saved
+        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("sample.xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
 }
