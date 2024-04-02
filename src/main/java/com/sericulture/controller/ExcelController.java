@@ -8,7 +8,9 @@ import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.AudioVisual.MonthWiseReport;
 import com.sericulture.model.DTRAllMarket.DTRMarketResponse;
 import com.sericulture.model.DTRAllMarket.DTRRaceResponse;
+import com.sericulture.model.MarketReport.MarketReportRaceWise;
 import com.sericulture.model.MarketReport.MarketResponse;
+import com.sericulture.model.MarketReport.MarketWiseInfo;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
@@ -745,8 +747,235 @@ public class ExcelController {
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");
-        subHeaderRow.createCell(1).setCellValue("Race");
+        subHeaderRow.createCell(1).setCellValue("Market");
 
+        int dynamicColumnStartsFrom = 3;
+        int raceNameStartsFrom = 2;
+        Row subHeader = sheet.createRow(2);
+
+        for (int j = 0; j < 1; j++) {
+            MarketWiseInfo response = reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(j);
+            Row currentRow = sheet.createRow(dynamicColumnStartsFrom);
+            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(1).setCellValue(response.getMarketName());
+            dynamicColumnStartsFrom = dynamicColumnStartsFrom+1;
+
+            for(int k=0; k<response.getMarketReportRaceWises().size();k++) {
+                MarketReportRaceWise marketReportRaceWise = response.getMarketReportRaceWises().get(k);
+                subHeaderRow.createCell(raceNameStartsFrom).setCellValue(marketReportRaceWise.getRaceName() + "(starting)");
+                subHeaderRow.createCell(raceNameStartsFrom+3).setCellValue(marketReportRaceWise.getRaceName() + "(ending)");
+
+                subHeader.createCell(raceNameStartsFrom).setCellValue("Weight");
+                subHeader.createCell(raceNameStartsFrom+1).setCellValue("Amount");
+                subHeader.createCell(raceNameStartsFrom+2).setCellValue("Avg");
+
+                subHeader.createCell(raceNameStartsFrom+3).setCellValue("Weight");
+                subHeader.createCell(raceNameStartsFrom+4).setCellValue("Amount");
+                subHeader.createCell(raceNameStartsFrom+5).setCellValue("Avg");
+
+                raceNameStartsFrom = raceNameStartsFrom + 6;
+            }
+
+            subHeaderRow.createCell(raceNameStartsFrom).setCellValue("Total pramana");
+            subHeader.createCell(raceNameStartsFrom).setCellValue("Month Starting");
+            subHeader.createCell(raceNameStartsFrom+1).setCellValue("Month Ending");
+
+            subHeaderRow.createCell(raceNameStartsFrom+2).setCellValue("Total moulya");
+            subHeader.createCell(raceNameStartsFrom+2).setCellValue("Month Starting");
+            subHeader.createCell(raceNameStartsFrom+3).setCellValue("Month Ending");
+
+            subHeaderRow.createCell(raceNameStartsFrom+4).setCellValue("Sarasari Dharane");
+            subHeader.createCell(raceNameStartsFrom+4).setCellValue("Month Starting");
+            subHeader.createCell(raceNameStartsFrom+5).setCellValue("Month Ending");
+
+            subHeaderRow.createCell(raceNameStartsFrom+6).setCellValue("Markukatte shulka");
+            subHeader.createCell(raceNameStartsFrom+6).setCellValue("Month Starting");
+            subHeader.createCell(raceNameStartsFrom+7).setCellValue("Month Ending");
+
+            subHeaderRow.createCell(raceNameStartsFrom+8).setCellValue("Thandagalu");
+            subHeader.createCell(raceNameStartsFrom+8).setCellValue("Month Starting");
+            subHeader.createCell(raceNameStartsFrom+9).setCellValue("Month Ending");
+
+        }
+
+        int dynamicColumnDataStartsFrom = 3;
+        int raceNameDataStartsFrom = 2;
+        for (int j = 0; j < reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().size(); j++) {
+            MarketWiseInfo response = reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(j);
+            Row currentRow = sheet.createRow(dynamicColumnDataStartsFrom);
+            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(1).setCellValue(response.getMarketName());
+
+            for(int k=0; k<response.getMarketReportRaceWises().size();k++) {
+                MarketReportRaceWise marketReportRaceWise = response.getMarketReportRaceWises().get(k);
+                if(marketReportRaceWise.getMarketReportInfo() != null){
+                    currentRow.createCell(raceNameDataStartsFrom).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                    currentRow.createCell(raceNameDataStartsFrom+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                    currentRow.createCell(raceNameDataStartsFrom+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                    currentRow.createCell(raceNameDataStartsFrom+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                    currentRow.createCell(raceNameDataStartsFrom+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                    currentRow.createCell(raceNameDataStartsFrom+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                }
+                raceNameDataStartsFrom = raceNameDataStartsFrom + 6;
+            }
+            currentRow.createCell(raceNameDataStartsFrom).setCellValue(response.getTotalWeightStarting());
+            currentRow.createCell(raceNameDataStartsFrom+1).setCellValue(response.getTotalWeightEnding());
+            currentRow.createCell(raceNameDataStartsFrom+2).setCellValue(response.getTotalAmountStarting());
+            currentRow.createCell(raceNameDataStartsFrom+3).setCellValue(response.getTotalAmountEnding());
+            currentRow.createCell(raceNameDataStartsFrom+4).setCellValue(response.getAvgAmountStarting());
+            currentRow.createCell(raceNameDataStartsFrom+5).setCellValue(response.getAvgAmountEnding());
+            currentRow.createCell(raceNameDataStartsFrom+6).setCellValue(response.getMarketFeeStarting());
+            currentRow.createCell(raceNameDataStartsFrom+7).setCellValue(response.getMarketFeeEnding());
+            currentRow.createCell(raceNameDataStartsFrom+8).setCellValue(response.getLotsStarting());
+            currentRow.createCell(raceNameDataStartsFrom+9).setCellValue(response.getLotsEnding());
+
+            raceNameDataStartsFrom = 2;
+
+            dynamicColumnDataStartsFrom = dynamicColumnDataStartsFrom+1;
+
+        }
+        // Get the index of the last row
+        int lastRowIndex = sheet.getLastRowNum();
+        Row lastRow = sheet.createRow(lastRowIndex + 1);
+        lastRow.createCell(1).setCellValue("Total");
+
+        // Initialize the total sum
+        int sumWeightIndex = 2;
+        int sumAmountIndex = 3;
+        int avgAmountIndex = 4;
+
+        int totalColumnStartsFrom = 2;
+
+        if(reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().size()>0) {
+            for (int j = 0; j < (reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(0).getMarketReportRaceWises().size() * 2); j++) {
+                double sum = 0.0;
+                int count = 0;
+                double totalWeightSum = 0.0;
+                double totalAmountSum = 0.0;
+                // Iterate through rows starting from row index 3
+                for (int rowIndex = 3; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                    Row currentRow = sheet.getRow(rowIndex);
+                    if (currentRow != null) {
+                        Cell weightCell = currentRow.getCell(sumWeightIndex);
+                        if (weightCell != null && weightCell.getCellType() == CellType.STRING) {
+                            // Add the cell value to the total sum
+                            totalWeightSum += Double.parseDouble(weightCell.getStringCellValue());
+                        }
+
+                        Cell amountCell = currentRow.getCell(sumAmountIndex);
+                        if (amountCell != null && amountCell.getCellType() == CellType.STRING) {
+                            // Add the cell value to the total sum
+                            totalAmountSum += Double.parseDouble(amountCell.getStringCellValue());
+                        }
+
+                        Cell avgCell = currentRow.getCell(avgAmountIndex);
+                        if (avgCell != null && avgCell.getCellType() == CellType.STRING) {
+                            // Add the cell value to the sum and increment count
+                            sum += Double.parseDouble(avgCell.getStringCellValue());
+                            count++;
+                        }
+                    }
+                }
+                double average = count > 0 ? sum / count : 0.0;
+                lastRow.createCell(totalColumnStartsFrom).setCellValue(totalWeightSum);
+                lastRow.createCell(totalColumnStartsFrom + 1).setCellValue(totalAmountSum);
+                lastRow.createCell(totalColumnStartsFrom + 2).setCellValue(average);
+                avgAmountIndex = avgAmountIndex + 3;
+                sumAmountIndex = sumAmountIndex + 3;
+                sumWeightIndex = sumWeightIndex + 3;
+                totalColumnStartsFrom = totalColumnStartsFrom + 3;
+            }
+        }
+
+        double sumWeight1 = 0.0;
+        double sumWeight2 = 0.0;
+        double sumAmount1 = 0.0;
+        double sumAmount2 = 0.0;
+        double avg1 = 0.0;
+        double avg2 = 0.0;
+        double market1 = 0.0;
+        double market2 = 0.0;
+        double lot1 = 0.0;
+        double lot2 = 0.0;
+        for (int rowIndex = 3; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+            Row currentRow = sheet.getRow(rowIndex);
+            if (currentRow != null) {
+                Cell weightCell = currentRow.getCell(totalColumnStartsFrom);
+                if (weightCell != null && weightCell.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    sumWeight1 += Double.parseDouble(weightCell.getStringCellValue());
+                }
+
+                Cell weightCell1 = currentRow.getCell(totalColumnStartsFrom+1);
+                if (weightCell1 != null && weightCell1.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    sumWeight2 += Double.parseDouble(weightCell1.getStringCellValue());
+                }
+
+                Cell amountCell = currentRow.getCell(totalColumnStartsFrom+2);
+                if (amountCell != null && amountCell.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    sumAmount1 += Double.parseDouble(amountCell.getStringCellValue());
+                }
+
+                Cell amountCell1 = currentRow.getCell(totalColumnStartsFrom+3);
+                if (amountCell1 != null && amountCell1.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    sumAmount2 += Double.parseDouble(amountCell1.getStringCellValue());
+                }
+
+                Cell avgCell = currentRow.getCell(totalColumnStartsFrom+4);
+                if (avgCell != null && avgCell.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    avg1 += Double.parseDouble(avgCell.getStringCellValue());
+                }
+
+                Cell avgCell1 = currentRow.getCell(totalColumnStartsFrom+5);
+                if (avgCell1 != null && avgCell1.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    avg2 += Double.parseDouble(avgCell1.getStringCellValue());
+                }
+
+                Cell marketCell = currentRow.getCell(totalColumnStartsFrom+6);
+                if (marketCell != null && !marketCell.toString().equals("") &&marketCell.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    market1 += Double.parseDouble(marketCell.getStringCellValue());
+                }
+
+                Cell marketCell1 = currentRow.getCell(totalColumnStartsFrom+7);
+                if (marketCell1 != null && !marketCell1.toString().equals("") && marketCell1.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    market2 += Double.parseDouble(marketCell1.getStringCellValue());
+                }
+
+                Cell lotCell = currentRow.getCell(totalColumnStartsFrom+8);
+                if (lotCell != null && !lotCell.toString().equals("") && lotCell.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    lot1 += Double.parseDouble(lotCell.getStringCellValue());
+                }
+
+                Cell lotCell1 = currentRow.getCell(totalColumnStartsFrom+9);
+                if (lotCell1 != null && !lotCell1.toString().equals("") && lotCell1.getCellType() == CellType.STRING) {
+                    // Add the cell value to the total sum
+                    lot2 += Double.parseDouble(lotCell1.getStringCellValue());
+                }
+            }
+        }
+        lastRow.createCell(totalColumnStartsFrom).setCellValue(sumWeight1);
+        lastRow.createCell(totalColumnStartsFrom+1).setCellValue(sumWeight2);
+        lastRow.createCell(totalColumnStartsFrom+2).setCellValue(sumAmount1);
+        lastRow.createCell(totalColumnStartsFrom+3).setCellValue(sumAmount2);
+        lastRow.createCell(totalColumnStartsFrom+4).setCellValue(avg1);
+        lastRow.createCell(totalColumnStartsFrom+5).setCellValue(avg2);
+        lastRow.createCell(totalColumnStartsFrom+6).setCellValue(market1);
+        lastRow.createCell(totalColumnStartsFrom+7).setCellValue(market2);
+        lastRow.createCell(totalColumnStartsFrom+8).setCellValue(lot1);
+        lastRow.createCell(totalColumnStartsFrom+9).setCellValue(lot2);
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= sheet.getRow(2).getLastCellNum(); columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
         String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
