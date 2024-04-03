@@ -11,6 +11,7 @@ import com.sericulture.model.DTRAllMarket.DTRRaceResponse;
 import com.sericulture.model.MarketReport.MarketReportRaceWise;
 import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketReport.MarketWiseInfo;
+import com.sericulture.model.MarketWiseReport.DivisionReport;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
 import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
@@ -696,8 +697,8 @@ public class ExcelController {
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");
         subHeaderRow.createCell(1).setCellValue("Race");
-        subHeaderRow.createCell(2).setCellValue("This year date");
-        subHeaderRow.createCell(8).setCellValue("Prev year date");
+        subHeaderRow.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getThisYearDate());
+        subHeaderRow.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getPrevYearDate());
 
         Row subHeaderRow1 = sheet.createRow(2);
         subHeaderRow1.createCell(2).setCellValue("Parimaana");
@@ -1409,7 +1410,115 @@ public class ExcelController {
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");
-        subHeaderRow.createCell(1).setCellValue("Race");
+        subHeaderRow.createCell(1).setCellValue("District");
+
+        Row subHeaderRow1 = sheet.createRow(2);
+
+        int dynamicColumnStartsFrom = 2;
+        if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size()>0) {
+            if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().size()>0) {
+                if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size()>0) {
+                    for (int j = 0; j < reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size(); j++) {
+                        subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().get(j).getRaceName());
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom).setCellValue("Weight Starting");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom+1).setCellValue("Weight Ending");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Amount Starting");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Amount Ending");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Avg Starting");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Avg Ending");
+                        dynamicColumnStartsFrom = dynamicColumnStartsFrom +6;
+                    }
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom).setCellValue("Total Starting Weight");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+1).setCellValue("Total Ending Weight");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Total Starting Amount");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Total Ending Amount");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Total Starting Avg");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Total Ending Avg");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Total Starting MF");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Total Ending MF");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Total Starting Lot");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Total Ending Lot");
+
+                }
+            }
+        }
+
+        int dynamicRowStartsFrom = 3;
+        for (int j = 0; j < reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size(); j++) {
+            DivisionReport divisionReport = reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(j);
+            Row divisionRow = sheet.createRow(dynamicRowStartsFrom);
+            divisionRow.createCell(1).setCellValue(divisionReport.getDivisionName());
+            int dynamicRowStartsFromRace = dynamicRowStartsFrom + 1;
+            double sumSWeight = 0.0;
+            double sumEWeight = 0.0;
+            double sumSAmount = 0.0;
+            double sumEAmount = 0.0;
+            double sumSAvg = 0.0;
+            double sumEAvg = 0.0;
+            for (int k = 0; k < divisionReport.getMarketWiseInfoList().size(); k++) {
+                MarketWiseInfo marketWiseInfo = divisionReport.getMarketWiseInfoList().get(k);
+                Row currentRow = sheet.createRow(dynamicRowStartsFromRace);
+                currentRow.createCell(1).setCellValue(marketWiseInfo.getMarketName());
+
+                int raceDynamicColumnStartsFrom = 2;
+                for (int l = 0; l < marketWiseInfo.getMarketReportRaceWises().size(); l++) {
+                    MarketReportRaceWise marketReportRaceWise = marketWiseInfo.getMarketReportRaceWises().get(l);
+                    if (marketReportRaceWise.getMarketReportInfo() != null) {
+                        currentRow.createCell(raceDynamicColumnStartsFrom).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                        currentRow.createCell(raceDynamicColumnStartsFrom + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                        currentRow.createCell(raceDynamicColumnStartsFrom + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                        currentRow.createCell(raceDynamicColumnStartsFrom + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                        currentRow.createCell(raceDynamicColumnStartsFrom + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                        currentRow.createCell(raceDynamicColumnStartsFrom + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                        raceDynamicColumnStartsFrom = raceDynamicColumnStartsFrom + 6;
+
+                        sumSWeight = sumSWeight + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                        sumEWeight = sumEWeight + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                        sumSAmount = sumSAmount + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                        sumEAmount = sumEAmount + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                        sumSAvg = sumSAvg + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                        sumEAvg = sumEAvg + convertStringToDouble(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+
+                    }
+                }
+                currentRow.createCell(raceDynamicColumnStartsFrom).setCellValue(marketWiseInfo.getTotalWeightStarting());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 1).setCellValue(marketWiseInfo.getTotalWeightEnding());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 2).setCellValue(marketWiseInfo.getTotalAmountStarting());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 3).setCellValue(marketWiseInfo.getTotalAmountEnding());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 4).setCellValue(marketWiseInfo.getAvgAmountStarting());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 5).setCellValue(marketWiseInfo.getAvgAmountEnding());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 6).setCellValue(marketWiseInfo.getMarketFeeStarting());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 7).setCellValue(marketWiseInfo.getMarketFeeEnding());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 8).setCellValue(marketWiseInfo.getLotsStarting());
+                currentRow.createCell(raceDynamicColumnStartsFrom + 9).setCellValue(marketWiseInfo.getLotsEnding());
+                dynamicRowStartsFromRace = dynamicRowStartsFromRace + 1;
+            }
+            Row divisionSpecificSum = sheet.createRow(dynamicRowStartsFromRace);
+            divisionSpecificSum.createCell(1).setCellValue("Sum");
+            int dynamicColumnStartsFrom1 = 2;
+            if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size()>0) {
+                if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().size() > 0) {
+                    if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size() > 0) {
+                        for (int s = 0; s < reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size(); s++) {
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1).setCellValue(sumSWeight);
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1+1).setCellValue(sumEWeight);
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1+2).setCellValue(sumSAmount);
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1+3).setCellValue(sumEAmount);
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1+4).setCellValue(sumSAvg);
+                            divisionSpecificSum.createCell(dynamicColumnStartsFrom1+5).setCellValue(sumEAvg);
+                            dynamicColumnStartsFrom1 = dynamicColumnStartsFrom1 + 6;
+                        }
+                    }
+                }
+            }
+            dynamicRowStartsFrom = dynamicRowStartsFrom + (divisionReport.getMarketWiseInfoList().size()+2);
+        }
+
+
+            // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= sheet.getRow(3).getLastCellNum(); columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
