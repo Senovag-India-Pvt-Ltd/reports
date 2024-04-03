@@ -12,6 +12,8 @@ import com.sericulture.model.MarketReport.MarketReportRaceWise;
 import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketReport.MarketWiseInfo;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
+import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
+import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
@@ -694,6 +696,356 @@ public class ExcelController {
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");
         subHeaderRow.createCell(1).setCellValue("Race");
+        subHeaderRow.createCell(2).setCellValue("This year date");
+        subHeaderRow.createCell(8).setCellValue("Prev year date");
+
+        Row subHeaderRow1 = sheet.createRow(2);
+        subHeaderRow1.createCell(2).setCellValue("Parimaana");
+        subHeaderRow1.createCell(4).setCellValue("Moulya");
+        subHeaderRow1.createCell(6).setCellValue("Saraasari");
+        subHeaderRow1.createCell(8).setCellValue("Parimaana");
+        subHeaderRow1.createCell(10).setCellValue("Moulya");
+        subHeaderRow1.createCell(12).setCellValue("Saraasari");
+
+        Row subHeaderRow2 = sheet.createRow(3);
+        subHeaderRow2.createCell(2).setCellValue("Starting");
+        subHeaderRow2.createCell(3).setCellValue("Ending");
+        subHeaderRow2.createCell(4).setCellValue("Starting");
+        subHeaderRow2.createCell(5).setCellValue("Ending");
+        subHeaderRow2.createCell(6).setCellValue("Starting");
+        subHeaderRow2.createCell(7).setCellValue("Ending");
+        subHeaderRow2.createCell(8).setCellValue("Starting");
+        subHeaderRow2.createCell(9).setCellValue("Ending");
+        subHeaderRow2.createCell(10).setCellValue("Starting");
+        subHeaderRow2.createCell(11).setCellValue("Ending");
+        subHeaderRow2.createCell(12).setCellValue("Starting");
+        subHeaderRow2.createCell(13).setCellValue("Ending");
+
+        int dynamicRowStartsFrom = 4;
+        double sumTStartWeight = 0.0;
+        double sumTAmount = 0.0;
+        double sumTAvg = 0.0;
+        double sumTEStartWeight = 0.0;
+        double sumTEAmount = 0.0;
+        double sumTEAvg = 0.0;
+        double sumPStartWeight = 0.0;
+        double sumPAmount = 0.0;
+        double sumPAvg = 0.0;
+        double sumPEStartWeight = 0.0;
+        double sumPEAmount = 0.0;
+        double sumPEAvg = 0.0;
+        for(int j=0; j<reportDataResponse.getContent().getMonthlyReportResponse().getMonthlyReportRaceWiseList().size(); j++){
+            MonthlyReportRaceWise response = reportDataResponse.getContent().getMonthlyReportResponse().getMonthlyReportRaceWiseList().get(j);
+            Row currentRow = sheet.createRow(dynamicRowStartsFrom);
+            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(1).setCellValue(response.getRaceName());
+            if(response.getThisYearReport() != null) {
+                currentRow.createCell(2).setCellValue(response.getThisYearReport().getStartWeight());
+                currentRow.createCell(3).setCellValue(response.getThisYearReport().getEndWeight());
+                currentRow.createCell(4).setCellValue(response.getThisYearReport().getStartAmount());
+                currentRow.createCell(5).setCellValue(response.getThisYearReport().getEndAmount());
+                currentRow.createCell(6).setCellValue(response.getThisYearReport().getStartAvg());
+                currentRow.createCell(7).setCellValue(response.getThisYearReport().getEndAvg());
+            }
+            if(response.getPrevYearReport() != null) {
+                currentRow.createCell(8).setCellValue(response.getPrevYearReport().getStartWeight());
+                currentRow.createCell(9).setCellValue(response.getPrevYearReport().getEndWeight());
+                currentRow.createCell(10).setCellValue(response.getPrevYearReport().getStartAmount());
+                currentRow.createCell(11).setCellValue(response.getPrevYearReport().getEndAmount());
+                currentRow.createCell(12).setCellValue(response.getPrevYearReport().getStartAvg());
+                currentRow.createCell(13).setCellValue(response.getPrevYearReport().getEndAvg());
+            }
+            Row differenceRow = sheet.createRow(dynamicRowStartsFrom+1);
+            differenceRow.createCell(1).setCellValue("Difference");
+
+            differenceRow.createCell(2).setCellValue(calculateDifference(response.getPrevYearReport().getStartWeight() ,response.getThisYearReport().getStartWeight()));
+            differenceRow.createCell(3).setCellValue(calculateDifference(response.getPrevYearReport().getEndWeight() ,response.getThisYearReport().getEndAmount()));
+            differenceRow.createCell(4).setCellValue(calculateDifference(response.getPrevYearReport().getStartAmount() ,response.getThisYearReport().getStartAmount()));
+            differenceRow.createCell(5).setCellValue(calculateDifference(response.getPrevYearReport().getEndAmount() ,response.getThisYearReport().getEndAmount()));
+            differenceRow.createCell(6).setCellValue(calculateDifference(response.getPrevYearReport().getStartAvg() ,response.getThisYearReport().getStartAvg()));
+            differenceRow.createCell(7).setCellValue(calculateDifference(response.getPrevYearReport().getEndAvg() ,response.getThisYearReport().getEndAvg()));
+
+            if(response.getThisYearReport().getStartWeight() != null) {
+                if(!response.getThisYearReport().getStartWeight().equals("")) {
+                    sumTStartWeight = sumTStartWeight + Double.parseDouble(response.getThisYearReport().getStartWeight());
+                }
+            }
+            if(response.getThisYearReport().getEndWeight() != null) {
+                if(!response.getThisYearReport().getEndWeight().equals("")) {
+                    sumTEStartWeight = sumTEStartWeight + Double.parseDouble(response.getThisYearReport().getEndWeight());
+                }
+            }
+            if(response.getThisYearReport().getStartAmount() != null) {
+                if(!response.getThisYearReport().getStartAmount().equals("")) {
+                    sumTAmount = sumTAmount + Double.parseDouble(response.getThisYearReport().getStartAmount());
+                }
+            }
+            if(response.getThisYearReport().getEndAmount() != null) {
+                if(!response.getThisYearReport().getEndAmount().equals("")) {
+                    sumTEAmount = sumTEAmount + Double.parseDouble(response.getThisYearReport().getEndAmount());
+                }
+            }
+            if(response.getThisYearReport().getStartAvg() != null) {
+                if(!response.getThisYearReport().getStartAvg().equals("")) {
+                    sumTAvg = sumTAvg + Double.parseDouble(response.getThisYearReport().getStartAvg());
+                }
+            }
+            if(response.getThisYearReport().getEndAvg() != null) {
+                if(!response.getThisYearReport().getEndAvg().equals("")) {
+                    sumTEAvg = sumTEAvg + Double.parseDouble(response.getThisYearReport().getEndAvg());
+                }
+            }
+
+            if(response.getPrevYearReport().getStartWeight() != null) {
+                if(!response.getPrevYearReport().getStartWeight().equals("")) {
+                    sumPStartWeight = sumPStartWeight + Double.parseDouble(response.getPrevYearReport().getStartWeight());
+                }
+            }
+            if(response.getPrevYearReport().getEndWeight() != null) {
+                if(!response.getPrevYearReport().getEndWeight().equals("")) {
+                    sumPEStartWeight = sumPEStartWeight + Double.parseDouble(response.getPrevYearReport().getEndWeight());
+                }
+            }
+            if(response.getPrevYearReport().getStartAmount() != null) {
+                if(!response.getPrevYearReport().getStartAmount().equals("")) {
+                    sumPAmount = sumPAmount + Double.parseDouble(response.getPrevYearReport().getStartAmount());
+                }
+            }
+            if(response.getPrevYearReport().getEndAmount() != null) {
+                if(!response.getPrevYearReport().getEndAmount().equals("")) {
+                    sumPEAmount = sumPEAmount + Double.parseDouble(response.getPrevYearReport().getEndAmount());
+                }
+            }
+            if(response.getPrevYearReport().getStartAvg() != null) {
+                if(!response.getPrevYearReport().getStartAvg().equals("")) {
+                    sumPAvg = sumPAvg + Double.parseDouble(response.getPrevYearReport().getStartAvg());
+                }
+            }
+            if(response.getPrevYearReport().getEndAvg() != null) {
+                if(!response.getPrevYearReport().getEndAvg().equals("")) {
+                    sumPEAvg = sumPEAvg + Double.parseDouble(response.getPrevYearReport().getEndAvg());
+                }
+            }
+
+            dynamicRowStartsFrom = dynamicRowStartsFrom+2;
+        }
+
+        Row overAllTotal = sheet.createRow(dynamicRowStartsFrom);
+        overAllTotal.createCell(1).setCellValue("Over all Total");
+        overAllTotal.createCell(2).setCellValue(sumTStartWeight);
+        overAllTotal.createCell(3).setCellValue(sumTEStartWeight);
+        overAllTotal.createCell(4).setCellValue(sumTAmount);
+        overAllTotal.createCell(5).setCellValue(sumTEAmount);
+        overAllTotal.createCell(6).setCellValue(sumTAvg);
+        overAllTotal.createCell(7).setCellValue(sumTEAvg);
+        overAllTotal.createCell(8).setCellValue(sumPStartWeight);
+        overAllTotal.createCell(9).setCellValue(sumPEStartWeight);
+        overAllTotal.createCell(10).setCellValue(sumPAmount);
+        overAllTotal.createCell(11).setCellValue(sumPEAmount);
+        overAllTotal.createCell(12).setCellValue(sumPAvg);
+        overAllTotal.createCell(13).setCellValue(sumPEAvg);
+
+        Row overAllDifference = sheet.createRow(dynamicRowStartsFrom+1);
+        overAllDifference.createCell(1).setCellValue("Over all difference");
+        overAllDifference.createCell(2).setCellValue(sumPStartWeight - sumTStartWeight);
+        overAllDifference.createCell(3).setCellValue(sumPEStartWeight - sumTEStartWeight);
+        overAllDifference.createCell(4).setCellValue(sumPAmount - sumTAmount);
+        overAllDifference.createCell(5).setCellValue(sumPEAmount - sumTEAmount);
+        overAllDifference.createCell(6).setCellValue(sumPAvg - sumTAvg);
+        overAllDifference.createCell(7).setCellValue(sumPEAvg - sumTEAvg);
+
+        double sumOTStartWeight = 0.0;
+        double sumOTAmount = 0.0;
+        double sumOTAvg = 0.0;
+        double sumOTEStartWeight = 0.0;
+        double sumOTEAmount = 0.0;
+        double sumOTEAvg = 0.0;
+        double sumOPStartWeight = 0.0;
+        double sumOPAmount = 0.0;
+        double sumOPAvg = 0.0;
+        double sumOPEStartWeight = 0.0;
+        double sumOPEAmount = 0.0;
+        double sumOPEAvg = 0.0;
+        Row tamilNadu = sheet.createRow(dynamicRowStartsFrom+1);
+        if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse() != null){
+            tamilNadu.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getRaceName());
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport() != null){
+                tamilNadu.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getStartWeight());
+                tamilNadu.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getEndWeight());
+                tamilNadu.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getStartAmount());
+                tamilNadu.createCell(5).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getEndAmount());
+                tamilNadu.createCell(6).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getStartAvg());
+                tamilNadu.createCell(7).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport();
+                sumOTStartWeight = sumOTStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOTAmount = sumOTAmount + convertStringToDouble(res.getStartAmount());
+                sumOTAvg = sumOTAvg + convertStringToDouble(res.getStartAvg());
+                sumOTEStartWeight = sumOTEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
+                sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
+            }
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport() != null){
+                tamilNadu.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getStartWeight());
+                tamilNadu.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getEndWeight());
+                tamilNadu.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getStartAmount());
+                tamilNadu.createCell(11).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getEndAmount());
+                tamilNadu.createCell(12).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getStartAvg());
+                tamilNadu.createCell(13).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport();
+                sumOPStartWeight = sumOPStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOPAmount = sumOPAmount + convertStringToDouble(res.getStartAmount());
+                sumOPAvg = sumOPAvg + convertStringToDouble(res.getStartAvg());
+                sumOPEStartWeight = sumOPEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOPEAmount = sumOPEAmount + convertStringToDouble(res.getEndAmount());
+                sumOPEAvg = sumOPEAvg + convertStringToDouble(res.getEndAvg());
+            }
+        }
+
+        Row andra = sheet.createRow(dynamicRowStartsFrom+1);
+        if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse() != null){
+            andra.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getRaceName());
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport() != null){
+                andra.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getStartWeight());
+                andra.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getEndWeight());
+                andra.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getStartAmount());
+                andra.createCell(5).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getEndAmount());
+                andra.createCell(6).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getStartAvg());
+                andra.createCell(7).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport();
+                sumOTStartWeight = sumOTStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOTAmount = sumOTAmount + convertStringToDouble(res.getStartAmount());
+                sumOTAvg = sumOTAvg + convertStringToDouble(res.getStartAvg());
+                sumOTEStartWeight = sumOTEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
+                sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
+            }
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport() != null){
+                andra.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getStartWeight());
+                andra.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getEndWeight());
+                andra.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getStartAmount());
+                andra.createCell(11).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getEndAmount());
+                andra.createCell(12).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getStartAvg());
+                andra.createCell(13).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport();
+                sumOPStartWeight = sumOPStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOPAmount = sumOPAmount + convertStringToDouble(res.getStartAmount());
+                sumOPAvg = sumOPAvg + convertStringToDouble(res.getStartAvg());
+                sumOPEStartWeight = sumOPEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOPEAmount = sumOPEAmount + convertStringToDouble(res.getEndAmount());
+                sumOPEAvg = sumOPEAvg + convertStringToDouble(res.getEndAvg());
+            }
+        }
+
+        Row others = sheet.createRow(dynamicRowStartsFrom+3);
+        if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse() != null){
+            others.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getRaceName());
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport() != null){
+                others.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getStartWeight());
+                others.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getEndWeight());
+                others.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getStartAmount());
+                others.createCell(5).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getEndAmount());
+                others.createCell(6).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getStartAvg());
+                others.createCell(7).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport();
+                sumOTStartWeight = sumOTStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOTAmount = sumOTAmount + convertStringToDouble(res.getStartAmount());
+                sumOTAvg = sumOTAvg + convertStringToDouble(res.getStartAvg());
+                sumOTEStartWeight = sumOTEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
+                sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
+            }
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport() != null){
+                others.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getStartWeight());
+                others.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getEndWeight());
+                others.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getStartAmount());
+                others.createCell(11).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getEndAmount());
+                others.createCell(12).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getStartAvg());
+                others.createCell(13).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getEndAvg());
+
+                MonthlyReportInfo res = reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport();
+                sumOPStartWeight = sumOPStartWeight + convertStringToDouble(res.getStartWeight());
+                sumOPAmount = sumOPAmount + convertStringToDouble(res.getStartAmount());
+                sumOPAvg = sumOPAvg + convertStringToDouble(res.getStartAvg());
+                sumOPEStartWeight = sumOPEStartWeight + convertStringToDouble(res.getEndWeight());
+                sumOPEAmount = sumOPEAmount + convertStringToDouble(res.getEndAmount());
+                sumOPEAvg = sumOPEAvg + convertStringToDouble(res.getEndAvg());
+            }
+        }
+
+        Row otherStateTotal = sheet.createRow(dynamicRowStartsFrom+4);
+        otherStateTotal.createCell(1).setCellValue("Other State Total");
+        otherStateTotal.createCell(2).setCellValue(sumOTStartWeight);
+        otherStateTotal.createCell(3).setCellValue(sumOTAmount);
+        otherStateTotal.createCell(4).setCellValue(sumOTAmount);
+        otherStateTotal.createCell(5).setCellValue(sumOTEAmount);
+        otherStateTotal.createCell(6).setCellValue(sumOTAvg);
+        otherStateTotal.createCell(7).setCellValue(sumOTEAvg);
+        otherStateTotal.createCell(8).setCellValue(sumOPStartWeight);
+        otherStateTotal.createCell(9).setCellValue(sumOPEStartWeight);
+        otherStateTotal.createCell(10).setCellValue(sumOPAmount);
+        otherStateTotal.createCell(11).setCellValue(sumOPEAmount);
+        otherStateTotal.createCell(12).setCellValue(sumOPAvg);
+        otherStateTotal.createCell(13).setCellValue(sumOPEAvg);
+
+        double karWeightStart = 0.0;
+        double karWeightEnd = 0.0;
+        double karAmountStart = 0.0;
+        double karAmountEnd = 0.0;
+        double karAvgStart = 0.0;
+        double karAvgEnd = 0.0;
+        Row karnataka = sheet.createRow(dynamicRowStartsFrom+5);
+        if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse() != null){
+            karnataka.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getRaceName());
+            MonthlyReportRaceWise res = reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse();
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport() != null){
+                karnataka.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartWeight());
+                karnataka.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getEndWeight());
+                karnataka.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartAmount());
+                karnataka.createCell(5).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getEndAmount());
+                karnataka.createCell(6).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartAvg());
+                karnataka.createCell(7).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getEndAvg());
+            }
+            if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport() != null){
+                karnataka.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getStartWeight());
+                karnataka.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getEndWeight());
+                karnataka.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getStartAmount());
+                karnataka.createCell(11).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getEndAmount());
+                karnataka.createCell(12).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getStartAvg());
+                karnataka.createCell(13).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getEndAvg());
+            }
+            karWeightStart = Double.parseDouble(calculateDifference(res.getPrevYearReport().getStartWeight(), res.getThisYearReport().getStartWeight()));
+            karWeightEnd = Double.parseDouble(calculateDifference(res.getPrevYearReport().getEndWeight(), res.getThisYearReport().getEndWeight()));
+            karAmountStart = Double.parseDouble(calculateDifference(res.getPrevYearReport().getStartAmount(), res.getThisYearReport().getStartAmount()));
+            karAmountEnd = Double.parseDouble(calculateDifference(res.getPrevYearReport().getEndAmount(), res.getThisYearReport().getEndAmount()));
+            karAvgStart = Double.parseDouble(calculateDifference(res.getPrevYearReport().getStartAvg(), res.getThisYearReport().getStartAvg()));
+            karAvgEnd = Double.parseDouble(calculateDifference(res.getPrevYearReport().getEndAvg(), res.getThisYearReport().getEndAvg()));
+
+        }
+
+        Row karnatakaDiff = sheet.createRow(dynamicRowStartsFrom+6);
+        karnatakaDiff.createCell(2).setCellValue(karWeightStart);
+        karnatakaDiff.createCell(3).setCellValue(karWeightEnd);
+        karnatakaDiff.createCell(4).setCellValue(karAmountStart);
+        karnatakaDiff.createCell(5).setCellValue(karAmountEnd);
+        karnatakaDiff.createCell(6).setCellValue(karAvgStart);
+        karnatakaDiff.createCell(7).setCellValue(karAvgEnd);
+        karnatakaDiff.createCell(1).setCellValue("Karnataka difference");
+
+        Row lots = sheet.createRow(dynamicRowStartsFrom+7);
+        lots.createCell(1).setCellValue("LOTS");
+
+        Row marketFee = sheet.createRow(dynamicRowStartsFrom+8);
+        marketFee.createCell(1).setCellValue("MARKET FEE");
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= sheet.getRow(4).getLastCellNum(); columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
@@ -707,6 +1059,35 @@ public class ExcelController {
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+    }
+
+    private String calculateDifference(String prevYear, String thisYear){
+        if(prevYear == null){
+            prevYear = "0.0";
+        }else{
+            if(prevYear.equals("")){
+                prevYear = "0.0";
+            }
+        }
+        if(thisYear == null){
+            thisYear = "0.0";
+        }else{
+            if(thisYear.equals("")){
+                thisYear = "0.0";
+            }
+        }
+        return String.valueOf(Double.parseDouble(prevYear) - Double.parseDouble(thisYear));
+    }
+
+    private double convertStringToDouble(String amount){
+        if(amount == null){
+            amount = "0.0";
+        }else{
+            if(amount.equals("")){
+                amount = "0.0";
+            }
+        }
+        return Double.parseDouble(amount);
     }
 
     @PostMapping("/market-report")

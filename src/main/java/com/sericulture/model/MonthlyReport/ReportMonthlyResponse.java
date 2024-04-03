@@ -11,5 +11,5 @@ import lombok.*;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReportMonthlyResponse {
-    private MonthlyReportResponse content;
+    private MonthlyReport content;
 }

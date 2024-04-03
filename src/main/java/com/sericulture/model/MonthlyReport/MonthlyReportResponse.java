@@ -14,4 +14,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MonthlyReportResponse {
     private List<MonthlyReportRaceWise> monthlyReportRaceWiseList;
+    private MonthlyReportRaceWise karnatakaResponse;
+    private MonthlyReportRaceWise tamilNaduResponse;
+    private MonthlyReportRaceWise andraPradeshResponse;
+    private MonthlyReportRaceWise otherStateResponse;
 }
