@@ -14,4 +14,5 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VahivaatuReport {
     private List<DistrictWise> districtWises;
+    private DistrictWise overAllSum;
 }

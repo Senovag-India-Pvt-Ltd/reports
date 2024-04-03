@@ -17,6 +17,8 @@ import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
+import com.sericulture.model.VahivaatuReport.DistrictWise;
+import com.sericulture.model.VahivaatuReport.RaceWiseReport;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -643,6 +645,71 @@ public class ExcelController {
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Serial No");
         subHeaderRow.createCell(1).setCellValue("District");
+
+        Row subHeaderRow1 = sheet.createRow(2);
+
+        int dynamicRaceStartsFrom = 2;
+        if(reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size()>0) {
+            if (reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size() > 0) {
+                for (int j = 0; j < reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size(); j++) {
+                    RaceWiseReport raceWiseReport = reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().get(j);
+                    subHeaderRow.createCell(dynamicRaceStartsFrom).setCellValue(raceWiseReport.getRaceName() +"Starting");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom).setCellValue("Utpaadane");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom+1).setCellValue("Vahivaatu");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom+2).setCellValue("Shekada");
+                    subHeaderRow.createCell(dynamicRaceStartsFrom+3).setCellValue(raceWiseReport.getRaceName() +"Ending");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom+3).setCellValue("Utpaadane");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom+4).setCellValue("Vahivaatu");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom+5).setCellValue("Shekada");
+                    dynamicRaceStartsFrom = dynamicRaceStartsFrom + 6;
+                }
+            }
+        }
+
+        int dynamicRowStartsFrom = 3;
+        for(int j=0; j<reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size();j++){
+            DistrictWise districtWise = reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(j);
+
+            Row currentRow = sheet.createRow(dynamicRowStartsFrom);
+            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(1).setCellValue(districtWise.getDistrictName());
+            int raceColumnStartsFrom = 2;
+            for(int k=0;k<districtWise.getRaceWiseReports().size();k++){
+                RaceWiseReport raceWiseReport = districtWise.getRaceWiseReports().get(k);
+                if(raceWiseReport.getVahivaatuInfo() != null) {
+                    currentRow.createCell(raceColumnStartsFrom).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonStarting());
+                    currentRow.createCell(raceColumnStartsFrom+1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
+                    currentRow.createCell(raceColumnStartsFrom+2).setCellValue("");
+                    currentRow.createCell(raceColumnStartsFrom+3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
+                    currentRow.createCell(raceColumnStartsFrom+4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
+                    currentRow.createCell(raceColumnStartsFrom+5).setCellValue("");
+
+                    raceColumnStartsFrom = raceColumnStartsFrom + 6;
+
+                }
+
+            }
+            dynamicRowStartsFrom = dynamicRowStartsFrom+1;
+        }
+
+        Row totalRow = sheet.createRow(dynamicRowStartsFrom);
+        totalRow.createCell(1).setCellValue("Total");
+        int totalDynamicColumn = 2;
+        if(reportDataResponse.getContent().getVahivaatuReport().getOverAllSum() != null) {
+            for (int s = 0; s < reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().size(); s++){
+                RaceWiseReport raceWiseReport = reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().get(s);
+                if(raceWiseReport.getVahivaatuInfo() != null) {
+                    totalRow.createCell(totalDynamicColumn).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonStarting());
+                    totalRow.createCell(totalDynamicColumn+1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
+                    totalRow.createCell(totalDynamicColumn+2).setCellValue("");
+                    totalRow.createCell(totalDynamicColumn+3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
+                    totalRow.createCell(totalDynamicColumn+4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
+                    totalRow.createCell(totalDynamicColumn+5).setCellValue("");
+
+                    totalDynamicColumn = totalDynamicColumn + 6;
+                }
+            }
+        }
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
