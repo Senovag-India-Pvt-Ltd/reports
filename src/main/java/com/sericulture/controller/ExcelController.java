@@ -1562,7 +1562,7 @@ public class ExcelController {
             }
             Row divisionSpecificSum = sheet.createRow(dynamicRowStartsFromRace);
             divisionSpecificSum.createCell(1).setCellValue("Sum");
-            int dynamicColumnStartsFrom1 = 2;
+            /*int dynamicColumnStartsFrom1 = 2;
             if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size()>0) {
                 if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().size() > 0) {
                     if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size() > 0) {
@@ -1577,13 +1577,141 @@ public class ExcelController {
                         }
                     }
                 }
+            }*/
+            if(divisionReport.getDivisionWiseSum().size()>0) {
+                int dynamicColumnStartsFrom1 = 2;
+                for (int s = 0; s < divisionReport.getDivisionWiseSum().get(0).getMarketReportRaceWises().size(); s++) {
+                    MarketReportRaceWise divisionSpecific = divisionReport.getDivisionWiseSum().get(0).getMarketReportRaceWises().get(s);
+                    if(divisionSpecific.getMarketReportInfo() != null) {
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1).setCellValue(divisionSpecific.getMarketReportInfo().getStartingWeight());
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 1).setCellValue(divisionSpecific.getMarketReportInfo().getEndingWeight());
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 2).setCellValue(divisionSpecific.getMarketReportInfo().getStartingAmount());;
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 3).setCellValue(divisionSpecific.getMarketReportInfo().getEndingAmount());
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 4).setCellValue(divisionSpecific.getMarketReportInfo().getStartingAvg());
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 5).setCellValue(divisionSpecific.getMarketReportInfo().getEndingAvg());
+                    }
+                    dynamicColumnStartsFrom1 = dynamicColumnStartsFrom1 + 6;
+                }
             }
             dynamicRowStartsFrom = dynamicRowStartsFrom + (divisionReport.getMarketWiseInfoList().size()+2);
         }
 
 
+        Row karRow = sheet.createRow(dynamicRowStartsFrom);
+        karRow.createCell(1).setCellValue("Rajyada ottu");
+        int dynKar = 2;
+        for(int x=0; x<reportDataResponse.getContent().getKarnatakaData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getKarnatakaData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                karRow.createCell(dynKar).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                karRow.createCell(dynKar+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                karRow.createCell(dynKar+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                karRow.createCell(dynKar+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                karRow.createCell(dynKar+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                karRow.createCell(dynKar+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynKar = dynKar + 6;
+            }
+        }
+
+        Row andraRow = sheet.createRow(dynamicRowStartsFrom+1);
+        andraRow.createCell(1).setCellValue("Andra");
+        int dynAnd = 2;
+        for(int x=0; x<reportDataResponse.getContent().getAndraData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getAndraData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                andraRow.createCell(dynAnd).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                andraRow.createCell(dynAnd+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                andraRow.createCell(dynAnd+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                andraRow.createCell(dynAnd+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                andraRow.createCell(dynAnd+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                andraRow.createCell(dynAnd+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynAnd = dynAnd + 6;
+            }
+        }
+
+        Row tamilNaduRow = sheet.createRow(dynamicRowStartsFrom+2);
+        tamilNaduRow.createCell(1).setCellValue("Tamilnaadu");
+        int dynTam = 2;
+        for(int x=0; x<reportDataResponse.getContent().getTamilNaduData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getTamilNaduData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                tamilNaduRow.createCell(dynTam).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                tamilNaduRow.createCell(dynTam+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                tamilNaduRow.createCell(dynTam+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                tamilNaduRow.createCell(dynTam+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                tamilNaduRow.createCell(dynTam+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                tamilNaduRow.createCell(dynTam+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynTam = dynTam + 6;
+            }
+        }
+
+        Row maharashtraRow = sheet.createRow(dynamicRowStartsFrom+3);
+        maharashtraRow.createCell(1).setCellValue("Maharashtra");
+        int dynMah = 2;
+        for(int x=0; x<reportDataResponse.getContent().getMaharashtraData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getMaharashtraData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                maharashtraRow.createCell(dynMah).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                maharashtraRow.createCell(dynMah+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                maharashtraRow.createCell(dynMah+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                maharashtraRow.createCell(dynMah+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                maharashtraRow.createCell(dynMah+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                maharashtraRow.createCell(dynMah+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynMah = dynMah + 6;
+            }
+        }
+
+        Row ithareRow = sheet.createRow(dynamicRowStartsFrom+4);
+        ithareRow.createCell(1).setCellValue("Ithare");
+        int dynOth = 2;
+        for(int x=0; x<reportDataResponse.getContent().getOtherStateData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOtherStateData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                ithareRow.createCell(dynOth).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                ithareRow.createCell(dynOth+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ithareRow.createCell(dynOth+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ithareRow.createCell(dynOth+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ithareRow.createCell(dynOth+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ithareRow.createCell(dynOth+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynOth = dynOth + 6;
+            }
+        }
+
+        Row ithareOttuRow = sheet.createRow(dynamicRowStartsFrom+5);
+        ithareOttuRow.createCell(1).setCellValue("Ithare Rajyada ottu");
+        int dynOthTot = 2;
+        for(int x=0; x<reportDataResponse.getContent().getOtherStateExcKarData().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOtherStateExcKarData().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                ithareOttuRow.createCell(dynOthTot).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                ithareOttuRow.createCell(dynOthTot+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ithareOttuRow.createCell(dynOthTot+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ithareOttuRow.createCell(dynOthTot+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ithareOttuRow.createCell(dynOthTot+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ithareOttuRow.createCell(dynOthTot+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynOthTot = dynOthTot + 6;
+            }
+        }
+
+        Row ellaOttu = sheet.createRow(dynamicRowStartsFrom+6);
+        ellaOttu.createCell(1).setCellValue("Ella ottu");
+        int dynAllOTot = 2;
+        for(int x=0; x<reportDataResponse.getContent().getOverAllStateTotal().size();x++){
+            MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOverAllStateTotal().get(x);
+            if(marketReportRaceWise.getMarketReportInfo() != null) {
+                ellaOttu.createCell(dynAllOTot).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
+                ellaOttu.createCell(dynAllOTot+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ellaOttu.createCell(dynAllOTot+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ellaOttu.createCell(dynAllOTot+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ellaOttu.createCell(dynAllOTot+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ellaOttu.createCell(dynAllOTot+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                dynAllOTot = dynAllOTot + 6;
+            }
+        }
+
+
             // Auto-size all columns
-        for (int columnIndex = 1; columnIndex <= sheet.getRow(3).getLastCellNum(); columnIndex++) {
+        for (int columnIndex = 1; columnIndex <= ellaOttu.getLastCellNum(); columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
         }
 
