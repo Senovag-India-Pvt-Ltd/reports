@@ -87,7 +87,7 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("Race wise Average Rate");
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
         subHeaderRow.createCell(1).setCellValue("Month");
 
         Row raceHeader = sheet.createRow(2);
@@ -141,7 +141,7 @@ public class ExcelController {
         dataRow12.createCell(1).setCellValue("March");
 
         Row dataRow13 = sheet.createRow(15);
-        dataRow13.createCell(1).setCellValue("Total");
+        dataRow13.createCell(1).setCellValue("ಒಟ್ಟು");
 
 
         //Dynamic data binds here
@@ -267,7 +267,7 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("Quantity and Average Rate of Cocoons  transacted( month wise/year wise)  from " +requestDto.getStartYear().getYear() +"-"+ (requestDto.getStartYear().getYear()+1) +" to "+(requestDto.getEndYear().getYear()-1)+"-"+requestDto.getEndYear().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
         subHeaderRow.createCell(1).setCellValue("Month");
 
         Row raceHeader = sheet.createRow(2);
@@ -321,7 +321,7 @@ public class ExcelController {
         dataRow12.createCell(1).setCellValue("March");
 
         Row dataRow13 = sheet.createRow(15);
-        dataRow13.createCell(1).setCellValue("Total");
+        dataRow13.createCell(1).setCellValue("ಒಟ್ಟು");
 
 
         //Dynamic data binds here
@@ -447,10 +447,10 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("Audio visual header");
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
         subHeaderRow.createCell(1).setCellValue("Market");
-        subHeaderRow.createCell(2).setCellValue("Race");
-
+        subHeaderRow.createCell(2).setCellValue("ತಳಿ");
+        
         Row belowSubHeaderRow = sheet.createRow(2);
 
         int dynamicColumnStartsFrom = 3;
@@ -531,7 +531,7 @@ public class ExcelController {
         // Get the index of the last row
         int lastRowIndex = sheet.getLastRowNum();
         Row lastRow = sheet.createRow(lastRowIndex + 1);
-        lastRow.createCell(2).setCellValue("Total");
+        lastRow.createCell(2).setCellValue("ಒಟ್ಟು");
 
         // Initialize the total sum
         int sumColumnIndex = 3;
@@ -657,8 +657,8 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
-        subHeaderRow.createCell(1).setCellValue("District");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
+        subHeaderRow.createCell(1).setCellValue("ಜಿಲ್ಲೆ");
 
         Row subHeaderRow1 = sheet.createRow(2);
 
@@ -667,11 +667,11 @@ public class ExcelController {
             if (reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size() > 0) {
                 for (int j = 0; j < reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size(); j++) {
                     RaceWiseReport raceWiseReport = reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().get(j);
-                    subHeaderRow.createCell(dynamicRaceStartsFrom).setCellValue(raceWiseReport.getRaceName() +"Starting");
+                    subHeaderRow.createCell(dynamicRaceStartsFrom).setCellValue(raceWiseReport.getRaceName() +"ತಿಂಗಳಲ್ಲಿ");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom).setCellValue("Utpaadane");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom+1).setCellValue("Vahivaatu");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom+2).setCellValue("Shekada");
-                    subHeaderRow.createCell(dynamicRaceStartsFrom+3).setCellValue(raceWiseReport.getRaceName() +"Ending");
+                    subHeaderRow.createCell(dynamicRaceStartsFrom+3).setCellValue(raceWiseReport.getRaceName() +"ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom+3).setCellValue("Utpaadane");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom+4).setCellValue("Vahivaatu");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom+5).setCellValue("Shekada");
@@ -707,7 +707,7 @@ public class ExcelController {
         }
 
         Row totalRow = sheet.createRow(dynamicRowStartsFrom);
-        totalRow.createCell(1).setCellValue("Total");
+        totalRow.createCell(1).setCellValue("ಒಟ್ಟು");
         int totalDynamicColumn = 2;
         if(reportDataResponse.getContent().getVahivaatuReport().getOverAllSum() != null) {
             for (int s = 0; s < reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().size(); s++){
@@ -779,35 +779,35 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+        headerRow.createCell(0).setCellValue(requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear()+"ನೇ ಮಾಹೆಯಲ್ಲಿ ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟಾದ ರೇಷ್ಮೆ ಗೂಡಿನ ವಿವರ");
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
-        subHeaderRow.createCell(1).setCellValue("Race");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
+        subHeaderRow.createCell(1).setCellValue("ತಳಿ");
         subHeaderRow.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getThisYearDate());
         subHeaderRow.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getPrevYearDate());
 
         Row subHeaderRow1 = sheet.createRow(2);
-        subHeaderRow1.createCell(2).setCellValue("Parimaana");
-        subHeaderRow1.createCell(4).setCellValue("Moulya");
-        subHeaderRow1.createCell(6).setCellValue("Saraasari");
-        subHeaderRow1.createCell(8).setCellValue("Parimaana");
-        subHeaderRow1.createCell(10).setCellValue("Moulya");
-        subHeaderRow1.createCell(12).setCellValue("Saraasari");
+        subHeaderRow1.createCell(2).setCellValue("ಪರಿಮಾಣ");
+        subHeaderRow1.createCell(4).setCellValue("ಮೌಲ್ಯ");
+        subHeaderRow1.createCell(6).setCellValue("ಸರಾಸರಿ");
+        subHeaderRow1.createCell(8).setCellValue("ಪರಿಮಾಣ");
+        subHeaderRow1.createCell(10).setCellValue("ಮೌಲ್ಯ");
+        subHeaderRow1.createCell(12).setCellValue("ಸರಾಸರಿ");
 
         Row subHeaderRow2 = sheet.createRow(3);
-        subHeaderRow2.createCell(2).setCellValue("Starting");
-        subHeaderRow2.createCell(3).setCellValue("Ending");
-        subHeaderRow2.createCell(4).setCellValue("Starting");
-        subHeaderRow2.createCell(5).setCellValue("Ending");
-        subHeaderRow2.createCell(6).setCellValue("Starting");
-        subHeaderRow2.createCell(7).setCellValue("Ending");
-        subHeaderRow2.createCell(8).setCellValue("Starting");
-        subHeaderRow2.createCell(9).setCellValue("Ending");
-        subHeaderRow2.createCell(10).setCellValue("Starting");
-        subHeaderRow2.createCell(11).setCellValue("Ending");
-        subHeaderRow2.createCell(12).setCellValue("Starting");
-        subHeaderRow2.createCell(13).setCellValue("Ending");
+        subHeaderRow2.createCell(2).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(3).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+        subHeaderRow2.createCell(4).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(5).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+        subHeaderRow2.createCell(6).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(7).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+        subHeaderRow2.createCell(8).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(9).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+        subHeaderRow2.createCell(10).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(11).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+        subHeaderRow2.createCell(12).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+        subHeaderRow2.createCell(13).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
         int dynamicRowStartsFrom = 4;
         double sumTStartWeight = 0.0;
@@ -919,7 +919,7 @@ public class ExcelController {
         }
 
         Row overAllTotal = sheet.createRow(dynamicRowStartsFrom);
-        overAllTotal.createCell(1).setCellValue("Over all Total");
+        overAllTotal.createCell(1).setCellValue("ಎಲ್ಲಾ ಒಟ್ಟು");
         overAllTotal.createCell(2).setCellValue(sumTStartWeight);
         overAllTotal.createCell(3).setCellValue(sumTEStartWeight);
         overAllTotal.createCell(4).setCellValue(sumTAmount);
@@ -1066,7 +1066,7 @@ public class ExcelController {
         }
 
         Row otherStateTotal = sheet.createRow(dynamicRowStartsFrom+4);
-        otherStateTotal.createCell(1).setCellValue("Other State Total");
+        otherStateTotal.createCell(1).setCellValue("ಇತರೆ ರಾಜ್ಯದ ಒಟ್ಟು");
         otherStateTotal.createCell(2).setCellValue(sumOTStartWeight);
         otherStateTotal.createCell(3).setCellValue(sumOTAmount);
         otherStateTotal.createCell(4).setCellValue(sumOTAmount);
@@ -1222,7 +1222,7 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
         subHeaderRow.createCell(1).setCellValue("Market");
 
         int dynamicColumnStartsFrom = 3;
@@ -1313,7 +1313,7 @@ public class ExcelController {
         // Get the index of the last row
         int lastRowIndex = sheet.getLastRowNum();
         Row lastRow = sheet.createRow(lastRowIndex + 1);
-        lastRow.createCell(1).setCellValue("Total");
+        lastRow.createCell(1).setCellValue("ಒಟ್ಟು");
 
         // Initialize the total sum
         int sumWeightIndex = 2;
@@ -1510,8 +1510,8 @@ public class ExcelController {
         headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
-        subHeaderRow.createCell(0).setCellValue("Serial No");
-        subHeaderRow.createCell(1).setCellValue("District");
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
+        subHeaderRow.createCell(1).setCellValue("ಜಿಲ್ಲೆ");
 
         Row subHeaderRow1 = sheet.createRow(2);
 
