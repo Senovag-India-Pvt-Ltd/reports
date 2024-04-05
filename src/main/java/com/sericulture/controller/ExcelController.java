@@ -213,10 +213,15 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("average_report"+Util.getISTLocalDate()+".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -391,10 +396,15 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("average_coccon_report"+Util.getISTLocalDate()+".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -594,10 +604,16 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("audio_visual_report"+Util.getISTLocalDate()+".xlsx");
+      //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -713,10 +729,15 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("27_b_report"+Util.getISTLocalDate()+".xlsx");
+      //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -1117,10 +1138,16 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("monthly_report"+Util.getISTLocalDate()+".xlsx");
+      //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -1427,10 +1454,16 @@ public class ExcelController {
         }
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("market_report"+Util.getISTLocalDate()+".xlsx");
+        //Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -1717,10 +1750,17 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-        String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // Specify the directory where the file will be saved
+        String userHome = System.getProperty("user.home");
+
+        // Define the directory path relative to the user's home directory
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("district_report"+Util.getISTLocalDate()+".xlsx");
+
+//        Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
