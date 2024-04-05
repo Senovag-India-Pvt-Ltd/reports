@@ -281,9 +281,9 @@ public class ApiService {
 
     public CocoonReport averageCocoonReport(AverageReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/averageCocoonReport";
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/averageCocoonReport";
 
-        //String finalapiurl = apiUrl + "auction/report/averageCocoonReport";
+        String finalapiurl = apiUrl + "auction/report/averageCocoonReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -347,9 +347,9 @@ public class ApiService {
 
     public Report27bResponse get27bReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/27bReport";
+         //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/27bReport";
 
-       // String finalapiurl = apiUrl + "auction/report/27bReport";
+        String finalapiurl = apiUrl + "auction/report/27bReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -369,9 +369,9 @@ public class ApiService {
 
     public ReportMonthlyResponse getMonthlyReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/monthlyReport";
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/monthlyReport";
 
-        // String finalapiurl = apiUrl + "auction/report/monthlyReport";
+        String finalapiurl = apiUrl + "auction/report/monthlyReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -391,9 +391,9 @@ public class ApiService {
 
     public MarketResponse getMarketReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/marketReport";
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/marketReport";
 
-        // String finalapiurl = apiUrl + "auction/report/marketReport";
+        String finalapiurl = apiUrl + "auction/report/marketReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -413,9 +413,9 @@ public class ApiService {
 
     public DivisionResponse getDistrictWiseReport(MonthlyReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/districtWiseReport";
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/districtWiseReport";
 
-        // String finalapiurl = apiUrl + "auction/report/districtWiseReport";
+        String finalapiurl = apiUrl + "auction/report/districtWiseReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
