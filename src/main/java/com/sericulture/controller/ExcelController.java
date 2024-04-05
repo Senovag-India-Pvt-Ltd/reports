@@ -55,9 +55,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateExcel(request);
+            FileInputStream fileInputStream = generateExcel(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -77,7 +76,7 @@ public class ExcelController {
         }
     }
 
-    private void generateExcel(AverageReportRequest requestDto) throws Exception {
+    private FileInputStream generateExcel(AverageReportRequest requestDto) throws Exception {
         AverageReportDataResponse reportDataResponse = apiService.averageReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -225,9 +224,11 @@ public class ExcelController {
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        FileInputStream fileIn = new FileInputStream(filePath.toString());
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        return fileIn;
     }
 
     @PostMapping("/average-cocoon-report")
@@ -235,9 +236,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateCocoonExcel(request);
+            FileInputStream fileInputStream = generateCocoonExcel(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -256,7 +256,7 @@ public class ExcelController {
         }
     }
 
-    private void generateCocoonExcel(AverageReportRequest requestDto) throws Exception {
+    private FileInputStream generateCocoonExcel(AverageReportRequest requestDto) throws Exception {
         CocoonReport reportDataResponse = apiService.averageCocoonReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -410,7 +410,9 @@ public class ExcelController {
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
         workbook.write(fileOut);
         fileOut.close();
+        FileInputStream fileIn = new FileInputStream(filePath.toString());
         workbook.close();
+        return fileIn;
     }
 
     @PostMapping("/audio-visual-report")
@@ -418,13 +420,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateAudioVisualExcel(request);
-
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
+            FileInputStream fileInputStream = generateAudioVisualExcel(request);
             InputStreamResource resource = new InputStreamResource(fileInputStream);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"audio_visual_report"+ Util.getISTLocalDate()+".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
@@ -439,7 +436,7 @@ public class ExcelController {
         }
     }
 
-    private void generateAudioVisualExcel(AudioVisualReportRequest requestDto) throws Exception {
+    private FileInputStream generateAudioVisualExcel(AudioVisualReportRequest requestDto) throws Exception {
         AudioVisualResponse reportDataResponse = apiService.audioVisualReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -620,6 +617,8 @@ public class ExcelController {
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        FileInputStream fileIn = new FileInputStream(filePath.toString());
+        return  fileIn;
     }
 
     @PostMapping("/27-b-report")
@@ -627,9 +626,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generate27bReport(request);
+            FileInputStream fileInputStream = generate27bReport(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -648,7 +646,7 @@ public class ExcelController {
         }
     }
 
-    private void generate27bReport(MonthlyReportRequest requestDto) throws Exception {
+    private FileInputStream generate27bReport(MonthlyReportRequest requestDto) throws Exception {
         Report27bResponse reportDataResponse = apiService.get27bReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -744,6 +742,8 @@ public class ExcelController {
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
+        return fileInputStream;
     }
 
     @PostMapping("/monthly-report")
@@ -751,9 +751,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateMonthlyReport(request);
+            FileInputStream fileInputStream = generateMonthlyReport(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -772,7 +771,7 @@ public class ExcelController {
         }
     }
 
-    private void generateMonthlyReport(MonthlyReportRequest requestDto) throws Exception {
+    private FileInputStream generateMonthlyReport(MonthlyReportRequest requestDto) throws Exception {
         ReportMonthlyResponse reportDataResponse = apiService.getMonthlyReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -1151,9 +1150,11 @@ public class ExcelController {
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        return fileInputStream;
     }
 
     private String calculateDifference(String prevYear, String thisYear){
@@ -1190,9 +1191,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateMarketReport(request);
+            FileInputStream fileInputStream = generateMarketReport(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -1211,7 +1211,7 @@ public class ExcelController {
         }
     }
 
-    private void generateMarketReport(MonthlyReportRequest requestDto) throws Exception {
+    private FileInputStream generateMarketReport(MonthlyReportRequest requestDto) throws Exception {
         MarketResponse reportDataResponse = apiService.getMarketReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -1470,6 +1470,8 @@ public class ExcelController {
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
+        return fileInputStream;
     }
 
     @PostMapping("/district-report")
@@ -1477,9 +1479,8 @@ public class ExcelController {
         try {
             System.out.println("enter to dtr online report pdf");
             logger.info("enter to dtr online report pdf");
-            generateDistrictReport(request);
+            FileInputStream fileInputStream = generateDistrictReport(request);
 
-            FileInputStream fileInputStream = new FileInputStream("sample.xlsx");
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
             HttpHeaders headers = new HttpHeaders();
@@ -1498,7 +1499,7 @@ public class ExcelController {
         }
     }
 
-    private void generateDistrictReport(MonthlyReportRequest requestDto) throws Exception {
+    private FileInputStream generateDistrictReport(MonthlyReportRequest requestDto) throws Exception {
         DivisionResponse reportDataResponse = apiService.getDistrictWiseReport(requestDto);
 
         Workbook workbook = new XSSFWorkbook();
@@ -1767,5 +1768,7 @@ public class ExcelController {
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
+        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
+        return fileInputStream;
     }
 }
