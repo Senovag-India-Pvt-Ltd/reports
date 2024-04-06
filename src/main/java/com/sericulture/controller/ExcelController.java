@@ -1253,24 +1253,24 @@ public class ExcelController {
             }
 
             subHeaderRow.createCell(raceNameStartsFrom).setCellValue("Total pramana");
-            subHeader.createCell(raceNameStartsFrom).setCellValue("Month Starting");
-            subHeader.createCell(raceNameStartsFrom+1).setCellValue("Month Ending");
+            subHeader.createCell(raceNameStartsFrom).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom+1).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
             subHeaderRow.createCell(raceNameStartsFrom+2).setCellValue("Total moulya");
-            subHeader.createCell(raceNameStartsFrom+2).setCellValue("Month Starting");
-            subHeader.createCell(raceNameStartsFrom+3).setCellValue("Month Ending");
+            subHeader.createCell(raceNameStartsFrom+2).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom+3).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
             subHeaderRow.createCell(raceNameStartsFrom+4).setCellValue("Sarasari Dharane");
-            subHeader.createCell(raceNameStartsFrom+4).setCellValue("Month Starting");
-            subHeader.createCell(raceNameStartsFrom+5).setCellValue("Month Ending");
+            subHeader.createCell(raceNameStartsFrom+4).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom+5).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
             subHeaderRow.createCell(raceNameStartsFrom+6).setCellValue("Markukatte shulka");
-            subHeader.createCell(raceNameStartsFrom+6).setCellValue("Month Starting");
-            subHeader.createCell(raceNameStartsFrom+7).setCellValue("Month Ending");
+            subHeader.createCell(raceNameStartsFrom+6).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom+7).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
             subHeaderRow.createCell(raceNameStartsFrom+8).setCellValue("Thandagalu");
-            subHeader.createCell(raceNameStartsFrom+8).setCellValue("Month Starting");
-            subHeader.createCell(raceNameStartsFrom+9).setCellValue("Month Ending");
+            subHeader.createCell(raceNameStartsFrom+8).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom+9).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
         }
 
