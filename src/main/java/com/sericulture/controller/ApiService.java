@@ -6,7 +6,6 @@ import com.sericulture.model.*;
 import com.sericulture.model.AudioVisual.AudioVisualReportRequest;
 import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.DTRAllMarket.DTRAllMarketResponse;
-import com.sericulture.model.DTRAllMarket.DTRInfoResponse;
 import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
@@ -49,6 +48,117 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+
+    public AuthorisationResponse fetchDataFromAuth(AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8015/dbt/v1/service/authorisationLetter";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<AuthorisationLetterPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        AuthorisationLetterReportResponse response = new AuthorisationLetterReportResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AuthorisationResponse response2 = objectMapper.readValue(response1, AuthorisationResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+
+
+
+    public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8015/dbt/v1/service/acknowledgementReceipt";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AcknowledgementResponse response2 = objectMapper.readValue(response1, AcknowledgementResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+
+    public SupplyOrderResponse fetchDataFromSupply(SupplyOrderPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8015/dbt/v1/service/supplyOrderReceipt";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SupplyOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SupplyOrderLetterReportResponse response = new SupplyOrderLetterReportResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SupplyOrderResponse response2 = objectMapper.readValue(response1, SupplyOrderResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+    public SelectionLetterResponse fetchDataFromSelection(SelectionLetterPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8015/dbt/v1/service/selectionLetter";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SelectionLetterPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SelectionLetterReportResponse response = new SelectionLetterReportResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SelectionLetterResponse response2 = objectMapper.readValue(response1, SelectionLetterResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+
+
+    public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8015/dbt/v1/service/workOrderGeneration";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<WorkOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        WorkOrderReportResponse response2 = objectMapper.readValue(response1, WorkOrderReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
 
     public DTRReportResponse dtrReport(DTROnlineRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint

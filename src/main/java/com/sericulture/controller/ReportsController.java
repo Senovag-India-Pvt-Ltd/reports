@@ -6,7 +6,6 @@ import com.sericulture.model.DTRAllMarket.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.slf4j.Logger;
@@ -29,7 +28,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -132,6 +130,270 @@ public class ReportsController {
 
     }
 
+
+    @PostMapping("/getBlankSample")
+    public ResponseEntity<?> getBlankSample(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getBlankSample");
+            logger.info("enter to getBlankSample");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Blank Sample_1.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForAcknowledgementReceipt(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+
+    @PostMapping("/getAuthorisationLetter")
+    public ResponseEntity<?> getAuthorisationLetter(@RequestBody AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getAuthorisationLetter");
+            logger.info("enter to getAuthorisationLetter");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Authorisation Letter to the Bank _Landscape.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForAuthorisationLetter(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+
+    @PostMapping("/getSelectionLetter")
+    public ResponseEntity<?> getSelectionLetter(@RequestBody SelectionLetterPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getSelectionLetter");
+            logger.info("enter to getSelectionLetter");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Selection letters_Landscape.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForSelectionLetter(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }@PostMapping("/getSupplyOrder")
+    public ResponseEntity<?> getSupplyOrder(@RequestBody SupplyOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getSupplyOrder");
+            logger.info("enter to getSupplyOrder");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Farm Mechanization Supply Order Receipt_Landscape.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForSupplyOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+        @PostMapping("/getAuthorisationLetterFromFarmer")
+    public ResponseEntity<?> getAuthorisationLetterFromFarmer(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getAuthorisationLetterFromFarmer");
+            logger.info("enter to getAuthorisationLetterFromFarmer");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Authorisation Letter From Farmer _Landscape.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceAuthorisationLetterFromFarmer(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+//    @PostMapping("/getAuthorisationLetterFromFarmerLand")
+//    public ResponseEntity<?> getAuthorisationLetterFromFarmerLand(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+//
+//        try {
+//            System.out.println("enter to getAuthorisationLetterFromFarmerLand");
+//            logger.info("enter to getAuthorisationLetterFromFarmerLand");
+//            String destFileName = "report_kannada.pdf";
+//            JasperReport jasperReport = getJasperReport("Authorisation Letter From Farmer _Landscape.jrxml");
+//
+//            // 2. parameters "empty"
+//            Map<String, Object> parameters = getParameters();
+//
+//            // 3. datasource "java object"
+//            JRDataSource dataSource = getDataSourceForAuthorisationLetterFromFarmerLand(requestDto);
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", "report.pdf");
+//
+//
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+//
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//            logger.info(ex.getMessage() + ex.getStackTrace());
+//            HttpHeaders headers = new HttpHeaders();
+//            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+//            //return  ex.getMessage();
+//            //throw new RuntimeException("fail export file: " + ex.getMessage());
+//        }
+//
+//
+//        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+//
+//    }
     @PostMapping("/getfarmercopy")
     public ResponseEntity<?> getfarmercopy(@RequestBody MarketAuctionForPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -1802,5 +2064,164 @@ public class ReportsController {
 
         Date date = sdfInput.parse(timeString);
         return sdfOutput.format(date);
+    }
+
+
+
+    private JRDataSource getDataSourceForAcknowledgementReceipt(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchData(requestDto);
+      //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader(" ಸಕೃಷಿ ಯಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/FARM MECHANIZATION-ACKNOWLEDGEMENT RECEIPT");
+            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ:");
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setAddressText("2021-22 ನೇ ಸಾಲಿನಲ್ಲಿ ಕೃಷಿ ಯಾಂತ್ರೀಕರಣ / ಕೃಷಿ ಉತ್ಪನ್ನಗಳ ಸಂಸ್ಕರಣೆ ಯೋಜನೆಯಡಿ" + apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ "ತಾಲ್ಲೂಕು");
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ ");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ ");
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName()+ "ರವರಿಂದ Land Preparation Equipments/Implements-35 HP Tractor Drawn Blade Harrow 5 Feet Length, min.140 kg wt.      ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ,");
+            response.setFruitsId(" ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ :" +apiResponse.getContent().get(0).getFruitsId());
+            response.setLineItemComment( "ಇದ್ದು, ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು.");
+            acknowledgementReceiptResponseList.add(response);
+
+          //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+
+        private JRDataSource getDataSourceAuthorisationLetterFromFarmer(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
+
+        WorkOrderReportResponse apiResponse = apiService.fetchDataApi(requestDto);
+        List<WorkOrderGenerationReportResponse> workOrderGenerationReportResponseList = new LinkedList<>();
+            WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
+            if (apiResponse.getContent()!= null) {
+                response.setHeader1("(ಕೃಷಿ ಇಲಾಖೆ)");
+                response.setHeader2("ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ , ಹೊಸಪೇಟೆ");
+                response.setHeader3("2021-2022 ನೇ ಸಾಲಿನಲ್ಲಿ  ಯೋಜನೆಯಡಿ ");
+                response.setHeader4("ಈ ಸಂಬಂಧ ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು ಮೇ :  JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್ ");
+                response.setHeader5("ಗೆ ಅಥವಾ ಸದರಿ ಘಟಕವನ್ನು ಖರೀದಿಸಲು ಪಡೆಯಲಾದ ನನ್ನ ಬ್ಯಾಂಕ್" );
+                response.setDate(apiResponse.getContent().get(0).getDate());
+                response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ"+ apiResponse.getContent().get(0).getFarmerFirstName());
+                response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+                response.setFruitsId(" (ನೋಂದಣಿ ಸಂಖ್ಯೆ: "+ apiResponse.getContent().get(0).getFruitsId()+"ಆದ ನಾನು ಮೇ: JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ Rotavater/Side Shift Rotavater (13-18 HP Tractor drawn Rotavater,16-18 Blades,60cms Working Width)");
+            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName()+" ಜಿಲ್ಲೆ,");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+"ತಾಲ್ಲೂಕು, ");
+                response.setVillageName(apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ, ");
+                response.setHobliName(apiResponse.getContent().get(0).getHobliName()+" ಹೋಬಳಿ,");
+                response.setFarmerAccountNumber(apiResponse.getContent().get(0).getFarmerAccountNumber());
+            response.setFarmerBankName(apiResponse.getContent().get(0).getFarmerBankName());
+            response.setFarmerBankIfsc(apiResponse.getContent().get(0).getFarmerBankIfsc());
+            response.setFarmerBranchName(apiResponse.getContent().get(0).getFarmerBranchName());
+            response.setHeader6("ಕೃಷಿ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು  ಕೃಷಿ ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಪಡೆಯಲು ಅರ್ಜಿ ಸಲ್ಲಿಸಿದು, ಈ ಸಂಬಂಧ ನಾನು ರೈತರ ವಂತಿಕೆ ಮೊತ್ತ ರೂ.");
+            response.setLineItemComment(" ಗಳನ್ನೂ ಮಾತ್ರ ಪಾವತಿಸಿರುತ್ತಾನೆ.");
+            response.setCost( apiResponse.getContent().get(0).getCost() );
+            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+            response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBankName(apiResponse.getContent().get(0).getVendorBankName());
+            response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
+            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName());
+            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+                workOrderGenerationReportResponseList.add(response);
+        }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(workOrderGenerationReportResponseList);
+    }
+
+
+            private JRDataSource getDataSourceForAuthorisationLetter(AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException {
+
+        AuthorisationResponse apiResponse = apiService.fetchDataFromAuth(requestDto);
+        List<AuthorisationLetterReportResponse> authorisationLetterReportResponseList = new LinkedList<>();
+                AuthorisationLetterReportResponse response = new AuthorisationLetterReportResponse();
+                if (apiResponse.getContent()!= null) {
+                    response.setHeader1("(ಕೃಷಿ ಇಲಾಖೆ)");
+                    response.setHeader2("ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ , ಹೊಸಪೇಟೆೆ");
+                    response.setDate(apiResponse.getContent().get(0).getDate());
+                    response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ"+ apiResponse.getContent().get(0).getFarmerFirstName());
+                    response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+                    response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
+                    response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+                    response.setDistrictName(apiResponse.getContent().get(0).getDistrictName()+"(Bank District)");
+                    response.setTalukName(apiResponse.getContent().get(0).getTalukName());
+                    response.setVillageName(apiResponse.getContent().get(0).getVillageName());
+                    response.setHobliName(apiResponse.getContent().get(0).getHobliName());
+                    response.setFarmerAccountNumber(apiResponse.getContent().get(0).getFarmerAccountNumber());
+                    response.setFarmerBankName(apiResponse.getContent().get(0).getFarmerBankName());
+                    response.setFarmerBankIfsc(apiResponse.getContent().get(0).getFarmerBankIfsc());
+                    response.setFarmerBranchName(apiResponse.getContent().get(0).getFarmerBranchName());
+                    response.setLineItemComment(apiResponse.getContent().get(0).getLineItemComment());
+                    response.setCost( apiResponse.getContent().get(0).getCost() );
+                    response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+                    response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
+                    response.setVendorBankName(apiResponse.getContent().get(0).getVendorBankName()+ "(Bank)");
+                    response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
+                    response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName()+" (Branch)");
+                    response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+                    authorisationLetterReportResponseList.add(response);
+                }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(authorisationLetterReportResponseList);
+    }
+
+    private JRDataSource getDataSourceForSelectionLetter(SelectionLetterPrintRequest requestDto) throws JsonProcessingException {
+
+        SelectionLetterResponse apiResponse = apiService.fetchDataFromSelection(requestDto);
+        List<SelectionLetterReportResponse> selectionLetterReportResponseList = new LinkedList<>();
+        SelectionLetterReportResponse response = new SelectionLetterReportResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setFarmerLastName(apiResponse.getContent().get(0).getFarmerLastName());
+            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+            response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
+            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName());
+            response.setLineItemComment(apiResponse.getContent().get(0).getLineItemComment());
+            response.setCost(apiResponse.getContent().get(0).getCost());
+            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+            response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBankName(apiResponse.getContent().get(0).getVendorName());
+            response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
+            response.setVendorUpi(apiResponse.getContent().get(0).getVendorBankIfsc());
+            selectionLetterReportResponseList.add(response);
+        }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(selectionLetterReportResponseList);
+    }
+
+    private JRDataSource getDataSourceForSupplyOrder(SupplyOrderPrintRequest requestDto) throws JsonProcessingException {
+
+        SupplyOrderResponse apiResponse = apiService.fetchDataFromSupply(requestDto);
+        List<SupplyOrderLetterReportResponse> supplyOrderLetterReportResponseList = new LinkedList<>();
+        SupplyOrderLetterReportResponse response = new SupplyOrderLetterReportResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setFarmerLastName(apiResponse.getContent().get(0).getFarmerLastName());
+            response.setAddressText(apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
+            response.setLineItemComment(apiResponse.getContent().get(0).getLineItemComment());
+            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+            supplyOrderLetterReportResponseList.add(response);
+        }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(supplyOrderLetterReportResponseList);
     }
 }
