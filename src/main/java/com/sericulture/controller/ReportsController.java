@@ -138,7 +138,7 @@ public class ReportsController {
             System.out.println("enter to getBlankSample");
             logger.info("enter to getBlankSample");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Blank Sample_1.jrxml");
+            JasperReport jasperReport = getJasperReport("Blank Sample_1_1.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -183,7 +183,7 @@ public class ReportsController {
             System.out.println("enter to getAuthorisationLetter");
             logger.info("enter to getAuthorisationLetter");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Authorisation Letter to the Bank _Landscape.jrxml");
+            JasperReport jasperReport = getJasperReport("Authorisation Letter to the Bank _Landscape_1.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -314,7 +314,7 @@ public class ReportsController {
             System.out.println("enter to getAuthorisationLetterFromFarmer");
             logger.info("enter to getAuthorisationLetterFromFarmer");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Authorisation Letter From Farmer _Landscape.jrxml");
+            JasperReport jasperReport = getJasperReport("Authorisation Letter From Farmer _Landscape_1.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -2076,15 +2076,15 @@ public class ReportsController {
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader(" ಸಕೃಷಿ ಯಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/FARM MECHANIZATION-ACKNOWLEDGEMENT RECEIPT");
-            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ:");
+            response.setHeader("ಸಕೃಷಿ ಯಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/FARM MECHANIZATION-ACKNOWLEDGEMENT RECEIPT");
+            response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ:");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setAddressText("2021-22 ನೇ ಸಾಲಿನಲ್ಲಿ ಕೃಷಿ ಯಾಂತ್ರೀಕರಣ / ಕೃಷಿ ಉತ್ಪನ್ನಗಳ ಸಂಸ್ಕರಣೆ ಯೋಜನೆಯಡಿ" + apiResponse.getContent().get(0).getAddressText());
             response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ");
             response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ "ತಾಲ್ಲೂಕು");
             response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ ");
-            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ ");
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName()+ "ರವರಿಂದ Land Preparation Equipments/Implements-35 HP Tractor Drawn Blade Harrow 5 Feet Length, min.140 kg wt.      ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ,");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ ರವರಿಂದ Land Preparation Equipments/Implements-35 HP Tractor Drawn Blade Harrow 5 Feet Length, ");
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName()+ " min.140 kg wt. ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ,");
             response.setFruitsId(" ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ :" +apiResponse.getContent().get(0).getFruitsId());
             response.setLineItemComment( "ಇದ್ದು, ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು.");
             acknowledgementReceiptResponseList.add(response);
@@ -2103,19 +2103,20 @@ public class ReportsController {
             WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
             if (apiResponse.getContent()!= null) {
                 response.setHeader1("(ಕೃಷಿ ಇಲಾಖೆ)");
-                response.setHeader2("ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ , ಹೊಸಪೇಟೆ");
-                response.setHeader3("2021-2022 ನೇ ಸಾಲಿನಲ್ಲಿ  ಯೋಜನೆಯಡಿ ");
-                response.setHeader4("ಈ ಸಂಬಂಧ ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು ಮೇ :  JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್ ");
+                response.setHeader2("ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ ,ಹೊಸಪೇಟೆ");
+                response.setHeader3("2021-2022 ನೇ ಸಾಲಿನಲ್ಲಿ  ಯೋಜನೆಯಡಿ");
+                response.setHeader4("ಈ ಸಂಬಂಧ ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು ಮೇ:JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್");
                 response.setHeader5("ಗೆ ಅಥವಾ ಸದರಿ ಘಟಕವನ್ನು ಖರೀದಿಸಲು ಪಡೆಯಲಾದ ನನ್ನ ಬ್ಯಾಂಕ್" );
+                response.setHeader7("ಆದ ನಾನು ಮೇ: JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ Rotavater/Side Shift Rotavater (13-18 HP Tractor drawn Rotavater,16-18 Blades,60cms Working Width)");
                 response.setDate(apiResponse.getContent().get(0).getDate());
-                response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ"+ apiResponse.getContent().get(0).getFarmerFirstName());
+                response.setWorkOrderId(apiResponse.getContent().get(0).getWorkOrderId());
+                response.setFarmerFirstName("ಶ್ರೀ/ಶ್ರೀಮತಿ " + apiResponse.getContent().get(0).getFarmerFirstName());
                 response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
-                response.setFruitsId(" (ನೋಂದಣಿ ಸಂಖ್ಯೆ: "+ apiResponse.getContent().get(0).getFruitsId()+"ಆದ ನಾನು ಮೇ: JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ Rotavater/Side Shift Rotavater (13-18 HP Tractor drawn Rotavater,16-18 Blades,60cms Working Width)");
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
-            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName()+" ಜಿಲ್ಲೆ,");
-            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+"ತಾಲ್ಲೂಕು, ");
-                response.setVillageName(apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ, ");
-                response.setHobliName(apiResponse.getContent().get(0).getHobliName()+" ಹೋಬಳಿ,");
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName()+ " ಜಿಲ್ಲೆ, ");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು, ");
+                response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಗ್ರಾಮ,");
+                response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ,  (ನೋಂದಣಿ ಸಂಖ್ಯೆ:  " + apiResponse.getContent().get(0).getFruitsId());
                 response.setFarmerAccountNumber(apiResponse.getContent().get(0).getFarmerAccountNumber());
             response.setFarmerBankName(apiResponse.getContent().get(0).getFarmerBankName());
             response.setFarmerBankIfsc(apiResponse.getContent().get(0).getFarmerBankIfsc());
@@ -2145,7 +2146,7 @@ public class ReportsController {
                     response.setHeader1("(ಕೃಷಿ ಇಲಾಖೆ)");
                     response.setHeader2("ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ , ಹೊಸಪೇಟೆೆ");
                     response.setDate(apiResponse.getContent().get(0).getDate());
-                    response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ"+ apiResponse.getContent().get(0).getFarmerFirstName());
+                    response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+ apiResponse.getContent().get(0).getFarmerFirstName());
                     response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
                     response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
                     response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
@@ -2177,24 +2178,30 @@ public class ReportsController {
         List<SelectionLetterReportResponse> selectionLetterReportResponseList = new LinkedList<>();
         SelectionLetterReportResponse response = new SelectionLetterReportResponse();
         if (apiResponse.getContent()!= null) {
+            response.setHeader4("2021-22 ನೇ ಸಾಲಿನಲ್ಲಿ ಕೃಷಿ ಯಾಂತ್ರೀಕರಣ ಯೋಜನೆಯಡಿ");
+            response.setHeader1("ಆದ ನೀವು ಮೆ: JOHN DEER INDIA PRIVATE LIMITED ಎಂಪ್ಯಾನಲ್ಲೆದ್  ಸಂಸ್ಥೆಇಂದ Rotovater/Side Shift rotovater ");
+            response.setHeader5("(Model: 13-18 Hp Tractor down Rotovater, 16-18  Blades, 60cm Working Width) ಕೃಷಿ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣ ಘಟಕವನ್ನು ಕೃಷಿ ಇಲಾಕೆಯಾ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಪಡೆಯಲು ಅರ್ಜಿ ");
+            response.setHeader2(" ರೈತರ ವಂತಿಕೆಯನ್ನು 10 ದಿನಗಳೊಳಗಾಗಿ ಮೆ : JOHN DEER INDIA PRIVATE LIMITED ಸಂಸ್ತೆಯ ಬ್ಯಾಂಕ್ : ");
+            response.setHeader3("ಸದರಿ ಕೃಷಿ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣ ಘಟಕ ಸಂಬಂದಿಸಿದಂತೆ, ರೂ.");
+            response.setHeader6("ಸಲಿಸಿ ಸಹಯಹೆಚಿಸುರುತಿರಿದನ ಪಡೆಯಲು ಹೆಚಿಸಿರುತ್ತಿರಿ.");
             response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setFarmerLastName(apiResponse.getContent().get(0).getFarmerLastName());
+            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
-            response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
-            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName(apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName(apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName(apiResponse.getContent().get(0).getVillageName());
-            response.setLineItemComment(apiResponse.getContent().get(0).getLineItemComment());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು, ");
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ, ");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
+            response.setLineItemComment(" ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  "+  apiResponse.getContent().get(0).getTalukName() + "  ತಾಲೂಕು ಇವರಿಗೆ ಸಲ್ಲಿಸಲು ಈ ಮೂಲಕ ತಿಳಿಸಿದೆ.");
             response.setCost(apiResponse.getContent().get(0).getCost());
+            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
             response.setVendorName(apiResponse.getContent().get(0).getVendorName());
-            response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
-            response.setVendorBankName(apiResponse.getContent().get(0).getVendorName());
-            response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorAccountNumber("ಖಾತೆ ಸಂಖ್ಯೆ :  " +apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBankName("   ಬ್ಯಾಂಕ್ ಶಕೇ :  " +apiResponse.getContent().get(0).getVendorName());
+            response.setVendorBankIfsc(", ಐ.ಎಫ್.ಎಸ್.ಸೀ (IFSC) ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getVendorBankIfsc() + " ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  ");
             response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
-            response.setVendorUpi(apiResponse.getContent().get(0).getVendorBankIfsc());
+            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+            response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
             selectionLetterReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -2207,18 +2214,25 @@ public class ReportsController {
         List<SupplyOrderLetterReportResponse> supplyOrderLetterReportResponseList = new LinkedList<>();
         SupplyOrderLetterReportResponse response = new SupplyOrderLetterReportResponse();
         if (apiResponse.getContent()!= null) {
+            response.setHeader1(" ಅದ ಇವರು ಮೆ : ಜಾನ್ ಡೀರ್ ಇಂಡಿಯಾ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್ ಸಂಸ್ಥೆಯ Rotavater/Side Shift Rotavater  (Model : 13-18HP");
+            response.setHeader2(" ಕೃಷಿ ಯಂತ್ರೋಪಕರಣ/ ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು ಕೃಷಿ ಇಲಾಖೆಯ ಮಾರ್ಗ ಸೂಚಿ ಅನ್ಮಯಾ");
+            response.setHeader3("(UTR ಸಂಖ್ಯೆ :1234567890) ಗಳನ್ನೂ ಪಾವತಿಸಿದ್ದು ಇವರಿಗೆ ಸದರಿ ಕೃಷಿ ಯಂತ್ರೋಪಕರಣ / ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು (Model : 13-18 HP ");
+            response.setHeader4("2021-22 ನೇ ಸಾಲಿನಲ್ಲಿ ಕೃಷಿ ಯಾಂತ್ರೀಕರಣ ಯೋಜನೆಯಡಿ/ಕೃಷಿ ಉತ್ಪನ್ನಗಳ ಸಂಸ್ಕರಣೆ  ");
+            response.setHeader5("ಇವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ  ಮತ್ತು ಮುಂದಿನ ಕ್ರಮಕ್ಕಾಗಿ ಕಳುಹಿಸಿದೆ ");
+            response.setHeader6(" ಪಡೆಯಲು ರೈತರ ವಂತಿಕೆ ರೂ.");
+            response.setHeader7(" Tractor Down Rotavater,16-18 Blades, 60cms Working Width) (Make Model : RT 6010)");
+            response.setHeader8("  ಇವರಿಗೆ  ಸಲ್ಲಿಸಲು ಈ ಮೂಲಕ ತಿಳಿಸಿದೆ.");
+            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
             response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setFarmerLastName(apiResponse.getContent().get(0).getFarmerLastName());
+            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ, ");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು, ");
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ, ");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
             response.setAddressText(apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName(apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName(apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName(apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId(apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment(apiResponse.getContent().get(0).getLineItemComment());
-            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+            response.setCost(apiResponse.getContent().get(0).getCost());
+            response.setFinancialYear("ಸರಬರಾಜು ಮಾಡಲು ಕಾರ್ಯಾದೇಶ ನೀಡಲಾಗಿರುತ್ತದೆ, (Schemes: Financial Year -    " + apiResponse.getContent().get(0).getFinancialYear() + "   State Sector TSP - Rs 6368.00,  " + apiResponse.getContent().get(0).getFinancialYear() + "  SMAM TSP -Rs 40,000.00)");
+            response.setLineItemComment("ಈ ಕಾರ್ಯದರ್ಶಿ ಪಡೆದ ನಂತರ ನಿಗಡಿತ ಅವಧಿಯೊಳಗೆ ಕಾರ್ಯ ಪೂರ್ಣಗೊಳಿಸಿ ಅಗತ್ಯ ದಾಖಲಾತಿಗಳನ್ನು ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ ,"+ apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು, ");
             supplyOrderLetterReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));

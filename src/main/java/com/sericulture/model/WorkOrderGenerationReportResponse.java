@@ -17,6 +17,7 @@ public class WorkOrderGenerationReportResponse {
     private String header3;
     private String header4;
     private String header5;
+    private String header7;
     private String date;
     private String farmerFirstName;
     private String farmerNumber;
@@ -39,4 +40,6 @@ public class WorkOrderGenerationReportResponse {
     private String vendorBankIfsc;
     private String vendorBranchName;
     private String vendorUpi;
+    private String workOrderId;
+
 }

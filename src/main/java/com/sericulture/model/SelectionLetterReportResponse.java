@@ -15,6 +15,13 @@ public class SelectionLetterReportResponse {
     private String farmerFirstName;
     private String farmerLastName;
     private String farmerNumber;
+    private String header4;
+    private String header1;
+    private String header2;
+    private String header3;
+    private String header5;
+    private String header6;
+    private String header7;
     private String fruitsId;
     private String farmerAddressText;
     private String districtName;
@@ -29,5 +36,6 @@ public class SelectionLetterReportResponse {
     private String vendorBankIfsc;
     private String vendorBranchName;
     private String vendorUpi;
+    private String sanctionNo;
 
 }
