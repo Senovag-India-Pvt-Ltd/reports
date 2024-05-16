@@ -35,4 +35,7 @@ public class AuthorisationLetterReportResponse {
     private String vendorBankIfsc;
     private String vendorBranchName;
     private String vendorUpi;
+    private String financialYear;
+    private String schemeName;
+    private String subSchemeName;
 }

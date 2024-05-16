@@ -37,5 +37,8 @@ public class SelectionLetterReportResponse {
     private String vendorBranchName;
     private String vendorUpi;
     private String sanctionNo;
+    private String financialYear;
+    private String schemeName;
+    private String subSchemeName;
 
 }

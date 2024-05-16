@@ -2076,17 +2076,21 @@ public class ReportsController {
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader("ಸಕೃಷಿ ಯಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/FARM MECHANIZATION-ACKNOWLEDGEMENT RECEIPT");
+            response.setHeader("ರೇಷ್ಮೆ ಯಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/FARM MECHANIZATION-ACKNOWLEDGEMENT RECEIPT");
             response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ:");
             response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setAddressText("2021-22 ನೇ ಸಾಲಿನಲ್ಲಿ ಕೃಷಿ ಯಾಂತ್ರೀಕರಣ / ಕೃಷಿ ಉತ್ಪನ್ನಗಳ ಸಂಸ್ಕರಣೆ ಯೋಜನೆಯಡಿ" + apiResponse.getContent().get(0).getAddressText());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
             response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ");
             response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ "ತಾಲ್ಲೂಕು");
             response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ ");
-            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ ರವರಿಂದ Land Preparation Equipments/Implements-35 HP Tractor Drawn Blade Harrow 5 Feet Length, ");
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName()+ " min.140 kg wt. ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ,");
-            response.setFruitsId(" ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ :" +apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "ಇದ್ದು, ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು.");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ");
+            response.setFarmerFirstName("ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName()+ " ರವರಿಂದ ");
+            response.setFruitsId(" ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ :  " +apiResponse.getContent().get(0).getFruitsId());
+            response.setHeader1( "ಇದ್ದು, ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು.");
+            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeName(" ನೇ ಸಾಲಿನಲ್ಲಿ  " + apiResponse.getContent().get(0).getSchemeName());
+            response.setSubSchemeName(apiResponse.getContent().get(0).getSubSchemeName());
+            response.setLineItemComment("ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ, ");
             acknowledgementReceiptResponseList.add(response);
 
           //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
@@ -2130,6 +2134,9 @@ public class ReportsController {
             response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
             response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName());
             response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+                response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+                response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+                response.setSubSchemeName(apiResponse.getContent().get(0).getSubSchemeName());
                 workOrderGenerationReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -2166,6 +2173,9 @@ public class ReportsController {
                     response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
                     response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName()+" (Branch)");
                     response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+                    response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+                    response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+                    response.setSubSchemeName(apiResponse.getContent().get(0).getSubSchemeName());
                     authorisationLetterReportResponseList.add(response);
                 }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -2203,6 +2213,9 @@ public class ReportsController {
             response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
             response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
             response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
+            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+            response.setSubSchemeName(apiResponse.getContent().get(0).getSubSchemeName());
             selectionLetterReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -2234,6 +2247,8 @@ public class ReportsController {
             response.setCost(apiResponse.getContent().get(0).getCost());
             response.setFinancialYear("ಸರಬರಾಜು ಮಾಡಲು ಕಾರ್ಯಾದೇಶ ನೀಡಲಾಗಿರುತ್ತದೆ, (Schemes: Financial Year -    " + apiResponse.getContent().get(0).getFinancialYear() + "   State Sector TSP - Rs 6368.00,  " + apiResponse.getContent().get(0).getFinancialYear() + "  SMAM TSP -Rs 40,000.00)");
             response.setLineItemComment("ಈ ಕಾರ್ಯದರ್ಶಿ ಪಡೆದ ನಂತರ ನಿಗಡಿತ ಅವಧಿಯೊಳಗೆ ಕಾರ್ಯ ಪೂರ್ಣಗೊಳಿಸಿ ಅಗತ್ಯ ದಾಖಲಾತಿಗಳನ್ನು ಸಹಾಯಕ ಕೃಷಿ ನಿರ್ದೇಶಕರ ಕಛೇರಿ ,"+ apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು, ");
+            response.setSchemeName(apiResponse.getContent().get(0).getSchemeName());
+            response.setSubSchemeName(apiResponse.getContent().get(0).getSubSchemeName());
             supplyOrderLetterReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));

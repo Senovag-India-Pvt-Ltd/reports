@@ -31,5 +31,6 @@ public class SupplyOrderLetterReportResponse {
     private String lineItemComment;
     private String financialYear;
     private String schemeName;
+    private String subSchemeName;
 
 }
