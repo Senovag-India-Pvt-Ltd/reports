@@ -2242,14 +2242,13 @@ public class ReportsController {
             response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
             response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + " ಜಿಲ್ಲೆ , ");
             response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
-            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ ,    ");
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
             response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
             response.setAddressText(apiResponse.getContent().get(0).getAddressText());
             response.setCost(apiResponse.getContent().get(0).getCost());
             response.setFinancialYear("ಸರಬರಾಜು ಮಾಡಲು ಕಾರ್ಯಾದೇಶ ನೀಡಲಾಗಿರುತ್ತದೆ, (Schemes: Financial Year -    " + apiResponse.getContent().get(0).getFinancialYear() + "   State Sector TSP - Rs 6368.00,  " + apiResponse.getContent().get(0).getFinancialYear() + "  SMAM TSP -Rs 40,000.00)");
-            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear() +"ನೇ ಸಾಲಿನಲ್ಲಿ ರೇಷ್ಮೆ ಯಾಂತ್ರೀಕರಣ ಯೋಜನೆಯಡಿ/ರೇಷ್ಮೆ ಉತ್ಪನ್ನಗಳ ಸಂಸ್ಕರಣೆ ");
+            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear() +"ನೇ ಸಾಲಿನಲ್ಲಿ " + apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setLineItemComment("ಈ ಕಾರ್ಯದರ್ಶಿ ಪಡೆದ ನಂತರ ನಿಗಡಿತ ಅವಧಿಯೊಳಗೆ ಕಾರ್ಯ ಪೂರ್ಣಗೊಳಿಸಿ ಅಗತ್ಯ ದಾಖಲಾತಿಗಳನ್ನು ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಛೇರಿ ,"+ apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು, ");
-            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setVendorName(apiResponse.getContent().get(0).getVendorName());
             supplyOrderLetterReportResponseList.add(response);
