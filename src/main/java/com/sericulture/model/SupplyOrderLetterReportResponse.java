@@ -30,7 +30,10 @@ public class SupplyOrderLetterReportResponse {
     private Float cost;
     private String lineItemComment;
     private String financialYear;
-    private String schemeName;
-    private String subSchemeName;
-
+    private String schemeNameInKannada;
+    private String subSchemeNameInKannada;
+    private String fatherNameKan;
+    private String mobileNumber;
+    private String scComponentName;
+    private String vendorName;
 }

@@ -42,7 +42,10 @@ public class WorkOrderGenerationReportResponse {
     private String vendorUpi;
     private String workOrderId;
     private String financialYear;
-    private String schemeName;
-    private String subSchemeName;
+    private String schemeNameInKannada;
+    private String subSchemeNameInKannada;
+    private String fatherNameKan;
+    private String mobileNumber;
+    private String scComponentName;
 
 }
