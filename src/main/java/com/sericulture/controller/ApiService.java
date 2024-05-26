@@ -25,6 +25,9 @@ public class ApiService {
     @Value("${marketapi.url}")
     private String apiUrl;
 
+    @Value("${dbtapi.url}")
+    private String dbtApiUrl;
+
     public ApiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -51,7 +54,7 @@ public class ApiService {
 
     public AuthorisationResponse fetchDataFromAuth(AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/authorisationLetter";
+        String finalapiurl = dbtApiUrl + "service/authorisationLetter";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -75,7 +78,7 @@ public class ApiService {
 
     public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/acknowledgementReceipt";
+        String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -97,7 +100,7 @@ public class ApiService {
 
     public SupplyOrderResponse fetchDataFromSupply(SupplyOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/supplyOrderReceipt";
+        String finalapiurl = dbtApiUrl +"service/supplyOrderReceipt";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -117,7 +120,7 @@ public class ApiService {
     }
     public SelectionLetterResponse fetchDataFromSelection(SelectionLetterPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/selectionLetter";
+        String finalapiurl = dbtApiUrl +"service/selectionLetter";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -140,7 +143,7 @@ public class ApiService {
 
     public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/workOrderGeneration";
+        String finalapiurl = dbtApiUrl +"service/workOrderGeneration";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
