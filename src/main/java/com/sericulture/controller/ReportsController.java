@@ -2203,19 +2203,13 @@ public class ReportsController {
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
             response.setHeader(" ರೇಷ್ಮೆ ಯಾಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/ACKNOWLEDGEMENT RECEIPT");
-            response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ:");
-            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setLineItemComment( apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ  " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ , " +apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು , " + apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ , " +apiResponse.getContent().get(0).getVillageName()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  \n " +
+                    "                                           \n"+
+                    "ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ " ರವರಿಂದ  " +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "  ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸುತ್ತಾರೆ . ಇವರ\n" +
+                    "                                    \n"+
+                    "ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು , ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು .");
             response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ ,");
-            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,");
-            response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ ,");
-            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ");
-            response.setFarmerFirstName("ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName()+ " ರವರಿಂದ ");
-            response.setFruitsId(" ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ : " +apiResponse.getContent().get(0).getFruitsId() + " ಇದ್ದು, ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು.");
-            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada("ನೇ ಸಾಲಿನಲ್ಲಿ  " + apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setLineItemComment("ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಾಲಿಸಿರುತ್ತಾರೆ, ");
             acknowledgementReceiptResponseList.add(response);
 
           //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
@@ -2233,37 +2227,31 @@ public class ReportsController {
             if (apiResponse.getContent()!= null) {
                 response.setHeader1("(ರೇಷ್ಮೆ  ಇಲಾಖೆ)");
                 response.setHeader2("ಸಹಾಯಕ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರ ಕಛೇರಿ ");
+                response.setLineItemComment("                    " + apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ  ಯೋಜನೆಯಡಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getFarmerFirstName()+ "  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  +  " , " +apiResponse.getContent().get(0).getVillageName()+ " ಗ್ರಾಮ ,  " + apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ  , " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾಲ್ಲೂಕು , " + apiResponse.getContent().get(0).getDistrictName()+ " ಜಿಲ್ಲೆ (ನೋಂದಣಿ \n " +
+                        "                                            \n" +
+                        "ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getFruitsId() + " , ಮೊಬೈಲ್ ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getMobileNumber() + " )  ಆದ ನಾನು ಮೇ  :  " + apiResponse.getContent().get(0).getVendorName() + "  ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ " +apiResponse.getContent().get(0).getScComponentName()+ "\n" +
+                                "                                                                                                \n " +
+                        "" +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ " ರೇಷ್ಮೆ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು ರೇಷ್ಮೆ ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ \n"+
+                        "                                                                                                           \n" +
+                        "ಅನ್ವಯ ಪಡೆಯಲು ಅರ್ಜಿ ಸಲ್ಲಿಸಿದು,ಈ ಸಂಬಂಧ ನಾನು ರೈತರ ವಂತಿಕೆ ಮೊತ್ತ ರೂ.  " + apiResponse.getContent().get(0).getCost() +"  ಗಳನ್ನೂ ಮಾತ್ರ ಪಾವತಿಸಿರುತ್ತಾನೆ.");
                 response.setHeader4("ಈ ಸಂಬಂಧ ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು ಮೇ: "+ apiResponse.getContent().get(0).getVendorName() + " ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್");
                 response.setHeader5("ಗೆ ಅಥವಾ ಸದರಿ ಘಟಕವನ್ನು ಖರೀದಿಸಲು ಪಡೆಯಲಾದ ನನ್ನ ಬ್ಯಾಂಕ್" );
-                response.setHeader7(" ಆದ ನಾನು ಮೇ  :  " + apiResponse.getContent().get(0).getVendorName() +   "  ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ  ");
                 response.setDate(apiResponse.getContent().get(0).getDate());
+                response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
                 response.setWorkOrderId(apiResponse.getContent().get(0).getWorkOrderId());
-                response.setFarmerFirstName("  ಶ್ರೀ/ಶ್ರೀಮತಿ  " + apiResponse.getContent().get(0).getFarmerFirstName());
-                response.setFatherNameKan("  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  + " ,");
                 response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
-            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName()+ " ಜಿಲ್ಲೆ , ");
-            response.setTalukName(apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು , ");
-                response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಗ್ರಾಮ ,");
-                response.setScComponentName(apiResponse.getContent().get(0).getScComponentName());
-                response.setHobliName(apiResponse.getContent().get(0).getHobliName()+ " ಹೋಬಳಿ  , ");
-                response.setFruitsId( " (ನೋಂದಣಿ ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getFruitsId() + " , ಮೊಬೈಲ್ ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getMobileNumber() + " )  ");
                 response.setFarmerAccountNumber(apiResponse.getContent().get(0).getFarmerAccountNumber());
             response.setFarmerBankName(apiResponse.getContent().get(0).getFarmerBankName());
             response.setFarmerBankIfsc(apiResponse.getContent().get(0).getFarmerBankIfsc());
             response.setFarmerBranchName(apiResponse.getContent().get(0).getFarmerBranchName());
-            response.setHeader6(" ರೇಷ್ಮೆ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು ರೇಷ್ಮೆ ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಪಡೆಯಲು ಅರ್ಜಿ ಸಲ್ಲಿಸಿದು,ಈ ಸಂಬಂಧ ನಾನು ರೈತರ ವಂತಿಕೆ ಮೊತ್ತ ರೂ.");
-            response.setLineItemComment(" ಗಳನ್ನೂ ಮಾತ್ರ ಪಾವತಿಸಿರುತ್ತಾನೆ.");
-            response.setCost( apiResponse.getContent().get(0).getCost() );
             response.setVendorName(apiResponse.getContent().get(0).getVendorName());
             response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
             response.setVendorBankName(apiResponse.getContent().get(0).getVendorBankName());
             response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
             response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName());
             response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
-                response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear() + " ನೇ ಸಾಲಿನಲ್ಲಿ  ಯೋಜನೆಯಡಿ ");
                 response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
-                response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
 
                 workOrderGenerationReportResponseList.add(response);
         }
