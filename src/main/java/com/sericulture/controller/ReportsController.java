@@ -138,7 +138,7 @@ public class ReportsController {
             System.out.println("enter to getBlankSample");
             logger.info("enter to getBlankSample");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Blank Sample_1_1.jrxml");
+            JasperReport jasperReport = getJasperReport("Acknowledgement.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -1189,11 +1189,21 @@ public class ReportsController {
                 apiResponse.content.setReeleramount("");
             }
             String markFee = "0";
+            String totalFee = "0";
             if (apiResponse.content.getMarketFee() != null && !apiResponse.content.getMarketFee().equals("")) {
                 markFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getMarketFee())));
             }
-            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())) + roundToWholeNumber(Double.parseDouble(markFee)));
-            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
+         else {
+            markFee = "0"; // or any default value you prefer
+        }
+            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
+                totalFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())));
+            }
+            else {
+                totalFee = "0"; // or any default value you prefer
+            }
+            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
+            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
 
             countries.add(apiResponse.content);
         }
@@ -2204,12 +2214,26 @@ public class ReportsController {
         if (apiResponse.getContent()!= null) {
             response.setHeader(" ರೇಷ್ಮೆ ಯಾಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/ACKNOWLEDGEMENT RECEIPT");
             response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
-            response.setLineItemComment( apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ  " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ , " +apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು , " + apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ , " +apiResponse.getContent().get(0).getVillageName()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  \n " +
-                    "                                           \n"+
-                    "ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ " ರವರಿಂದ  " +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "  ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸುತ್ತಾರೆ . ಇವರ\n" +
-                    "                                    \n"+
-                    "ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು , ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು .");
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
             response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ  " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ , " +apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು , " + apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ ,\n " +
+                    "                                           \n"+
+                    "" +apiResponse.getContent().get(0).getVillageName()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ " ರವರಿಂದ  " +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "\n" +
+                    "                                    \n"+
+                    "ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸುತ್ತಾರೆ . ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "\n" +
+                    "                                                              \n" +
+                    "ಇದ್ದು , ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು .");
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
             acknowledgementReceiptResponseList.add(response);
 
           //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
