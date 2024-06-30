@@ -17,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
+import java.util.Collections;
+
 @Service
 public class ApiService {
 
@@ -79,17 +82,14 @@ public class ApiService {
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+        AcknowledgementResponse response = restTemplate.postForObject(finalapiurl,requestEntity, AcknowledgementResponse.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        AcknowledgementResponse response2 = objectMapper.readValue(response1, AcknowledgementResponse.class);
-
-        return response2;
+        return response;
         // Process the API response as needed
         //return apiResponse;
     }
