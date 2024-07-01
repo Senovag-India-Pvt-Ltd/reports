@@ -13,15 +13,14 @@ import lombok.*;
 
 public class AcknowledgementReceiptResponse {
     private String header;
-    private String header1;
     private String acceptedDate;
     private String date;
+    private String farmerFirstName;
     private String addressText;
     private String districtName;
     private String talukName;
     private String hobliName;
     private String villageName;
-    private String farmerFirstName;
     private String fruitsId;
     private String lineItemComment;
     private String financialYear;
@@ -29,5 +28,6 @@ public class AcknowledgementReceiptResponse {
     private String subSchemeNameInKannada;
     private String fatherNameKan;
     private String mobileNumber;
+
 
 }

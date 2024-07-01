@@ -17,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
+import java.util.Collections;
+
 @Service
 public class ApiService {
 
@@ -82,17 +85,14 @@ public class ApiService {
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+        AcknowledgementResponse response = restTemplate.postForObject(finalapiurl,requestEntity, AcknowledgementResponse.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        AcknowledgementResponse response2 = objectMapper.readValue(response1, AcknowledgementResponse.class);
-
-        return response2;
+        return response;
         // Process the API response as needed
         //return apiResponse;
     }
@@ -139,6 +139,68 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrder";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public SanctionCompany fetchDataFromSanctionCompany(SanctionCompanyPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionCompany";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionCompanyPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionCompanyResponse response = new SanctionCompanyResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionCompany response2 = objectMapper.readValue(response1, SanctionCompany.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public SanctionBeneficiary fetchDataFromSanctionBeneficiary(SanctionBeneficiaryPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionBeneficiary";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionBeneficiaryPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionBeneficiaryResponse response = new SanctionBeneficiaryResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionBeneficiary response2 = objectMapper.readValue(response1, SanctionBeneficiary.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 
 
     public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
