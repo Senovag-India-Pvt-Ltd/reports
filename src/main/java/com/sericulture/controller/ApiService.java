@@ -36,7 +36,8 @@ public class ApiService {
     }
     public ContentRoot fetchDataFromApi(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLot";
+//        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLot";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();

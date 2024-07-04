@@ -1159,9 +1159,9 @@ public class ReportsController {
             } else {
                 apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
             }
-            if (apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")) {
-                apiResponse.content.setFeespaid("");
-            } else {
+//            if (apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")) {
+//                apiResponse.content.setFeespaid("");
+//            } else {
                 System.out.println("Enter the first value:");
                 String[] components = apiResponse.content.getFeespaid().split("[+=]");
 
@@ -1182,7 +1182,7 @@ public class ReportsController {
                 // Print the rounded result
                 System.out.println("Rounded result: " + roundedResult);
                 apiResponse.content.setFeespaid(value1 + "+" + value2 + "=" + String.valueOf(roundedResult));
-            }
+            //}
             if (!apiResponse.content.getBidAmount().equals("")) {
                 apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
             } else {
