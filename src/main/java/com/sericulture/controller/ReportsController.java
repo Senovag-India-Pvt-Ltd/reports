@@ -944,9 +944,29 @@ public class ReportsController {
         ContentRoot apiResponse = apiService.fetchDataFromApi(requestDto);
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
+//            double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
+//            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
+//            double marketFee = apiResponse.content.getMarketFee();
+//            double totalAmount = apiResponse.content.getTotalamount();
+//
+//// Formatting and setting the Feespaid field
+//            String formatfees = roundToTwoDecimalPlaces(farmerMarketFee) + "+" + roundToTwoDecimalPlaces(reelerMarketFee) + "=" + roundToTwoDecimalPlaces(farmerMarketFee + reelerMarketFee);
+//            apiResponse.content.setFeespaid(formatfees);
+//
+//// Formatting and setting the PaidAmount field
+//            String format = roundToTwoDecimalPlaces(marketFee) + "-" + roundToTwoDecimalPlaces(farmerMarketFee) + "=" + roundToTwoDecimalPlaces(marketFee - farmerMarketFee);
+//            apiResponse.content.setPaidAmount(format);
+//
+//// Formatting and setting the AmountPaid field
+//            String marketFees = roundToTwoDecimalPlaces(totalAmount) + "+" + roundToTwoDecimalPlaces(reelerMarketFee) + "=" + roundToTwoDecimalPlaces(totalAmount + reelerMarketFee);
+//            apiResponse.content.setAmountPaid(marketFees);
 
             String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
             apiResponse.content.setFeespaid(formatfees);
+            String format = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getMarketFee()==null?"0.0":apiResponse.content.getMarketFee())) + "-" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getMarketFee()==null?"0.0":apiResponse.content.getMarketFee()) - apiResponse.content.getFarmerMarketFee()));
+            apiResponse.content.setPaidAmount(format);
+            String marketFees = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getTotalamount()==null?"0.0":apiResponse.content.getTotalamount())) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getTotalamount()==null?"0.0":apiResponse.content.getTotalamount()) + apiResponse.content.getReelerMarketFee()));
+            apiResponse.content.setAmountPaid(marketFees);
 
             Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
             Double farmerfee = apiResponse.content.getFarmerMarketFee();
@@ -1158,6 +1178,8 @@ public class ReportsController {
                 apiResponse.content.setLotSoldOutAmount("");
             } else {
                 apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
+
+//                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee() - apiResponse.content.getReelerMarketFee())));
             }
 //            if (apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")) {
 //                apiResponse.content.setFeespaid("");

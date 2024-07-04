@@ -62,6 +62,8 @@ public class Content {
     private String logurl;
 
     private String feespaid;
+    private String paidAmount;
+    private String amountPaid;
     private String amountfarmer;
     private String amountrealar;
     private String marketName;
