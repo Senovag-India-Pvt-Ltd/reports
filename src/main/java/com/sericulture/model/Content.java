@@ -23,6 +23,8 @@ public class Content {
 
     private String farmerLastName;
 
+    private String fatherNameKan;
+
     private String farmerAddress;
 
     private String farmerTaluk;

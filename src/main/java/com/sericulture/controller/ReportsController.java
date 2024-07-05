@@ -766,6 +766,12 @@ public class ReportsController {
             if (apiResponse.content.getFarmerNameKannada() == null) {
                 apiResponse.content.setFarmerNameKannada("");
             }
+            if (apiResponse.content.getFatherNameKan() == null) {
+                apiResponse.content.setFatherNameKan("");
+            }
+            if (apiResponse.content.getFarmerAddress() == null) {
+                apiResponse.content.setFarmerAddress("");
+            }
             if (apiResponse.content.getReelerLicense() == null) {
                 apiResponse.content.setReelerLicense("");
             }
@@ -777,7 +783,7 @@ public class ReportsController {
             } else {
                 farmerNumber = apiResponse.content.getFarmerNumber();
             }
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() + " " + apiResponse.content.getFarmerAddress());
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() + ", " + apiResponse.content.getFatherNameKan() +"," +apiResponse.content.getFarmerAddress());
             String reelerNumberText = "";
             String reelerAddressText = "";
             if (apiResponse.content.getReelerNumber() != null) {
@@ -944,22 +950,7 @@ public class ReportsController {
         ContentRoot apiResponse = apiService.fetchDataFromApi(requestDto);
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
-//            double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
-//            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
-//            double marketFee = apiResponse.content.getMarketFee();
-//            double totalAmount = apiResponse.content.getTotalamount();
-//
-//// Formatting and setting the Feespaid field
-//            String formatfees = roundToTwoDecimalPlaces(farmerMarketFee) + "+" + roundToTwoDecimalPlaces(reelerMarketFee) + "=" + roundToTwoDecimalPlaces(farmerMarketFee + reelerMarketFee);
-//            apiResponse.content.setFeespaid(formatfees);
-//
-//// Formatting and setting the PaidAmount field
-//            String format = roundToTwoDecimalPlaces(marketFee) + "-" + roundToTwoDecimalPlaces(farmerMarketFee) + "=" + roundToTwoDecimalPlaces(marketFee - farmerMarketFee);
-//            apiResponse.content.setPaidAmount(format);
-//
-//// Formatting and setting the AmountPaid field
-//            String marketFees = roundToTwoDecimalPlaces(totalAmount) + "+" + roundToTwoDecimalPlaces(reelerMarketFee) + "=" + roundToTwoDecimalPlaces(totalAmount + reelerMarketFee);
-//            apiResponse.content.setAmountPaid(marketFees);
+
 
             String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
             apiResponse.content.setFeespaid(formatfees);
@@ -1015,6 +1006,12 @@ public class ReportsController {
             if (apiResponse.content.getFarmerNameKannada() == null) {
                 apiResponse.content.setFarmerNameKannada("");
             }
+            if (apiResponse.content.getFarmerAddress() == null) {
+                apiResponse.content.setFarmerAddress("");
+            }
+            if (apiResponse.content.getFatherNameKan() == null) {
+                apiResponse.content.setFatherNameKan("");
+            }
             if (apiResponse.content.getReelerLicense() == null) {
                 apiResponse.content.setReelerLicense("");
             }
@@ -1026,7 +1023,7 @@ public class ReportsController {
             } else {
                 farmerNumber = apiResponse.content.getFarmerNumber();
             }
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() + " " + apiResponse.content.getFarmerAddress());
+            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")" + apiResponse.content.getFarmerNameKannada() + ", "+ apiResponse.content.getFatherNameKan()+ ", " + apiResponse.content.getFarmerAddress());
             String reelerNumberText = "";
             String reelerAddressText = "";
             if (apiResponse.content.getReelerNumber() != null) {
@@ -1225,8 +1222,10 @@ public class ReportsController {
             else {
                 totalFee = "0"; // or any default value you prefer
             }
-            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
-            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
+//            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
+//            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
+            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee))  + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()));
+            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + tot_amt  );
 
             countries.add(apiResponse.content);
         }
