@@ -977,7 +977,8 @@ public class ReportsController {
 //                        String marketFees = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount())) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount()) + apiResponse.content.getReelerMarketFee()));
 //            apiResponse.content.setAmountPaid(marketFees);
 
-
+//            String value = roundToTwoDecimalPlaces(apiResponse.content.getLot()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
+//            apiResponse.content.setAvgValue(value);
             // Processing the FarmerMarketFee and ReelerMarketFee
             long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
             long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
@@ -1013,6 +1014,13 @@ public class ReportsController {
             apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
             apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
             apiResponse.content.setDescription1( "  OUT PASS for Lot No " + apiResponse.content.getAllottedLotId() + "Dtd" + apiResponse.content.getAuctionDate() + "Wt " + apiResponse.content.getLotWeight() + "Kgs, Reeler" +  apiResponse.content.getReelerLicense() + " " + apiResponse.content.getReelerName() + " " + apiResponse.content.getReelerAddress() );
+
+//            apiResponse.content.setValue(apiResponse.content.getLotWeight() / 4);
+
+
+//# Calculate the description value
+
+//# Set the description value in the API response content
 
             //  apiResponse.content.setReeleramount(relaramout);
             String inputDateTime = "";
@@ -1075,7 +1083,7 @@ public class ReportsController {
             if (apiResponse.content.getReelerAddress() != null) {
                 reelerAddressText = apiResponse.content.getReelerAddress();
             }
-            apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerName() + apiResponse.content.getReelerNameKannada() + " " + reelerAddressText);
+            apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerName()+" " + reelerAddressText);
 
             if (apiResponse.content.getSmallBinList() != null) {
                 List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
@@ -1201,7 +1209,17 @@ public class ReportsController {
                     }
                 }
                 apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( " (" +apiResponse.content.getLotSoldOutAmount() + ")"))));
+                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
+//                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
+
+//                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
+//                double lotSoldOutAmount = Double.parseDouble(lotSoldOutAmountStr);
+//
+//// Round to the nearest whole number and convert to long
+//                long totalAmount = Math.round(lotSoldOutAmount);
+//
+//// Set the total amount as a String
+//                apiResponse.content.setTotalamount(String.valueOf(totalAmount));
             }
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
             if (apiResponse.content.getBidAmount().equals("0.0")) {

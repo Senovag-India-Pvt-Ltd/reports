@@ -130,6 +130,10 @@ public class Content {
     private String ifsc;
     private String description;
     private String description1;
+    private String avgValue;
+    private String value;
+
+
 
 
 
