@@ -86,6 +86,7 @@ public class Content {
     private String accountnumber_ifsccode;
 
     private String marketNameKannada;
+    
     private String farmerNameKannada;
     private Date auctionDateWithTime;
     private String farmerMobileNumber;
@@ -125,4 +126,11 @@ public class Content {
     private String accpetedBy;
     private String shed;
     private String fruitsId;
+
+    private String ifsc;
+    private String description;
+    private String description1;
+
+
+
 }
