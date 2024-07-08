@@ -36,8 +36,8 @@ public class ApiService {
     }
     public ContentRoot fetchDataFromApi(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-//        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLot";
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
+        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLot";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -163,7 +163,7 @@ public class ApiService {
 
     public SanctionCompany fetchDataFromSanctionCompany(SanctionCompanyPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionCompany";
+        String finalapiurl = dbtApiUrl +"service/sanctionCompany";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -184,7 +184,7 @@ public class ApiService {
 
     public SanctionBeneficiary fetchDataFromSanctionBeneficiary(SanctionBeneficiaryPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionBeneficiary";
+        String finalapiurl = dbtApiUrl + "service/sanctionBeneficiary";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
