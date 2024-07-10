@@ -980,6 +980,29 @@ public class ReportsController {
 //            String value = roundToTwoDecimalPlaces(apiResponse.content.getLot()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
 //            apiResponse.content.setAvgValue(value);
             // Processing the FarmerMarketFee and ReelerMarketFee
+
+
+//            long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
+//            long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
+//            long totalMarketFee = farmerMarketFee + reelerMarketFee;
+//
+//            String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
+//            apiResponse.content.setFeespaid(formatfees);
+//
+//// Processing the LotSoldOutAmount
+//            double lotSoldOutAmountDouble = Double.parseDouble(apiResponse.content.getLotSoldOutAmount() == null ? "0.0" : apiResponse.content.getLotSoldOutAmount());
+//            long lotSoldOutAmount = toLong(lotSoldOutAmountDouble);
+//            long paidAmount = lotSoldOutAmount - farmerMarketFee;
+//
+//            String format = lotSoldOutAmount + "-" + farmerMarketFee + "=" + paidAmount;
+//            apiResponse.content.setPaidAmount(format);
+//
+//// Processing the AmountPaid (based on LotSoldOutAmount)
+//            long amountPaid = lotSoldOutAmount + reelerMarketFee;
+//            String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
+//            apiResponse.content.setAmountPaid(marketFees);
+
+            // Parsing and processing the market fees
             long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
             long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
             long totalMarketFee = farmerMarketFee + reelerMarketFee;
@@ -989,16 +1012,20 @@ public class ReportsController {
 
 // Processing the LotSoldOutAmount
             double lotSoldOutAmountDouble = Double.parseDouble(apiResponse.content.getLotSoldOutAmount() == null ? "0.0" : apiResponse.content.getLotSoldOutAmount());
-            long lotSoldOutAmount = toLong(lotSoldOutAmountDouble);
-            long paidAmount = lotSoldOutAmount - farmerMarketFee;
+            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
 
-            String format = lotSoldOutAmount + "-" + farmerMarketFee + "=" + paidAmount;
+// Round the Double value to a whole number
+            long lotSoldOutAmount = Math.round(lotSoldOutAmountDouble);
+            long paidAmount = lotSoldOutAmount - farmerMarketFeeLong;
+
+            String format = lotSoldOutAmount + "-" + farmerMarketFeeLong + "=" + paidAmount;
             apiResponse.content.setPaidAmount(format);
 
 // Processing the AmountPaid (based on LotSoldOutAmount)
             long amountPaid = lotSoldOutAmount + reelerMarketFee;
             String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
             apiResponse.content.setAmountPaid(marketFees);
+
 
             Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
             Double farmerfee = apiResponse.content.getFarmerMarketFee();
