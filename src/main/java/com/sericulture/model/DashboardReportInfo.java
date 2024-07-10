@@ -25,5 +25,9 @@ public class DashboardReportInfo {
     private String weighedLots;
     private String totalSoldOutAmount;
 
+    private String totalBidCount;
+    private String currentAuctionMaxAmount;
+    private String totalNotBid;
+
     private String headerText;
 }
