@@ -1594,7 +1594,7 @@ public class ReportsController {
             contentList.add(lotReportResponse);
         }
         lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
-        lotReportResponse1.setHeaderText2("Reeler Id = " + requestDto.getReelerNumber() + " and Bid Date = " + convertDate(requestDto.getReportFromDate().toString()));
+        lotReportResponse1.setHeaderText2("Reeler Id = " + (requestDto.getReelerNumber() != null && !requestDto.getReelerNumber().equals("") ? requestDto.getReelerNumber() : "All") + " and Bid Date = " + convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(0, lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
@@ -2308,6 +2308,10 @@ public class ReportsController {
     public static String convertToTime(String timeString) throws ParseException {
         SimpleDateFormat sdfInput = new SimpleDateFormat("HH:mm:ss.SSS");
         SimpleDateFormat sdfOutput = new SimpleDateFormat("HH:mm:ss");
+
+        if (!(timeString.matches("\\d{2}:\\d{2}:\\d{2}\\.\\d{3}"))) {
+            timeString = timeString + ".000";
+        }
 
         Date date = sdfInput.parse(timeString);
         return sdfOutput.format(date);
