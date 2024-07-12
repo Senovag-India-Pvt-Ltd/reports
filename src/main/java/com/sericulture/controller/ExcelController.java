@@ -41,7 +41,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping("excel-report")
+@RequestMapping("marketreport/excel-report")
 public class ExcelController {
     private final ApiService apiService;
     private static final Logger logger = LoggerFactory.getLogger(ReportsController.class);
