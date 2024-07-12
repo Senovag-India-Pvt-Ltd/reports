@@ -1,6 +1,7 @@
 package com.sericulture.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sericulture.helper.Util;
 import com.sericulture.model.*;
 import com.sericulture.model.DTRAllMarket.*;
 import net.sf.jasperreports.engine.*;
@@ -1591,6 +1592,7 @@ public class ReportsController {
             } else {
                 lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
             }
+            lotReportResponse.setAuctionNumber(Util.objectToInteger(lotReportResponse.getAuctionSession()));
             contentList.add(lotReportResponse);
         }
         lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
