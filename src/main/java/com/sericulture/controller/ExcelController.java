@@ -1910,7 +1910,7 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("market_report"+Util.getISTLocalDate()+".xlsx");
+        Path filePath = directory.resolve("dtr_report"+Util.getISTLocalDate()+".xlsx");
         //Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
