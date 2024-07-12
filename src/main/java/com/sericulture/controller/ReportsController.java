@@ -1023,9 +1023,27 @@ public class ReportsController {
             apiResponse.content.setPaidAmount(format);
 
 // Processing the AmountPaid (based on LotSoldOutAmount)
+//            long amountPaid = lotSoldOutAmount + reelerMarketFee;
+//            String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
+//            apiResponse.content.setAmountPaid(marketFees);
+//
+//            apiResponse.content.setReelerFees(apiResponse.content.getAmountPaid());
+
             long amountPaid = lotSoldOutAmount + reelerMarketFee;
-            String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
+
+// Convert amountPaid to String
+            String amt = String.valueOf(amountPaid);
+
+// Set reeler fees using amt
+            apiResponse.content.setReelerFees(amt);
+
+// Construct marketFees string
+            String marketFees = lotSoldOutAmount + " + " + reelerMarketFee + " = " + amountPaid;
+
+// Set amount paid using marketFees
             apiResponse.content.setAmountPaid(marketFees);
+
+
 
 
             Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());

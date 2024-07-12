@@ -132,6 +132,7 @@ public class Content {
     private String description1;
     private String avgValue;
     private String value;
+    private String reelerFees;
 
 
 
