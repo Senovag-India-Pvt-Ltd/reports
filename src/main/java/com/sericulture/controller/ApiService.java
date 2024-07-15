@@ -249,6 +249,29 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public DTRReportResponse blankDtrReport(DTROnlineRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBlankDTROnlineReport";
+
+        String finalapiurl = apiUrl + "auction/report/getBlankDTROnlineReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<DTROnlineRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        DTRReportResponse response = new DTRReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DTRReportResponse response2 = objectMapper.readValue(response1, DTRReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public BiddingReportResponse biddingReport(BiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
         //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
