@@ -24,7 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +36,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.google.common.math.DoubleMath.roundToLong;
 import static org.hibernate.type.descriptor.java.CoercionHelper.toLong;
 
 @RestController
@@ -883,6 +887,7 @@ public class ReportsController {
                                 apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
                                 break;
                             case 1:
+
                                 apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
                                 break;
                             case 2:
@@ -969,41 +974,6 @@ public class ReportsController {
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
-
-//            String formatfees = roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
-//            apiResponse.content.setFeespaid(formatfees);
-//            String format = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount())) + "-" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount()) - apiResponse.content.getFarmerMarketFee()));
-//            apiResponse.content.setPaidAmount(format);
-////            String marketFees = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getTotalamount()==null?"0.0":apiResponse.content.getTotalamount())) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getTotalamount()==null?"0.0":apiResponse.content.getTotalamount()) + apiResponse.content.getReelerMarketFee()));
-//                        String marketFees = roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount())) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((Double.parseDouble(apiResponse.content.getLotSoldOutAmount()==null?"0.0":apiResponse.content.getLotSoldOutAmount()) + apiResponse.content.getReelerMarketFee()));
-//            apiResponse.content.setAmountPaid(marketFees);
-
-//            String value = roundToTwoDecimalPlaces(apiResponse.content.getLot()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + roundToTwoDecimalPlaces((apiResponse.content.getFarmerMarketFee() + apiResponse.content.getReelerMarketFee()));
-//            apiResponse.content.setAvgValue(value);
-            // Processing the FarmerMarketFee and ReelerMarketFee
-
-
-//            long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
-//            long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
-//            long totalMarketFee = farmerMarketFee + reelerMarketFee;
-//
-//            String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
-//            apiResponse.content.setFeespaid(formatfees);
-//
-//// Processing the LotSoldOutAmount
-//            double lotSoldOutAmountDouble = Double.parseDouble(apiResponse.content.getLotSoldOutAmount() == null ? "0.0" : apiResponse.content.getLotSoldOutAmount());
-//            long lotSoldOutAmount = toLong(lotSoldOutAmountDouble);
-//            long paidAmount = lotSoldOutAmount - farmerMarketFee;
-//
-//            String format = lotSoldOutAmount + "-" + farmerMarketFee + "=" + paidAmount;
-//            apiResponse.content.setPaidAmount(format);
-//
-//// Processing the AmountPaid (based on LotSoldOutAmount)
-//            long amountPaid = lotSoldOutAmount + reelerMarketFee;
-//            String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
-//            apiResponse.content.setAmountPaid(marketFees);
-
-            // Parsing and processing the market fees
             long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
             long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
             long totalMarketFee = farmerMarketFee + reelerMarketFee;
@@ -1011,64 +981,37 @@ public class ReportsController {
             String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
             apiResponse.content.setFeespaid(formatfees);
 
-// Processing the LotSoldOutAmount
-            double lotSoldOutAmountDouble = Double.parseDouble(apiResponse.content.getLotSoldOutAmount() == null ? "0.0" : apiResponse.content.getLotSoldOutAmount());
-            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
 
-// Round the Double value to a whole number
-            long lotSoldOutAmount = Math.round(lotSoldOutAmountDouble);
-            long paidAmount = lotSoldOutAmount - farmerMarketFeeLong;
+            long amountPaid = reelerMarketFee;  // Only assign reelerMarketFee to amountPaid
 
-            String format = lotSoldOutAmount + "-" + farmerMarketFeeLong + "=" + paidAmount;
-            apiResponse.content.setPaidAmount(format);
-
-// Processing the AmountPaid (based on LotSoldOutAmount)
-//            long amountPaid = lotSoldOutAmount + reelerMarketFee;
-//            String marketFees = lotSoldOutAmount + "+" + reelerMarketFee + "=" + amountPaid;
-//            apiResponse.content.setAmountPaid(marketFees);
-//
-//            apiResponse.content.setReelerFees(apiResponse.content.getAmountPaid());
-
-            long amountPaid = lotSoldOutAmount + reelerMarketFee;
-
-// Convert amountPaid to String
-            String amt = String.valueOf(amountPaid);
-
-// Set reeler fees using amt
-            apiResponse.content.setReelerFees(amt);
-
-// Construct marketFees string
-            String marketFees = lotSoldOutAmount + " + " + reelerMarketFee + " = " + amountPaid;
-
-// Set amount paid using marketFees
+            String marketFees = String.valueOf(reelerMarketFee);  // Convert reelerMarketFee to string
             apiResponse.content.setAmountPaid(marketFees);
 
+            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
+            long paidAmount = farmerMarketFeeLong;
+            String format = farmerMarketFeeLong + "";
+            apiResponse.content.setPaidAmount(format);
 
 
+            long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
+            long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
+            long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
+            String farmeramout = "" + (total - farmerfee);
+            String relaramout = "" + (total - realerfee);
 
-            Double total = Double.valueOf(apiResponse.content.getLotSoldOutAmount());
-            Double farmerfee = apiResponse.content.getFarmerMarketFee();
-            Double realerfee = apiResponse.content.getReelerMarketFee();
-            String farmeramout = "" + roundToTwoDecimalPlaces((total - farmerfee));
-            String relaramout = "" + roundToTwoDecimalPlaces((total - realerfee));
-            Double slip1Amount = 0.0;
-            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
+            long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
+
+//            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
             apiResponse.content.setAmountfarmer(farmeramout);
             apiResponse.content.setAmountrealar(relaramout);
-            apiResponse.content.setLoginname_accountnumber_ifsccode("   (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "  IFSC "  + apiResponse.content.getIfscCode());
-            apiResponse.content.setAccountnumber_ifsccode("  FarmerBankA/c - " + apiResponse.content.getAccountNumber() );
-            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
+            apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getIfscCode());
+            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getAccountNumber() );
+            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
+//            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
             apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
             apiResponse.content.setDescription1( "  OUT PASS for Lot No " + apiResponse.content.getAllottedLotId() + "Dtd" + apiResponse.content.getAuctionDate() + "Wt " + apiResponse.content.getLotWeight() + "Kgs, Reeler" +  apiResponse.content.getReelerLicense() + " " + apiResponse.content.getReelerName() + " " + apiResponse.content.getReelerAddress() );
 
-//            apiResponse.content.setValue(apiResponse.content.getLotWeight() / 4);
 
-
-//# Calculate the description value
-
-//# Set the description value in the API response content
-
-            //  apiResponse.content.setReeleramount(relaramout);
             String inputDateTime = "";
             if (apiResponse.content.getAuctionDateWithTime() != null) {
                 inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
@@ -1199,10 +1142,21 @@ public class ReportsController {
                         System.out.println("Default case");
                 }
             }
-
             if (apiResponse.content.getLotWeightDetail() != null) {
-                if (apiResponse.content.getLotWeightDetail().size() > 0) {
-                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
+                int lotWeightSize = apiResponse.content.getLotWeightDetail().size();
+                for (int i = 0; i < lotWeightSize && i < 15; i++) {
+                    try {
+                        // Dynamically create the method name
+                        Method method = apiResponse.content.getClass().getMethod("setLotDetail" + i, String.class);
+                        // Format the value
+                        String formattedValue = String.format("%.3f", Double.parseDouble(apiResponse.content.getLotWeightDetail().get(i).toString()));
+                        // Invoke the method
+                        method.invoke(apiResponse.content, formattedValue);
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        e.printStackTrace();
+//            if (apiResponse.content.getLotWeightDetail() != null) {
+//                if (apiResponse.content.getLotWeightDetail().size() > 0) {
+//                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
                         switch (i) {
                             case 0:
                                 apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
@@ -1254,6 +1208,9 @@ public class ReportsController {
                         }
                     }
                 }
+
+
+//                apiResponse.content.setTotalcrates(String.valueOf(lotWeightDetails.size()));
                 apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
                 apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
 //                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
@@ -1261,11 +1218,7 @@ public class ReportsController {
 //                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
 //                double lotSoldOutAmount = Double.parseDouble(lotSoldOutAmountStr);
 //
-//// Round to the nearest whole number and convert to long
-//                long totalAmount = Math.round(lotSoldOutAmount);
-//
-//// Set the total amount as a String
-//                apiResponse.content.setTotalamount(String.valueOf(totalAmount));
+
             }
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
             if (apiResponse.content.getBidAmount().equals("0.0")) {
@@ -1324,17 +1277,28 @@ public class ReportsController {
          else {
             markFee = "0"; // or any default value you prefer
         }
+//            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
+//                totalFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())));
+//            }
+//            else {
+//                totalFee = "0"; // or any default value you prefer
+//            }
+////            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
+////            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
+//
+//            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee))  + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()));
+//            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + tot_amt  );
+//
             if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
-                totalFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())));
+                double totalAmount = Double.parseDouble(apiResponse.content.getTotalamount());
+                totalFee = String.valueOf(Math.round(totalAmount)); // Convert to long
+            } else {
+                totalFee = "0"; // Default value
             }
-            else {
-                totalFee = "0"; // or any default value you prefer
-            }
-//            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
-//            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
-            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee))  + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()));
-            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + tot_amt  );
+            long marketFee = Math.round(apiResponse.content.getReelerMarketFee());
 
+            String tot_amt = String.valueOf(Math.round(Double.parseDouble(totalFee)) + marketFee);
+            apiResponse.content.setReelerbalance("Lot value: " + Math.round(Double.parseDouble(totalFee)) + "+" + marketFee + "=" + tot_amt);
             countries.add(apiResponse.content);
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
