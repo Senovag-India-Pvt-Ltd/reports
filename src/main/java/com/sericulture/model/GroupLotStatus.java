@@ -37,4 +37,13 @@ public class GroupLotStatus {
     private String weight31= "";
     private String lot31= "";
     private String mf31= "";
+
+    private String gender = "";
+    private String max41 = "";
+    private String min41= "";
+    private String avg41= "";
+    private String amount41= "";
+    private String weight41= "";
+    private String lot41= "";
+    private String mf41= "";
 }

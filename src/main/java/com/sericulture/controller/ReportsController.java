@@ -1366,6 +1366,21 @@ public class ReportsController {
         return bd.doubleValue();
     }
 
+    public static String roundToThreeDecimalPlaces(double value) {
+        return String.format("%.3f", value);
+    }
+
+    public double parseDoubleOrDefault(String str, double defaultValue) {
+        if (str == null || str.isEmpty()) {
+            return defaultValue;
+        }
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return defaultValue; // Return default value if parsing fails
+        }
+    }
+
     @PostMapping("/dtr-online-report")
     public ResponseEntity<?> dtrOnlineReport(@RequestBody DTROnlineRequest request) {
 
@@ -1939,78 +1954,210 @@ public class ReportsController {
         }
         return new JRBeanCollectionDataSource(contentList);
     }
-    @PostMapping("/get-form-13-report")
-    public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request) {
-        try {
-            System.out.println("enter to form 14");
-            logger.info("enter to form 13");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("form_13_cb_report.jrxml");
 
-            Form13ReportResponse apiResponse = apiService.getForm13Report(request);
-            List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
-            if(apiResponse.getContent().getStateWiseLotStatus().size()>0){
-                for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
-                    GroupLotStatus groupLotStateStatus = new GroupLotStatus();
-                    groupLotStateStatus.setStateName(apiResponse.getContent().getStateWiseLotStatus().get(i).getDescription());
-                    groupLotStateStatus.setLot21(apiResponse.getContent().getStateWiseLotStatus().get(i).getLot());
-                    groupLotStateStatus.setWeight21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getWeight()))));
-                    groupLotStateStatus.setAmount21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getAmount()))));
-                    groupLotStateStatus.setMax21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMax()))));
-                    groupLotStateStatus.setMin21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMin()))));
-                    groupLotStateStatus.setAvg21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getAvg()))));
-                    groupLotStateStatus.setMf21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMf()))));
-                    groupStateLotStatuses.add(groupLotStateStatus);
-                }
-            }
+@PostMapping("/get-form-13-report")
+public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request) {
+    try {
+        System.out.println("enter to form 14");
+        logger.info("enter to form 13");
+        String destFileName = "report_kannada.pdf";
+        JasperReport jasperReport = getJasperReport("form_13_cb_report.jrxml");
 
-            List<GroupLotStatus> groupRaceLotStatuses = new ArrayList<>();
-            if(apiResponse.getContent().getRaceWiseLotStatus().size()>0){
-                for(int i=0; i<apiResponse.getContent().getRaceWiseLotStatus().size(); i++) {
-                    GroupLotStatus groupLotRaceStatus = new GroupLotStatus();
-                    groupLotRaceStatus.setRaceName(apiResponse.getContent().getRaceWiseLotStatus().get(i).getDescription());
-                    groupLotRaceStatus.setLot31(apiResponse.getContent().getRaceWiseLotStatus().get(i).getLot());
-                    groupLotRaceStatus.setWeight31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight()))));
-                    groupLotRaceStatus.setAmount31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAmount()))));
-                    groupLotRaceStatus.setMax31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMax()))));
-                    groupLotRaceStatus.setMin31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMin()))));
-                    groupLotRaceStatus.setAvg31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAvg()))));
-                    groupLotRaceStatus.setMf31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMf()))));
-                    groupRaceLotStatuses.add(groupLotRaceStatus);
-                }
-            }
+        Form13ReportResponse apiResponse = apiService.getForm13Report(request);
+        List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = getParameters();
+        for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
+            GroupLotStatus groupLotStateStatus = new GroupLotStatus();
+            groupLotStateStatus.setStateName(apiResponse.getContent().getStateWiseLotStatus().get(i).getDescription());
+            groupLotStateStatus.setLot21(apiResponse.getContent().getStateWiseLotStatus().get(i).getLot());
 
-            // 3. datasource "java object"
-            JRDataSource dataSource = getForm13Data(request);
-            parameters.put("datasource1", groupStateLotStatuses);
-            parameters.put("datasource2", groupRaceLotStatuses);
+            String weight = apiResponse.getContent().getStateWiseLotStatus().get(i).getWeight();
+            groupLotStateStatus.setWeight21(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(weight, 0))));
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            String amount = apiResponse.getContent().getStateWiseLotStatus().get(i).getAmount();
+            groupLotStateStatus.setAmount21(String.valueOf((long) parseDoubleOrDefault(amount, 0)));
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            String max = apiResponse.getContent().getStateWiseLotStatus().get(i).getMax();
+            groupLotStateStatus.setMax21(String.valueOf((long) parseDoubleOrDefault(max, 0)));
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String min = apiResponse.getContent().getStateWiseLotStatus().get(i).getMin();
+            groupLotStateStatus.setMin21(String.valueOf((long) parseDoubleOrDefault(min, 0)));
 
+            String avg = apiResponse.getContent().getStateWiseLotStatus().get(i).getAvg();
+            groupLotStateStatus.setAvg21(String.valueOf((long) parseDoubleOrDefault(avg, 0)));
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            String mf = apiResponse.getContent().getStateWiseLotStatus().get(i).getMf();
+            groupLotStateStatus.setMf21(String.valueOf((long) parseDoubleOrDefault(mf, 0)));
 
-        } catch (JRException ex) {
-            logger.error("Error generating Form 13 report", ex);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            groupStateLotStatuses.add(groupLotStateStatus);
         }
+
+        List<GroupLotStatus> groupGenderLotStatuses = new ArrayList<>();
+        if (apiResponse.getContent().getGenderWiseLotStatus().size() > 0) {
+            for (int i = 0; i < apiResponse.getContent().getGenderWiseLotStatus().size(); i++) {
+                GroupLotStatus groupLotGenderStatus = new GroupLotStatus();
+                groupLotGenderStatus.setGender(apiResponse.getContent().getGenderWiseLotStatus().get(i).getDescription());
+                groupLotGenderStatus.setLot41(apiResponse.getContent().getGenderWiseLotStatus().get(i).getLot());
+                groupLotGenderStatus.setWeight41(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getWeight(), 0))));
+                groupLotGenderStatus.setAmount41(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getAmount(), 0)));
+                groupLotGenderStatus.setMax41(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getMax(), 0)));
+                groupLotGenderStatus.setMin41(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getMin(), 0)));
+                groupLotGenderStatus.setAvg41(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getAvg(), 0)));
+                groupLotGenderStatus.setMf41(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getGenderWiseLotStatus().get(i).getMf(), 0)));
+                groupGenderLotStatuses.add(groupLotGenderStatus);
+            }
+        }
+
+        List<GroupLotStatus> groupRaceLotStatuses = new ArrayList<>();
+        if (apiResponse.getContent().getRaceWiseLotStatus().size() > 0) {
+            for (int i = 0; i < apiResponse.getContent().getRaceWiseLotStatus().size(); i++) {
+                GroupLotStatus groupLotRaceStatus = new GroupLotStatus();
+                groupLotRaceStatus.setRaceName(apiResponse.getContent().getRaceWiseLotStatus().get(i).getDescription());
+                groupLotRaceStatus.setLot31(apiResponse.getContent().getRaceWiseLotStatus().get(i).getLot());
+                groupLotRaceStatus.setWeight31(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight(), 0))));
+                groupLotRaceStatus.setAmount31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAmount(), 0)));
+                groupLotRaceStatus.setMax31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMax(), 0)));
+                groupLotRaceStatus.setMin31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMin(), 0)));
+                groupLotRaceStatus.setAvg31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAvg(), 0)));
+                groupLotRaceStatus.setMf31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMf(), 0)));
+                groupRaceLotStatuses.add(groupLotRaceStatus);
+            }
+        }
+
+        // 2. parameters "empty"
+        Map<String, Object> parameters = getParameters();
+
+        // 3. datasource "java object"
+        JRDataSource dataSource = getForm13Data(request);
+        parameters.put("datasource1", groupStateLotStatuses);
+        parameters.put("datasource2", groupRaceLotStatuses);
+        parameters.put("datasource3", groupGenderLotStatuses);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+        ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+        JRPdfExporter pdfExporter = new JRPdfExporter();
+        pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+        pdfExporter.exportReport();
+        return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+    } catch (JRException ex) {
+        logger.error("Error generating Form 13 report", ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+    } catch (JsonProcessingException e) {
+        throw new RuntimeException(e);
+    }
+}
+
+
+    private JRBeanCollectionDataSource getForm13Data(Form13Request requestDto) throws JsonProcessingException {
+        Form13ReportResponse apiResponse = apiService.getForm13Report(requestDto);
+
+        if (apiResponse.getContent().getLotsFrom0to351().size() > 0) {
+            int totalLot1 = 0;
+            for (int i = 0; i < apiResponse.getContent().getLotsFrom0to351().size(); i++) {
+                if (apiResponse.getContent().getLotsFrom0to351().get(i).getLot() != null && !apiResponse.getContent().getLotsFrom0to351().get(i).getLot().equals("")) {
+                    totalLot1 = Integer.parseInt(apiResponse.getContent().getLotsFrom0to351().get(i).getLot());
+                }
+            }
+
+            apiResponse.setLot1(apiResponse.getContent().getLotsFrom0to351().get(0).getLot());
+            apiResponse.setLot2(apiResponse.getContent().getLotsFrom0to351().get(1).getLot());
+            apiResponse.setLot3(apiResponse.getContent().getLotsFrom0to351().get(2).getLot());
+            apiResponse.setLot4(apiResponse.getContent().getLotsFrom0to351().get(3).getLot());
+            apiResponse.setLot5(apiResponse.getContent().getLotsFrom0to351().get(4).getLot());
+            apiResponse.setLot6(apiResponse.getContent().getLotsFrom0to351().get(5).getLot());
+            apiResponse.setLot7(apiResponse.getContent().getLotsFrom0to351().get(6).getLot());
+            apiResponse.setTotalLot1(String.valueOf(totalLot1));
+
+            double totalWeight1 = 0;
+            for (int i = 0; i < apiResponse.getContent().getLotsFrom0to351().size(); i++) {
+                if (apiResponse.getContent().getLotsFrom0to351().get(i).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(i).getWeight().equals("")) {
+                    totalWeight1 = Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(i).getWeight());
+                }
+            }
+
+            apiResponse.setWeight1((apiResponse.getContent().getLotsFrom0to351().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(0).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(0).getWeight()))) : "");
+            apiResponse.setWeight2((apiResponse.getContent().getLotsFrom0to351().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(1).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(1).getWeight()))) : "");
+            apiResponse.setWeight3((apiResponse.getContent().getLotsFrom0to351().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(2).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(2).getWeight()))) : "");
+            apiResponse.setWeight4((apiResponse.getContent().getLotsFrom0to351().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(3).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(3).getWeight()))) : "");
+            apiResponse.setWeight5((apiResponse.getContent().getLotsFrom0to351().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(4).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(4).getWeight()))) : "");
+            apiResponse.setWeight6((apiResponse.getContent().getLotsFrom0to351().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(5).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(5).getWeight()))) : "");
+            apiResponse.setWeight7((apiResponse.getContent().getLotsFrom0to351().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(6).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(6).getWeight()))) : "");
+            apiResponse.setTotalWeight1(String.valueOf(roundToThreeDecimalPlaces(totalWeight1)));
+
+
+            apiResponse.setPerc1((apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage()))) : "");
+            apiResponse.setPerc2((apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage()))) : "");
+            apiResponse.setPerc3((apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage()))) : "");
+            apiResponse.setPerc4((apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage()))) : "");
+            apiResponse.setPerc5((apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage()))) : "");
+            apiResponse.setPerc6((apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage()))) : "");
+            apiResponse.setPerc7((apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage()))) : "");
+        }
+
+        if (apiResponse.getContent().getLotsFrom201to300().size() > 0) {
+            apiResponse.setLot41(apiResponse.getContent().getLotsFrom201to300().get(0).getLot());
+            apiResponse.setLot42(apiResponse.getContent().getLotsFrom201to300().get(1).getLot());
+            apiResponse.setLot43(apiResponse.getContent().getLotsFrom201to300().get(2).getLot());
+            apiResponse.setLot44(apiResponse.getContent().getLotsFrom201to300().get(3).getLot());
+            apiResponse.setLot45(apiResponse.getContent().getLotsFrom201to300().get(4).getLot());
+            apiResponse.setLot46(apiResponse.getContent().getLotsFrom201to300().get(5).getLot());
+            apiResponse.setLot47(apiResponse.getContent().getLotsFrom201to300().get(6).getLot());
+
+            apiResponse.setWeight41((apiResponse.getContent().getLotsFrom201to300().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getWeight()))) : "");
+            apiResponse.setWeight42((apiResponse.getContent().getLotsFrom201to300().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getWeight()))) : "");
+            apiResponse.setWeight43((apiResponse.getContent().getLotsFrom201to300().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getWeight()))) : "");
+            apiResponse.setWeight44((apiResponse.getContent().getLotsFrom201to300().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getWeight()))) : "");
+            apiResponse.setWeight45((apiResponse.getContent().getLotsFrom201to300().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getWeight()))) : "");
+            apiResponse.setWeight46((apiResponse.getContent().getLotsFrom201to300().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getWeight()))) : "");
+            apiResponse.setWeight47((apiResponse.getContent().getLotsFrom201to300().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getWeight()))) : "");
+
+            apiResponse.setPerc41((apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage()))) : "");
+            apiResponse.setPerc42((apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage()))) : "");
+            apiResponse.setPerc43((apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage()))) : "");
+            apiResponse.setPerc44((apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage()))) : "");
+            apiResponse.setPerc45((apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage()))) : "");
+            apiResponse.setPerc46((apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage()))) : "");
+            apiResponse.setPerc47((apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage()))) : "");
+        }
+
+        if (apiResponse.getContent().getTotalLotStatus().size() > 0) {
+            apiResponse.setLot11(apiResponse.getContent().getTotalLotStatus().get(0).getLot());
+            apiResponse.setWeight11(String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getWeight()))));
+            apiResponse.setAmount11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAmount())));
+            apiResponse.setMax11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMax())));
+            apiResponse.setMin11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMin())));
+            apiResponse.setMf11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMf())));
+            apiResponse.setAvg11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAvg())));
+        }
+
+        if (apiResponse.getContent().getAverageLotStatus().size() > 0) {
+            apiResponse.setAverageDesc1(apiResponse.getContent().getAverageLotStatus().get(0).getDescription());
+            apiResponse.setLot51(apiResponse.getContent().getAverageLotStatus().get(0).getLot());
+            apiResponse.setWeight51((apiResponse.getContent().getAverageLotStatus().get(0).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getWeight()))) : "");
+            apiResponse.setPerc51((apiResponse.getContent().getAverageLotStatus().get(0).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getPercentage()))) : "");
+
+            apiResponse.setAverageDesc2(apiResponse.getContent().getAverageLotStatus().get(1).getDescription());
+            apiResponse.setLot52(apiResponse.getContent().getAverageLotStatus().get(1).getLot());
+            apiResponse.setWeight52((apiResponse.getContent().getAverageLotStatus().get(1).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getWeight()))) : "");
+            apiResponse.setPerc52((apiResponse.getContent().getAverageLotStatus().get(1).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getPercentage()))) : "");
+        }
+
+        List<Form13ReportResponse> form13ReportResponses = new LinkedList<>();
+        apiResponse.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + apiResponse.getContent().getMarketNameKannada() + " ದಿನವಹಿ ವಹಿವಾಟು ಘೋಷ್ವರೆ   : " + convertDate(String.valueOf(requestDto.getAuctionDate())));
+        apiResponse.setAverageRate("Average Rate Rs."+roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageRate())));
+        form13ReportResponses.add(apiResponse);
+        return new JRBeanCollectionDataSource(form13ReportResponses);
     }
 
     @PostMapping("/get-form-13-report-by-dist")
@@ -2187,106 +2334,7 @@ public class ReportsController {
         form13ReportResponses.add(apiResponse);
         return new JRBeanCollectionDataSource(form13ReportResponses);
     }
-    private JRBeanCollectionDataSource getForm13Data(Form13Request requestDto) throws JsonProcessingException {
-        Form13ReportResponse apiResponse = apiService.getForm13Report(requestDto);
 
-        if (apiResponse.getContent().getLotsFrom0to351().size() > 0) {
-            int totalLot1 = 0;
-            for (int i = 0; i < apiResponse.getContent().getLotsFrom0to351().size(); i++) {
-                if (apiResponse.getContent().getLotsFrom0to351().get(i).getLot() != null && !apiResponse.getContent().getLotsFrom0to351().get(i).getLot().equals("")) {
-                    totalLot1 = Integer.parseInt(apiResponse.getContent().getLotsFrom0to351().get(i).getLot());
-                }
-            }
-
-            apiResponse.setLot1(apiResponse.getContent().getLotsFrom0to351().get(0).getLot());
-            apiResponse.setLot2(apiResponse.getContent().getLotsFrom0to351().get(1).getLot());
-            apiResponse.setLot3(apiResponse.getContent().getLotsFrom0to351().get(2).getLot());
-            apiResponse.setLot4(apiResponse.getContent().getLotsFrom0to351().get(3).getLot());
-            apiResponse.setLot5(apiResponse.getContent().getLotsFrom0to351().get(4).getLot());
-            apiResponse.setLot6(apiResponse.getContent().getLotsFrom0to351().get(5).getLot());
-            apiResponse.setLot7(apiResponse.getContent().getLotsFrom0to351().get(6).getLot());
-            apiResponse.setTotalLot1(String.valueOf(totalLot1));
-
-            double totalWeight1 = 0;
-            for (int i = 0; i < apiResponse.getContent().getLotsFrom0to351().size(); i++) {
-                if (apiResponse.getContent().getLotsFrom0to351().get(i).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(i).getWeight().equals("")) {
-                    totalWeight1 = Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(i).getWeight());
-                }
-            }
-
-            apiResponse.setWeight1((apiResponse.getContent().getLotsFrom0to351().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(0).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(0).getWeight()))) : "");
-            apiResponse.setWeight2((apiResponse.getContent().getLotsFrom0to351().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(1).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(1).getWeight()))) : "");
-            apiResponse.setWeight3((apiResponse.getContent().getLotsFrom0to351().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(2).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(2).getWeight()))) : "");
-            apiResponse.setWeight4((apiResponse.getContent().getLotsFrom0to351().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(3).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(3).getWeight()))) : "");
-            apiResponse.setWeight5((apiResponse.getContent().getLotsFrom0to351().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(4).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(4).getWeight()))) : "");
-            apiResponse.setWeight6((apiResponse.getContent().getLotsFrom0to351().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(5).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(5).getWeight()))) : "");
-            apiResponse.setWeight7((apiResponse.getContent().getLotsFrom0to351().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(6).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(6).getWeight()))) : "");
-            apiResponse.setTotalWeight1(String.valueOf(roundToTwoDecimalPlaces(totalWeight1)));
-
-
-            apiResponse.setPerc1((apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage()))) : "");
-            apiResponse.setPerc2((apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(1).getPercentage()))) : "");
-            apiResponse.setPerc3((apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(2).getPercentage()))) : "");
-            apiResponse.setPerc4((apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(3).getPercentage()))) : "");
-            apiResponse.setPerc5((apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(4).getPercentage()))) : "");
-            apiResponse.setPerc6((apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(5).getPercentage()))) : "");
-            apiResponse.setPerc7((apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(6).getPercentage()))) : "");
-        }
-
-        if (apiResponse.getContent().getLotsFrom201to300().size() > 0) {
-            apiResponse.setLot41(apiResponse.getContent().getLotsFrom201to300().get(0).getLot());
-            apiResponse.setLot42(apiResponse.getContent().getLotsFrom201to300().get(1).getLot());
-            apiResponse.setLot43(apiResponse.getContent().getLotsFrom201to300().get(2).getLot());
-            apiResponse.setLot44(apiResponse.getContent().getLotsFrom201to300().get(3).getLot());
-            apiResponse.setLot45(apiResponse.getContent().getLotsFrom201to300().get(4).getLot());
-            apiResponse.setLot46(apiResponse.getContent().getLotsFrom201to300().get(5).getLot());
-            apiResponse.setLot47(apiResponse.getContent().getLotsFrom201to300().get(6).getLot());
-
-            apiResponse.setWeight41((apiResponse.getContent().getLotsFrom201to300().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getWeight()))) : "");
-            apiResponse.setWeight42((apiResponse.getContent().getLotsFrom201to300().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getWeight()))) : "");
-            apiResponse.setWeight43((apiResponse.getContent().getLotsFrom201to300().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getWeight()))) : "");
-            apiResponse.setWeight44((apiResponse.getContent().getLotsFrom201to300().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getWeight()))) : "");
-            apiResponse.setWeight45((apiResponse.getContent().getLotsFrom201to300().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getWeight()))) : "");
-            apiResponse.setWeight46((apiResponse.getContent().getLotsFrom201to300().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getWeight()))) : "");
-            apiResponse.setWeight47((apiResponse.getContent().getLotsFrom201to300().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getWeight()))) : "");
-
-            apiResponse.setPerc41((apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage()))) : "");
-            apiResponse.setPerc42((apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage()))) : "");
-            apiResponse.setPerc43((apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getPercentage()))) : "");
-            apiResponse.setPerc44((apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getPercentage()))) : "");
-            apiResponse.setPerc45((apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getPercentage()))) : "");
-            apiResponse.setPerc46((apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getPercentage()))) : "");
-            apiResponse.setPerc47((apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getPercentage()))) : "");
-        }
-
-        if (apiResponse.getContent().getTotalLotStatus().size() > 0) {
-            apiResponse.setLot11(apiResponse.getContent().getTotalLotStatus().get(0).getLot());
-            apiResponse.setWeight11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getWeight()))));
-            apiResponse.setAmount11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAmount()))));
-            apiResponse.setMax11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMax()))));
-            apiResponse.setMin11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMin()))));
-            apiResponse.setMf11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMf()))));
-            apiResponse.setAvg11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAvg()))));
-        }
-
-        if (apiResponse.getContent().getAverageLotStatus().size() > 0) {
-            apiResponse.setAverageDesc1(apiResponse.getContent().getAverageLotStatus().get(0).getDescription());
-            apiResponse.setLot51(apiResponse.getContent().getAverageLotStatus().get(0).getLot());
-            apiResponse.setWeight51((apiResponse.getContent().getAverageLotStatus().get(0).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getWeight()))) : "");
-            apiResponse.setPerc51((apiResponse.getContent().getAverageLotStatus().get(0).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getPercentage()))) : "");
-
-            apiResponse.setAverageDesc2(apiResponse.getContent().getAverageLotStatus().get(1).getDescription());
-            apiResponse.setLot52(apiResponse.getContent().getAverageLotStatus().get(1).getLot());
-            apiResponse.setWeight52((apiResponse.getContent().getAverageLotStatus().get(1).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getWeight()))) : "");
-            apiResponse.setPerc52((apiResponse.getContent().getAverageLotStatus().get(1).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getPercentage()))) : "");
-        }
-
-        List<Form13ReportResponse> form13ReportResponses = new LinkedList<>();
-        apiResponse.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + apiResponse.getContent().getMarketNameKannada() + " ದಿನವಹಿ ವಹಿವಾಟು ಘೋಷ್ವರೆ   : " + convertDate(String.valueOf(requestDto.getAuctionDate())));
-        apiResponse.setAverageRate("Average Rate Rs."+roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageRate())));
-        form13ReportResponses.add(apiResponse);
-        return new JRBeanCollectionDataSource(form13ReportResponses);
-    }
 
     @PostMapping("/get-dtr-all-market-report")
     public ResponseEntity<byte[]> getDTRAllMarketReport(@RequestBody Form13Request request) {
