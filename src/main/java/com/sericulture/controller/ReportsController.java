@@ -825,7 +825,9 @@ public class ReportsController {
             }
 //            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
             apiResponse.content.setBinno("  ಜಾಲರಿ ಸಂಖ್ಯೆ : " + bigBins );
-            apiResponse.content.setDescription("   ಲಾಭದ ಗೂಡು ಕೊಡುವುದನ್ನು ಕಡ್ಡಾಯವಾಗಿ ನಿಷೇಧಿಸಿದೆ  , ಕೊಟ್ಟಲ್ಲಿ  ದಂಡ ವಿಧಿಸಲಾಗುವುದು  ");
+            apiResponse.content.setDescription("  ಲಾಭದ ಗೂಡು ಕೊಡುವುದು /ಸಂಗ್ರಹಿಸುವುದನ್ನು  ಕಡ್ಡಾಯವಾಗಿ ನಿಷೇದಿಸಿದೆ .\n" +
+                            "                                            \n" +
+                    "  ಕೊಟ್ಟಿದ್ದಲ್ಲಿ  / ಸಂಗ್ರಹಿಸಿದಲ್ಲಿ  ದಂಡ ವಿಧಿಸಲಾಗುವುದು\n  ");
 
             for (int i = 0; i < 15; i++) {
                 switch (i) {
