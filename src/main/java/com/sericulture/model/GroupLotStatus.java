@@ -20,6 +20,14 @@ public class GroupLotStatus {
     private String max;
     private String avg;
 
+    private String totalLots;
+    private String totalWeight;
+    private String totalAmount;
+    private String totalMarketFee;
+    private String totalMin;
+    private String totalMax;
+    private String totalAvg;
+
     private String stateName = "";
     private String max21 = "";
     private String min21= "";
@@ -46,4 +54,28 @@ public class GroupLotStatus {
     private String weight41= "";
     private String lot41= "";
     private String mf41= "";
+
+    private String totalStateLots= "";
+    private String totalStateWeight = "";
+    private String totalStateAmount= "";
+    private String totalStateMarketFee= "";
+    private String totalStateMin= "";
+    private String totalStateMax= "";
+    private String totalStateAvg= "";
+
+    private String totalGenderLots= "";
+    private String totalGenderWeight = "";
+    private String totalGenderAmount= "";
+    private String totalGenderMarketFee= "";
+    private String totalGenderMin= "";
+    private String totalGenderMax= "";
+    private String totalGenderAvg= "";
+
+    private String totalRaceLots= "";
+    private String totalRaceWeight = "";
+    private String totalRaceAmount= "";
+    private String totalRaceMarketFee= "";
+    private String totalRaceMin= "";
+    private String totalRaceMax= "";
+    private String totalRaceAvg= "";
 }

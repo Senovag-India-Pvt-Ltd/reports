@@ -18,6 +18,7 @@ public class Form13Response extends ResponseBody {
     List<GroupLotStatus> stateWiseLotStatus;
     List<GroupLotStatus> genderWiseLotStatus;
     List<GroupLotStatus> raceWiseLotStatus;
+    List<GroupLotStatus> totalStatus;
 
     private String headerText;
     private String averageRateText;
