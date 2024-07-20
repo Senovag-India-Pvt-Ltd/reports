@@ -435,9 +435,9 @@ public class ApiService {
 
     public Form13ReportResponse getForm13ReportByDist(RequestBody requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13ReportByDist";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13ReportByDist";
 
-        String finalapiurl = apiUrl + "auction/report/getForm13ReportByDist";
+//        String finalapiurl = apiUrl + "auction/report/getForm13ReportByDist";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
