@@ -94,4 +94,29 @@ public class Form13ReportResponse {
     private String weight52="";
     private String perc51="";
     private String perc52="";
+
+
+    private String totalStateLots= "";
+    private String totalStateWeight = "";
+    private String totalStateAmount= "";
+    private String totalStateMarketFee= "";
+    private String totalStateMin= "";
+    private String totalStateMax= "";
+    private String totalStateAvg= "";
+
+    private String totalGenderLots= "";
+    private String totalGenderWeight = "";
+    private String totalGenderAmount= "";
+    private String totalGenderMarketFee= "";
+    private String totalGenderMin= "";
+    private String totalGenderMax= "";
+    private String totalGenderAvg= "";
+
+    private String totalRaceLots= "";
+    private String totalRaceWeight = "";
+    private String totalRaceAmount= "";
+    private String totalRaceMarketFee= "";
+    private String totalRaceMin= "";
+    private String totalRaceMax= "";
+    private String totalRaceAvg= "";
 }

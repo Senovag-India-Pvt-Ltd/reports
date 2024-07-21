@@ -826,8 +826,7 @@ public class ReportsController {
 //            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
             apiResponse.content.setBinno("  ಜಾಲರಿ ಸಂಖ್ಯೆ : " + bigBins );
             apiResponse.content.setDescription("  ಲಾಭದ ಗೂಡು ಕೊಡುವುದು /ಸಂಗ್ರಹಿಸುವುದನ್ನು  ಕಡ್ಡಾಯವಾಗಿ ನಿಷೇದಿಸಿದೆ .\n" +
-                            "                                            \n" +
-                    "  ಕೊಟ್ಟಿದ್ದಲ್ಲಿ  / ಸಂಗ್ರಹಿಸಿದಲ್ಲಿ  ದಂಡ ವಿಧಿಸಲಾಗುವುದು\n  ");
+                    "  ಕೊಟ್ಟಿದ್ದಲ್ಲಿ  / ಸಂಗ್ರಹಿಸಿದಲ್ಲಿ  ದಂಡ ವಿಧಿಸಲಾಗುವುದು \n  ");
 
             for (int i = 0; i < 15; i++) {
                 switch (i) {
@@ -1011,7 +1010,6 @@ public class ReportsController {
             apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
 //            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
             apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
-            apiResponse.content.setDescription1( "  OUT PASS for Lot No " + apiResponse.content.getAllottedLotId() + "Dtd" + apiResponse.content.getAuctionDate() + "Wt " + apiResponse.content.getLotWeight() + "Kgs, Reeler" +  apiResponse.content.getReelerLicense() + " " + apiResponse.content.getReelerName() + " " + apiResponse.content.getReelerAddress() );
 
 
             String inputDateTime = "";
@@ -1033,6 +1031,8 @@ public class ReportsController {
                     String formattedDateTime1 = outputFormat1.format(parsedDate);
                     apiResponse.content.setAuctionDate_time(formattedDateTime);
                     apiResponse.content.setAuctionDate(formattedDateTime1);
+                    apiResponse.content.setDescription1( "  OUT PASS for Lot No " + apiResponse.content.getAllottedLotId() + " ,  Dtd  "  + apiResponse.content.getAuctionDate() + " ,  Wt  " + apiResponse.content.getLotWeight() + "  Kgs, Reeler  " +  apiResponse.content.getReelerLicense() + " ,  " + apiResponse.content.getReelerName() + " ,  " + apiResponse.content.getReelerAddress() );
+
                 }
             } catch (ParseException e) {
                 throw new RuntimeException("Error parsing input date and time", e);
@@ -1074,8 +1074,7 @@ public class ReportsController {
             if (apiResponse.content.getReelerAddress() != null) {
                 reelerAddressText = apiResponse.content.getReelerAddress();
             }
-            apiResponse.content.setReelerDetails(reelerNumberText + apiResponse.content.getReelerName()+" " + reelerAddressText);
-
+            apiResponse.content.setReelerDetails(reelerNumberText + " ,  ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.content.getReelerName()+" ,  ಬಿನ್/ಕೋಂ  "  +apiResponse.content.getReelerNameKannada()+ " ,  " + reelerAddressText);
             if (apiResponse.content.getSmallBinList() != null) {
                 List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
                         .map(Object::toString)
@@ -1931,6 +1930,39 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         Form13ReportResponse apiResponse = apiService.getForm13Report(request);
         List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
+        List<Form13ReportResponse> form13ReportResponseList = new LinkedList<>();
+        Form13ReportResponse response = new Form13ReportResponse();
+        if (apiResponse.getContent()!= null) {
+            //            for(int i=0; i<apiResponse.getContent().getTotalStatus().size(); i++) {
+                GroupLotStatus groupLotTotalStatus = new GroupLotStatus();
+            response.setTotalStateLots(apiResponse.getContent().getTotalStatus().get(0).getTotalLots());
+            response.setTotalStateWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+            response.setTotalStateAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+            response.setTotalStateMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+            response.setTotalStateMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+            response.setTotalStateMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+            response.setTotalStateAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+            response.setTotalGenderLots(apiResponse.getContent().getTotalStatus().get(0).getTotalGenderLots());
+            response.setTotalGenderWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+            response.setTotalGenderAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+            response.setTotalGenderMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+            response.setTotalGenderMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+            response.setTotalGenderMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+            response.setTotalGenderAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+            response.setTotalRaceLots(apiResponse.getContent().getTotalStatus().get(0).getTotalRaceLots());
+            response.setTotalRaceWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+            response.setTotalRaceAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+            response.setTotalRaceMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+            response.setTotalRaceMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+            response.setTotalRaceMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+            response.setTotalRaceAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+            form13ReportResponseList.add(response);
+
+        }
+
 
         for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
             GroupLotStatus groupLotStateStatus = new GroupLotStatus();
@@ -2308,7 +2340,40 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("form_13_cb_report.jrxml");
 
+
             Form13ReportResponse apiResponse = apiService.getForm13ReportByDist(request);
+            List<GroupLotStatus> groupLotStatusList = new ArrayList<>();
+            if(apiResponse.getContent().getTotalStatus().size()>0){
+                for(int i=0; i<apiResponse.getContent().getTotalStatus().size(); i++) {
+                    GroupLotStatus groupLotTotalStatus = new GroupLotStatus();
+                    groupLotTotalStatus.setTotalStateLots(apiResponse.getContent().getTotalStatus().get(0).getTotalLots());
+                    groupLotTotalStatus.setTotalStateWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+                    groupLotTotalStatus.setTotalStateAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+                    groupLotTotalStatus.setTotalStateMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+                    groupLotTotalStatus.setTotalStateMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+                    groupLotTotalStatus.setTotalStateMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+                    groupLotTotalStatus.setTotalStateAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+                    groupLotTotalStatus.setTotalGenderLots(apiResponse.getContent().getTotalStatus().get(0).getTotalGenderLots());
+                    groupLotTotalStatus.setTotalGenderWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+                    groupLotTotalStatus.setTotalGenderAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+                    groupLotTotalStatus.setTotalGenderMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+                    groupLotTotalStatus.setTotalGenderMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+                    groupLotTotalStatus.setTotalGenderMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+                    groupLotTotalStatus.setTotalGenderAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+                    groupLotTotalStatus.setTotalRaceLots(apiResponse.getContent().getTotalStatus().get(0).getTotalRaceLots());
+                    groupLotTotalStatus.setTotalRaceWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
+                    groupLotTotalStatus.setTotalRaceAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
+                    groupLotTotalStatus.setTotalRaceMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
+                    groupLotTotalStatus.setTotalRaceMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMin(), 0)));
+                    groupLotTotalStatus.setTotalRaceMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMax(), 0)));
+                    groupLotTotalStatus.setTotalRaceAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAvg(), 0)));
+
+                    groupLotStatusList.add(groupLotTotalStatus);
+                }
+            }
+
             List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
             if(apiResponse.getContent().getStateWiseLotStatus().size()>0){
                 for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
