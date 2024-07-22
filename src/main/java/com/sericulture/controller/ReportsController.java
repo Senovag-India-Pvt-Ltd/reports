@@ -2369,8 +2369,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             List<GroupLotStatus> groupLotStatusList = new ArrayList<>();
             if(apiResponse.getContent().getTotalStatus().size()>0){
                 for(int i=0; i<apiResponse.getContent().getTotalStatus().size(); i++) {
-                    GroupLotStatus groupLotTotalStatus = new GroupLotStatus();
-                    groupLotTotalStatus.setTotalStateLots(apiResponse.getContent().getTotalStatus().get(0).getTotalLots());
+                    GroupLotStatus groupLotTotalStatus = new GroupLotStatus();                   groupLotTotalStatus.setTotalStateLots(apiResponse.getContent().getTotalStatus().get(0).getTotalLots());
                     groupLotTotalStatus.setTotalStateWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
                     groupLotTotalStatus.setTotalStateAmount(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalAmount(), 0)));
                     groupLotTotalStatus.setTotalStateMarketFee(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalMarketFee(), 0)));
