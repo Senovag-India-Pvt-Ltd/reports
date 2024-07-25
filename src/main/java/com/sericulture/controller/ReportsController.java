@@ -2228,6 +2228,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
 
             Form13ReportResponse apiResponse = apiService.getForm13ReportByDist(request);
+            List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
+            List<Form13ReportResponse> form13ReportResponseList = new LinkedList<>();
             List<GroupLotStatus> groupLotStatusList = new ArrayList<>();
             if(apiResponse.getContent().getTotalStatus().size()>0){
                 for(int i=0; i<apiResponse.getContent().getTotalStatus().size(); i++) {
@@ -2259,20 +2261,30 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 }
             }
 
-            List<GroupLotStatus> groupStateLotStatuses = new ArrayList<>();
-            if(apiResponse.getContent().getStateWiseLotStatus().size()>0){
-                for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
-                    GroupLotStatus groupLotStateStatus = new GroupLotStatus();
-                    groupLotStateStatus.setStateName(apiResponse.getContent().getStateWiseLotStatus().get(i).getDescription());
-                    groupLotStateStatus.setLot21(apiResponse.getContent().getStateWiseLotStatus().get(i).getLot());
-                    groupLotStateStatus.setWeight21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getWeight()))));
-                    groupLotStateStatus.setAmount21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getAmount()))));
-                    groupLotStateStatus.setMax21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMax()))));
-                    groupLotStateStatus.setMin21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMin()))));
-                    groupLotStateStatus.setAvg21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getAvg()))));
-                    groupLotStateStatus.setMf21(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getStateWiseLotStatus().get(i).getMf()))));
-                    groupStateLotStatuses.add(groupLotStateStatus);
-                }
+            for(int i=0; i<apiResponse.getContent().getStateWiseLotStatus().size(); i++) {
+                GroupLotStatus groupLotStateStatus = new GroupLotStatus();
+                groupLotStateStatus.setStateName(apiResponse.getContent().getStateWiseLotStatus().get(i).getDescription());
+                groupLotStateStatus.setLot21(apiResponse.getContent().getStateWiseLotStatus().get(i).getLot());
+
+                String weight = apiResponse.getContent().getStateWiseLotStatus().get(i).getWeight();
+                groupLotStateStatus.setWeight21(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(weight, 0))));
+
+                String amount = apiResponse.getContent().getStateWiseLotStatus().get(i).getAmount();
+                groupLotStateStatus.setAmount21(String.valueOf((long) parseDoubleOrDefault(amount, 0)));
+
+                String max = apiResponse.getContent().getStateWiseLotStatus().get(i).getMax();
+                groupLotStateStatus.setMax21(String.valueOf((long) parseDoubleOrDefault(max, 0)));
+
+                String min = apiResponse.getContent().getStateWiseLotStatus().get(i).getMin();
+                groupLotStateStatus.setMin21(String.valueOf((long) parseDoubleOrDefault(min, 0)));
+
+                String avg = apiResponse.getContent().getStateWiseLotStatus().get(i).getAvg();
+                groupLotStateStatus.setAvg21(String.valueOf((long) parseDoubleOrDefault(avg, 0)));
+
+                String mf = apiResponse.getContent().getStateWiseLotStatus().get(i).getMf();
+                groupLotStateStatus.setMf21(String.valueOf((long) parseDoubleOrDefault(mf, 0)));
+
+                groupStateLotStatuses.add(groupLotStateStatus);
             }
 
             List<GroupLotStatus> groupGenderLotStatuses = new ArrayList<>();
@@ -2292,17 +2304,17 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             }
 
             List<GroupLotStatus> groupRaceLotStatuses = new ArrayList<>();
-            if(apiResponse.getContent().getRaceWiseLotStatus().size()>0){
-                for(int i=0; i<apiResponse.getContent().getRaceWiseLotStatus().size(); i++) {
+            if (apiResponse.getContent().getRaceWiseLotStatus().size() > 0) {
+                for (int i = 0; i < apiResponse.getContent().getRaceWiseLotStatus().size(); i++) {
                     GroupLotStatus groupLotRaceStatus = new GroupLotStatus();
                     groupLotRaceStatus.setRaceName(apiResponse.getContent().getRaceWiseLotStatus().get(i).getDescription());
                     groupLotRaceStatus.setLot31(apiResponse.getContent().getRaceWiseLotStatus().get(i).getLot());
-                    groupLotRaceStatus.setWeight31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight()))));
-                    groupLotRaceStatus.setAmount31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAmount()))));
-                    groupLotRaceStatus.setMax31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMax()))));
-                    groupLotRaceStatus.setMin31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMin()))));
-                    groupLotRaceStatus.setAvg31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAvg()))));
-                    groupLotRaceStatus.setMf31(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMf()))));
+                    groupLotRaceStatus.setWeight31(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight(), 0))));
+                    groupLotRaceStatus.setAmount31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAmount(), 0)));
+                    groupLotRaceStatus.setMax31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMax(), 0)));
+                    groupLotRaceStatus.setMin31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMin(), 0)));
+                    groupLotRaceStatus.setAvg31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getAvg(), 0)));
+                    groupLotRaceStatus.setMf31(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getMf(), 0)));
                     groupRaceLotStatuses.add(groupLotRaceStatus);
                 }
             }
@@ -2411,7 +2423,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             apiResponse.setWeight5((apiResponse.getContent().getLotsFrom0to351().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(4).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(4).getWeight()))) : "");
             apiResponse.setWeight6((apiResponse.getContent().getLotsFrom0to351().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(5).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(5).getWeight()))) : "");
             apiResponse.setWeight7((apiResponse.getContent().getLotsFrom0to351().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom0to351().get(6).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(6).getWeight()))) : "");
-            apiResponse.setTotalWeight1(String.valueOf(roundToTwoDecimalPlaces(totalWeight1)));
+            apiResponse.setTotalWeight1(String.valueOf(roundToThreeDecimalPlaces(totalWeight1)));
 
 
             apiResponse.setPerc1((apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom0to351().get(0).getPercentage()))) : "");
@@ -2432,13 +2444,13 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             apiResponse.setLot46(apiResponse.getContent().getLotsFrom201to300().get(5).getLot());
             apiResponse.setLot47(apiResponse.getContent().getLotsFrom201to300().get(6).getLot());
 
-            apiResponse.setWeight41((apiResponse.getContent().getLotsFrom201to300().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getWeight()))) : "");
-            apiResponse.setWeight42((apiResponse.getContent().getLotsFrom201to300().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getWeight()))) : "");
-            apiResponse.setWeight43((apiResponse.getContent().getLotsFrom201to300().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getWeight()))) : "");
-            apiResponse.setWeight44((apiResponse.getContent().getLotsFrom201to300().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getWeight()))) : "");
-            apiResponse.setWeight45((apiResponse.getContent().getLotsFrom201to300().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getWeight()))) : "");
-            apiResponse.setWeight46((apiResponse.getContent().getLotsFrom201to300().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getWeight()))) : "");
-            apiResponse.setWeight47((apiResponse.getContent().getLotsFrom201to300().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getWeight()))) : "");
+            apiResponse.setWeight41((apiResponse.getContent().getLotsFrom201to300().get(0).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getWeight()))) : "");
+            apiResponse.setWeight42((apiResponse.getContent().getLotsFrom201to300().get(1).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getWeight()))) : "");
+            apiResponse.setWeight43((apiResponse.getContent().getLotsFrom201to300().get(2).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(2).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(2).getWeight()))) : "");
+            apiResponse.setWeight44((apiResponse.getContent().getLotsFrom201to300().get(3).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(3).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(3).getWeight()))) : "");
+            apiResponse.setWeight45((apiResponse.getContent().getLotsFrom201to300().get(4).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(4).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(4).getWeight()))) : "");
+            apiResponse.setWeight46((apiResponse.getContent().getLotsFrom201to300().get(5).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(5).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(5).getWeight()))) : "");
+            apiResponse.setWeight47((apiResponse.getContent().getLotsFrom201to300().get(6).getWeight() != null && !apiResponse.getContent().getLotsFrom201to300().get(6).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(6).getWeight()))) : "");
 
             apiResponse.setPerc41((apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(0).getPercentage()))) : "");
             apiResponse.setPerc42((apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage() != null && !apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getLotsFrom201to300().get(1).getPercentage()))) : "");
@@ -2451,23 +2463,23 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         if (apiResponse.getContent().getTotalLotStatus().size() > 0) {
             apiResponse.setLot11(apiResponse.getContent().getTotalLotStatus().get(0).getLot());
-            apiResponse.setWeight11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getWeight()))));
-            apiResponse.setAmount11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAmount()))));
-            apiResponse.setMax11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMax()))));
-            apiResponse.setMin11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMin()))));
-            apiResponse.setMf11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMf()))));
-            apiResponse.setAvg11(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAvg()))));
+            apiResponse.setWeight11(String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getWeight()))));
+            apiResponse.setAmount11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAmount())));
+            apiResponse.setMax11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMax())));
+            apiResponse.setMin11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMin())));
+            apiResponse.setMf11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getMf())));
+            apiResponse.setAvg11(String.valueOf((long) Double.parseDouble(apiResponse.getContent().getTotalLotStatus().get(0).getAvg())));
         }
 
         if (apiResponse.getContent().getAverageLotStatus().size() > 0) {
             apiResponse.setAverageDesc1(apiResponse.getContent().getAverageLotStatus().get(0).getDescription());
             apiResponse.setLot51(apiResponse.getContent().getAverageLotStatus().get(0).getLot());
-            apiResponse.setWeight51((apiResponse.getContent().getAverageLotStatus().get(0).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getWeight()))) : "");
+            apiResponse.setWeight51((apiResponse.getContent().getAverageLotStatus().get(0).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getWeight()))) : "");
             apiResponse.setPerc51((apiResponse.getContent().getAverageLotStatus().get(0).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(0).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(0).getPercentage()))) : "");
 
             apiResponse.setAverageDesc2(apiResponse.getContent().getAverageLotStatus().get(1).getDescription());
             apiResponse.setLot52(apiResponse.getContent().getAverageLotStatus().get(1).getLot());
-            apiResponse.setWeight52((apiResponse.getContent().getAverageLotStatus().get(1).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getWeight().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getWeight()))) : "");
+            apiResponse.setWeight52((apiResponse.getContent().getAverageLotStatus().get(1).getWeight() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getWeight().equals("")) ? String.valueOf(roundToThreeDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getWeight()))) : "");
             apiResponse.setPerc52((apiResponse.getContent().getAverageLotStatus().get(1).getPercentage() != null && !apiResponse.getContent().getAverageLotStatus().get(1).getPercentage().equals("")) ? String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(apiResponse.getContent().getAverageLotStatus().get(1).getPercentage()))) : "");
         }
 
