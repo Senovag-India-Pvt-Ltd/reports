@@ -32,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -1501,6 +1502,38 @@ public class ReportsController {
         }
     }
 
+//    private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws Exception {
+//        String marketName = "";
+//        BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
+//        List<LotReportResponse> contentList = new LinkedList<>();
+//        LotReportResponse lotReportResponse1 = new LotReportResponse();
+//
+//        for (LotReportResponse lotReportResponse : apiResponse.getContent()) {
+//            marketName = lotReportResponse.getMarketName();
+//
+//            if (lotReportResponse.getAcceptedBy() == null) {
+//                lotReportResponse.setAcceptedBy("");
+//            }
+//            if (lotReportResponse.getAcceptedTime() == null) {
+//                lotReportResponse.setAcceptedTime("");
+//            } else {
+//                lotReportResponse.setAcceptedTime(convertToTime(lotReportResponse.getAcceptedTime()));
+//            }
+//            if (lotReportResponse.getBidTime() == null) {
+//                lotReportResponse.setBidTime("");
+//            } else {
+//                lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
+//            }
+//            contentList.add(lotReportResponse);
+//        }
+//        lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
+//        lotReportResponse1.setHeaderText2("Lot Number = " + requestDto.getLotId() + " and Bid Date = " + convertDate(requestDto.getReportFromDate().toString()));
+//        contentList.add(0, lotReportResponse1);
+//        return new JRBeanCollectionDataSource(contentList);
+//    }
+
+    private static final DateTimeFormatter TIME_FORMATTER_WITH_MILLIS = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+
     private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest requestDto) throws Exception {
         String marketName = "";
         BiddingReportResponse apiResponse = apiService.biddingReport(requestDto);
@@ -1516,12 +1549,12 @@ public class ReportsController {
             if (lotReportResponse.getAcceptedTime() == null) {
                 lotReportResponse.setAcceptedTime("");
             } else {
-                lotReportResponse.setAcceptedTime(convertToTime(lotReportResponse.getAcceptedTime()));
+                lotReportResponse.setAcceptedTime(convertToTimeWithMillis(lotReportResponse.getAcceptedTime()));
             }
             if (lotReportResponse.getBidTime() == null) {
                 lotReportResponse.setBidTime("");
             } else {
-                lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
+                lotReportResponse.setBidTime(convertToTimeWithMillis(lotReportResponse.getBidTime()));
             }
             contentList.add(lotReportResponse);
         }
@@ -1532,6 +1565,12 @@ public class ReportsController {
         contentList.add(lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
+
+    private String convertToTimeWithMillis(String time) {
+        LocalTime localTime = LocalTime.parse(time);
+        return localTime.format(TIME_FORMATTER_WITH_MILLIS);
+    }
+
 
     @PostMapping("/get-reeler-bidding-report")
     public ResponseEntity<?> getReelerBiddingReport(@RequestBody ReelerBiddingReportRequest request) {
@@ -1585,12 +1624,12 @@ public class ReportsController {
             if (lotReportResponse.getAcceptedTime() == null) {
                 lotReportResponse.setAcceptedTime("");
             } else {
-                lotReportResponse.setAcceptedTime(convertToTime(lotReportResponse.getAcceptedTime()));
+                lotReportResponse.setAcceptedTime(convertToTimeWithMillis(lotReportResponse.getAcceptedTime()));
             }
             if (lotReportResponse.getBidTime() == null) {
                 lotReportResponse.setBidTime("");
             } else {
-                lotReportResponse.setBidTime(convertToTime(lotReportResponse.getBidTime()));
+                lotReportResponse.setBidTime(convertToTimeWithMillis(lotReportResponse.getBidTime()));
             }
             lotReportResponse.setAuctionNumber(Util.objectToInteger(lotReportResponse.getAuctionSession()));
             contentList.add(lotReportResponse);
