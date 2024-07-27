@@ -1811,7 +1811,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"dtr_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"blank_dtr_report"+ Util.getISTLocalDate()+".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
