@@ -274,9 +274,9 @@ public class ApiService {
 
     public BiddingReportResponse biddingReport(BiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
 
-        String finalapiurl = apiUrl + "auction/report/getBiddingReport";
+//        String finalapiurl = apiUrl + "auction/report/getBiddingReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();

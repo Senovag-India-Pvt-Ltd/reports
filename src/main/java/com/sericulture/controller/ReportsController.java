@@ -1561,6 +1561,8 @@ public class ReportsController {
         lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
         lotReportResponse1.setHeaderText2("Lot Number = " + requestDto.getLotId() + " and Bid Date = " + convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(0, lotReportResponse1);
+        lotReportResponse1.setSerialNumber("");
+        contentList.add(lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
 
