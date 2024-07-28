@@ -1393,6 +1393,14 @@ public class ReportsController {
         if (apiResponse.getContent().getMarketNameKannada() != null) {
             marketNameKannada = apiResponse.getContent().getMarketNameKannada();
         }
+        if (apiResponse.getContent().getFarmerVillage() == null) {
+            apiResponse.getContent().setFarmerVillage("");
+        }
+        if (apiResponse.getContent().getFarmerTaluk() == null) {
+            apiResponse.getContent().setFarmerTaluk("");
+        }
+
+
         // Define date format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDate = requestDto.getToDate().format(formatter);
@@ -1401,6 +1409,7 @@ public class ReportsController {
         content.setTotal_weight_with_amount_details(
                 "Wt: " + (long) apiResponse.getContent().getTotalWeight() +
                         " , Amount: " + (long) apiResponse.getContent().getTotalBidAmount() +
+                        " , Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount() +
                         ", Farmer Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount() +
                         ", MF: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()) +
                         ", Reeler Amt: " + (long) apiResponse.getContent().getTotalReelerAmount()
@@ -1430,6 +1439,14 @@ public class ReportsController {
             if (dtrOnlineReportUnitDetail.getFarmerAddress() != null) {
                 farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() + ",";
             }
+            String villageName = "";
+            if (dtrOnlineReportUnitDetail.getFarmerVillage() != null) {
+                villageName = "/" + dtrOnlineReportUnitDetail.getFarmerVillage() + ",";
+            }
+            String talukName = "";
+            if (dtrOnlineReportUnitDetail.getFarmerTaluk() != null) {
+                talukName = "/" + dtrOnlineReportUnitDetail.getFarmerTaluk() + ",";
+            }
 
             // Define date format
 //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -1438,7 +1455,7 @@ public class ReportsController {
 //            String formattedDate = requestDto.getToDate().format(formatter);
 
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
-            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
+            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +talukName + " ,  " + villageName );
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
 //            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
 //            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
@@ -1472,12 +1489,12 @@ public class ReportsController {
         contentLastColumn.setAllottedLotId("");
         contentLastColumn.setFarmerDetails("");
         contentLastColumn.setWeight("Wt: " + roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()));
-        contentLastColumn.setBidAmount("");
+        contentLastColumn.setBidAmount("Bid Amt: " + (long) apiResponse.getContent().getTotalBidAmount());
 //        contentLastColumn.setLotSoldOutAmount("Amt: " + roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount()));
 //        contentLastColumn.setFarmerAmount("F Amt: " + roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount()));
 //        contentLastColumn.setMarketFee("MF: " + roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
 //        contentLastColumn.setReelerAmount("R Amt: " + roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
-        contentLastColumn.setLotSoldOutAmount("Amt: " + (long) apiResponse.getContent().getTotalBidAmount());
+        contentLastColumn.setLotSoldOutAmount("Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount());
         contentLastColumn.setFarmerAmount("F Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount());
         contentLastColumn.setMarketFee("MF: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
         contentLastColumn.setReelerAmount("R Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
