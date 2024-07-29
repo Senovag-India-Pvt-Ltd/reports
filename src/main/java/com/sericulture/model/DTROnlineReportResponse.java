@@ -29,4 +29,13 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String marketNameKannada;
     private String farmerTaluk;
     private String farmerVillage;
+    private Long maxAmount;
+    private Long minAmount;
+    private float avgAmount;
+    private long notTransactedLots;
+    private String max_amount;
+    private String min_amount;
+    private String avg_amount;
+
+
 }

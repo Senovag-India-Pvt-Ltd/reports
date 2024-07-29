@@ -49,4 +49,10 @@ public class DTROnlineReportUnitDetail {
     private String not_transacted_lots;
     private String farmerTaluk;
     private String farmerVillage;
+    private Long maxAmount;
+    private Long minAmount;
+    private float avgAmount;
+    private String max_amount;
+    private String min_amount;
+    private String avg_amount;
 }

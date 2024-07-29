@@ -1415,9 +1415,9 @@ public class ReportsController {
                         ", Reeler Amt: " + (long) apiResponse.getContent().getTotalReelerAmount()
         );
         content.setTotal_lots("Total lots: " + apiResponse.getContent().getTotalLots());
-        content.setTransacted_lots("Total Transacted Lots: " + (apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()));
+        content.setTransacted_lots("Total Transacted Lots: " + apiResponse.getContent().getPaymentSuccessLots());
         if ((apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()) > 0) {
-            content.setNot_transacted_lots("Not Transacted Lots: " + apiResponse.getContent().getPaymentSuccessLots());
+            content.setNot_transacted_lots("Not Transacted Lots: " +(apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()));
         } else {
             content.setNot_transacted_lots("Not Transacted Lots: 0");
         }
@@ -1426,6 +1426,9 @@ public class ReportsController {
 //        content.setReeler_transaction_amt("Reeler transaction Amt: " + roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
         content.setFarmer_cheque("Farmer cheque Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount());
         content.setMf_amount("MF Amt: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
+        content.setMin_amount("Min Amount : " + (long) apiResponse.getContent().getMinAmount());
+        content.setMax_amount(" Max Amount : " +(long) apiResponse.getContent().getMaxAmount());
+        content.setAvg_amount(" Avg Amount : " + (long) apiResponse.getContent().getAvgAmount());
         content.setReeler_transaction_amt("Reeler transaction Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
         content.setLotSoldOutAmount("Total Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount());
 
@@ -1462,15 +1465,20 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + marketNameKannada + " ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : " + formattedDate);
             //   dtrOnlineReportUnitDetail.setTotal_weight_with_amount_details("Wt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalWeight())+" , Amount: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalBidAmount())+", Farmer Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerAmount())+ ",MF: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalFarmerMarketFee()+apiResponse.getContent().getTotalReelerMarketFee())+", Reeler Amt: "+roundToTwoDecimalPlaces(apiResponse.getContent().getTotalReelerAmount()));
             dtrOnlineReportUnitDetail.setTotal_lots("Total lots: " + apiResponse.getContent().getTotalLots());
-            content.setTransacted_lots("Total Transacted Lots: " + (apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()));
+            content.setTransacted_lots("Total Transacted Lots: " + apiResponse.getContent().getPaymentSuccessLots() );
             if ((apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()) > 0) {
-                content.setNot_transacted_lots("Not Transacted Lots: " + apiResponse.getContent().getPaymentSuccessLots() );
+                content.setNot_transacted_lots("Not Transacted Lots: "  + (apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()));
             } else {
                 content.setNot_transacted_lots("Not Transacted Lots: 0");
             }
             dtrOnlineReportUnitDetail.setFarmer_cheque("Farmer cheque Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount());
             dtrOnlineReportUnitDetail.setMf_amount("MF Amt: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
             dtrOnlineReportUnitDetail.setReeler_transaction_amt("Reeler transaction Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
+            dtrOnlineReportUnitDetail.setMin_amount("Min Amount : " + (long) apiResponse.getContent().getMinAmount());
+            dtrOnlineReportUnitDetail.setMax_amount(" Max Amount : " +(long) apiResponse.getContent().getMaxAmount());
+            dtrOnlineReportUnitDetail.setAvg_amount(" Avg Amount : " + (long) apiResponse.getContent().getAvgAmount());
+
+
 
             contentList.add(dtrOnlineReportUnitDetail);
         }
