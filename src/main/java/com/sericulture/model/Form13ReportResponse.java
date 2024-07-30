@@ -119,4 +119,16 @@ public class Form13ReportResponse {
     private String totalRaceMin= "";
     private String totalRaceMax= "";
     private String totalRaceAvg= "";
+
+    private String description = "";
+    private String totalLots= "";
+    private String totalWeight = "";
+    private String totalPercentage = "";
+
+    private String description2 = "";
+    private String totalLots2= "";
+    private String totalWeight2 = "";
+    private String totalPercentage2 = "";
+
+
 }

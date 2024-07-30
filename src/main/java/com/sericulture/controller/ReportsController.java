@@ -2236,6 +2236,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         apiResponse.setTotalRaceMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(2).getTotalMax(), 0)));
         apiResponse.setTotalRaceAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(2).getTotalAvg(), 0)));
 
+        apiResponse.setDescription2(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getDescription(), 0))));
+        apiResponse.setTotalLots2(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalLots(), 0)));
+        apiResponse.setTotalWeight2(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalWeight(), 0))));
+        apiResponse.setTotalPercentage2(String.valueOf(roundToTwoDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalPercentage(), 0))));
+
         form13ReportResponses.add(apiResponse);
         return new JRBeanCollectionDataSource(form13ReportResponses);
     }
@@ -2465,6 +2470,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         apiResponse.setTotalRaceMin(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(2).getTotalMin(), 0)));
         apiResponse.setTotalRaceMax(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(2).getTotalMax(), 0)));
         apiResponse.setTotalRaceAvg(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(2).getTotalAvg(), 0)));
+
+        apiResponse.setDescription2(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getDescription(), 0))));
+        apiResponse.setTotalLots2(String.valueOf((long) parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalLots(), 0)));
+        apiResponse.setTotalWeight2(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalWeight(), 0))));
+        apiResponse.setTotalPercentage2(String.valueOf(roundToTwoDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getLotsFrom0to351Total().get(0).getTotalPercentage(), 0))));
+
 
         form13ReportResponses.add(apiResponse);
         return new JRBeanCollectionDataSource(form13ReportResponses);
