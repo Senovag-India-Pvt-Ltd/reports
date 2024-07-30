@@ -1,5 +1,6 @@
 package com.sericulture.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonFormat
 @NoArgsConstructor
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -45,7 +47,8 @@ public class LotPendingReportResponse {
     private BigDecimal marketAuctionId;
     private String marketNameKannada;
     private String farmerNameKannada;
-    private Date auctionDateWithTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    private String auctionDateWithTime;
     private String farmerMobileNumber;
     private String reelerMobileNumber;
     private String reelerNumber;
