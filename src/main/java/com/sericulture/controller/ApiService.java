@@ -8,6 +8,8 @@ import com.sericulture.model.AudioVisual.AudioVisualResponse;
 import com.sericulture.model.DTRAllMarket.DTRAllMarketResponse;
 import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReport;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictRequest;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
@@ -266,6 +268,28 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         DTRReportResponse response2 = objectMapper.readValue(response1, DTRReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public MonthlyDistrictReport monthlyDistrictReport(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReport";
+
+        String finalapiurl = apiUrl + "auction/report/getMonthlyDistrictReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyDistrictRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        MonthlyDistrictReport response2 = objectMapper.readValue(response1, MonthlyDistrictReport.class);
 
         return response2;
         // Process the API response as needed

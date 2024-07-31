@@ -13,6 +13,10 @@ import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketReport.MarketWiseInfo;
 import com.sericulture.model.MarketWiseReport.DivisionReport;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReport;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReportInfo;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictRequest;
+import com.sericulture.model.MonthlyDistrictReport.SumOfMonthlyDistrictReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
@@ -2315,6 +2319,95 @@ public class ExcelController {
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
         Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        return new FileInputStream(filePath.toString());
+    }
+
+    @PostMapping("/district-monthly-report")
+    public ResponseEntity<?> districtMonthlyReport(@RequestBody MonthlyDistrictRequest request) {
+        try {
+            FileInputStream fileInputStream =  generateDistrictMonthlyReport(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "district_monthly_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private FileInputStream generateDistrictMonthlyReport(MonthlyDistrictRequest requestDto) throws Exception {
+        MonthlyDistrictReport reportDataResponse = apiService.monthlyDistrictReport(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + reportDataResponse.getMarketName() + " ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟು ಘೋಷ್ವಾರೆ : " + reportDataResponse.getStartDate() + " - " + reportDataResponse.getEndDate());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Sl No");
+        subHeaderRow.createCell(1).setCellValue("State");
+        subHeaderRow.createCell(2).setCellValue("District");
+        subHeaderRow.createCell(3).setCellValue("Taluk");
+        subHeaderRow.createCell(4).setCellValue("Race");
+        subHeaderRow.createCell(5).setCellValue("Lots");
+        subHeaderRow.createCell(6).setCellValue("Weight");
+
+        int dynamicRowStartsFrom = 2;
+        for(int k=0; k<reportDataResponse.getMonthlyDistrictReportInfoList().size();k++) {
+
+            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+            MonthlyDistrictReportInfo monthlyDistrictReportInfo = reportDataResponse.getMonthlyDistrictReportInfoList().get(k);
+
+            dynamicRow.createCell(0).setCellValue(monthlyDistrictReportInfo.getSerialNumber());
+            dynamicRow.createCell(1).setCellValue(monthlyDistrictReportInfo.getStateName());
+            dynamicRow.createCell(2).setCellValue(monthlyDistrictReportInfo.getDistrictName());
+            dynamicRow.createCell(3).setCellValue(monthlyDistrictReportInfo.getTalukName());
+            dynamicRow.createCell(4).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalWeight());
+            dynamicRow.createCell(6).setCellValue(monthlyDistrictReportInfo.getRaceName());
+            dynamicRowStartsFrom++;
+        }
+
+        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+        for(int k=0; k<reportDataResponse.getSumOfMonthlyDistrictReportInfoList().size();k++) {
+
+            Row dynamicRow = sheet.createRow(endOfDynamicRowFrom);
+            SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = reportDataResponse.getSumOfMonthlyDistrictReportInfoList().get(k);
+            dynamicRow.createCell(4).setCellValue("Total "+monthlyDistrictReportInfo.getRaceName());
+            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+            dynamicRow.createCell(6).setCellValue("Wt: "+monthlyDistrictReportInfo.getTotalWeight());
+            endOfDynamicRowFrom++;
+        }
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= 7; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("monthly_district_report" + Util.getISTLocalDate() + ".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
