@@ -65,7 +65,7 @@ public class ExcelController {
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"average_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "average_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -150,59 +150,59 @@ public class ExcelController {
         //Starting 0th and 1st column cells are hardcoded, So dynamic data column starts from 2nd column
 
         int dynamicColumnStartsFrom = 2;
-        for(int j=0; j<reportDataResponse.getContent().getAverageRateYearWiseList().size(); j++){
+        for (int j = 0; j < reportDataResponse.getContent().getAverageRateYearWiseList().size(); j++) {
             AverageRateYearWise response = reportDataResponse.getContent().getAverageRateYearWiseList().get(j);
-            if(response.getAverageRateRaceWiseList().size()>0) {
+            if (response.getAverageRateRaceWiseList().size() > 0) {
                 subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(response.getYear());
             }
 
-            for(int k=0; k<response.getAverageRateRaceWiseList().size(); k++) {
+            for (int k = 0; k < response.getAverageRateRaceWiseList().size(); k++) {
                 AverageRateRaceWise averageRateRaceWise = response.getAverageRateRaceWiseList().get(k);
                 double totalWeight = 0.0;
                 double totalAmount = 0.0;
-                for(int l=0; l<averageRateRaceWise.getAverageRateValues().size(); l++) {
+                for (int l = 0; l < averageRateRaceWise.getAverageRateValues().size(); l++) {
                     Row currentDataRow;
                     raceHeader.createCell(dynamicColumnStartsFrom).setCellValue("Quantity");
-                    raceHeader.createCell(dynamicColumnStartsFrom+1).setCellValue(averageRateRaceWise.getRaceName());
-                    if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("April")){
+                    raceHeader.createCell(dynamicColumnStartsFrom + 1).setCellValue(averageRateRaceWise.getRaceName());
+                    if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("April")) {
                         currentDataRow = dataRow1;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("May")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("May")) {
                         currentDataRow = dataRow2;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("June")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("June")) {
                         currentDataRow = dataRow3;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("July")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("July")) {
                         currentDataRow = dataRow4;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("August")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("August")) {
                         currentDataRow = dataRow5;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("September")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("September")) {
                         currentDataRow = dataRow6;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("October")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("October")) {
                         currentDataRow = dataRow7;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("November")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("November")) {
                         currentDataRow = dataRow8;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("December")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("December")) {
                         currentDataRow = dataRow9;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("January")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("January")) {
                         currentDataRow = dataRow10;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("February")){
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("February")) {
                         currentDataRow = dataRow11;
-                    }else if(averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("March")) {
+                    } else if (averageRateRaceWise.getAverageRateValues().get(l).getMonth().equals("March")) {
                         currentDataRow = dataRow12;
-                    }else{
+                    } else {
                         currentDataRow = null;
                     }
                     if (currentDataRow != null) {
-                        totalWeight = totalWeight+ Util.objectToFloat(averageRateRaceWise.getAverageRateValues().get(l).getWeight());
-                        totalAmount = totalAmount+ Util.objectToFloat(averageRateRaceWise.getAverageRateValues().get(l).getLotSoldAmount());
+                        totalWeight = totalWeight + Util.objectToFloat(averageRateRaceWise.getAverageRateValues().get(l).getWeight());
+                        totalAmount = totalAmount + Util.objectToFloat(averageRateRaceWise.getAverageRateValues().get(l).getLotSoldAmount());
 
                         currentDataRow.createCell(dynamicColumnStartsFrom).setCellValue(averageRateRaceWise.getAverageRateValues().get(l).getWeight());
-                        currentDataRow.createCell(dynamicColumnStartsFrom+1).setCellValue(averageRateRaceWise.getAverageRateValues().get(l).getLotSoldAmount());
+                        currentDataRow.createCell(dynamicColumnStartsFrom + 1).setCellValue(averageRateRaceWise.getAverageRateValues().get(l).getLotSoldAmount());
 
                     }
                 }
                 //+2 for quantity and rate
                 dataRow13.createCell(dynamicColumnStartsFrom).setCellValue(totalWeight);
-                dataRow13.createCell(dynamicColumnStartsFrom+1).setCellValue(totalAmount);
+                dataRow13.createCell(dynamicColumnStartsFrom + 1).setCellValue(totalAmount);
                 dynamicColumnStartsFrom = dynamicColumnStartsFrom + 2;
             }
         }
@@ -222,7 +222,7 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("average_report"+Util.getISTLocalDate()+".xlsx");
+        Path filePath = directory.resolve("average_report" + Util.getISTLocalDate() + ".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -245,7 +245,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"average_cocoon_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "average_cocoon_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -266,7 +266,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Quantity and Average Rate of Cocoons  transacted( month wise/year wise)  from " +requestDto.getStartYear().getYear() +"-"+ (requestDto.getStartYear().getYear()+1) +" to "+(requestDto.getEndYear().getYear()-1)+"-"+requestDto.getEndYear().getYear());
+        headerRow.createCell(0).setCellValue("Quantity and Average Rate of Cocoons  transacted( month wise/year wise)  from " + requestDto.getStartYear().getYear() + "-" + (requestDto.getStartYear().getYear() + 1) + " to " + (requestDto.getEndYear().getYear() - 1) + "-" + requestDto.getEndYear().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
@@ -333,58 +333,58 @@ public class ExcelController {
         double totalWeight = 0.0;
         double totalAmount = 0.0;
         for (int j = 0; j < reportDataResponse.getContent().getAverageCocoonYearWises().size(); j++) {
-                AverageCocoonYearWise response = reportDataResponse.getContent().getAverageCocoonYearWises().get(j);
-                if (response.getAverageCocoonReports().size() > 0) {
-                    subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(response.getYear());
+            AverageCocoonYearWise response = reportDataResponse.getContent().getAverageCocoonYearWises().get(j);
+            if (response.getAverageCocoonReports().size() > 0) {
+                subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(response.getYear());
+            }
+
+            for (int k = 0; k < response.getAverageCocoonReports().size(); k++) {
+                AverageCocoonReport averageRateRaceWise = response.getAverageCocoonReports().get(k);
+
+
+                Row currentDataRow;
+                raceHeader.createCell(dynamicColumnStartsFrom).setCellValue("Qty (M.tons)");
+                raceHeader.createCell(dynamicColumnStartsFrom + 1).setCellValue("Avg Rates (Rs)");
+                if (averageRateRaceWise.getMonth().equals("4")) {
+                    currentDataRow = dataRow1;
+                } else if (averageRateRaceWise.getMonth().equals("5")) {
+                    currentDataRow = dataRow2;
+                } else if (averageRateRaceWise.getMonth().equals("6")) {
+                    currentDataRow = dataRow3;
+                } else if (averageRateRaceWise.getMonth().equals("7")) {
+                    currentDataRow = dataRow4;
+                } else if (averageRateRaceWise.getMonth().equals("8")) {
+                    currentDataRow = dataRow5;
+                } else if (averageRateRaceWise.getMonth().equals("9")) {
+                    currentDataRow = dataRow6;
+                } else if (averageRateRaceWise.getMonth().equals("10")) {
+                    currentDataRow = dataRow7;
+                } else if (averageRateRaceWise.getMonth().equals("11")) {
+                    currentDataRow = dataRow8;
+                } else if (averageRateRaceWise.getMonth().equals("12")) {
+                    currentDataRow = dataRow9;
+                } else if (averageRateRaceWise.getMonth().equals("1")) {
+                    currentDataRow = dataRow10;
+                } else if (averageRateRaceWise.getMonth().equals("2")) {
+                    currentDataRow = dataRow11;
+                } else if (averageRateRaceWise.getMonth().equals("3")) {
+                    currentDataRow = dataRow12;
+                } else {
+                    currentDataRow = null;
+                }
+                if (currentDataRow != null) {
+                    totalWeight = totalWeight + Util.objectToFloat(averageRateRaceWise.getWeight());
+                    totalAmount = totalAmount + Util.objectToFloat(averageRateRaceWise.getLotSoldAmount());
+
+                    currentDataRow.createCell(dynamicColumnStartsFrom).setCellValue(averageRateRaceWise.getWeight());
+                    currentDataRow.createCell(dynamicColumnStartsFrom + 1).setCellValue(averageRateRaceWise.getLotSoldAmount());
+
                 }
 
-                for (int k = 0; k < response.getAverageCocoonReports().size(); k++) {
-                    AverageCocoonReport averageRateRaceWise = response.getAverageCocoonReports().get(k);
-
-
-                    Row currentDataRow;
-                    raceHeader.createCell(dynamicColumnStartsFrom).setCellValue("Qty (M.tons)");
-                    raceHeader.createCell(dynamicColumnStartsFrom + 1).setCellValue("Avg Rates (Rs)");
-                    if (averageRateRaceWise.getMonth().equals("4")) {
-                        currentDataRow = dataRow1;
-                    } else if (averageRateRaceWise.getMonth().equals("5")) {
-                        currentDataRow = dataRow2;
-                    } else if (averageRateRaceWise.getMonth().equals("6")) {
-                        currentDataRow = dataRow3;
-                    } else if (averageRateRaceWise.getMonth().equals("7")) {
-                        currentDataRow = dataRow4;
-                    } else if (averageRateRaceWise.getMonth().equals("8")) {
-                        currentDataRow = dataRow5;
-                    } else if (averageRateRaceWise.getMonth().equals("9")) {
-                        currentDataRow = dataRow6;
-                    } else if (averageRateRaceWise.getMonth().equals("10")) {
-                        currentDataRow = dataRow7;
-                    } else if (averageRateRaceWise.getMonth().equals("11")) {
-                        currentDataRow = dataRow8;
-                    } else if (averageRateRaceWise.getMonth().equals("12")) {
-                        currentDataRow = dataRow9;
-                    } else if (averageRateRaceWise.getMonth().equals("1")) {
-                        currentDataRow = dataRow10;
-                    } else if (averageRateRaceWise.getMonth().equals("2")) {
-                        currentDataRow = dataRow11;
-                    } else if (averageRateRaceWise.getMonth().equals("3")) {
-                        currentDataRow = dataRow12;
-                    } else {
-                        currentDataRow = null;
-                    }
-                    if (currentDataRow != null) {
-                        totalWeight = totalWeight + Util.objectToFloat(averageRateRaceWise.getWeight());
-                        totalAmount = totalAmount + Util.objectToFloat(averageRateRaceWise.getLotSoldAmount());
-
-                        currentDataRow.createCell(dynamicColumnStartsFrom).setCellValue(averageRateRaceWise.getWeight());
-                        currentDataRow.createCell(dynamicColumnStartsFrom + 1).setCellValue(averageRateRaceWise.getLotSoldAmount());
-
-                    }
-
-
-                }
 
             }
+
+        }
         //+2 for quantity and rate
         dataRow13.createCell(dynamicColumnStartsFrom).setCellValue(totalWeight);
         dataRow13.createCell(dynamicColumnStartsFrom + 1).setCellValue(totalAmount);
@@ -406,7 +406,7 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("average_coccon_report"+Util.getISTLocalDate()+".xlsx");
+        Path filePath = directory.resolve("average_coccon_report" + Util.getISTLocalDate() + ".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -425,7 +425,7 @@ public class ExcelController {
             FileInputStream fileInputStream = generateAudioVisualExcel(request);
             InputStreamResource resource = new InputStreamResource(fileInputStream);
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"audio_visual_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "audio_visual_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -452,7 +452,7 @@ public class ExcelController {
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
         subHeaderRow.createCell(1).setCellValue("Market");
         subHeaderRow.createCell(2).setCellValue("ತಳಿ");
-        
+
         Row belowSubHeaderRow = sheet.createRow(2);
 
         int dynamicColumnStartsFrom = 3;
@@ -464,12 +464,12 @@ public class ExcelController {
             MonthWiseReport response = reportDataResponse.getContent().getAudioReportResponse().getMonthWiseReports().get(j);
             subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(response.getMonth());
             belowSubHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue("Weight");
-            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+1).setCellValue("Min");
-            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+2).setCellValue("Max");
-            belowSubHeaderRow.createCell(dynamicColumnStartsFrom+3).setCellValue("Avg");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom + 1).setCellValue("Min");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom + 2).setCellValue("Max");
+            belowSubHeaderRow.createCell(dynamicColumnStartsFrom + 3).setCellValue("Avg");
 
             int updateRaceWiseRowCount = dynamicRowStartsFrom;
-            for(int k=0; k<response.getDtrMarketResponses().size(); k++){
+            for (int k = 0; k < response.getDtrMarketResponses().size(); k++) {
                 Row currentRow;
                 if (createdRows.contains(updateRaceWiseRowCount)) {
                     // If the row has already been created, get it from the sheet
@@ -479,28 +479,28 @@ public class ExcelController {
                     currentRow = sheet.createRow(updateRaceWiseRowCount);
                     createdRows.add(updateRaceWiseRowCount);
                 }
-               // Row currentRow = sheet.createRow(updateRaceWiseRowCount);
-                currentRow.createCell(0).setCellValue(k+1);
+                // Row currentRow = sheet.createRow(updateRaceWiseRowCount);
+                currentRow.createCell(0).setCellValue(k + 1);
 
                 DTRMarketResponse dtrMarketResponse = response.getDtrMarketResponses().get(k);
                 currentRow.createCell(1).setCellValue(dtrMarketResponse.getMarketNameInKannada());
 
-                int raceWiseRowCount = updateRaceWiseRowCount+1;
-                for(int l=0; l<dtrMarketResponse.getDtrRaceResponses().size(); l++){
+                int raceWiseRowCount = updateRaceWiseRowCount + 1;
+                for (int l = 0; l < dtrMarketResponse.getDtrRaceResponses().size(); l++) {
                     DTRRaceResponse dtrRaceResponse = dtrMarketResponse.getDtrRaceResponses().get(l);
-                    if(l==0) {
+                    if (l == 0) {
                         currentRow.createCell(2).setCellValue(dtrRaceResponse.getRaceNameInKannada());
-                        if(dtrRaceResponse.getDtrResponses() != null) {
+                        if (dtrRaceResponse.getDtrResponses() != null) {
                             if (dtrRaceResponse.getDtrResponses().size() > 0) {
                                 for (int m = 0; m < dtrRaceResponse.getDtrResponses().size(); m++) {
                                     currentRow.createCell(weightDataCount).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getWeight());
-                                    currentRow.createCell(weightDataCount+1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
-                                    currentRow.createCell(weightDataCount+2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
-                                    currentRow.createCell(weightDataCount+3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
+                                    currentRow.createCell(weightDataCount + 1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
+                                    currentRow.createCell(weightDataCount + 2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
+                                    currentRow.createCell(weightDataCount + 3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         Row currentRowRace;
                         if (innerRows.contains(raceWiseRowCount)) {
                             // If the row has already been created, get it from the sheet
@@ -512,23 +512,23 @@ public class ExcelController {
                         }
                         //Row currentRowRace = sheet.createRow(raceWiseRowCount);
                         currentRowRace.createCell(2).setCellValue(dtrRaceResponse.getRaceNameInKannada());
-                        if(dtrRaceResponse.getDtrResponses() != null) {
+                        if (dtrRaceResponse.getDtrResponses() != null) {
                             if (dtrRaceResponse.getDtrResponses().size() > 0) {
                                 for (int m = 0; m < dtrRaceResponse.getDtrResponses().size(); m++) {
                                     currentRowRace.createCell(weightDataCount).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getWeight());
-                                    currentRowRace.createCell(weightDataCount+1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
-                                    currentRowRace.createCell(weightDataCount+2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
-                                    currentRowRace.createCell(weightDataCount+3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
+                                    currentRowRace.createCell(weightDataCount + 1).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMinAmount());
+                                    currentRowRace.createCell(weightDataCount + 2).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getMaxAmount());
+                                    currentRowRace.createCell(weightDataCount + 3).setCellValue(dtrRaceResponse.getDtrResponses().get(m).getAvgAmount());
                                 }
                             }
                         }
-                        raceWiseRowCount = raceWiseRowCount+1;
+                        raceWiseRowCount = raceWiseRowCount + 1;
                     }
                 }
                 updateRaceWiseRowCount = updateRaceWiseRowCount + dtrMarketResponse.getDtrRaceResponses().size();
             }
-            weightDataCount = weightDataCount+ 4;
-            dynamicColumnStartsFrom = dynamicColumnStartsFrom+4;
+            weightDataCount = weightDataCount + 4;
+            dynamicColumnStartsFrom = dynamicColumnStartsFrom + 4;
         }
         // Get the index of the last row
         int lastRowIndex = sheet.getLastRowNum();
@@ -586,14 +586,14 @@ public class ExcelController {
             }
             double average = count > 0 ? sum / count : 0.0;
             lastRow.createCell(totalColumnStartsFrom).setCellValue(totalSum);
-            lastRow.createCell(totalColumnStartsFrom+1).setCellValue(minValue);
-            lastRow.createCell(totalColumnStartsFrom+2).setCellValue(maxValue);
-            lastRow.createCell(totalColumnStartsFrom+3).setCellValue(average);
-            totalColumnStartsFrom = totalColumnStartsFrom+4;
-            averageColumnIndex = averageColumnIndex +4;
-            maxColumnIndex = maxColumnIndex +4;
-            minColumnIndex = minColumnIndex +4;
-            sumColumnIndex = sumColumnIndex +4;
+            lastRow.createCell(totalColumnStartsFrom + 1).setCellValue(minValue);
+            lastRow.createCell(totalColumnStartsFrom + 2).setCellValue(maxValue);
+            lastRow.createCell(totalColumnStartsFrom + 3).setCellValue(average);
+            totalColumnStartsFrom = totalColumnStartsFrom + 4;
+            averageColumnIndex = averageColumnIndex + 4;
+            maxColumnIndex = maxColumnIndex + 4;
+            minColumnIndex = minColumnIndex + 4;
+            sumColumnIndex = sumColumnIndex + 4;
         }
 
         // Auto-size all columns
@@ -603,7 +603,7 @@ public class ExcelController {
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
         // Specify the directory where the file will be saved
         String userHome = System.getProperty("user.home");
 
@@ -611,8 +611,8 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("audio_visual_report"+Util.getISTLocalDate()+".xlsx");
-      //  Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("audio_visual_report" + Util.getISTLocalDate() + ".xlsx");
+        //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -620,7 +620,7 @@ public class ExcelController {
         fileOut.close();
         workbook.close();
         FileInputStream fileIn = new FileInputStream(filePath.toString());
-        return  fileIn;
+        return fileIn;
     }
 
     @PostMapping("/27-b-report")
@@ -635,7 +635,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"27_b_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "27_b_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -656,7 +656,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+        headerRow.createCell(0).setCellValue("header with month and year" + requestDto.getStartDate().getMonth() + "-" + requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
@@ -665,62 +665,62 @@ public class ExcelController {
         Row subHeaderRow1 = sheet.createRow(2);
 
         int dynamicRaceStartsFrom = 2;
-        if(reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size()>0) {
+        if (reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size() > 0) {
             if (reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size() > 0) {
                 for (int j = 0; j < reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().size(); j++) {
                     RaceWiseReport raceWiseReport = reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(0).getRaceWiseReports().get(j);
-                    subHeaderRow.createCell(dynamicRaceStartsFrom).setCellValue(raceWiseReport.getRaceName() +"ತಿಂಗಳಲ್ಲಿ");
+                    subHeaderRow.createCell(dynamicRaceStartsFrom).setCellValue(raceWiseReport.getRaceName() + "ತಿಂಗಳಲ್ಲಿ");
                     subHeaderRow1.createCell(dynamicRaceStartsFrom).setCellValue("Utpaadane");
-                    subHeaderRow1.createCell(dynamicRaceStartsFrom+1).setCellValue("Vahivaatu");
-                    subHeaderRow1.createCell(dynamicRaceStartsFrom+2).setCellValue("Shekada");
-                    subHeaderRow.createCell(dynamicRaceStartsFrom+3).setCellValue(raceWiseReport.getRaceName() +"ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
-                    subHeaderRow1.createCell(dynamicRaceStartsFrom+3).setCellValue("Utpaadane");
-                    subHeaderRow1.createCell(dynamicRaceStartsFrom+4).setCellValue("Vahivaatu");
-                    subHeaderRow1.createCell(dynamicRaceStartsFrom+5).setCellValue("Shekada");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom + 1).setCellValue("Vahivaatu");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom + 2).setCellValue("Shekada");
+                    subHeaderRow.createCell(dynamicRaceStartsFrom + 3).setCellValue(raceWiseReport.getRaceName() + "ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom + 3).setCellValue("Utpaadane");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom + 4).setCellValue("Vahivaatu");
+                    subHeaderRow1.createCell(dynamicRaceStartsFrom + 5).setCellValue("Shekada");
                     dynamicRaceStartsFrom = dynamicRaceStartsFrom + 6;
                 }
             }
         }
 
         int dynamicRowStartsFrom = 3;
-        for(int j=0; j<reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size();j++){
+        for (int j = 0; j < reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().size(); j++) {
             DistrictWise districtWise = reportDataResponse.getContent().getVahivaatuReport().getDistrictWises().get(j);
 
             Row currentRow = sheet.createRow(dynamicRowStartsFrom);
-            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(0).setCellValue(j + 1);
             currentRow.createCell(1).setCellValue(districtWise.getDistrictName());
             int raceColumnStartsFrom = 2;
-            for(int k=0;k<districtWise.getRaceWiseReports().size();k++){
+            for (int k = 0; k < districtWise.getRaceWiseReports().size(); k++) {
                 RaceWiseReport raceWiseReport = districtWise.getRaceWiseReports().get(k);
-                if(raceWiseReport.getVahivaatuInfo() != null) {
+                if (raceWiseReport.getVahivaatuInfo() != null) {
                     currentRow.createCell(raceColumnStartsFrom).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonStarting());
-                    currentRow.createCell(raceColumnStartsFrom+1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
-                    currentRow.createCell(raceColumnStartsFrom+2).setCellValue("");
-                    currentRow.createCell(raceColumnStartsFrom+3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
-                    currentRow.createCell(raceColumnStartsFrom+4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
-                    currentRow.createCell(raceColumnStartsFrom+5).setCellValue("");
+                    currentRow.createCell(raceColumnStartsFrom + 1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
+                    currentRow.createCell(raceColumnStartsFrom + 2).setCellValue("");
+                    currentRow.createCell(raceColumnStartsFrom + 3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
+                    currentRow.createCell(raceColumnStartsFrom + 4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
+                    currentRow.createCell(raceColumnStartsFrom + 5).setCellValue("");
 
                     raceColumnStartsFrom = raceColumnStartsFrom + 6;
 
                 }
 
             }
-            dynamicRowStartsFrom = dynamicRowStartsFrom+1;
+            dynamicRowStartsFrom = dynamicRowStartsFrom + 1;
         }
 
         Row totalRow = sheet.createRow(dynamicRowStartsFrom);
         totalRow.createCell(1).setCellValue("ಒಟ್ಟು");
         int totalDynamicColumn = 2;
-        if(reportDataResponse.getContent().getVahivaatuReport().getOverAllSum() != null) {
-            for (int s = 0; s < reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().size(); s++){
+        if (reportDataResponse.getContent().getVahivaatuReport().getOverAllSum() != null) {
+            for (int s = 0; s < reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().size(); s++) {
                 RaceWiseReport raceWiseReport = reportDataResponse.getContent().getVahivaatuReport().getOverAllSum().getRaceWiseReports().get(s);
-                if(raceWiseReport.getVahivaatuInfo() != null) {
+                if (raceWiseReport.getVahivaatuInfo() != null) {
                     totalRow.createCell(totalDynamicColumn).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonStarting());
-                    totalRow.createCell(totalDynamicColumn+1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
-                    totalRow.createCell(totalDynamicColumn+2).setCellValue("");
-                    totalRow.createCell(totalDynamicColumn+3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
-                    totalRow.createCell(totalDynamicColumn+4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
-                    totalRow.createCell(totalDynamicColumn+5).setCellValue("");
+                    totalRow.createCell(totalDynamicColumn + 1).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonStarting());
+                    totalRow.createCell(totalDynamicColumn + 2).setCellValue("");
+                    totalRow.createCell(totalDynamicColumn + 3).setCellValue(raceWiseReport.getVahivaatuInfo().getTotalCocoonEnding());
+                    totalRow.createCell(totalDynamicColumn + 4).setCellValue(raceWiseReport.getVahivaatuInfo().getSoldOutCocoonEnding());
+                    totalRow.createCell(totalDynamicColumn + 5).setCellValue("");
 
                     totalDynamicColumn = totalDynamicColumn + 6;
                 }
@@ -733,11 +733,11 @@ public class ExcelController {
 
         // Define the directory path relative to the user's home directory
         String directoryPath = Paths.get(userHome, "Downloads").toString();
-       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("27_b_report"+Util.getISTLocalDate()+".xlsx");
-      //  Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("27_b_report" + Util.getISTLocalDate() + ".xlsx");
+        //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -760,7 +760,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"monthly_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "monthly_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -781,7 +781,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue(requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear()+"ನೇ ಮಾಹೆಯಲ್ಲಿ ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟಾದ ರೇಷ್ಮೆ ಗೂಡಿನ ವಿವರ");
+        headerRow.createCell(0).setCellValue(requestDto.getStartDate().getMonth() + "-" + requestDto.getStartDate().getYear() + "ನೇ ಮಾಹೆಯಲ್ಲಿ ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟಾದ ರೇಷ್ಮೆ ಗೂಡಿನ ವಿವರ");
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
@@ -824,12 +824,12 @@ public class ExcelController {
         double sumPEStartWeight = 0.0;
         double sumPEAmount = 0.0;
         double sumPEAvg = 0.0;
-        for(int j=0; j<reportDataResponse.getContent().getMonthlyReportResponse().getMonthlyReportRaceWiseList().size(); j++){
+        for (int j = 0; j < reportDataResponse.getContent().getMonthlyReportResponse().getMonthlyReportRaceWiseList().size(); j++) {
             MonthlyReportRaceWise response = reportDataResponse.getContent().getMonthlyReportResponse().getMonthlyReportRaceWiseList().get(j);
             Row currentRow = sheet.createRow(dynamicRowStartsFrom);
-            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(0).setCellValue(j + 1);
             currentRow.createCell(1).setCellValue(response.getRaceName());
-            if(response.getThisYearReport() != null) {
+            if (response.getThisYearReport() != null) {
                 currentRow.createCell(2).setCellValue(response.getThisYearReport().getStartWeight());
                 currentRow.createCell(3).setCellValue(response.getThisYearReport().getEndWeight());
                 currentRow.createCell(4).setCellValue(response.getThisYearReport().getStartAmount());
@@ -837,7 +837,7 @@ public class ExcelController {
                 currentRow.createCell(6).setCellValue(response.getThisYearReport().getStartAvg());
                 currentRow.createCell(7).setCellValue(response.getThisYearReport().getEndAvg());
             }
-            if(response.getPrevYearReport() != null) {
+            if (response.getPrevYearReport() != null) {
                 currentRow.createCell(8).setCellValue(response.getPrevYearReport().getStartWeight());
                 currentRow.createCell(9).setCellValue(response.getPrevYearReport().getEndWeight());
                 currentRow.createCell(10).setCellValue(response.getPrevYearReport().getStartAmount());
@@ -845,79 +845,79 @@ public class ExcelController {
                 currentRow.createCell(12).setCellValue(response.getPrevYearReport().getStartAvg());
                 currentRow.createCell(13).setCellValue(response.getPrevYearReport().getEndAvg());
             }
-            Row differenceRow = sheet.createRow(dynamicRowStartsFrom+1);
+            Row differenceRow = sheet.createRow(dynamicRowStartsFrom + 1);
             differenceRow.createCell(1).setCellValue("Difference");
 
-            differenceRow.createCell(2).setCellValue(calculateDifference(response.getPrevYearReport().getStartWeight() ,response.getThisYearReport().getStartWeight()));
-            differenceRow.createCell(3).setCellValue(calculateDifference(response.getPrevYearReport().getEndWeight() ,response.getThisYearReport().getEndAmount()));
-            differenceRow.createCell(4).setCellValue(calculateDifference(response.getPrevYearReport().getStartAmount() ,response.getThisYearReport().getStartAmount()));
-            differenceRow.createCell(5).setCellValue(calculateDifference(response.getPrevYearReport().getEndAmount() ,response.getThisYearReport().getEndAmount()));
-            differenceRow.createCell(6).setCellValue(calculateDifference(response.getPrevYearReport().getStartAvg() ,response.getThisYearReport().getStartAvg()));
-            differenceRow.createCell(7).setCellValue(calculateDifference(response.getPrevYearReport().getEndAvg() ,response.getThisYearReport().getEndAvg()));
+            differenceRow.createCell(2).setCellValue(calculateDifference(response.getPrevYearReport().getStartWeight(), response.getThisYearReport().getStartWeight()));
+            differenceRow.createCell(3).setCellValue(calculateDifference(response.getPrevYearReport().getEndWeight(), response.getThisYearReport().getEndAmount()));
+            differenceRow.createCell(4).setCellValue(calculateDifference(response.getPrevYearReport().getStartAmount(), response.getThisYearReport().getStartAmount()));
+            differenceRow.createCell(5).setCellValue(calculateDifference(response.getPrevYearReport().getEndAmount(), response.getThisYearReport().getEndAmount()));
+            differenceRow.createCell(6).setCellValue(calculateDifference(response.getPrevYearReport().getStartAvg(), response.getThisYearReport().getStartAvg()));
+            differenceRow.createCell(7).setCellValue(calculateDifference(response.getPrevYearReport().getEndAvg(), response.getThisYearReport().getEndAvg()));
 
-            if(response.getThisYearReport().getStartWeight() != null) {
-                if(!response.getThisYearReport().getStartWeight().equals("")) {
+            if (response.getThisYearReport().getStartWeight() != null) {
+                if (!response.getThisYearReport().getStartWeight().equals("")) {
                     sumTStartWeight = sumTStartWeight + Double.parseDouble(response.getThisYearReport().getStartWeight());
                 }
             }
-            if(response.getThisYearReport().getEndWeight() != null) {
-                if(!response.getThisYearReport().getEndWeight().equals("")) {
+            if (response.getThisYearReport().getEndWeight() != null) {
+                if (!response.getThisYearReport().getEndWeight().equals("")) {
                     sumTEStartWeight = sumTEStartWeight + Double.parseDouble(response.getThisYearReport().getEndWeight());
                 }
             }
-            if(response.getThisYearReport().getStartAmount() != null) {
-                if(!response.getThisYearReport().getStartAmount().equals("")) {
+            if (response.getThisYearReport().getStartAmount() != null) {
+                if (!response.getThisYearReport().getStartAmount().equals("")) {
                     sumTAmount = sumTAmount + Double.parseDouble(response.getThisYearReport().getStartAmount());
                 }
             }
-            if(response.getThisYearReport().getEndAmount() != null) {
-                if(!response.getThisYearReport().getEndAmount().equals("")) {
+            if (response.getThisYearReport().getEndAmount() != null) {
+                if (!response.getThisYearReport().getEndAmount().equals("")) {
                     sumTEAmount = sumTEAmount + Double.parseDouble(response.getThisYearReport().getEndAmount());
                 }
             }
-            if(response.getThisYearReport().getStartAvg() != null) {
-                if(!response.getThisYearReport().getStartAvg().equals("")) {
+            if (response.getThisYearReport().getStartAvg() != null) {
+                if (!response.getThisYearReport().getStartAvg().equals("")) {
                     sumTAvg = sumTAvg + Double.parseDouble(response.getThisYearReport().getStartAvg());
                 }
             }
-            if(response.getThisYearReport().getEndAvg() != null) {
-                if(!response.getThisYearReport().getEndAvg().equals("")) {
+            if (response.getThisYearReport().getEndAvg() != null) {
+                if (!response.getThisYearReport().getEndAvg().equals("")) {
                     sumTEAvg = sumTEAvg + Double.parseDouble(response.getThisYearReport().getEndAvg());
                 }
             }
 
-            if(response.getPrevYearReport().getStartWeight() != null) {
-                if(!response.getPrevYearReport().getStartWeight().equals("")) {
+            if (response.getPrevYearReport().getStartWeight() != null) {
+                if (!response.getPrevYearReport().getStartWeight().equals("")) {
                     sumPStartWeight = sumPStartWeight + Double.parseDouble(response.getPrevYearReport().getStartWeight());
                 }
             }
-            if(response.getPrevYearReport().getEndWeight() != null) {
-                if(!response.getPrevYearReport().getEndWeight().equals("")) {
+            if (response.getPrevYearReport().getEndWeight() != null) {
+                if (!response.getPrevYearReport().getEndWeight().equals("")) {
                     sumPEStartWeight = sumPEStartWeight + Double.parseDouble(response.getPrevYearReport().getEndWeight());
                 }
             }
-            if(response.getPrevYearReport().getStartAmount() != null) {
-                if(!response.getPrevYearReport().getStartAmount().equals("")) {
+            if (response.getPrevYearReport().getStartAmount() != null) {
+                if (!response.getPrevYearReport().getStartAmount().equals("")) {
                     sumPAmount = sumPAmount + Double.parseDouble(response.getPrevYearReport().getStartAmount());
                 }
             }
-            if(response.getPrevYearReport().getEndAmount() != null) {
-                if(!response.getPrevYearReport().getEndAmount().equals("")) {
+            if (response.getPrevYearReport().getEndAmount() != null) {
+                if (!response.getPrevYearReport().getEndAmount().equals("")) {
                     sumPEAmount = sumPEAmount + Double.parseDouble(response.getPrevYearReport().getEndAmount());
                 }
             }
-            if(response.getPrevYearReport().getStartAvg() != null) {
-                if(!response.getPrevYearReport().getStartAvg().equals("")) {
+            if (response.getPrevYearReport().getStartAvg() != null) {
+                if (!response.getPrevYearReport().getStartAvg().equals("")) {
                     sumPAvg = sumPAvg + Double.parseDouble(response.getPrevYearReport().getStartAvg());
                 }
             }
-            if(response.getPrevYearReport().getEndAvg() != null) {
-                if(!response.getPrevYearReport().getEndAvg().equals("")) {
+            if (response.getPrevYearReport().getEndAvg() != null) {
+                if (!response.getPrevYearReport().getEndAvg().equals("")) {
                     sumPEAvg = sumPEAvg + Double.parseDouble(response.getPrevYearReport().getEndAvg());
                 }
             }
 
-            dynamicRowStartsFrom = dynamicRowStartsFrom+2;
+            dynamicRowStartsFrom = dynamicRowStartsFrom + 2;
         }
 
         Row overAllTotal = sheet.createRow(dynamicRowStartsFrom);
@@ -935,7 +935,7 @@ public class ExcelController {
         overAllTotal.createCell(12).setCellValue(sumPAvg);
         overAllTotal.createCell(13).setCellValue(sumPEAvg);
 
-        Row overAllDifference = sheet.createRow(dynamicRowStartsFrom+1);
+        Row overAllDifference = sheet.createRow(dynamicRowStartsFrom + 1);
         overAllDifference.createCell(1).setCellValue("Over all difference");
         overAllDifference.createCell(2).setCellValue(sumPStartWeight - sumTStartWeight);
         overAllDifference.createCell(3).setCellValue(sumPEStartWeight - sumTEStartWeight);
@@ -956,10 +956,10 @@ public class ExcelController {
         double sumOPEStartWeight = 0.0;
         double sumOPEAmount = 0.0;
         double sumOPEAvg = 0.0;
-        Row tamilNadu = sheet.createRow(dynamicRowStartsFrom+1);
-        if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse() != null){
+        Row tamilNadu = sheet.createRow(dynamicRowStartsFrom + 1);
+        if (reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse() != null) {
             tamilNadu.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getRaceName());
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport() != null) {
                 tamilNadu.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getStartWeight());
                 tamilNadu.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getEndWeight());
                 tamilNadu.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getThisYearReport().getStartAmount());
@@ -975,7 +975,7 @@ public class ExcelController {
                 sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
                 sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
             }
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport() != null) {
                 tamilNadu.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getStartWeight());
                 tamilNadu.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getEndWeight());
                 tamilNadu.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getTamilNaduResponse().getPrevYearReport().getStartAmount());
@@ -993,10 +993,10 @@ public class ExcelController {
             }
         }
 
-        Row andra = sheet.createRow(dynamicRowStartsFrom+1);
-        if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse() != null){
+        Row andra = sheet.createRow(dynamicRowStartsFrom + 1);
+        if (reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse() != null) {
             andra.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getRaceName());
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport() != null) {
                 andra.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getStartWeight());
                 andra.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getEndWeight());
                 andra.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getThisYearReport().getStartAmount());
@@ -1012,7 +1012,7 @@ public class ExcelController {
                 sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
                 sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
             }
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport() != null) {
                 andra.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getStartWeight());
                 andra.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getEndWeight());
                 andra.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getAndraPradeshResponse().getPrevYearReport().getStartAmount());
@@ -1030,10 +1030,10 @@ public class ExcelController {
             }
         }
 
-        Row others = sheet.createRow(dynamicRowStartsFrom+3);
-        if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse() != null){
+        Row others = sheet.createRow(dynamicRowStartsFrom + 3);
+        if (reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse() != null) {
             others.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getRaceName());
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport() != null) {
                 others.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getStartWeight());
                 others.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getEndWeight());
                 others.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getThisYearReport().getStartAmount());
@@ -1049,7 +1049,7 @@ public class ExcelController {
                 sumOTEAmount = sumOTEAmount + convertStringToDouble(res.getEndAmount());
                 sumOTEAvg = sumOTEAvg + convertStringToDouble(res.getEndAvg());
             }
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport() != null) {
                 others.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getStartWeight());
                 others.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getEndWeight());
                 others.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getOtherStateResponse().getPrevYearReport().getStartAmount());
@@ -1067,7 +1067,7 @@ public class ExcelController {
             }
         }
 
-        Row otherStateTotal = sheet.createRow(dynamicRowStartsFrom+4);
+        Row otherStateTotal = sheet.createRow(dynamicRowStartsFrom + 4);
         otherStateTotal.createCell(1).setCellValue("ಇತರೆ ರಾಜ್ಯದ ಒಟ್ಟು");
         otherStateTotal.createCell(2).setCellValue(sumOTStartWeight);
         otherStateTotal.createCell(3).setCellValue(sumOTAmount);
@@ -1088,11 +1088,11 @@ public class ExcelController {
         double karAmountEnd = 0.0;
         double karAvgStart = 0.0;
         double karAvgEnd = 0.0;
-        Row karnataka = sheet.createRow(dynamicRowStartsFrom+5);
-        if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse() != null){
+        Row karnataka = sheet.createRow(dynamicRowStartsFrom + 5);
+        if (reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse() != null) {
             karnataka.createCell(1).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getRaceName());
             MonthlyReportRaceWise res = reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse();
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport() != null) {
                 karnataka.createCell(2).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartWeight());
                 karnataka.createCell(3).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getEndWeight());
                 karnataka.createCell(4).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartAmount());
@@ -1100,7 +1100,7 @@ public class ExcelController {
                 karnataka.createCell(6).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getStartAvg());
                 karnataka.createCell(7).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getThisYearReport().getEndAvg());
             }
-            if(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport() != null){
+            if (reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport() != null) {
                 karnataka.createCell(8).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getStartWeight());
                 karnataka.createCell(9).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getEndWeight());
                 karnataka.createCell(10).setCellValue(reportDataResponse.getContent().getMonthlyReportResponse().getKarnatakaResponse().getPrevYearReport().getStartAmount());
@@ -1117,7 +1117,7 @@ public class ExcelController {
 
         }
 
-        Row karnatakaDiff = sheet.createRow(dynamicRowStartsFrom+6);
+        Row karnatakaDiff = sheet.createRow(dynamicRowStartsFrom + 6);
         karnatakaDiff.createCell(2).setCellValue(karWeightStart);
         karnatakaDiff.createCell(3).setCellValue(karWeightEnd);
         karnatakaDiff.createCell(4).setCellValue(karAmountStart);
@@ -1126,10 +1126,10 @@ public class ExcelController {
         karnatakaDiff.createCell(7).setCellValue(karAvgEnd);
         karnatakaDiff.createCell(1).setCellValue("Karnataka difference");
 
-        Row lots = sheet.createRow(dynamicRowStartsFrom+7);
+        Row lots = sheet.createRow(dynamicRowStartsFrom + 7);
         lots.createCell(1).setCellValue("LOTS");
 
-        Row marketFee = sheet.createRow(dynamicRowStartsFrom+8);
+        Row marketFee = sheet.createRow(dynamicRowStartsFrom + 8);
         marketFee.createCell(1).setCellValue("MARKET FEE");
 
         // Auto-size all columns
@@ -1147,8 +1147,8 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("monthly_report"+Util.getISTLocalDate()+".xlsx");
-      //  Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("monthly_report" + Util.getISTLocalDate() + ".xlsx");
+        //  Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
@@ -1159,29 +1159,29 @@ public class ExcelController {
         return fileInputStream;
     }
 
-    private String calculateDifference(String prevYear, String thisYear){
-        if(prevYear == null){
+    private String calculateDifference(String prevYear, String thisYear) {
+        if (prevYear == null) {
             prevYear = "0.0";
-        }else{
-            if(prevYear.equals("")){
+        } else {
+            if (prevYear.equals("")) {
                 prevYear = "0.0";
             }
         }
-        if(thisYear == null){
+        if (thisYear == null) {
             thisYear = "0.0";
-        }else{
-            if(thisYear.equals("")){
+        } else {
+            if (thisYear.equals("")) {
                 thisYear = "0.0";
             }
         }
         return String.valueOf(Double.parseDouble(prevYear) - Double.parseDouble(thisYear));
     }
 
-    private double convertStringToDouble(String amount){
-        if(amount == null){
+    private double convertStringToDouble(String amount) {
+        if (amount == null) {
             amount = "0.0";
-        }else{
-            if(amount.equals("")){
+        } else {
+            if (amount.equals("")) {
                 amount = "0.0";
             }
         }
@@ -1200,7 +1200,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"market_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "market_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -1221,7 +1221,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+        headerRow.createCell(0).setCellValue("header with month and year" + requestDto.getStartDate().getMonth() + "-" + requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
@@ -1234,45 +1234,45 @@ public class ExcelController {
         for (int j = 0; j < 1; j++) {
             MarketWiseInfo response = reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(j);
             Row currentRow = sheet.createRow(dynamicColumnStartsFrom);
-            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(0).setCellValue(j + 1);
             currentRow.createCell(1).setCellValue(response.getMarketName());
-            dynamicColumnStartsFrom = dynamicColumnStartsFrom+1;
+            dynamicColumnStartsFrom = dynamicColumnStartsFrom + 1;
 
-            for(int k=0; k<response.getMarketReportRaceWises().size();k++) {
+            for (int k = 0; k < response.getMarketReportRaceWises().size(); k++) {
                 MarketReportRaceWise marketReportRaceWise = response.getMarketReportRaceWises().get(k);
                 subHeaderRow.createCell(raceNameStartsFrom).setCellValue(marketReportRaceWise.getRaceName() + "(starting)");
-                subHeaderRow.createCell(raceNameStartsFrom+3).setCellValue(marketReportRaceWise.getRaceName() + "(ending)");
+                subHeaderRow.createCell(raceNameStartsFrom + 3).setCellValue(marketReportRaceWise.getRaceName() + "(ending)");
 
                 subHeader.createCell(raceNameStartsFrom).setCellValue("Weight");
-                subHeader.createCell(raceNameStartsFrom+1).setCellValue("Amount");
-                subHeader.createCell(raceNameStartsFrom+2).setCellValue("Avg");
+                subHeader.createCell(raceNameStartsFrom + 1).setCellValue("Amount");
+                subHeader.createCell(raceNameStartsFrom + 2).setCellValue("Avg");
 
-                subHeader.createCell(raceNameStartsFrom+3).setCellValue("Weight");
-                subHeader.createCell(raceNameStartsFrom+4).setCellValue("Amount");
-                subHeader.createCell(raceNameStartsFrom+5).setCellValue("Avg");
+                subHeader.createCell(raceNameStartsFrom + 3).setCellValue("Weight");
+                subHeader.createCell(raceNameStartsFrom + 4).setCellValue("Amount");
+                subHeader.createCell(raceNameStartsFrom + 5).setCellValue("Avg");
 
                 raceNameStartsFrom = raceNameStartsFrom + 6;
             }
 
             subHeaderRow.createCell(raceNameStartsFrom).setCellValue("Total pramana");
             subHeader.createCell(raceNameStartsFrom).setCellValue("ತಿಂಗಳಲ್ಲಿ");
-            subHeader.createCell(raceNameStartsFrom+1).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+            subHeader.createCell(raceNameStartsFrom + 1).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
-            subHeaderRow.createCell(raceNameStartsFrom+2).setCellValue("Total moulya");
-            subHeader.createCell(raceNameStartsFrom+2).setCellValue("ತಿಂಗಳಲ್ಲಿ");
-            subHeader.createCell(raceNameStartsFrom+3).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+            subHeaderRow.createCell(raceNameStartsFrom + 2).setCellValue("Total moulya");
+            subHeader.createCell(raceNameStartsFrom + 2).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom + 3).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
-            subHeaderRow.createCell(raceNameStartsFrom+4).setCellValue("Sarasari Dharane");
-            subHeader.createCell(raceNameStartsFrom+4).setCellValue("ತಿಂಗಳಲ್ಲಿ");
-            subHeader.createCell(raceNameStartsFrom+5).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+            subHeaderRow.createCell(raceNameStartsFrom + 4).setCellValue("Sarasari Dharane");
+            subHeader.createCell(raceNameStartsFrom + 4).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom + 5).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
-            subHeaderRow.createCell(raceNameStartsFrom+6).setCellValue("Markukatte shulka");
-            subHeader.createCell(raceNameStartsFrom+6).setCellValue("ತಿಂಗಳಲ್ಲಿ");
-            subHeader.createCell(raceNameStartsFrom+7).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+            subHeaderRow.createCell(raceNameStartsFrom + 6).setCellValue("Markukatte shulka");
+            subHeader.createCell(raceNameStartsFrom + 6).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom + 7).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
-            subHeaderRow.createCell(raceNameStartsFrom+8).setCellValue("Thandagalu");
-            subHeader.createCell(raceNameStartsFrom+8).setCellValue("ತಿಂಗಳಲ್ಲಿ");
-            subHeader.createCell(raceNameStartsFrom+9).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
+            subHeaderRow.createCell(raceNameStartsFrom + 8).setCellValue("Thandagalu");
+            subHeader.createCell(raceNameStartsFrom + 8).setCellValue("ತಿಂಗಳಲ್ಲಿ");
+            subHeader.createCell(raceNameStartsFrom + 9).setCellValue("ತಿಂಗಳ ಅಂತ್ಯಕ್ಕೆ");
 
         }
 
@@ -1281,35 +1281,35 @@ public class ExcelController {
         for (int j = 0; j < reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().size(); j++) {
             MarketWiseInfo response = reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(j);
             Row currentRow = sheet.createRow(dynamicColumnDataStartsFrom);
-            currentRow.createCell(0).setCellValue(j+1);
+            currentRow.createCell(0).setCellValue(j + 1);
             currentRow.createCell(1).setCellValue(response.getMarketName());
 
-            for(int k=0; k<response.getMarketReportRaceWises().size();k++) {
+            for (int k = 0; k < response.getMarketReportRaceWises().size(); k++) {
                 MarketReportRaceWise marketReportRaceWise = response.getMarketReportRaceWises().get(k);
-                if(marketReportRaceWise.getMarketReportInfo() != null){
+                if (marketReportRaceWise.getMarketReportInfo() != null) {
                     currentRow.createCell(raceNameDataStartsFrom).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                    currentRow.createCell(raceNameDataStartsFrom+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                    currentRow.createCell(raceNameDataStartsFrom+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                    currentRow.createCell(raceNameDataStartsFrom+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                    currentRow.createCell(raceNameDataStartsFrom+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                    currentRow.createCell(raceNameDataStartsFrom+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                    currentRow.createCell(raceNameDataStartsFrom + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                    currentRow.createCell(raceNameDataStartsFrom + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                    currentRow.createCell(raceNameDataStartsFrom + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                    currentRow.createCell(raceNameDataStartsFrom + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                    currentRow.createCell(raceNameDataStartsFrom + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 }
                 raceNameDataStartsFrom = raceNameDataStartsFrom + 6;
             }
             currentRow.createCell(raceNameDataStartsFrom).setCellValue(response.getTotalWeightStarting());
-            currentRow.createCell(raceNameDataStartsFrom+1).setCellValue(response.getTotalWeightEnding());
-            currentRow.createCell(raceNameDataStartsFrom+2).setCellValue(response.getTotalAmountStarting());
-            currentRow.createCell(raceNameDataStartsFrom+3).setCellValue(response.getTotalAmountEnding());
-            currentRow.createCell(raceNameDataStartsFrom+4).setCellValue(response.getAvgAmountStarting());
-            currentRow.createCell(raceNameDataStartsFrom+5).setCellValue(response.getAvgAmountEnding());
-            currentRow.createCell(raceNameDataStartsFrom+6).setCellValue(response.getMarketFeeStarting());
-            currentRow.createCell(raceNameDataStartsFrom+7).setCellValue(response.getMarketFeeEnding());
-            currentRow.createCell(raceNameDataStartsFrom+8).setCellValue(response.getLotsStarting());
-            currentRow.createCell(raceNameDataStartsFrom+9).setCellValue(response.getLotsEnding());
+            currentRow.createCell(raceNameDataStartsFrom + 1).setCellValue(response.getTotalWeightEnding());
+            currentRow.createCell(raceNameDataStartsFrom + 2).setCellValue(response.getTotalAmountStarting());
+            currentRow.createCell(raceNameDataStartsFrom + 3).setCellValue(response.getTotalAmountEnding());
+            currentRow.createCell(raceNameDataStartsFrom + 4).setCellValue(response.getAvgAmountStarting());
+            currentRow.createCell(raceNameDataStartsFrom + 5).setCellValue(response.getAvgAmountEnding());
+            currentRow.createCell(raceNameDataStartsFrom + 6).setCellValue(response.getMarketFeeStarting());
+            currentRow.createCell(raceNameDataStartsFrom + 7).setCellValue(response.getMarketFeeEnding());
+            currentRow.createCell(raceNameDataStartsFrom + 8).setCellValue(response.getLotsStarting());
+            currentRow.createCell(raceNameDataStartsFrom + 9).setCellValue(response.getLotsEnding());
 
             raceNameDataStartsFrom = 2;
 
-            dynamicColumnDataStartsFrom = dynamicColumnDataStartsFrom+1;
+            dynamicColumnDataStartsFrom = dynamicColumnDataStartsFrom + 1;
 
         }
         // Get the index of the last row
@@ -1324,7 +1324,7 @@ public class ExcelController {
 
         int totalColumnStartsFrom = 2;
 
-        if(reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().size()>0) {
+        if (reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().size() > 0) {
             for (int j = 0; j < (reportDataResponse.getContent().getMarketReports().getMarketWiseInfos().get(0).getMarketReportRaceWises().size() * 2); j++) {
                 double sum = 0.0;
                 int count = 0;
@@ -1384,55 +1384,55 @@ public class ExcelController {
                     sumWeight1 += Double.parseDouble(weightCell.getStringCellValue());
                 }
 
-                Cell weightCell1 = currentRow.getCell(totalColumnStartsFrom+1);
+                Cell weightCell1 = currentRow.getCell(totalColumnStartsFrom + 1);
                 if (weightCell1 != null && weightCell1.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     sumWeight2 += Double.parseDouble(weightCell1.getStringCellValue());
                 }
 
-                Cell amountCell = currentRow.getCell(totalColumnStartsFrom+2);
+                Cell amountCell = currentRow.getCell(totalColumnStartsFrom + 2);
                 if (amountCell != null && amountCell.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     sumAmount1 += Double.parseDouble(amountCell.getStringCellValue());
                 }
 
-                Cell amountCell1 = currentRow.getCell(totalColumnStartsFrom+3);
+                Cell amountCell1 = currentRow.getCell(totalColumnStartsFrom + 3);
                 if (amountCell1 != null && amountCell1.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     sumAmount2 += Double.parseDouble(amountCell1.getStringCellValue());
                 }
 
-                Cell avgCell = currentRow.getCell(totalColumnStartsFrom+4);
+                Cell avgCell = currentRow.getCell(totalColumnStartsFrom + 4);
                 if (avgCell != null && avgCell.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     avg1 += Double.parseDouble(avgCell.getStringCellValue());
                 }
 
-                Cell avgCell1 = currentRow.getCell(totalColumnStartsFrom+5);
+                Cell avgCell1 = currentRow.getCell(totalColumnStartsFrom + 5);
                 if (avgCell1 != null && avgCell1.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     avg2 += Double.parseDouble(avgCell1.getStringCellValue());
                 }
 
-                Cell marketCell = currentRow.getCell(totalColumnStartsFrom+6);
-                if (marketCell != null && !marketCell.toString().equals("") &&marketCell.getCellType() == CellType.STRING) {
+                Cell marketCell = currentRow.getCell(totalColumnStartsFrom + 6);
+                if (marketCell != null && !marketCell.toString().equals("") && marketCell.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     market1 += Double.parseDouble(marketCell.getStringCellValue());
                 }
 
-                Cell marketCell1 = currentRow.getCell(totalColumnStartsFrom+7);
+                Cell marketCell1 = currentRow.getCell(totalColumnStartsFrom + 7);
                 if (marketCell1 != null && !marketCell1.toString().equals("") && marketCell1.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     market2 += Double.parseDouble(marketCell1.getStringCellValue());
                 }
 
-                Cell lotCell = currentRow.getCell(totalColumnStartsFrom+8);
+                Cell lotCell = currentRow.getCell(totalColumnStartsFrom + 8);
                 if (lotCell != null && !lotCell.toString().equals("") && lotCell.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     lot1 += Double.parseDouble(lotCell.getStringCellValue());
                 }
 
-                Cell lotCell1 = currentRow.getCell(totalColumnStartsFrom+9);
+                Cell lotCell1 = currentRow.getCell(totalColumnStartsFrom + 9);
                 if (lotCell1 != null && !lotCell1.toString().equals("") && lotCell1.getCellType() == CellType.STRING) {
                     // Add the cell value to the total sum
                     lot2 += Double.parseDouble(lotCell1.getStringCellValue());
@@ -1440,15 +1440,15 @@ public class ExcelController {
             }
         }
         lastRow.createCell(totalColumnStartsFrom).setCellValue(sumWeight1);
-        lastRow.createCell(totalColumnStartsFrom+1).setCellValue(sumWeight2);
-        lastRow.createCell(totalColumnStartsFrom+2).setCellValue(sumAmount1);
-        lastRow.createCell(totalColumnStartsFrom+3).setCellValue(sumAmount2);
-        lastRow.createCell(totalColumnStartsFrom+4).setCellValue(avg1);
-        lastRow.createCell(totalColumnStartsFrom+5).setCellValue(avg2);
-        lastRow.createCell(totalColumnStartsFrom+6).setCellValue(market1);
-        lastRow.createCell(totalColumnStartsFrom+7).setCellValue(market2);
-        lastRow.createCell(totalColumnStartsFrom+8).setCellValue(lot1);
-        lastRow.createCell(totalColumnStartsFrom+9).setCellValue(lot2);
+        lastRow.createCell(totalColumnStartsFrom + 1).setCellValue(sumWeight2);
+        lastRow.createCell(totalColumnStartsFrom + 2).setCellValue(sumAmount1);
+        lastRow.createCell(totalColumnStartsFrom + 3).setCellValue(sumAmount2);
+        lastRow.createCell(totalColumnStartsFrom + 4).setCellValue(avg1);
+        lastRow.createCell(totalColumnStartsFrom + 5).setCellValue(avg2);
+        lastRow.createCell(totalColumnStartsFrom + 6).setCellValue(market1);
+        lastRow.createCell(totalColumnStartsFrom + 7).setCellValue(market2);
+        lastRow.createCell(totalColumnStartsFrom + 8).setCellValue(lot1);
+        lastRow.createCell(totalColumnStartsFrom + 9).setCellValue(lot2);
 
         // Auto-size all columns
         for (int columnIndex = 1; columnIndex <= sheet.getRow(2).getLastCellNum(); columnIndex++) {
@@ -1464,7 +1464,7 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("market_report"+Util.getISTLocalDate()+".xlsx");
+        Path filePath = directory.resolve("market_report" + Util.getISTLocalDate() + ".xlsx");
         //Path filePath = directory.resolve("sample.xlsx");
 
         // Write the workbook content to the specified file path
@@ -1488,7 +1488,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"district_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "district_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -1509,7 +1509,7 @@ public class ExcelController {
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("header with month and year"+requestDto.getStartDate().getMonth() +"-"+requestDto.getStartDate().getYear());
+        headerRow.createCell(0).setCellValue("header with month and year" + requestDto.getStartDate().getMonth() + "-" + requestDto.getStartDate().getYear());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("ಕ್ರಸಂ");
@@ -1518,29 +1518,29 @@ public class ExcelController {
         Row subHeaderRow1 = sheet.createRow(2);
 
         int dynamicColumnStartsFrom = 2;
-        if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size()>0) {
-            if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().size()>0) {
-                if(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size()>0) {
+        if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().size() > 0) {
+            if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().size() > 0) {
+                if (reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size() > 0) {
                     for (int j = 0; j < reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().size(); j++) {
                         subHeaderRow.createCell(dynamicColumnStartsFrom).setCellValue(reportDataResponse.getContent().getDivisionWiseReport().getDivisionReportList().get(0).getMarketWiseInfoList().get(0).getMarketReportRaceWises().get(j).getRaceName());
                         subHeaderRow1.createCell(dynamicColumnStartsFrom).setCellValue("Weight Starting");
-                        subHeaderRow1.createCell(dynamicColumnStartsFrom+1).setCellValue("Weight Ending");
-                        subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Amount Starting");
-                        subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Amount Ending");
-                        subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Avg Starting");
-                        subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Avg Ending");
-                        dynamicColumnStartsFrom = dynamicColumnStartsFrom +6;
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom + 1).setCellValue("Weight Ending");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom + 2).setCellValue("Amount Starting");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom + 3).setCellValue("Amount Ending");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom + 4).setCellValue("Avg Starting");
+                        subHeaderRow1.createCell(dynamicColumnStartsFrom + 5).setCellValue("Avg Ending");
+                        dynamicColumnStartsFrom = dynamicColumnStartsFrom + 6;
                     }
                     subHeaderRow1.createCell(dynamicColumnStartsFrom).setCellValue("Total Starting Weight");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+1).setCellValue("Total Ending Weight");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Total Starting Amount");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Total Ending Amount");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Total Starting Avg");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Total Ending Avg");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+2).setCellValue("Total Starting MF");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+3).setCellValue("Total Ending MF");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+4).setCellValue("Total Starting Lot");
-                    subHeaderRow1.createCell(dynamicColumnStartsFrom+5).setCellValue("Total Ending Lot");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 1).setCellValue("Total Ending Weight");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 2).setCellValue("Total Starting Amount");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 3).setCellValue("Total Ending Amount");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 4).setCellValue("Total Starting Avg");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 5).setCellValue("Total Ending Avg");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 2).setCellValue("Total Starting MF");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 3).setCellValue("Total Ending MF");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 4).setCellValue("Total Starting Lot");
+                    subHeaderRow1.createCell(dynamicColumnStartsFrom + 5).setCellValue("Total Ending Lot");
 
                 }
             }
@@ -1614,14 +1614,15 @@ public class ExcelController {
                     }
                 }
             }*/
-            if(divisionReport.getDivisionWiseSum().size()>0) {
+            if (divisionReport.getDivisionWiseSum().size() > 0) {
                 int dynamicColumnStartsFrom1 = 2;
                 for (int s = 0; s < divisionReport.getDivisionWiseSum().get(0).getMarketReportRaceWises().size(); s++) {
                     MarketReportRaceWise divisionSpecific = divisionReport.getDivisionWiseSum().get(0).getMarketReportRaceWises().get(s);
-                    if(divisionSpecific.getMarketReportInfo() != null) {
+                    if (divisionSpecific.getMarketReportInfo() != null) {
                         divisionSpecificSum.createCell(dynamicColumnStartsFrom1).setCellValue(divisionSpecific.getMarketReportInfo().getStartingWeight());
                         divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 1).setCellValue(divisionSpecific.getMarketReportInfo().getEndingWeight());
-                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 2).setCellValue(divisionSpecific.getMarketReportInfo().getStartingAmount());;
+                        divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 2).setCellValue(divisionSpecific.getMarketReportInfo().getStartingAmount());
+                        ;
                         divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 3).setCellValue(divisionSpecific.getMarketReportInfo().getEndingAmount());
                         divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 4).setCellValue(divisionSpecific.getMarketReportInfo().getStartingAvg());
                         divisionSpecificSum.createCell(dynamicColumnStartsFrom1 + 5).setCellValue(divisionSpecific.getMarketReportInfo().getEndingAvg());
@@ -1629,131 +1630,131 @@ public class ExcelController {
                     dynamicColumnStartsFrom1 = dynamicColumnStartsFrom1 + 6;
                 }
             }
-            dynamicRowStartsFrom = dynamicRowStartsFrom + (divisionReport.getMarketWiseInfoList().size()+2);
+            dynamicRowStartsFrom = dynamicRowStartsFrom + (divisionReport.getMarketWiseInfoList().size() + 2);
         }
 
 
         Row karRow = sheet.createRow(dynamicRowStartsFrom);
         karRow.createCell(1).setCellValue("Rajyada ottu");
         int dynKar = 2;
-        for(int x=0; x<reportDataResponse.getContent().getKarnatakaData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getKarnatakaData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getKarnatakaData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 karRow.createCell(dynKar).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                karRow.createCell(dynKar+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                karRow.createCell(dynKar+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                karRow.createCell(dynKar+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                karRow.createCell(dynKar+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                karRow.createCell(dynKar+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                karRow.createCell(dynKar + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                karRow.createCell(dynKar + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                karRow.createCell(dynKar + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                karRow.createCell(dynKar + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                karRow.createCell(dynKar + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynKar = dynKar + 6;
             }
         }
 
-        Row andraRow = sheet.createRow(dynamicRowStartsFrom+1);
+        Row andraRow = sheet.createRow(dynamicRowStartsFrom + 1);
         andraRow.createCell(1).setCellValue("Andra");
         int dynAnd = 2;
-        for(int x=0; x<reportDataResponse.getContent().getAndraData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getAndraData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getAndraData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 andraRow.createCell(dynAnd).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                andraRow.createCell(dynAnd+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                andraRow.createCell(dynAnd+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                andraRow.createCell(dynAnd+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                andraRow.createCell(dynAnd+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                andraRow.createCell(dynAnd+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                andraRow.createCell(dynAnd + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                andraRow.createCell(dynAnd + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                andraRow.createCell(dynAnd + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                andraRow.createCell(dynAnd + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                andraRow.createCell(dynAnd + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynAnd = dynAnd + 6;
             }
         }
 
-        Row tamilNaduRow = sheet.createRow(dynamicRowStartsFrom+2);
+        Row tamilNaduRow = sheet.createRow(dynamicRowStartsFrom + 2);
         tamilNaduRow.createCell(1).setCellValue("Tamilnaadu");
         int dynTam = 2;
-        for(int x=0; x<reportDataResponse.getContent().getTamilNaduData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getTamilNaduData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getTamilNaduData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 tamilNaduRow.createCell(dynTam).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                tamilNaduRow.createCell(dynTam+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                tamilNaduRow.createCell(dynTam+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                tamilNaduRow.createCell(dynTam+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                tamilNaduRow.createCell(dynTam+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                tamilNaduRow.createCell(dynTam+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                tamilNaduRow.createCell(dynTam + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                tamilNaduRow.createCell(dynTam + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                tamilNaduRow.createCell(dynTam + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                tamilNaduRow.createCell(dynTam + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                tamilNaduRow.createCell(dynTam + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynTam = dynTam + 6;
             }
         }
 
-        Row maharashtraRow = sheet.createRow(dynamicRowStartsFrom+3);
+        Row maharashtraRow = sheet.createRow(dynamicRowStartsFrom + 3);
         maharashtraRow.createCell(1).setCellValue("Maharashtra");
         int dynMah = 2;
-        for(int x=0; x<reportDataResponse.getContent().getMaharashtraData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getMaharashtraData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getMaharashtraData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 maharashtraRow.createCell(dynMah).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                maharashtraRow.createCell(dynMah+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                maharashtraRow.createCell(dynMah+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                maharashtraRow.createCell(dynMah+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                maharashtraRow.createCell(dynMah+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                maharashtraRow.createCell(dynMah+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                maharashtraRow.createCell(dynMah + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                maharashtraRow.createCell(dynMah + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                maharashtraRow.createCell(dynMah + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                maharashtraRow.createCell(dynMah + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                maharashtraRow.createCell(dynMah + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynMah = dynMah + 6;
             }
         }
 
-        Row ithareRow = sheet.createRow(dynamicRowStartsFrom+4);
+        Row ithareRow = sheet.createRow(dynamicRowStartsFrom + 4);
         ithareRow.createCell(1).setCellValue("Ithare");
         int dynOth = 2;
-        for(int x=0; x<reportDataResponse.getContent().getOtherStateData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getOtherStateData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOtherStateData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 ithareRow.createCell(dynOth).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                ithareRow.createCell(dynOth+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                ithareRow.createCell(dynOth+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                ithareRow.createCell(dynOth+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                ithareRow.createCell(dynOth+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                ithareRow.createCell(dynOth+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                ithareRow.createCell(dynOth + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ithareRow.createCell(dynOth + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ithareRow.createCell(dynOth + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ithareRow.createCell(dynOth + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ithareRow.createCell(dynOth + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynOth = dynOth + 6;
             }
         }
 
-        Row ithareOttuRow = sheet.createRow(dynamicRowStartsFrom+5);
+        Row ithareOttuRow = sheet.createRow(dynamicRowStartsFrom + 5);
         ithareOttuRow.createCell(1).setCellValue("Ithare Rajyada ottu");
         int dynOthTot = 2;
-        for(int x=0; x<reportDataResponse.getContent().getOtherStateExcKarData().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getOtherStateExcKarData().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOtherStateExcKarData().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 ithareOttuRow.createCell(dynOthTot).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                ithareOttuRow.createCell(dynOthTot+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                ithareOttuRow.createCell(dynOthTot+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                ithareOttuRow.createCell(dynOthTot+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                ithareOttuRow.createCell(dynOthTot+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                ithareOttuRow.createCell(dynOthTot+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                ithareOttuRow.createCell(dynOthTot + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ithareOttuRow.createCell(dynOthTot + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ithareOttuRow.createCell(dynOthTot + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ithareOttuRow.createCell(dynOthTot + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ithareOttuRow.createCell(dynOthTot + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynOthTot = dynOthTot + 6;
             }
         }
 
-        Row ellaOttu = sheet.createRow(dynamicRowStartsFrom+6);
+        Row ellaOttu = sheet.createRow(dynamicRowStartsFrom + 6);
         ellaOttu.createCell(1).setCellValue("Ella ottu");
         int dynAllOTot = 2;
-        for(int x=0; x<reportDataResponse.getContent().getOverAllStateTotal().size();x++){
+        for (int x = 0; x < reportDataResponse.getContent().getOverAllStateTotal().size(); x++) {
             MarketReportRaceWise marketReportRaceWise = reportDataResponse.getContent().getOverAllStateTotal().get(x);
-            if(marketReportRaceWise.getMarketReportInfo() != null) {
+            if (marketReportRaceWise.getMarketReportInfo() != null) {
                 ellaOttu.createCell(dynAllOTot).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingWeight());
-                ellaOttu.createCell(dynAllOTot+1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
-                ellaOttu.createCell(dynAllOTot+2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
-                ellaOttu.createCell(dynAllOTot+3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
-                ellaOttu.createCell(dynAllOTot+4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
-                ellaOttu.createCell(dynAllOTot+5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
+                ellaOttu.createCell(dynAllOTot + 1).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingWeight());
+                ellaOttu.createCell(dynAllOTot + 2).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAmount());
+                ellaOttu.createCell(dynAllOTot + 3).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAmount());
+                ellaOttu.createCell(dynAllOTot + 4).setCellValue(marketReportRaceWise.getMarketReportInfo().getStartingAvg());
+                ellaOttu.createCell(dynAllOTot + 5).setCellValue(marketReportRaceWise.getMarketReportInfo().getEndingAvg());
                 dynAllOTot = dynAllOTot + 6;
             }
         }
 
 
-            // Auto-size all columns
+        // Auto-size all columns
         for (int columnIndex = 1; columnIndex <= ellaOttu.getLastCellNum(); columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
         }
 
         // Write the workbook content to a file
         // Specify the directory where the file will be saved
-       // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+        // String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
         // Specify the directory where the file will be saved
         String userHome = System.getProperty("user.home");
 
@@ -1761,7 +1762,7 @@ public class ExcelController {
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("district_report"+Util.getISTLocalDate()+".xlsx");
+        Path filePath = directory.resolve("district_report" + Util.getISTLocalDate() + ".xlsx");
 
 //        Path filePath = directory.resolve("sample.xlsx");
 
@@ -1786,7 +1787,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"dtr_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "dtr_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -1811,7 +1812,7 @@ public class ExcelController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" +"blank_dtr_report"+ Util.getISTLocalDate()+".csv")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "blank_dtr_report" + Util.getISTLocalDate() + ".csv")
                     .contentType(MediaType.parseMediaType("application/csv"))
                     .body(resource);
 
@@ -1824,9 +1825,262 @@ public class ExcelController {
         }
     }
 
+//    private FileInputStream generateDTRReport(DTROnlineRequest requestDto) throws Exception {
+//        DTRReportResponse reportDataResponse = apiService.dtrReport(requestDto);
+//
+//
+//        Workbook workbook = new XSSFWorkbook();
+//        Sheet sheet = workbook.createSheet("Sheet 1");
+//
+//        // Create a header row
+//        Row headerRow = sheet.createRow(0);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        String formattedDate = requestDto.getToDate().format(formatter);
+//        String marketNameKannada = "";
+//        if (reportDataResponse.getContent().getMarketNameKannada() != null) {
+//            marketNameKannada = reportDataResponse.getContent().getMarketNameKannada();
+//        }
+//        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + marketNameKannada + " ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : " + formattedDate);
+//
+//        Row subHeaderRow = sheet.createRow(1);
+//        subHeaderRow.createCell(0).setCellValue("Sl No");
+//        subHeaderRow.createCell(1).setCellValue("Lot No");
+//        subHeaderRow.createCell(2).setCellValue("Farmer Details");
+//        subHeaderRow.createCell(3).setCellValue("Weight");
+//        subHeaderRow.createCell(4).setCellValue("Bid Amt");
+//        subHeaderRow.createCell(5).setCellValue("Amt");
+//        subHeaderRow.createCell(6).setCellValue("Farmer Amt");
+//        subHeaderRow.createCell(7).setCellValue("MF");
+//        subHeaderRow.createCell(8).setCellValue("Reeler Amt");
+//        subHeaderRow.createCell(9).setCellValue("Reeler");
+//        subHeaderRow.createCell(10).setCellValue("Bank");
+//        subHeaderRow.createCell(11).setCellValue("IFSC");
+//        subHeaderRow.createCell(12).setCellValue("Account No");
+//
+//        int dynamicRowStartsFrom = 2;
+//        for (int k = 0; k < reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size(); k++) {
+//
+//            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+//            DTROnlineReportUnitDetail dtrOnlineReportUnitDetail = reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().get(k);
+//
+//            String farmerAddress = "";
+//            if (dtrOnlineReportUnitDetail.getFarmerAddress() != null) {
+//                farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() + ",";
+//            }
+//
+//            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+//            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
+//            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+//
+//
+//            dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
+//            dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
+//            dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
+//            dynamicRow.createCell(3).setCellValue(dtrOnlineReportUnitDetail.getWeight());
+//            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+//            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+//            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+//            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+//            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+//            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+//            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+//            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+//            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+//
+//            dynamicRowStartsFrom = dynamicRowStartsFrom + 1;
+//        }
+//
+//        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+//        Row sumRow = sheet.createRow(endOfDynamicRowFrom);
+//
+//        sumRow.createCell(3).setCellValue("Wt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+//        sumRow.createCell(5).setCellValue("Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalBidAmount()));
+//        sumRow.createCell(6).setCellValue("F Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
+//        sumRow.createCell(7).setCellValue("MF: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+//        sumRow.createCell(8).setCellValue("R Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+//
+//
+//        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
+//        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
+//        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom + 4);
+//        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom + 5);
+//        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom + 6);
+//        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom + 7);
+//
+//        summaryRow1.createCell(0).setCellValue("Total lots: " + reportDataResponse.getContent().getTotalLots());
+//        summaryRow2.createCell(0).setCellValue("Total Transacted Lots: " + reportDataResponse.getContent().getPaymentSuccessLots());
+//        if ((reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()) > 0) {
+//            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: " + (reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()));
+//        } else {
+//            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: 0");
+//        }
+//        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
+//        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+//        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+//
+//        // Auto-size all columns
+//        for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
+//            sheet.autoSizeColumn(columnIndex, true);
+//        }
+//        // Write the workbook content to a file
+//        // Specify the directory where the file will be saved
+//        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+//        // Specify the directory where the file will be saved
+//        String userHome = System.getProperty("user.home");
+//
+//        // Define the directory path relative to the user's home directory
+//        String directoryPath = Paths.get(userHome, "Downloads").toString();
+//        Path directory = Paths.get(directoryPath);
+//        Files.createDirectories(directory);
+//        Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
+//        //Path filePath = directory.resolve("sample.xlsx");
+//
+//        // Write the workbook content to the specified file path
+//        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+//        workbook.write(fileOut);
+//        fileOut.close();
+//        workbook.close();
+//        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
+//        return fileInputStream;
+//    }
+
+//    private FileInputStream generateBlankDTRReport(DTROnlineRequest requestDto) throws Exception {
+//        DTRReportResponse reportDataResponse = apiService.blankDtrReport(requestDto);
+//
+//
+//        Workbook workbook = new XSSFWorkbook();
+//        Sheet sheet = workbook.createSheet("Sheet 1");
+//
+//        // Create a header row
+//        Row headerRow = sheet.createRow(0);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        String formattedDate = requestDto.getToDate().format(formatter);
+//        String marketNameKannada = "";
+//        if (reportDataResponse.getContent().getMarketNameKannada() != null) {
+//            marketNameKannada = reportDataResponse.getContent().getMarketNameKannada();
+//        }
+//        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + marketNameKannada + " ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆ  : " + formattedDate);
+//
+//        Row subHeaderRow = sheet.createRow(1);
+//        subHeaderRow.createCell(0).setCellValue("Sl No");
+//        subHeaderRow.createCell(1).setCellValue("Lot No");
+//        subHeaderRow.createCell(2).setCellValue("Farmer Details");
+//        subHeaderRow.createCell(3).setCellValue("Weight");
+//        subHeaderRow.createCell(4).setCellValue("Bid Amt");
+//        subHeaderRow.createCell(5).setCellValue("Amt");
+//        subHeaderRow.createCell(6).setCellValue("Farmer Amt");
+//        subHeaderRow.createCell(7).setCellValue("MF");
+//        subHeaderRow.createCell(8).setCellValue("Reeler Amt");
+//        subHeaderRow.createCell(9).setCellValue("Reeler");
+//        subHeaderRow.createCell(10).setCellValue("Bank");
+//        subHeaderRow.createCell(11).setCellValue("IFSC");
+//        subHeaderRow.createCell(12).setCellValue("Account No");
+//
+//        int dynamicRowStartsFrom = 2;
+//        for(int k=0; k<reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size();k++) {
+//
+//            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+//            DTROnlineReportUnitDetail dtrOnlineReportUnitDetail = reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().get(k);
+//
+//            String farmerAddress = "";
+//            if (dtrOnlineReportUnitDetail.getFarmerAddress() != null) {
+//                farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() + ",";
+//            }
+//
+//            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+//            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
+//            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+//
+//
+//            dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
+//            dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
+//            dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
+//            dynamicRow.createCell(3).setCellValue(dtrOnlineReportUnitDetail.getWeight());
+//            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+//            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+//            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+//            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+//            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+//            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+//            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+//            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+//            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+//
+//            dynamicRowStartsFrom = dynamicRowStartsFrom + 1;
+//        }
+//
+//        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+//        Row sumRow = sheet.createRow(endOfDynamicRowFrom);
+//
+//        sumRow.createCell(3).setCellValue("Wt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+//        sumRow.createCell(5).setCellValue("Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+//        sumRow.createCell(6).setCellValue("F Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
+//        sumRow.createCell(7).setCellValue("MF: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+//        sumRow.createCell(8).setCellValue("R Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+//
+//
+//        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom+2);
+//        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom+3);
+//        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom+4);
+//        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom+5);
+//        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom+6);
+//        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom+7);
+//
+//        summaryRow1.createCell(0).setCellValue("Total lots: " + reportDataResponse.getContent().getTotalLots());
+//        summaryRow2.createCell(0).setCellValue("Total Transacted Lots: " + reportDataResponse.getContent().getPaymentSuccessLots());
+//        if ((reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()) > 0) {
+//            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: " + (reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()));
+//        } else {
+//            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: 0");
+//        }
+//        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
+//        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+//        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+//
+//        // Auto-size all columns
+//        for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
+//            sheet.autoSizeColumn(columnIndex, true);
+//        }
+//        // Write the workbook content to a file
+//        // Specify the directory where the file will be saved
+//        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
+//        // Specify the directory where the file will be saved
+//        String userHome = System.getProperty("user.home");
+//
+//        // Define the directory path relative to the user's home directory
+//        String directoryPath = Paths.get(userHome, "Downloads").toString();
+//        Path directory = Paths.get(directoryPath);
+//        Files.createDirectories(directory);
+//        Path filePath = directory.resolve("dtr_report"+Util.getISTLocalDate()+".xlsx");
+//        //Path filePath = directory.resolve("sample.xlsx");
+//
+//        // Write the workbook content to the specified file path
+//        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+//        workbook.write(fileOut);
+//        fileOut.close();
+//        workbook.close();
+//        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
+//        return fileInputStream;
+//    }
+//
+//    private static double roundToTwoDecimalPlaces(double value) {
+//        // Use BigDecimal for rounding to 2 decimal places
+//        BigDecimal bd = new BigDecimal(value);
+//        bd = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
+//        return bd.doubleValue();
+//    }
+//}
+
     private FileInputStream generateDTRReport(DTROnlineRequest requestDto) throws Exception {
         DTRReportResponse reportDataResponse = apiService.dtrReport(requestDto);
-
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet 1");
@@ -1857,7 +2111,7 @@ public class ExcelController {
         subHeaderRow.createCell(12).setCellValue("Account No");
 
         int dynamicRowStartsFrom = 2;
-        for(int k=0; k<reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size();k++) {
+        for (int k = 0; k < reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size(); k++) {
 
             Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
             DTROnlineReportUnitDetail dtrOnlineReportUnitDetail = reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().get(k);
@@ -1870,16 +2124,15 @@ public class ExcelController {
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
-            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
-            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
-            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
-            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
-
+            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
 
             dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
             dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
             dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
-            dynamicRow.createCell(3).setCellValue(dtrOnlineReportUnitDetail.getWeight());
+            dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
             dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
             dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
             dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
@@ -1890,25 +2143,28 @@ public class ExcelController {
             dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
             dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
 
-            dynamicRowStartsFrom = dynamicRowStartsFrom + 1;
+            dynamicRowStartsFrom++;
         }
 
         int endOfDynamicRowFrom = dynamicRowStartsFrom;
         Row sumRow = sheet.createRow(endOfDynamicRowFrom);
 
-        sumRow.createCell(3).setCellValue("Wt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
-        sumRow.createCell(5).setCellValue("Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalBidAmount()));
-        sumRow.createCell(6).setCellValue("F Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
-        sumRow.createCell(7).setCellValue("MF: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        sumRow.createCell(8).setCellValue("R Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+        sumRow.createCell(3).setCellValue("Wt: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+        sumRow.createCell(5).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(6).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(7).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(8).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
 
-
-        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom+2);
-        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom+3);
-        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom+4);
-        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom+5);
-        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom+6);
-        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom+7);
+        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
+        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
+        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom + 4);
+        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom + 5);
+        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom + 6);
+        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom + 7);
+        Row summaryRow7 = sheet.createRow(endOfDynamicRowFrom + 8);
+        Row summaryRow8 = sheet.createRow(endOfDynamicRowFrom + 9);
+        Row summaryRow9 = sheet.createRow(endOfDynamicRowFrom + 10);
+        Row summaryRow10 = sheet.createRow(endOfDynamicRowFrom + 11);
 
         summaryRow1.createCell(0).setCellValue("Total lots: " + reportDataResponse.getContent().getTotalLots());
         summaryRow2.createCell(0).setCellValue("Total Transacted Lots: " + reportDataResponse.getContent().getPaymentSuccessLots());
@@ -1917,40 +2173,41 @@ public class ExcelController {
         } else {
             summaryRow3.createCell(0).setCellValue("Not Transacted Lots: 0");
         }
-        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
-        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        // Add Min, Max, Avg, and Total Amount
+        summaryRow7.createCell(0).setCellValue("Min Amount: " + roundToLong(reportDataResponse.getContent().getMinAmount()));
+        summaryRow8.createCell(0).setCellValue("Max Amount: " + roundToLong(reportDataResponse.getContent().getMaxAmount()));
+        summaryRow9.createCell(0).setCellValue("Avg Amount: " + roundToLong(reportDataResponse.getContent().getAvgAmount()));
+        summaryRow10.createCell(0).setCellValue("Total Amount: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+
 
         // Auto-size all columns
         for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
         }
-        // Write the workbook content to a file
-        // Specify the directory where the file will be saved
-        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
-        // Specify the directory where the file will be saved
-        String userHome = System.getProperty("user.home");
 
         // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("dtr_report"+Util.getISTLocalDate()+".xlsx");
-        //Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
-        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
-        return fileInputStream;
+
+        return new FileInputStream(filePath.toString());
     }
+
 
     private FileInputStream generateBlankDTRReport(DTROnlineRequest requestDto) throws Exception {
         DTRReportResponse reportDataResponse = apiService.blankDtrReport(requestDto);
 
-
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet 1");
 
@@ -1993,16 +2250,15 @@ public class ExcelController {
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
-            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
-            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf((float) roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
-            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
-            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToTwoDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
-
+            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
 
             dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
             dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
             dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
-            dynamicRow.createCell(3).setCellValue(dtrOnlineReportUnitDetail.getWeight());
+            dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
             dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
             dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
             dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
@@ -2013,62 +2269,74 @@ public class ExcelController {
             dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
             dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
 
-            dynamicRowStartsFrom = dynamicRowStartsFrom + 1;
+            dynamicRowStartsFrom++;
         }
 
         int endOfDynamicRowFrom = dynamicRowStartsFrom;
         Row sumRow = sheet.createRow(endOfDynamicRowFrom);
 
-        sumRow.createCell(3).setCellValue("Wt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
-        sumRow.createCell(5).setCellValue("Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalBidAmount()));
-        sumRow.createCell(6).setCellValue("F Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
-        sumRow.createCell(7).setCellValue("MF: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        sumRow.createCell(8).setCellValue("R Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+        sumRow.createCell(3).setCellValue("Wt: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+        sumRow.createCell(5).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(6).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(7).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(8).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
 
-
-        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom+2);
-        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom+3);
-        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom+4);
-        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom+5);
-        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom+6);
-        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom+7);
+        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
+        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
+        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom + 4);
+        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom + 5);
+        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom + 6);
+        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom + 7);
+        Row summaryRow7 = sheet.createRow(endOfDynamicRowFrom + 8);
+        Row summaryRow8 = sheet.createRow(endOfDynamicRowFrom + 9);
+        Row summaryRow9 = sheet.createRow(endOfDynamicRowFrom + 10);
+        Row summaryRow10 = sheet.createRow(endOfDynamicRowFrom + 11);
 
         summaryRow1.createCell(0).setCellValue("Total lots: " + reportDataResponse.getContent().getTotalLots());
         summaryRow2.createCell(0).setCellValue("Total Transacted Lots: " + reportDataResponse.getContent().getPaymentSuccessLots());
-        if ((reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()) > 0) {
-            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: " + (reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()));
-        } else {
-            summaryRow3.createCell(0).setCellValue("Not Transacted Lots: 0");
-        }
-        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerAmount()));
-        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToTwoDecimalPlaces(reportDataResponse.getContent().getTotalReelerAmount()));
+        summaryRow3.createCell(0).setCellValue("Not Transacted Lots: " + Math.max(reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots(), 0));
+        summaryRow4.createCell(0).setCellValue("Farmer cheque Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        // Add Min, Max, Avg, and Total Amount
+        summaryRow7.createCell(0).setCellValue("Min Amount: " + roundToLong(reportDataResponse.getContent().getMinAmount()));
+        summaryRow8.createCell(0).setCellValue("Max Amount: " + roundToLong(reportDataResponse.getContent().getMaxAmount()));
+        summaryRow9.createCell(0).setCellValue("Avg Amount: " + roundToLong(reportDataResponse.getContent().getAvgAmount()));
+        summaryRow10.createCell(0).setCellValue("Total Amount: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
 
         // Auto-size all columns
         for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
         }
-        // Write the workbook content to a file
-        // Specify the directory where the file will be saved
-        //String directoryPath = "C:\\Users\\Swathi V S\\Downloads\\";
-        // Specify the directory where the file will be saved
-        String userHome = System.getProperty("user.home");
 
         // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
         String directoryPath = Paths.get(userHome, "Downloads").toString();
         Path directory = Paths.get(directoryPath);
         Files.createDirectories(directory);
-        Path filePath = directory.resolve("dtr_report"+Util.getISTLocalDate()+".xlsx");
-        //Path filePath = directory.resolve("sample.xlsx");
+        Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
 
         // Write the workbook content to the specified file path
         FileOutputStream fileOut = new FileOutputStream(filePath.toString());
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
-        FileInputStream fileInputStream = new FileInputStream(filePath.toString());
-        return fileInputStream;
+
+        return new FileInputStream(filePath.toString());
     }
+
+    private static long roundToLong(double value) {
+        return Math.round(value);
+    }
+
+//    private static double roundToThreeDecimalPlaces(double value) {
+//        BigDecimal bd = new BigDecimal(value);
+//        bd = bd.setScale(3, BigDecimal.ROUND_HALF_UP);
+//        return bd.doubleValue();
+//    }
+public static String roundToThreeDecimalPlaces(double value) {
+    return String.format("%.3f", value);
+}
 
     private static double roundToTwoDecimalPlaces(double value) {
         // Use BigDecimal for rounding to 2 decimal places
@@ -2076,4 +2344,5 @@ public class ExcelController {
         bd = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
         return bd.doubleValue();
     }
+
 }
