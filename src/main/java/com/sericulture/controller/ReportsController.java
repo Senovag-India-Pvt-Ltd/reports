@@ -1487,7 +1487,7 @@ public class ReportsController {
         contentLastColumn.setAllottedLotId("");
         contentLastColumn.setFarmerDetails("");
         contentLastColumn.setWeight("Wt: " + roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()));
-        contentLastColumn.setBidAmount("Bid Amt: " + (long) apiResponse.getContent().getTotalBidAmount());
+        contentLastColumn.setBidAmount("");
         contentLastColumn.setLotSoldOutAmount("Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount());
         contentLastColumn.setFarmerAmount("F Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount());
         contentLastColumn.setMarketFee("MF: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
@@ -1734,6 +1734,9 @@ public class ReportsController {
             }
             if (lotReportResponse.getReelerMobileNumber() == null) {
                 lotReportResponse.setReelerMobileNumber("");
+            }
+            if (lotReportResponse.getReelerLicense() == null) {
+                lotReportResponse.setReelerLicense("");
             }
             if (lotReportResponse.getAccpetedBy() == null) {
                 lotReportResponse.setAccpetedBy("");
