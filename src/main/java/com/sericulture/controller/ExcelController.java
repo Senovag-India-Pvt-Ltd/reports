@@ -2379,9 +2379,9 @@ public class ExcelController {
             dynamicRow.createCell(1).setCellValue(monthlyDistrictReportInfo.getStateName());
             dynamicRow.createCell(2).setCellValue(monthlyDistrictReportInfo.getDistrictName());
             dynamicRow.createCell(3).setCellValue(monthlyDistrictReportInfo.getTalukName());
-            dynamicRow.createCell(4).setCellValue(monthlyDistrictReportInfo.getTotalLots());
-            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalWeight());
-            dynamicRow.createCell(6).setCellValue(monthlyDistrictReportInfo.getRaceName());
+            dynamicRow.createCell(4).setCellValue(monthlyDistrictReportInfo.getRaceName());
+            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+            dynamicRow.createCell(6).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(monthlyDistrictReportInfo.getTotalWeight())));
             dynamicRowStartsFrom++;
         }
 
@@ -2392,7 +2392,7 @@ public class ExcelController {
             SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().get(k);
             dynamicRow.createCell(4).setCellValue("Total "+monthlyDistrictReportInfo.getRaceName());
             dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
-            dynamicRow.createCell(6).setCellValue("Wt: "+monthlyDistrictReportInfo.getTotalWeight());
+            dynamicRow.createCell(6).setCellValue("Wt: "+roundToThreeDecimalPlaces(Double.parseDouble(monthlyDistrictReportInfo.getTotalWeight())));
             endOfDynamicRowFrom++;
         }
         // Auto-size all columns
