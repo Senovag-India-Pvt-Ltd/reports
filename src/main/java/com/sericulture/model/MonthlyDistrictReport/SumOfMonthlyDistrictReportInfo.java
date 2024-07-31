@@ -1,12 +1,15 @@
 package com.sericulture.model.MonthlyDistrictReport;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
+@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SumOfMonthlyDistrictReportInfo {
     private String raceName;
     private String totalLots;

@@ -10,6 +10,7 @@ import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
 import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReport;
 import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictRequest;
+import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictResponse;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
@@ -274,7 +275,7 @@ public class ApiService {
         //return apiResponse;
     }
 
-    public MonthlyDistrictReport monthlyDistrictReport(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
+    public MonthlyDistrictResponse monthlyDistrictReport(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
         //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReport";
 
@@ -289,7 +290,7 @@ public class ApiService {
         String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        MonthlyDistrictReport response2 = objectMapper.readValue(response1, MonthlyDistrictReport.class);
+        MonthlyDistrictResponse response2 = objectMapper.readValue(response1, MonthlyDistrictResponse.class);
 
         return response2;
         // Process the API response as needed
