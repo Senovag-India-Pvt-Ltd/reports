@@ -1346,6 +1346,15 @@ public class ReportsController {
             return defaultValue; // Return default value if parsing fails
         }
     }
+    private double parseDoubleOrDefault(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            // Return default value in case of parsing error
+            return 0.0; // You can change this to any default value
+        }
+    }
+
 
     @PostMapping("/dtr-online-report")
     public ResponseEntity<?> dtrOnlineReport(@RequestBody DTROnlineRequest request) {
@@ -1431,6 +1440,8 @@ public class ReportsController {
         content.setAvg_amount(" Avg Amount : " + (long) apiResponse.getContent().getAvgAmount());
         content.setReeler_transaction_amt("Reeler transaction Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
         content.setLotSoldOutAmount("Total Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount());
+        content.setTotal_weight_with_amount_details(roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()));
+
 
 
 
@@ -1453,7 +1464,12 @@ public class ReportsController {
                 talukName = "/" + dtrOnlineReportUnitDetail.getFarmerTaluk() + ",";
             }
 
-
+            double parsedWeight = parseDoubleOrDefault(dtrOnlineReportUnitDetail.getWeight());
+//            double roundedWeight = roundToThreeDecimalPlaces(parsedWeight);
+            dtrOnlineReportUnitDetail.setWeight(String.valueOf(parsedWeight));
+            dtrOnlineReportUnitDetail.setWeight(
+                    String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(dtrOnlineReportUnitDetail.getWeight()))));
+            //            groupLotRaceStatus.setWeight31(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight(), 0))));
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +talukName + " ,  " + villageName );
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
