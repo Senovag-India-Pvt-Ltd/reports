@@ -13,10 +13,7 @@ import com.sericulture.model.MarketReport.MarketResponse;
 import com.sericulture.model.MarketReport.MarketWiseInfo;
 import com.sericulture.model.MarketWiseReport.DivisionReport;
 import com.sericulture.model.MarketWiseReport.DivisionResponse;
-import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReport;
-import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictReportInfo;
-import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictRequest;
-import com.sericulture.model.MonthlyDistrictReport.SumOfMonthlyDistrictReportInfo;
+import com.sericulture.model.MonthlyDistrictReport.*;
 import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
@@ -2353,14 +2350,15 @@ public class ExcelController {
     }
 
     private FileInputStream generateDistrictMonthlyReport(MonthlyDistrictRequest requestDto) throws Exception {
-        MonthlyDistrictReport reportDataResponse = apiService.monthlyDistrictReport(requestDto);
+        MonthlyDistrictResponse reportDataResponse = apiService.monthlyDistrictReport(requestDto);
+        MonthlyDistrictReport monthlyDistrictReport = reportDataResponse.getContent();
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet 1");
 
         // Create a header row
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + reportDataResponse.getMarketName() + " ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟು ಘೋಷ್ವಾರೆ : " + reportDataResponse.getStartDate() + " - " + reportDataResponse.getEndDate());
+        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + monthlyDistrictReport.getMarketNameInKannada() + " ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟು ಘೋಷ್ವಾರೆ : " + monthlyDistrictReport.getStartDate() + " - " + monthlyDistrictReport.getEndDate());
 
         Row subHeaderRow = sheet.createRow(1);
         subHeaderRow.createCell(0).setCellValue("Sl No");
@@ -2372,10 +2370,10 @@ public class ExcelController {
         subHeaderRow.createCell(6).setCellValue("Weight");
 
         int dynamicRowStartsFrom = 2;
-        for(int k=0; k<reportDataResponse.getMonthlyDistrictReportInfoList().size();k++) {
+        for(int k=0; k<monthlyDistrictReport.getMonthlyDistrictReportInfoList().size();k++) {
 
             Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
-            MonthlyDistrictReportInfo monthlyDistrictReportInfo = reportDataResponse.getMonthlyDistrictReportInfoList().get(k);
+            MonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getMonthlyDistrictReportInfoList().get(k);
 
             dynamicRow.createCell(0).setCellValue(monthlyDistrictReportInfo.getSerialNumber());
             dynamicRow.createCell(1).setCellValue(monthlyDistrictReportInfo.getStateName());
@@ -2388,10 +2386,10 @@ public class ExcelController {
         }
 
         int endOfDynamicRowFrom = dynamicRowStartsFrom;
-        for(int k=0; k<reportDataResponse.getSumOfMonthlyDistrictReportInfoList().size();k++) {
+        for(int k=0; k<monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().size();k++) {
 
             Row dynamicRow = sheet.createRow(endOfDynamicRowFrom);
-            SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = reportDataResponse.getSumOfMonthlyDistrictReportInfoList().get(k);
+            SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().get(k);
             dynamicRow.createCell(4).setCellValue("Total "+monthlyDistrictReportInfo.getRaceName());
             dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
             dynamicRow.createCell(6).setCellValue("Wt: "+monthlyDistrictReportInfo.getTotalWeight());
