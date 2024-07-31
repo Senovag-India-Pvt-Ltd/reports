@@ -13,6 +13,8 @@ import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictRequest;
 import com.sericulture.model.MonthlyDistrictReport.MonthlyDistrictResponse;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
+import com.sericulture.model.UnitCounterReport.UnitCounterReportRequest;
+import com.sericulture.model.UnitCounterReport.UnitCounterReportResponse;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -277,9 +279,9 @@ public class ApiService {
 
     public MonthlyDistrictResponse monthlyDistrictReport(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReport";
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReport";
 
-        String finalapiurl = apiUrl + "auction/report/getMonthlyDistrictReport";
+//        String finalapiurl = apiUrl + "auction/report/getMonthlyDistrictReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -291,6 +293,28 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         MonthlyDistrictResponse response2 = objectMapper.readValue(response1, MonthlyDistrictResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public UnitCounterReportResponse unitCounterReport(UnitCounterReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getUnitCounterReport";
+
+//        String finalapiurl = apiUrl + "auction/report/getUnitCounterReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<UnitCounterReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        UnitCounterReportResponse response2 = objectMapper.readValue(response1, UnitCounterReportResponse.class);
 
         return response2;
         // Process the API response as needed

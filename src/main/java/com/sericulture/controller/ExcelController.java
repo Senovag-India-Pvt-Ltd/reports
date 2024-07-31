@@ -18,6 +18,10 @@ import com.sericulture.model.MonthlyReport.MonthlyReportInfo;
 import com.sericulture.model.MonthlyReport.MonthlyReportRaceWise;
 import com.sericulture.model.MonthlyReport.MonthlyReportRequest;
 import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
+import com.sericulture.model.UnitCounterReport.UnitCounterReport;
+import com.sericulture.model.UnitCounterReport.UnitCounterReportInfo;
+import com.sericulture.model.UnitCounterReport.UnitCounterReportRequest;
+import com.sericulture.model.UnitCounterReport.UnitCounterReportResponse;
 import com.sericulture.model.VahivaatuReport.DistrictWise;
 import com.sericulture.model.VahivaatuReport.RaceWiseReport;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
@@ -41,6 +45,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -2325,6 +2330,154 @@ public class ExcelController {
 
         return new FileInputStream(filePath.toString());
     }
+    @PostMapping("/unit-counter-report")
+    public ResponseEntity<?> unitCounterReport(@RequestBody UnitCounterReportRequest request) {
+        try {
+            FileInputStream fileInputStream =  generateUnitCounterReport(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "unit_counter_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+//    private FileInputStream generateUnitCounterReport(UnitCounterReportRequest requestDto) throws Exception {
+//        UnitCounterReportResponse reportDataResponse = apiService.unitCounterReport(requestDto);
+//        UnitCounterReport unitCounterReport = reportDataResponse.getContent();
+//
+//        Workbook workbook = new XSSFWorkbook();
+//        Sheet sheet = workbook.createSheet("Sheet 1");
+//
+//        // Create a header row
+//        Row headerRow = sheet.createRow(0);
+//        headerRow.createCell(0).setCellValue("Unit Counter Report For, " +  unitCounterReport.getAuctionDate());
+//
+//        Row subHeaderRow = sheet.createRow(1);
+//        subHeaderRow.createCell(0).setCellValue("Sl No");
+//        subHeaderRow.createCell(1).setCellValue("Lot No");
+//        subHeaderRow.createCell(2).setCellValue("Reeler Id");
+//        subHeaderRow.createCell(3).setCellValue("Reeler Name");
+//        subHeaderRow.createCell(4).setCellValue("Bid Amount");
+//        subHeaderRow.createCell(5).setCellValue("Weight");
+//        subHeaderRow.createCell(6).setCellValue("Amt");
+//        subHeaderRow.createCell(7).setCellValue("MF Amt");
+//
+//        int dynamicRowStartsFrom = 2;
+//        for(int k=0; k<unitCounterReport.getUnitCounterReportInfoList().size();k++) {
+//
+//            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+//            UnitCounterReportInfo unitCounterReportInfo = unitCounterReport.getUnitCounterReportInfoList().get(k);
+//
+//            dynamicRow.createCell(0).setCellValue(unitCounterReportInfo.getSerialNumber());
+//            dynamicRow.createCell(1).setCellValue(unitCounterReportInfo.getAllottedLotId());
+//            dynamicRow.createCell(2).setCellValue(unitCounterReportInfo.getLotTransactionDate());
+//            dynamicRow.createCell(3).setCellValue(unitCounterReportInfo.getReelerLicense());
+//            dynamicRow.createCell(4).setCellValue(unitCounterReportInfo.getBidAmount());
+//            dynamicRow.createCell(5).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
+//            dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getReelerMarketFee());
+//            dynamicRowStartsFrom++;
+//        }
+//
+////        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+////        for(int k=0; k<unitCounterReport.getSumOfMonthlyDistrictReportInfoList().size();k++) {
+////
+////            Row dynamicRow = sheet.createRow(endOfDynamicRowFrom);
+////            SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().get(k);
+////            dynamicRow.createCell(4).setCellValue("Total "+monthlyDistrictReportInfo.getRaceName());
+////            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+////            dynamicRow.createCell(6).setCellValue("Wt: "+roundToThreeDecimalPlaces(Double.parseDouble(monthlyDistrictReportInfo.getTotalWeight())));
+////            endOfDynamicRowFrom++;
+////        }
+//        // Auto-size all columns
+//        for (int columnIndex = 1; columnIndex <= 7; columnIndex++) {
+//            sheet.autoSizeColumn(columnIndex, true);
+//        }
+//
+//        // Define the directory path relative to the user's home directory
+//        String userHome = System.getProperty("user.home");
+//        String directoryPath = Paths.get(userHome, "Downloads").toString();
+//        Path directory = Paths.get(directoryPath);
+//        Files.createDirectories(directory);
+//        Path filePath = directory.resolve("unit_counter_report" + Util.getISTLocalDate() + ".xlsx");
+//
+//        // Write the workbook content to the specified file path
+//        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+//        workbook.write(fileOut);
+//        fileOut.close();
+//        workbook.close();
+//
+//        return new FileInputStream(filePath.toString());
+//    }
+private FileInputStream generateUnitCounterReport(UnitCounterReportRequest requestDto) throws Exception {
+    UnitCounterReportResponse reportDataResponse = apiService.unitCounterReport(requestDto);
+    List<UnitCounterReportInfo> unitCounterReportInfoList = reportDataResponse.getContent();
+
+    Workbook workbook = new XSSFWorkbook();
+    Sheet sheet = workbook.createSheet("Sheet 1");
+
+    // Create a header row
+    Row headerRow = sheet.createRow(0);
+    headerRow.createCell(0).setCellValue("Unit Counter Report For, " + unitCounterReportInfoList.get(0).getLotTransactionDate());
+
+    Row subHeaderRow = sheet.createRow(1);
+//    subHeaderRow.createCell(0).setCellValue("Sl No");
+    subHeaderRow.createCell(0).setCellValue("Lot No");
+    subHeaderRow.createCell(1).setCellValue("Date");
+    subHeaderRow.createCell(2).setCellValue("Reeler Id");
+    subHeaderRow.createCell(3).setCellValue("Reeler Name");
+    subHeaderRow.createCell(4).setCellValue("Weight");
+    subHeaderRow.createCell(5).setCellValue("Amt");
+    subHeaderRow.createCell(6).setCellValue("MF Amt");
+
+    int dynamicRowStartsFrom = 2;
+    for(int k = 0; k < unitCounterReportInfoList.size(); k++) {
+        Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+        UnitCounterReportInfo unitCounterReportInfo = unitCounterReportInfoList.get(k);
+
+//        dynamicRow.createCell(0).setCellValue(unitCounterReportInfo.getSerialNumber());
+        dynamicRow.createCell(0).setCellValue(unitCounterReportInfo.getAllottedLotId());
+        dynamicRow.createCell(1).setCellValue(unitCounterReportInfo.getLotTransactionDate());
+        dynamicRow.createCell(2).setCellValue(unitCounterReportInfo.getReelerLicense());
+        dynamicRow.createCell(3).setCellValue(unitCounterReportInfo.getReelerName());
+        dynamicRow.createCell(4).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
+        dynamicRow.createCell(5).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
+        dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getFarmerMarketFee()));
+        dynamicRowStartsFrom++;
+    }
+
+    // Auto-size all columns
+    for (int columnIndex = 1; columnIndex <= 7; columnIndex++) {
+        sheet.autoSizeColumn(columnIndex, true);
+    }
+
+    // Define the directory path relative to the user's home directory
+    String userHome = System.getProperty("user.home");
+    String directoryPath = Paths.get(userHome, "Downloads").toString();
+    Path directory = Paths.get(directoryPath);
+    Files.createDirectories(directory);
+    Path filePath = directory.resolve("unit_counter_report" + Util.getISTLocalDate() + ".xlsx");
+
+    // Write the workbook content to the specified file path
+    FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+    workbook.write(fileOut);
+    fileOut.close();
+    workbook.close();
+
+    return new FileInputStream(filePath.toString());
+}
+
 
     @PostMapping("/district-monthly-report")
     public ResponseEntity<?> districtMonthlyReport(@RequestBody MonthlyDistrictRequest request) {
