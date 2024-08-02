@@ -2279,6 +2279,7 @@ public class ExcelController {
         }
 
         int endOfDynamicRowFrom = dynamicRowStartsFrom;
+        Long minAmount = reportDataResponse.getContent().getMinAmount();
         Row sumRow = sheet.createRow(endOfDynamicRowFrom);
 
         sumRow.createCell(3).setCellValue("Wt: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
@@ -2305,7 +2306,7 @@ public class ExcelController {
         summaryRow5.createCell(0).setCellValue("MF Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
         summaryRow6.createCell(0).setCellValue("Reeler transaction Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
         // Add Min, Max, Avg, and Total Amount
-        summaryRow7.createCell(0).setCellValue("Min Amount: " + roundToLong(reportDataResponse.getContent().getMinAmount()));
+        summaryRow7.createCell(0).setCellValue("Min Amount: " + roundToLong(minAmount != null ? minAmount : 0.0));
         summaryRow8.createCell(0).setCellValue("Max Amount: " + roundToLong(reportDataResponse.getContent().getMaxAmount()));
         summaryRow9.createCell(0).setCellValue("Avg Amount: " + roundToLong(reportDataResponse.getContent().getAvgAmount()));
         summaryRow10.createCell(0).setCellValue("Total Amount: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
