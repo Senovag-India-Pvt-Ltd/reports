@@ -50,6 +50,7 @@ public class DTROnlineReportUnitDetail {
     private String farmerTaluk;
     private String farmerVillage;
     private String raceName;
+    private String cocoonAge;
     private Long maxAmount;
     private Long minAmount;
     private float avgAmount;

@@ -34,6 +34,7 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String farmerTaluk;
     private String farmerVillage;
     private String raceName;
+    private Long cocoonAge;
     private Long maxAmount;
     private Long minAmount;
     private float avgAmount;
