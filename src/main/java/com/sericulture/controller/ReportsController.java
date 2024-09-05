@@ -1408,6 +1408,9 @@ public class ReportsController {
         if (apiResponse.getContent().getFarmerTaluk() == null) {
             apiResponse.getContent().setFarmerTaluk("");
         }
+        if (apiResponse.getContent().getRaceName() == null) {
+            apiResponse.getContent().setRaceName("");
+        }
 
 
         // Define date format
@@ -1476,7 +1479,7 @@ public class ReportsController {
 //            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(Math.round(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
 //            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(Math.round(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
 //            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(Math.round(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
-
+            dtrOnlineReportUnitDetail.setRaceName(dtrOnlineReportUnitDetail.getRaceName());
             dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee())));
             dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
             dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
@@ -1526,6 +1529,7 @@ public class ReportsController {
         contentLastColumn.setBankDetails("");
         contentLastColumn.setIfscCode("");
         contentLastColumn.setAccountNumber("");
+        contentLastColumn.setRaceName("");
         contentList.add(contentLastColumn);
         return new JRBeanCollectionDataSource(contentList);
     }
