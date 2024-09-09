@@ -2106,15 +2106,17 @@ public class ExcelController {
         subHeaderRow.createCell(1).setCellValue("Lot No");
         subHeaderRow.createCell(2).setCellValue("Farmer Details");
         subHeaderRow.createCell(3).setCellValue("Weight");
-        subHeaderRow.createCell(4).setCellValue("Bid Amt");
-        subHeaderRow.createCell(5).setCellValue("Amt");
-        subHeaderRow.createCell(6).setCellValue("Farmer Amt");
-        subHeaderRow.createCell(7).setCellValue("MF");
-        subHeaderRow.createCell(8).setCellValue("Reeler Amt");
-        subHeaderRow.createCell(9).setCellValue("Reeler");
-        subHeaderRow.createCell(10).setCellValue("Bank");
-        subHeaderRow.createCell(11).setCellValue("IFSC");
-        subHeaderRow.createCell(12).setCellValue("Account No");
+        subHeaderRow.createCell(4).setCellValue("Cocoon Age");
+        subHeaderRow.createCell(5).setCellValue("Bid Amt");
+        subHeaderRow.createCell(6).setCellValue("Amt");
+        subHeaderRow.createCell(7).setCellValue("Farmer Amt");
+        subHeaderRow.createCell(8).setCellValue("MF");
+        subHeaderRow.createCell(9).setCellValue("Reeler Amt");
+        subHeaderRow.createCell(10).setCellValue("Reeler");
+        subHeaderRow.createCell(11).setCellValue("Bank");
+        subHeaderRow.createCell(12).setCellValue("IFSC");
+        subHeaderRow.createCell(13).setCellValue("Account No");
+        subHeaderRow.createCell(14).setCellValue("Race Name");
 
         int dynamicRowStartsFrom = 2;
         for (int k = 0; k < reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size(); k++) {
@@ -2130,24 +2132,32 @@ public class ExcelController {
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
-            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
-            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
-            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
-            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+            dtrOnlineReportUnitDetail.setMarketFee(String.format("%.2f", (Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount())));
+
+
 
             dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
             dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
             dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
             dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
-            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
-            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
-            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
-            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
-            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
-            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
-            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
-            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
-            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getCocoonAge());
+            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+            dynamicRow.createCell(13).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(14).setCellValue(dtrOnlineReportUnitDetail.getRaceName());
 
             dynamicRowStartsFrom++;
         }
@@ -2156,10 +2166,10 @@ public class ExcelController {
         Row sumRow = sheet.createRow(endOfDynamicRowFrom);
 
         sumRow.createCell(3).setCellValue("Wt: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
-        sumRow.createCell(5).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
-        sumRow.createCell(6).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
-        sumRow.createCell(7).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        sumRow.createCell(8).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        sumRow.createCell(6).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(7).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(8).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(9).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
 
         Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
         Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
@@ -2190,7 +2200,7 @@ public class ExcelController {
 
 
         // Auto-size all columns
-        for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
+        for (int columnIndex = 1; columnIndex <= 15; columnIndex++) {
             sheet.autoSizeColumn(columnIndex, true);
         }
 
@@ -2232,15 +2242,17 @@ public class ExcelController {
         subHeaderRow.createCell(1).setCellValue("Lot No");
         subHeaderRow.createCell(2).setCellValue("Farmer Details");
         subHeaderRow.createCell(3).setCellValue("Weight");
-        subHeaderRow.createCell(4).setCellValue("Bid Amt");
-        subHeaderRow.createCell(5).setCellValue("Amt");
-        subHeaderRow.createCell(6).setCellValue("Farmer Amt");
-        subHeaderRow.createCell(7).setCellValue("MF");
-        subHeaderRow.createCell(8).setCellValue("Reeler Amt");
-        subHeaderRow.createCell(9).setCellValue("Reeler");
-        subHeaderRow.createCell(10).setCellValue("Bank");
-        subHeaderRow.createCell(11).setCellValue("IFSC");
-        subHeaderRow.createCell(12).setCellValue("Account No");
+        subHeaderRow.createCell(4).setCellValue("Cocoon Age");
+        subHeaderRow.createCell(5).setCellValue("Bid Amt");
+        subHeaderRow.createCell(6).setCellValue("Amt");
+        subHeaderRow.createCell(7).setCellValue("Farmer Amt");
+        subHeaderRow.createCell(8).setCellValue("MF");
+        subHeaderRow.createCell(9).setCellValue("Reeler Amt");
+        subHeaderRow.createCell(10).setCellValue("Reeler");
+        subHeaderRow.createCell(11).setCellValue("Bank");
+        subHeaderRow.createCell(12).setCellValue("IFSC");
+        subHeaderRow.createCell(13).setCellValue("Account No");
+        subHeaderRow.createCell(14).setCellValue("Race Name");
 
         int dynamicRowStartsFrom = 2;
         for(int k=0; k<reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size();k++) {
@@ -2256,24 +2268,32 @@ public class ExcelController {
             dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
             dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
             dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
-            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
-            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
-            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
-            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+            dtrOnlineReportUnitDetail.setMarketFee(String.format("%.2f", (Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount())));
+
+
 
             dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
             dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
             dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
             dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
-            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
-            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
-            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
-            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
-            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
-            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
-            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
-            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
-            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getCocoonAge());
+            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+            dynamicRow.createCell(13).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(14).setCellValue(dtrOnlineReportUnitDetail.getRaceName());
 
             dynamicRowStartsFrom++;
         }
@@ -2283,10 +2303,10 @@ public class ExcelController {
         Row sumRow = sheet.createRow(endOfDynamicRowFrom);
 
         sumRow.createCell(3).setCellValue("Wt: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
-        sumRow.createCell(5).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
-        sumRow.createCell(6).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
-        sumRow.createCell(7).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
-        sumRow.createCell(8).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        sumRow.createCell(6).setCellValue("Amt: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(7).setCellValue("F Amt: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(8).setCellValue("MF: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(9).setCellValue("R Amt: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
 
         Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
         Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
