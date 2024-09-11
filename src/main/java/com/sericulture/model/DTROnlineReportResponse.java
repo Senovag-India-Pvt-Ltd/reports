@@ -42,6 +42,10 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String max_amount;
     private String min_amount;
     private String avg_amount;
+    private String farmerNameKannada;
+    private String fatherNameKannada;
+    private String talukNameInKannada;
+    private String villageNameInKannada;
 
 
 }
