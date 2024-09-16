@@ -977,45 +977,26 @@ public class ReportsController {
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
-            long farmerMarketFee = toLong(apiResponse.content.getFarmerMarketFee());
-            long reelerMarketFee = toLong(apiResponse.content.getReelerMarketFee());
-            long totalMarketFee = farmerMarketFee + reelerMarketFee;
+            long farmerMarketFee = Math.round(apiResponse.content.getFarmerMarketFee());
+            long reelerMarketFee = Math.round(apiResponse.content.getReelerMarketFee());
+            long totalMarketFee = Math.round(farmerMarketFee + reelerMarketFee);
 
             String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
             apiResponse.content.setFeespaid(formatfees);
 
-
-            long amountPaid = reelerMarketFee;  // Only assign reelerMarketFee to amountPaid
+            long amountPaid = Math.round(reelerMarketFee);  // Apply rounding to amountPaid
 
             String marketFees = String.valueOf(reelerMarketFee);  // Convert reelerMarketFee to string
             apiResponse.content.setAmountPaid(marketFees);
 //            apiResponse.content.setBarCode(apiResponse.content.getAuctionDate() + apiResponse.content.getAllottedLotId() +apiResponse.content.getMarketId());
 
-            // Get the required fields
-            // Get the required fields
-            String auctionDate = apiResponse.content.getAuctionDate();      // e.g., "20230911"
-            String allottedLotId = apiResponse.content.getAllottedLotId();  // e.g., "12345"
-            String marketId = apiResponse.content.getMarketId();            // e.g., "67890"
-
-// Create the barcode by concatenating fields with a delimiter (e.g., "|")
-            String barCode = auctionDate + "|" + allottedLotId + "|" + marketId;
-
-// Set the barcode in the API response content
-            apiResponse.content.setBarCode(barCode);
-
-// When scanning the barcode, the system should extract the allottedLotId
-// Assuming the scanning logic would extract the allottedLotId as:
-            String[] parts = barCode.split("\\|");  // Split by the delimiter "|"
-            String scannedLotId = parts[1];         // This will get the allottedLotId (the second part)
-
-
-
-            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
-            long paidAmount = farmerMarketFeeLong;
-            String format = farmerMarketFeeLong + "";
-            apiResponse.content.setPaidAmount(format);
-
-
+            apiResponse.content.setAuctionDate(apiResponse.content.getAuctionDate());
+//            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
+//            long paidAmount = farmerMarketFeeLong;
+//            String format = farmerMarketFeeLong + "";
+//            apiResponse.content.setPaidAmount(format);
+//
+//
             long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
             long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
             long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
@@ -1023,6 +1004,21 @@ public class ReportsController {
             String relaramout = "" + (total - realerfee);
 
             long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
+
+            // Assuming farmerMarketFee is a double or can be converted to double
+//            double farmerMarketFeeDouble = (double) farmerMarketFee;
+//            double paidAmount = farmerMarketFeeDouble;
+//            String format = String.valueOf(farmerMarketFeeDouble);
+//            apiResponse.content.setPaidAmount(format);
+
+            double farmerMarketFeeDouble = (double) farmerMarketFee;
+            long paidAmount = Math.round(farmerMarketFeeDouble); // Math.round returns a long
+            String format = String.valueOf(paidAmount); // Convert to string without decimal
+            apiResponse.content.setPaidAmount(format);
+
+
+
+
 
 //            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
             apiResponse.content.setAmountfarmer(farmeramout);
