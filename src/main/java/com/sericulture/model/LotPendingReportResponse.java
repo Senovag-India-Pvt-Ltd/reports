@@ -24,6 +24,8 @@ public class LotPendingReportResponse {
     private String farmerAddress;
     private String farmerTaluk;
     private String farmerVillage;
+    private String farmerTalukInKannada;
+    private String farmerVillageInKannada;
     private String ifscCode;
     private String accountNumber;
     private String reelerLicense;
@@ -70,4 +72,6 @@ public class LotPendingReportResponse {
     private String shed;
     private String weight;
     private String reelerDetails;
+    private String village;
+
 }

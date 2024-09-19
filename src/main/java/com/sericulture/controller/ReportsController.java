@@ -1678,11 +1678,16 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
     LotReportResponse lotReportResponse1 = new LotReportResponse();
 
     for (LotReportResponse lotReportResponse : apiResponse.getContent()) {
-        marketName = lotReportResponse.getMarketName();
+        marketName = lotReportResponse.getMarketNameInKannada();
 
         if (lotReportResponse.getAcceptedBy() == null) {
             lotReportResponse.setAcceptedBy("");
+
         }
+        if (lotReportResponse.getMarketNameInKannada() == null) {
+            lotReportResponse.setMarketNameInKannada("");
+        }
+
         if (lotReportResponse.getAcceptedTime() == null) {
             lotReportResponse.setAcceptedTime("");
         } else {
@@ -1695,11 +1700,13 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
         }
         contentList.add(lotReportResponse);
     }
-    lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
+    lotReportResponse1.setHeaderText("ಸರ್ಕಾರಿ ಕಕೂನ್  ಮಾರುಕಟ್ಟೆ  , " + marketName+ "   ಬಿಡ್  ರಿಪೋರ್ಟ್");
+//    lotReportResponse1.setMarketNameInKannada("ಸರ್ಕಾರಿ ಕಕೂನ್  ಮಾರುಕಟ್ಟೆ  , " + marketName+ "   ಬಿಡ್  ರಿಪೋರ್ಟ್");
+
 
     // Determine lot number text
     String lotNumberText = (requestDto.getLotId() == 0) ? "All" : String.valueOf(requestDto.getLotId());
-    lotReportResponse1.setHeaderText2("Lot Number : " + lotNumberText + " and Bid Date : " + convertDate(requestDto.getReportFromDate().toString()));
+    lotReportResponse1.setHeaderText2("ಲಾಟ್  ಸಂಖ್ಯೆ  : " + lotNumberText + "   ಮತ್ತು  ಬಿಡ್ ದಿನಾಂಕ : " + convertDate(requestDto.getReportFromDate().toString()));
 
     contentList.add(0, lotReportResponse1);
     lotReportResponse1.setSerialNumber("");
@@ -1758,9 +1765,12 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
         List<LotReportResponse> contentList = new LinkedList<>();
         LotReportResponse lotReportResponse1 = new LotReportResponse();
         for (LotReportResponse lotReportResponse : apiResponse.getContent()) {
-            marketName = lotReportResponse.getMarketName();
+            marketName = lotReportResponse.getMarketNameInKannada();
             if (lotReportResponse.getAcceptedBy() == null) {
                 lotReportResponse.setAcceptedBy("");
+            }
+            if (lotReportResponse.getMarketNameInKannada() == null) {
+                lotReportResponse.setMarketNameInKannada("");
             }
             if (lotReportResponse.getAcceptedTime() == null) {
                 lotReportResponse.setAcceptedTime("");
@@ -1775,8 +1785,8 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
             lotReportResponse.setAuctionNumber(Util.objectToInteger(lotReportResponse.getAuctionSession()));
             contentList.add(lotReportResponse);
         }
-        lotReportResponse1.setHeaderText("Government Cocoon Market, " + marketName + "\n BIDDING REPORT");
-        lotReportResponse1.setHeaderText2("Reeler Id : " + (requestDto.getReelerNumber() != null && !requestDto.getReelerNumber().equals("") ? requestDto.getReelerNumber() : "All") + " and Bid Date : " + convertDate(requestDto.getReportFromDate().toString()));
+        lotReportResponse1.setHeaderText("ಸರ್ಕಾರಿ ಕಕೂನ್  ಮಾರುಕಟ್ಟೆ  , " + marketName  + "  ಬಿಡ್  ರಿಪೋರ್ಟ್");
+        lotReportResponse1.setHeaderText2("ಖರೀದಿದಾರರ ಐಡಿ :  " + (requestDto.getReelerNumber() != null && !requestDto.getReelerNumber().equals("") ? requestDto.getReelerNumber() : "All") + "  ಮತ್ತು  ಬಿಡ್ ದಿನಾಂಕ  : " + convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(0, lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
@@ -1824,7 +1834,9 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
         PendingReportResponse apiResponse = apiService.pendingReportList(requestDto);
         List<LotPendingReportResponse> contentList = new LinkedList<>();
         LotPendingReportResponse lotReportResponse1 = new LotPendingReportResponse();
-        lotReportResponse1.setHeaderText("Pending report for " + convertDate(requestDto.getReportFromDate().toString()));
+//        lotReportResponse1.setHeaderText("Pending report for " + convertDate(requestDto.getReportFromDate().toString()));
+        lotReportResponse1.setHeaderText("ಬಾಕಿಯಿರುವ ರಿಪೋರ್ಟ್ , ದಿನಾಂಕ : " + convertDate(requestDto.getReportFromDate().toString()));
+
         contentList.add(lotReportResponse1);
         for (LotPendingReportResponse lotReportResponse : apiResponse.getContent()) {
             lotReportResponse.setAccpetedBy(lotReportResponse.getAcceptedBy());
@@ -1833,6 +1845,9 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
             }
             if (lotReportResponse.getReelerNumber() == null) {
                 lotReportResponse.setReelerNumber("");
+            }
+            if (lotReportResponse.getFarmerVillageInKannada() == null) {
+                lotReportResponse.setFarmerVillageInKannada("");
             }
             if (lotReportResponse.getReelerMobileNumber() == null) {
                 lotReportResponse.setReelerMobileNumber("");
@@ -1843,10 +1858,11 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
             if (lotReportResponse.getAccpetedBy() == null) {
                 lotReportResponse.setAccpetedBy("");
             }
-
+            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerNameKannada());
+            lotReportResponse.setVillage(lotReportResponse.getFarmerVillageInKannada());
             lotReportResponse.setReeler_amount(String.valueOf(lotReportResponse.getReelerAmount()));
 
-            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerFirstName() + " " + lotReportResponse.getFarmerMiddleName() + " " + lotReportResponse.getFarmerLastName());
+            lotReportResponse.setFarmerDetails(lotReportResponse.getFarmerNameKannada());
 
             lotReportResponse.setSerialNumber(String.valueOf(lotReportResponse.getSerailNumberForPagination()));
             contentList.add(lotReportResponse);
