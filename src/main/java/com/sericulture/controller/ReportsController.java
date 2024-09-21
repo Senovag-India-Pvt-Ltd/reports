@@ -2863,8 +2863,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader(" ರೇಷ್ಮೆ ಯಾಂತ್ರೀಕರಣ-ಸ್ವೀಕೃತಿ ಪತ್ರ/ACKNOWLEDGEMENT RECEIPT");
-            response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setHeader(" ರೇಷ್ಮೆ   ಯಾಂತ್ರೀಕರಣ - ಸ್ವೀಕೃತಿ  ಪತ್ರ / ACKNOWLEDGEMENT RECEIPT");
+            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
             response.setAddressText( apiResponse.getContent().get(0).getAddressText());
@@ -2879,11 +2879,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                                    \n"+
                     "ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸುತ್ತಾರೆ . ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "\n" +
                     "                                                              \n" +
-                    "ಇದ್ದು , ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು .");
+                    "ಇದ್ದು  ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,   ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು .");
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
             response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
             response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
             acknowledgementReceiptResponseList.add(response);
 
