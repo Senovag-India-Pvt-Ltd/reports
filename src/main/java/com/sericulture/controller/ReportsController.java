@@ -1733,8 +1733,8 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
 
 
     // Determine lot number text
-    String lotNumberText = (requestDto.getLotId() == 0) ? "All" : String.valueOf(requestDto.getLotId());
-    lotReportResponse1.setHeaderText2("ಲಾಟ್  ಸಂಖ್ಯೆ  : " + lotNumberText + "   ಮತ್ತು  ಬಿಡ್ ದಿನಾಂಕ : " + convertDate(requestDto.getReportFromDate().toString()));
+    String lotNumberText = (requestDto.getLotId() == 0) ? " ಎಲ್ಲಾ  ಲಾಟ್ಸ್ ಗಳು" : String.valueOf(requestDto.getLotId());
+    lotReportResponse1.setHeaderText2("ಲಾಟ್  ಸಂಖ್ಯೆ  : " + lotNumberText + " ,  ಬಿಡ್ ದಿನಾಂಕ : " + convertDate(requestDto.getReportFromDate().toString()));
 
     contentList.add(0, lotReportResponse1);
     lotReportResponse1.setSerialNumber("");
@@ -1814,7 +1814,7 @@ private JRBeanCollectionDataSource getBiddingReportData(BiddingReportRequest req
             contentList.add(lotReportResponse);
         }
         lotReportResponse1.setHeaderText("ಸರ್ಕಾರಿ ಕಕೂನ್  ಮಾರುಕಟ್ಟೆ  , " + marketName  + "  ಬಿಡ್  ರಿಪೋರ್ಟ್");
-        lotReportResponse1.setHeaderText2("ಖರೀದಿದಾರರ ಐಡಿ :  " + (requestDto.getReelerNumber() != null && !requestDto.getReelerNumber().equals("") ? requestDto.getReelerNumber() : "All") + "  ಮತ್ತು  ಬಿಡ್ ದಿನಾಂಕ  : " + convertDate(requestDto.getReportFromDate().toString()));
+        lotReportResponse1.setHeaderText2("ಖರೀದಿದಾರರ ಐಡಿ :  " + (requestDto.getReelerNumber() != null && !requestDto.getReelerNumber().equals("") ? requestDto.getReelerNumber() :"ಎಲ್ಲಾ  ಐಡಿಗಳು") + "  ,  ಬಿಡ್ ದಿನಾಂಕ  : " + convertDate(requestDto.getReportFromDate().toString()));
         contentList.add(0, lotReportResponse1);
         return new JRBeanCollectionDataSource(contentList);
     }
