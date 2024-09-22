@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sericulture.helper.Util;
 import com.sericulture.model.*;
 import com.sericulture.model.DTRAllMarket.*;
+import jakarta.xml.bind.JAXBException;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -2895,7 +2896,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
     }
 
 
-        private JRDataSource getDataSourceAuthorisationLetterFromFarmer(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
+        private JRDataSource getDataSourceAuthorisationLetterFromFarmer(WorkOrderPrintRequest requestDto) throws JsonProcessingException , JAXBException {
 
         WorkOrderReportResponse apiResponse = apiService.fetchDataApi(requestDto);
         List<WorkOrderGenerationReportResponse> workOrderGenerationReportResponseList = new LinkedList<>();
