@@ -133,6 +133,13 @@ public class Content {
     private String avgValue;
     private String value;
     private String reelerFees;
+    private String barCode;
+    private String marketId;
+    private String fatherNameKannada;
+    private String talukNameInKannada;
+    private String villageNameInKannada;
+
+
 
 
 

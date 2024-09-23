@@ -28,9 +28,8 @@ public class LotReportResponse extends ResponseBody {
     private String reelerNumber;
 
     private String marketName;
+    private String marketNameInKannada;
     private String auctionSession;
     private String serialNumber;
     private long serailNumberForPagination;
-
-
 }

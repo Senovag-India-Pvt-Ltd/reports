@@ -28,6 +28,5 @@ public class AcknowledgementReceiptResponse {
     private String subSchemeNameInKannada;
     private String fatherNameKan;
     private String mobileNumber;
-
-
+    private String arn;
 }

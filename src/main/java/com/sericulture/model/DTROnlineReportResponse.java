@@ -18,10 +18,14 @@ public class DTROnlineReportResponse extends ResponseBody {
     private List<DTROnlineReportUnitDetail> dtrOnlineReportUnitDetailList = new ArrayList<>();
     private int totalLots;
     private int paymentSuccessLots;
-    private double totalFarmerAmount;
-    private double totalReelerAmount;
-    private double totalReelerMarketFee;
-    private double totalFarmerMarketFee;
+    //    private double totalFarmerAmount;
+//    private double totalReelerAmount;
+//    private double totalReelerMarketFee;
+//    private double totalFarmerMarketFee;
+    private float totalFarmerAmount;
+    private float totalReelerAmount;
+    private float totalReelerMarketFee;
+    private float totalFarmerMarketFee;
 
     private int totalBidAmount;
     private float totalWeight;
@@ -29,6 +33,8 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String marketNameKannada;
     private String farmerTaluk;
     private String farmerVillage;
+    private String raceName;
+    private Long cocoonAge;
     private Long maxAmount;
     private Long minAmount;
     private float avgAmount;
@@ -36,6 +42,10 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String max_amount;
     private String min_amount;
     private String avg_amount;
+    private String farmerNameKannada;
+    private String fatherNameKannada;
+    private String talukNameInKannada;
+    private String villageNameInKannada;
 
 
 }
