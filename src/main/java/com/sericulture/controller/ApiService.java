@@ -87,6 +87,9 @@ public class ApiService {
 
     public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+
         String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
 
         // Define the request headers
@@ -211,11 +214,13 @@ public class ApiService {
 
     public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/workOrderGeneration";
         String finalapiurl = dbtApiUrl +"service/workOrderGeneration";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<WorkOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
