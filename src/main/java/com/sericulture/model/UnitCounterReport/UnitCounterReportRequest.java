@@ -12,6 +12,10 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 public class UnitCounterReportRequest extends RequestBody {
     private LocalDate reportFromDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     private int godownId;
     private int marketId;
+    private String reelerNumber;
+
 }
