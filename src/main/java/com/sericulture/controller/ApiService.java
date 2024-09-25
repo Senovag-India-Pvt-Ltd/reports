@@ -91,6 +91,9 @@ public class ApiService {
 
     public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+
         String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
 
 //        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
@@ -218,6 +221,7 @@ public class ApiService {
 
     public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/workOrderGeneration";
         String finalapiurl = dbtApiUrl +"service/workOrderGeneration";
 
 //        String finalapiurl ="http://localhost:8013/dbt/v1/" + "service/workOrderGeneration";
