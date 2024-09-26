@@ -16,6 +16,9 @@ import com.sericulture.model.MonthlyReport.ReportMonthlyResponse;
 import com.sericulture.model.UnitCounterReport.UnitCounterReportRequest;
 import com.sericulture.model.UnitCounterReport.UnitCounterReportResponse;
 import com.sericulture.model.VahivaatuReport.Report27bResponse;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +26,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import java.io.StringReader;
 import java.util.Collections;
 
 @Service
@@ -87,7 +91,13 @@ public class ApiService {
 
     public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+
         String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
+
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -211,11 +221,15 @@ public class ApiService {
 
     public WorkOrderReportResponse fetchDataApi(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/workOrderGeneration";
         String finalapiurl = dbtApiUrl +"service/workOrderGeneration";
+
+//        String finalapiurl ="http://localhost:8013/dbt/v1/" + "service/workOrderGeneration";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<WorkOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
@@ -233,7 +247,7 @@ public class ApiService {
 
     public DTRReportResponse dtrReport(DTROnlineRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDTROnlineReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDTROnlineReport";
 
          String finalapiurl = apiUrl + "auction/report/getDTROnlineReport";
 
@@ -256,7 +270,7 @@ public class ApiService {
 
     public DTRReportResponse blankDtrReport(DTROnlineRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBlankDTROnlineReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBlankDTROnlineReport";
 
         String finalapiurl = apiUrl + "auction/report/getBlankDTROnlineReport";
 
@@ -346,7 +360,7 @@ public class ApiService {
 
     public BiddingReportResponse reelerBiddingReport(ReelerBiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerBiddingReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerBiddingReport";
 
         String finalapiurl = apiUrl + "auction/report/getReelerBiddingReport";
 
@@ -507,7 +521,7 @@ public class ApiService {
 
     public ReelerTxnResponse reelerTxnReportList(ReelerTxnRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-      //   String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerTxnReport";
+//         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerTxnReport";
 
         String finalapiurl = apiUrl + "auction/report/getReelerTxnReport";
 
