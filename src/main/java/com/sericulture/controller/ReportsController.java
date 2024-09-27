@@ -757,7 +757,7 @@ public class ReportsController {
                 apiResponse.content.setAuctionDate_time("");
             }
             // Parse the input date and time
-            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
             Date parsedDate;
             try {
                 if (inputDateTime != null && !inputDateTime.equals("")) {
@@ -1064,7 +1064,7 @@ public class ReportsController {
                 apiResponse.content.setAuctionDate_time("");
             }
             // Parse the input date and time
-            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
             Date parsedDate;
             try {
                 if (inputDateTime != null && !inputDateTime.equals("")) {
