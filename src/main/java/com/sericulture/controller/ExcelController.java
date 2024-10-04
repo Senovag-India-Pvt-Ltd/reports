@@ -2468,9 +2468,10 @@ private FileInputStream generateUnitCounterReport(UnitCounterReportRequest reque
     subHeaderRow.createCell(1).setCellValue("Date");
     subHeaderRow.createCell(2).setCellValue("Reeler Id");
     subHeaderRow.createCell(3).setCellValue("Reeler Name");
-    subHeaderRow.createCell(4).setCellValue("Weight");
-    subHeaderRow.createCell(5).setCellValue("Amt");
-    subHeaderRow.createCell(6).setCellValue("MF Amt");
+    subHeaderRow.createCell(4).setCellValue("Bid Amount");
+    subHeaderRow.createCell(5).setCellValue("Weight");
+    subHeaderRow.createCell(6).setCellValue("Amt");
+    subHeaderRow.createCell(7).setCellValue("MF Amt");
 
     int dynamicRowStartsFrom = 2;
     for(int k = 0; k < unitCounterReportInfoList.size(); k++) {
@@ -2482,14 +2483,15 @@ private FileInputStream generateUnitCounterReport(UnitCounterReportRequest reque
         dynamicRow.createCell(1).setCellValue(unitCounterReportInfo.getLotTransactionDate());
         dynamicRow.createCell(2).setCellValue(unitCounterReportInfo.getReelerLicense());
         dynamicRow.createCell(3).setCellValue(unitCounterReportInfo.getReelerName());
-        dynamicRow.createCell(4).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
-        dynamicRow.createCell(5).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
-        dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getFarmerMarketFee()));
+        dynamicRow.createCell(4).setCellValue(unitCounterReportInfo.getBidAmount());
+        dynamicRow.createCell(5).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
+        dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
+        dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getFarmerMarketFee()));
         dynamicRowStartsFrom++;
     }
 
     // Auto-size all columns
-    for (int columnIndex = 1; columnIndex <= 7; columnIndex++) {
+    for (int columnIndex = 1; columnIndex <= 8; columnIndex++) {
         sheet.autoSizeColumn(columnIndex, true);
     }
 
