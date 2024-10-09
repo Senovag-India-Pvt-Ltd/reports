@@ -17,6 +17,7 @@ public class Form13ReportResponse {
     private Form13Response content;
 
     private String headerText = "";
+    private String headerText1 = "";
     private String averageRate = "";
 
     private String lot1 = "";

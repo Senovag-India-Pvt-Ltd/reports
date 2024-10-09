@@ -2361,6 +2361,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         List<Form13ReportResponse> form13ReportResponses = new LinkedList<>();
         apiResponse.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ  ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ , " + apiResponse.getContent().getMarketNameKannada() + "  ದಿನವಹಿ ವಹಿವಾಟು ಘೋಷ್ವರೆ   : " + convertDate(requestDto.getFromDate().toString())+ " to " + convertDate(requestDto.getToDate().toString()));
+//        apiResponse.setHeaderText1("Form 13 Abstract " +
+//                (apiResponse.getContent().getRaceName() != null && !apiResponse.getContent().getRaceName().isEmpty()
+//                        ? apiResponse.getContent().getRaceName()
+//                        : "all"));
         apiResponse.setAverageRate("Average Rate Rs. " + String.valueOf(Math.round(parseDoubleOrDefault(apiResponse.getContent().getAverageRate(), 0.0))));
         apiResponse.setTotalStateLots(String.valueOf(Math.round(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalLots(),0))));
         apiResponse.setTotalStateWeight(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getTotalStatus().get(0).getTotalWeight(), 0))));
