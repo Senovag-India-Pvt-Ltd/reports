@@ -27,6 +27,9 @@ public class Form13Request extends RequestBody{
     @Schema(name = "districtId")
     private Long districtId;
 
+    @Schema(name = "raceId")
+    private int raceId;
+
 
 //    private LocalDate auctionDate;
 //    private LocalDate fromDate;

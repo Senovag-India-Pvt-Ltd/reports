@@ -26,6 +26,9 @@ public class RequestBody implements Serializable {
     @Schema(name = "auctionDate", example = "2024-07-08", required = true)
     private LocalDate auctionDate;
 
+    @Schema(name = "raceId")
+    private int raceId;
+
     public List<ValidationMessage> validate(){
         return new ArrayList<ValidationMessage>();
     }

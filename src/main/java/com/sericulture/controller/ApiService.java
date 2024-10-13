@@ -335,6 +335,28 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public ReelerMFResponse reelerMFReport(UnitCounterReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerMFReport";
+
+//        String finalapiurl = apiUrl + "auction/report/getUnitCounterReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<UnitCounterReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ReelerMFResponse response2 = objectMapper.readValue(response1, ReelerMFResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public BiddingReportResponse biddingReport(BiddingReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 //        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBiddingReport";
@@ -429,7 +451,7 @@ public class ApiService {
 
     public ReelerPendingReposne getReelerPendingReport(RequestBody requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        //String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerPendingReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerPendingReport";
 
         String finalapiurl = apiUrl + "auction/report/getReelerPendingReport";
 
@@ -475,7 +497,7 @@ public class ApiService {
 
     public Form13ReportResponse getForm13Report(RequestBody requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13Report";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13Report";
 
         String finalapiurl = apiUrl + "auction/report/getForm13Report";
 
