@@ -47,5 +47,6 @@ public class WorkOrderGenerationReportResponse {
     private String fatherNameKan;
     private String mobileNumber;
     private String scComponentName;
+    private String logurl;
 
 }
