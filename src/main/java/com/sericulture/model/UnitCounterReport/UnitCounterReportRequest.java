@@ -17,5 +17,6 @@ public class UnitCounterReportRequest extends RequestBody {
     private int godownId;
     private int marketId;
     private String reelerNumber;
+    private String traderLicenseNumber;
 
 }

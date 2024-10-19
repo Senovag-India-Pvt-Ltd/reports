@@ -65,6 +65,31 @@ public class ApiService {
         //return apiResponse;
     }
 
+
+
+
+    public ContentRoot fetchDataFromApiSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoon";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLotForSeedCocoon";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MarketAuctionForPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        MarketAuctionForPrintResponse response = new MarketAuctionForPrintResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ContentRoot response2 = objectMapper.readValue(response1, ContentRoot.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public AuthorisationResponse fetchDataFromAuth(AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
         String finalapiurl = dbtApiUrl + "service/authorisationLetter";
@@ -85,7 +110,27 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+    public ContentRoot fetchDataFromApiSilk(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSilk";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLotForSilk";
 
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MarketAuctionForPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        MarketAuctionForPrintResponse response = new MarketAuctionForPrintResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ContentRoot response2 = objectMapper.readValue(response1, ContentRoot.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 
 
 
@@ -291,6 +336,53 @@ public class ApiService {
         //return apiResponse;
     }
 
+
+    public DTRReportResponse dtrReportForSilkType(DTROnlineRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDTROnlineReportForSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getDTROnlineReportForSilkType";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<DTROnlineRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        DTRReportResponse response = new DTRReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DTRReportResponse response2 = objectMapper.readValue(response1, DTRReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public DTRReportResponse blankDtrReportForSilkType(DTROnlineRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getBlankDTROnlineReportForSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getBlankDTROnlineReportForSilkType";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<DTROnlineRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        DTRReportResponse response = new DTRReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DTRReportResponse response2 = objectMapper.readValue(response1, DTRReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public MonthlyDistrictResponse monthlyDistrictReport(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 //        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReport";
@@ -312,6 +404,30 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+
+    public MonthlyDistrictResponse monthlyDistrictReportSilk(MonthlyDistrictRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getMonthlyDistrictReportSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getMonthlyDistrictReportSilkType";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<MonthlyDistrictRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        MonthlyDistrictResponse response2 = objectMapper.readValue(response1, MonthlyDistrictResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+
 
     public UnitCounterReportResponse unitCounterReport(UnitCounterReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
@@ -335,11 +451,33 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public UnitCounterReportResponse unitCounterReportSilkType(UnitCounterReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getUnitCounterReportSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getUnitCounterReportSilkType";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<UnitCounterReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        UnitCounterReportResponse response2 = objectMapper.readValue(response1, UnitCounterReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public ReelerMFResponse reelerMFReport(UnitCounterReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerMFReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getReelerMFReport";
 
-//        String finalapiurl = apiUrl + "auction/report/getUnitCounterReport";
+        String finalapiurl = apiUrl + "auction/report/getReelerMFReport";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -474,9 +612,33 @@ public class ApiService {
 
     public DashboardResponse getDashboardReport(DashboardReportRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-       // String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReport";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReport";
 
         String finalapiurl = apiUrl + "auction/report/getDashboardReport";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<DashboardReportRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        DashboardReport response = new DashboardReport();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DashboardResponse response2 = objectMapper.readValue(response1, DashboardResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+
+    public DashboardResponse getDashboardReportSilkType(DashboardReportRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//         String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getDashboardReportSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getDashboardReportSilkType";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -580,6 +742,52 @@ public class ApiService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         AverageReportDataResponse response2 = objectMapper.readValue(response1, AverageReportDataResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public Form13ReportResponse getForm13ReportSilk(RequestBody requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13ReportSilk";
+
+        String finalapiurl = apiUrl + "auction/report/getForm13ReportSilk";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<RequestBody> requestEntity = new HttpEntity<>(requestDto, headers);
+        Form13ReportResponse response = new Form13ReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Form13ReportResponse response2 = objectMapper.readValue(response1, Form13ReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public Form13ReportResponse getForm13ReportByDistSilkType(RequestBody requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/report/getForm13ReportByDistrictSilkType";
+
+        String finalapiurl = apiUrl + "auction/report/getForm13ReportByDistrictSilkType";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<RequestBody> requestEntity = new HttpEntity<>(requestDto, headers);
+        Form13ReportResponse response = new Form13ReportResponse();
+        String response1=restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Form13ReportResponse response2 = objectMapper.readValue(response1, Form13ReportResponse.class);
 
         return response2;
         // Process the API response as needed

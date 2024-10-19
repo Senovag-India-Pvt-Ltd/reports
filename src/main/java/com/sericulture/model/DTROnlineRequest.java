@@ -25,4 +25,8 @@ public class DTROnlineRequest implements Serializable {
 
     @Schema(name = "toDate")
     private LocalDate toDate;
+
+    @Schema(name = "traderLicenseNumber")
+    private int traderLicenseNumber;
+
 }
