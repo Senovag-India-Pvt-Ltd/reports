@@ -5130,6 +5130,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
             response.setArn( apiResponse.getContent().get(0).getArn());
             response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             acknowledgementReceiptResponseList.add(response);
 
           //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
@@ -5172,7 +5173,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName());
             response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
                 response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
-
+                response.setLogurl("/reports/Seal_of_Karnataka.PNG");
                 workOrderGenerationReportResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));

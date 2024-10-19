@@ -29,4 +29,5 @@ public class AcknowledgementReceiptResponse {
     private String fatherNameKan;
     private String mobileNumber;
     private String arn;
+    private String logurl;
 }
