@@ -1831,7 +1831,7 @@ public class ReportsController {
     }
     private JRDataSource getDataSourceForTripletSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
 
-        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoon(requestDto);
+        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoonTriplet(requestDto);
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
@@ -1858,8 +1858,8 @@ public class ReportsController {
 
             if (apiResponse != null && apiResponse.content != null) {
                 // Set the sadodLot with null check
-                if (apiResponse.content.getSadodLotNumber() != null) {
-                    apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
+                if (apiResponse.content.getLgLotParentLevel() != null) {
+                    apiResponse.content.setSadodLot(apiResponse.content.getLgLotParentLevel());
                 } else {
                     // Handle the case where sadodLotNumber is null (e.g., set to a default value)
                     apiResponse.content.setSadodLot("DefaultSadodLot"); // Replace with an appropriate default value
@@ -1878,13 +1878,13 @@ public class ReportsController {
             DecimalFormat df = new DecimalFormat("#.00");
 
             double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
-            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
-            double totalMarketFee = farmerMarketFee + reelerMarketFee;
+            double lgMarketFee = apiResponse.content.getLgMarketFee();
+            double totalMarketFee = farmerMarketFee + lgMarketFee;
 
-            String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
+            String formatFees = df.format(farmerMarketFee) + "+" + df.format(lgMarketFee) + "=" + df.format(totalMarketFee);
             apiResponse.content.setFeespaid(formatFees);
 
-            String amountPaid = df.format(reelerMarketFee);  // Format reelerMarketFee to two decimal places
+            String amountPaid = df.format(lgMarketFee);  // Format reelerMarketFee to two decimal places
             apiResponse.content.setAmountPaid(amountPaid);
 
 
@@ -2149,7 +2149,7 @@ public class ReportsController {
 
 //                apiResponse.content.setTotalcrates(String.valueOf(lotWeightDetails.size()));
                 apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
+                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLgSoldOutAmount() ))));
 //                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
 
 //                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
@@ -2163,17 +2163,17 @@ public class ReportsController {
             } else {
                 apiResponse.content.setBidAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getBidAmount()))));
             }
-            if (apiResponse.content.getLotWeight().equals("0.0")) {
+            if (apiResponse.content.getLgLotParentLevel().equals("0.0")) {
                 apiResponse.content.setLotWeight("");
             } else {
-                double doubleValue = Double.parseDouble(apiResponse.content.getLotWeight());
+                double doubleValue = Double.parseDouble(apiResponse.content.getLgLotWeight());
                 String formattedValue = String.format("%.3f", doubleValue);
                 apiResponse.content.setLotWeight(formattedValue);
             }
-            if (apiResponse.content.getLotSoldOutAmount().equals("0.0")) {
+            if (apiResponse.content.getLgSoldOutAmount().equals("0.0")) {
                 apiResponse.content.setLotSoldOutAmount("");
             } else {
-                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getLgSoldOutAmount()) - apiResponse.content.getFarmerMarketFee()));
 
 //                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
 

@@ -172,6 +172,21 @@ public class Content {
     private double traderAmount;
 
 
+    private String lotGroupageId;
+    private String lgBuyerId;
+    private String lgBuyerType;
+    private String lgLotWeight;
+    private String lgAmount;
+    private double lgMarketFee;
+    private String lgSoldOutAmount;
+    private String lgAverageYield;
+    private String lgNoOfDfl;
+    private String lgInvoiceNumber;
+    private String lgLotParentLevel;
+    private String lgAuctionDate;
+    private String lgBuyerName;
+
+
 
 
 }
