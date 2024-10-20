@@ -88,6 +88,11 @@ public class Content {
     private String marketNameKannada;
     
     private String farmerNameKannada;
+    private String externalUnitName;
+    private String externalUnitAddress;
+    private String externalUnitLicenseNumber;
+    private String externalUnitNumber;
+    private String externalUnitOrganisationName;
     private Date auctionDateWithTime;
     private String farmerMobileNumber;
     private String reelerMobileNumber;
@@ -139,8 +144,32 @@ public class Content {
     private String talukNameInKannada;
     private String villageNameInKannada;
 
-
-
+    private String traderFirstName;
+    private String traderMiddleName;
+    private String traderLastName;
+    private String traderFatherName;
+    private String traderAddress;
+    private String traderSilkType;
+    private float traderLicenseFee;
+    private String traderMobileNumber;
+    private String traderArnNumber;
+    private String traderLicenseNumber;
+    private String traderStateNameInKannada;
+    private String traderDistrictNameInKannada;
+    private String traderApplicationNumber;
+    private String traderLicenseChallanNumber;
+    private String reelerMobile;
+    private String reelerBankName;
+    private String reelerBranchName;
+    private String reelerAccountNumber;
+    private String reelerIfscCode;
+    private String reelerFatherName;
+    private String sadodLotNumber;
+    private String godownName;
+    private String sadodLot;
+    private String traderDetails;
+    private double traderMarketFee;
+    private double traderAmount;
 
 
 

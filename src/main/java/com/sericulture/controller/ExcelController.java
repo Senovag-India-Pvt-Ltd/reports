@@ -1831,6 +1831,57 @@ public class ExcelController {
         }
     }
 
+    @PostMapping("/dtr-report-silk")
+    public ResponseEntity<?> dtrReportSilk(@RequestBody DTROnlineRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            FileInputStream fileInputStream = generateDTRReportForSilkType(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "dtr_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/blank-dtr-report-silk")
+    public ResponseEntity<?> blankDtrReportSilk(@RequestBody DTROnlineRequest request) {
+        try {
+            System.out.println("enter to dtr online report pdf");
+            logger.info("enter to dtr online report pdf");
+            FileInputStream fileInputStream = blankDtrReportForSilkType(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "blank_dtr_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+
 //    private FileInputStream generateDTRReport(DTROnlineRequest requestDto) throws Exception {
 //        DTRReportResponse reportDataResponse = apiService.dtrReport(requestDto);
 //
@@ -2361,10 +2412,310 @@ public class ExcelController {
 
         return new FileInputStream(filePath.toString());
     }
+    private FileInputStream generateDTRReportForSilkType(DTROnlineRequest requestDto) throws Exception {
+        DTRReportResponse reportDataResponse = apiService.dtrReportForSilkType(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = requestDto.getToDate().format(formatter);
+        String marketNameKannada = "";
+        if (reportDataResponse.getContent().getMarketNameKannada() != null) {
+            marketNameKannada = reportDataResponse.getContent().getMarketNameKannada();
+        }
+        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + marketNameKannada + " ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆಃ  : " + formattedDate);
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಮ ಸಂಖ್ಯೆ ");
+        subHeaderRow.createCell(1).setCellValue("ಲಾಟ್ ಸಂಖ್ಯೆ");
+        subHeaderRow.createCell(2).setCellValue("ರೈತರ ವಿವರಗಳು");
+        subHeaderRow.createCell(3).setCellValue("ತೂಕ");
+        subHeaderRow.createCell(4).setCellValue("ಗೂಡಿನ  ವಯಸ್ಸು ");
+        subHeaderRow.createCell(5).setCellValue("ಬಿಡ್ ಮೊತ್ತ");
+        subHeaderRow.createCell(6).setCellValue("ಮೊತ್ತ ");
+        subHeaderRow.createCell(7).setCellValue("ರೈತರ ಮೊತ್ತ ");
+        subHeaderRow.createCell(8).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ");
+        subHeaderRow.createCell(9).setCellValue("ಖರೀದಿದಾರರ ಮೊತ್ತ ");
+        subHeaderRow.createCell(10).setCellValue("ಖರೀದಿದಾರರ ವಿವರಗಳು");
+        subHeaderRow.createCell(11).setCellValue("ಬ್ಯಾಂಕ್ ವಿವರಗಳು");
+        subHeaderRow.createCell(12).setCellValue("ಐಎಫ್ಎಸ್ಸಿ");
+        subHeaderRow.createCell(13).setCellValue("ಖಾತೆ ಸಂಖ್ಯೆ");
+        subHeaderRow.createCell(14).setCellValue("ತಳಿ ");
+
+        int dynamicRowStartsFrom = 2;
+        for (int k = 0; k < reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size(); k++) {
+
+            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+            DTROnlineReportUnitDetail dtrOnlineReportUnitDetail = reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().get(k);
+
+            String farmerAddress = "";
+            if (dtrOnlineReportUnitDetail.getFarmerAddress() != null) {
+                farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() + ",";
+            }
+            dtrOnlineReportUnitDetail.setFarmerDetails(" ಶ್ರೀ /ಶ್ರೀಮತಿ. " +dtrOnlineReportUnitDetail.getFarmerNameKannada() + " , ಬಿನ್/ಕೋಂ " + dtrOnlineReportUnitDetail.getFatherNameKannada() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + dtrOnlineReportUnitDetail.getFarmerAddress() + "(" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +dtrOnlineReportUnitDetail.getTalukNameInKannada()+ ", " + dtrOnlineReportUnitDetail.getVillageNameInKannada());
+            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+//            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
+            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+            dtrOnlineReportUnitDetail.setMarketFee(String.format("%.2f", (Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount())));
+
+
+
+            dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
+            dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
+            dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
+            dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
+            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getCocoonAge());
+            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+            dynamicRow.createCell(13).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(14).setCellValue(dtrOnlineReportUnitDetail.getRaceName());
+
+            dynamicRowStartsFrom++;
+        }
+
+        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+        Row sumRow = sheet.createRow(endOfDynamicRowFrom);
+
+        sumRow.createCell(3).setCellValue("ತೂಕ: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+        sumRow.createCell(6).setCellValue("ಒಟ್ಟು ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(7).setCellValue("ರೈತರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(8).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(9).setCellValue("ಖರೀದಿದಾರರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+
+        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
+        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
+        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom + 4);
+        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom + 5);
+        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom + 6);
+        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom + 7);
+        Row summaryRow7 = sheet.createRow(endOfDynamicRowFrom + 8);
+        Row summaryRow8 = sheet.createRow(endOfDynamicRowFrom + 9);
+        Row summaryRow9 = sheet.createRow(endOfDynamicRowFrom + 10);
+        Row summaryRow10 = sheet.createRow(endOfDynamicRowFrom + 11);
+        Row summaryRow11 = sheet.createRow(endOfDynamicRowFrom + 12);
+
+
+        summaryRow1.createCell(0).setCellValue("ಒಟ್ಟು ಲಾಟ್ ಗಳು: " + reportDataResponse.getContent().getTotalLots());
+        summaryRow2.createCell(0).setCellValue("ಒಟ್ಟು ವಹಿವಾಟಾಗಿರುವ ಲಾಟ್ ಗಳು:: " + reportDataResponse.getContent().getPaymentSuccessLots());
+        if ((reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()) > 0) {
+            summaryRow3.createCell(0).setCellValue("ವಹಿವಾಟಾಗದ ಲಾಟ್ ಗಳು: " + (reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots()));
+        } else {
+            summaryRow3.createCell(0).setCellValue("ವಹಿವಾಟಾಗದ ಲಾಟ್ ಗಳು: 0");
+        }
+        summaryRow4.createCell(0).setCellValue("ರೈತರ ಚೆಕ್ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        summaryRow5.createCell(0).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        summaryRow6.createCell(0).setCellValue("ಖರೀದಿದಾರರ ವ್ಯವಹಾರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        // Add Min, Max, Avg, and Total Amount
+        summaryRow7.createCell(0).setCellValue("ಕನಿಷ್ಠ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getMinAmount()));
+        summaryRow8.createCell(0).setCellValue("ಗರಿಷ್ಠ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getMaxAmount()));
+        summaryRow9.createCell(0).setCellValue("ಸರಾಸರಿ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getAvgAmount()));
+        summaryRow10.createCell(0).setCellValue("ಒಟ್ಟು ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        summaryRow11.createCell(0).setCellValue("ಒಟ್ಟು ತೂಕ: " + roundToLong(reportDataResponse.getContent().getTotalWeight()));
+
+
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= 15; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        return new FileInputStream(filePath.toString());
+    }
+
+    private FileInputStream blankDtrReportForSilkType(DTROnlineRequest requestDto) throws Exception {
+        DTRReportResponse reportDataResponse = apiService.blankDtrReportForSilkType(requestDto);
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = requestDto.getToDate().format(formatter);
+        String marketNameKannada = "";
+        if (reportDataResponse.getContent().getMarketNameKannada() != null) {
+            marketNameKannada = reportDataResponse.getContent().getMarketNameKannada();
+        }
+        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + marketNameKannada + " ದಿನವಹಿ ವಹಿವಾಟು ತಖ್ತೆಃ : " + formattedDate);
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("ಕ್ರಮ ಸಂಖ್ಯೆ ");
+        subHeaderRow.createCell(1).setCellValue("ಲಾಟ್ ಸಂಖ್ಯೆ");
+        subHeaderRow.createCell(2).setCellValue("ರೈತರ ವಿವರಗಳು");
+        subHeaderRow.createCell(3).setCellValue("ತೂಕ");
+        subHeaderRow.createCell(4).setCellValue("ಗೂಡಿನ  ವಯಸ್ಸು ");
+        subHeaderRow.createCell(5).setCellValue("ಬಿಡ್ ಮೊತ್ತ");
+        subHeaderRow.createCell(6).setCellValue("ಮೊತ್ತ ");
+        subHeaderRow.createCell(7).setCellValue("ರೈತರ ಮೊತ್ತ ");
+        subHeaderRow.createCell(8).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ");
+        subHeaderRow.createCell(9).setCellValue("ಖರೀದಿದಾರರ ಮೊತ್ತ ");
+        subHeaderRow.createCell(10).setCellValue("ಖರೀದಿದಾರರ ವಿವರಗಳು");
+        subHeaderRow.createCell(11).setCellValue("ಬ್ಯಾಂಕ್ ವಿವರಗಳು");
+        subHeaderRow.createCell(12).setCellValue("ಐಎಫ್ಎಸ್ಸಿ");
+        subHeaderRow.createCell(13).setCellValue("ಖಾತೆ ಸಂಖ್ಯೆ");
+        subHeaderRow.createCell(14).setCellValue("ತಳಿ ");
+
+        int dynamicRowStartsFrom = 2;
+        for(int k=0; k<reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().size();k++) {
+
+            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+            DTROnlineReportUnitDetail dtrOnlineReportUnitDetail = reportDataResponse.getContent().getDtrOnlineReportUnitDetailList().get(k);
+
+            String farmerAddress = "";
+            if (dtrOnlineReportUnitDetail.getFarmerAddress() != null) {
+                farmerAddress = "/" + dtrOnlineReportUnitDetail.getFarmerAddress() + ",";
+            }
+
+            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+//            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ")");
+            dtrOnlineReportUnitDetail.setFarmerDetails(" ಶ್ರೀ /ಶ್ರೀಮತಿ. " +dtrOnlineReportUnitDetail.getFarmerNameKannada() + " , ಬಿನ್/ಕೋಂ " + dtrOnlineReportUnitDetail.getFatherNameKannada() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + dtrOnlineReportUnitDetail.getFarmerAddress() + "(" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +dtrOnlineReportUnitDetail.getTalukNameInKannada()+ ", " + dtrOnlineReportUnitDetail.getVillageNameInKannada());
+
+            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
+//            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+//            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount()))));
+//            dtrOnlineReportUnitDetail.setReelerAmount(String.valueOf(roundToLong(Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount()))));
+            dtrOnlineReportUnitDetail.setMarketFee(String.format("%.2f", (Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee()))));
+            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+            dtrOnlineReportUnitDetail.setReelerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount())));
+
+
+
+            dynamicRow.createCell(0).setCellValue(dtrOnlineReportUnitDetail.getSerialNumber());
+            dynamicRow.createCell(1).setCellValue(dtrOnlineReportUnitDetail.getAllottedLotId());
+            dynamicRow.createCell(2).setCellValue(dtrOnlineReportUnitDetail.getFarmerDetails());
+            dynamicRow.createCell(3).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(dtrOnlineReportUnitDetail.getWeight())));
+            dynamicRow.createCell(4).setCellValue(dtrOnlineReportUnitDetail.getCocoonAge());
+            dynamicRow.createCell(5).setCellValue(dtrOnlineReportUnitDetail.getBidAmount());
+            dynamicRow.createCell(6).setCellValue(dtrOnlineReportUnitDetail.getLotSoldOutAmount());
+            dynamicRow.createCell(7).setCellValue(dtrOnlineReportUnitDetail.getFarmerAmount());
+            dynamicRow.createCell(8).setCellValue(dtrOnlineReportUnitDetail.getMarketFee());
+            dynamicRow.createCell(9).setCellValue(dtrOnlineReportUnitDetail.getReelerAmount());
+            dynamicRow.createCell(10).setCellValue(dtrOnlineReportUnitDetail.getReelerDetails());
+            dynamicRow.createCell(11).setCellValue(dtrOnlineReportUnitDetail.getBankDetails());
+            dynamicRow.createCell(12).setCellValue(dtrOnlineReportUnitDetail.getIfscCode());
+            dynamicRow.createCell(13).setCellValue(dtrOnlineReportUnitDetail.getAccountNumber());
+            dynamicRow.createCell(14).setCellValue(dtrOnlineReportUnitDetail.getRaceName());
+
+            dynamicRowStartsFrom++;
+        }
+
+        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+        Long minAmount = reportDataResponse.getContent().getMinAmount();
+        Row sumRow = sheet.createRow(endOfDynamicRowFrom);
+
+        sumRow.createCell(3).setCellValue("ತೂಕ: " + roundToThreeDecimalPlaces(reportDataResponse.getContent().getTotalWeight()));
+        sumRow.createCell(6).setCellValue("ಒಟ್ಟು ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        sumRow.createCell(7).setCellValue("ರೈತರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        sumRow.createCell(8).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        sumRow.createCell(9).setCellValue("ಖರೀದಿದಾರರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+
+        Row summaryRow1 = sheet.createRow(endOfDynamicRowFrom + 2);
+        Row summaryRow2 = sheet.createRow(endOfDynamicRowFrom + 3);
+        Row summaryRow3 = sheet.createRow(endOfDynamicRowFrom + 4);
+        Row summaryRow4 = sheet.createRow(endOfDynamicRowFrom + 5);
+        Row summaryRow5 = sheet.createRow(endOfDynamicRowFrom + 6);
+        Row summaryRow6 = sheet.createRow(endOfDynamicRowFrom + 7);
+        Row summaryRow7 = sheet.createRow(endOfDynamicRowFrom + 8);
+        Row summaryRow8 = sheet.createRow(endOfDynamicRowFrom + 9);
+        Row summaryRow9 = sheet.createRow(endOfDynamicRowFrom + 10);
+        Row summaryRow10 = sheet.createRow(endOfDynamicRowFrom + 11);
+        Row summaryRow11 = sheet.createRow(endOfDynamicRowFrom + 12);
+
+
+        summaryRow1.createCell(0).setCellValue("ಒಟ್ಟು ಲಾಟ್ ಗಳು: " + reportDataResponse.getContent().getTotalLots());
+        summaryRow2.createCell(0).setCellValue("ಒಟ್ಟು ವಹಿವಾಟಾಗಿರುವ ಲಾಟ್ ಗಳು: " + reportDataResponse.getContent().getPaymentSuccessLots());
+        summaryRow3.createCell(0).setCellValue("ವಹಿವಾಟಾಗದ ಲಾಟ್ ಗಳು: " + Math.max(reportDataResponse.getContent().getTotalLots() - reportDataResponse.getContent().getPaymentSuccessLots(), 0));
+        summaryRow4.createCell(0).setCellValue("ರೈತರ ಚೆಕ್ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerAmount()));
+        summaryRow5.createCell(0).setCellValue("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ: " + roundToLong(reportDataResponse.getContent().getTotalFarmerMarketFee() + reportDataResponse.getContent().getTotalReelerMarketFee()));
+        summaryRow6.createCell(0).setCellValue("ಖರೀದಿದಾರರ ವ್ಯವಹಾರ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotalReelerAmount()));
+        // Add Min, Max, Avg, and Total Amount
+        summaryRow7.createCell(0).setCellValue("ಕನಿಷ್ಠ ಮೊತ್ತ: " + roundToLong(minAmount != null ? minAmount : 0.0));
+        summaryRow8.createCell(0).setCellValue("ಗರಿಷ್ಠ ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getMaxAmount()));
+        summaryRow9.createCell(0).setCellValue("ಸರಾಸರಿ ಮೊತ್ತ : " + roundToLong(reportDataResponse.getContent().getAvgAmount()));
+        summaryRow10.createCell(0).setCellValue("ಒಟ್ಟು ಮೊತ್ತ: " + roundToLong(reportDataResponse.getContent().getTotallotSoldOutAmount()));
+        summaryRow11.createCell(0).setCellValue("ಒಟ್ಟು ತೂಕ: " + roundToLong(reportDataResponse.getContent().getTotalWeight()));
+
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= 13; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("dtr_report" + Util.getISTLocalDate() + ".xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        return new FileInputStream(filePath.toString());
+    }
+
+
     @PostMapping("/unit-counter-report")
     public ResponseEntity<?> unitCounterReport(@RequestBody UnitCounterReportRequest request) {
         try {
             FileInputStream fileInputStream =  generateUnitCounterReport(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "unit_counter_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/unit-counter-report-silk")
+    public ResponseEntity<?> unitCounterReportSilkType(@RequestBody UnitCounterReportRequest request) {
+        try {
+            FileInputStream fileInputStream =  generateUnitCounterReportSilkType(request);
 
             InputStreamResource resource = new InputStreamResource(fileInputStream);
 
@@ -2595,6 +2946,67 @@ private FileInputStream generateUnitCounterReport(UnitCounterReportRequest reque
 }
 
 
+    private FileInputStream generateUnitCounterReportSilkType(UnitCounterReportRequest requestDto) throws Exception {
+        UnitCounterReportResponse reportDataResponse = apiService.unitCounterReportSilkType(requestDto);
+        List<UnitCounterReportInfo> unitCounterReportInfoList = reportDataResponse.getContent();
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Unit Counter Report For, " + unitCounterReportInfoList.get(0).getLotTransactionDate());
+
+        Row subHeaderRow = sheet.createRow(1);
+//    subHeaderRow.createCell(0).setCellValue("Sl No");
+        subHeaderRow.createCell(0).setCellValue("Lot No");
+        subHeaderRow.createCell(1).setCellValue("Date");
+        subHeaderRow.createCell(2).setCellValue("Trader License");
+        subHeaderRow.createCell(3).setCellValue("Trader Name");
+        subHeaderRow.createCell(4).setCellValue("Bid Amount");
+        subHeaderRow.createCell(5).setCellValue("Weight");
+        subHeaderRow.createCell(6).setCellValue("Amt");
+        subHeaderRow.createCell(7).setCellValue("MF Amt");
+
+        int dynamicRowStartsFrom = 2;
+        for(int k = 0; k < unitCounterReportInfoList.size(); k++) {
+            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+            UnitCounterReportInfo unitCounterReportInfo = unitCounterReportInfoList.get(k);
+
+//        dynamicRow.createCell(0).setCellValue(unitCounterReportInfo.getSerialNumber());
+            dynamicRow.createCell(0).setCellValue(unitCounterReportInfo.getAllottedLotId());
+            dynamicRow.createCell(1).setCellValue(unitCounterReportInfo.getLotTransactionDate());
+            dynamicRow.createCell(2).setCellValue(unitCounterReportInfo.getTraderLicenseNumber());
+            dynamicRow.createCell(3).setCellValue(unitCounterReportInfo.getTraderName());
+            dynamicRow.createCell(4).setCellValue(unitCounterReportInfo.getBidAmount());
+            dynamicRow.createCell(5).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
+            dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
+            dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getTraderMarketFee()));
+            dynamicRowStartsFrom++;
+        }
+
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= 8; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("unit_counter_report" + Util.getISTLocalDate() + ".xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        return new FileInputStream(filePath.toString());
+    }
+
+
     @PostMapping("/district-monthly-report")
     public ResponseEntity<?> districtMonthlyReport(@RequestBody MonthlyDistrictRequest request) {
         try {
@@ -2703,6 +3115,96 @@ public static String roundToThreeDecimalPlaces(double value) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(0, BigDecimal.ROUND_HALF_UP);
         return bd.doubleValue();
+    }
+
+    @PostMapping("/district-monthly-report-silk")
+    public ResponseEntity<?> districtMonthlyReportSilk(@RequestBody MonthlyDistrictRequest request) {
+        try {
+            FileInputStream fileInputStream =  generateDistrictMonthlyReportSilk(request);
+
+            InputStreamResource resource = new InputStreamResource(fileInputStream);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=sample.xlsx");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "district_monthly_report" + Util.getISTLocalDate() + ".csv")
+                    .contentType(MediaType.parseMediaType("application/csv"))
+                    .body(resource);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
+    private FileInputStream generateDistrictMonthlyReportSilk(MonthlyDistrictRequest requestDto) throws Exception {
+        MonthlyDistrictResponse reportDataResponse = apiService.monthlyDistrictReportSilk(requestDto);
+        MonthlyDistrictReport monthlyDistrictReport = reportDataResponse.getContent();
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Sheet 1");
+
+        // Create a header row
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " + monthlyDistrictReport.getMarketNameInKannada() + " ಜಿಲ್ಲಾವಾರು ವಹಿವಾಟು ಘೋಷ್ವಾರೆ : " + monthlyDistrictReport.getStartDate() + " - " + monthlyDistrictReport.getEndDate());
+
+        Row subHeaderRow = sheet.createRow(1);
+        subHeaderRow.createCell(0).setCellValue("Sl No");
+        subHeaderRow.createCell(1).setCellValue("State");
+        subHeaderRow.createCell(2).setCellValue("District");
+        subHeaderRow.createCell(3).setCellValue("Taluk");
+        subHeaderRow.createCell(4).setCellValue("Race");
+        subHeaderRow.createCell(5).setCellValue("Lots");
+        subHeaderRow.createCell(6).setCellValue("Weight");
+
+        int dynamicRowStartsFrom = 2;
+        for(int k=0; k<monthlyDistrictReport.getMonthlyDistrictReportInfoList().size();k++) {
+
+            Row dynamicRow = sheet.createRow(dynamicRowStartsFrom);
+            MonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getMonthlyDistrictReportInfoList().get(k);
+
+            dynamicRow.createCell(0).setCellValue(monthlyDistrictReportInfo.getSerialNumber());
+            dynamicRow.createCell(1).setCellValue(monthlyDistrictReportInfo.getStateName());
+            dynamicRow.createCell(2).setCellValue(monthlyDistrictReportInfo.getDistrictName());
+            dynamicRow.createCell(3).setCellValue(monthlyDistrictReportInfo.getTalukName());
+            dynamicRow.createCell(4).setCellValue(monthlyDistrictReportInfo.getRaceName());
+            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+            dynamicRow.createCell(6).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(monthlyDistrictReportInfo.getTotalWeight())));
+            dynamicRowStartsFrom++;
+        }
+
+        int endOfDynamicRowFrom = dynamicRowStartsFrom;
+        for(int k=0; k<monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().size();k++) {
+
+            Row dynamicRow = sheet.createRow(endOfDynamicRowFrom);
+            SumOfMonthlyDistrictReportInfo monthlyDistrictReportInfo = monthlyDistrictReport.getSumOfMonthlyDistrictReportInfoList().get(k);
+            dynamicRow.createCell(4).setCellValue("Total "+monthlyDistrictReportInfo.getRaceName());
+            dynamicRow.createCell(5).setCellValue(monthlyDistrictReportInfo.getTotalLots());
+            dynamicRow.createCell(6).setCellValue("Wt: "+roundToThreeDecimalPlaces(Double.parseDouble(monthlyDistrictReportInfo.getTotalWeight())));
+            endOfDynamicRowFrom++;
+        }
+        // Auto-size all columns
+        for (int columnIndex = 1; columnIndex <= 7; columnIndex++) {
+            sheet.autoSizeColumn(columnIndex, true);
+        }
+
+        // Define the directory path relative to the user's home directory
+        String userHome = System.getProperty("user.home");
+        String directoryPath = Paths.get(userHome, "Downloads").toString();
+        Path directory = Paths.get(directoryPath);
+        Files.createDirectories(directory);
+        Path filePath = directory.resolve("monthly_district_report" + Util.getISTLocalDate() + ".xlsx");
+
+        // Write the workbook content to the specified file path
+        FileOutputStream fileOut = new FileOutputStream(filePath.toString());
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        return new FileInputStream(filePath.toString());
     }
 
 }
