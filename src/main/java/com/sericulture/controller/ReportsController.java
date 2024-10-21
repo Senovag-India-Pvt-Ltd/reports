@@ -2278,14 +2278,14 @@ public class ReportsController {
 
             DecimalFormat df = new DecimalFormat("#.00");
 
-            double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
             double reelerMarketFee = apiResponse.content.getReelerMarketFee();
-            double totalMarketFee = farmerMarketFee + reelerMarketFee;
+            double traderMarketFee = apiResponse.content.getTraderMarketFee();
+            double totalMarketFee = reelerMarketFee + traderMarketFee;
 
-            String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
+            String formatFees = df.format(reelerMarketFee) + "+" + df.format(traderMarketFee) + "=" + df.format(totalMarketFee);
             apiResponse.content.setFeespaid(formatFees);
 
-            String amountPaid = df.format(reelerMarketFee);  // Format reelerMarketFee to two decimal places
+            String amountPaid = df.format(traderMarketFee);  // Format reelerMarketFee to two decimal places
             apiResponse.content.setAmountPaid(amountPaid);
 
 
@@ -2298,12 +2298,12 @@ public class ReportsController {
 //
 //
             long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
-            long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
-            long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
-            String farmeramout = "" + (total - farmerfee);
-            String relaramout = "" + (total - realerfee);
+            long reelerfee = Math.round(apiResponse.content.getReelerMarketFee());
+            long traderfee = Math.round(apiResponse.content.getTraderMarketFee());
+            String farmeramout = "" + (total - reelerfee);
+            String relaramout = "" + (total - traderfee);
 
-            long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
+            long slip1Amount = Math.round((total - reelerfee) + reelerfee + traderfee);
 
             // Assuming farmerMarketFee is a double or can be converted to double
 //            double farmerMarketFeeDouble = (double) farmerMarketFee;
@@ -2318,7 +2318,7 @@ public class ReportsController {
 
 
 // Assuming farmerMarketFee is a double or a float
-            double farmerMarketFeeDouble = (double) farmerMarketFee;
+            double farmerMarketFeeDouble = (double) reelerfee;
             DecimalFormat decimalFormat = new DecimalFormat("#.00");
             String format = decimalFormat.format(farmerMarketFeeDouble); // Format to 2 decimal places
             apiResponse.content.setPaidAmount(format);
@@ -2330,11 +2330,11 @@ public class ReportsController {
 //            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
             apiResponse.content.setAmountfarmer(farmeramout);
             apiResponse.content.setAmountrealar(relaramout);
-            apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getIfscCode());
-            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getAccountNumber() );
-            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
+            apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getReelerAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getReelerIfscCode());
+            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getReelerAccountNumber() );
+            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getTraderMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
 //            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
-            apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
+            apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getReelerIfscCode());
 
 
             String inputDateTime = "";
@@ -2563,7 +2563,7 @@ public class ReportsController {
             if (apiResponse.content.getLotSoldOutAmount().equals("0.0")) {
                 apiResponse.content.setLotSoldOutAmount("");
             } else {
-                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getReelerMarketFee()));
 
 //                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
 
