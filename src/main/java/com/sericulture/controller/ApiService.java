@@ -92,8 +92,8 @@ public class ApiService {
 
     public ContentRoot fetchDataFromApiSeedCocoonTriplet(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-//        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
-        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
