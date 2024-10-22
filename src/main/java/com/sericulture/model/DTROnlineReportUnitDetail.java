@@ -81,4 +81,8 @@ public class DTROnlineReportUnitDetail {
     private String max_amount;
     private String min_amount;
     private String avg_amount;
+    private String marketNameInKannada;
+    private String reelerVillage;
+    private String reelerTaluk;
+    private String reelerBankAccountNumber;
 }

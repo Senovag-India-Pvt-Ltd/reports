@@ -1146,6 +1146,11 @@ public class ReportsController {
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
+            apiResponse.content.setIfscCode(apiResponse.content.getReelerIfscCode());
+            apiResponse.content.setAccountNumber(apiResponse.content.getReelerAccountNumber());
+            apiResponse.content.setFarmerMobileNumber(apiResponse.content.getReelerMobileNumber());
+
+
             String traderNumberText = "";
             String traderAddressText = "";
             if (apiResponse.content.getTraderLicenseNumber() != null) {
@@ -1174,8 +1179,8 @@ public class ReportsController {
             slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
             apiResponse.content.setAmountfarmer(farmeramout);
             apiResponse.content.setAmountrealar(relaramout);
-            apiResponse.content.setLoginname_accountnumber_ifsccode("    (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
-            apiResponse.content.setAccountnumber_ifsccode("Bank - " + apiResponse.content.getAccountNumber() + "(" + apiResponse.content.getIfscCode() + ")");
+            apiResponse.content.setLoginname_accountnumber_ifsccode("    (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getReelerAccountNumber() + "(" + apiResponse.content.getReelerIfscCode() + ")");
+            apiResponse.content.setAccountnumber_ifsccode("Bank - " + apiResponse.content.getReelerAccountNumber() + "(" + apiResponse.content.getReelerIfscCode() + ")");
             apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount.toString());
             //  apiResponse.content.setReeleramount(relaramout);
             String inputDateTime = "";
@@ -2331,7 +2336,7 @@ public class ReportsController {
             apiResponse.content.setAmountfarmer(farmeramout);
             apiResponse.content.setAmountrealar(relaramout);
             apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getReelerAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getReelerIfscCode());
-            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getReelerAccountNumber() );
+            apiResponse.content.setAccountnumber_ifsccode("  Reeler Bank A/c No. - " + apiResponse.content.getReelerAccountNumber() );
             apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getTraderMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
 //            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
             apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getReelerIfscCode());
