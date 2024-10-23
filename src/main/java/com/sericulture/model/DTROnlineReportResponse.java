@@ -24,9 +24,10 @@ public class DTROnlineReportResponse extends ResponseBody {
 //    private double totalFarmerMarketFee;
     private float totalFarmerAmount;
     private float totalReelerAmount;
+    private float totalTraderAmount;
     private float totalReelerMarketFee;
     private float totalFarmerMarketFee;
-
+    private float totalTraderMarketFee;
     private int totalBidAmount;
     private float totalWeight;
     private float totallotSoldOutAmount;
@@ -46,6 +47,7 @@ public class DTROnlineReportResponse extends ResponseBody {
     private String fatherNameKannada;
     private String talukNameInKannada;
     private String villageNameInKannada;
+    private String marketNameInKannada;
 
 
 }

@@ -3165,7 +3165,7 @@ public class ReportsController {
         String formattedDate = requestDto.getToDate().format(formatter);
         content.setHeaderText("ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ  ,  " + marketNameKannada + "   ದಿನವಹಿ  ವಹಿವಾಟು ತಖ್ತೆಃ  : " + formattedDate);
 //        content.setTotal_weight_with_amount_details("Wt: " + roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()) + " , Amount: " + (long) apiResponse.getContent().getTotalBidAmount() + " , Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount() +", Farmer Amt: " + (long) apiResponse.getContent().getTotalFarmerAmount() +", MF: " + (long) (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()) + ", Reeler Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
-        content.setTotal_weight_with_amount_details("Wt: " + roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()) + " , Amount: " +  apiResponse.getContent().getTotalBidAmount() + " , Amount: " +  apiResponse.getContent().getTotallotSoldOutAmount() +", Farmer Amt: " + apiResponse.getContent().getTotalFarmerAmount() +", MF: " +  (apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()) + ", Reeler Amt: " +  apiResponse.getContent().getTotalReelerAmount());
+        content.setTotal_weight_with_amount_details("Wt: " + roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight()) + " , Amount: " +  apiResponse.getContent().getTotalBidAmount() + " , Amount: " +  apiResponse.getContent().getTotallotSoldOutAmount() +", Reeler Amt: " + apiResponse.getContent().getTotalReelerAmount() +", MF: " +  (apiResponse.getContent().getTotalTraderMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()) + ", Trader Amt: " +  apiResponse.getContent().getTotalTraderAmount());
         content.setTotal_lots("ಒಟ್ಟು   ಲಾಟ್ ಗಳು : " + apiResponse.getContent().getTotalLots());
         content.setTransacted_lots("ಒಟ್ಟು   ವಹಿವಾಟಾಗಿರುವ ಲಾಟ್ ಗಳು : " + apiResponse.getContent().getPaymentSuccessLots());
         if ((apiResponse.getContent().getTotalLots() - apiResponse.getContent().getPaymentSuccessLots()) > 0) {
@@ -3181,12 +3181,12 @@ public class ReportsController {
 //        content.setAvg_amount(" Avg Amount : " + (long) apiResponse.getContent().getAvgAmount());
 //        content.setReeler_transaction_amt("Reeler transaction Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
 //        content.setLotSoldOutAmount("Total Amount: " + (long) apiResponse.getContent().getTotallotSoldOutAmount());
-        content.setFarmer_cheque("ರೈತರ ಚೆಕ್ ಮೊತ್ತ : " + (Math.round(apiResponse.getContent().getTotalFarmerAmount())));
+        content.setFarmer_cheque("ರೀಲರ್ ಚೆಕ್ ಮೊತ್ತ : " + (Math.round(apiResponse.getContent().getTotalReelerAmount())));
         content.setMf_amount("ಮಾರುಕಟ್ಟೆ   ಶುಲ್ಕ : " + Math.round(apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
         content.setMin_amount("ಕನಿಷ್ಠ   ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getMinAmount()));
         content.setMax_amount("ಗರಿಷ್ಠ   ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getMaxAmount()));
         content.setAvg_amount("ಸರಾಸರಿ  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getAvgAmount()));
-        content.setReeler_transaction_amt("ಖರೀದಿದಾರರ ವ್ಯವಹಾರ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalReelerAmount()));
+        content.setReeler_transaction_amt("ಟ್ರೇಡರ್   ವ್ಯವಹಾರ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalTraderAmount()));
         content.setLotSoldOutAmount("ಒಟ್ಟು   ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotallotSoldOutAmount()));
         content.setWeight("ಒಟ್ಟು   ತೂಕ : " + (roundToThreeDecimalPlaces(apiResponse.getContent().getTotalWeight())));
 
@@ -3228,11 +3228,15 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setWeight(
                     String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(dtrOnlineReportUnitDetail.getWeight()))));
             //            groupLotRaceStatus.setWeight31(String.valueOf(roundToThreeDecimalPlaces(parseDoubleOrDefault(apiResponse.getContent().getRaceWiseLotStatus().get(i).getWeight(), 0))));
-            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+//            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getBankName() + "/" + dtrOnlineReportUnitDetail.getAccountNumber());
+            dtrOnlineReportUnitDetail.setBankDetails(dtrOnlineReportUnitDetail.getReelerBankName() + "/" + dtrOnlineReportUnitDetail.getReelerBankAccountNumber());
 //            dtrOnlineReportUnitDetail.setFarmerDetails(dtrOnlineReportUnitDetail.getFarmerFirstName() + " " + dtrOnlineReportUnitDetail.getFarmerMiddleName() + " " + dtrOnlineReportUnitDetail.getFarmerLastName() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + farmerAddress + " (" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +talukName + " ,  " + villageName );
 //            dtrOnlineReportUnitDetail.setFarmerDetails(" ಶ್ರೀ /ಶ್ರೀಮತಿ. " +dtrOnlineReportUnitDetail.getFarmerNameKannada() + " , ಬಿನ್/ಕೋಂ " + dtrOnlineReportUnitDetail.getFatherNameKannada() + "(" + dtrOnlineReportUnitDetail.getFarmerNumber() + ") " + dtrOnlineReportUnitDetail.getFarmerAddress() + "(" + dtrOnlineReportUnitDetail.getFarmerMobileNumber() + ") "  +dtrOnlineReportUnitDetail.getTalukNameInKannada()+ ", " + dtrOnlineReportUnitDetail.getVillageNameInKannada());
-            dtrOnlineReportUnitDetail.setReelerDetails(dtrOnlineReportUnitDetail.getReelerName() + "(" + dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
+            dtrOnlineReportUnitDetail.setReelerDetails(" ಶ್ರೀ /ಶ್ರೀಮತಿ. " +dtrOnlineReportUnitDetail.getReelerName() +  " ("+ dtrOnlineReportUnitDetail.getReelerLicense() + ")" + "(" + dtrOnlineReportUnitDetail.getReelerMobile() + ")");
             dtrOnlineReportUnitDetail.setFarmerDetails(" ಶ್ರೀ /ಶ್ರೀಮತಿ. " +dtrOnlineReportUnitDetail.getTraderFirstName() + " "+dtrOnlineReportUnitDetail.getTraderLastName() +" , ಬಿನ್/ಕೋಂ " + dtrOnlineReportUnitDetail.getTraderFatherName() + "(" + dtrOnlineReportUnitDetail.getTraderLicenseNumber() + ") " + dtrOnlineReportUnitDetail.getTraderAddress() + "(" + dtrOnlineReportUnitDetail.getTraderMobileNumber() + ") "  +dtrOnlineReportUnitDetail.getTraderDistrictNameInKannada());
+            dtrOnlineReportUnitDetail.setIfscCode(dtrOnlineReportUnitDetail.getReelerIfscCode());
+            dtrOnlineReportUnitDetail.setAccountNumber(dtrOnlineReportUnitDetail.getReelerBankAccountNumber());
+
 
 //            dtrOnlineReportUnitDetail.setMarketFee(String.valueOf(Math.round((Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee())))));
 //            dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.valueOf(Math.round(Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount()))));
@@ -3242,7 +3246,9 @@ public class ReportsController {
             dtrOnlineReportUnitDetail.setCocoonAge(dtrOnlineReportUnitDetail.getCocoonAge());
             dtrOnlineReportUnitDetail.setMarketFee(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerMarketFee()) + Double.parseDouble(dtrOnlineReportUnitDetail.getReelerMarketFee())));
             dtrOnlineReportUnitDetail.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getLotSoldOutAmount())));
-            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+//            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getFarmerAmount())));
+            dtrOnlineReportUnitDetail.setFarmerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getTraderAmount())));
+
             dtrOnlineReportUnitDetail.setReelerAmount(String.format("%.2f", Double.parseDouble(dtrOnlineReportUnitDetail.getReelerAmount())));
 
 
@@ -3262,9 +3268,9 @@ public class ReportsController {
 //            dtrOnlineReportUnitDetail.setMin_amount("Min Amount : " + (long) apiResponse.getContent().getMinAmount());
 //            dtrOnlineReportUnitDetail.setMax_amount(" Max Amount : " +(long) apiResponse.getContent().getMaxAmount());
 //            dtrOnlineReportUnitDetail.setAvg_amount(" Avg Amount : " + (long) apiResponse.getContent().getAvgAmount());
-            dtrOnlineReportUnitDetail.setFarmer_cheque("ರೈತರ ಚೆಕ್ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalFarmerAmount()));
-            dtrOnlineReportUnitDetail.setMf_amount("ಮಾರುಕಟ್ಟೆ   ಶುಲ್ಕ : " + Math.round(apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
-            dtrOnlineReportUnitDetail.setReeler_transaction_amt("ಖರೀದಿದಾರರ ವ್ಯವಹಾರ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalReelerAmount()));
+            dtrOnlineReportUnitDetail.setFarmer_cheque("ರೀಲರ್ ಚೆಕ್ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalReelerAmount()));
+            dtrOnlineReportUnitDetail.setMf_amount("ಮಾರುಕಟ್ಟೆ   ಶುಲ್ಕ : " + Math.round(apiResponse.getContent().getTotalTraderMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
+            dtrOnlineReportUnitDetail.setReeler_transaction_amt("ಟ್ರೇಡರ್  ವ್ಯವಹಾರ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalTraderAmount()));
             dtrOnlineReportUnitDetail.setMin_amount("ಕನಿಷ್ಠ  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getMinAmount()));
             dtrOnlineReportUnitDetail.setMax_amount("ಗರಿಷ್ಠ  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getMaxAmount()));
             dtrOnlineReportUnitDetail.setAvg_amount("ಸರಾಸರಿ  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getAvgAmount()));
@@ -3283,9 +3289,9 @@ public class ReportsController {
 //        contentLastColumn.setReelerAmount("R Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
 //        contentLastColumn.setReelerAmount("R Amt: " + (long) apiResponse.getContent().getTotalReelerAmount());
         contentLastColumn.setLotSoldOutAmount("ಒಟ್ಟು ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotallotSoldOutAmount()));
-        contentLastColumn.setFarmerAmount("ರೈತರ  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalFarmerAmount()));
+        contentLastColumn.setFarmerAmount("ಟ್ರೇಡರ್ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalTraderAmount()));
         contentLastColumn.setMarketFee("ಮಾರುಕಟ್ಟೆ ಶುಲ್ಕ : " + Math.round(apiResponse.getContent().getTotalFarmerMarketFee() + apiResponse.getContent().getTotalReelerMarketFee()));
-        contentLastColumn.setReelerAmount("ಖರೀದಿದಾರರ ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalReelerAmount()));
+        contentLastColumn.setReelerAmount("ರೀಲರ್  ಮೊತ್ತ : " + Math.round(apiResponse.getContent().getTotalReelerAmount()));
         contentLastColumn.setReelerDetails("");
         contentLastColumn.setBankDetails("");
         contentLastColumn.setIfscCode("");

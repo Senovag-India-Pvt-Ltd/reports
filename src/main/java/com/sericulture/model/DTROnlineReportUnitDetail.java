@@ -85,4 +85,6 @@ public class DTROnlineReportUnitDetail {
     private String reelerVillage;
     private String reelerTaluk;
     private String reelerBankAccountNumber;
+    private String traderAmount;
+
 }
