@@ -168,6 +168,8 @@ public class Content {
     private String godownName;
     private String sadodLot;
     private String traderDetails;
+    private String traderLicense;
+    private String reelerLicens;
     private double traderMarketFee;
     private double traderAmount;
 
@@ -185,6 +187,16 @@ public class Content {
     private String lgLotParentLevel;
     private String lgAuctionDate;
     private String lgBuyerName;
+    private String unitDetails;
+    private String noOfBags;
+    private String formNo;
+    private String silkQuality;
+    private String silkType;
+    private String silkQualities;
+    private String bags;
+    private String form;
+    private String silkTypes;
+
 
 
 
