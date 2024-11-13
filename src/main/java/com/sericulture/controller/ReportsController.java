@@ -149,7 +149,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("kannada_triplicate_with_variable_seed_cocoon_1.jrxml");
+            JasperReport jasperReport = getJasperReport("farmer_copy_with_variable_seed_cocoon_1.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
