@@ -1861,6 +1861,10 @@ public class ReportsController {
 //                    "  (ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
 //                    "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ."+ apiResponse.content.getAllottedLotId());t
 
+            apiResponse.content.setLgBuyerName(
+                    apiResponse.content.getLgBuyerName() != null ? apiResponse.content.getLgBuyerName() : ""
+            );
+
             if (apiResponse != null && apiResponse.content != null) {
                 // Set the sadodLot with null check
                 if (apiResponse.content.getLgLotParentLevel() != null) {
