@@ -2288,6 +2288,7 @@ public class ReportsController {
             apiResponse.content.setReelerLicens("  Reeler License No. " +apiResponse.content.getReelerLicense());
             apiResponse.content.setSilkTypes(apiResponse.content.getSilkType());
             apiResponse.content.setSilkQualities(apiResponse.content.getSilkQuality());
+            apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
             apiResponse.content.setBags(apiResponse.content.getNoOfBags());
             apiResponse.content.setForm(apiResponse.content.getFormNo());
 //            apiResponse.content.setAmount(apiResponse.content.getTotalamount());
