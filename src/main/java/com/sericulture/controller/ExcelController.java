@@ -2798,7 +2798,7 @@ public class ExcelController {
             dynamicRow.createCell(5).setCellValue(reelerMFReportInfo.getBidAmount());
             dynamicRow.createCell(6).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(reelerMFReportInfo.getWeight())));
             dynamicRow.createCell(7).setCellValue(reelerMFReportInfo.getLotSoldOutAmount());
-            dynamicRow.createCell(8).setCellValue(reelerMFReportInfo.getReelerMarketFee()+(reelerMFReportInfo.getFarmerMarketFee()));
+            dynamicRow.createCell(8).setCellValue(reelerMFReportInfo.getReelerMarketFee());
             dynamicRowStartsFrom++;
         }
 
