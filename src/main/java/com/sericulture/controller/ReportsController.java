@@ -1836,7 +1836,7 @@ public class ReportsController {
     }
     private JRDataSource getDataSourceForTripletSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
 
-        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoonTriplet(requestDto);
+        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoon(requestDto);
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
@@ -1861,17 +1861,13 @@ public class ReportsController {
 //                    "  (ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
 //                    "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ."+ apiResponse.content.getAllottedLotId());t
 
-            apiResponse.content.setLgBuyerName(
-                    apiResponse.content.getLgBuyerName() != null ? apiResponse.content.getLgBuyerName() : ""
-            );
-
             if (apiResponse != null && apiResponse.content != null) {
                 // Set the sadodLot with null check
-                if (apiResponse.content.getLgLotParentLevel() != null) {
-                    apiResponse.content.setLgLotParentLevel(apiResponse.content.getLgLotParentLevel());
+                if (apiResponse.content.getSadodLotNumber() != null) {
+                    apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
                 } else {
                     // Handle the case where sadodLotNumber is null (e.g., set to a default value)
-                    apiResponse.content.setLgLotParentLevel("DefaultSadodLot"); // Replace with an appropriate default value
+                    apiResponse.content.setSadodLot("DefaultSadodLot"); // Replace with an appropriate default value
                 }
 
                 // Build the description with null checks
@@ -1887,13 +1883,13 @@ public class ReportsController {
             DecimalFormat df = new DecimalFormat("#.00");
 
             double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
-            double lgMarketFee = apiResponse.content.getLgMarketFee();
-            double totalMarketFee = farmerMarketFee + lgMarketFee;
+            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
+            double totalMarketFee = farmerMarketFee + reelerMarketFee;
 
-            String formatFees = df.format(farmerMarketFee) + "+" + df.format(lgMarketFee) + "=" + df.format(totalMarketFee);
+            String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
             apiResponse.content.setFeespaid(formatFees);
 
-            String amountPaid = df.format(lgMarketFee);  // Format reelerMarketFee to two decimal places
+            String amountPaid = df.format(reelerMarketFee);  // Format reelerMarketFee to two decimal places
             apiResponse.content.setAmountPaid(amountPaid);
 
 
@@ -1905,7 +1901,7 @@ public class ReportsController {
 //            apiResponse.content.setPaidAmount(format);
 //
 //
-            long total = Math.round(Double.valueOf(apiResponse.content.getLgSoldOutAmount()));
+            long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
             long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
             long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
             String farmeramout = "" + (total - farmerfee);
@@ -2017,7 +2013,7 @@ public class ReportsController {
                 externalUnitLicenseAddresssText = apiResponse.content.getExternalUnitAddress();
             }
 //            apiResponse.content.setReelerDetails(reelerNumberText + " ,  ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.content.getReelerName()+" ,  ಬಿನ್/ಕೋಂ  "  +apiResponse.content.getReelerNameKannada()+ " ,  " + reelerAddressText);
-                        apiResponse.content.setReelerDetails(externalUnitLicenseNumberText + " ,  " +apiResponse.content.getExternalUnitName()+" ,   "  +externalUnitLicenseAddresssText);
+            apiResponse.content.setReelerDetails(externalUnitLicenseNumberText + " ,  " +apiResponse.content.getExternalUnitName()+" ,   "  +externalUnitLicenseAddresssText);
 
             if (apiResponse.content.getSmallBinList() != null) {
                 List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
@@ -2158,7 +2154,7 @@ public class ReportsController {
 
 //                apiResponse.content.setTotalcrates(String.valueOf(lotWeightDetails.size()));
                 apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLgSoldOutAmount() ))));
+                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
 //                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
 
 //                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
@@ -2167,22 +2163,22 @@ public class ReportsController {
 
             }
             apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            if (apiResponse.content.getLgAmount().equals("0.0")) {
-                apiResponse.content.setLgAmount("");
+            if (apiResponse.content.getBidAmount().equals("0.0")) {
+                apiResponse.content.setBidAmount("");
             } else {
-                apiResponse.content.setLgAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getLgAmount()))));
+                apiResponse.content.setBidAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getBidAmount()))));
             }
-            if (apiResponse.content.getLgLotWeight().equals("0.0")) {
-                apiResponse.content.setLgLotWeight("");
+            if (apiResponse.content.getLotWeight().equals("0.0")) {
+                apiResponse.content.setLotWeight("");
             } else {
-                double doubleValue = Double.parseDouble(apiResponse.content.getLgLotWeight());
+                double doubleValue = Double.parseDouble(apiResponse.content.getLotWeight());
                 String formattedValue = String.format("%.3f", doubleValue);
-                apiResponse.content.setLgLotWeight(formattedValue);
+                apiResponse.content.setLotWeight(formattedValue);
             }
-            if (apiResponse.content.getLgSoldOutAmount().equals("0.0")) {
-                apiResponse.content.setLgSoldOutAmount("");
+            if (apiResponse.content.getLotSoldOutAmount().equals("0.0")) {
+                apiResponse.content.setLotSoldOutAmount("");
             } else {
-                apiResponse.content.setLgSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
 
 //                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
 
@@ -2212,7 +2208,7 @@ public class ReportsController {
             System.out.println("Rounded result: " + roundedResult);
 //                apiResponse.content.setFeespaid(value1 + "+" + value2 + "=" + String.valueOf(roundedResult));
             //}
-            if (!apiResponse.content.getLgAmount().equals("")) {
+            if (!apiResponse.content.getBidAmount().equals("")) {
                 apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
             } else {
                 apiResponse.content.setReeleramount("");
