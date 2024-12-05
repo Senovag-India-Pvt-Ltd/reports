@@ -2798,7 +2798,7 @@ public class ExcelController {
             dynamicRow.createCell(5).setCellValue(reelerMFReportInfo.getBidAmount());
             dynamicRow.createCell(6).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(reelerMFReportInfo.getWeight())));
             dynamicRow.createCell(7).setCellValue(reelerMFReportInfo.getLotSoldOutAmount());
-            dynamicRow.createCell(8).setCellValue(reelerMFReportInfo.getReelerMarketFee()+(reelerMFReportInfo.getFarmerMarketFee()));
+            dynamicRow.createCell(8).setCellValue(reelerMFReportInfo.getReelerMarketFee());
             dynamicRowStartsFrom++;
         }
 
@@ -2925,7 +2925,7 @@ private FileInputStream generateUnitCounterReport(UnitCounterReportRequest reque
         dynamicRow.createCell(4).setCellValue(unitCounterReportInfo.getBidAmount());
         dynamicRow.createCell(5).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
         dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
-        dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getFarmerMarketFee()));
+        dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getReelerMarketFee());
         dynamicRowStartsFrom++;
     }
 
@@ -2986,7 +2986,7 @@ private FileInputStream generateUnitCounterReport(UnitCounterReportRequest reque
             dynamicRow.createCell(4).setCellValue(unitCounterReportInfo.getBidAmount());
             dynamicRow.createCell(5).setCellValue(roundToThreeDecimalPlaces(Double.parseDouble(unitCounterReportInfo.getWeight())));
             dynamicRow.createCell(6).setCellValue(unitCounterReportInfo.getLotSoldOutAmount());
-            dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getReelerMarketFee()+(unitCounterReportInfo.getTraderMarketFee()));
+            dynamicRow.createCell(7).setCellValue(unitCounterReportInfo.getTraderMarketFee());
             dynamicRowStartsFrom++;
         }
 

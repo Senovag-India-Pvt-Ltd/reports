@@ -196,6 +196,8 @@ public class Content {
     private String bags;
     private String form;
     private String silkTypes;
+    private String approximateEstimatedWeight;
+    private String approximateWeight;
 
 
 
