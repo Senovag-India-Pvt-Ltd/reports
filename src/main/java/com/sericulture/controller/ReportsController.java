@@ -5884,7 +5884,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader1("ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾಪಂಚಾಯತ್,_________________ರವರ ಕಚೇರಿ ನಡವಳಿಗಳು");
+            response.setHeader1("ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾಪಂಚಾಯತ್, " +apiResponse.getContent().get(0).getDistrictName() +"  ರವರ ಕಚೇರಿ ನಡವಳಿಗಳು");
             response.setHeader4("ವಿಷಯ  : ");
             response.setHeader20( apiResponse.getContent().get(0).getFinancialYear() +"______________ನೇ ಸಾಲಿನಲ್ಲಿ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)  ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() + "\n" +
                     "                            \n"+
@@ -5900,26 +5900,24 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "4.	ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ: ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು, ದಿನಾಂಕ:22.08.2023");
 
 
-            response.setHeader8 (" __________ನೇ ಸಾಲಿನಲ್ಲಿ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಎಲ್ಲಾ ವರ್ಗದ ರೈತರಿಗೆ ಮೊದಲ\n" +
+            response.setHeader8 ("         " +apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಎಲ್ಲಾ ವರ್ಗದ ರೈತರಿಗೆ ಮೊದಲ\n" +
                     "                                      \n"+
                     " 2.೦೦ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದ ವರಗೆ ಘಟಕ ದರದ ಶೇ.90 ಹಾಗೂ 2.00 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟು 5.೦೦ ಹೆಕ್ಟೇರ್ ವರಗೆ ಎಲ್ಲಾ ವರ್ಗದ ರೈತರಿಗೆ ಘಟಕ \n" +
                     "                         \n" +
                     "ದರದ ಶೇ.45 ರ ಸಹಾಯಧನ ನೀಡಲು ಉಲ್ಲೇಖ (1) ರ ಮಾರ್ಗಸೂಚಿಯಲ್ಲಿ ಅವಕಾಶವಿರುತ್ತದೆ.\n"+
                     "                     \n"+
-                    "________________ವಿಭಾಗದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು ಪರಿಶೀಲಿಸಿದೆ.  ________________ ತಾಲ್ಲೂಕಿನ\n" +
+                    "________________ವಿಭಾಗದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು ಪರಿಶೀಲಿಸಿದೆ "  +apiResponse.getContent().get(0).getTalukName()+  "ತಾಲ್ಲೂಕಿನ\n" +
                     "                           \n"+
-                    "________________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರದ ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ ______________________________________ಇವರು \n" +
+                    "________________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರದ ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು" +apiResponse.getContent().get(0).getScCategoryName()+  " \n" +
                     "                                    \n"+
-                    "ಸಾಮಾನ್ಯ/ ವಿಶೇಷ ಘಟಕ ಯೋಜನೆ/ ಗಿರಿಜನ ಉಪ ಯೋಜನೆ ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು, ________________  ತಾಲ್ಲೂಕು, ________________  ಹೋಬಳಿ, ________________ ಗ್ರಾಮದ \n" +
+                    "ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು, ________________  ತಾಲ್ಲೂಕು, ________________  ಹೋಬಳಿ, __________ ಗ್ರಾಮದ ಸರ್ವೆ ನಂ. ____________ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ \n" +
                     "     \n" +
-                    "ಸರ್ವೆ ನಂ. _________________________________ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ \n"+
+                    "ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ _______________ಸರಬರಾಜು ಪಡೆದು ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್ ಇನ್ವಾಯ್ಸ್  ಸಂಖ್ಯೆ:\n"+
                     "                                                  \n"+
-                    "ಸಂಸ್ಥೆ _________________________________________ ಸರಬರಾಜು ಪಡೆದು ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್ ಇನ್ವಾಯ್ಸ್  ಸಂಖ್ಯೆ: ________________ ದಿನಾಂಕ:______________________ \n" +
+                    " ___________ ದಿನಾಂಕ:____________ ರನ್ವಯ ದಿನಾಂಕ:__________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು, ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ \n" +
                     "                       \n"+
-                    "ರನ್ವಯ ದಿನಾಂಕ:_________________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು, ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ ಘಟಕವು ತೃಪ್ತಿಕರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ\n" +
+                    "ಘಟಕವು ತೃಪ್ತಿಕರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ __________________ಇವರು ದೃಢಪಡಿಸಿರುತ್ತಾರೆ. ಸದರಿ  ಘಟಕವು ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು \n" +
                     "                           \n" +
-                    "ಶ್ರೀ/ಶ್ರೀಮತಿ ______________________________________ಇವರು ದೃಢಪಡಿಸಿರುತ್ತಾರೆ. ಸದರಿ ಘಟಕವು ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು  \n" +
-                    "                   \n" +
                     ", ___________________ ವಿಭಾಗ ಇವರಿಂದ ದಿನಾಂಕ: _____________________ ರಂದು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿರುತ್ತದೆ ಹಾಗೂ ಮಂಜೂರಾತಿ ನೀಡಲು ಶಿಫಾರಸ್ಸು ಮಾಡಿರುತ್ತಾರೆ. \n" +
                     "                   \n"+
                     "ಕಾರ್ಯಕ್ರಮದ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಫಲಾನುಭವಿಯು ಘಟಕ ದರದ ತನ್ನ ಪಾಲಿನ ಹಣವನ್ನು ಮಾತ್ರವೇ ಘಟಕ ಸರಬರಾಜುದಾರರಿಗೆ ಪಾವತಿಸಿದ್ದಲ್ಲಿ, ರೈತರಿಂದ \n" +
@@ -5939,6 +5937,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
             response.setHeader9("ಆದೇಶ ಸಂಖ್ಯೆ:                                                                  ದಿನಾಂಕ: ___________________");
 
+            response.setHeader24("ಪೀಠಿಕೆ:-");
 
             response.setHeader10( "ಪೀಠಿಕೆಯಲ್ಲಿ ವಿವರಿಸಿರುವಂತೆ __________ನೇ ಸಾಲಿನಲ್ಲಿ __________________ಜಿಲ್ಲೆಯ ____________________ ತಾಲ್ಲೂಕಿನ _______________ \n" +
                     "                  \n"+
@@ -5955,15 +5954,21 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                                           \n"+
                     "ರಂತೆ ಮೆ:_________________ ಇವರಿಗೆ ಪಾವತಿಸಲು ರೂ.____________/- ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಸದರಿ ವೆಚ್ಚವನ್ನು ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ ________________ ಯಡಿ ಭರಿಸುವುದು." );
             response.setHeader11("ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು\n" +
-                    "ಜಿ.ಪಂ., ________________\n");
-            response.setHeader12("ಇವರಿಗೆ " +
-                    "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, __________________ ವಿಭಾಗ " +
-                    "ಪ್ರತಿಯನ್ನು ಮಾಹಿತಿ ಹಾಗೂ ಕ್ರಮಕ್ಕಾಗಿ;" +
-                    "1 ಜಿಲ್ಲಾ ಖಜಾನೆ ಅಧಿಕಾರಿಗಳು, ___________________" +
-                    "2. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ  _________________" +
-                    "3. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು ವಿಭಾಗ, ಬೆಂಗಳೂರು " +
-                    "4.	ಮೆ:__________________________________"+
-                    "5. ಶ್ರೀ/ಶ್ರೀಮತಿ___________________________ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ. ");
+                    "      \n"+
+                    "ಜಿ.ಪಂ., ________________");
+            response.setHeader19("ಇವರಿಗೆ;");
+
+            response.setHeader12("ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, __________________ ವಿಭಾಗ \n" +
+                    "                  \n"+
+                    "ಪ್ರತಿಯನ್ನು ಮಾಹಿತಿ ಹಾಗೂ ಕ್ರಮಕ್ಕಾಗಿ\n" +
+                    "                  \n"+
+                    "1 ಜಿಲ್ಲಾ ಖಜಾನೆ ಅಧಿಕಾರಿಗಳು, ___________________\n" +
+                    "                    \n"+
+                    "2. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ  _________________\n" +
+                    "                     \n"+
+                    "3. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು ವಿಭಾಗ, ಬೆಂಗಳೂರು \n" +
+                    "                    \n"+
+                    "4. ಶ್ರೀ/ಶ್ರೀಮತಿ "  +apiResponse.getContent().get(0).getFarmerFirstName() +" ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.");
 
 //            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
 //                    "                       \n" +
@@ -5971,27 +5976,27 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 //                    "                                      \n" +
 //                    "ಗ್ರಾಮ" +  apiResponse.getContent().get(0).getVillageName()+  " ಜಿಲ್ಲೆ " + apiResponse.getContent().get(0).getDistrictName());
 //            response.setHeader19("");
-//            response.setDate(apiResponse.getContent().get(0).getDate());
-//            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
-//            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
-//            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
-//            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
-//            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
-//            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
-//            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
-//            response.setCost(apiResponse.getContent().get(0).getCost());
-//            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
-//            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
-//            response.setVendorAccountNumber("ಖಾತೆ ಸಂಖ್ಯೆ :  " +apiResponse.getContent().get(0).getVendorAccountNumber());
-//            response.setVendorBankName("   ಬ್ಯಾಂಕ್ ಶಕೇ :  " +apiResponse.getContent().get(0).getVendorName());
-//            response.setVendorBankIfsc(", ಐ.ಎಫ್.ಎಸ್.ಸೀ (IFSC) ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getVendorBankIfsc() + " ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  ");
-//            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
-//            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
-//            response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
-//            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
-//            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
-//            response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-//            response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
+            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
+            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
+            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
+            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
+            response.setCost(apiResponse.getContent().get(0).getCost());
+            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
+            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+            response.setVendorAccountNumber("ಖಾತೆ ಸಂಖ್ಯೆ :  " +apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBankName("   ಬ್ಯಾಂಕ್ ಶಕೇ :  " +apiResponse.getContent().get(0).getVendorName());
+            response.setVendorBankIfsc(", ಐ.ಎಫ್.ಎಸ್.ಸೀ (IFSC) ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getVendorBankIfsc() + " ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  ");
+            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
+            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+            response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
+            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
             sanctionOrderResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
