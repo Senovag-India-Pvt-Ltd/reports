@@ -13,6 +13,7 @@ import lombok.*;
 
 public class AcknowledgementReceiptResponse {
     private String header;
+    private String header1;
     private String acceptedDate;
     private String date;
     private String farmerFirstName;

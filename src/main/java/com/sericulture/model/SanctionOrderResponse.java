@@ -11,6 +11,11 @@ import lombok.*;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SanctionOrderResponse {
+    private String logurl;
+    private String arn;
+    private String addressText;
+    private String acceptedDate;
+    private String header;
     private String header1;
     private String header2;
     private String header3;
@@ -66,4 +71,8 @@ public class SanctionOrderResponse {
     private String fatherNameKan;
     private String mobileNumber;
     private String scComponentName;
+    private String surveyNumber;
+    private String scCategoryName;
+    private String scHeadAccountName;
+    private String sanctionOrderNumber;
 }
