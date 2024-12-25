@@ -1228,7 +1228,7 @@ public class ReportsController {
                 farmerNumber = apiResponse.content.getFarmerNumber();
             }
             apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ")\n" +
-                    "  ಶ್ರೀ /ಶ್ರೀಮತಿ. "+ apiResponse.content.getFarmerNameKannada() + " ,  ಬಿನ್/ಕೋಂ    " + apiResponse.content.getFatherNameKan()  + " ,  " + apiResponse.content.getFarmerVillage() +" , "+ apiResponse.content.getFarmerTaluk());
+                    "  ಶ್ರೀ /ಶ್ರೀಮತಿ. "+ apiResponse.content.getFarmerNameKannada() + " ,  ಬಿನ್/ಕೋಂ    " + apiResponse.content.getFatherNameKan()  + " ,  " + apiResponse.content.getFarmerVillage() +" , "+ apiResponse.content.getFarmerTaluk() +" , Mob No- "+ apiResponse.content.getFarmerMobileNumber());
             String reelerNumberText = "";
             String reelerAddressText = "";
             if (apiResponse.content.getReelerNumber() != null) {
