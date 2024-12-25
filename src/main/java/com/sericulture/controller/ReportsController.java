@@ -535,6 +535,48 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/pdmcWorkOrder")
+    public ResponseEntity<?> getPdmcWorkOrder(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to Work Order");
+            logger.info("enter to Work Order");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("pdmc_work_order.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForPDMCWorkOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
     @PostMapping("/getSanctionOrderPmksyCompany")
     public ResponseEntity<?> getSanctionOrderPmksyCompany(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -5594,6 +5636,87 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            sanctionOrderResponseList.add(response);
+        }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+    }
+    private JRDataSource getDataSourceForPDMCWorkOrder(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchPDMCWorkOrder(requestDto);
+        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader1("ಕೇಂದ್ರ ಪುರಸ್ಕೃತ - ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ ಕಾರ್ಯಕ್ರಮ ಕಾರ್ಯಾದೇಶ.");
+            response.setHeader4("          ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋ  " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು  "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮ  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು  "+apiResponse.getContent().get(0).getDistrictName()+ "   ಜಿಲ್ಲೆ  ಇವರು\n" +
+                            "                  \n" +
+                            "20 -ಸಾಲಿನ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ ಕಾರ್ಯಕ್ರಮದಡಿ ಅರ್ಜಿ ನೋಂದಣಿ ಸಂಖ್ಯೆ _______________________ ಆಗಿರುತ್ತದೆ.  ಸದರಿಯವರು\n" +
+                    "                    \n" +
+                            apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗದಡಿ ಆಯ್ಕೆಗೊಂಡ ಫಲಾನುಭವಿಯಾಗಿದ್ದು, ___________ ಸರ್ವೆ ನಂಬರ್\u200Cನ ___________ ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ___________ ಅಂತರದಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ \n" +
+                            "                  \n" +
+                            "ತೋಟ ಹೊಂದಿರುತ್ತಾರೆ.  20 - ನೇ ಸಾಲಿನ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ -ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ\n" +
+                    "                                      \n"+
+                    "ಕಾರ್ಯಕ್ರಮದ ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಸದರಿಯವರು ಘಟಕ ದರದ ಶೇ. ________ ರ ಗರಿಷ್ಠ ರೂ. ___________ ಗಳ ಸಹಾಯಧನ ಪಡೆಯಲು ಮಾತ್ರ ಅರ್ಹರಿರುತ್ತಾರೆ.\n" +
+                    "        \n"+
+                    "ಮೇಲ್ಕಾಣಿಸಿದ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋ  " +apiResponse.getContent().get(0).getFatherNameKan() + "ರವರು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಅಧಿಕೃತ\n" +
+                            "                                 \n"+
+                            "ಹನಿ ನೀರಾವರಿ ಘಟಕ ಸರಬರಾಜುದಾರರಾದ ಮೆII ___________________________________  _________________________ ಇವರನ್ನು ಆಯ್ಕೆ ಮಾಡಿಕೊಂಡಿದ್ದು, ಇದರಂತೆ \n" +
+                            "        \n"+
+                            "ಕಾರ್ಯಾದೇಶ ನೀಡಿದೆ.");
+
+
+
+            response.setHeader24("ಪೀಠಿಕೆ:-");
+
+
+
+            response.setHeader11("ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು\n" +
+                    "      \n"+
+                    "ಜಿಲ್ಲಾ ಪಂಚಾಯತ್________________");
+            response.setHeader19("ಇವರಿಗೆ;");
+
+            response.setHeader12("ಮೆII ___________________________________________________\n"+
+                    "                           \n"+
+                    "________________________________________________________\n"+
+                    "                                        \n"+
+                    "________________________________________________________\n"+
+                    "       \n"+
+                    "ಪ್ರತಿ ಮಾಹಿತಿಗಾಗಿ\n"+
+                    "                              \n"+
+                    "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, __________________,\n"+
+                    "                        \n"+
+                    "ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ, ________________\n"+
+                    "                            \n"+
+                            "ಸಂಬಂಧಿಸಿದ ರೇಷ್ಮೆ ಬೆಳೆಗಾರರಿಗೆ");
+
+
+//            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
+//                    "                       \n" +
+//                    " ಶ್ರೀ /.ಶ್ರೀಮತಿ. "+ apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  + "\n" +
+//                    "                                      \n" +
+//                    "ಗ್ರಾಮ" +  apiResponse.getContent().get(0).getVillageName()+  " ಜಿಲ್ಲೆ " + apiResponse.getContent().get(0).getDistrictName());
+//            response.setHeader19("");
+//            response.setDate(apiResponse.getContent().get(0).getDate());
+//            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
+//            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+//            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+//            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
+//            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
+//            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
+//            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
+//            response.setCost(apiResponse.getContent().get(0).getCost());
+//            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
+//            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+//            response.setVendorAccountNumber("ಖಾತೆ ಸಂಖ್ಯೆ :  " +apiResponse.getContent().get(0).getVendorAccountNumber());
+//            response.setVendorBankName("   ಬ್ಯಾಂಕ್ ಶಕೇ :  " +apiResponse.getContent().get(0).getVendorName());
+//            response.setVendorBankIfsc(", ಐ.ಎಫ್.ಎಸ್.ಸೀ (IFSC) ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getVendorBankIfsc() + " ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  ");
+//            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
+//            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+//            response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
+//            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+//            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
+//            response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+//            response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
             sanctionOrderResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
