@@ -75,4 +75,5 @@ public class SanctionOrderResponse {
     private String scCategoryName;
     private String scHeadAccountName;
     private String sanctionOrderNumber;
+    private Float sanctionAmount;
 }
