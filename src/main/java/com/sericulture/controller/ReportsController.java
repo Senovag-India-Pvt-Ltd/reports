@@ -5555,7 +5555,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                     \n"+
                     "_____________ವಿಭಾಗದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು ಪರಿಶೀಲಿಸಿದೆ. "  +apiResponse.getContent().get(0).getTalukName()+  "  ತಾಲ್ಲೂಕಿನ ________________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರದ ವ್ಯಾಪ್ತಿಯ \n" +
                     "                           \n"+
-                    " ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು" +apiResponse.getContent().get(0).getScCategoryName()+  "ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು,  "+apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು,  "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ, "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮದ ಸರ್ವೆ ನಂ. ________\n" +
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು" +apiResponse.getContent().get(0).getScCategoryName()+  "ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು,  "+apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು,  "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ, "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮದ ಸರ್ವೆ ನಂ. " +apiResponse.getContent().get(0).getSurveyNumber() + "\n" +
                     "     \n" +
                     "ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ______ ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ  " +apiResponse.getContent().get(0).getVendorName()+ "ಸರಬರಾಜು ಪಡೆದು ಸದರಿ ಸಂಸ್ಥೆಯ \n"+
                     "                                                  \n"+
@@ -5648,17 +5648,17 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         SanctionOrderResponse response = new SanctionOrderResponse();
         if (apiResponse.getContent()!= null) {
             response.setHeader1("ಕೇಂದ್ರ ಪುರಸ್ಕೃತ - ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ ಕಾರ್ಯಕ್ರಮ ಕಾರ್ಯಾದೇಶ.");
-            response.setHeader4("          ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋ  " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು  "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮ  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು  "+apiResponse.getContent().get(0).getDistrictName()+ "   ಜಿಲ್ಲೆ  ಇವರು\n" +
+            response.setHeader4("          ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"   ಬಿನ್/ಕೋಂ  " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು  "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮ  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು  "+apiResponse.getContent().get(0).getDistrictName()+ "   ಜಿಲ್ಲೆ  ಇವರು\n" +
                             "                  \n" +
                             "20 -ಸಾಲಿನ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ ಕಾರ್ಯಕ್ರಮದಡಿ ಅರ್ಜಿ ನೋಂದಣಿ ಸಂಖ್ಯೆ _______________________ ಆಗಿರುತ್ತದೆ.  ಸದರಿಯವರು\n" +
                     "                    \n" +
-                            apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗದಡಿ ಆಯ್ಕೆಗೊಂಡ ಫಲಾನುಭವಿಯಾಗಿದ್ದು, ___________ ಸರ್ವೆ ನಂಬರ್\u200Cನ ___________ ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ___________ ಅಂತರದಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ \n" +
+                            apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗದಡಿ ಆಯ್ಕೆಗೊಂಡ ಫಲಾನುಭವಿಯಾಗಿದ್ದು, " +apiResponse.getContent().get(0).getSurveyNumber() + " ಸರ್ವೆ ನಂಬರ್\u200Cನ ___________ ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ___________ ಅಂತರದಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ \n" +
                             "                  \n" +
                             "ತೋಟ ಹೊಂದಿರುತ್ತಾರೆ.  20 - ನೇ ಸಾಲಿನ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ -ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಸಹಾಯಧನ\n" +
                     "                                      \n"+
                     "ಕಾರ್ಯಕ್ರಮದ ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಸದರಿಯವರು ಘಟಕ ದರದ ಶೇ. ________ ರ ಗರಿಷ್ಠ ರೂ. ___________ ಗಳ ಸಹಾಯಧನ ಪಡೆಯಲು ಮಾತ್ರ ಅರ್ಹರಿರುತ್ತಾರೆ.\n" +
                     "        \n"+
-                    "ಮೇಲ್ಕಾಣಿಸಿದ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋ  " +apiResponse.getContent().get(0).getFatherNameKan() + "ರವರು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಅಧಿಕೃತ\n" +
+                    "ಮೇಲ್ಕಾಣಿಸಿದ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"   ಬಿನ್/ಕೋಂ  " +apiResponse.getContent().get(0).getFatherNameKan() + "ರವರು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಅಧಿಕೃತ\n" +
                             "                                 \n"+
                             "ಹನಿ ನೀರಾವರಿ ಘಟಕ ಸರಬರಾಜುದಾರರಾದ ಮೆII ___________________________________  _________________________ ಇವರನ್ನು ಆಯ್ಕೆ ಮಾಡಿಕೊಂಡಿದ್ದು, ಇದರಂತೆ \n" +
                             "        \n"+
@@ -5755,7 +5755,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                           \n"+
                     "ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು" +apiResponse.getContent().get(0).getScCategoryName()+  "ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು,  "+apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು,  "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ, "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮದ ಸರ್ವೆ\n" +
                             "                                    \n"+
-                            "ನಂ. _____________ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ ____________ ಸರಬರಾಜು ಪಡೆದು\n"+
+                            "ನಂ. " +apiResponse.getContent().get(0).getSurveyNumber() + " ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ ____________ ಸರಬರಾಜು ಪಡೆದು\n"+
                             "                                                  \n"+
                             "ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್ ಇನ್ವಾಯ್ಸ್  ಸಂಖ್ಯೆ: ________________ ದಿನಾಂಕ:______________ರನ್ವಯ ದಿನಾಂಕ:_________________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,\n" +
                             "                       \n"+
@@ -5913,7 +5913,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                           \n"+
                     "ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು  " +apiResponse.getContent().get(0).getScCategoryName() +"  ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು,  "+apiResponse.getContent().get(0).getTalukName()+ "  ತಾಲ್ಲೂಕು,  "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ, " +apiResponse.getContent().get(0).getVillageName()+ " ಗ್ರಾಮದ ಸರ್ವೆ\n" +
                     "                                    \n"+
-                    "ನಂ.____________ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ ___________ ಸರಬರಾಜು ಪಡೆದು\n" +
+                    "ನಂ. " +apiResponse.getContent().get(0).getSurveyNumber() + " ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ ___________ ಸರಬರಾಜು ಪಡೆದು\n" +
                     "     \n" +
                     "ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್ ಇನ್ವಾಯ್ಸ್  ಸಂಖ್ಯೆ: ________________ ದಿನಾಂಕ:_______________ರನ್ವಯ ದಿನಾಂಕ:______________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,\n"+
                     "                                                  \n"+
@@ -6033,7 +6033,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                           \n"+
                     " ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು  " +apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು,  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,  "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ, "+apiResponse.getContent().get(0).getVillageName()+ "   ಗ್ರಾಮದ\n" +
                     "                                    \n"+
-                    "ಸರ್ವೆ ನಂ. ___________ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ  ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ _____________ಸರಬರಾಜು\n" +
+                    "ಸರ್ವೆ ನಂ.  " +apiResponse.getContent().get(0).getSurveyNumber() + " ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ___________ಅಂತರದಲ್ಲಿ  ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ _____________ಸರಬರಾಜು\n" +
                     "     \n" +
                     "ಪಡೆದು ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್ ಇನ್ವಾಯ್ಸ್  ಸಂಖ್ಯೆ:_____________ ದಿನಾಂಕ:_____________ ರನ್ವಯ ದಿನಾಂಕ:_____________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ  ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,\n"+
                     "                                                  \n"+
