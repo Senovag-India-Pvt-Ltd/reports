@@ -5416,17 +5416,17 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         if (apiResponse.getContent()!= null) {
             response.setHeader(" ಸ್ವೀಕೃತಿ  ಪತ್ರ  ( ACKNOWLEDGEMENT LETTER )");
-            response.setHeader1(" FID ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getFruitsId() + "   BID ಸಂಖ್ಯೆ :  \n" +
+            response.setHeader1(" FID ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getFruitsId() + "   BID ಸಂಖ್ಯೆ  :  \n" +
                     "                      \n" +
                     "________________________________(ಕಛೇರಿಯಿಂದ   ನೀಡುವುದು)] ");
-            response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ. " +apiResponse.getContent().get(0).getFarmerFirstName()+  "  ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"  ಗ್ರಾಮದ______________ ಸರ್ವೇ ನಂಬರಿನಲ್ಲಿ  \n" +
+            response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ. " +apiResponse.getContent().get(0).getFarmerFirstName()+  "  ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"  ಗ್ರಾಮದ  " +apiResponse.getContent().get(0).getSurveyNumber()+"  ಸರ್ವೇ ನಂಬರಿನಲ್ಲಿ  \n" +
                     "                                                \n"+
-                    "_____________  ಬೆಳೆಗೆ _____________   ಕಂಪನಿ ರವರು ಹನಿ ನೀರಾವರಿ ಪದ್ಧತಿಯನ್ನು   ಅಳವಡಿಸಿ  , ಸಹಾಯಧನಕ್ಕಾಗಿ ದಿನಾಂಕ: _______________ರಂದು\n" +
+                    "_____________  ಬೆಳೆಗೆ   " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ ರವರು ಹನಿ ನೀರಾವರಿ ಪದ್ಧತಿಯನ್ನು    ಅಳವಡಿಸಿ  , ಸಹಾಯಧನಕ್ಕಾಗಿ ದಿನಾಂಕ: _______________\n" +
                             "                  \n" +
-                            "(ಕಾರ್ಯದೇಶ ನೀಡಿದ ________________ ದಿನಗಳು  ಒಳಗಾಗಿ)  ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಕಡತವನ್ನು   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ");
+                            "ರಂದು  (ಕಾರ್ಯದೇಶ ನೀಡಿದ ________________ ದಿನಗಳು  ಒಳಗಾಗಿ)  ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ");
             response.setHeader2("(ಸಹಿ/-)\n" +
                     "                      \n"+
-                    "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು (ತಾಸ )\n" +
+                    "ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು (ತಾಸ )\n" +
                     "                              \n"+
                      apiResponse.getContent().get(0).getTalukName()+ " ತಾಲೂಕು _________________");
             response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());

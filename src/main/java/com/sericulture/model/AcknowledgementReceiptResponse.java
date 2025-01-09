@@ -32,4 +32,16 @@ public class AcknowledgementReceiptResponse {
     private String mobileNumber;
     private String arn;
     private String logurl;
+    private String districtNameInKannada;
+    private String hobliNameInKannada;
+    private String villageNameInKannada;
+    private String schemeId;
+    private String surveyNumber;
+    private String vendorName;
+    private String vendorBankName;
+    private String vendorIfscCode;
+    private String vendorBranch;
+    private String vendorAccountNumber;
+    private String vendorUPI;
+    private String talukNameInKannada;
 }
