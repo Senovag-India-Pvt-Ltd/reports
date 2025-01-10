@@ -5421,14 +5421,14 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "________________________________(ಕಛೇರಿಯಿಂದ   ನೀಡುವುದು)] ");
             response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ. " +apiResponse.getContent().get(0).getFarmerFirstName()+  "  ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"  ಗ್ರಾಮದ  " +apiResponse.getContent().get(0).getSurveyNumber()+"  ಸರ್ವೇ ನಂಬರಿನಲ್ಲಿ  \n" +
                     "                                                \n"+
-                    "_____________  ಬೆಳೆಗೆ   " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ ರವರು ಹನಿ ನೀರಾವರಿ ಪದ್ಧತಿಯನ್ನು    ಅಳವಡಿಸಿ  , ಸಹಾಯಧನಕ್ಕಾಗಿ ದಿನಾಂಕ: _______________\n" +
+                    "_______________ಬೆಳೆಗೆ   " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ ರವರು ಹನಿ ನೀರಾವರಿ ಪದ್ಧತಿಯನ್ನು    ಅಳವಡಿಸಿ  ,   ಸಹಾಯಧನಕ್ಕಾಗಿ ದಿನಾಂಕ:________________\n" +
                             "                  \n" +
-                            "ರಂದು  (ಕಾರ್ಯದೇಶ ನೀಡಿದ ________________ ದಿನಗಳು  ಒಳಗಾಗಿ)  ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ");
+                            "ರಂದು  (ಕಾರ್ಯದೇಶ ನೀಡಿದ ________________ ದಿನಗಳು  ಒಳಗಾಗಿ)  ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.");
             response.setHeader2("(ಸಹಿ/-)\n" +
                     "                      \n"+
                     "ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು (ತಾಸ )\n" +
                     "                              \n"+
-                     apiResponse.getContent().get(0).getTalukName()+ " ತಾಲೂಕು _________________");
+                     apiResponse.getContent().get(0).getTalukName()+ " ತಾಲ್ಲೂಕು  _________________");
             response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
@@ -5643,6 +5643,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionOrderResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -5695,6 +5696,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ, ________________\n"+
                     "                            \n"+
                             "ಸಂಬಂಧಿಸಿದ ರೇಷ್ಮೆ ಬೆಳೆಗಾರರಿಗೆ");
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
 
 //            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
@@ -5814,6 +5816,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "3. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು ವಿಭಾಗ, ಬೆಂಗಳೂರು \n" +
                     "                    \n"+
                     "4. ಶ್ರೀ/ಶ್ರೀಮತಿ "  +apiResponse.getContent().get(0).getFarmerFirstName() +" ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.");
+
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
 
 //            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
@@ -5975,6 +5979,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "                            \n"+
                     "5. ಶ್ರೀ/ಶ್ರೀಮತಿ"  +apiResponse.getContent().get(0).getFarmerFirstName() +"ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ. ");
 
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
 //            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
 //                    "                       \n" +
 //                    " ಶ್ರೀ /.ಶ್ರೀಮತಿ. "+ apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  + "\n" +
@@ -6122,6 +6128,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionOrderResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -6230,6 +6237,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionOrderResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -6373,6 +6381,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionCompanyResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -6512,6 +6521,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionBeneficiaryResponseList.add(response);
         }
 //        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));

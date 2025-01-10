@@ -248,9 +248,9 @@ public class ApiService {
     public AcknowledgementResponse fetchAcknowledgementPmksy(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 
-        String finalapiurl = dbtApiUrl +"service/pmksyAcknowledgement";
+//        String finalapiurl = dbtApiUrl +"service/pmksyAcknowledgement";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/pmksyAcknowledgement";
+        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/pmksyAcknowledgement";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -273,9 +273,9 @@ public class ApiService {
             // Make a GET request to the API endpoint
 //        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
 //
-            String finalapiurl = dbtApiUrl +"service/sanctionOrder";
+//            String finalapiurl = dbtApiUrl +"service/sanctionOrder";
 
-//            String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
+            String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
 
             // Define the request headers
             HttpHeaders headers = new HttpHeaders();
@@ -297,8 +297,8 @@ public class ApiService {
     public SanctionOrder fetchPDMCWorkOrder(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 
-        String finalapiurl = dbtApiUrl +"service/sanctionOrderWorkOrder";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderWorkOrder";
+//        String finalapiurl = dbtApiUrl +"service/sanctionOrderWorkOrder";
+        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderWorkOrder";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -321,8 +321,8 @@ public class ApiService {
     public SanctionOrder fetchSanctionOrderPmksyCompany(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 
-        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
+//        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
+        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -365,8 +365,8 @@ public class ApiService {
 
     public SanctionOrder fetchSanctionOrderPDMCFarmer(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
+//        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
+        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -389,8 +389,8 @@ public class ApiService {
 
     public SanctionOrder fetchSanctionOrderPDMCCompany(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
+//        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
+        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrder";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
