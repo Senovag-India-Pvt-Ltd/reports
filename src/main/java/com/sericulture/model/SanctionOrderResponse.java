@@ -77,5 +77,9 @@ public class SanctionOrderResponse {
     private String sanctionOrderNumber;
     private Float sanctionAmount;
     private String workOrderNumber;
+    private String hectareName;
+    private String spacingName;
+    private String referenceNo;
+    private String tscName;
 
 }
