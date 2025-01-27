@@ -66,4 +66,6 @@ public class SanctionBeneficiaryResponse {
     private String fatherNameKan;
     private String mobileNumber;
     private String scComponentName;
+    private String logurl;
+
 }

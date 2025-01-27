@@ -248,11 +248,9 @@ public class ApiService {
     public AcknowledgementResponse fetchAcknowledgementPmksy(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+        String finalapiurl = dbtApiUrl +"service/pmksyAcknowledgement";
 
-        String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
-
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/pmksyAcknowledgement";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
