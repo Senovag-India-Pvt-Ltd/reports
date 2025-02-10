@@ -6230,138 +6230,163 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader1("ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,_____________________  ರವರ ಕಚೇರಿ ನಡವಳಿಗಳು");
+            response.setHeader1("ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   "  +apiResponse.getContent().get(0).getDistrictName()+  "   ರವರ ಕಚೇರಿ ನಡವಳಿಗಳು");
             response.setHeader4("ವಿಷಯ  : ");
-            response.setHeader20( apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)  ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ\n" +
+            response.setHeader20( apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ ಸಾಲಿನಲ್ಲಿ     ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)  ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ \n" +
                     "                            \n"+
-                    "" +apiResponse.getContent().get(0).getFarmerFirstName() + "  ರವರಿಗೆ ರೂ.  " +apiResponse.getContent().get(0).getSanctionAmount() + " /- ಗಳ ಸಹಾಯಧನ ಮಂಜೂರಾತಿ ಬಗ್ಗೆ  .");
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + "  ರವರಿಗೆ ರೂ.  " +apiResponse.getContent().get(0).getSanctionAmount() + " /- ಗಳ ಸಹಾಯಧನ ಮಂಜೂರಾತಿ ಬಗ್ಗೆ  .");
 //            response.setHeader21( " ,ರವರು(ಸಾಮಾನ್ಯ/SCP/TSP) ನಿರ್ಮಿಸಿರುವ - ಚದರ ಅಡಿಗಳ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಗೆ ರೂ . " +apiResponse.getContent().get(0).getCost()+ "  ಗಳ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡುವ ಬಗ್ಗೆ ");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
-            response.setHeader2("1.	ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆ ಸಂಖ್ಯೆ   : ___________________________________ ದಿನಾಂಕ:___________\n"+
+            response.setHeader2("1.	ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆ ಸಂಖ್ಯೆ   : ______________________________________________ ದಿನಾಂಕ:__________________________________\n"+
                     "                          \n"+
-                    "2.	ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , ______________ ವಿಭಾಗ ಇವರ ಪ್ರಸ್ತಾವನೆ ದಿನಾಂಕ:_________________\n"+
+                    "2.	ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು ,    "  +apiResponse.getContent().get(0).getTalukName()+  "  ವಿಭಾಗ ಇವರ ಪ್ರಸ್ತಾವನೆ ದಿನಾಂಕ:__________________________________\n"+
                     "                     \n"+
-                    "3.	ರೇಷ್ಮೆ   ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ಕೃಷಿ ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರು ರವರ ಪತ್ರದ ಸಂಖ್ಯೆ   : ______________________________________________ ದಿನಾಂಕ:_______________\n"+
+                    "3.	ರೇಷ್ಮೆ   ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ಕೃಷಿ ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರು ರವರ ಪತ್ರದ ಸಂಖ್ಯೆ   : ______________________________________ ದಿನಾಂಕ:___________________________\n"+
                     "                                   \n"+
-                    "4.	ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ  :  ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು, ದಿನಾಂಕ:22.08.2023");
+                    "4.	ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ  :  ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು, ದಿನಾಂಕ  :  22.08.2023");
 
             if (Double.parseDouble(apiResponse.getContent().get(0).getHectareName()) > 2) {
-            response.setHeader8 ("         " +apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಎಲ್ಲಾ    ವರ್ಗದ\n" +
+            response.setHeader8 ("             " +apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ\n" +
                     "                                      \n"+
-                    "ರೈತರಿಗೆ ಮೊದಲ 2.೦೦ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದ ವರಗೆ ಘಟಕ ದರದ ಶೇ.90 ಹಾಗೂ 2.00 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟು     5.೦೦ ಹೆಕ್ಟೇರ್ ವರಗೆ ಎಲ್ಲಾ    ವರ್ಗದ ರೈತರಿಗೆ ಘಟಕ ದರದ ಶೇ.45 ರ \n" +
+                    "ಎಲ್ಲಾ    ವರ್ಗದ  ರೈತರಿಗೆ ಮೊದಲ 2.೦೦ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದ ವರಗೆ ಘಟಕ ದರದ ಶೇ.90 ಹಾಗೂ 2.00 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟು     5.೦೦ ಹೆಕ್ಟೇರ್ ವರಗೆ ಎಲ್ಲಾ    ವರ್ಗದ ರೈತರಿಗೆ ಘಟಕ \n" +
                     "                         \n" +
-                    "ಸಹಾಯಧನ ನೀಡಲು ಉಲ್ಲೇಖ (1) ರ ಮಾರ್ಗಸೂಚಿಯಲ್ಲಿ      ಅವಕಾಶವಿರುತ್ತದೆ.\n"+
+                    "ದರದ ಶೇ.45 ರ  ಸಹಾಯಧನ ನೀಡಲು ಉಲ್ಲೇಖ (1) ರ ಮಾರ್ಗಸೂಚಿಯಲ್ಲಿ      ಅವಕಾಶವಿರುತ್ತದೆ.\n"+
                     "                     \n"+
-                    "________________ವಿಭಾಗದ ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿದೆ   "  +apiResponse.getContent().get(0).getTalukName()+  "   ತಾಲ್ಲೂಕಿನ  ________________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರದ ವ್ಯಾಪ್ತಿಯ\n" +
+//
+                    apiResponse.getContent().get(0).getTalukName()+   "  ವಿಭಾಗದ ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿದೆ   "  +apiResponse.getContent().get(0).getTalukName()+  "   ತಾಲ್ಲೂಕಿನ   "  +apiResponse.getContent().get(0).getTscName()+ "  ತಾಂತ್ರಿಕ ಸೇವಾ\n" +
                     "                           \n"+
-                    "ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು  " +apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು  ,  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ  ,  "+apiResponse.getContent().get(0).getVillageName()+ "   ಗ್ರಾಮದ   ಸರ್ವೆ ನಂ.  " +apiResponse.getContent().get(0).getSurveyNumber() + "  ಹೆಕ್ಟೇರ್ \n" +
+                    "ಕೇಂದ್ರದ  ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"   ಇವರು   " +apiResponse.getContent().get(0).getScCategoryName()+  "   ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು  ,  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ  ,  "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮದ\n" +
                     "                                    \n"+
-                    "ಪ್ರದೇಶದಲ್ಲಿ   ________________ಅಂತರದಲ್ಲಿ     ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು    ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ  _________________ಸರಬರಾಜು ಪಡೆದು  ಸದರಿ\n" +
+                    "ಸರ್ವೆ ನಂ.  " +apiResponse.getContent().get(0).getSurveyNumber() + "  ರ    " +apiResponse.getContent().get(0).getHectareName() + "  ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ    " +apiResponse.getContent().get(0).getSpacingName() + "  ಅಂತರದಲ್ಲಿ     ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು    ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ  \n" +
                     "     \n" +
-                    "ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್   ಇನ್ ವಾಯ್ಸ್   ಸಂಖ್ಯೆ  :_________________ ದಿನಾಂಕ :________________ರನ್ವಯ ದಿನಾಂಕ:________________ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,\n"+
+                    apiResponse.getContent().get(0).getVendorName() + "   ಸರಬರಾಜು ಪಡೆದು  ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್   ಇನ್ ವಾಯ್ಸ್   ಸಂಖ್ಯೆ  :______________________________________ ದಿನಾಂಕ :________________________________ ರನ್ವಯ\n"+
                     "                                                  \n"+
-                    "ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ ಘಟಕವು ತೃಪ್ತಿಕರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ದೃಢಪಡಿಸಿರುತ್ತಾರೆ. ಸದರಿ   ಘಟಕವು  ಶ್ರೀ/ಶ್ರೀಮತಿ \n"+
+                    "ದಿನಾಂಕ: ________________________________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,  ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ ಘಟಕವು ತೃಪ್ತಿಕರವಾಗಿ\n" +
+                    "                                                   \n"+
+                    "ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ದೃಢಪಡಿಸಿರುತ್ತಾರೆ. ಸದರಿ   ಘಟಕವು    ಶ್ರೀ/ಶ್ರೀಮತಿ \n"+
                     "                                               \n"+
-                    apiResponse.getContent().get(0).getFarmerFirstName() +"   ಇವರ  2  ಹೆಕ್ಟೇರ್  ಮೇಲ್ಪಟ್ಟ    ಹಿಪ್ಪುನೇರಳೆ  ತೋಟಕ್ಕೆ     ಅಳವಡಿಸಿಕೊಂಡಿರುವುದಾಗಿದ್ದು      ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , _______________________ ವಿಭಾಗ\n" +
+                    apiResponse.getContent().get(0).getFarmerFirstName() +"   ಇವರ  2  ಹೆಕ್ಟೇರ್  ಮೇಲ್ಪಟ್ಟ    ಹಿಪ್ಪುನೇರಳೆ  ತೋಟಕ್ಕೆ     ಅಳವಡಿಸಿಕೊಂಡಿರುವುದಾಗಿದ್ದು      ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು ,  "+apiResponse.getContent().get(0).getTalukName()+ "   ವಿಭಾಗ\n" +
                     "                       \n"+
-                    "ಇವರಿಂದ ದಿನಾಂಕ : ___________________ ರಂದು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿರುತ್ತದೆ  ಹಾಗೂ ಮಂಜೂರಾತಿ ನೀಡಲು  ಶಿಫಾರಸ್ಸು   ಮಾಡಿರುತ್ತಾರೆ.\n" +
+                    "ಇವರಿಂದ ದಿನಾಂಕ : ________________________________ ರಂದು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿರುತ್ತದೆ  ಹಾಗೂ ಮಂಜೂರಾತಿ ನೀಡಲು  ಶಿಫಾರಸ್ಸು   ಮಾಡಿರುತ್ತಾರೆ.\n" +
                     "                           \n" +
                     "ಕಾರ್ಯಕ್ರಮದ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಫಲಾನುಭವಿಯು ಘಟಕ ದರದ ತನ್ನ   ಪಾಲಿನ  ಹಣವನ್ನು    ಮಾತ್ರವೇ ಘಟಕ ಸರಬರಾಜುದಾರರಿಗೆ  ಪಾವತಿಸಿದ್ದಲ್ಲಿ   , ರೈತರಿಂದ NOC\n" +
                     "              \n"+
                     "ಪಡೆದು ಸಂಬಂಧಿಸಿದ ಸಂಸ್ಥೆಗೆ ಸಹಾಯಧನ ಪಾವತಿಸಲು ಅವಕಾಶವಿದೆ . ಉಲ್ಲೇಖ (3) ರನ್ವಯ ಘಟಕದರ ರೂ.   " +apiResponse.getContent().get(0).getSanctionAmount()+ " /- ಗಳ ಕೇಂದ್ರ   ಹಾಗೂ ರಾಜ್ಯದ ಕಡ್ಡಾಯ ಪಾಲಿನ \n" +
                     "                   \n" +
-                    "ಶೇ 45 ರ ಸಹಾಯಧನ ರೂ.   "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP) + "  /- ಗಳನ್ನು   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ ಮಂಜೂರು ಮಾಡಲು ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , ___________________ವಿಭಾಗ\n" +
+                    "ಶೇ 45 ರ ಸಹಾಯಧನ ರೂ.   "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP) + "  /- ಗಳನ್ನು   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ ಮಂಜೂರು ಮಾಡಲು ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು ,  "+apiResponse.getContent().get(0).getTalukName()+ "  ವಿಭಾಗ\n" +
                     "                     \n" +
                     "ರವರು  ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುತ್ತಾರೆ . ಉಲ್ಲೇಖ (3) ರ ಪತ್ರದಲ್ಲಿ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ ಅನುದಾನವು ಬಿಡುಗಡೆಯಾಗಿರುವಂತೆ ಘಟಕ ದರದ ಶೇ 45 ಸಹಾಯಧನ \n" +
                     "           \n" +
                     "ರೂ.   "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.45")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳನ್ನು ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ ರೀತ್ಯಾ ಮಂಜೂರು ಮಾಡಬಹುದಾಗಿದೆ. ಅದರಂತೆ ಈ ಆದೇಶ.");
 
             }else{
-                response.setHeader8 ("         " +apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ ಎಲ್ಲಾ    ವರ್ಗದ\n" +
+                response.setHeader8 ("             " +apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC)   ಯೋಜನೆಯಡಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಕೆಗಾಗಿ\n" +
                         "                                      \n"+
-                        "ರೈತರಿಗೆ ಮೊದಲ 2.೦೦ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದ ವರಗೆ ಘಟಕ ದರದ ಶೇ.90 ಹಾಗೂ 2.00 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟು     5.೦೦ ಹೆಕ್ಟೇರ್ ವರಗೆ ಎಲ್ಲಾ    ವರ್ಗದ ರೈತರಿಗೆ ಘಟಕ ದರದ ಶೇ.45 ರ \n" +
+                        "ಎಲ್ಲಾ    ವರ್ಗದ  ರೈತರಿಗೆ ಮೊದಲ 2.೦೦ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದ ವರಗೆ ಘಟಕ ದರದ ಶೇ.90 ಹಾಗೂ 2.00 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟು     5.೦೦ ಹೆಕ್ಟೇರ್ ವರಗೆ ಎಲ್ಲಾ    ವರ್ಗದ ರೈತರಿಗೆ ಘಟಕ \n" +
                         "                         \n" +
-                        "ಸಹಾಯಧನ ನೀಡಲು ಉಲ್ಲೇಖ (1) ರ ಮಾರ್ಗಸೂಚಿಯಲ್ಲಿ      ಅವಕಾಶವಿರುತ್ತದೆ.\n"+
+                        "ದರದ ಶೇ.45 ರ  ಸಹಾಯಧನ ನೀಡಲು ಉಲ್ಲೇಖ (1) ರ ಮಾರ್ಗಸೂಚಿಯಲ್ಲಿ      ಅವಕಾಶವಿರುತ್ತದೆ.\n"+
                         "                     \n"+
-                        "________________ವಿಭಾಗದ ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿದೆ   "  +apiResponse.getContent().get(0).getTalukName()+  "   ತಾಲ್ಲೂಕಿನ  ________________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರದ ವ್ಯಾಪ್ತಿಯ\n" +
+//
+                        apiResponse.getContent().get(0).getTalukName()+   "  ವಿಭಾಗದ ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಉಲ್ಲೇಖ (2)ರ ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿದೆ   "  +apiResponse.getContent().get(0).getTalukName()+  "   ತಾಲ್ಲೂಕಿನ   "  +apiResponse.getContent().get(0).getTscName()+ "  ತಾಂತ್ರಿಕ ಸೇವಾ\n" +
                         "                           \n"+
-                        "ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು  " +apiResponse.getContent().get(0).getScCategoryName()+  "  ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು  ,  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ  ,  "+apiResponse.getContent().get(0).getVillageName()+ "   ಗ್ರಾಮದ   ಸರ್ವೆ ನಂ.  " +apiResponse.getContent().get(0).getSurveyNumber() + "  ಹೆಕ್ಟೇರ್ \n" +
+                        "ಕೇಂದ್ರದ  ವ್ಯಾಪ್ತಿಯ ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"   ಇವರು   " +apiResponse.getContent().get(0).getScCategoryName()+  "   ವರ್ಗಕ್ಕೆ ಸೇರಿದವರಾಗಿದ್ದು  ,  "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getHobliName()+ "  ಹೋಬಳಿ  ,  "+apiResponse.getContent().get(0).getVillageName()+ "  ಗ್ರಾಮದ\n" +
                         "                                    \n"+
-                        "ಪ್ರದೇಶದಲ್ಲಿ   ________________ಅಂತರದಲ್ಲಿ     ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು    ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ  _________________ಸರಬರಾಜು ಪಡೆದು  ಸದರಿ\n" +
+                        "ಸರ್ವೆ ನಂ.  " +apiResponse.getContent().get(0).getSurveyNumber() + "  ರ    " +apiResponse.getContent().get(0).getHectareName() + "  ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ    " +apiResponse.getContent().get(0).getSpacingName() + "  ಅಂತರದಲ್ಲಿ     ಬೆಳೆಸಿರುವ ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕವನ್ನು    ಇಲಾಖೆ ಅಂಗೀಕೃತ ಸಂಸ್ಥೆ  \n" +
                         "     \n" +
-                        "ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್   ಇನ್ ವಾಯ್ಸ್   ಸಂಖ್ಯೆ  :__________________ ದಿನಾಂಕ :__________________ರನ್ವಯ ದಿನಾಂಕ:_________________ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,\n"+
-                        "                                                  \n"+
-                        "ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ ಘಟಕವು ತೃಪ್ತಿಕರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ  " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ದೃಢಪಡಿಸಿರುತ್ತಾರೆ. ಸದರಿ  ಘಟಕವು  ರೇಷ್ಮೆ   \n" +
-                        "                       \n"+
-                        "ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , ___________________ ವಿಭಾಗ ಇವರಿಂದ ದಿನಾಂಕ : ___________________ ರಂದು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿರುತ್ತದೆ  ಹಾಗೂ ಮಂಜೂರಾತಿ ನೀಡಲು  ಶಿಫಾರಸ್ಸು   ಮಾಡಿರುತ್ತಾರೆ.\n" +
+                        apiResponse.getContent().get(0).getVendorName() + "   ಸರಬರಾಜು ಪಡೆದು  ಸದರಿ ಸಂಸ್ಥೆಯ ಟ್ಯಾಕ್ಸ್   ಇನ್ ವಾಯ್ಸ್   ಸಂಖ್ಯೆ  :______________________________________ ದಿನಾಂಕ :________________________________ ರನ್ವಯ\n"+
+                                "                                                  \n"+
+                                "ದಿನಾಂಕ: ________________________________ ರಂದು ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆಂದು,   ಅಳವಡಿಸಿರುವ ಹನಿ ನೀರಾವರಿ ಘಟಕವು  ತೃಪ್ತಿಕರವಾಗಿ\n" +
+                        "                                                   \n"+
+                        "ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವುದಾಗಿ    ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"   ಇವರು  ದೃಢಪಡಿಸಿರುತ್ತಾರೆ.  ಸದರಿ   ಘಟಕವು  ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು ,  "  +apiResponse.getContent().get(0).getTalukName()+  "   ವಿಭಾಗ  \n" +
+                        "                   \n" +
+                                "ಇವರಿಂದ  ದಿನಾಂಕ : ________________________________ ರಂದು  ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿರುತ್ತದೆ   ಹಾಗೂ  ಮಂಜೂರಾತಿ  ನೀಡಲು  ಶಿಫಾರಸ್ಸು     ಮಾಡಿರುತ್ತಾರೆ.\n" +
                         "                           \n" +
-                        "ಕಾರ್ಯಕ್ರಮದ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಫಲಾನುಭವಿಯು ಘಟಕ ದರದ ತನ್ನ    ಪಾಲಿನ ಹಣವನ್ನು    ಮಾತ್ರವೇಘಟಕ ಸರಬರಾಜುದಾರರಿಗೆ ಪಾವತಿಸಿದ್ದಲ್ಲಿ  , ರೈತರಿಂದ  NOC ಪಡೆದು\n" +
+                        "ಕಾರ್ಯಕ್ರಮದ  ಮಾರ್ಗಸೂಚಿ  ಅನ್ವಯ ಫಲಾನುಭವಿಯು ಘಟಕ ದರದ ತನ್ನ     ಪಾಲಿನ ಹಣವನ್ನು     ಮಾತ್ರವೇ  ಘಟಕ ಸರಬರಾಜುದಾರರಿಗೆ ಪಾವತಿಸಿದ್ದಲ್ಲಿ  , ರೈತರಿಂದ NOC\n" +
                         "                  \n"+
-                        "ಸಂಬಂಧಿಸಿದ ಸಂಸ್ಥೆಗೆ ಸಹಾಯಧನ ಪಾವತಿಸಲು ಅವಕಾಶವಿದೆ. ಉಲ್ಲೇಖ(3) ರನ್ವಯ ಘಟಕದರ ರೂ.  " +apiResponse.getContent().get(0).getSanctionAmount()+ " /- ಗಳ ಶೇ.90 ರ ಸಹಾಯಧನ ರೂ." + new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP) + " /-  ಗಳಲ್ಲಿ  ಕೇಂದ್ರ   \n"+
+                        "ಪಡೆದು  ಸಂಬಂಧಿಸಿದ  ಸಂಸ್ಥೆಗೆ  ಸಹಾಯಧನ  ಪಾವತಿಸಲು  ಅವಕಾಶವಿದೆ .  ಉಲ್ಲೇಖ(3) ರನ್ವಯ  ಘಟಕದರ  ರೂ.   " +apiResponse.getContent().get(0).getSanctionAmount()+ " /- ಗಳ  ಶೇ.90 ರ  ಸಹಾಯಧನ  ರೂ.   " + new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.90")).setScale(2, RoundingMode.HALF_UP) + " /- \n"+
                         "                            \n"+
-                        "ಹಾಗೂ ರಾಜ್ಯದ ಕಡ್ಡಾಯ ಪಾಲಿನ ಶೇ 55 ಸಹಾಯಧನ ರೂ. "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳನ್ನು    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ  "+apiResponse.getContent().get(0).getScHeadAccountName() + " ರಡಿ ಮತ್ತು ರಾಜ್ಯದ ಹೆಚ್ಚುವರಿ ಪಾಲಿನ ಶೇ 35 ಸಹಾಯಧನ\n" +
+                        "ಗಳಲ್ಲಿ    ಕೇಂದ್ರ  ಹಾಗೂ  ರಾಜ್ಯದ  ಕಡ್ಡಾಯ  ಪಾಲಿನ ಶೇ 55 ಸಹಾಯಧನ ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "    ರಡಿ ಮತ್ತು ರಾಜ್ಯದ ಹೆಚ್ಚುವರಿ ಪಾಲಿನ\n" +
                         "                         \n"+
-                        "ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.35")).setScale(2, RoundingMode.HALF_UP) + "   ಅನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ  "+apiResponse.getContent().get(0).getScHeadAccountName() + " ರಡಿ ಮಂಜೂರು ಮಾಡಲು ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , _________________ವಿಭಾಗ ರವರು ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುತ್ತಾರೆ .\n"+
+                        "ಶೇ 35 ಸಹಾಯಧನ  ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.35")).setScale(2, RoundingMode.HALF_UP) + "   ಅನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "   ರಡಿ  ಮಂಜೂರು  ಮಾಡಲು ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು ,   "  +apiResponse.getContent().get(0).getTalukName()+  "  ವಿಭಾಗ  ರವರು\n"+
                         "                                                   \n" +
-                        "ಉಲ್ಲೇಖ (3) ರ  ಪತ್ರದಲ್ಲಿ     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ  "+apiResponse.getContent().get(0).getScHeadAccountName()+ "ರಡಿ ಅನುದಾನವು ಬಿಡುಗಡೆಯಾಗಿರುವಂತೆ ಘಟಕ ದರದ ಶೇ 55 ಸಹಾಯಧನ (ಕೇಂದ್ರ    ಪಾಲು ಶೇ 33 ಮತ್ತು     ರಾಜ್ಯ  \n"+
+                        "ಶಿಫಾರಸ್ಸು      ಮಾಡಿರುತ್ತಾರೆ  .   ಉಲ್ಲೇಖ (3) ರ   ಪತ್ರದಲ್ಲಿ      ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName()+ "   ರಡಿ   ಕೇಂದ್ರ    ಪಾಲು  ಶೇ 33  ಮತ್ತು     ರಾಜ್ಯ    ಪಾಲು  ಶೇ 22  ಅನುದಾನವು \n"+
                         "              \n" +
-                        "ಪಾಲು ಶೇ 22) ರೂ.   "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳನ್ನು     ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ ರೀತ್ಯಾ     ಮಂಜೂರು ಮಾಡಬಹುದಾಗಿದೆ . ಅದರಂತೆ ಈ ಆದೇಶ .");
+                        "ಬಿಡುಗಡೆಯಾಗಿರುವಂತೆ   ಘಟಕ ದರದ ಶೇ 55 ಸಹಾಯಧನ  ರೂ.   "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳನ್ನು    ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ ರೀತ್ಯಾ     ಮಂಜೂರು ಮಾಡಬಹುದಾಗಿದೆ.  ಅದರಂತೆ ಈ ಆದೇಶ .");
             }
-                response.setHeader9("ಆದೇಶ ಸಂಖ್ಯೆ   :                                                                                                           ದಿನಾಂಕ: ___________________");
+                response.setHeader9("ಆದೇಶ ಸಂಖ್ಯೆ   :_______________________________________________                                                                                               ದಿನಾಂಕ: ________________________________");
 
             response.setHeader24("ಪೀಠಿಕೆ  :-");
 
             if (Double.parseDouble(apiResponse.getContent().get(0).getHectareName()) > 2) {
-                response.setHeader10( "               ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ  " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " +apiResponse.getContent().get(0).getDistrictName() +"  ಜಿಲ್ಲೆಯ   "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕಿನ  _______________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ   ವ್ಯಾಪ್ತಿಯ\n" +
+                response.setHeader10( "               ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ  " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " +apiResponse.getContent().get(0).getDistrictName() +"  ಜಿಲ್ಲೆಯ   "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕಿನ    "+apiResponse.getContent().get(0).getTscName()+ "  ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ   ವ್ಯಾಪ್ತಿಯ\n" +
                         "                  \n"+
-                        "ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ____________________ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ    _________________ ಅಂತರದಲ್ಲಿ \n" +
+                        "ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ _________________________ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ   _________________________\n" +
                         "                                              \n" +
-                        "ಬೆಳೆಸಿರುವ  2 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟ    ಹಿಪ್ಪುನೇರಳೆ  ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿರುವುದಕ್ಕೆ    ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ ”  "  +apiResponse.getContent().get(0).getScHeadAccountName() +"  ರಡಿ\n" +
+                        "ಅಂತರದಲ್ಲಿ    ಬೆಳೆಸಿರುವ  2 ಹೆಕ್ಟೇರ್ ಮೇಲ್ಪಟ್ಟ    ಹಿಪ್ಪುನೇರಳೆ  ತೋಟಕ್ಕೆ    ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿರುವುದಕ್ಕೆ    ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ ” "  +apiResponse.getContent().get(0).getScHeadAccountName() +"\n" +
                         "                       \n"+
-                        "ಘಟಕ ದರದ ಶೇ 45 ರ ಸಹಾಯಧನ (ಕೇಂದ್ರ ಹಾಗೂ ರಾಜ್ಯದ ಕಡ್ಡಾಯ ಪಾಲು) ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.45")).setScale(2, RoundingMode.HALF_UP) + "  /- (ರೂ__________________________________________________________________.)  ಮಾತ್ರಗಳನ್ನು \n" +
+                        "ರಡಿ  ಕೇಂದ್ರ    ಹಾಗೂ   ರಾಜ್ಯದ   ಕಡ್ಡಾಯ   ಪಾಲು  ಘಟಕ   ದರದ   ಶೇ 45  ರ   ಸಹಾಯಧನ   ರೂ. ___________________________________________________ /- \n" +
                         "                       \n" +
-                        "ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಫಲಾನುಭವಿಯ ವಂತಿಗೆಯನ್ನು   ಅನುಮೋದಿತ ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಲ್ಲಿ    ಫಲಾನುಭವಿಗಳಿಂದ NOC ಪಡೆದು\n" +
+                        "(ರೂ._____________________________________________________________________________________________.)  ಮಾತ್ರಗಳನ್ನು  ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಫಲಾನುಭವಿಯ ವಂತಿಗೆಯನ್ನು \n" +
                         "                \n" +
-                        "ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು    ಸರಬರಾಜು ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಲು ಅವಕಾಶವಿರುವಂತೆ,  ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸಂಖ್ಯೆ  : ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು,\n" +
+                        "ಅನುಮೋದಿತ ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಿ ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಲ್ಲಿ    ಫಲಾನುಭವಿಗಳಿಂದ NOC ಪಡೆದು  ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು    ಸರಬರಾಜು ಸಂಸ್ಥೆಗೆ \n" +
                         "                  \n" +
-                        "ದಿನಾಂಕ:22.08.2023 ರಂತೆ ಮೆ : "+apiResponse.getContent().get(0).getVendorName() +  "  ಇವರಿಗೆ ಪಾವತಿಸಲು ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.45")).setScale(2, RoundingMode.HALF_UP) + " /- ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಸದರಿ ವೆಚ್ಚವನ್ನು   ಲೆಕ್ಕ  ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ಯಡಿ ಭರಿಸುವುದು.");
+                        "ಪಾವತಿಸಲು ಅವಕಾಶವಿರುವಂತೆ,  ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸಂಖ್ಯೆ  : ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು,  ದಿನಾಂಕ:22.08.2023 ರಂತೆ ಮೆ : "+apiResponse.getContent().get(0).getVendorName() +  "\n" +
+                        "                  \n" +
+                        "ಇವರಿಗೆ ಪಾವತಿಸಲು ರೂ.  __________________________________ /- ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಸದರಿ ವೆಚ್ಚವನ್ನು   ಲೆಕ್ಕ  ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ಯಡಿ ಭರಿಸುವುದು.");
 
             }else{
-            response.setHeader10( "               ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ  " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " +apiResponse.getContent().get(0).getDistrictName() +"  ಜಿಲ್ಲೆಯ   "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕಿನ  _______________ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ     ವ್ಯಾಪ್ತಿಯ\n" +
+            response.setHeader10( "               ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ  " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " +apiResponse.getContent().get(0).getDistrictName() +"  ಜಿಲ್ಲೆಯ   "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕಿನ   "+apiResponse.getContent().get(0).getTscName()+ "  ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ     ವ್ಯಾಪ್ತಿಯ\n" +
                     "                  \n"+
-                    "ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ ____________________ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ    _________________ ಅಂತರದಲ್ಲಿ \n" +
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() +"  ಇವರು ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ ಪ್ರತಿ ಹನಿಗೆ ಅಧಿಕ ಬೆಳೆ (PDMC) ಯೋಜನೆಯಡಿ _________________________ ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ   _________________________\n" +
                     "                                              \n" +
-                    "ಬೆಳೆಸಿರುವ  ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿರುವುದಕ್ಕೆ     ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ ”  "  +apiResponse.getContent().get(0).getScHeadAccountName() +"  ರಡಿ ಘಟಕ ದರದ 55 ರ\n" +
+                    "ಅಂತರದಲ್ಲಿ    ಬೆಳೆಸಿರುವ  ಹಿಪ್ಪುನೇರಳೆ ತೋಟಕ್ಕೆ     ಹನಿ ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿರುವುದಕ್ಕೆ     ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ ”  "  +apiResponse.getContent().get(0).getScHeadAccountName() +"\n" +
                     "                       \n" +
-                    "ಸಹಾಯಧನ (ಕೇಂದ್ರ   ಪಾಲು ಶೇ 33 ಮತ್ತು    ರಾಜ್ಯ    ಪಾಲು ಶೇ 22) ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /- (ರೂ._______________________________________________________________________) ಮಾತ್ರಗಳನ್ನು \n" +
+                    "ರಡಿ   ಕೇಂದ್ರ     ಪಾಲು   ಶೇ 33   ಮತ್ತು      ರಾಜ್ಯ      ಪಾಲು   ಶೇ 22  ಘಟಕ   ದರದ 55 ರ   ಸಹಾಯಧನ   ರೂ.   ___________________________________________________ /- \n" +
                     "                           \n" +
-                    "ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಫಲಾನುಭವಿಯ  ವಂತಿಗೆಯನ್ನು    ಅನುಮೋದಿತ  ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಿ ಹನಿ  ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಲ್ಲಿ    ಫಲಾನುಭವಿಗಳಿಂದ NOC ಪಡೆದು\n"+
+                    "(ರೂ._____________________________________________________________________________________________) ಮಾತ್ರಗಳನ್ನು    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಫಲಾನುಭವಿಯ  ವಂತಿಗೆಯನ್ನು \n"+
                     "                                          \n" +
-                    "ಸರ್ಕಾರದ  ಸಹಾಯಧನವನ್ನು    ಸರಬರಾಜು  ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಲು ಅವಕಾಶವಿರುವಂತೆ ,ಆರ್ಥಿಕ  ಪ್ರತ್ಯಾಯೋಜನೆ  ಆದೇಶ ಸಂಖ್ಯೆ   :  ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು, ದಿನಾಂಕ \n" +
+                    "ಅನುಮೋದಿತ  ಸಂಸ್ಥೆಗೆ ಪಾವತಿಸಿ ಹನಿ  ನೀರಾವರಿ ಘಟಕ ಅಳವಡಿಸಿಕೊಂಡಲ್ಲಿ    ಫಲಾನುಭವಿಗಳಿಂದ NOC ಪಡೆದು   ಸರ್ಕಾರದ  ಸಹಾಯಧನವನ್ನು    ಸರಬರಾಜು  ಸಂಸ್ಥೆಗೆ \n" +
                     "                                           \n"+
-                    ": 22.08.2023 ರಂತೆ ಮೆ : "+apiResponse.getContent().get(0).getVendorName() +  "   ಇವರಿಗೆ ಪಾವತಿಸಲು ರೂ.  "+ new BigDecimal(apiResponse.getContent().get(0).getSanctionAmount()).multiply(new BigDecimal("0.55")).setScale(2, RoundingMode.HALF_UP) + " /-  ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ .  ಸದರಿ ವೆಚ್ಚವನ್ನು    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ  "+apiResponse.getContent().get(0).getScHeadAccountName() + "\n"+
+                    "ಪಾವತಿಸಲು   ಅವಕಾಶವಿರುವಂತೆ ,ಆರ್ಥಿಕ  ಪ್ರತ್ಯಾಯೋಜನೆ  ಆದೇಶ ಸಂಖ್ಯೆ   :  ತೋಇ 61 ರೇಕೃವಿ 2019, ಬೆಂಗಳೂರು, ದಿನಾಂಕ : 22.08.2023 ರಂತೆ ಮೆ : "+apiResponse.getContent().get(0).getVendorName() +  "\n"+
                     "            \n" +
-                    "ಯಡಿ ಭರಿಸುವುದು ." );
+                    "ಇವರಿಗೆ ಪಾವತಿಸಲು ರೂ.  ___________________________________ /-  ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ .  ಸದರಿ ವೆಚ್ಚವನ್ನು    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ  "+apiResponse.getContent().get(0).getScHeadAccountName() + "  ಯಡಿ ಭರಿಸುವುದು ." );
 
             }
-            response.setHeader11("ರೇಷ್ಮೆ     ಉಪನಿರ್ದೇಶಕರು\n" +
+            response.setHeader11("ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು\n" +
                     "      \n"+
-                    "ಜಿ.ಪಂ. , ________________");
+                    "ಜಿ.ಪಂ.,   " +apiResponse.getContent().get(0).getDistrictName());
             response.setHeader19("ಇವರಿಗೆ  ;");
 
-            response.setHeader12("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , __________________ ವಿಭಾಗ \n" +
+            response.setHeader12("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , " +apiResponse.getContent().get(0).getTalukName()+ "   ವಿಭಾಗ  \n" +
                     "                  \n"+
-                    "ಪ್ರತಿಯನ್ನು    ಮಾಹಿತಿ ಹಾಗೂ ಕ್ರಮಕ್ಕಾಗಿ\n" +
+                    "ಪ್ರತಿಯನ್ನು    ಮಾಹಿತಿ ಹಾಗೂ ಕ್ರಮಕ್ಕಾಗಿ ;\n" +
                     "                  \n"+
-                    "1 ಜಿಲ್ಲಾ    ಖಜಾನೆ ಅಧಿಕಾರಿಗಳು , ___________________\n" +
+                    "1 ಜಿಲ್ಲಾ    ಖಜಾನೆ ಅಧಿಕಾರಿಗಳು , ________________________________________\n" +
                     "                    \n"+
-                    "2. ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು , ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ   _________________\n" +
+                    "2. ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ  " +apiResponse.getContent().get(0).getTscName()+ "\n" +
                     "                     \n"+
-                    "3. ರೇಷ್ಮೆ   ಜಂಟಿ ನಿರ್ದೇಶಕರು , ಬೆಂಗಳೂರು ವಿಭಾಗ , ಬೆಂಗಳೂರು \n" +
+                    "3. ರೇಷ್ಮೆ    ಜಂಟಿ ನಿರ್ದೇಶಕರು , ಬೆಂಗಳೂರು ವಿಭಾಗ , ಬೆಂಗಳೂರು \n" +
                     "                    \n"+
-                    "4. ಮೆ :__________________________________  \n" +
-                    "                    \n"+
-                    "5. ಶ್ರೀ/ಶ್ರೀಮತಿ  "  +apiResponse.getContent().get(0).getFarmerFirstName() +" ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .");
+                    "4. ಮೆ :   " +apiResponse.getContent().get(0).getVendorName()+ "\n" +
+                    "                            \n"+
+                    "5. ಶ್ರೀ/ಶ್ರೀಮತಿ    "  +apiResponse.getContent().get(0).getFarmerFirstName() +"   ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ. \n" +
+                    "                            \n"+
+                    "                            \n"+
+                    "                            \n"+
+                    "                                                                                                                                ಶ್ರೀ/ಶ್ರೀಮತಿ    "  +apiResponse.getContent().get(0).getFarmerFirstName());
+//            "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು , __________________ ವಿಭಾಗ \n" +
+//                    "                  \n"+
+//                    "ಪ್ರತಿಯನ್ನು    ಮಾಹಿತಿ ಹಾಗೂ ಕ್ರಮಕ್ಕಾಗಿ\n" +
+//                    "                  \n"+
+//                    "1 ಜಿಲ್ಲಾ    ಖಜಾನೆ ಅಧಿಕಾರಿಗಳು , ___________________\n" +
+//                    "                    \n"+
+//                    "2. ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು , ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ   _________________\n" +
+//                    "                     \n"+
+//                    "3. ರೇಷ್ಮೆ   ಜಂಟಿ ನಿರ್ದೇಶಕರು , ಬೆಂಗಳೂರು ವಿಭಾಗ , ಬೆಂಗಳೂರು \n" +
+//                    "                    \n"+
+//                    "4. ಮೆ :__________________________________  \n" +
+//                    "                    \n"+
+//                    "5. ಶ್ರೀ/ಶ್ರೀಮತಿ  "  +apiResponse.getContent().get(0).getFarmerFirstName() +" ರವರುಗಳ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .");
 
 //            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
 //                    "                       \n" +
