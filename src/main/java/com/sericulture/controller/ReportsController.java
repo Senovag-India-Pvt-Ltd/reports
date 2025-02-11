@@ -5717,7 +5717,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             }
 
 
-            response.setHeader9("ಆದೇಶ ಸಂಖ್ಯೆ   :                                                                                                                                          ದಿನಾಂಕ: ___________________");
+            response.setHeader9("ಆದೇಶ ಸಂಖ್ಯೆ   :_______________________________________________                                                                                               ದಿನಾಂಕ: ________________________________");
 
             response.setHeader24("ಪೀಠಿಕೆ  :-");
 
