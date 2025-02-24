@@ -163,7 +163,6 @@ public class ApiService {
 
         String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
 
-//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLot";
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
 
         // Define the request headers
@@ -188,6 +187,7 @@ public class ApiService {
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SupplyOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
@@ -208,6 +208,7 @@ public class ApiService {
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SelectionLetterPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
@@ -224,12 +225,13 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = dbtApiUrl +"service/sanctionOrder";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrder";
+        String finalapiurl = dbtApiUrl +"service/sanctionOrderRH";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRH";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
@@ -346,9 +348,13 @@ public class ApiService {
         // Make a GET request to the API endpoint
         String finalapiurl = dbtApiUrl +"service/sanctionCompany";
 
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionCompany";
+
+
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SanctionCompanyPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
@@ -413,9 +419,12 @@ public class ApiService {
         // Make a GET request to the API endpoint
         String finalapiurl = dbtApiUrl + "service/sanctionBeneficiary";
 
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionBeneficiary";
+
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SanctionBeneficiaryPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
