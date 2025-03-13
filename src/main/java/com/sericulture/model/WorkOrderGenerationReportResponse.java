@@ -48,5 +48,7 @@ public class WorkOrderGenerationReportResponse {
     private String mobileNumber;
     private String scComponentName;
     private String logurl;
+    private Float sanctionAmount;
+
 
 }
