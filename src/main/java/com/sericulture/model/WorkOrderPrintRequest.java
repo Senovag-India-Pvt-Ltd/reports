@@ -9,5 +9,8 @@ import lombok.*;
 @EqualsAndHashCode
 public class WorkOrderPrintRequest extends LotStatusRequest {
     private int applicationFormId;
+    private int scApplicationFormServiceId;
+    private int stepId;
+    private int schemeId;
 
 }
