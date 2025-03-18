@@ -5384,13 +5384,15 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setHobliName( apiResponse.getContent().get(0).getHobliName());
             response.setVillageName( apiResponse.getContent().get(0).getVillageName());
             response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictName() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,  " + apiResponse.getContent().get(0).getHobliName()+ "\n " +
+            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ,  " + apiResponse.getContent().get(0).getHobliNameInKannada()+ "\n " +
                     "                                           \n"+
-                    "ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageName()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  " +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "\n" +
+                    "ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  \n" +
                     "                                    \n"+
-                    "ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸುತ್ತಾರೆ  . ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "\n" +
+                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "     ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸುತ್ತಾರೆ .\n" +
                     "                                                              \n" +
-                    "ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,   ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು  .");
+                    "ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + " ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,   ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು  \n" +
+                    "                       \n" +
+                    "ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು  .");
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
             response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
