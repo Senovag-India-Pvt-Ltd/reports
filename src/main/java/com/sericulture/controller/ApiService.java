@@ -161,9 +161,9 @@ public class ApiService {
 
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
 
-        String finalapiurl = dbtApiUrl +"service/acknowledgementReceipt";
+        String finalapiurl = dbtApiUrl +"service/pmksyAcknowledgement";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/acknowledgementReceipt";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/pmksyAcknowledgement";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
