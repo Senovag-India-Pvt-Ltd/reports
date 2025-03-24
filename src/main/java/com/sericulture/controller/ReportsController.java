@@ -5384,15 +5384,18 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setHobliName( apiResponse.getContent().get(0).getHobliName());
             response.setVillageName( apiResponse.getContent().get(0).getVillageName());
             response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ,  " + apiResponse.getContent().get(0).getHobliNameInKannada()+ "\n " +
+            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ,\n " +
                     "                                           \n"+
-                    "ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ ನಿವಾಸಿಯಾದ  ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  \n" +
+                    apiResponse.getContent().get(0).getHobliNameInKannada()+ "    ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ   ನಿವಾಸಿಯಾದ   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  \n" +
                     "                                    \n"+
-                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "     ಯಂತ್ರೋಪಕರಣಕೆ ಸಹಾಯಧನ ಪಡೆಯಲು ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸುತ್ತಾರೆ .\n" +
+                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "     ಯಂತ್ರೋಪಕರಣಕೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು\n" +
                     "                                                              \n" +
-                    "ಇವರ ನೋಂದಣಿ ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + " ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,   ಈ ನೋಂದಣಿ ಸಂಖ್ಯೆಯನ್ನು  \n" +
+                    "ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸುತ್ತಾರೆ .  ಇವರ  ನೋಂದಣಿ  ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,\n" +
                     "                       \n" +
-                    "ಮುಂದಿನ ವಿಚರಾಣೆಗೆ ಉಪಯೋಗಿಸತಕದ್ದು  .");
+                    "ಈ   ನೋಂದಣಿ   ಸಂಖ್ಯೆಯನ್ನು      ಮುಂದಿನ  ವಿಚರಾಣೆಗೆ   ಉಪಯೋಗಿಸತಕದ್ದು  .");
+            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
+                    "                        \n" +
+            "______________________________  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ");
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
             response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
@@ -5422,11 +5425,13 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setHeader1(" FID ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getFruitsId() + "   BID ಸಂಖ್ಯೆ  :  \n" +
                     "                      \n" +
                     "________________________________(ಕಛೇರಿಯಿಂದ   ನೀಡುವುದು)] ");
-            response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ. " +apiResponse.getContent().get(0).getFarmerFirstName()+  "  ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"  ಗ್ರಾಮದ  " +apiResponse.getContent().get(0).getSurveyNumber()+"  ಸರ್ವೇ ನಂಬರಿನಲ್ಲಿ  \n" +
+            response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+  "   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    " +apiResponse.getContent().get(0).getVillageName()+"    ಗ್ರಾಮದ   " +apiResponse.getContent().get(0).getSurveyNumber()+"   ಸರ್ವೇ   ನಂಬರಿನಲ್ಲಿ  \n" +
                     "                                                \n"+
-                    "_______________ಬೆಳೆಗೆ   " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ ರವರು ಹನಿ ನೀರಾವರಿ ಪದ್ಧತಿಯನ್ನು    ಅಳವಡಿಸಿ  ,   ಸಹಾಯಧನಕ್ಕಾಗಿ ದಿನಾಂಕ:________________\n" +
+                    "__________________________________  ಬೆಳೆಗೆ    " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ   ರವರು   ಹನಿ   ನೀರಾವರಿ   ಪದ್ಧತಿಯನ್ನು     ಅಳವಡಿಸಿ  ,   ಸಹಾಯಧನಕ್ಕಾಗಿ   ದಿನಾಂಕ:\n" +
                             "                  \n" +
-                            "ರಂದು  (ಕಾರ್ಯದೇಶ ನೀಡಿದ ________________ ದಿನಗಳು  ಒಳಗಾಗಿ)  ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.");
+                            "___________________________________ ರಂದು  (ಕಾರ್ಯದೇಶ    ನೀಡಿದ   ________________________________ ದಿನಗಳು   ಒಳಗಾಗಿ )    ಸಂಬಂಧಿಸಿದ   ಎಲ್ಲಾ    \n" +
+                            "                  \n" +
+                    "ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.");
             response.setHeader2("(ಸಹಿ/-)\n" +
                     "                      \n"+
                     "ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು (ತಾಸ )\n" +
