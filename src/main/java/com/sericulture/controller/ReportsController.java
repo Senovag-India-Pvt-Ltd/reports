@@ -5427,11 +5427,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "________________________________(ಕಛೇರಿಯಿಂದ   ನೀಡುವುದು)] ");
             response.setLineItemComment( "            ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+  "   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    " +apiResponse.getContent().get(0).getVillageName()+"    ಗ್ರಾಮದ   " +apiResponse.getContent().get(0).getSurveyNumber()+"   ಸರ್ವೇ   ನಂಬರಿನಲ್ಲಿ  \n" +
                     "                                                \n"+
-                    "__________________________________  ಬೆಳೆಗೆ    " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ   ರವರು   ಹನಿ   ನೀರಾವರಿ   ಪದ್ಧತಿಯನ್ನು     ಅಳವಡಿಸಿ  ,   ಸಹಾಯಧನಕ್ಕಾಗಿ   ದಿನಾಂಕ:\n" +
+                    "____________________________________  ಬೆಳೆಗೆ    " +apiResponse.getContent().get(0).getVendorName()+"   ಕಂಪನಿ   ರವರು   ಹನಿ   ನೀರಾವರಿ   ಪದ್ಧತಿಯನ್ನು     ಅಳವಡಿಸಿ  ,   ಸಹಾಯಧನಕ್ಕಾಗಿ \n" +
                             "                  \n" +
-                            "___________________________________ ರಂದು  (ಕಾರ್ಯದೇಶ    ನೀಡಿದ   ________________________________ ದಿನಗಳು   ಒಳಗಾಗಿ )    ಸಂಬಂಧಿಸಿದ   ಎಲ್ಲಾ    \n" +
+                            "ದಿನಾಂಕ:  _____________________________________ ರಂದು  (ಕಾರ್ಯದೇಶ   ನೀಡಿದ   ________________________________ ದಿನಗಳು   ಒಳಗಾಗಿ )   ಸಂಬಂಧಿಸಿದ \n" +
                             "                  \n" +
-                    "ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.");
+                    "ಎಲ್ಲಾ     ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಕಡತವನ್ನು    ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.");
             response.setHeader2("(ಸಹಿ/-)\n" +
                     "                      \n"+
                     "ರೇಷ್ಮೆ    ಸಹಾಯಕ ನಿರ್ದೇಶಕರು (ತಾಸ )\n" +
