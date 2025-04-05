@@ -963,7 +963,7 @@ public class ReportsController {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("farmer_copy_with_variable_silk.jrxml");
+            JasperReport jasperReport = getJasperReport("bid_slip_silk_type_.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -1408,6 +1408,13 @@ public class ReportsController {
             apiResponse.content.setIfscCode(apiResponse.content.getReelerIfscCode());
             apiResponse.content.setAccountNumber(apiResponse.content.getReelerAccountNumber());
             apiResponse.content.setFarmerMobileNumber(apiResponse.content.getReelerMobileNumber());
+            apiResponse.content.setTraderLicense("  Trader License No. " +apiResponse.content.getTraderLicenseNumber());
+            apiResponse.content.setReelerLicens("  Reeler License No. " +apiResponse.content.getReelerLicense());
+            apiResponse.content.setSilkTypes(apiResponse.content.getSilkType());
+            apiResponse.content.setSilkQualities(apiResponse.content.getSilkQuality());
+            apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
+            apiResponse.content.setBags(apiResponse.content.getNoOfBags());
+            apiResponse.content.setForm(apiResponse.content.getFormNo());
 
 
             String traderNumberText = "";
