@@ -77,9 +77,37 @@ public class SanctionOrderResponse {
     private String sanctionOrderNumber;
     private Float sanctionAmount;
     private String workOrderNumber;
+    private Long schemeId;
+    private Long subSchemeId;
+    private Long approvalStageId;
+    private Long categoryId;
+    private Long componentId;
     private String hectareName;
     private String spacingName;
     private String referenceNo;
     private String tscName;
+    private int serialNumber;
+    private int index;
+    private Long applicationFormId;
+    private String farmerMiddleName;
+    private String farmerLastName;
+    private String workFlowType;
+    private String action;
+    private Float eligibleAmount;
+    private String khazaneRecipientId;
+    private Long biddingSlipLotNo;
+    private Float  totalSchemeAmount;
+    private Float  lotWeight;
+    private Float  perKgRate;
+    private Float  cocoonsWeight;
+//    private String  addressText;
+    private String  marketName;
+    private String  marketAuctionDate;
+    private String  districtNameInKannada;
+    private String  talukNameInKannada;
+    private String  hobliNameInKannada;
+    private String  villageNameInKannada;
+    private String userDistrict;
+    private String userMarket;
 
 }

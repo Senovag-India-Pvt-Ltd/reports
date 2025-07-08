@@ -12,4 +12,6 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private int scApplicationFormServiceId;
     private int stepId;
     private int schemeId;
+    private int userMasterId;
+    private int subSchemeId;
 }

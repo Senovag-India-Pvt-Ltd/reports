@@ -274,6 +274,139 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/get-seed-cocoon")
+    public ResponseEntity<?> getSeedCocoon(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to seed cocoon");
+            logger.info("enter to seed cocoon");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("SanctionOrderBonus.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForSeedCocoon(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+    @PostMapping("/get-Bonus")
+    public ResponseEntity<?> getBonus(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to get Bonus");
+            logger.info("enter to get Bonus");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Bonus2.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", jasperReport);
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForBonus(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+    @PostMapping("/get-Incentive")
+    public ResponseEntity<?> getIncentive(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to get Incentive");
+            logger.info("enter to get Incentive");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Incentive.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForIncentive(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
 
     @PostMapping("/getAcknowledementPMKSY")
     public ResponseEntity<?> getAcknowledementPMKSY(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
@@ -5406,6 +5539,248 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+
+    private JRDataSource getDataSourceForBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromBonus(requestDto);
+        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+
+
+        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
+            response.setHeader2("ವಿಷಯ: ");
+            response.setHeader3("ಉಲ್ಲೇಖ: ");
+            response.setHeader4("ಪೀಠಿಕೆ: ");
+
+            response.setHeader1("ಮೈಸೂರು  ಬಿತ್ತನೆ  ವಲಯದ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ವಿತರಿಸಬೇಕಾದ  ಬೋನಸ್  ಮೊತ್ತ     ರೂ. " +apiResponse.getContent().get(0).getUserMarket() + " ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡುವ ಬಗ್ಗೆ.\n" +
+                  "            \n"+
+                    "            \n"+
+                    "1) ಸರ್ಕಾರದ ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ   83 ರೇಕೃವಿ  2023  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 09/08/2023 ಮತ್ತು    04/10/2023\n" +
+                    "            \n"+
+                    "2) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು  ಇವರ  ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಪಿ.ಎಸ್1/ಮಾರ್ಗಸೂಚಿ13/\n" +
+                    "            \n"+
+                    "    2023-24  ದಿನಾ೦ಕ :-11/08/2023\n" +
+                    "            \n"+
+                    "3) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ  /ಯೋ!/ಪಿ.ಎಸ್.5/ಬೆಸ್ನಿನವೀಅಅಕಾ/52/\n" +
+                    "            \n"+
+                    "    2023-24  ದಿನಾ೦ಕ :-12/10/2023\n" +
+                    "            \n"+
+                    "4) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು , ಮಾಗಡಿ  ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  /ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ  /ವಂ.ಮ.ಹ೦/ 20/2024-25\n" +
+                    "            \n"+
+                    "    ದಿನಾ೦ಕ :- 06/03/2025\n" +
+                    "               \n" +
+                    "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ಕೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
+                    "            \n"+
+                    "            \n"+
+                    "               ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .  ಬೇಡಿಕೆ\n" +
+                    "            \n"+
+                    "       ಇಲ್ಲದೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾದಲ್ಲಿ    ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ   ರೂ _______________/- ರ   ಬೋನಸ್ ಪಾವತಿಸಲು  ಮೇಲ್ಕಂಡ   ಉಲ್ಲೆಖ \n" +
+                    "            \n"+
+                    "       (1) ರಿ೦ದ (4) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+                    "            \n"+
+                    "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   ,_______________  ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  _______________ ಕೆ.ಜಿ \n" +
+                    "            \n"+
+                    "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ _______________/- ರಂತೆ ಒಟ್ಟು _______________\n" +
+                    "            \n"+
+                    "       ರೂ ಗಳ ಬೋನಸ್ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
+            response.setHeader5("              ಮೇಲ್ಕಂಡ   ಉಲ್ಲೇಖ   (1)  ರಿ೦ದ  (4) ರ  ಸುತ್ತೋಲೆ , ಜ್ಞಾಪನ , ಆದೇಶಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ   ಅ೦ಶಗಳನ್ನು   ಪರಿಶೀಲಿಸಿ  ಒಟ್ಟು   02 ಜನ\n" +
+                    "            \n"+
+                    "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   ಬೋನಸ್  ಒಟ್ಟು   ಬಾಬ್ತು   ರೂ. _______________________ /-(ರೂಪಾಯಿ ಹತ್ತು   ಸಾವಿರದ  ಒ೦ಭತ್ತು    ನೂರ  ಹದಿಮೂರು ರೂ ಮಾತ್ರ )\n" +
+                    "            \n"+
+                    "ಗಳಿಗೆ  ಮ೦ಜೂರು  ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ .  ಉಲ್ಲೇಖ (5)  ರಂತೆ  ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
+
+            response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
+            response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , _________________ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
+                    "            \n"+
+                    "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ____________ ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ _______________/- ರ೦ತೆ ಒಟ್ಟು   ರೂ _______________________\n" +
+                    "            \n"+
+                    "(ರೂಪಾಯಿ ಹತ್ತು ಸಾವಿರದ ಒ೦ಭತ್ತು  ನೂರ ಹದಿಮೂರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ \n" +
+                    "            \n"+
+                    "ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  ________________________ ರಲ್ಲಿ   ಭರಿಸಲು  ಮ೦ಜೂರಾತಿ   ನೀಡಿದೆ.");
+            response.setHeader8("ಇವರಿಗೆ,\n" +
+                    "            \n"+
+                    "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
+
+            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+            response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
+                    "            \n"+
+                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                    "            \n"+
+                    "______________________\n");
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            sanctionOrderResponseList.add(response);
+            for(SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()){
+                sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getFarmerFirstName());
+                sanctionOrderResponseList.add(sanctionOrderResponse);
+            }
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+    }
+
+    private JRDataSource getDataSourceForIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromIncentive(requestDto);
+        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+
+        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getMarketName() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
+            response.setHeader2("ವಿಷಯ: ");
+            response.setHeader3("ಉಲ್ಲೇಖ: ");
+            response.setHeader4("ಪೀಠಿಕೆ:-1");
+
+            response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ ಸಾಲಿನಲ್ಲಿ   ಉತ್ಪಾದಕತೆ  ಮತ್ತು    ಗುಣಮಟ್ಟ    ಅಧಾರದ  ಪ್ರೋತ್ಸಾಹಧನ  ಬಾಬ್ತು  ರೂ _______________ ಗಳಿಗೆ\n" +
+                    "            \n"+
+                    "    ಮ೦ಜೂರು ಮಾಡುವ ಕುರಿತು.\n" +
+                    "            \n"+
+                    "1) ಸರ್ಕಾರದ  ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ  79 ರೇಕೃವಿ 2022 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 15/05/2022\n" +
+                    "            \n"+
+                    "2) ರೇಷ್ಮೆ    ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ಇವರ ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಎ.ಎಸ್1/ಯೋಕ/ಮೊಸು/15/\n" +
+                    "            \n"+
+                    "    2022-23 ದಿನಾ೦ಕ:-05/05/2022\n" +
+                    "            \n"+
+                    "3) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು, ಮಾಗಡಿ ರವರ ಜ್ಞಾಪನ ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  / ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ/ವ೦.ಮ.ಹ೦//20/2024/25\n" +
+                    "            \n"+
+                    "    ದಿನಾ೦ಕ: 05/03/2025\n" +
+                    "            \n"+
+                    "4) ಸರ್ಕಾರದ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ತಕೋಇ:61:ರೇಕೃವಿ:2019 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
+                    "            \n"+
+                    "               " +apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ ಸಾಲಿನಲ್ಲಿ    ವಿರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
+                    "            \n"+
+                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ  ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು   ಗುಣಮಟ್ಟ  ಅಧರಿಸಿ  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ \n" +
+                    "            \n"+
+                    "ರೂ _______________/- ರಂತೆ ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+                    "            \n"+
+                    "            \n"+
+                    "               ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಈ ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಯನ್ನು   ನೀಡಿದ್ದು , ಅದರ೦ತೆ ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ  ಮಂಜೂರಾತಿ\n" +
+                    "            \n"+
+                    "ನೀಡಲು  ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ  ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, ಸೋಲೂರು ಸ೦ಸ್ಮೆಯಲ್ಲಿ  ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ\n" +
+                    "            \n"+
+                    "13-03-2025 ರ ಮಾಹೆಯಲ್ಲಿ    ವಹಿವಾಟಾದ ಬಿತ್ತನೆ  ಗೂಡುಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹಧನದ   ವಿವರ ಕೆಳಗಿನಂತಿದೆ");
+            response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ರೂ ____________________/-\n" +
+                    "            \n"+
+                    "(ಆರು ಸಾವಿರದ ಒಂದು ನೂರ ಐವತ್ತಾರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಪ ್ರೋತ್ಸಾಹ  ಧನವನ್ನು  ಪಟ್ಟೆಯಲ್ಲಿ   ಲಗತ್ತಿಸಿರುವ 02  ಜನ ರ ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ  \n" +
+                    "            \n"+
+                    "ಮ೦ಜೂರು ಮಾಡಬಹುದಾ? ರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
+
+            response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಪೋ್ರೋ:ಮ೦/604(2)2024-25 ದಿನಾ೦ಕ:13/03/2025");
+            response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, ___________________ ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ ಮೈಸೂರು\n" +
+                    "            \n"+
+                    "ಬಿತ್ತನೆ ತಳಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರಿಗೆ _________________ಕ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ ರೂ _________________/- ರಂತೆ ಒಟ್ಟು ರೂ. ___________________/-\n" +
+                    "            \n"+
+                    "(ಆರು ಸಾವಿರದ ಒಂದು ನೂರ ಐವತ್ತಾರು  ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ  ಮ೦ಜೂರು ಮಾಡಿದೆ ಸದರಿ ವೆಚ್ಚವನ್ನು   ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ \n" +
+                    "            \n"+
+                    "ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ _________________________ ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
+            response.setHeader8("ಇವರಿಗೆ,\n" +
+                    "            \n"+
+                    "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
+            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+            response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
+                    "            \n"+
+                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                    "            \n"+
+                    "______________________\n");
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            sanctionOrderResponseList.add(response);
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+    }
+
+    private JRDataSource getDataSourceForSeedCocoon(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoon(requestDto);
+        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+
+        List<SanctionOrderResponse> sanctionOrderResponseList= new LinkedList<>();
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ  ಕಚೇರಿ  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ _________________________ ದಿನಾ೦ಕ: 13/03/2025");
+            response.setHeader2("ವಿಷಯ: ");
+            response.setHeader3("ಉಲ್ಲೇಖ: ");
+            response.setHeader4("ಪೀಠಿಕೆ:");
+
+            response.setHeader1( "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  ಸೋಲೂರು  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಸರ್ಕಾರಿ  ಬಿತ್ತನೆ  ಕೋಡಿಗಳಿಗೆ ಬಿತ್ತನೆ  ಗೂಡು ಖರೀಸಿದ ಬಾಬ್ತು   \n" +
+                    "            \n"+
+                    "  ರೂ ___________________/- ಗಳಿಗೆ  ಮಂಜೂರಾತಿ  ವೀಡುವ ಬಗ್ಗೆ.\n" +
+                    "            \n"+
+                    "1) ರೇಷ್ಮೆ   ಕೃಷಿ  ಆಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ  ರೇಷ್ಮೆ    ವಿರ್ದೇಶಕರು,  ಬೆ೦ಗಳೂರು  ರವರ  ಸುತ್ತೋಲೆ  ಪತ್ರದ ಸ೦ಖ್ಯೆ  :ತಾ೦0೦1:ರೇಬಿ: ರೇಷ್ಮೆ   :ಬಿಗೂಖ:\n" +
+                    "            \n"+
+                    "    08.2011-12  ದಿನಾ೦ಕ: 16/08/2011\n" +
+                    "                     \n" +
+                    "2) ರೇಷ್ಮೆ   ಉಪ ವಿರ್ದೇಶಕರು, ಮಾಗಡಿ  ರವರ ಜ್ನಾಪನ ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  /ರೇಉವನಿ/ಮಾ/ಲೆಕ್ಕ /ವ೦.ಮ.ಹ೦/20/2024-25  ದಿನಾ೦ಕ:-05/03/2025\n" +
+                    "                    \n" +
+                    "3) ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ಸಿ.ಪಿ:267: ಎಸ್.ಎಲ್.ಎಸ್:78  ದಿನಾ೦ಕ: 01/06/1981ರ ಭಾಗ ..ರ ಕ್ರಮ ಸ೦ಖ್ಯೆ 3 ರಂತೆ.\n" +
+                    "                     \n" +
+                    "                                                     ***************                   \n" +
+                    "            \n"+
+                    "            \n"+
+                    "              ಉಲ್ಲೇಖ  (1)  ರಿ೦ದ (3) ರ  ವರೆಗಿನ  ಆದೇಶ, ಸುತ್ತೋಲೆ  ಹಾಗೂ  ಜ್ನ್ಞಾಪನಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವಂತೆ.  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಗೂಡಿನ \n" +
+                    "            \n"+
+                    "ಮಾರುಕಟ್ಟೆ , _________________ ಸಂ೦ಸ್ಮೆಯಲ್ಲಿ   ದಿನಾ೦ಕ:- 08/03/2025 ರಿ೦ದ  11/03/2025ರ ವರೆಗೆ, ಸರ್ಕಾರಿ  ಬಿತ್ತನೆ\n" +
+                    "            \n"+
+                    "ಕೋಠಿಗಳ ಉಪಯೋಗಕ್ಕಾಗಿ  ಮೈಸೂರು  ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು , ಈ ಕೆಳಕಂಡ ರೈತರಿ೦ದ ಖರೀದಿಸಿದ  ಗೂಡಿನ ಬಾಬ್ತು \n" +
+                    "            \n"+
+                    "ರೂ _____________________ ಗಳಿಗೆ ಮ೦ಜೂರಾತಿ  ವೀಡಬೇಕಾಗಿದೆ. ವಿವರ ಕಳಗಿನಂತಿದೆ.");
+            response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ರೂ ____________________/-\n" +
+                    "            \n"+
+                    "(ಆರು ಸಾವಿರದ ಒಂದು ನೂರ ಐವತ್ತಾರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಪ ್ರೋತ್ಸಾಹ  ಧನವನ್ನು  ಪಟ್ಟೆಯಲ್ಲಿ   ಲಗತ್ತಿಸಿರುವ 02  ಜನ ರ ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ  \n" +
+                    "            \n"+
+                    "ಮ೦ಜೂರು ಮಾಡಬಹುದಾ? ರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
+
+            response.setHeader6("ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಖ:ಮಂ:02:2024-25 ");
+            response.setHeader8("ಮಂ೦ಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ ಸ೦ಂ:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಖ:ಮಂ೦:02:2024-25 ದಿನಾ೦ಕ:13/03/2025");
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            sanctionOrderResponseList.add(response);
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
 
