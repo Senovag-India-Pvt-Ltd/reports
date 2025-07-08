@@ -154,8 +154,75 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public SanctionOrder fetchDataFromBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 
 
+    public SanctionOrder fetchDataFromIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public SanctionOrder fetchDataFromSeedCocoon(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
     public AcknowledgementResponse fetchData(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
 
