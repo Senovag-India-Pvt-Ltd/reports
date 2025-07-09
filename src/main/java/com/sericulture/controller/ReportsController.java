@@ -5722,6 +5722,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (sanctionOrderResponse.getLotWeight() == null) {
                     sanctionOrderResponse.setLotWeight(0f);
                 }
+                if (sanctionOrderResponse.getMarketAuctionDate() == null) {
+                    sanctionOrderResponse.setMarketAuctionDate("");
+                }
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
@@ -5743,7 +5746,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:-1");
 
-        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ ಸಾಲಿನಲ್ಲಿ   ಉತ್ಪಾದಕತೆ  ಮತ್ತು    ಗುಣಮಟ್ಟ    ಅಧಾರದ  ಪ್ರೋತ್ಸಾಹಧನ  ಬಾಬ್ತು  ರೂ _______________ ಗಳಿಗೆ\n" +
+        response.setHeader1(  "2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ   ಉತ್ಪಾದಕತೆ  ಮತ್ತು    ಗುಣಮಟ್ಟ    ಅಧಾರದ  ಪ್ರೋತ್ಸಾಹಧನ  ಬಾಬ್ತು  ರೂ   " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " ಗಳಿಗೆ\n" +
                 "            \n"+
                 "    ಮ೦ಜೂರು ಮಾಡುವ ಕುರಿತು.\n" +
                 "            \n"+
@@ -5759,32 +5762,37 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "4) ಸರ್ಕಾರದ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ತಕೋಇ:61:ರೇಕೃವಿ:2019 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
                 "            \n"+
-                "               " +apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ ಸಾಲಿನಲ್ಲಿ    ವಿರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
+                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ    ವಿರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
                 "            \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ  ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು   ಗುಣಮಟ್ಟ  ಅಧರಿಸಿ  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ \n" +
                 "            \n"+
-                "ರೂ _______________/- ರಂತೆ ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+                "ರೂ   " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರಂತೆ ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
                 "            \n"+
                 "            \n"+
                 "               ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಈ ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಯನ್ನು   ನೀಡಿದ್ದು , ಅದರ೦ತೆ ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ  ಮಂಜೂರಾತಿ\n" +
                 "            \n"+
-                "ನೀಡಲು  ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ  ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, ಸೋಲೂರು ಸ೦ಸ್ಮೆಯಲ್ಲಿ  ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ\n" +
+                "ನೀಡಲು  ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ  ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ  ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ\n" +
                 "            \n"+
                 "13-03-2025 ರ ಮಾಹೆಯಲ್ಲಿ    ವಹಿವಾಟಾದ ಬಿತ್ತನೆ  ಗೂಡುಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹಧನದ   ವಿವರ ಕೆಳಗಿನಂತಿದೆ");
-        response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ರೂ ____________________/-\n" +
+        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+        long amountLong = amountFloat.longValue();
+
+        String amountInWords = NumberToWordsConverter.convert(amountLong);
+        response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "/-  (ರೂಪಾಯಿ \n" +
                 "            \n"+
-                "(ಆರು ಸಾವಿರದ ಒಂದು ನೂರ ಐವತ್ತಾರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಪ ್ರೋತ್ಸಾಹ  ಧನವನ್ನು  ಪಟ್ಟೆಯಲ್ಲಿ   ಲಗತ್ತಿಸಿರುವ 02  ಜನ ರ ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ  \n" +
+                amountInWords +"  ರೂಗಳು ಮಾತ್ರ)ಗಳಿಗೆ ಪ ್ರೋತ್ಸಾಹ  ಧನವನ್ನು  ಪಟ್ಟೆಯಲ್ಲಿ   ಲಗತ್ತಿಸಿರುವ  02 \n" +
                 "            \n"+
-                "ಮ೦ಜೂರು ಮಾಡಬಹುದಾ? ರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
+                "ಜನರ ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ   ಮ೦ಜೂರು ಮಾಡಬಹುದಾ? ರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
         response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಪೋ್ರೋ:ಮ೦/604(2)2024-25 ದಿನಾ೦ಕ:13/03/2025");
-        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, ___________________ ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ ಮೈಸೂರು\n" +
+
+        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ ಮೈಸೂರು\n" +
                 "            \n"+
-                "ಬಿತ್ತನೆ ತಳಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರಿಗೆ _________________ಕ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ ರೂ _________________/- ರಂತೆ ಒಟ್ಟು ರೂ. ___________________/-\n" +
+                "ಬಿತ್ತನೆ ತಳಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರಿಗೆ  " +apiResponse.getContent().get(0).getCocoonsWeight() + " ಕ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು ರೂ. " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " /-\n" +
                 "            \n"+
-                "(ಆರು ಸಾವಿರದ ಒಂದು ನೂರ ಐವತ್ತಾರು  ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ  ಮ೦ಜೂರು ಮಾಡಿದೆ ಸದರಿ ವೆಚ್ಚವನ್ನು   ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ \n" +
+                "(ರೂಪಾಯಿ " + amountInWords +"  ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ  ಮ೦ಜೂರು ಮಾಡಿದೆ ಸದರಿ ವೆಚ್ಚವನ್ನು \n" +
                 "            \n"+
-                "ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ _________________________ ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
+                "ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ  ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ _________________________ ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
         response.setHeader8("ಇವರಿಗೆ,\n" +
                 "            \n"+
                 "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
@@ -5801,7 +5809,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "            \n"+
-                "______________________\n");
+                apiResponse.getContent().get(0).getUserMarket() +  " \n");
         response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
         response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
         response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
@@ -5809,12 +5817,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setArn( apiResponse.getContent().get(0).getArn());
         response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        sanctionOrderResponseList.add(response);
+//        sanctionOrderResponseList.add(response);
 
 
         if (apiResponse.getContent()!= null) {
-
             sanctionOrderResponseList.add(response);
+            int serialNo = 1;
             for(SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()){
                 if (sanctionOrderResponse.getFarmerFirstName() == null){
                     sanctionOrderResponse.setFarmerFirstName("");
@@ -5831,17 +5839,18 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (sanctionOrderResponse.getLotWeight() == null){
                     sanctionOrderResponse.setLotWeight(0f);
                 }
-                sanctionOrderResponse.setSerialNumber(sanctionOrderResponse.getSerialNumber());
-                sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getFarmerFirstName());
-                sanctionOrderResponse.setTotalSchemeAmount(sanctionOrderResponse.getTotalSchemeAmount());
+                if (sanctionOrderResponse.getMarketAuctionDate() == null) {
+                    sanctionOrderResponse.setMarketAuctionDate("");
+                }
+
+                sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
-
-            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
+
 
     private JRBeanCollectionDataSource getDataSourceForSeedCocoon(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
