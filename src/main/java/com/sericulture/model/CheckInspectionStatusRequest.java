@@ -2,6 +2,8 @@ package com.sericulture.model;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -14,4 +16,5 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private int schemeId;
     private int userMasterId;
     private int subSchemeId;
+    private List<Long> applicationFormIds;
 }

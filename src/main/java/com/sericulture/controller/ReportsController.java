@@ -327,12 +327,14 @@ public class ReportsController {
             String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("Bonus2.jrxml");
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("CollectionBeanParam", jasperReport);
-
             // 3. datasource "java object"
             JRDataSource dataSource = getDataSourceForBonus(requestDto);
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -5552,93 +5554,114 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
     }
 
 
-    private JRDataSource getDataSourceForBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+    private JRBeanCollectionDataSource getDataSourceForBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
         SanctionOrder apiResponse = apiService.fetchDataFromBonus(requestDto);
         //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
-
-
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
+        response.setHeader1("ಮೈಸೂರು  ಬಿತ್ತನೆ  ವಲಯದ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ವಿತರಿಸಬೇಕಾದ  ಬೋನಸ್  ಮೊತ್ತ     ರೂ. " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "  ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡುವ ಬಗ್ಗೆ.\n" +
+                "            \n"+
+                "            \n"+
+                "1) ಸರ್ಕಾರದ ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ   83 ರೇಕೃವಿ  2023  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 09/08/2023 ಮತ್ತು    04/10/2023\n" +
+                "            \n"+
+                "2) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು  ಇವರ  ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಪಿ.ಎಸ್1/ಮಾರ್ಗಸೂಚಿ13/\n" +
+                "            \n"+
+                "    2023-24  ದಿನಾ೦ಕ :-11/08/2023\n" +
+                "            \n"+
+                "3) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ  /ಯೋ!/ಪಿ.ಎಸ್.5/ಬೆಸ್ನಿನವೀಅಅಕಾ/52/\n" +
+                "            \n"+
+                "    2023-24  ದಿನಾ೦ಕ :-12/10/2023\n" +
+                "            \n"+
+                "4) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು , ಮಾಗಡಿ  ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  /ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ  /ವಂ.ಮ.ಹ೦/ 20/2024-25\n" +
+                "            \n"+
+                "    ದಿನಾ೦ಕ :- 06/03/2025\n" +
+                "               \n" +
+                "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ಕೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
+                "            \n"+
+                "            \n"+
+                "               ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .  ಬೇಡಿಕೆ\n" +
+                "            \n"+
+                "       ಇಲ್ಲದೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾದಲ್ಲಿ    ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ   ರೂ _______________/- ರ   ಬೋನಸ್ ಪಾವತಿಸಲು  ಮೇಲ್ಕಂಡ   ಉಲ್ಲೆಖ \n" +
+                "            \n"+
+                "       (1) ರಿ೦ದ (4) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+                "            \n"+
+                "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   ,_______________  ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  _______________ ಕೆ.ಜಿ \n" +
+                "            \n"+
+                "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ _______________/- ರಂತೆ ಒಟ್ಟು _______________\n" +
+                "            \n"+
+                "       ರೂ ಗಳ ಬೋನಸ್ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
+        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
+        response.setHeader2("ವಿಷಯ: ");
+        response.setHeader3("ಉಲ್ಲೇಖ: ");
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+
+
+        response.setHeader5("              ಮೇಲ್ಕಂಡ   ಉಲ್ಲೇಖ   (1)  ರಿ೦ದ  (4) ರ  ಸುತ್ತೋಲೆ , ಜ್ಞಾಪನ , ಆದೇಶಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ   ಅ೦ಶಗಳನ್ನು   ಪರಿಶೀಲಿಸಿ  ಒಟ್ಟು   02 ಜನ\n" +
+                "            \n"+
+                "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   ಬೋನಸ್  ಒಟ್ಟು   ಬಾಬ್ತು   ರೂ. _______________________ /-(ರೂಪಾಯಿ ಹತ್ತು   ಸಾವಿರದ  ಒ೦ಭತ್ತು    ನೂರ  ಹದಿಮೂರು ರೂ ಮಾತ್ರ )\n" +
+                "            \n"+
+                "ಗಳಿಗೆ  ಮ೦ಜೂರು  ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ .  ಉಲ್ಲೇಖ (5)  ರಂತೆ  ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
+
+        response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
+        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , _________________ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
+                "            \n"+
+                "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ____________ ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ _______________/- ರ೦ತೆ ಒಟ್ಟು   ರೂ _______________________\n" +
+                "            \n"+
+                "(ರೂಪಾಯಿ ಹತ್ತು ಸಾವಿರದ ಒ೦ಭತ್ತು  ನೂರ ಹದಿಮೂರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ \n" +
+                "            \n"+
+                "ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  ________________________ ರಲ್ಲಿ   ಭರಿಸಲು  ಮ೦ಜೂರಾತಿ   ನೀಡಿದೆ.");
+        response.setHeader8("ಇವರಿಗೆ,\n" +
+                "            \n"+
+                "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
+
+        response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+        response.setDate(apiResponse.getContent().get(0).getDate());
+        response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+        response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+        response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+        response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+        response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+        response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+        response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+        response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
+                "            \n"+
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "            \n"+
+                "______________________\n");
+        response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+        response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+        response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+        response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+        response.setArn( apiResponse.getContent().get(0).getArn());
+        response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//     response.
+        sanctionOrderResponseList.add(response);
+
+
         if (apiResponse.getContent()!= null) {
-            response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
-            response.setHeader2("ವಿಷಯ: ");
-            response.setHeader3("ಉಲ್ಲೇಖ: ");
-            response.setHeader4("ಪೀಠಿಕೆ: ");
 
-            response.setHeader1("ಮೈಸೂರು  ಬಿತ್ತನೆ  ವಲಯದ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ವಿತರಿಸಬೇಕಾದ  ಬೋನಸ್  ಮೊತ್ತ     ರೂ. " +apiResponse.getContent().get(0).getUserMarket() + " ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡುವ ಬಗ್ಗೆ.\n" +
-                  "            \n"+
-                    "            \n"+
-                    "1) ಸರ್ಕಾರದ ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ   83 ರೇಕೃವಿ  2023  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 09/08/2023 ಮತ್ತು    04/10/2023\n" +
-                    "            \n"+
-                    "2) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು  ಇವರ  ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಪಿ.ಎಸ್1/ಮಾರ್ಗಸೂಚಿ13/\n" +
-                    "            \n"+
-                    "    2023-24  ದಿನಾ೦ಕ :-11/08/2023\n" +
-                    "            \n"+
-                    "3) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ  /ಯೋ!/ಪಿ.ಎಸ್.5/ಬೆಸ್ನಿನವೀಅಅಕಾ/52/\n" +
-                    "            \n"+
-                    "    2023-24  ದಿನಾ೦ಕ :-12/10/2023\n" +
-                    "            \n"+
-                    "4) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು , ಮಾಗಡಿ  ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  /ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ  /ವಂ.ಮ.ಹ೦/ 20/2024-25\n" +
-                    "            \n"+
-                    "    ದಿನಾ೦ಕ :- 06/03/2025\n" +
-                    "               \n" +
-                    "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ಕೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
-                    "            \n"+
-                    "            \n"+
-                    "               ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .  ಬೇಡಿಕೆ\n" +
-                    "            \n"+
-                    "       ಇಲ್ಲದೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾದಲ್ಲಿ    ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ   ರೂ _______________/- ರ   ಬೋನಸ್ ಪಾವತಿಸಲು  ಮೇಲ್ಕಂಡ   ಉಲ್ಲೆಖ \n" +
-                    "            \n"+
-                    "       (1) ರಿ೦ದ (4) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
-                    "            \n"+
-                    "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   ,_______________  ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  _______________ ಕೆ.ಜಿ \n" +
-                    "            \n"+
-                    "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ _______________/- ರಂತೆ ಒಟ್ಟು _______________\n" +
-                    "            \n"+
-                    "       ರೂ ಗಳ ಬೋನಸ್ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
-            response.setHeader5("              ಮೇಲ್ಕಂಡ   ಉಲ್ಲೇಖ   (1)  ರಿ೦ದ  (4) ರ  ಸುತ್ತೋಲೆ , ಜ್ಞಾಪನ , ಆದೇಶಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ   ಅ೦ಶಗಳನ್ನು   ಪರಿಶೀಲಿಸಿ  ಒಟ್ಟು   02 ಜನ\n" +
-                    "            \n"+
-                    "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   ಬೋನಸ್  ಒಟ್ಟು   ಬಾಬ್ತು   ರೂ. _______________________ /-(ರೂಪಾಯಿ ಹತ್ತು   ಸಾವಿರದ  ಒ೦ಭತ್ತು    ನೂರ  ಹದಿಮೂರು ರೂ ಮಾತ್ರ )\n" +
-                    "            \n"+
-                    "ಗಳಿಗೆ  ಮ೦ಜೂರು  ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ .  ಉಲ್ಲೇಖ (5)  ರಂತೆ  ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
-
-            response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
-            response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , _________________ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
-                    "            \n"+
-                    "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ____________ ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ _______________/- ರ೦ತೆ ಒಟ್ಟು   ರೂ _______________________\n" +
-                    "            \n"+
-                    "(ರೂಪಾಯಿ ಹತ್ತು ಸಾವಿರದ ಒ೦ಭತ್ತು  ನೂರ ಹದಿಮೂರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ \n" +
-                    "            \n"+
-                    "ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  ________________________ ರಲ್ಲಿ   ಭರಿಸಲು  ಮ೦ಜೂರಾತಿ   ನೀಡಿದೆ.");
-            response.setHeader8("ಇವರಿಗೆ,\n" +
-                    "            \n"+
-                    "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
-
-            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
-            response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
-                    "            \n"+
-                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
-                    "            \n"+
-                    "______________________\n");
-            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-            response.setArn( apiResponse.getContent().get(0).getArn());
-            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             sanctionOrderResponseList.add(response);
             for(SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()){
+                if (sanctionOrderResponse.getFarmerFirstName() == null){
+                    sanctionOrderResponse.setFarmerFirstName("");
+                }
+                if (sanctionOrderResponse.getVillageNameInKannada() == null){
+                    sanctionOrderResponse.setVillageNameInKannada("");
+                }
+                if (sanctionOrderResponse.getPerKgRate() == null){
+                    sanctionOrderResponse.setPerKgRate(0f);
+                }
+                if (sanctionOrderResponse.getCocoonsWeight() == null){
+                    sanctionOrderResponse.setCocoonsWeight(0f);
+                }
+                if (sanctionOrderResponse.getLotWeight() == null){
+                    sanctionOrderResponse.setLotWeight(0f);
+                }
+                sanctionOrderResponse.setSerialNumber(sanctionOrderResponse.getSerialNumber());
                 sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getFarmerFirstName());
+                sanctionOrderResponse.setTotalSchemeAmount(sanctionOrderResponse.getTotalSchemeAmount());
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
 
