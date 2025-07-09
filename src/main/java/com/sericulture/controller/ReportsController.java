@@ -5553,6 +5553,60 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
+    public class NumberToWordsConverter {
+
+        private static final String[] units = {
+                "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+                "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                "Seventeen", "Eighteen", "Nineteen"
+        };
+
+        private static final String[] tens = {
+                "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+        };
+
+        private static String convertLessThanThousand(int number) {
+            String word = "";
+            if (number % 100 < 20){
+                word = units[number % 100];
+                number /= 100;
+            } else {
+                word = units[number % 10];
+                number /= 10;
+
+                word = tens[number % 10] + (word.isEmpty() ? "" : " " + word);
+                number /= 10;
+            }
+            if (number == 0) return word;
+            return units[number] + " Hundred" + (word.isEmpty() ? "" : " " + word);
+        }
+
+        public static String convert(long number) {
+            if (number == 0) { return "Zero"; }
+
+            String[] bigUnits = {"", "Thousand", "Million", "Billion"};
+            int[] parts = new int[4];
+            int partIndex = 0;
+
+            while (number > 0) {
+                parts[partIndex++] = (int)(number % 1000);
+                number /= 1000;
+            }
+
+            StringBuilder words = new StringBuilder();
+            for (int i = partIndex - 1; i >= 0; i--) {
+                if (parts[i] != 0) {
+                    words.append(convertLessThanThousand(parts[i]))
+                            .append(" ")
+                            .append(bigUnits[i])
+                            .append(" ");
+                }
+            }
+
+            return words.toString().trim();
+        }
+    }
+
 
     private JRBeanCollectionDataSource getDataSourceForBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
@@ -5582,13 +5636,13 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "               ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .  ಬೇಡಿಕೆ\n" +
                 "            \n"+
-                "       ಇಲ್ಲದೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾದಲ್ಲಿ    ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ   ರೂ _______________/- ರ   ಬೋನಸ್ ಪಾವತಿಸಲು  ಮೇಲ್ಕಂಡ   ಉಲ್ಲೆಖ \n" +
+                "       ಇಲ್ಲದೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾದಲ್ಲಿ    ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ   ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರ   ಬೋನಸ್ ಪಾವತಿಸಲು  ಮೇಲ್ಕಂಡ   ಉಲ್ಲೆಖ \n" +
                 "            \n"+
                 "       (1) ರಿ೦ದ (4) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
                 "            \n"+
-                "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   ,_______________  ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  _______________ ಕೆ.ಜಿ \n" +
+                "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   , " +apiResponse.getContent().get(0).getUserMarket() + "   ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  " +apiResponse.getContent().get(0).getCocoonsWeight() + "  ಕೆ.ಜಿ \n" +
                 "            \n"+
-                "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ _______________/- ರಂತೆ ಒಟ್ಟು _______________\n" +
+                "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು  " +apiResponse.getContent().get(0).getSanctionAmount() + " \n" +
                 "            \n"+
                 "       ರೂ ಗಳ ಬೋನಸ್ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
@@ -5596,19 +5650,23 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ: ");
 
+        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+        long amountLong = amountFloat.longValue();
+
+        String amountInWords = NumberToWordsConverter.convert(amountLong);
 
         response.setHeader5("              ಮೇಲ್ಕಂಡ   ಉಲ್ಲೇಖ   (1)  ರಿ೦ದ  (4) ರ  ಸುತ್ತೋಲೆ , ಜ್ಞಾಪನ , ಆದೇಶಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ   ಅ೦ಶಗಳನ್ನು   ಪರಿಶೀಲಿಸಿ  ಒಟ್ಟು   02 ಜನ\n" +
                 "            \n"+
-                "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   ಬೋನಸ್  ಒಟ್ಟು   ಬಾಬ್ತು   ರೂ. _______________________ /-(ರೂಪಾಯಿ ಹತ್ತು   ಸಾವಿರದ  ಒ೦ಭತ್ತು    ನೂರ  ಹದಿಮೂರು ರೂ ಮಾತ್ರ )\n" +
+                "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   ಬೋನಸ್  ಒಟ್ಟು   ಬಾಬ್ತು   ರೂ.  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " /- (ರೂಪಾಯಿ " + amountInWords +"  ರೂ ಮಾತ್ರ )\n" +
                 "            \n"+
                 "ಗಳಿಗೆ  ಮ೦ಜೂರು  ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ .  ಉಲ್ಲೇಖ (5)  ರಂತೆ  ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
         response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
-        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , _________________ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
+        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , " +apiResponse.getContent().get(0).getUserMarket() + " ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
                 "            \n"+
-                "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ  ____________ ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ _______________/- ರ೦ತೆ ಒಟ್ಟು   ರೂ _______________________\n" +
+                "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ   " +apiResponse.getContent().get(0).getCocoonsWeight() + " ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರ೦ತೆ ಒಟ್ಟು   ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " \n" +
                 "            \n"+
-                "(ರೂಪಾಯಿ ಹತ್ತು ಸಾವಿರದ ಒ೦ಭತ್ತು  ನೂರ ಹದಿಮೂರು ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ \n" +
+                "(ರೂಪಾಯಿ " + amountInWords +"  ರೂ ಮಾತ್ರ ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ \n" +
                 "            \n"+
                 "ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  ________________________ ರಲ್ಲಿ   ಭರಿಸಲು  ಮ೦ಜೂರಾತಿ   ನೀಡಿದೆ.");
         response.setHeader8("ಇವರಿಗೆ,\n" +
@@ -5628,7 +5686,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "            \n"+
-                "______________________\n");
+                apiResponse.getContent().get(0).getTotalSchemeAmount() + "\n");
         response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
         response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
         response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
