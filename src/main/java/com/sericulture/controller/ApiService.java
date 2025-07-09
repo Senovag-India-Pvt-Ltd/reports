@@ -156,8 +156,8 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromBonus(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -180,8 +180,8 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -203,8 +203,8 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSeedCocoon(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-//        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
-        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
+        String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForK2";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
