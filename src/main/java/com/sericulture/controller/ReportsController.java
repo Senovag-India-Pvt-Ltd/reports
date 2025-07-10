@@ -5725,6 +5725,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (sanctionOrderResponse.getMarketAuctionDate() == null) {
                     sanctionOrderResponse.setMarketAuctionDate("");
                 }
+                if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
+                    sanctionOrderResponse.setTotalCocoonsWeight(0f);
+                }
+
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
@@ -5844,6 +5848,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (sanctionOrderResponse.getMarketAuctionDate() == null) {
                     sanctionOrderResponse.setMarketAuctionDate("");
                 }
+                if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
+                    sanctionOrderResponse.setTotalCocoonsWeight(0f);
+                }
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
@@ -5941,6 +5948,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 }
                 if (sanctionOrderResponse.getMarketAuctionDate() == null) {
                     sanctionOrderResponse.setMarketAuctionDate("");
+                }
+                if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
+                    sanctionOrderResponse.setTotalCocoonsWeight(0f);
                 }
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);

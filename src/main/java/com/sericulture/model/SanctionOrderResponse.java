@@ -109,5 +109,7 @@ public class SanctionOrderResponse {
     private String  villageNameInKannada;
     private String userDistrict;
     private String userMarket;
+    private Float totalCocoonsWeight;
+
 
 }
