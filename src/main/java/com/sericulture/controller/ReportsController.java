@@ -5728,6 +5728,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
                     sanctionOrderResponse.setTotalCocoonsWeight(0f);
                 }
+                if (sanctionOrderResponse.getTotalSchemeAmount() == null) {
+                    sanctionOrderResponse.setTotalSchemeAmount(0f);
+                }
+                if (sanctionOrderResponse.getSanctionAmount() == null) {
+                    sanctionOrderResponse.setSanctionAmount(0f);
+                }
 
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
@@ -5756,37 +5762,40 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "1) ಸರ್ಕಾರದ  ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ  79 ರೇಕೃವಿ 2022 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 15/05/2022\n" +
                 "            \n"+
-                "2) ರೇಷ್ಮೆ    ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ಇವರ ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಎ.ಎಸ್1/ಯೋಕ/ಮೊಸು/15/\n" +
+                "2) ರೇಷ್ಮೆ    ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ಇವರ ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಎ.ಎಸ್1/ಯೋಕ/ಮೊಸು/\n" +
                 "            \n"+
-                "    2022-23 ದಿನಾ೦ಕ:-05/05/2022\n" +
+                "    15/2022-23 ದಿನಾ೦ಕ:-05/05/2022\n" +
                 "            \n"+
-                "3) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು, ಮಾಗಡಿ ರವರ ಜ್ಞಾಪನ ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  / ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ/ವ೦.ಮ.ಹ೦//20/2024/25\n" +
+                "3) ರೇಷ್ಮೆ    ಉಪ ನಿರ್ದೇಶಕರು, ಮಾಗಡಿ ರವರ ಜ್ಞಾಪನ ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  / ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ/ವ೦.ಮ.ಹ೦//20/2024/25\n" +
                 "            \n"+
                 "    ದಿನಾ೦ಕ: 05/03/2025\n" +
                 "            \n"+
-                "4) ಸರ್ಕಾರದ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ತಕೋಇ:61:ರೇಕೃವಿ:2019 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
+                "4) ಸರ್ಕಾರದ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ತೋಇ:61:ರೇಕೃವಿ:2019 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
                 "            \n"+
-                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ    ವಿರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
-                "            \n"+
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ  ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು   ಗುಣಮಟ್ಟ  ಅಧರಿಸಿ  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ \n" +
-                "            \n"+
-                "ರೂ   " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರಂತೆ ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+
                 "            \n"+
                 "            \n"+
-                "               ಉಲ್ಲೇಖ (1) ಮತ್ತು (2 ರಲ್ಲಿ   ಈ ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಯನ್ನು   ನೀಡಿದ್ದು , ಅದರ೦ತೆ ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ  ಮಂಜೂರಾತಿ\n" +
+                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ     ನೀರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
                 "            \n"+
-                "ನೀಡಲು  ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ  ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ  ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ\n" +
+                "ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು     ಗುಣಮಟ್ಟ      ಅಧರಿಸಿ  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ \n" +
                 "            \n"+
-                "13-03-2025 ರ ಮಾಹೆಯಲ್ಲಿ    ವಹಿವಾಟಾದ ಬಿತ್ತನೆ  ಗೂಡುಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹಧನದ   ವಿವರ ಕೆಳಗಿನಂತಿದೆ");
+                "ರೂ   " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರಂತೆ  ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
+                "            \n"+
+                "            \n"+
+                "               ಉಲ್ಲೇಖ (1) ಮತ್ತು   (2) ರಲ್ಲಿ     ಈ ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಿದ್ದು , ಅದರ೦ತೆ ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ    ಮಂಜೂರಾತಿ\n" +
+                "            \n"+
+                "ನೀಡಲು   ಅಧಿಕಾರ  ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ    ರೇಷ್ಮೆ    ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ , " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ\n" +
+                "            \n"+
+                "13-03-2025 ರ ಮಾಹೆಯಲ್ಲಿ      ವಹಿವಾಟಾದ ಬಿತ್ತನೆ  ಗೂಡುಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹಧನದ   ವಿವರ ಕೆಳಗಿನಂತಿದೆ");
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
         long amountLong = amountFloat.longValue();
 
         String amountInWords = NumberToWordsConverter.convert(amountLong);
-        response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "/-  (ರೂಪಾಯಿ \n" +
+        response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು    ಪರಿಶೀಲಿಸಿ ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "/-  (ರೂಪಾಯಿ \n" +
                 "            \n"+
-                amountInWords +"  ರೂಗಳು ಮಾತ್ರ)ಗಳಿಗೆ ಪ ್ರೋತ್ಸಾಹ  ಧನವನ್ನು  ಪಟ್ಟೆಯಲ್ಲಿ   ಲಗತ್ತಿಸಿರುವ  02 \n" +
+                amountInWords +"  ರೂಗಳು ಮಾತ್ರ  )ಗಳಿಗೆ   ಪ್ರೋತ್ಸಾಹ   ಧನವನ್ನು     ಪಟ್ಟೆಯಲ್ಲಿ    ಲಗತ್ತಿಸಿರುವ\n" +
                 "            \n"+
-                "ಜನರ ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ   ಮ೦ಜೂರು ಮಾಡಬಹುದಾ? ರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು  \n"+
+                "02 ಜನರ ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ    ಮ೦ಜೂರು   ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ ಪ್ರಾಪ್ತವಿದ್ದು  \n"+
                         "                 \n"+
                         "ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
@@ -5850,6 +5859,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 }
                 if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
                     sanctionOrderResponse.setTotalCocoonsWeight(0f);
+                }
+                if (sanctionOrderResponse.getTotalSchemeAmount() == null) {
+                    sanctionOrderResponse.setTotalSchemeAmount(0f);
+                }
+                if (sanctionOrderResponse.getSanctionAmount() == null) {
+                    sanctionOrderResponse.setSanctionAmount(0f);
                 }
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
@@ -5951,6 +5966,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 }
                 if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
                     sanctionOrderResponse.setTotalCocoonsWeight(0f);
+                }
+                if (sanctionOrderResponse.getTotalSchemeAmount() == null) {
+                    sanctionOrderResponse.setTotalSchemeAmount(0f);
+                }
+                if (sanctionOrderResponse.getSanctionAmount() == null) {
+                    sanctionOrderResponse.setSanctionAmount(0f);
                 }
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
