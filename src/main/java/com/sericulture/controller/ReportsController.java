@@ -5627,7 +5627,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "    2023-24  ದಿನಾ೦ಕ :-11/08/2023\n" +
                 "            \n"+
-                "3) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ  /ಯೋ!/ಪಿ.ಎಸ್.5/ಬೆಸ್ನಿನವೀಅಅಕಾ/52/\n" +
+                "3) ರೇಷ್ಮೆ   ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ  /ಯೋ/ಪಿ.ಎಸ್.5/ಬೆಸ್ತಿನಿಅಅಕಾ/52/\n" +
                 "            \n"+
                 "    2023-24  ದಿನಾ೦ಕ :-12/10/2023\n" +
                 "            \n"+
@@ -5635,7 +5635,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "    ದಿನಾ೦ಕ :- 06/03/2025\n" +
                 "               \n" +
-                "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ಕೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
+                "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ತೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
                 "            \n"+
                 "            \n"+
                 "               ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .  ಬೇಡಿಕೆ\n" +
@@ -5646,10 +5646,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "       ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ   , " +apiResponse.getContent().get(0).getUserMarket() + "   ಸ೦ಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ :- 13/02/2025 ರಿ೦ದ 24/02/2025ರ  ಒಟ್ಟು  " +apiResponse.getContent().get(0).getCocoonsWeight() + "  ಕೆ.ಜಿ \n" +
                 "            \n"+
-                "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು  " +apiResponse.getContent().get(0).getSanctionAmount() + " \n" +
+                "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " \n" +
                 "            \n"+
-                "       ರೂ ಗಳ ಬೋನಸ್ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
-        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
+                "       ರೂ. ಗಳ  ಬೋನಸ್  ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
+        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ: ");
