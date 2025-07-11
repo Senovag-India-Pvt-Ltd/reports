@@ -5648,7 +5648,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "       ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " \n" +
                 "            \n"+
-                "       ರೂ. ಗಳ  ಬೋನಸ್  ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ ಕಳಗಿನ೦ತಿದೆ.\n");
+                "       ರೂ. ಗಳ  ಬೋನಸ್  ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ  ಕೆಳಗಿನಂತಿದೆ.\n");
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
@@ -5665,7 +5665,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "            \n"+
                 "ಗಳಿಗೆ  ಮ೦ಜೂರು  ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ .  ಉಲ್ಲೇಖ (5)  ರಂತೆ  ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
-        response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
+        response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
         response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , " +apiResponse.getContent().get(0).getUserMarket() + " ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ  ಮೈಸೂರು  \n" +
                 "            \n"+
                 "ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ   " +apiResponse.getContent().get(0).getCocoonsWeight() + " ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರ೦ತೆ ಒಟ್ಟು   ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " \n" +
@@ -5775,7 +5775,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
                 "            \n"+
                 "            \n"+
-                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ     ನೀರ೦ತರ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
+                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ     ನಿರಂತರ  ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು     ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
                 "            \n"+
                 "ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು     ಗುಣಮಟ್ಟ      ಅಧರಿಸಿ  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ \n" +
                 "            \n"+
@@ -5799,7 +5799,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                         "                 \n"+
                         "ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
-        response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಪೋ್ರೋ:ಮ೦/604(2)2024-25 ದಿನಾ೦ಕ:13/03/2025");
+        response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಪೋ್ರೋ:ಮ೦/604(2)2024-25 ದಿನಾ೦ಕ:13/03/2025");
 
         response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ ಮೈಸೂರು\n" +
                 "            \n"+
@@ -5914,7 +5914,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ಕೋಠಿಗಳ ಉಪಯೋಗಕ್ಕಾಗಿ   ಮೈಸೂರು  ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   , ಈ ಕೆಳಕಂಡ ರೈತರಿ೦ದ  ಖರೀದಿಸಿದ  ಗೂಡಿನ ಬಾಬ್ತು \n" +
                 "            \n"+
                 "ರೂ  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "  ಗಳಿಗೆ ಮ೦ಜೂರಾತಿ  ವೀಡಬೇಕಾಗಿದೆ. ವಿವರ ಕೆಳಗಿನಂತಿದೆ.");
-        response.setHeader5("              ಹೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ ,  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಬಿತ್ತನೆ ಕೋಠಿಗಳ ಉಪಯೋಗಕ್ಕಾಗಿ  ಮೈಸೂರು  ಬಿತ್ತನೆ  \n" +
+        response.setHeader5("              ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ ,  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಬಿತ್ತನೆ ಕೋಠಿಗಳ ಉಪಯೋಗಕ್ಕಾಗಿ  ಮೈಸೂರು  ಬಿತ್ತನೆ  \n" +
                 "            \n"+
                 "ಗೂಡುಗಳನ್ನು    ಖರೀದಿಸಿದ   ಬಾಬ್ತು ರೂ  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " /- (ರೂಪಾಯಿ  " + amountInWords +"  ರೂ ಮಾತ್ರ )  ಗಳಿಗೆ ಉಲ್ಲೇಖ (3)ರ\n" +
                 "            \n"+
@@ -5925,13 +5925,13 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ರಲ್ಲಿ    ಭರಿಸಲು ಮ೦ಜೂರಾತಿ ನೀಡಿದೆ.\n");
 
         response.setHeader6(" ( Rupees." +amountInWords + " Only )");
-        response.setHeader7("ಸಂ:ರೇಸವಿ:ರೇಗೂಮಾ:ಸೂ£ಬಿಗೂಐ:ಮಂ೦:02:2024-25 ");
+        response.setHeader7("ಸಂ:ರೇಸವಿ:ರೇಗೂಮಾ :" +apiResponse.getContent().get(0).getUserMarket() + ": ಬಿಗೂಐ:ಮಂ೦:02:2024-25 ");
         response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
                 "            \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "            \n"+
                 apiResponse.getContent().get(0).getUserMarket() +  " \n");
-        response.setHeader8("ಮಂ೦ಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ ಸ೦ಂ:ರೇಸನಿ:ರೇಗೂಮಾ:ಸೋ:ಬಿಗೂಖ:ಮಂ೦:02:2024-25 ದಿನಾ೦ಕ:13/03/2025");
+        response.setHeader8("ಮಂ೦ಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ ಸ೦ಂ:ರೇಸನಿ:ರೇಗೂಮಾ:" +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಖ:ಮಂ೦:02:2024-25 ದಿನಾ೦ಕ:13/03/2025");
         response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
         response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
         response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
