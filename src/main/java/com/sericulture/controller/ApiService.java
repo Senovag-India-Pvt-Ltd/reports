@@ -177,6 +177,52 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public SeedMarket fetchDataFromPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+         String finalapiurl = apiUrl + "auction/print/getLotDistributeDetailsForPermitRSP";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getLotDistributeDetailsForPermitRSP";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<LotStatusSeedMarketRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        LotDistributeResponse response = new LotDistributeResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SeedMarket response2 = objectMapper.readValue(response1, SeedMarket.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public SeedMarket fetchDataFromInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+         String finalapiurl = apiUrl + "auction/print/getLotDistributeResponseForInvoiceForSeedMarket";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getLotDistributeResponseForInvoiceForSeedMarket";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<LotStatusSeedMarketRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        LotDistributeResponse response = new LotDistributeResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SeedMarket response2 = objectMapper.readValue(response1, SeedMarket.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
 
     public SanctionOrder fetchDataFromIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint

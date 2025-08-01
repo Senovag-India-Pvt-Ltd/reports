@@ -320,6 +320,101 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/get-Permit")
+    public ResponseEntity<?> getPermit(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to get Permit");
+            logger.info("enter to get Permit");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Permit.jrxml");
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForPermit(requestDto);
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+    @PostMapping("/get-Invoice")
+    public ResponseEntity<?> getInvoice(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to get Invoice");
+            logger.info("enter to get Invoice");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Invoice.jrxml");
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForInvoice(requestDto);
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+
     @PostMapping("/get-Bonus")
     public ResponseEntity<?> getBonus(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -5609,6 +5704,140 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
             return words.toString().trim();
         }
+    }
+
+    private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+
+        SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
+        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ ತಲುಪಿದೆ .   ಅದನ್ನು ಈ ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
+                "    \n" +
+                        "ಸ್ಥಳ________________________________                                       ರುಜು ___________________________            ರುಜು  _________________________________  \n"+
+                        "      \n"+
+                        "ದಿನಾಂಕ__________________________                                         ಹುದ್ದೆಯ ಹೆಸರು__________________________________      ಹುದ್ದೆಯ ಹೆಸರು _________________________");
+        response.setHeader1("ರವರ ಕಛೆರಿ_______________________\n" +
+                "        \n"+
+                "____________________\n"+
+                "        \n"+
+                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader1("ಗೆ,                \n" +
+                "        \n"+
+                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "        \n"+
+                "__________________________");
+        response.setHeader3("ಉಲ್ಲೇಖ: ");
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+
+//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+//        long amountLong = amountFloat.longValue();
+//
+//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//     response.
+//        sanctionOrderResponseList.add(response);
+
+
+        if (apiResponse.getContent() != null) {
+            lotDistributeResponseList.add(response);
+
+            int serialNo = 1;
+            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+                if (lotDistributeResponse.getFarmerFullName() == null) {
+                    lotDistributeResponse.setFarmerFullName("");
+                }
+                if (lotDistributeResponse.getRace() == null) {
+                    lotDistributeResponse.setRace("");
+                }
+                if (lotDistributeResponse.getLotWeight() == null) {
+                    lotDistributeResponse.setLotWeight(0f);
+                }
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
+                }
+                if (lotDistributeResponse.getAmount() == null) {
+                    lotDistributeResponse.setAmount(0f);
+                }
+                if (lotDistributeResponse.getSoldAmount() == null) {
+                    lotDistributeResponse.setSoldAmount(0f);
+                }
+
+                lotDistributeResponse.setSerialNumber(serialNo++);
+                lotDistributeResponseList.add(lotDistributeResponse);
+            }
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+    }
+
+
+    private JRBeanCollectionDataSource getDataSourceForPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+
+        SeedMarket apiResponse = apiService.fetchDataFromPermit(requestDto);
+        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ  " + apiResponse.getContent().get(0).getTestDate()  +"    ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"\n" +
+                        "         \n"+
+                        "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                        "      \n"+
+                        "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
+                        "              \n" +
+                        "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "           \n"+
+                apiResponse.getContent().get(0).getMarketAuctionDate());
+
+
+
+        response.setHeader3("ಉಲ್ಲೇಖ: ");
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+
+//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+//        long amountLong = amountFloat.longValue();
+//
+//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//     response.
+//        sanctionOrderResponseList.add(response);
+
+
+        if (apiResponse.getContent() != null) {
+            lotDistributeResponseList.add(response);
+
+            int serialNo = 1;
+            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+                if (lotDistributeResponse.getFarmerFullName() == null) {
+                    lotDistributeResponse.setFarmerFullName("");
+                }
+                if (lotDistributeResponse.getLotWeight() == null) {
+                    lotDistributeResponse.setLotWeight(0f);
+                }
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
+                }
+                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
+                }
+                if (lotDistributeResponse.getAmount() == null) {
+                    lotDistributeResponse.setAmount(0f);
+                }
+                if (lotDistributeResponse.getSoldAmount() == null) {
+                    lotDistributeResponse.setSoldAmount(0f);
+                }
+
+                lotDistributeResponse.setSerialNumber(serialNo++);
+                lotDistributeResponseList.add(lotDistributeResponse);
+            }
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
     }
 
 
