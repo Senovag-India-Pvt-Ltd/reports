@@ -179,8 +179,8 @@ public class ApiService {
 
     public SeedMarket fetchDataFromPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-         String finalapiurl = apiUrl + "auction/print/getLotDistributeDetailsForPermitRSP";
-//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getLotDistributeDetailsForPermitRSP";
+         String finalapiurl = apiUrl + "lotGroupage/getLotDistributeDetailsForPermitRSP";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getLotDistributeDetailsForPermitRSP";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -202,8 +202,8 @@ public class ApiService {
 
     public SeedMarket fetchDataFromInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-         String finalapiurl = apiUrl + "auction/print/getLotDistributeResponseForInvoiceForSeedMarket";
-//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getLotDistributeResponseForInvoiceForSeedMarket";
+         String finalapiurl = apiUrl + "lotGroupage/getLotDistributeResponseForInvoiceForSeedMarket";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getLotDistributeResponseForInvoiceForSeedMarket";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
@@ -223,6 +223,28 @@ public class ApiService {
         //return apiResponse;
     }
 
+
+    public SeedMarket fetchDataCashAndMarketReciept(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+
+        String finalapiurl = apiUrl + "lotGroupage/getLotDistributeDetailsForMarketReceiptAndCashReceipt";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getLotDistributeDetailsForMarketReceiptAndCashReceipt";
+
+
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<LotStatusSeedMarketRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SeedMarket response = restTemplate.postForObject(finalapiurl,requestEntity, SeedMarket.class);
+
+        return response;
+        // Process the API response as needed
+        //return apiResponse;
+    }
 
     public SanctionOrder fetchDataFromIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint

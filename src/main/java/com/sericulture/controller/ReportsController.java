@@ -374,7 +374,7 @@ public class ReportsController {
             System.out.println("enter to get Invoice");
             logger.info("enter to get Invoice");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Invoice.jrxml");
+            JasperReport jasperReport = getJasperReport("Invoice2.jrxml");
 
             // 3. datasource "java object"
             JRDataSource dataSource = getDataSourceForInvoice(requestDto);
@@ -5706,20 +5706,80 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         }
     }
 
+//    private JRDataSource getDataSourceForAcknowledgementReceipt(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+//
+//        SeedMarket apiResponse = apiService.fetchDataCashAndMarketReciept(requestDto);
+//        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+//
+//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+//        LotDistributeResponse response = new LotDistributeResponse();
+//        if (apiResponse.getContent()!= null) {
+//            response.setHeader("__________ರಲ್ಲಿ ಹಣ್ಣಾದ_________  ಸಾವಿರ ಬೈವೋಲ್ಟಿನ್/ ಮೈಸೂರು ತಳಿ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು  ________________ \n" +
+//                    "      \n" +
+//                    "ಗ್ರಾಮದ  ಬಿತ್ತನೆ   ಗೂಡು ಸಾಕಣೆಗೆ  ಅನುಜ್ಞಾ ಪತ್ರ ಪಡೆದಿರುವ ಶ್ರೀ  _____________ರವರಿಂದ ಒಂದು ಸಾವಿರ ಗೂಡುಗಳಿಗೆ \n" +
+//                            "            \n" +
+//                            "ರೂ._________ ದರದ ಪ್ರಕಾರ____________ರಂದು ಕೊಂಡು  _______ಲಾಟಿಗೆ ಉಪಯೋಗಿಸಲು ಸಂಭಂದಿಸಿದ ದಾಸ್ತಾನು \n"+
+//                            "     \n"+
+//                            "ಪುಸ್ತಕದ ಪುಟ ____________ ರಲ್ಲಿ _____________  ರಂದು ದಾಖಲು ಮಾಡಿಕೊಂಡು ____________ ದ ಬಿತ್ತನೆ ಕೋಠಿಗೆ\n"+
+//                    "           \n"+
+//                    "ಸರಕು ರವಾನೆ ಮೂಲಕ ರವಾನಿಸಲಾಗಿದೆಯೆಂದು ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ   ಒಟ್ಟು  ಮೊಬಲಗು __________\n" +
+//                            "                   \n" +
+//                            "ರೂ. ಗಳನ್ನೂ ನಗದು/ ಚೆಕ್ ಸಂಖ್ಯೆ ____________ ಕೊಡಲಾಗಿದೆ.");
+//            response.setHeader1("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
+//                            "     \n" +
+//                            "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
+//            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+//            response.setDate(apiResponse.getContent().get(0).getDate());
+//            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+//            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+//            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+//            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+//            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+//            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+//            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+//            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ,\n " +
+//                    "                                           \n"+
+//                    apiResponse.getContent().get(0).getHobliNameInKannada()+ "    ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ   ನಿವಾಸಿಯಾದ   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  \n" +
+//                    "                                    \n"+
+//                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "     ಯಂತ್ರೋಪಕರಣಕೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು\n" +
+//                    "                                                              \n" +
+//                    "ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸುತ್ತಾರೆ .  ಇವರ  ನೋಂದಣಿ  ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,\n" +
+//                    "                       \n" +
+//                    "ಈ   ನೋಂದಣಿ   ಸಂಖ್ಯೆಯನ್ನು      ಮುಂದಿನ  ವಿಚರಾಣೆಗೆ   ಉಪಯೋಗಿಸತಕದ್ದು  .");
+//            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
+//                    "                        \n" +
+//                    "______________________________  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ");
+//            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+//            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+//            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+//            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+//            response.setArn( apiResponse.getContent().get(0).getArn());
+//            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+//            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//            lotDistributeResponseList.add(response);
+//
+//            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+//        }
+//        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+//        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+//    }
+
     private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ ತಲುಪಿದೆ .   ಅದನ್ನು ಈ ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
+        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
                 "    \n" +
-                        "ಸ್ಥಳ________________________________                                       ರುಜು ___________________________            ರುಜು  _________________________________  \n"+
+                        "ಸ್ಥಳ________________________________                                       ರುಜು ___________________________                   ರುಜು  _________________________________  \n"+
                         "      \n"+
                         "ದಿನಾಂಕ__________________________                                         ಹುದ್ದೆಯ ಹೆಸರು__________________________________      ಹುದ್ದೆಯ ಹೆಸರು _________________________");
-        response.setHeader1("ರವರ ಕಛೆರಿ_______________________\n" +
+        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
-                "____________________\n"+
+                "_________________________________\n"+
+                "        \n"+
+                "_________________________________\n"+
                 "        \n"+
                 " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
@@ -5758,6 +5818,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getTestDate() == null) {
                     lotDistributeResponse.setTestDate("");
                 }
+                if (lotDistributeResponse.getInvoiceNumber() == null) {
+                    lotDistributeResponse.setInvoiceNumber("");
+                }
+
                 if (lotDistributeResponse.getAmount() == null) {
                     lotDistributeResponse.setAmount(0f);
                 }
