@@ -330,15 +330,23 @@ public class ReportsController {
             JasperReport jasperReport = getJasperReport("Permit.jrxml");
 
             // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceForPermit(requestDto);
+//            JRDataSource dataSource = getDataSourceForPermit(requestDto);
+            JRDataSource dataSource1 = getDataSourceForPermit(requestDto);        // ✅ Table 1 data
+            JRDataSource dataSource2 = getDataSourceForPermit2(requestDto);
 
             // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("CollectionBeanParam", dataSource);
+//            Map<String, Object> parameters = new HashMap<String, Object>();
+//            parameters.put("CollectionBeanParam", dataSource);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", dataSource1);
+            parameters.put("CollectionBeanParam2", dataSource2);
 
 
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource1);
+
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
 
@@ -390,15 +398,14 @@ public class ReportsController {
 //            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource1);
 
 
-            JRDataSource dataSource1 = getDataSourceForInvoice(requestDto);        // ✅ Table 1 data
+            JRDataSource dataSource1 = getDataSourceForInvoice(requestDto);
             JRDataSource dataSource2 = getDataSourceForInvoice2(requestDto);
-            JRDataSource dataSource3 = getDataSourceForInvoice3(requestDto); // ✅ Table 2 data
-// ✅ Table 2 data
+            JRDataSource dataSource3 = getDataSourceForInvoice3(requestDto);
 
             Map<String, Object> parameters = new HashMap<>();
-            parameters.put("CollectionBeanParam", dataSource1);   // 🔁 Table 1 param
-            parameters.put("CollectionBeanParam2", dataSource2);  // 🔁 Table 2 param
-            parameters.put("CollectionBeanParam3", dataSource3);  // 🔁 Table 2 param
+            parameters.put("CollectionBeanParam", dataSource1);
+            parameters.put("CollectionBeanParam2", dataSource2);
+            parameters.put("CollectionBeanParam3", dataSource3);
 
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource1);
@@ -5782,15 +5789,6 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
-//        LotDistributeResponse response = new LotDistributeResponse();
-
-//        if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
-//
-//            int serialNo = 1;
-//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-
          lotDistributeResponseList.add(response);
 
         if (apiResponse.getContent() != null) {
@@ -5872,16 +5870,6 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
-//        LotDistributeResponse response = new LotDistributeResponse();
-
-//        if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
-//
-//            int serialNo = 1;
-//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-
-//        lotDistributeResponseList.add(response);
 
         if (apiResponse.getContent() != null) {
 //            lotDistributeResponseList.add(response);
@@ -5910,8 +5898,6 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     lotDistributeResponse.setSoldAmount(0f);
                 }
 
-//                lotDistributeResponse.setSerialNumber(serialNo++);
-//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
 
@@ -5943,17 +5929,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader4("ಪೀಠಿಕೆ: ");
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
-
-
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
-//
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
-
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
-//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
 
     }
 
@@ -5962,16 +5939,6 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
-//        LotDistributeResponse response = new LotDistributeResponse();
-
-//        if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
-//
-//            int serialNo = 1;
-//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-
-//        lotDistributeResponseList.add(response);
 
         if (apiResponse.getContent() != null) {
 //            lotDistributeResponseList.add(response);
@@ -6000,15 +5967,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     lotDistributeResponse.setSoldAmount(0f);
                 }
 
-//                lotDistributeResponse.setSerialNumber(serialNo++);
-//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
 
             }
         }
-
-
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
                 "_________________________________\n"+
@@ -6032,63 +5995,75 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
-        response.setHeader4("ಪೀಠಿಕೆ: ");
-
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
 
-
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
-//
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
-
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
-//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
 
     }
-
-
-
-
 
     private JRBeanCollectionDataSource getDataSourceForPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
         SeedMarket apiResponse = apiService.fetchDataFromPermit(requestDto);
-        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
+        lotDistributeResponseList.add(response);
+
+        if (apiResponse.getContent() != null) {
+
+            int serialNo = 1;
+//            lotDistributeResponseList.add(response);
+
+            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+                if (lotDistributeResponse.getFarmerFullName() == null) {
+                    lotDistributeResponse.setFarmerFullName("");
+                }
+                if (lotDistributeResponse.getLotWeight() == null) {
+                    lotDistributeResponse.setLotWeight(0f);
+                }
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
+                }
+                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
+                }
+                if (lotDistributeResponse.getAmount() == null) {
+                    lotDistributeResponse.setAmount(0f);
+                }
+                if (lotDistributeResponse.getSoldAmount() == null) {
+                    lotDistributeResponse.setSoldAmount(0f);
+                }
+
+                lotDistributeResponse.setSerialNumber(serialNo++);
+                lotDistributeResponseList.add(lotDistributeResponse);
+            }
+        }
+
         response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ  " + apiResponse.getContent().get(0).getTestDate()  +"    ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"\n" +
-                        "         \n"+
-                        "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
-                        "      \n"+
-                        "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                "         \n"+
+                "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                "      \n"+
+                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
-                        "              \n" +
-                        "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "              \n" +
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "           \n"+
                 apiResponse.getContent().get(0).getMarketAuctionDate());
-
-
-
-        response.setHeader3("ಉಲ್ಲೇಖ: ");
-        response.setHeader4("ಪೀಠಿಕೆ: ");
-
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
-//
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
-
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+    }
 
+    private JRBeanCollectionDataSource getDataSourceForPermit2(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
+        SeedMarket apiResponse = apiService.fetchDataFromPermit(requestDto);
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+
+//        lotDistributeResponseList.add(response);
         if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
-
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
                 if (lotDistributeResponse.getFarmerFullName() == null) {
@@ -6114,7 +6089,23 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponseList.add(lotDistributeResponse);
             }
         }
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ  " + apiResponse.getContent().get(0).getTestDate()  +"    ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"\n" +
+                "         \n"+
+                "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                "      \n"+
+                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
+                "              \n" +
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "           \n"+
+                apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader3("ಉಲ್ಲೇಖ: ");
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
     }
 
