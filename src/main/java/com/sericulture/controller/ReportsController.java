@@ -369,23 +369,40 @@ public class ReportsController {
 
     @PostMapping("/get-Invoice")
     public ResponseEntity<?> getInvoice(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
-
         try {
             System.out.println("enter to get Invoice");
             logger.info("enter to get Invoice");
             String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("Invoice2.jrxml");
 
-            // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceForInvoice(requestDto);
+//            // ✅ Get the data as a list
+//            JRDataSource dataSource1 = getDataSourceForInvoice(requestDto);
+//            JRDataSource dataSource2 = getDataSourceForInvoice(requestDto);
+//
+//
+////            JRDataSource dataSource1 = getDataSourceForInvoice(requestDto); // For CollectionBeanParam
+////            JRDataSource dataSource2 = getDataSourceForInvoice(requestDto); // For CollectionBeanParam2 (same data)
+//
+//            Map<String, Object> parameters = new HashMap<>();
+//            parameters.put("CollectionBeanParam", dataSource1);
+//            parameters.put("CollectionBeanParam2", dataSource2);
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource1);
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("CollectionBeanParam", dataSource);
+
+            JRDataSource dataSource1 = getDataSourceForInvoice(requestDto);        // ✅ Table 1 data
+            JRDataSource dataSource2 = getDataSourceForInvoice2(requestDto);
+            JRDataSource dataSource3 = getDataSourceForInvoice3(requestDto); // ✅ Table 2 data
+// ✅ Table 2 data
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", dataSource1);   // 🔁 Table 1 param
+            parameters.put("CollectionBeanParam2", dataSource2);  // 🔁 Table 2 param
+            parameters.put("CollectionBeanParam3", dataSource3);  // 🔁 Table 2 param
 
 
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource1);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
 
@@ -393,11 +410,11 @@ public class ReportsController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "report.pdf");
 
-
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
             pdfExporter.exportReport();
+
             return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
 
         } catch (Exception ex) {
@@ -405,14 +422,11 @@ public class ReportsController {
             logger.info(ex.getMessage() + ex.getStackTrace());
             HttpHeaders headers = new HttpHeaders();
             return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
         }
-
-
-        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
-
     }
+
+
+
 
 
     @PostMapping("/get-Bonus")
@@ -5765,45 +5779,21 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 //    }
 
     private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
-
-        SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
-        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
+            SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
-                "    \n" +
-                        "ಸ್ಥಳ________________________________                                       ರುಜು ___________________________                   ರುಜು  _________________________________  \n"+
-                        "      \n"+
-                        "ದಿನಾಂಕ__________________________                                         ಹುದ್ದೆಯ ಹೆಸರು__________________________________      ಹುದ್ದೆಯ ಹೆಸರು _________________________");
-        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
-                "        \n"+
-                "_________________________________\n"+
-                "        \n"+
-                "_________________________________\n"+
-                "        \n"+
-                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+//        LotDistributeResponse response = new LotDistributeResponse();
 
-        response.setHeader1("ಗೆ,                \n" +
-                "        \n"+
-                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "        \n"+
-                "__________________________");
-        response.setHeader3("ಉಲ್ಲೇಖ: ");
-        response.setHeader4("ಪೀಠಿಕೆ: ");
-
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
+//        if (apiResponse.getContent() != null) {
+//            lotDistributeResponseList.add(response);
 //
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+//            int serialNo = 1;
+//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
 
-        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-//     response.
-//        sanctionOrderResponseList.add(response);
-
+         lotDistributeResponseList.add(response);
 
         if (apiResponse.getContent() != null) {
-            lotDistributeResponseList.add(response);
-
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
                 if (lotDistributeResponse.getFarmerFullName() == null) {
@@ -5829,13 +5819,238 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     lotDistributeResponse.setSoldAmount(0f);
                 }
 
+//                lotDistributeResponse.setSerialNumber(serialNo++);
+//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
+
             }
         }
+
+        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader1("ಗೆ,                \n" +
+                "        \n"+
+                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "        \n"+
+                "__________________________");
+        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
+                        "     \n"+
+                        "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+                "    \n" +
+                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
+        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
+                "    \n" +
+                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                "      \n"+
+                "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+        response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
+
+
+
+//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+//        long amountLong = amountFloat.longValue();
+//
+//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
+//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
+
     }
+
+
+    private JRBeanCollectionDataSource getDataSourceForInvoice2(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+//        LotDistributeResponse response = new LotDistributeResponse();
+
+//        if (apiResponse.getContent() != null) {
+//            lotDistributeResponseList.add(response);
+//
+//            int serialNo = 1;
+//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+
+//        lotDistributeResponseList.add(response);
+
+        if (apiResponse.getContent() != null) {
+//            lotDistributeResponseList.add(response);
+            int serialNo = 1;
+            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+                if (lotDistributeResponse.getFarmerFullName() == null) {
+                    lotDistributeResponse.setFarmerFullName("");
+                }
+                if (lotDistributeResponse.getRace() == null) {
+                    lotDistributeResponse.setRace("");
+                }
+                if (lotDistributeResponse.getLotWeight() == null) {
+                    lotDistributeResponse.setLotWeight(0f);
+                }
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
+                }
+                if (lotDistributeResponse.getInvoiceNumber() == null) {
+                    lotDistributeResponse.setInvoiceNumber("");
+                }
+
+                if (lotDistributeResponse.getAmount() == null) {
+                    lotDistributeResponse.setAmount(0f);
+                }
+                if (lotDistributeResponse.getSoldAmount() == null) {
+                    lotDistributeResponse.setSoldAmount(0f);
+                }
+
+//                lotDistributeResponse.setSerialNumber(serialNo++);
+//                lotDistributeResponseList.add(lotDistributeResponse);
+                lotDistributeResponse.setSerialNumber(serialNo++);
+                lotDistributeResponseList.add(lotDistributeResponse);
+
+            }
+        }
+
+        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader1("ಗೆ,                \n" +
+                "        \n"+
+                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "        \n"+
+                "__________________________");
+        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
+                "     \n"+
+                "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+                "    \n" +
+                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
+        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
+                "    \n" +
+                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                "      \n"+
+                "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+        response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
+
+
+//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+//        long amountLong = amountFloat.longValue();
+//
+//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
+
+    }
+
+
+    private JRBeanCollectionDataSource getDataSourceForInvoice3(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+//        LotDistributeResponse response = new LotDistributeResponse();
+
+//        if (apiResponse.getContent() != null) {
+//            lotDistributeResponseList.add(response);
+//
+//            int serialNo = 1;
+//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+
+//        lotDistributeResponseList.add(response);
+
+        if (apiResponse.getContent() != null) {
+//            lotDistributeResponseList.add(response);
+            int serialNo = 1;
+            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+                if (lotDistributeResponse.getFarmerFullName() == null) {
+                    lotDistributeResponse.setFarmerFullName("");
+                }
+                if (lotDistributeResponse.getRace() == null) {
+                    lotDistributeResponse.setRace("");
+                }
+                if (lotDistributeResponse.getLotWeight() == null) {
+                    lotDistributeResponse.setLotWeight(0f);
+                }
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
+                }
+                if (lotDistributeResponse.getInvoiceNumber() == null) {
+                    lotDistributeResponse.setInvoiceNumber("");
+                }
+
+                if (lotDistributeResponse.getAmount() == null) {
+                    lotDistributeResponse.setAmount(0f);
+                }
+                if (lotDistributeResponse.getSoldAmount() == null) {
+                    lotDistributeResponse.setSoldAmount(0f);
+                }
+
+//                lotDistributeResponse.setSerialNumber(serialNo++);
+//                lotDistributeResponseList.add(lotDistributeResponse);
+                lotDistributeResponse.setSerialNumber(serialNo++);
+                lotDistributeResponseList.add(lotDistributeResponse);
+
+            }
+        }
+
+
+        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                "_________________________________\n"+
+                "        \n"+
+                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+
+        response.setHeader1("ಗೆ,                \n" +
+                "        \n"+
+                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "        \n"+
+                "__________________________");
+        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
+                "     \n"+
+                "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+                "    \n" +
+                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
+        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
+                "    \n" +
+                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                "      \n"+
+                "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+
+        response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
+
+
+//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+//        long amountLong = amountFloat.longValue();
+//
+//        String amountInWords = NumberToWordsConverter.convert(amountLong);
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
+
+    }
+
+
+
 
 
     private JRBeanCollectionDataSource getDataSourceForPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
@@ -5868,12 +6083,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 //        String amountInWords = NumberToWordsConverter.convert(amountLong);
 
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-//     response.
-//        sanctionOrderResponseList.add(response);
+
 
 
         if (apiResponse.getContent() != null) {
-            lotDistributeResponseList.add(response);
+//            lotDistributeResponseList.add(response);
 
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
