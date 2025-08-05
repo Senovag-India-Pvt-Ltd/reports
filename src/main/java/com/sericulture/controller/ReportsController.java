@@ -42,6 +42,9 @@ import java.util.stream.Collectors;
 import static com.google.common.math.DoubleMath.roundToLong;
 import static org.hibernate.type.descriptor.java.CoercionHelper.toLong;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 
 @RestController
@@ -6038,12 +6041,27 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponseList.add(lotDistributeResponse);
             }
         }
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTestDate = "";
 
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ  " + apiResponse.getContent().get(0).getTestDate()  +"    ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"\n" +
+        try {
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+            formattedTestDate = testDate.format(outputFormatter);
+        } catch (Exception e) {
+            formattedTestDate = ""; // fallback if parsing fails
+        }
+
+
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
                 "         \n"+
-                "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                "      \n" +
+                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು  " + apiResponse.getContent().get(0).getMarketName()  +"  ಇಂದ\n" +
                 "      \n"+
-                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                        "               \n" +
+                        "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
@@ -6089,11 +6107,26 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponseList.add(lotDistributeResponse);
             }
         }
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ  " + apiResponse.getContent().get(0).getTestDate()  +"    ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"\n" +
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTestDate = "";
+
+        try {
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+            formattedTestDate = testDate.format(outputFormatter);
+        } catch (Exception e) {
+            formattedTestDate = ""; // fallback if parsing fails
+        }
+
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
                 "         \n"+
-                "ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು   ಖರೀದಿಸಿರುತ್ತಾರೆ .   ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ ಗೂಡುಗಳನ್ನು   " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ  " + apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                "      \n" +
+                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು  " + apiResponse.getContent().get(0).getMarketName()  +"  ಇಂದ\n" +
                 "      \n"+
-                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                apiResponse.getContent().get(0).getRspAddress()  +"\n" +
+                "               \n" +
+                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
