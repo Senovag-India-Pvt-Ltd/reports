@@ -422,6 +422,44 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/get-market-reciept")
+    public ResponseEntity<?> getMarketReciept(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to Cash Reciept");
+            logger.info("enter to Cash Reciept");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("Marketfee.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceMarketReciept(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+        }
+    }
+
     @PostMapping("/get-Invoice")
     public ResponseEntity<?> getInvoice(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
         try {
@@ -5884,6 +5922,72 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
                             "     \n" +
                             "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
+            response.setHeader4("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+//            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
+
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            lotDistributeResponseList.add(response);
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+    }
+
+    private JRDataSource getDataSourceMarketReciept(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+
+        SeedMarket apiResponse = apiService.fetchDataCashAndMarketReciept(requestDto);
+        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        LotDistributeResponse response = new LotDistributeResponse();
+        if (apiResponse.getContent()!= null) {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String formattedTestDate = "";
+
+            try {
+                LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+                formattedTestDate = testDate.format(outputFormatter);
+            } catch (Exception e) {
+                formattedTestDate = ""; // fallback if parsing fails
+            }
+
+            Float amountFloat = apiResponse.getContent().get(0).getSoldAmount();
+            long amountLong = amountFloat.longValue();
+
+            String amountInKannada = KannadaNumberToWords.convert(amountLong);
+            System.out.println("Amount in Kannada: " + amountInKannada);
+
+
+
+            try {
+                LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+                formattedTestDate = testDate.format(outputFormatter);
+            } catch (Exception e) {
+                formattedTestDate = ""; // fallback if parsing fails
+            }
+
+            Float amountFloat1 = apiResponse.getContent().get(0).getAmount();
+            long amountLong1 = amountFloat1.longValue();
+
+            String amountInKannadas = KannadaNumberToWords.convert(amountLong1);
+            System.out.println("Amount in Kannada: " + amountInKannadas);
+            response.setHeader(apiResponse.getContent().get(0).getFarmerVillage() + "    ಗ್ರಾಮದ   ಶ್ರೀ   " +apiResponse.getContent().get(0).getFatherNameKan()+"   ಇವರ   ಮಗನಾದ /\n" +
+                    "   \n" +
+                    "ಮಗಳಾದ   ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getFarmerFullName() + "   ಇವರಿಂದ   ನೂಲು  ಬಿಚ್ಚುವ /\n" +
+                    "     \n" +
+                            "ರೇಷ್ಮೆ    ಗೂಡುಗಳ    ಮಾರಾಟ   ನಿಮಿತ್ತವಾಗಿ   " + apiResponse.getContent().get(0).getAmount() + "    ರೂ . \n" +
+                            "     \n"  +
+                            "( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + apiResponse.getContent().get(0).getLotWeight() + "\n" +
+                    "       \n" +
+                    "ಕೆ.ಜಿ.   " + apiResponse.getContent().get(0).getMarketFee() + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ   ಶುಲ್ಕವನ್ನು\n" +
+                            "     \n" +
+                            "ಪಡೆಯಲಾಗಿದೆ  .    ಈ   ಸರಕಿನ    ಒಟ್ಟು      ಮೌಲ್ಯ     " + apiResponse.getContent().get(0).getSoldAmount() + "\n" +
+                            "    \n" +
+                    "ರೂಪಾಯಿಗಳು");
+
+            response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
+                    "     \n" +
+                    "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
             response.setHeader4("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 //            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
