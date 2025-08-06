@@ -6006,6 +6006,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         LotDistributeResponse response = new LotDistributeResponse();
          lotDistributeResponseList.add(response);
 
+
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
@@ -6018,7 +6021,19 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getLotWeight() == null) {
                     lotDistributeResponse.setLotWeight(0f);
                 }
-                if (lotDistributeResponse.getTestDate() == null) {
+//                if (lotDistributeResponse.getTestDate() == null) {
+//                    lotDistributeResponse.setTestDate("");
+//                }
+                String rawTestDate = lotDistributeResponse.getTestDate();
+                if (rawTestDate != null && !rawTestDate.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
+                        String formattedDate = parsedDate.format(outputFormatter);
+                        lotDistributeResponse.setTestDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                    }
+                } else {
                     lotDistributeResponse.setTestDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
@@ -6082,8 +6097,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
 
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
                 if (lotDistributeResponse.getFarmerFullName() == null) {
@@ -6095,7 +6111,19 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getLotWeight() == null) {
                     lotDistributeResponse.setLotWeight(0f);
                 }
-                if (lotDistributeResponse.getTestDate() == null) {
+//                if (lotDistributeResponse.getTestDate() == null) {
+//                    lotDistributeResponse.setTestDate("");
+//                }
+                String rawTestDate = lotDistributeResponse.getTestDate();
+                if (rawTestDate != null && !rawTestDate.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
+                        String formattedDate = parsedDate.format(outputFormatter);
+                        lotDistributeResponse.setTestDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                    }
+                } else {
                     lotDistributeResponse.setTestDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
@@ -6147,8 +6175,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
 
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
-//            lotDistributeResponseList.add(response);
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
                 if (lotDistributeResponse.getFarmerFullName() == null) {
@@ -6160,7 +6189,19 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getLotWeight() == null) {
                     lotDistributeResponse.setLotWeight(0f);
                 }
-                if (lotDistributeResponse.getTestDate() == null) {
+//                if (lotDistributeResponse.getTestDate() == null) {
+//                    lotDistributeResponse.setTestDate("");
+//                }
+                String rawTestDate = lotDistributeResponse.getTestDate();
+                if (rawTestDate != null && !rawTestDate.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
+                        String formattedDate = parsedDate.format(outputFormatter);
+                        lotDistributeResponse.setTestDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                    }
+                } else {
                     lotDistributeResponse.setTestDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
