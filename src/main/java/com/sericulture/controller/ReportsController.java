@@ -6053,14 +6053,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "        \n"+
                 "__________________________");
-        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
-                        "     \n"+
-                        "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
-                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
-        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
-                "    \n" +
-                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                            "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader("ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -6132,14 +6128,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "        \n"+
                 "__________________________");
-        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
-                "     \n"+
-                "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
-                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
-        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
-                "    \n" +
-                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader("ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -6200,14 +6192,10 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "        \n"+
                 "__________________________");
-        response.setHeader3(" ಸಂಸ್ಥೆಯ ಸಂಬಂದಪಟ್ಟ  ದಾಸ್ತಾನು  ಪುಸ್ತಕದಲ್ಲಿ ನಮೂದಿಸಲಾಗಿದೆ . \n" +
-                "     \n"+
-                "ರುಜು ___________________________                          ಹುದ್ದೆಯ ಹೆಸರು ___________________\n" +
+        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
-                "ರುಜು  __________________________                          ಹುದ್ದೆಯ ಹೆಸರು____________________");
-        response.setHeader("ಮೇಲಿನ ಸರಕು ಸುಸ್ಥಿತಿಯಲ್ಲಿ  ತಲುಪಿದೆ .   ಅದನ್ನು   ಈ\n" +
-                "    \n" +
-                "ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
+                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader("ಸ್ಥಳ     : "+ apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
