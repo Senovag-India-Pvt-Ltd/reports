@@ -5979,7 +5979,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                             "     \n"  +
                             "( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + apiResponse.getContent().get(0).getLotWeight() + "\n" +
                     "       \n" +
-                    "ಕೆ.ಜಿ.   " + apiResponse.getContent().get(0).getMarketFee() + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ   ಶುಲ್ಕವನ್ನು\n" +
+                    "ಕೆ.ಜಿ.   " + apiResponse.getContent().get(0).getMarketFee() + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ     ಶುಲ್ಕವನ್ನು\n" +
                             "     \n" +
                             "ಪಡೆಯಲಾಗಿದೆ  .    ಈ   ಸರಕಿನ    ಒಟ್ಟು      ಮೌಲ್ಯ     " + apiResponse.getContent().get(0).getSoldAmount() + "\n" +
                             "    \n" +
@@ -6255,18 +6255,18 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
                 "         \n"+
-                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
                 "      \n" +
-                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು  " + apiResponse.getContent().get(0).getMarketName()  +"  ಇಂದ\n" +
+                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
                 "      \n"+
                 apiResponse.getContent().get(0).getRspAddress()  +"\n" +
                         "               \n" +
                         "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
-        response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
+        response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "           \n"+
                 apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
@@ -6320,18 +6320,18 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
                 "         \n"+
-                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ  ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
                 "      \n" +
-                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು  " + apiResponse.getContent().get(0).getMarketName()  +"  ಇಂದ\n" +
+                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
                 "      \n"+
                 apiResponse.getContent().get(0).getRspAddress()  +"\n" +
                 "               \n" +
                 "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
-        response.setHeader2("ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
+        response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "           \n"+
                 apiResponse.getContent().get(0).getMarketAuctionDate());
 
