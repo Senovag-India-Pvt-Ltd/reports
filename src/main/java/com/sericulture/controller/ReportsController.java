@@ -5874,50 +5874,52 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
 
 
-            response.setHeader(formattedTestDate + "  ರಲ್ಲಿ    ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "  ಸಾವಿರ ಬೈವೋಲ್ಟಿನ್/ ಮೈಸೂರು ತಳಿ ಬಿತ್ತನೆ\n" +
+            response.setHeader(formattedTestDate + "  ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/ ಮೈಸೂರು  ತಳಿ\n" +
                     "      \n" +
-                    "ಗೂಡುಗಳನ್ನು   "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "  ಗ್ರಾಮದ  ಬಿತ್ತನೆ   ಗೂಡು ಸಾಕಣೆಗೆ  ಅನುಜ್ಞಾ \n" +
+                    "ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು    "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ  ಬಿತ್ತನೆ   ಗೂಡು  ಸಾಕಣೆಗೆ\n" +
                             "               \n" +
-                            "ಪತ್ರ   ಪಡೆದಿರುವ ಶ್ರೀ  "+ apiResponse.getContent().get(0).getFarmerFullName()  + "  ರವರಿಂದ ಒಂದು ಸಾವಿರ ಗೂಡುಗಳಿಗೆ \n" +
+                            "ಅನುಜ್ಞಾ    ಪತ್ರ    ಪಡೆದಿರುವ   ಶ್ರೀ   "+ apiResponse.getContent().get(0).getFarmerFullName()  + "   ರವರಿಂದ   ಒಂದು  ಸಾವಿರ\n" +
                             "            \n" +
-                            "ರೂ.  "+ apiResponse.getContent().get(0).getAmount()  + "  ದರದ ಪ್ರಕಾರ  "+ apiResponse.getContent().get(0).getMarketAuctionDate()  + "  ರಂದು ಕೊಂಡು  _____________ಲಾಟಿಗೆ\n"+
+                            "ಗೂಡುಗಳಿಗೆ   ರೂ.   "+ apiResponse.getContent().get(0).getAmount()  + "   ದರದ   ಪ್ರಕಾರ   "+ apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು   ಕೊಂಡು\n"+
                             "     \n"+
-                            "ಉಪಯೋಗಿಸಲು ಸಂಭಂದಿಸಿದ ದಾಸ್ತಾನು  ಪುಸ್ತಕದ ಪುಟ ______________  ರಲ್ಲಿ  \n" +
+                            "__________________________ ಲಾಟಿಗೆ   ಉಪಯೋಗಿಸಲು   ಸಂಭಂದಿಸಿದ   ದಾಸ್ತಾನು\n" +
                             "            \n" +
-                            apiResponse.getContent().get(0).getMarketAuctionDate()  + "  ರಂದು ದಾಖಲು ಮಾಡಿಕೊಂಡು  _____________________ ದ ಬಿತ್ತನೆ ಕೋಠಿಗೆ\n"+
+                            "ಪುಸ್ತಕದ   ಪುಟ   _______________________ ರಲ್ಲಿ     " +apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು  ದಾಖಲು\n"+
                     "           \n"+
-                    "ಸರಕು ರವಾನೆ ಮೂಲಕ ರವಾನಿಸಲಾಗಿದೆಯೆಂದು  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
+                            "ಮಾಡಿಕೊಂಡು  _________________________ ದ   ಬಿತ್ತನೆ    ಕೋಠಿಗೆ    ಸರಕು \n" +
+                            "    \n" +
+                            "ರವಾನೆ   ಮೂಲಕ   ರವಾನಿಸಲಾಗಿದೆಯೆಂದು  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
                             "             \n" +
                     "             \n" +
                     "    \n" +
-                            "ಒಟ್ಟು  ಮೊಬಲಗು  " +amountInKannada+ "  ರೂ. ಗಳನ್ನೂ "+ apiResponse.getContent().get(0).getSoldAmount() + "\n" +
+                            "ಒಟ್ಟು  ಮೊಬಲಗು  " +amountInKannada+ "  ರೂ. ಗಳನ್ನು    ನಗದು/ಚೆಕ್  \n" +
                             "                   \n" +
-                             "ನಗದು/ ಚೆಕ್ ಸಂಖ್ಯೆ ____________ ಕೊಡಲಾಗಿದೆ.");
-            response.setHeader1("ಬಿತ್ತನೆ   ಪ್ರಚಾರ  ಶಾಖೆ/ ಕೃಷಿ  ಕ್ಷೇತ್ರ  /ಕೋಠಿಯ  ಅಧಿಕಾರಿ   "+ apiResponse.getContent().get(0).getFarmerFullName()  + " \n" +
+                             "ಸಂಖ್ಯೆ ________________________________ ಕೊಡಲಾಗಿದೆ.");
+            response.setHeader1("ಬಿತ್ತನೆ    ಪ್ರಚಾರ   ಶಾಖೆ/ ಕೃಷಿ   ಕ್ಷೇತ್ರ  /ಕೋಠಿಯ  ಅಧಿಕಾರಿ    "+ apiResponse.getContent().get(0).getFarmerFullName()  + " \n" +
                     "               \n" +
-                    apiResponse.getContent().get(0).getFarmerVillage()  + "   ಅವರಿಂದ  ತಾರೀಖು  " +formattedTestDate+ "  ರಲ್ಲಿ    ಹಣ್ಣಾಗಿದ್ದು  ,\n" +
+                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು  " +formattedTestDate+ "  ರಲ್ಲಿ     ಹಣ್ಣಾಗಿದ್ದು  ,\n" +
                             "    \n" +
-                            "ಒಂದು ಕಿಲೋಗೆ  "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + " ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ  ಬೈವೋಲ್ಟಿನ್/ಮೈಸೂರು\n" +
+                            "ಒಂದು   ಕಿಲೋಗೆ   "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "  ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ     ಬೈವೋಲ್ಟಿನ್ / ಮೈಸೂರು\n" +
                             "     \n" +
-                    "ತಳಿ ಬಿತ್ತನೆ ಗೂಡನ್ನು ದರ  "+  apiResponse.getContent().get(0).getAmount()  + "  ಕ್ಕೆ   ಸರಬರಾಜು  ಮಾಡಿದಕ್ಕಾಗಿ\n"+
+                    "ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡನ್ನು      ದರ   "+  apiResponse.getContent().get(0).getAmount()  + "   ಕ್ಕೆ     ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ\n"+
                      "     \n" +
-                    apiResponse.getContent().get(0).getMarketName()  + " ರಿಂದ ____________________ ರವರೆಗೆ ಒಟ್ಟು\n"+
+                    apiResponse.getContent().get(0).getMarketName()  + "     ರಿಂದ __________________________________\n"+
                     "    \n"+
-                    "ಕಿ.ಮೀ.  _________________________ ಸಾಗಣೆ  ವೆಚ್ಚ  __________________ ಸೇರಿದಂತೆ  ಒಟ್ಟು  \n"+
+                    "ರವರೆಗೆ   ಒಟ್ಟು    ಕಿ.ಮೀ.  _________________________ ಸಾಗಣೆ  ವೆಚ್ಚ  ___________________________\n"+
                     "    \n" +
-                    "ಮೊಬಲಗು   "+ amountInKannada + "   ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
+                    "ಸೇರಿದಂತೆ    ಒಟ್ಟು      ಮೊಬಲಗು   "+ amountInKannada + "   ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
                     "    \n" +
                     "    \n" +
                     "    \n" +
-                             "                        ಅನುಜ್ಞಾ   ಪಾತ್ರ    ಪಡೆದಿರುವ   ಸಾಕಣೆದಾರನ  ಸಹಿ  ಅಥವಾ\n" +
+                             "                        ಅನುಜ್ಞಾ     ಪಾತ್ರ      ಪಡೆದಿರುವ     ಸಾಕಣೆದಾರನ    ಸಹಿ\n" +
                             "         \n" +
-                            "ಹೆಬ್ಬೆಟ್ಟಿನ  ಗುರುತು.  ಪಾವತಿ   ಮಾಡಿರುವ   ದರ   ಚಾಲ್ತಿಯಲ್ಲಿರುವ   ಕೊಳ್ಳುವ  \n" +
+                            "ಅಥವಾ    ಹೆಬ್ಬೆಟ್ಟಿನ    ಗುರುತು.   ಪಾವತಿ    ಮಾಡಿರುವ    ದರ   ಚಾಲ್ತಿಯಲ್ಲಿರುವ\n" +
                          "      \n"+
-                            "ದರಕ್ಕಿಂತ  ಹೆಚ್ಚಿಲ್ಲವೆಂದೂ  ಮೇಲಾಧಿಕಾರಿಯ  ಮಂಜೂರಾತಿಯನ್ನು     ದಿನಾಂಕ. \n" +
+                            "ಕೊಳ್ಳುವ    ದರಕ್ಕಿಂತ   ಹೆಚ್ಚಿಲ್ಲವೆಂದೂ   ಮೇಲಾಧಿಕಾರಿಯ  ಮಂಜೂರಾತಿಯನ್ನು \n" +
                             "     \n" +
-                            apiResponse.getContent().get(0).getMarketAuctionDate()  + "  ರಂದು ________________ ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ    ಪಡೆದ್ದಿದೆನೆಂದೂ\n" +
+                            "ದಿನಾಂಕ.   " +apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು __________________________ ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ \n" +
                             "    \n" +
-                            "ಹಣಪಾವತಿ  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
+                            "ಪಡೆದ್ದಿದೆನೆಂದೂ   ಹಣಪಾವತಿ   ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
 
             response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
                             "     \n" +
