@@ -38,6 +38,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.text.DecimalFormat;
 
 import static com.google.common.math.DoubleMath.roundToLong;
 import static org.hibernate.type.descriptor.java.CoercionHelper.toLong;
@@ -6249,6 +6250,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
 
     }
+    private Float roundTwoDecimals(Float value) {
+        return Float.parseFloat(String.format("%.2f", value));
+    }
 
     private JRBeanCollectionDataSource getDataSourceForPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
@@ -6266,20 +6270,54 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getFarmerFullName() == null) {
                     lotDistributeResponse.setFarmerFullName("");
                 }
-                if (lotDistributeResponse.getLotWeight() == null) {
-                    lotDistributeResponse.setLotWeight(0f);
-                }
-                if (lotDistributeResponse.getTestDate() == null) {
-                    lotDistributeResponse.setTestDate("");
-                }
                 if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
                     lotDistributeResponse.setNoOfCocoonPerKg(0L);
                 }
-                if (lotDistributeResponse.getAmount() == null) {
-                    lotDistributeResponse.setAmount(0f);
-                }
-                if (lotDistributeResponse.getSoldAmount() == null) {
-                    lotDistributeResponse.setSoldAmount(0f);
+//                if (lotDistributeResponse.getLotWeight() == null) {
+//                    lotDistributeResponse.setLotWeight(0f);
+//                }
+//                if (lotDistributeResponse.getTotalNumber() == null) {
+//                    lotDistributeResponse.setTotalNumber(0f);
+//                }
+//
+//                if (lotDistributeResponse.getAmount() == null) {
+//                    lotDistributeResponse.setAmount(0f);
+//                }
+//                if (lotDistributeResponse.getSoldAmount() == null) {
+//                    lotDistributeResponse.setSoldAmount(0f);
+//                }
+                DecimalFormat df = new DecimalFormat("0.00");
+                df.setRoundingMode(RoundingMode.HALF_UP);
+
+                lotDistributeResponse.setLotWeightStr(
+                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
+                );
+                lotDistributeResponse.setTotalNumberStr(
+                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
+                );
+                lotDistributeResponse.setAmountStr(
+                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
+                );
+                lotDistributeResponse.setSoldAmountStr(
+                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
+                );
+
+
+//                lotDistributeResponse.setLotWeight(
+//                        Float.valueOf(String.format("%.2f", lotDistributeResponse.getLotWeight() == null ? 0f : lotDistributeResponse.getLotWeight()))
+//                );
+//                lotDistributeResponse.setTotalNumber(
+//                        Float.valueOf(String.format("%.2f", lotDistributeResponse.getTotalNumber() == null ? 0f : lotDistributeResponse.getTotalNumber()))
+//                );
+//                lotDistributeResponse.setAmount(
+//                        Float.valueOf(String.format("%.2f", lotDistributeResponse.getAmount() == null ? 0f : lotDistributeResponse.getAmount()))
+//                );
+//                lotDistributeResponse.setSoldAmount(
+//                        Float.valueOf(String.format("%.2f", lotDistributeResponse.getSoldAmount() == null ? 0f : lotDistributeResponse.getSoldAmount()))
+//                );
+
+                if (lotDistributeResponse.getTestDate() == null) {
+                    lotDistributeResponse.setTestDate("");
                 }
 
                 lotDistributeResponse.setSerialNumber(serialNo++);
@@ -6308,12 +6346,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                         "               \n" +
                         "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
-
         response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "           \n"+
-                apiResponse.getContent().get(0).getMarketAuctionDate());
+                apiResponse.getContent().get(0).getMarketName());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
@@ -6332,21 +6369,42 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getFarmerFullName() == null) {
                     lotDistributeResponse.setFarmerFullName("");
                 }
-                if (lotDistributeResponse.getLotWeight() == null) {
-                    lotDistributeResponse.setLotWeight(0f);
-                }
                 if (lotDistributeResponse.getTestDate() == null) {
                     lotDistributeResponse.setTestDate("");
                 }
                 if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
                     lotDistributeResponse.setNoOfCocoonPerKg(0L);
                 }
-                if (lotDistributeResponse.getAmount() == null) {
-                    lotDistributeResponse.setAmount(0f);
-                }
-                if (lotDistributeResponse.getSoldAmount() == null) {
-                    lotDistributeResponse.setSoldAmount(0f);
-                }
+//                if (lotDistributeResponse.getLotWeight() == null) {
+//                    lotDistributeResponse.setLotWeight(0f);
+//                }
+//
+//                if (lotDistributeResponse.getAmount() == null) {
+//                    lotDistributeResponse.setAmount(0f);
+//                }
+//                if (lotDistributeResponse.getSoldAmount() == null) {
+//                    lotDistributeResponse.setSoldAmount(0f);
+//                }
+//                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+//                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
+//                }
+
+                DecimalFormat df = new DecimalFormat("0.00");
+                df.setRoundingMode(RoundingMode.HALF_UP);
+
+                lotDistributeResponse.setLotWeightStr(
+                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
+                );
+                lotDistributeResponse.setTotalNumberStr(
+                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
+                );
+                lotDistributeResponse.setAmountStr(
+                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
+                );
+                lotDistributeResponse.setSoldAmountStr(
+                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
+                );
+//
 
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
@@ -6378,7 +6436,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "              \n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "           \n"+
-                apiResponse.getContent().get(0).getMarketAuctionDate());
+                apiResponse.getContent().get(0).getMarketName());
 
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ: ");
