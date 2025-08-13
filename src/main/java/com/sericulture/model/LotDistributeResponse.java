@@ -122,6 +122,7 @@ public class LotDistributeResponse extends ResponseBody{
     private String lotWeightStr;
     private String amountStr;
     private String soldAmountStr;
+    private String licenseNo;
 
 
 

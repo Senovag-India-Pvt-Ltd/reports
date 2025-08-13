@@ -6346,6 +6346,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                         "               \n" +
                         "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
+
         response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
@@ -6438,8 +6440,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "           \n"+
                 apiResponse.getContent().get(0).getMarketName());
 
-        response.setHeader3("ಉಲ್ಲೇಖ: ");
-        response.setHeader4("ಪೀಠಿಕೆ: ");
+        response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
 
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
