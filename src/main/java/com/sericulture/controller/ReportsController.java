@@ -5980,19 +5980,24 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "   \n" +
                     "ಮಗಳಾದ   ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getFarmerFullName() + "   ಇವರಿಂದ   ನೂಲು  ಬಿಚ್ಚುವ /\n" +
                     "     \n" +
-                            "ರೇಷ್ಮೆ    ಗೂಡುಗಳ    ಮಾರಾಟ   ನಿಮಿತ್ತವಾಗಿ   " + apiResponse.getContent().get(0).getAmount() + "    ರೂ . \n" +
+                            "ರೇಷ್ಮೆ    ಗೂಡುಗಳ    ಮಾರಾಟ   ನಿಮಿತ್ತವಾಗಿ    ರೂ .  " + String.format("%.2f", apiResponse.getContent().get(0).getAmount()) + "\n" +
                             "     \n"  +
-                            "( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + apiResponse.getContent().get(0).getLotWeight() + "\n" +
+                            "ರೂ .  ( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + String.format("%.2f", apiResponse.getContent().get(0).getLotWeight()) + "\n" +
                     "       \n" +
-                    "ಕೆ.ಜಿ.   " + apiResponse.getContent().get(0).getMarketFee() + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ     ಶುಲ್ಕವನ್ನು\n" +
+                    "ಕೆ.ಜಿ.   " + String.format("%.2f", apiResponse.getContent().get(0).getMarketFee()) + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ     ಶುಲ್ಕವನ್ನು\n" +
                             "     \n" +
-                            "ಪಡೆಯಲಾಗಿದೆ  .    ಈ   ಸರಕಿನ    ಒಟ್ಟು      ಮೌಲ್ಯ     " + apiResponse.getContent().get(0).getSoldAmount() + "\n" +
+                            "ಪಡೆಯಲಾಗಿದೆ  .    ಈ   ಸರಕಿನ    ಒಟ್ಟು      ಮೌಲ್ಯ     " + String.format("%.2f", apiResponse.getContent().get(0).getSoldAmount()) + "\n" +
                             "    \n" +
                     "ರೂಪಾಯಿಗಳು");
 
             response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
                     "     \n" +
                     "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
+            response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
+                    "              \n" +
+                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
+                    "           \n"+
+                    apiResponse.getContent().get(0).getMarketName());
             response.setHeader4("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 //            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
@@ -6273,6 +6278,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
                     lotDistributeResponse.setNoOfCocoonPerKg(0L);
                 }
+
 //                if (lotDistributeResponse.getLotWeight() == null) {
 //                    lotDistributeResponse.setLotWeight(0f);
 //                }
@@ -6288,6 +6294,13 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 //                }
                 DecimalFormat df = new DecimalFormat("0.00");
                 df.setRoundingMode(RoundingMode.HALF_UP);
+
+                lotDistributeResponse.setTotalLotWeightStr(
+                        lotDistributeResponse.getTotalLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getTotalLotWeight())
+                );
+                lotDistributeResponse.setTotalSoldOutAmountStr(
+                        lotDistributeResponse.getTotalSoldOutAmount() == null ? "0.00" : df.format(lotDistributeResponse.getTotalSoldOutAmount())
+                );
 
                 lotDistributeResponse.setLotWeightStr(
                         lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
@@ -6347,6 +6360,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                         "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
+        response.setTotalLotWeightStr( String.format("%.2f", apiResponse.getContent().get(0).getTotalLotWeight()));
+        response.setTotalSoldOutAmountStr(String.format("%.2f", apiResponse.getContent().get(0).getTotalSoldOutAmount()));
 
         response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
@@ -6377,6 +6392,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
                     lotDistributeResponse.setNoOfCocoonPerKg(0L);
                 }
+
 //                if (lotDistributeResponse.getLotWeight() == null) {
 //                    lotDistributeResponse.setLotWeight(0f);
 //                }
@@ -6393,7 +6409,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
                 DecimalFormat df = new DecimalFormat("0.00");
                 df.setRoundingMode(RoundingMode.HALF_UP);
-
+                lotDistributeResponse.setTotalLotWeightStr(
+                        lotDistributeResponse.getTotalLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getTotalLotWeight())
+                );
+                lotDistributeResponse.setTotalSoldOutAmountStr(
+                        lotDistributeResponse.getTotalSoldOutAmount() == null ? "0.00" : df.format(lotDistributeResponse.getTotalSoldOutAmount())
+                );
                 lotDistributeResponse.setLotWeightStr(
                         lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
                 );
