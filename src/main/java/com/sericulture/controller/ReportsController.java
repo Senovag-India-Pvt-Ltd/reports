@@ -6094,9 +6094,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
                             "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
-        response.setHeader("ಸ್ಥಳ     : ______________________________________\n"+
+        response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "      \n"+
-                           "ದಿನಾಂಕ  : ______________________________________");
+                "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
         response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
 
@@ -6198,7 +6198,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
-        response.setHeader("ಸ್ಥಳ     : ______________________________________\n"+
+        response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -6291,7 +6291,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "    \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
-        response.setHeader("ಸ್ಥಳ     : ______________________________________\n"+
+        response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "      \n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
