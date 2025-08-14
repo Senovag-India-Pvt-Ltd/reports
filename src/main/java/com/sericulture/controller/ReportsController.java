@@ -6067,9 +6067,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
-                "_________________________________\n"+
-                "        \n"+
-                "_________________________________\n"+
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
+                        "           \n"+
+                        apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "        \n"+
                 " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
@@ -6155,9 +6155,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
-                "_________________________________\n"+
-                "        \n"+
-                "_________________________________\n"+
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
+                "           \n"+
+                apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "        \n"+
                 " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
@@ -6232,9 +6232,9 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         }
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
-                "_________________________________\n"+
-                "        \n"+
-                "_________________________________\n"+
+                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
+                "           \n"+
+                apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "        \n"+
                 " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
