@@ -6048,10 +6048,8 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         LotDistributeResponse response = new LotDistributeResponse();
          lotDistributeResponseList.add(response);
 
-
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
+
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
                 if (lotDistributeResponse.getFarmerFullName() == null) {
@@ -6079,44 +6077,61 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponse.setSoldAmountStr(
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
-                String rawTestDate = lotDistributeResponse.getTestDate();
+
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate = lotDistributeResponse.getSpunFromDate();
                 if (rawTestDate != null && !rawTestDate.isEmpty()) {
                     try {
                         LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
                         String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setTestDate(formattedDate);
+                        lotDistributeResponse.setSpunFromDate(formattedDate);
                     } catch (Exception e) {
-                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
                     }
                 } else {
-                    lotDistributeResponse.setTestDate("");
+                    lotDistributeResponse.setSpunFromDate("");
+                }
+
+                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
+                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
+                        String formattedDate = parsedDate.format(outputFormatter3);
+                        lotDistributeResponse.setSpunToDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
+                    }
+                } else {
+                    lotDistributeResponse.setSpunToDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
-
-//                if (lotDistributeResponse.getAmount() == null) {
-//                    lotDistributeResponse.setAmount(0f);
-//                }
-//                if (lotDistributeResponse.getSoldAmount() == null) {
-//                    lotDistributeResponse.setSoldAmount(0f);
-//                }
-
-//                lotDistributeResponse.setSerialNumber(serialNo++);
-//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
 
             }
         }
+        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        String formattedMarketAuctionDate = "";
+        try {
+            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter2);
+            formattedMarketAuctionDate = auctionDate.format(outputFormatter2);
+        } catch (Exception e) {
+            formattedMarketAuctionDate = "";
+        }
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
                         "           \n"+
                         apiResponse.getContent().get(0).getMarketName() + "\n"+
                 "        \n"+
-                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                " ತಾರೀಖು   " + formattedMarketAuctionDate);
 
         response.setHeader1("ಗೆ,                \n" +
                 "        \n"+
@@ -6131,29 +6146,121 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
         response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
-
-
-
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
-//
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
-
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
-//        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
 
     }
 
+
+//        private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+//        SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
+//        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+//        LotDistributeResponse response = new LotDistributeResponse();
+//        lotDistributeResponseList.add(response);
+//
+//
+//        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+//        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        if (apiResponse.getContent() != null) {
+//            int serialNo = 1;
+//            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+//                if (lotDistributeResponse.getRace() == null) {
+//                    lotDistributeResponse.setRace("");
+//                }
+//                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+//                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
+//                }
+//                DecimalFormat df = new DecimalFormat("0.00");
+//                df.setRoundingMode(RoundingMode.HALF_UP);
+//
+//
+//                lotDistributeResponse.setLotWeightStr(
+//                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
+//                );
+//                lotDistributeResponse.setTotalNumberStr(
+//                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
+//                );
+//                lotDistributeResponse.setAmountStr(
+//                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
+//                );
+//                lotDistributeResponse.setSoldAmountStr(
+//                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
+//                );
+//                String rawTestDate = lotDistributeResponse.getTestDate();
+//                if (rawTestDate != null && !rawTestDate.isEmpty()) {
+//                    try {
+//                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
+//                        String formattedDate = parsedDate.format(outputFormatter);
+//                        lotDistributeResponse.setTestDate(formattedDate);
+//                    } catch (Exception e) {
+//                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+//                    }
+//                } else {
+//                    lotDistributeResponse.setTestDate("");
+//                }
+//                if (lotDistributeResponse.getInvoiceNumber() == null) {
+//                    lotDistributeResponse.setInvoiceNumber("");
+//                }
+//
+////                if (lotDistributeResponse.getAmount() == null) {
+////                    lotDistributeResponse.setAmount(0f);
+////                }
+////                if (lotDistributeResponse.getSoldAmount() == null) {
+////                    lotDistributeResponse.setSoldAmount(0f);
+////                }
+//
+////                lotDistributeResponse.setSerialNumber(serialNo++);
+////                lotDistributeResponseList.add(lotDistributeResponse);
+//                lotDistributeResponse.setSerialNumber(serialNo++);
+//                lotDistributeResponseList.add(lotDistributeResponse);
+//
+//            }
+//        }
+//
+//        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
+//                "        \n"+
+//                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
+//                "           \n"+
+//                apiResponse.getContent().get(0).getMarketName() + "\n"+
+//                "        \n"+
+//                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+//
+//        response.setHeader1("ಗೆ,                \n" +
+//                "        \n"+
+//                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+//                "        \n"+
+//                "__________________________");
+//        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
+//                "    \n" +
+//                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+//        response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
+//                "      \n"+
+//                "ದಿನಾಂಕ  : ______________________________________");
+//        response.setHeader4("ಪೀಠಿಕೆ: ");
+//        response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
+//
+//
+//
+////        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
+////        long amountLong = amountFloat.longValue();
+////
+////        String amountInWords = NumberToWordsConverter.convert(amountLong);
+//
+//        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+//        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+////        return lotDistributeResponseList; // instead of new JRBeanCollectionDataSource(...)
+//
+//    }
 
     private JRBeanCollectionDataSource getDataSourceForInvoice2(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
 
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
@@ -6182,38 +6289,44 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponse.setSoldAmountStr(
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
-                String rawTestDate = lotDistributeResponse.getTestDate();
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate = lotDistributeResponse.getSpunFromDate();
                 if (rawTestDate != null && !rawTestDate.isEmpty()) {
                     try {
                         LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
                         String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setTestDate(formattedDate);
+                        lotDistributeResponse.setSpunFromDate(formattedDate);
                     } catch (Exception e) {
-                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
                     }
                 } else {
-                    lotDistributeResponse.setTestDate("");
+                    lotDistributeResponse.setSpunFromDate("");
+                }
+
+                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
+                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
+                        String formattedDate = parsedDate.format(outputFormatter3);
+                        lotDistributeResponse.setSpunToDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
+                    }
+                } else {
+                    lotDistributeResponse.setSpunToDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
 
-//                if (lotDistributeResponse.getAmount() == null) {
-//                    lotDistributeResponse.setAmount(0f);
-//                }
-//                if (lotDistributeResponse.getSoldAmount() == null) {
-//                    lotDistributeResponse.setSoldAmount(0f);
-//                }
-
-//                lotDistributeResponse.setSerialNumber(serialNo++);
-//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
 
             }
         }
-
-
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
                 "        \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
@@ -6245,9 +6358,6 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
-
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
@@ -6276,31 +6386,38 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 lotDistributeResponse.setSoldAmountStr(
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
-                String rawTestDate = lotDistributeResponse.getTestDate();
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate = lotDistributeResponse.getSpunFromDate();
                 if (rawTestDate != null && !rawTestDate.isEmpty()) {
                     try {
                         LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
                         String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setTestDate(formattedDate);
+                        lotDistributeResponse.setSpunFromDate(formattedDate);
                     } catch (Exception e) {
-                        lotDistributeResponse.setTestDate(""); // fallback if parsing fails
+                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
                     }
                 } else {
-                    lotDistributeResponse.setTestDate("");
+                    lotDistributeResponse.setSpunFromDate("");
+                }
+
+                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
+                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
+                        String formattedDate = parsedDate.format(outputFormatter3);
+                        lotDistributeResponse.setSpunToDate(formattedDate);
+                    } catch (Exception e) {
+                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
+                    }
+                } else {
+                    lotDistributeResponse.setSpunToDate("");
                 }
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
-
-//                if (lotDistributeResponse.getAmount() == null) {
-//                    lotDistributeResponse.setAmount(0f);
-//                }
-//                if (lotDistributeResponse.getSoldAmount() == null) {
-//                    lotDistributeResponse.setSoldAmount(0f);
-//                }
-
-//                lotDistributeResponse.setSerialNumber(serialNo++);
-//                lotDistributeResponseList.add(lotDistributeResponse);
                 lotDistributeResponse.setSerialNumber(serialNo++);
                 lotDistributeResponseList.add(lotDistributeResponse);
 
@@ -6391,16 +6508,27 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         String formattedTestDate = "";
 
         try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunToDate(), inputFormatter);
             formattedTestDate = testDate.format(outputFormatter);
         } catch (Exception e) {
             formattedTestDate = ""; // fallback if parsing fails
         }
 
+        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTestDate2 = "";
 
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
+        try {
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunFromDate(), inputFormatter2);
+            formattedTestDate2 = testDate.format(outputFormatter2);
+        } catch (Exception e) {
+            formattedTestDate2 = ""; // fallback if parsing fails
+        }
+
+
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
                 "         \n"+
-                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                formattedTestDate2 + " - "  + formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
                 "      \n" +
                 "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
                 "      \n"+
@@ -6473,15 +6601,26 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         String formattedTestDate = "";
 
         try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunToDate(), inputFormatter);
             formattedTestDate = testDate.format(outputFormatter);
         } catch (Exception e) {
             formattedTestDate = ""; // fallback if parsing fails
         }
 
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ\n" +
+        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTestDate2 = "";
+
+        try {
+            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunFromDate(), inputFormatter2);
+            formattedTestDate2 = testDate.format(outputFormatter2);
+        } catch (Exception e) {
+            formattedTestDate2 = ""; // fallback if parsing fails
+        }
+
+        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
                 "         \n"+
-                "ಮಾರುಕಟ್ಟೆಯಿಂದ  " +formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
+                formattedTestDate2 + " - "  + formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
                 "      \n" +
                 "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
                 "      \n"+
