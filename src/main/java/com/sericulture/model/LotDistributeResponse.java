@@ -25,6 +25,7 @@ public class LotDistributeResponse extends ResponseBody{
     private String farmerMiddleName;
     private String farmerLastName;
     private String fatherNameKan;
+
     //    private float bidAmount;
     @JsonIgnore
     private int raceMasterId;
@@ -90,6 +91,7 @@ public class LotDistributeResponse extends ResponseBody{
     private Long noOfCocoonTakenForExamination;
     private Long noOfDFLFromFc;
     private Long noOfCocoonPerKg;
+    private Long totalCocoonCount;
     private String noOfCocoonExamined;
     private String pupaCocoonStatus;
     private String marketAuctionDate;
@@ -106,6 +108,12 @@ public class LotDistributeResponse extends ResponseBody{
     private String lotWeightAfterWeighment;
     private int serialNumber;
     private String farmerFullName;
+    private Float totalNumber;
+    private Float totalLotWeight;
+    private Float totalSoldOutAmount;
+    private String licenseNo;
+    private String spunFromDate;
+    private String spunToDate;
 
     private String header;
     private String header1;
@@ -117,14 +125,10 @@ public class LotDistributeResponse extends ResponseBody{
     private String header7;
     private String header8;
     private String logurl;
-    private Float totalNumber;
     private String totalNumberStr;
     private String lotWeightStr;
     private String amountStr;
     private String soldAmountStr;
-    private String licenseNo;
-    private Float totalLotWeight;
-    private Float totalSoldOutAmount;
     private String totalLotWeightStr;
     private String totalSoldOutAmountStr;
 

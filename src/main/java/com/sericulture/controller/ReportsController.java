@@ -5858,13 +5858,34 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         if (apiResponse.getContent()!= null) {
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            String formattedTestDate = "";
+
+            String formattedFromDate = "";
+            String formattedToDate = "";
 
             try {
-                LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
-                formattedTestDate = testDate.format(outputFormatter);
+                // Parse full datetime → then take only LocalDate
+                LocalDateTime fromDateTime = LocalDateTime.parse(apiResponse.getContent().get(0).getSpunFromDate(), inputFormatter);
+                formattedFromDate = fromDateTime.toLocalDate().format(outputFormatter);
             } catch (Exception e) {
-                formattedTestDate = ""; // fallback if parsing fails
+                formattedFromDate = ""; // fallback if parsing fails
+            }
+
+            try {
+                LocalDateTime toDateTime = LocalDateTime.parse(apiResponse.getContent().get(0).getSpunToDate(), inputFormatter);
+                formattedToDate = toDateTime.toLocalDate().format(outputFormatter);
+            } catch (Exception e) {
+                formattedToDate = ""; // fallback if parsing fails
+            }
+
+            DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+            DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            String formattedMarketAuctionDate = "";
+            try {
+                LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter2);
+                formattedMarketAuctionDate = auctionDate.format(outputFormatter2);
+            } catch (Exception e) {
+                formattedMarketAuctionDate = ""; // fallback if parsing fails
             }
 
             Float amountFloat = apiResponse.getContent().get(0).getSoldAmount();
@@ -5875,42 +5896,42 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
 
 
-            response.setHeader(formattedTestDate + "  ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/ ಮೈಸೂರು  ತಳಿ\n" +
+            response.setHeader(formattedFromDate  + "  - " +  formattedToDate  +" ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/\n" +
                     "      \n" +
-                    "ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು    "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ  ಬಿತ್ತನೆ   ಗೂಡು  ಸಾಕಣೆಗೆ\n" +
+                    "ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು    "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ  ಬಿತ್ತನೆ\n" +
                             "               \n" +
-                            "ಅನುಜ್ಞಾ    ಪತ್ರ    ಪಡೆದಿರುವ   ಶ್ರೀ   "+ apiResponse.getContent().get(0).getFarmerFullName()  + "   ರವರಿಂದ   ಒಂದು  ಸಾವಿರ\n" +
+                            "ಗೂಡು  ಸಾಕಣೆಗೆ  ಅನುಜ್ಞಾ    ಪತ್ರ    ಪಡೆದಿರುವ   ಶ್ರೀ   "+ apiResponse.getContent().get(0).getFarmerFullName()  + "   ರವರಿಂದ\n" +
                             "            \n" +
-                            "ಗೂಡುಗಳಿಗೆ   ರೂ.   "+ apiResponse.getContent().get(0).getAmount()  + "   ದರದ   ಪ್ರಕಾರ   "+ apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು   ಕೊಂಡು\n"+
+                            apiResponse.getContent().get(0).getNoOfCocoonPerKg() + "  ಗೂಡುಗಳಿಗೆ   ರೂ.   "+ apiResponse.getContent().get(0).getAmount()  + "   ದರದ   ಪ್ರಕಾರ   "+ formattedMarketAuctionDate  + "  ರಂದು\n"+
                             "     \n"+
-                            "__________________________ ಲಾಟಿಗೆ   ಉಪಯೋಗಿಸಲು   ಸಂಭಂದಿಸಿದ   ದಾಸ್ತಾನು\n" +
+                            "ಕೊಂಡು __________________________ ಲಾಟಿಗೆ   ಉಪಯೋಗಿಸಲು   ಸಂಭಂದಿಸಿದ\n" +
                             "            \n" +
-                            "ಪುಸ್ತಕದ   ಪುಟ   _______________________ ರಲ್ಲಿ     " +apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು  ದಾಖಲು\n"+
+                            "ದಾಸ್ತಾನು  ಪುಸ್ತಕದ   ಪುಟ   _______________________ ರಲ್ಲಿ     " + formattedMarketAuctionDate  + "   ರಂದು\n"+
                     "           \n"+
-                            "ಮಾಡಿಕೊಂಡು  _________________________ ದ   ಬಿತ್ತನೆ    ಕೋಠಿಗೆ    ಸರಕು \n" +
+                            "ದಾಖಲು  ಮಾಡಿಕೊಂಡು   _______________________________  ದ   ಬಿತ್ತನೆ    ಕೋಠಿಗೆ \n" +
                             "    \n" +
-                            "ರವಾನೆ   ಮೂಲಕ   ರವಾನಿಸಲಾಗಿದೆಯೆಂದು  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
+                            "ಸರಕು  ರವಾನೆ   ಮೂಲಕ   ರವಾನಿಸಲಾಗಿದೆಯೆಂದು  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
                             "             \n" +
                     "             \n" +
                     "    \n" +
-                            "ಒಟ್ಟು  ಮೊಬಲಗು  " +amountInKannada+ "  ರೂ. ಗಳನ್ನು    ನಗದು/ಚೆಕ್  \n" +
+                            "ಒಟ್ಟು  ಮೊಬಲಗು  " +amountInKannada+ "  ರೂ. ಗಳನ್ನು  \n" +
                             "                   \n" +
-                             "ಸಂಖ್ಯೆ ________________________________ ಕೊಡಲಾಗಿದೆ.");
+                             "ನಗದು/ಚೆಕ್   ಸಂಖ್ಯೆ ________________________________ ಕೊಡಲಾಗಿದೆ.");
             response.setHeader1("ಬಿತ್ತನೆ    ಪ್ರಚಾರ   ಶಾಖೆ/ ಕೃಷಿ   ಕ್ಷೇತ್ರ  /ಕೋಠಿಯ  ಅಧಿಕಾರಿ    "+ apiResponse.getContent().get(0).getFarmerFullName()  + " \n" +
                     "               \n" +
-                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು  " +formattedTestDate+ "  ರಲ್ಲಿ     ಹಣ್ಣಾಗಿದ್ದು  ,\n" +
+                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು  " +formattedFromDate + " - " +  formattedFromDate  +  "\n" +
                             "    \n" +
-                            "ಒಂದು   ಕಿಲೋಗೆ   "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "  ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ     ಬೈವೋಲ್ಟಿನ್ / ಮೈಸೂರು\n" +
+                            "ರಲ್ಲಿ     ಹಣ್ಣಾಗಿದ್ದು  , ಒಂದು   ಕಿಲೋಗೆ   "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "  ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ\n" +
                             "     \n" +
-                    "ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡನ್ನು      ದರ   "+  apiResponse.getContent().get(0).getAmount()  + "   ಕ್ಕೆ     ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ\n"+
+                    "ಬೈವೋಲ್ಟಿನ್ / ಮೈಸೂರು  ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡನ್ನು      ದರ   "+  apiResponse.getContent().get(0).getAmount()  + "   ಕ್ಕೆ\n"+
                      "     \n" +
-                    apiResponse.getContent().get(0).getMarketName()  + "     ರಿಂದ __________________________________\n"+
+                    " ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ  " +apiResponse.getContent().get(0).getMarketName()  + "\n"+
                     "    \n"+
-                    "ರವರೆಗೆ   ಒಟ್ಟು    ಕಿ.ಮೀ.  ____________________________ ಸಾಗಣೆ    ವೆಚ್ಚ  \n"+
+                    "ರಿಂದ   ____________________________________________  ರವರೆಗೆ   ಒಟ್ಟು    ಕಿ.ಮೀ. \n"+
                     "    \n" +
-                    "_____________________________   ಸೇರಿದಂತೆ    ಒಟ್ಟು      ಮೊಬಲಗು\n" +
+                    " ____________________________ ಸಾಗಣೆ    ವೆಚ್ಚ  _____________________________  ಸೇರಿದಂತೆ\n" +
                     "       \n" +
-                    amountInKannada + "   ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
+                    "ಒಟ್ಟು     ಮೊಬಲಗು  " +amountInKannada + "  ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
                     "    \n" +
                     "    \n" +
                     "    \n" +
@@ -5920,14 +5941,14 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                          "      \n"+
                             "ಕೊಳ್ಳುವ    ದರಕ್ಕಿಂತ   ಹೆಚ್ಚಿಲ್ಲವೆಂದೂ   ಮೇಲಾಧಿಕಾರಿಯ  ಮಂಜೂರಾತಿಯನ್ನು \n" +
                             "     \n" +
-                            "ದಿನಾಂಕ.   " +apiResponse.getContent().get(0).getMarketAuctionDate()  + "   ರಂದು __________________________ ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ \n" +
+                            "ದಿನಾಂಕ.   ________________________________  ರಂದು _______________________________________\n" +
                             "    \n" +
-                            "ಪಡೆದ್ದಿದೆನೆಂದೂ   ಹಣಪಾವತಿ   ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
+                            "ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ     ಪಡೆದ್ದಿದೆನೆಂದೂ   ಹಣಪಾವತಿ  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
 
             response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
                             "     \n" +
                             "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
-            response.setHeader4("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+            response.setHeader4("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 //            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
             response.setLogurl("/reports/Seal_of_Karnataka.PNG");
@@ -5964,6 +5985,17 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
 
 
+            DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+            DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            String formattedMarketAuctionDate = "";
+            try {
+                LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter2);
+                formattedMarketAuctionDate = auctionDate.format(outputFormatter2);
+            } catch (Exception e) {
+                formattedMarketAuctionDate = ""; // fallback if parsing fails
+            }
+
             try {
                 LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getTestDate(), inputFormatter);
                 formattedTestDate = testDate.format(outputFormatter);
@@ -5998,7 +6030,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                     "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                     "           \n"+
                     apiResponse.getContent().get(0).getMarketName());
-            response.setHeader4("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+            response.setHeader4("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 //            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
             response.setLogurl("/reports/Seal_of_Karnataka.PNG");
