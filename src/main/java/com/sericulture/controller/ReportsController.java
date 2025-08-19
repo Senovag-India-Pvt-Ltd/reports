@@ -6052,9 +6052,22 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-                if (lotDistributeResponse.getFarmerFullName() == null) {
-                    lotDistributeResponse.setFarmerFullName("");
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+
+                String fullName = lotDistributeResponse.getFarmerFullName();
+                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+
+                if (fullName == null) {
+                    fullName = "";
                 }
+                if (fruitsId == null) {
+                    fruitsId = "";
+                }
+
+                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
                 if (lotDistributeResponse.getRace() == null) {
                     lotDistributeResponse.setRace("");
                 }
@@ -6264,9 +6277,22 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-                if (lotDistributeResponse.getFarmerFullName() == null) {
-                    lotDistributeResponse.setFarmerFullName("");
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+
+                String fullName = lotDistributeResponse.getFarmerFullName();
+                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+
+                if (fullName == null) {
+                    fullName = "";
                 }
+                if (fruitsId == null) {
+                    fruitsId = "";
+                }
+
+                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
                 if (lotDistributeResponse.getRace() == null) {
                     lotDistributeResponse.setRace("");
                 }
@@ -6361,9 +6387,22 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-                if (lotDistributeResponse.getFarmerFullName() == null) {
-                    lotDistributeResponse.setFarmerFullName("");
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+
+                String fullName = lotDistributeResponse.getFarmerFullName();
+                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+
+                if (fullName == null) {
+                    fullName = "";
                 }
+                if (fruitsId == null) {
+                    fruitsId = "";
+                }
+
+                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
                 if (lotDistributeResponse.getRace() == null) {
                     lotDistributeResponse.setRace("");
                 }
@@ -6466,9 +6505,22 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 //            lotDistributeResponseList.add(response);
 
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-                if (lotDistributeResponse.getFarmerFullName() == null) {
-                    lotDistributeResponse.setFarmerFullName("");
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+
+                String fullName = lotDistributeResponse.getFarmerFullName();
+                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+
+                if (fullName == null) {
+                    fullName = "";
                 }
+                if (fruitsId == null) {
+                    fruitsId = "";
+                }
+
+                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
                 if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
                     lotDistributeResponse.setNoOfCocoonPerKg(0L);
                 }
@@ -6570,9 +6622,22 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-                if (lotDistributeResponse.getFarmerFullName() == null) {
-                    lotDistributeResponse.setFarmerFullName("");
+//                if (lotDistributeResponse.getFarmerFullName() == null) {
+//                    lotDistributeResponse.setFarmerFullName("");
+//                }
+
+                String fullName = lotDistributeResponse.getFarmerFullName();
+                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+
+                if (fullName == null) {
+                    fullName = "";
                 }
+                if (fruitsId == null) {
+                    fruitsId = "";
+                }
+
+                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
                 if (lotDistributeResponse.getTestDate() == null) {
                     lotDistributeResponse.setTestDate("");
                 }
