@@ -6525,6 +6525,16 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
             formattedTestDate2 = ""; // fallback if parsing fails
         }
 
+        DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+        DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String formattedMarketAuctionDate = "";
+        try {
+            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter3);
+            formattedMarketAuctionDate = auctionDate.format(outputFormatter3);
+        } catch (Exception e) {
+            formattedMarketAuctionDate = ""; // fallback if parsing fails
+        }
 
         response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
                 "         \n"+
@@ -6534,12 +6544,12 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "      \n"+
                 apiResponse.getContent().get(0).getRspAddress()  +"\n" +
                         "               \n" +
-                        "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
-        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                        "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + formattedMarketAuctionDate);
+//        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
         response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
         response.setTotalLotWeightStr( String.format("%.2f", apiResponse.getContent().get(0).getTotalLotWeight()));
         response.setTotalSoldOutAmountStr(String.format("%.2f", apiResponse.getContent().get(0).getTotalSoldOutAmount()));
-
+        response.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
         response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
@@ -6617,7 +6627,16 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
         } catch (Exception e) {
             formattedTestDate2 = ""; // fallback if parsing fails
         }
+        DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+        DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        String formattedMarketAuctionDate = "";
+        try {
+            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter3);
+            formattedMarketAuctionDate = auctionDate.format(outputFormatter3);
+        } catch (Exception e) {
+            formattedMarketAuctionDate = ""; // fallback if parsing fails
+        }
         response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
                 "         \n"+
                 formattedTestDate2 + " - "  + formattedTestDate + "  ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
@@ -6626,8 +6645,11 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                 "      \n"+
                 apiResponse.getContent().get(0).getRspAddress()  +"\n" +
                 "               \n" +
-                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + apiResponse.getContent().get(0).getMarketAuctionDate());
-        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + formattedMarketAuctionDate);
+
+        response.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
+
+//        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
                 "              \n" +
