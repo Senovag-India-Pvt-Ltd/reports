@@ -5896,7 +5896,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
 
 
 
-            response.setHeader(formattedFromDate  + "  - " +  formattedToDate  +" ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/\n" +
+            response.setHeader(formattedFromDate  + "   -   " +  formattedToDate  +"   ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/\n" +
                     "      \n" +
                     "ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು    "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ  ಬಿತ್ತನೆ\n" +
                             "               \n" +
@@ -5919,7 +5919,7 @@ public ResponseEntity<byte[]> getForm13Report(@RequestBody Form13Request request
                              "ನಗದು/ಚೆಕ್   ಸಂಖ್ಯೆ ________________________________ ಕೊಡಲಾಗಿದೆ.");
             response.setHeader1("ಬಿತ್ತನೆ    ಪ್ರಚಾರ   ಶಾಖೆ/ ಕೃಷಿ   ಕ್ಷೇತ್ರ  /ಕೋಠಿಯ  ಅಧಿಕಾರಿ    "+ apiResponse.getContent().get(0).getFarmerFullName()  + " \n" +
                     "               \n" +
-                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು  " +formattedFromDate + " - " +  formattedFromDate  +  "\n" +
+                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು   " +formattedFromDate + "   -   " +  formattedFromDate  +  "\n" +
                             "    \n" +
                             "ರಲ್ಲಿ     ಹಣ್ಣಾಗಿದ್ದು  , ಒಂದು   ಕಿಲೋಗೆ   "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "  ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ\n" +
                             "     \n" +
