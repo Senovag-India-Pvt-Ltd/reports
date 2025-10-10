@@ -197,7 +197,7 @@ public class Content {
     private String form;
     private String silkTypes;
     private Float approximateEstimatedWeight;
-    private String approximateWeight;
+    private Float approximateWeight;
 
 
 

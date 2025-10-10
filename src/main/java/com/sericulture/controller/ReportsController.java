@@ -1753,7 +1753,9 @@ public class ReportsController {
             apiResponse.content.setReelerLicens("  Reeler License No. " +apiResponse.content.getReelerLicense());
             apiResponse.content.setSilkTypes(apiResponse.content.getSilkType());
             apiResponse.content.setSilkQualities(apiResponse.content.getSilkQuality());
+//            apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
             apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
+
             apiResponse.content.setBags(apiResponse.content.getNoOfBags());
             apiResponse.content.setForm(apiResponse.content.getFormNo());
 
@@ -2891,7 +2893,9 @@ public class ReportsController {
             apiResponse.content.setReelerLicens("  Reeler License No. " +apiResponse.content.getReelerLicense());
             apiResponse.content.setSilkTypes(apiResponse.content.getSilkType());
             apiResponse.content.setSilkQualities(apiResponse.content.getSilkQuality());
+//            apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
             apiResponse.content.setApproximateWeight(apiResponse.content.getApproximateEstimatedWeight());
+
             apiResponse.content.setBags(apiResponse.content.getNoOfBags());
             apiResponse.content.setForm(apiResponse.content.getFormNo());
 //            apiResponse.content.setAmount(apiResponse.content.getTotalamount());
@@ -7165,50 +7169,16 @@ public class ReportsController {
         List<WorkOrderGenerationReportResponse> workOrderGenerationReportResponseList = new LinkedList<>();
         WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader1("ಕರ್ನಾಟಕ ಸರ್ಕಾರ\n" +
-                    "     \n"+
-                    "ರೇಷ್ಮೆ   ಇಲಾಖೆ");
-            response.setHeader2("ಆದೇಶ ಸಂಖ್ಯೆ :  ");
-            response.setHeader3("ದಿನಾಂಕ:");
-            response.setHeader4("ಕಾರ್ಯಾದೇಶ");
-            response.setHeader5("ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಯೋಜನೆ (ಎಸ್.ಸಿ.ಪಿ.) ಯಡಿ ಶ್ರೀಮತಿ ದುಂಡಮ್ಮ   ಕೋಂ ದೊಡ್ಡನಂಜಯ್ಯ , ಕಾಮಗೆರೆ ಗ್ರಾಮ, ಪಾಳ್ಯ   ಹೋಬಳಿ, ಕೊಳ್ಳೇಗಾಲ ತಾಲ್ಲೂಕು, ಚಾಮರಾಜನಗರ ಜಿಲ್ಲೆ  ಇವರಿಗೆ 6 ಬೇಸಿನ್ ಮಲ್ಟಿಎಂಡ್ ರೀಲಿಂಗ್ ಯಂತ್ರೋಪಕರಣ ಪೂರೈಕೆ – ಕಾರ್ಯಾದೇಶ ನೀಡುವ ಕುರಿತು");
-            response.setHeader6("ವಿಷಯ : ");
-            response.setLineItemComment("ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಯೋಜನೆಯ ಮಲ್ಟಿಎಂಡ್ ರೀಲಿಂಗ್ ಯಂತ್ರೋಪಕರಣದ ಅಂಗೀಕೃತ ಪೂರೈಕೆದಾರರ ಪಟ್ಟಿಯ ಪ್ರಕಾರ ಈ ಕೆಳಕಂಡ ಯಂತ್ರೋಪಕರಣವನ್ನು ಫಲಾನುಭವಿಯ ಘಟಕ ಸ್ಥಾಪನೆ ಸ್ಥಳದಲ್ಲಿ  ಪೂರೈಕೆ, ಅಳವಡಿಕೆ ಮತ್ತು ಚಾಲನೆ ಮಾಡುವಂತೆ ಈ ಮೂಲಕ ಕಾರ್ಯಾದೇಶ ನೀಡಿದೆ.");
-            response.setHeader7("ಯಂತ್ರೋಪಕರಣ ಮತ್ತು ಫಲಾನುಭವಿಯ ವಿವರಗಳು\n" +
-                    "     \n" +
-                    "1. ಫಲಾನುಭವಿಯ ಹೆಸರು ಮತ್ತು ವಿಳಾಸ: ____________________________\n" +
-                    "     \n" +
-                    "2. ಯಂತ್ರೋಪಕರಣದ ವಿವರ: __________________________________\n" +
-                    "     \n" +
-                    "3. ಪ್ರಮಾಣ: __________________\n" +
-                    "     \n" +
-                    "4. ಘಟಕ ದರ (ರೂ): __________________\n" +
-                    "     \n" +
-                    "5. ಸಹಾಯಧನ (ರೂ): __________________\n" +
-                    "     \n" +
-                    "6. ಪೂರೈಕೆ ಮತ್ತು ಅಳವಡಿಕೆ ಸ್ಥಳ: _____________________\n" +
-                    "     \n" +
-                    "7. ಪೂರ್ಣಗೊಳಿಸಬೇಕಾದ ಅವಧಿ: ಈ ಆದೇಶ ಸ್ವೀಕರಿಸಿದ ದಿನಾಂಕದಿಂದ ___ ದಿನಗಳೊಳಗೆ.");
-            response.setHeader8("1. ಯಂತ್ರೋಪಕರಣವು ಇಲಾಖೆಯು ನಿರ್ದಿಷ್ಟಪಡಿಸಿದ ಗುಣಮಟ್ಟ ಮತ್ತು ತಾಂತ್ರಿಕ ಮಾನದಂಡಗಳಿಗೆ ಅನುಗುಣವಾಗಿರಬೇಕು.\n" +
-                    "     \n" +
-                    "2.  ಯಂತ್ರೋಪಕರಣವನ್ನು ನಿರ್ದಿಷ್ಟ ಅವಧಿಯಲ್ಲಿ ಪೂರೈಕೆ, ಅಳವಡಿಕೆ ಮತ್ತು ಚಾಲನೆಗೊಳಿಸಬೇಕು.\n" +
-                    "     \n" +
-                    "3.  ಅಳವಡಿಕೆಯ ದಿನಾಂಕದಿಂದ ಕನಿಷ್ಠ ___ ವರ್ಷಗಳ ಸಮಗ್ರ ವಾರಂಟಿ ಇರಬೇಕು.\n" +
-                    "     \n" +
-                    "4.  ಫಲಾನುಭವಿಗೆ ಯಂತ್ರೋಪಕರಣದ ಬಳಕೆ ಹಾಗೂ ನಿರ್ವಹಣೆ ಕುರಿತು ತರಬೇತಿ/ಪ್ರದರ್ಶನ ನೀಡುವುದು ಕಡ್ಡಾಯ.\n" +
-                    "     \n" +
-                    "5.  ಯಶಸ್ವಿ ಅಳವಡಿಕೆ ಮತ್ತು ಪರಿಶೀಲನೆ ಬಳಿಕ ಕೆಳಗಿನ ದಾಖಲೆಗಳೊಂದಿಗೆ ಸಹಾಯಧನ ಬಿಡುಗಡೆ ಮಾಡಲಾಗುವುದು:\n" +
-                    "     \n" +
-                    "    o  ಸರಕು ರಶೀದಿ (Delivery Challan)\n" +
-                    "     \n" +
-                    "    o  ಅಳವಡಿಕೆ ಪ್ರಮಾಣಪತ್ರ (ಫಲಾನುಭವಿಯ ಮತ್ತು ಇಲಾಖೆಯ ಅಧಿಕಾರಿ ಸಹಿ)\n"+
-                    "     \n" +
-                    "    o  ಸರಕು ಪಟ್ಟಿ (GST ಬಿಲ್)\n" +
-                    "     \n" +
-                    "    o  ವಾರಂಟಿ ಪ್ರಮಾಣಪತ್ರ\n" +
-                    "     \n" +
-                    "6.  ಈ ಆದೇಶದಲ್ಲಿ   ಉಲ್ಲೇಖಿಸಿದ ನಿಯಮಗಳನ್ನು   ಪಾಲಿಸದಿದ್ದಲ್ಲಿ   ಇಲಾಖೆ ಆದೇಶವನ್ನು  ರದ್ದುಪಡಿಸುವ ಹಕ್ಕು   ಹೊಂದಿರುತ್ತದೆ.");
-            response.setHeader9("ಈ ಕೆಲಸದ ಆದೇಶವನ್ನು ಸ್ವೀಕರಿಸಿದ ಕುರಿತು ಹಾಗೂ ಷರತ್ತುಗಳಿಗೆ ಒಪ್ಪಿರುವುದಾಗಿ ದೃಢಪಡಿಸುವುದು.");
+            response.setHeader1("(ರೇಷ್ಮೆ  ಇಲಾಖೆ)");
+            response.setHeader2("ಸಹಾಯಕ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರ ಕಛೇರಿ ");
+            response.setLineItemComment("                    " + apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ    ಯೋಜನೆಯಡಿ  ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getFarmerFirstName()+ "   ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  +  " , " +apiResponse.getContent().get(0).getVillageName()+ "    ಗ್ರಾಮ ,  " + apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ  ,\n " +
+                    "                                            \n" +
+                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,    " + apiResponse.getContent().get(0).getDistrictName()+ "    ಜಿಲ್ಲೆ    (ನೋಂದಣಿ  ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getFruitsId() + " , ಮೊಬೈಲ್ ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getMobileNumber() + " )  ಆದ ನಾನು ಮೇ  :  " + apiResponse.getContent().get(0).getVendorName() + "  ಸಂಸ್ಥೆಯ ವತಿಯಿಂದ   " +apiResponse.getContent().get(0).getScComponentName()+ "\n" +
+                    "                                                                                                \n " +
+                    "" +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ " ರೇಷ್ಮೆ ಯಂತ್ರೋಪಕರಣ/ಸಂಸ್ಕರಣಾ ಘಟಕವನ್ನು ರೇಷ್ಮೆ ಇಲಾಖೆಯ ಮಾರ್ಗಸೂಚಿ ಅನ್ವಯ ಪಡೆಯಲು ಅರ್ಜಿ ಸಲ್ಲಿಸಿದು,\n"+
+                    "                                                                                                           \n" +
+                    "ಈ ಸಂಬಂಧ ನಾನು ರೈತರ ವಂತಿಕೆ ಮೊತ್ತ ರೂ.  " + apiResponse.getContent().get(0).getSchemeAmount() +"  ಗಳನ್ನೂ ಮಾತ್ರ ಪಾವತಿಸಿರುತ್ತಾನೆ.");
+            response.setHeader4("ಈ  ಸಂಬಂಧ  ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು    ಮೇ: "+ apiResponse.getContent().get(0).getVendorName() + " ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್  ಗೆ ಅಥವಾ ಸದರಿ ಘಟಕವನ್ನು    ಖರೀದಿಸಲು ಪಡೆಯಲಾದ ನನ್ನ    ಬ್ಯಾಂಕ್");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
