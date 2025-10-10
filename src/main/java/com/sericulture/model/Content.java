@@ -57,7 +57,7 @@ public class Content {
 
     private double reelerCurrentBalance;
 
-    private int farmerEstimatedWeight;
+    private Float farmerEstimatedWeight;
 
     private List<Float> lotWeightDetail;
 
@@ -196,7 +196,7 @@ public class Content {
     private String bags;
     private String form;
     private String silkTypes;
-    private String approximateEstimatedWeight;
+    private Float approximateEstimatedWeight;
     private String approximateWeight;
 
 

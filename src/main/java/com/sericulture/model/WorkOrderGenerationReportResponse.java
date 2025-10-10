@@ -18,6 +18,12 @@ public class WorkOrderGenerationReportResponse {
     private String header4;
     private String header5;
     private String header7;
+    private String header8;
+    private String header9;
+    private String header10;
+    private String header11;
+    private String header12;
+
     private String date;
     private String farmerFirstName;
     private String farmerNumber;

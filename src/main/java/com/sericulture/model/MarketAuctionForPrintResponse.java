@@ -54,7 +54,7 @@ public class MarketAuctionForPrintResponse {
 
     private double reelerCurrentBalance;
 
-    private int farmerEstimatedWeight;
+    private Float farmerEstimatedWeight;
 
     private List<Float> lotWeightDetail;
 
