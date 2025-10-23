@@ -56,7 +56,24 @@ public class WorkOrderGenerationReportResponse {
     private String logurl;
     private Float sanctionAmount;
     private Float schemeAmount;
+    private String nameKan;
+    private String tscNameInKannada;
+    private String createdDate;
+    private String acre;
+    private String surveyNumber;
+    private String arn;
+    private String gunta;
+    private String devAcre;
+    private String devGunta;
+    private String devFGunta;
+    private String scApplicationFormId;
+    private String schemeName;
+    private String subSchemeName;
     private String workOrderNumber;
+    private String userDistrictName;
+    private String userTaluk;
+    private String userTscName;
+    private String createdTime;
 
 
 }

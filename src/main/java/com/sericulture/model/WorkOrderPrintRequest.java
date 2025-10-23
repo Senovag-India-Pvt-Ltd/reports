@@ -12,5 +12,6 @@ public class WorkOrderPrintRequest extends LotStatusRequest {
     private int scApplicationFormServiceId;
     private int stepId;
     private int schemeId;
+    private int userId;
 
 }

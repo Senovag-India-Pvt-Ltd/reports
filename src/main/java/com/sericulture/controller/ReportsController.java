@@ -1175,6 +1175,50 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/getWorkOrder")
+    public ResponseEntity<?> getWorkOrder(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getWorkOrder");
+            logger.info("enter to getWorkOrder");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("workorder.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForWorkOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
     //    @PostMapping("/getAuthorisationLetterFromFarmerLand")
 //    public ResponseEntity<?> getAuthorisationLetterFromFarmerLand(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 //
@@ -7179,6 +7223,94 @@ public class ReportsController {
                     "                                                                                                           \n" +
                     "ಈ ಸಂಬಂಧ ನಾನು ರೈತರ ವಂತಿಕೆ ಮೊತ್ತ ರೂ.  " + apiResponse.getContent().get(0).getSchemeAmount() +"  ಗಳನ್ನೂ ಮಾತ್ರ ಪಾವತಿಸಿರುತ್ತಾನೆ.");
             response.setHeader4("ಈ  ಸಂಬಂಧ  ಸರ್ಕಾರದ ಸಹಾಯಧನವನ್ನು    ಮೇ: "+ apiResponse.getContent().get(0).getVendorName() + " ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್  ಗೆ ಅಥವಾ ಸದರಿ ಘಟಕವನ್ನು    ಖರೀದಿಸಲು ಪಡೆಯಲಾದ ನನ್ನ    ಬ್ಯಾಂಕ್");
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+            response.setFarmerAccountNumber(apiResponse.getContent().get(0).getFarmerAccountNumber());
+            response.setFarmerBankName(apiResponse.getContent().get(0).getFarmerBankName());
+            response.setFarmerBankIfsc(apiResponse.getContent().get(0).getFarmerBankIfsc());
+            response.setFarmerBranchName(apiResponse.getContent().get(0).getFarmerBranchName());
+            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+            response.setVendorAccountNumber(apiResponse.getContent().get(0).getVendorAccountNumber());
+            response.setVendorBankName(apiResponse.getContent().get(0).getVendorBankName());
+            response.setVendorBankIfsc(apiResponse.getContent().get(0).getVendorBankIfsc());
+            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBranchName());
+            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            workOrderGenerationReportResponseList.add(response);
+        }
+//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(workOrderGenerationReportResponseList);
+    }
+
+
+    private JRDataSource getDataSourceForWorkOrder(WorkOrderPrintRequest requestDto) throws JsonProcessingException , JAXBException {
+
+        WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrder(requestDto);
+        List<WorkOrderGenerationReportResponse> workOrderGenerationReportResponseList = new LinkedList<>();
+        WorkOrderGenerationReportResponse apiData = apiResponse.getContent().get(0);
+        WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
+        if (apiResponse.getContent()!= null) {
+
+            // Split created_date into date and time (HH:mm)
+            String createdDateTime = apiData.getCreatedDate();
+            String datePart = "";
+            String timePart = "";
+            if (createdDateTime != null && !createdDateTime.isEmpty()) {
+                try {
+                    // Parse database datetime format: yyyy-MM-dd HH:mm:ss.SSS
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm"); // HH:mm format
+
+                    LocalDateTime ldt = LocalDateTime.parse(createdDateTime, inputFormatter);
+                    datePart = ldt.format(dateFormatter);
+                    timePart = ldt.format(timeFormatter);
+                } catch (Exception e) {
+                    // fallback if parsing fails
+                    String[] parts = createdDateTime.split(" ");
+                    datePart = parts[0];
+                    if (parts.length >= 2) timePart = parts[1].substring(0, 5);
+                }
+            }
+
+
+            response.setHeader1("ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader2("ದಿನಾಂಕ : " +datePart );
+            response.setHeader3("ಸಾಮಾನ್ಯ  / ವಿಶೇಷ  ಘಟಕ   ಉಪ  ಯೇಜನೆ / ಗಿರಿಜನ  ಉಪ  ಯೇಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
+            response.setLineItemComment("                    ಮೇಲ್ಕಾಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
+                            "     \n " +
+                            "ಸಮಯದಲ್ಲಿ    ತಾಂತ್ರಿಕ    ಸೇವಾ   ಕೇಂದ್ರ     " + apiResponse.getContent().get(0).getTscNameInKannada() + "  ಕ್ಕೆ    ಸೇರಿದ   ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಯಳಾದ\n " +
+                    "      \n " +
+                            "ಶ್ರೀ/ಶ್ರೀಮತಿ     " + apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ  "  + apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    ಸರ್ವೆ   ನಂಬರು   " + apiResponse.getContent().get(0).getSurveyNumber()  + "\n" +
+                            "    \n " +
+                            "ರಲ್ಲಿ    " + apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳ\n " +
+                            "      \n "+
+                               "ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n" +
+                    "       \n"+
+                                        apiResponse.getContent().get(0).getVillageName() + "    ಗ್ರಾಮದ    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   ರೇಷ್ಮೆ    ಹುಳು\n " +
+                    "        \n " +
+                            "ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+            response.setHeader4        ("                    ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + "    ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   " + apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ\n" +
+                            "      \n "+
+                                    apiResponse.getContent().get(0).getSurveyNumber() + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ   ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ  ಮನೆ   ನಿರ್ಮಿಸಲು  ನೋಂದಣಿ  ಅರ್ಜಿ  ಸಂಖ್ಯೆ \n " +
+                                    "    \n" +
+                                    apiResponse.getContent().get(0).getArn() + "   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  ");
+            response.setHeader5("ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು,\n" +
+                    "     \n"+
+                    "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,\n" +
+                    "     \n"+
+                    apiResponse.getContent().get(0).getUserDistrictName());
+            response.setHeader6("ಇವರಿಗೆ,\n" +
+                    "     \n"+
+                    "ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  " + apiResponse.getContent().get(0).getUserTaluk() + " ವಿಭಾಗ, \n" +
+                    "     \n"+
+                    "ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ  ,  " + apiResponse.getContent().get(0).getUserTscName() + " .\n" +
+                    "     \n"+
+                    "ಸಂಬಂಧಿಸಿದ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ,\n");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
