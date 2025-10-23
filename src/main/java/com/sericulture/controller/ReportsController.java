@@ -793,20 +793,64 @@ public class ReportsController {
     }
 
 
-    @PostMapping("/getSanctionOrder")
-    public ResponseEntity<?> getSanctionOrder(@RequestBody SanctionOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+//    @PostMapping("/getSanctionOrderRH")
+//    public ResponseEntity<?> getSanctionOrderRH(@RequestBody SanctionOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+//
+//        try {
+//            System.out.println("enter to getSanctionOrder");
+//            logger.info("enter to getSanctionOrder");
+//            String destFileName = "report_kannada.pdf";
+//            JasperReport jasperReport = getJasperReport("Sanction_OrderRH.jrxml");
+//
+//            // 2. parameters "empty"
+//            Map<String, Object> parameters = getParameters();
+//
+//            // 3. datasource "java object"
+//            JRDataSource dataSource = getDataSourceForSanctionOrderRH(requestDto);
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", "report.pdf");
+//
+//
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+//
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//            logger.info(ex.getMessage() + ex.getStackTrace());
+//            HttpHeaders headers = new HttpHeaders();
+//            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+//            //return  ex.getMessage();
+//            //throw new RuntimeException("fail export file: " + ex.getMessage());
+//        }
+//        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+//
+//    }
+
+
+            @PostMapping("/getSanctionOrderRH")
+    public ResponseEntity<?> getSanctionOrderRH(@RequestBody SanctionOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
             System.out.println("enter to getSanctionOrder");
             logger.info("enter to getSanctionOrder");
+
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Sanction_Order.jrxml");
+            JasperReport jasperReport = getJasperReport("Sanction_OrderRH.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
 
             // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceForSanctionOrder(requestDto);
+            JRDataSource dataSource = getDataSourceForSanctionOrderRH(requestDto); // ✅ Change: null check inside this method
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -816,24 +860,22 @@ public class ReportsController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "report.pdf");
 
-
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
             pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
+            // ✅ Change: Proper logging and error response
+            logger.error("Error generating sanction order PDF", ex);
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            headers.setContentType(MediaType.TEXT_PLAIN);
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
-
     }
+
 
     @PostMapping("/getSanctionOrderPmksy")
     public ResponseEntity<?> getSanctionOrder(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
@@ -8263,103 +8305,220 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
-    private JRDataSource getDataSourceForSanctionOrder(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+//    private JRDataSource getDataSourceForSanctionOrderRH(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+//
+//        SanctionOrder apiResponse = apiService.fetchDataFromSanction(requestDto);
+//        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+//        SanctionOrderResponse response = new SanctionOrderResponse();
+//        if (apiResponse.getContent()!= null) {
+//            response.setHeader1("ರೇಷ್ಮೆ   ಜಂಟಿ  ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್ ರವರ ನಡವಳಿಗಳು ");
+//            response.setHeader4("ವಿಷಯ  : ");
+//            response.setHeader20( "           " + apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ  ರೇಷ್ಮೆ   ಮಂಡಳಿಯ ಸಹಯೋಗದೊಂದಿಗೆ ಇಲಾಖೆಯು ಕೇಂದ್ರವಲಯ ಸಿಲ್ಕ್   ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ  ಶ್ರೀಮತಿ./.ಶ್ರೀ. \n" +
+//                    "                    \n" +
+//                    apiResponse.getContent().get(0).getFarmerFirstName()  +   "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  +"  ,ರವರು   " +apiResponse.getContent().get(0).getScCategoryName()+ "   ನಿರ್ಮಿಸಿರುವ - ಚದರ  ಅಡಿಗಳ ರೇಷ್ಮೆ    ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಗೆ  ರೂ . " +apiResponse.getContent().get(0).getSanctionAmount()+ "   ಗಳ  ಸಹಾಯಧನ \n " +
+//                    "        \n" +
+//                    "ಮಂಜೂರು  ಮಾಡುವ  ಬಗ್ಗೆ.");
+//            response.setHeader5( "ಉಲ್ಲೇಖ : ");
+//            response.setHeader2("1. " +apiResponse.getContent().get(0).getFinancialYear() +"  ಸಾಲಿಗೆ ಮುಂದವರೆದ ಸರ್ಕಾರದ ಆದೇಶ ¸ಸಂಖ್ಯೆ   ______________________________________________ ದಿನಾಂಕ   ______________________________________________ \n"+
+//                    "                               \n"+
+//                    "2. ರೇಷ್ಮೆ  ಕೃಷಿ ಅಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಮಾರ್ಗಸೂಚಿಯ ಸುತೋಲೆ ಸಂಖ್ಯೆ   ______________________________________________ ದಿನಾಂಕ  ______________________________________________\n" +
+//                    "                        \n" +
+//                    "3. ರೇಷ್ಮೆ   ಕೃಷಿ ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಕ್ರಿಯಾಯೋಜನೆ ಸುತೋಲೆ ಸಂಖ್ಯೆ    ದಿನಾಂಕ  ______________________________________________\n" +
+//                    "                    \n"+
+//                    "4. ರೇಷ್ಮೆ   ಕೃಷಿ ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ    ದಿನಾಂಕ  ______________________________________________\n"+
+//                    "                                     \n"+
+//                    "5. ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ :ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ   :ತೋಇ/61/ರೇಕೃವಿ/2019.ದಿನಾಂಕ  ______________________________________________\n" +
+//                    "                                                \n" +
+//                    "6  ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು ಜಿಲ್ಲಾ   ಪಂಚಾಯತ್ ,  "+ apiResponse.getContent().get(0).getDistrictName()  +"   ರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ  : ______________________________________________ ದಿನಾಂಕ : ______________________________________________");
+//            response.setHeader24("ಪೀಠಿಕೆ ");
+//            response.setHeader8(  "              " + apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ  ಸಾಲಿನಲ್ಲಿ   ವಿವಿಧ ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆಗಳಡಿ ವಿವಿಧ ಕಾರ್ಯಕ್ರಮಗಳ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ   ಸರ್ಕಾರವು ಆಡಳಿತಾತ್ಮಕ  ಅನುಮೋದನೆಯನ್ನು\n" +
+//                    "                                       \n"+
+//                    "ನೀಡಿದ್ದು ,  ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ   ಕೇಂದ್ರವಲಯ ಸಿಲ್ಕ್   ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆ ನಿರ್ಮಾಣಕ್ಕೆ ಸಹಾಯಧನ ಕಾರ್ಯಕಮದ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ \n" +
+//                    "                                       \n"+
+//                    "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ ಕ್ರಿಯಾಯೋಜನೆ ಮತ್ತು ಉಲ್ಲೇಖ(4)ರಲ್ಲಿ    ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದಿಂದ ಅನುಧಾನ ಬಿಡುಗಡೆಯಾಗಿರುತ್ತದೆ .ಇಲಾಖೆಯು  ಕೇಂದ್ರ\n"+
+//                    "                                       \n"+
+//                    "ರೇಷ್ಮೆ   ಮಂಡಳಿಯ  ಸಹಯೋಗದೊಂದಿಗೆ ಕೇಂದ್ರ   ವಲಯ ಸಿಲ್ಕ್    ಸಮಗ್ರ    ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಠಾನಗೊಳಿಸಲಾಗುತ್ತಿದೆ.  ಸದರಿ ಯೋಜನೆಯಡಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರು\n"+
+//                    "                                       \n"+
+//                    "ನಿರ್ಮಾಣ ಮಾಡಿರುವ    "  +apiResponse.getContent().get(0).getSpacingName()+   "    ಚದರ ಅಡಿ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ ನೀಡಬೇಕಾಗಿದ್ದು ,  ಸಾಮಾನ್ಯ  /ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ   ವರ್ಗದಡಿ ಕೇಂದ್ರ  : ರಾಜ್ಯ :\n"+
+//                    "                                       \n"+
+//                    "ಫಲಾನುಭವಿ ಪಾಲು  50:25:25/65:25:10 ಆಗಿರುತ್ತದೆ .  " +apiResponse.getContent().get(0).getSpacingName()+   "   ಚದರ ಅಡಿಯ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆ ನಿರ್ಮಾಣದ  ಘಟಕದರ  ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount()  + "    ಲಕ್ಷಗಳಿಗೆ  ನಿಗಧಿಪಡಿಸಿದ್ದು  ,\n" +
+//                    "                                       \n"+
+//                    "ಇದರಲ್ಲಿ     ಶೇಕಡ 75 ರಷ್ಟನ್ನು    ಅಂದರೆ ರೂ . " +apiResponse.getContent().get(0).getSanctionAmount() + "   ಲಕ್ಷಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ ನೀಡಲಾಗುತ್ತದೆ . ಇದರಲ್ಲಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕದರದ ಶೇ .50/65 ಅಂದರೆ ರೂ.  " +apiResponse.getContent().get(0).getSanctionAmount() + "\n"+
+//                    "                                       \n"+
+//                    "ಲಕ್ಷಗಳು  ಮತ್ತು    ರಾಜ್ಯದ  ಪಾಲು  ಘಟಕದರದ ಶೇ . 25 ಅಂದರೆ ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount() + "  ಲಕ್ಷಗಳು  ಆಗಿರುತ್ತದೆ .  ಕೇಂದ್ರ   ರೇಷ್ಮೆ    ಮಂಡಳಿಯು ಕೇಂದ್ರದ ಪಾಲಿನ    ಅನುದಾನವನ್ನು    ರೇಷ್ಮೆ \n"+
+//                    "                                       \n"+
+//                    "ಕೃಷಿ  ಅಭಿವೃದ್ಧಿ     ಆಯುಕ್ತರು    ಹಾಗು ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರವರ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಒದಗಿಸಿರುತ್ತದೆ  ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನ ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount() + "   ಲಕ್ಷಗಳನ್ನು     (50/65%)  ಕೇಂದ್ರ \n"+
+//                    "                                       \n"+
+//                    "ರೇಷ್ಮೆ    ಮಂಡಳಿ  ಭರಿಸುವುದರಿಂದ ಇದನ್ನು    ರೇಷ್ಮೆ   ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯ , ಬೆಂಗಳೂರುರವರ  \n" +
+//                    "                       \n" +
+//                    "ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ ಫಲಾನುಭವಿ  ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ  ನೇರವಾಗಿ  ಜಮಾ  ಮಾಡಲಾಗುತ್ತದೆ . ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು    ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   \n"+
+//                    "                                       \n"+
+//                    "ಯೋಜನೆ  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName() + "    ಅಡಿ ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರುರವರು    ಖಜಾನೆ  __________________________ 2 \n " +
+//                    "    \n" +
+//                    "ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿದ್ದು   ಫಲಾನುಭವಿಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ಜಮಾ  ಮಾಡಲಾಗುವುದು . " );
+//            response.setHeader9("ಇದರಲ್ಲಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕದರದ ಶೇ .50/65 ಅಂದರೆ ರೂ ಲಕ್ಷಗಳು ಮತ್ತು ರಾಜ್ಯದ ಪಾಲು ಘಟಕದರದ ಶೇ . 25 ಅಂದರೆ ರೂ .   ಲಕ್ಷಗಳು ಆಗಿರುತ್ತದೆ . ಕೇಂದ್ರ   ರೇಷ್ಮೆ ಮಂಡಳಿಯು ಕೇಂದ್ರದ ಪಾಲಿನ  ಅನುದಾನವನ್ನು ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗು ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರವರ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಒದಗಿಸಿರುತ್ತದೆ ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನ ರೂ . ಲಕ್ಷಗಳನ್ನು (50/65%)   ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ಭರಿಸುವುದರಿಂದ ಇದನ್ನು ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು ,ರೇಷ್ಮೆ ನಿರ್ದೇಶನಾಲಯ , ಬೆಂಗಳೂರುರವರ ಕಛೇರಿಯಿಂದ ಡಿಬಿಟಿ ಮುಖಾಂತರ ಫಲಾನುಭವಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲಾಗುತ್ತದೆ . ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-1-35(106)(422)(423) ಅಡಿ ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರುರವರು  ಖಜಾನೆ -2 ಮುಖಾಂತರ ಬಿಡುಗಡೆಗೊಳಿಸಿದ್ದು ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ  ಜಮಾ ಮಾಡಲಾಗುವುದು .  ");
+//            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "    ಜಿಲ್ಲೆಯ    " + apiResponse.getContent().get(0).getTalukName() +"    ತಾಲೂಕಿನ   ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    " +apiResponse.getContent().get(0).getVillageName()+ "    ಗ್ರಾಮದಲ್ಲಿ    " +apiResponse.getContent().get(0).getScCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ    ಶ್ರೀ ./ಶ್ರೀಮತಿ . \n"+
+//                    "                                       \n"+
+//                    apiResponse.getContent().get(0).getFarmerFirstName() + "    ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ಇವರು   " +apiResponse.getContent().get(0).getVillageName()+ "   ಗ್ರಾಮದ ಸರ್ವೆನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "   ರಲ್ಲಿ   " +  apiResponse.getContent().get(0).getHectareName() + "   ಹೆಕ್ಟೇರು ವಿಸ್ತೀರ್ಣದಲ್ಲಿ    ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಹೊಂದಿದ್ದು    ಗ್ರಾಮದ ಸುರ್ವೆನಂ\n" +
+//                    "                                                                     \n" +
+//                    "/ಖಾತೆ  ನ. _____________________________ರಲ್ಲಿ   ಚದರಡಿ ವಿಸ್ತೀರ್ಣದ _____________________________ ಮೇಲ್ಚಾವಣಿಯ    ಪ್ರತ್ಯೇಕ ರೇಷ್ಮೆ  ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಯನ್ನು    ಅಂದಾಜು  ರೂ .  \n" +
+//                    "               \n" +
+//                    apiResponse.getContent().get(0).getSanctionAmount()+ "     ಲಕ್ಷಗಳ  ವೆಚ್ಚದಲ್ಲಿ     (ಸ್ವಂತ  ವೆಚ್ಚ   /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು )ನಿರ್ಮಿಸಿರುವುದನ್ನು     ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿ ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ    ಹಾಗೂ ರೇಷ್ಮೆ   ಸಹಾಯಕ \n" +
+//                    "                                      \n" +
+//                    "ನಿರ್ದೇಶಕರು ,   " +apiResponse.getContent().get(0).getTalukName()+ "    ವಿಭಾಗರವರು   ಪರಿಶೀಲಿಸಿ  ಧ್ರಡೀಕರಿಸಿ ಸಲ್ಲಿಸಿದ ಎಲ್ಲ     ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ ಪ್ರಸ್ತಾವನೆಯನ್ನು    "+ apiResponse.getContent().get(0).getDistrictName() +"   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್\n" +
+//                    "                         \n" +
+//                    "ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು  ಪರಿಶೀಲಿಸಿ   ಧ್ರಡೀಕರಿಸಿ  ಉಲ್ಲೇಖ (6)  ಈ ಕಛೇರಿಗೆ ಶಿಫಾರಸ್ಸು     ಮಾಡಿ ಸಲ್ಲಿಸಿದ್ದು    ,ಸದರಿ ಫಲಾನುಭವಿಗೆ  ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount()+ "  ಗಳ  ಸಹಾಯಧನವನ್ನು   \n" +
+//                    "                                     \n"  +
+//                    "ಮಂಜೂರು   ಮಾಡುವಂತೆ  ಕೋರಿರುತ್ತಾರೆ . ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ  ಸಹಾಯಧನ   ಮಂಜೂರು ಮಾಡಲು ಉಲ್ಲೇಖ (5)ರ  ಸರ್ಕಾರಿ ಆದೇಶದ ರೀತ್ಯಾ   ಈ ಕಛೆರಿಯ\n" +
+//                    "         \n" +
+//                    "ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜನೆ  ವ್ಯಾಪ್ತಿಗೆ ಒಳಪಟ್ಟಿದ್ದು    ಅದರಂತೆ ಸಹಾಯಧನ ಮಂಜೂರಾತಿಗಾಗಿ   ಈ ಕೆಳಕಂಡ ಆದೇಶವನ್ನು   ಹೊರಡಿಸಿದೆ ." );
+//            response.setHeader11("");
+//            response.setHeader12("ಆದೇಶ ");
+//            response.setHeader13("ಸಂಖ್ಯೆ ");
+//            response.setHeader14("ದಿನಾಂಕ ");
+//            response.setHeader15("");
+//            response.setHeader16("             ಮೇಲಿನ  ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ  ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು , ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್    " +apiResponse.getContent().get(0).getDistrictName() +"    ರವರು   ಶಿಫಾರಸ್ಸು      ಮಾಡಿರುವಂತೆ     "+apiResponse.getContent().get(0).getTscName()+ "\n" +
+//                    "                                             \n" +
+//                    "ತಾಂತ್ರಿಕ   ಸೇವಾ  ಕೇಂದ್ರ    ವ್ಯಾಪ್ತಿಯ    "+apiResponse.getContent().get(0).getVillageName()+  "    ಗ್ರಾಮದ   ಸಾಮಾನ್ಯ /ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ ಗ್ರಾಮದ ಸಾಮಾನ್ಯ ಎಸ್ಸಿಪಿ  ಟಿಎಸ್ಪಿ ವರ್ಗಕ್ಕೆ ಸೇರಿದ ಶ್ರೀ . /ಶ್ರೀಮತಿ . "+ apiResponse.getContent().get(0).getFarmerFirstName()+"\n" +
+//                    "                                              \n" +
+//                    " ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು ಕೇಂದ್ರ   ವಲಯ ಸಿಲ್ಕ್    ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ     "+apiResponse.getContent().get(0).getSpacingName() + "     ಚ.ಅಡಿಯ  ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಗೆ   ಘಟಕ ದರದ ಶೇ . 75 / 90 ರಷ್ಟು    \n" +
+//                    "                                \n"+
+//                    "ಸಹಾಯಧನ ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount()  + "   ಲಕ್ಷ (   __________________________________________________________________________________________________  ರೂ ಗಳು  ಮಾತ್ರ ) ಗಳಿಗೆ   ಮಂಜೂರಾತಿ \n" +
+//                    "                                            \n" +
+//                    "ನೀಡಿದೆ . ಈ ಸಹಾಯಧನದ ಪೈಕಿ   ರೂ .    " +apiResponse.getContent().get(0).getSanctionAmount()  + "    ಲಕ್ಷ   (__________________________________________________________________________________________________ ರೂ . ಗಳು ಮಾತ್ರ )\n" +
+//                    "              \n" +
+//                    "ಕೇಂದ್ರದ  ಪಾಲಾಗಿ ಕೇಂದ್ರ ರೇಷ್ಮೆ    ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತದಲ್ಲಿ      ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯದಿಂದ  ಡಿಬಿಟಿ  ಮುಖಾಂತರ  ಫಲಾನುಭವಿಗಳ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ  ನೇರವಾಗಿ \n" +
+//                    "                                                \n" +
+//                    "ಜಮಾ  ಮಾಡಲಾಗುವುದು  ಮತ್ತು     ರಾಜ್ಯದ   ಪಾಲಾಗಿ ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount()  + "   ಲಕ್ಷಗಳನ್ನು   ( __________________________________________________________________________________________________\n" +
+//                    "                   \n" +
+//                    "ರೂ  ಗಳು ಮಾತ್ರ ) ರಾಜ್ಯ    ರೇಷ್ಮೆ    ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName() + "   ರಡಿ  ಖಜಾನೆ ________________________________2 ರಲ್ಲಿ     ಬಿಡುಗೋಡೆಗಳಿಸಿರುವ   \n" +
+//                    "                                             \n" +
+//                    "ಸಹಾಯಧನವನ್ನು    ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು ಖಜಾನೆ ____________________________________________2  ಮೂಲಕ ಮುಖಾಂತರ ಫಲಾನುಭವಿ ಖಾತೆಗೆ ನೇರವಾಗಿ\n" +
+//                    "                             \n" +
+//                    "ಜಮಾ  ಮಾಡುವುದು . ಈ ವೆಚ್ಚವನ್ನು    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ      "+apiResponse.getContent().get(0).getScHeadAccountName() + "  (ಸಾಮಾನ್ಯ / ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ ) ಅಡಿ  ಭರಿಸುವುದು ." );
+//            response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು ");
+//            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
+//                    "                       \n" +
+//                    "ಶ್ರೀ /.ಶ್ರೀಮತಿ. "+ apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  + "\n" +
+//                    "                                      \n" +
+//                    "ಗ್ರಾಮ    " +  apiResponse.getContent().get(0).getVillageName()+  " ಜಿಲ್ಲೆ    " + apiResponse.getContent().get(0).getDistrictName());
+//            response.setHeader19("");
+//            response.setDate(apiResponse.getContent().get(0).getDate());
+//            response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
+//            response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
+//            response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
+//            response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
+//            response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
+//            response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
+//            response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
+//            response.setLineItemComment("  1. ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು ,ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್ ,    " +apiResponse.getContent().get(0).getDistrictName() +"   ರವರಿಗೆ  ಎಲ್ಲ    ಮೂಲ ದಾಖಲಾತಿಗಳೊಂದಿಗೆ  ಮುಂದಿನ ಅಗತ್ಯ    ಕ್ರಮಕ್ಕಾಗಿ ಕಳುಹಿಸಿದೆ .  \n"+
+//                    "                                       \n"+
+//                    " 2. ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು   " +apiResponse.getContent().get(0).getDistrictName() +"  ವಿಭಾಗರವರಿಗೆ  ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .  \n"+
+//                    "                                       \n"+
+//                    " 3. ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿ ,ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ      " +apiResponse.getContent().get(0).getTscName() +" ರವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .");
+//            response.setCost(apiResponse.getContent().get(0).getCost());
+//            response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
+//            response.setVendorName(apiResponse.getContent().get(0).getVendorName());
+//            response.setVendorAccountNumber("ಖಾತೆ ಸಂಖ್ಯೆ :  " +apiResponse.getContent().get(0).getVendorAccountNumber());
+//            response.setVendorBankName("   ಬ್ಯಾಂಕ್ ಶಕೇ :  " +apiResponse.getContent().get(0).getVendorName());
+//            response.setVendorBankIfsc(", ಐ.ಎಫ್.ಎಸ್.ಸೀ (IFSC) ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getVendorBankIfsc() + " ಗೆ ಪಾವತಿಸಲು, ಪಾವತಿಸಿರುವ ಬಗ್ಗೆ ವಿವರಗಳನ್ನು (ಬ್ಯಾಂಕ್ ಚಲ್ಲನ್ ಸಂಖ್ಯೆ/ಅರ್.ತೀ.ಜೀ.ಎಸ್ ಸಂಖ್ಯೆ) ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಚೇರಿ,  ");
+//            response.setVendorBranchName(apiResponse.getContent().get(0).getVendorBankName());
+//            response.setVendorUpi(apiResponse.getContent().get(0).getVendorUpi());
+//            response.setSanctionNo(apiResponse.getContent().get(0).getSanctionNo());
+//            response.setFinancialYear(apiResponse.getContent().get(0).getFinancialYear());
+//            response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
+//            response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+//            response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+//            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//            sanctionOrderResponseList.add(response);
+//        }
+////        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+//        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+//    }
+
+
+    private JRDataSource getDataSourceForSanctionOrderRH(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
         SanctionOrder apiResponse = apiService.fetchDataFromSanction(requestDto);
+
+        // ✅ Change: Null check for API response to avoid NullPointerException
+        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            logger.warn("No data returned from sanction API for applicationFormId: {}", requestDto.getApplicationFormId());
+            return new JREmptyDataSource(); // Safe fallback for empty PDF
+        }
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+
         SanctionOrderResponse response = new SanctionOrderResponse();
-        if (apiResponse.getContent()!= null) {
-            response.setHeader1("ರೇಷ್ಮೆ   ಜಂಟಿ  ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್ ರವರ ನಡವಳಿಗಳು ");
+//        if (apiResponse.getContent()!= null) {
+        // Add null check here
+        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            throw new RuntimeException("No data returned from sanction API for applicationFormId: " + requestDto.getApplicationFormId());
+        }
+            response.setHeader1("ರೇಷ್ಮೆ   ಜಂಟಿ  ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getDistrictName() +"   ವಿಭಾಗ,  ಬೆಂಗಳೂರುರವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
             response.setHeader4("ವಿಷಯ  : ");
-            response.setHeader20( "           " + apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ  ರೇಷ್ಮೆ   ಮಂಡಳಿಯ ಸಹಯೋಗದೊಂದಿಗೆ ಇಲಾಖೆಯು ಕೇಂದ್ರವಲಯ ಸಿಲ್ಕ್   ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ  ಶ್ರೀಮತಿ./.ಶ್ರೀ. \n" +
+            response.setHeader20( "           " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ   ಇಲಾಖೆಯು  ಕೇಂದ್ರ     ರೇಷ್ಮೆ    ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ  ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ   “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” \n" +
                     "                    \n" +
-                    apiResponse.getContent().get(0).getFarmerFirstName()  +   "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  +"  ,ರವರು   " +apiResponse.getContent().get(0).getScCategoryName()+ "   ನಿರ್ಮಿಸಿರುವ - ಚದರ  ಅಡಿಗಳ ರೇಷ್ಮೆ    ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಗೆ  ರೂ . " +apiResponse.getContent().get(0).getSanctionAmount()+ "   ಗಳ  ಸಹಾಯಧನ \n " +
-                    "        \n" +
-                    "ಮಂಜೂರು  ಮಾಡುವ  ಬಗ್ಗೆ.");
+                    "ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕೆ   600  ಚದರಡಿ   ಸಾಮಾನ್ಯದಡಿ  ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
-            response.setHeader2("1. " +apiResponse.getContent().get(0).getFinancialYear() +"  ಸಾಲಿಗೆ ಮುಂದವರೆದ ಸರ್ಕಾರದ ಆದೇಶ ¸ಸಂಖ್ಯೆ   ______________________________________________ ದಿನಾಂಕ   ______________________________________________ \n"+
-                    "                               \n"+
-                    "2. ರೇಷ್ಮೆ  ಕೃಷಿ ಅಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಮಾರ್ಗಸೂಚಿಯ ಸುತೋಲೆ ಸಂಖ್ಯೆ   ______________________________________________ ದಿನಾಂಕ  ______________________________________________\n" +
-                    "                        \n" +
-                    "3. ರೇಷ್ಮೆ   ಕೃಷಿ ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಕ್ರಿಯಾಯೋಜನೆ ಸುತೋಲೆ ಸಂಖ್ಯೆ    ದಿನಾಂಕ  ______________________________________________\n" +
-                    "                    \n"+
-                    "4. ರೇಷ್ಮೆ   ಕೃಷಿ ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು ,ಬೆಂಗಳೂರು ,ರವರ ಜ್ಞಾಪನ ಸಂಖ್ಯೆ    ದಿನಾಂಕ  ______________________________________________\n"+
-                    "                                     \n"+
-                    "5. ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ :ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ   :ತೋಇ/61/ರೇಕೃವಿ/2019.ದಿನಾಂಕ  ______________________________________________\n" +
-                    "                                                \n" +
-                    "6  ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು ಜಿಲ್ಲಾ   ಪಂಚಾಯತ್ ,  "+ apiResponse.getContent().get(0).getDistrictName()  +"   ರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ  : ______________________________________________ ದಿನಾಂಕ : ______________________________________________");
+            response.setHeader2("1. ಸರ್ಕಾರದ   ಆದೇಶ  ಸಂಖ್ಯೆ :ರೇಷ್ಮೆ /58/ರೇಕೃವಿ/2025, ದಿನಾಂಕ:11.04.2025.\n" +
+                    "        \n" +
+                    "2. ರೇಷ್ಮೆ    ಕೃಷಿ  ಅಭಿವೃದ್ದಿ   ಆಯುಕ್ತರು   ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋಲೆ  ಸಂ:ಯೋ/ಪಿಎಸ್5/ಕೇವಸಿಸಯೋ\n" +
+                    "        \n" +
+                    "   /ಮಾಸೂ/27/2025-26.  ದಿನಾಂಕ :04.06.2025.\n" +
+                    "        \n" +
+                    "3. ಸರ್ಕಾರದ  ಆದೇಶ ಸಂಖ್ಯೆ.ತೋಇ/61/ರೇಕೃವಿ/2019 ಬೆಂಗಳೂರು, ದಿನಾಂಕ : 22.08.2023.\n" +
+                    "        \n" +
+                    "4. ರೇಷ್ಮೆ   ಕೃಷಿ  ಅಭಿವೃದ್ದಿ  ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ  ಸಂಖ್ಯೆ:ಯೋ/ಪಿಎಸ್5/ರೇಅಯ/ಅಬಿ\n" +
+                    "        \n" +
+                    "   /24/2025-26. ದಿನಾಂಕ:31.05.2025.\n" +
+                    "        \n" +
+                    "5. ರೇಷ್ಮೆ   ಉಪ  ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  ಬೆಂಗಳೂರು  ಗ್ರಾಮಾಂತರ   ರವರ   ಪ್ರಸ್ತಾವನೆ  ದಿನಾಂಕ:03.07.2025 ");
             response.setHeader24("ಪೀಠಿಕೆ ");
-            response.setHeader8(  "              " + apiResponse.getContent().get(0).getFinancialYear() +"  ನೇ  ಸಾಲಿನಲ್ಲಿ   ವಿವಿಧ ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆಗಳಡಿ ವಿವಿಧ ಕಾರ್ಯಕ್ರಮಗಳ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ   ಸರ್ಕಾರವು ಆಡಳಿತಾತ್ಮಕ  ಅನುಮೋದನೆಯನ್ನು\n" +
-                    "                                       \n"+
-                    "ನೀಡಿದ್ದು ,  ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ   ಕೇಂದ್ರವಲಯ ಸಿಲ್ಕ್   ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆ ನಿರ್ಮಾಣಕ್ಕೆ ಸಹಾಯಧನ ಕಾರ್ಯಕಮದ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ \n" +
-                    "                                       \n"+
-                    "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ ಕ್ರಿಯಾಯೋಜನೆ ಮತ್ತು ಉಲ್ಲೇಖ(4)ರಲ್ಲಿ    ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದಿಂದ ಅನುಧಾನ ಬಿಡುಗಡೆಯಾಗಿರುತ್ತದೆ .ಇಲಾಖೆಯು  ಕೇಂದ್ರ\n"+
-                    "                                       \n"+
-                    "ರೇಷ್ಮೆ   ಮಂಡಳಿಯ  ಸಹಯೋಗದೊಂದಿಗೆ ಕೇಂದ್ರ   ವಲಯ ಸಿಲ್ಕ್    ಸಮಗ್ರ    ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಠಾನಗೊಳಿಸಲಾಗುತ್ತಿದೆ.  ಸದರಿ ಯೋಜನೆಯಡಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರು\n"+
-                    "                                       \n"+
-                    "ನಿರ್ಮಾಣ ಮಾಡಿರುವ    "  +apiResponse.getContent().get(0).getSpacingName()+   "    ಚದರ ಅಡಿ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ ನೀಡಬೇಕಾಗಿದ್ದು ,  ಸಾಮಾನ್ಯ  /ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ   ವರ್ಗದಡಿ ಕೇಂದ್ರ  : ರಾಜ್ಯ :\n"+
-                    "                                       \n"+
-                    "ಫಲಾನುಭವಿ ಪಾಲು  50:25:25/65:25:10 ಆಗಿರುತ್ತದೆ .  " +apiResponse.getContent().get(0).getSpacingName()+   "   ಚದರ ಅಡಿಯ ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆ ನಿರ್ಮಾಣದ  ಘಟಕದರ  ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount()  + "    ಲಕ್ಷಗಳಿಗೆ  ನಿಗಧಿಪಡಿಸಿದ್ದು  ,\n" +
-                    "                                       \n"+
-                    "ಇದರಲ್ಲಿ     ಶೇಕಡ 75 ರಷ್ಟನ್ನು    ಅಂದರೆ ರೂ . " +apiResponse.getContent().get(0).getSanctionAmount() + "   ಲಕ್ಷಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ ನೀಡಲಾಗುತ್ತದೆ . ಇದರಲ್ಲಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕದರದ ಶೇ .50/65 ಅಂದರೆ ರೂ.  " +apiResponse.getContent().get(0).getSanctionAmount() + "\n"+
-                    "                                       \n"+
-                    "ಲಕ್ಷಗಳು  ಮತ್ತು    ರಾಜ್ಯದ  ಪಾಲು  ಘಟಕದರದ ಶೇ . 25 ಅಂದರೆ ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount() + "  ಲಕ್ಷಗಳು  ಆಗಿರುತ್ತದೆ .  ಕೇಂದ್ರ   ರೇಷ್ಮೆ    ಮಂಡಳಿಯು ಕೇಂದ್ರದ ಪಾಲಿನ    ಅನುದಾನವನ್ನು    ರೇಷ್ಮೆ \n"+
-                    "                                       \n"+
-                    "ಕೃಷಿ  ಅಭಿವೃದ್ಧಿ     ಆಯುಕ್ತರು    ಹಾಗು ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರವರ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಒದಗಿಸಿರುತ್ತದೆ  ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನ ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount() + "   ಲಕ್ಷಗಳನ್ನು     (50/65%)  ಕೇಂದ್ರ \n"+
-                    "                                       \n"+
-                    "ರೇಷ್ಮೆ    ಮಂಡಳಿ  ಭರಿಸುವುದರಿಂದ ಇದನ್ನು    ರೇಷ್ಮೆ   ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯ , ಬೆಂಗಳೂರುರವರ  \n" +
-                    "                       \n" +
-                    "ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ ಫಲಾನುಭವಿ  ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ  ನೇರವಾಗಿ  ಜಮಾ  ಮಾಡಲಾಗುತ್ತದೆ . ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು    ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   \n"+
-                    "                                       \n"+
-                    "ಯೋಜನೆ  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName() + "    ಅಡಿ ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರುರವರು    ಖಜಾನೆ  __________________________ 2 \n " +
-                    "    \n" +
-                    "ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿದ್ದು   ಫಲಾನುಭವಿಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ಜಮಾ  ಮಾಡಲಾಗುವುದು . " );
+            response.setHeader8(  "               " + apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ  ಸಾಲಿನಲ್ಲಿ    ರೇಷ್ಮೆ    ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರಮಗಳ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ   ವಿವಿಧ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ    ಸರ್ಕಾರವು\n " +
+                    "      \n " +
+                    "ಆಡಳಿತಾತ್ಮಕ    ಅನುಮೋದನೆಯನ್ನು    ನೀಡಿದ್ದು,  ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ    ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಕಾರ್ಯಕ್ರಮದ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ   ಮಾರ್ಗಸೂಚಿಯನ್ನು \n " +
+                    "     \n" +
+                    "ನೀಡಲಾಗಿದೆ.   ಇಲಾಖೆಯು   ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿಯ    ಸಹಯೋಗದೊಂದಿಗೆ   ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ  “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2’’   ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಟಾನಗೊಳಿಸಲಾಗುತ್ತಿದೆ.\n " +
+                    "          \n" +
+                    "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   600   ಚದರ   ಅಡಿ   ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕೆ  ಸಹಾಯಧನ   ನೀಡಬೇಕಾಗಿದ್ದು,\n"+
+                    "     \n" +
+                    "ಸಾಮಾನ್ಯ   ವರ್ಗದಡಿ   ಕೇಂದ್ರ   :  ರಾಜ್ಯ  :ಫಲಾನುಭವಿ  ಪಾಲು 50:25:25  ಆಗಿರುತ್ತದೆ.  600  ಚದರ  ಅಡಿಯ   ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ  ನಿರ್ಮಾಣದ  ಘಟಕ  ದರ\n " +
+                    "                \n " +
+                    "ರೂ.3.25   ಲಕ್ಷಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಖಡ  75  ರಷ್ಟನ್ನು   ಅಂದರೆ  ರೂ.2.4375  ಲಕ್ಷಗಳನ್ನು   ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿದೆ. ಇದರಲ್ಲಿ   ಕೇಂದ್ರದ   ಪಾಲು\n" +
+                    "             \n " +
+                    "ಘಟಕ  ದರದ  ಶೇ.50  ಅಂದರೆ   ರೂ.1.625  ಲಕ್ಷಗಳು  ಮತ್ತು    ರಾಜ್ಯದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.0.8125   ಲಕ್ಷಗಳು   ಆಗಿರುತ್ತದೆ.   ಕೇಂದ್ರ \n " +
+                    "        \n " +
+                    "ರೇಷ್ಮೆ     ಮಂಡಳಿಯು   ಕೇಂದ್ರದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು    PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು    SBI, ಬ್ಯಾಂಕ್   ಬಹುಮಹಡಿ   ಕಟ್ಟಡ   ಶಾಖೆಯ  ಬ್ಯಾಂಕ್   ಖಾತೆಯಲ್ಲಿ \n " +
+                    "      \n " +
+                    "ಜಮೆಯಾಗಿರುತ್ತದೆ.   ಆದ್ದರಿಂದ  ಕೇಂದ್ರದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.1.625   ಲಕ್ಷಗಳನ್ನು(50%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆಗಳ\n" +
+                    "              \n"+
+                    "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತದೆ.\n " +
+                    "      \n " +
+                    "ರಾಜ್ಯದ    ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು    ರೇಷ್ಮೆ    ಅಭಿವೃದ್ದಿ    ಯೋಜನೆ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ:2851-00-107-1-35(106)   ರಡಿ   ರೇಷ್ಮೆ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತರು   ಹಾಗೂ\n " +
+                            "        \n" +
+                            "ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,  ಬೆಂಗಳೂರು   ರವರು   ಖಜಾನೆ-2   ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿ   ರಾಜ್ಯದ   ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು    ಸಹ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ\n " +
+                            "     \n" +
+                            "ಫಲಾನುಭವಿಯ    ಬ್ಯಾಂಕ್    ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುವುದು." );
             response.setHeader9("ಇದರಲ್ಲಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕದರದ ಶೇ .50/65 ಅಂದರೆ ರೂ ಲಕ್ಷಗಳು ಮತ್ತು ರಾಜ್ಯದ ಪಾಲು ಘಟಕದರದ ಶೇ . 25 ಅಂದರೆ ರೂ .   ಲಕ್ಷಗಳು ಆಗಿರುತ್ತದೆ . ಕೇಂದ್ರ   ರೇಷ್ಮೆ ಮಂಡಳಿಯು ಕೇಂದ್ರದ ಪಾಲಿನ  ಅನುದಾನವನ್ನು ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗು ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರವರ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಒದಗಿಸಿರುತ್ತದೆ ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನ ರೂ . ಲಕ್ಷಗಳನ್ನು (50/65%)   ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ಭರಿಸುವುದರಿಂದ ಇದನ್ನು ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು ,ರೇಷ್ಮೆ ನಿರ್ದೇಶನಾಲಯ , ಬೆಂಗಳೂರುರವರ ಕಛೇರಿಯಿಂದ ಡಿಬಿಟಿ ಮುಖಾಂತರ ಫಲಾನುಭವಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲಾಗುತ್ತದೆ . ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-1-35(106)(422)(423) ಅಡಿ ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು ಬೆಂಗಳೂರುರವರು  ಖಜಾನೆ -2 ಮುಖಾಂತರ ಬಿಡುಗಡೆಗೊಳಿಸಿದ್ದು ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ  ಜಮಾ ಮಾಡಲಾಗುವುದು .  ");
-            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "    ಜಿಲ್ಲೆಯ    " + apiResponse.getContent().get(0).getTalukName() +"    ತಾಲೂಕಿನ   ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    " +apiResponse.getContent().get(0).getVillageName()+ "    ಗ್ರಾಮದಲ್ಲಿ    " +apiResponse.getContent().get(0).getScCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ    ಶ್ರೀ ./ಶ್ರೀಮತಿ . \n"+
-                    "                                       \n"+
-                    apiResponse.getContent().get(0).getFarmerFirstName() + "    ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ಇವರು   " +apiResponse.getContent().get(0).getVillageName()+ "   ಗ್ರಾಮದ ಸರ್ವೆನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "   ರಲ್ಲಿ   " +  apiResponse.getContent().get(0).getHectareName() + "   ಹೆಕ್ಟೇರು ವಿಸ್ತೀರ್ಣದಲ್ಲಿ    ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಹೊಂದಿದ್ದು    ಗ್ರಾಮದ ಸುರ್ವೆನಂ\n" +
-                    "                                                                     \n" +
-                    "/ಖಾತೆ  ನ. _____________________________ರಲ್ಲಿ   ಚದರಡಿ ವಿಸ್ತೀರ್ಣದ _____________________________ ಮೇಲ್ಚಾವಣಿಯ    ಪ್ರತ್ಯೇಕ ರೇಷ್ಮೆ  ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಯನ್ನು    ಅಂದಾಜು  ರೂ .  \n" +
-                    "               \n" +
-                    apiResponse.getContent().get(0).getSanctionAmount()+ "     ಲಕ್ಷಗಳ  ವೆಚ್ಚದಲ್ಲಿ     (ಸ್ವಂತ  ವೆಚ್ಚ   /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು )ನಿರ್ಮಿಸಿರುವುದನ್ನು     ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿ ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ    ಹಾಗೂ ರೇಷ್ಮೆ   ಸಹಾಯಕ \n" +
-                    "                                      \n" +
-                    "ನಿರ್ದೇಶಕರು ,   " +apiResponse.getContent().get(0).getTalukName()+ "    ವಿಭಾಗರವರು   ಪರಿಶೀಲಿಸಿ  ಧ್ರಡೀಕರಿಸಿ ಸಲ್ಲಿಸಿದ ಎಲ್ಲ     ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ ಪ್ರಸ್ತಾವನೆಯನ್ನು    "+ apiResponse.getContent().get(0).getDistrictName() +"   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್\n" +
-                    "                         \n" +
-                    "ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು  ಪರಿಶೀಲಿಸಿ   ಧ್ರಡೀಕರಿಸಿ  ಉಲ್ಲೇಖ (6)  ಈ ಕಛೇರಿಗೆ ಶಿಫಾರಸ್ಸು     ಮಾಡಿ ಸಲ್ಲಿಸಿದ್ದು    ,ಸದರಿ ಫಲಾನುಭವಿಗೆ  ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount()+ "  ಗಳ  ಸಹಾಯಧನವನ್ನು   \n" +
-                    "                                     \n"  +
-                    "ಮಂಜೂರು   ಮಾಡುವಂತೆ  ಕೋರಿರುತ್ತಾರೆ . ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ  ಸಹಾಯಧನ   ಮಂಜೂರು ಮಾಡಲು ಉಲ್ಲೇಖ (5)ರ  ಸರ್ಕಾರಿ ಆದೇಶದ ರೀತ್ಯಾ   ಈ ಕಛೆರಿಯ\n" +
-                    "         \n" +
-                    "ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜನೆ  ವ್ಯಾಪ್ತಿಗೆ ಒಳಪಟ್ಟಿದ್ದು    ಅದರಂತೆ ಸಹಾಯಧನ ಮಂಜೂರಾತಿಗಾಗಿ   ಈ ಕೆಳಕಂಡ ಆದೇಶವನ್ನು   ಹೊರಡಿಸಿದೆ ." );
+            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "ಬೆಂಗಳೂರು ಗ್ರಾಮಾಂತರ ಜಿಲ್ಲೆಯ ದೇವನಹಳ್ಳಿ ತಾಲ್ಲೂಕಿನ ದೇವನಹಳ್ಳಿ ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯಲ್ಲಿ ಕೊಯಿರಾ ಗ್ರಾಮದಲ್ಲಿ ಸಾಮಾನ್ಯ ವರ್ಗಕ್ಕೆ ಸೇರಿದ ಶ್ರೀ/ಶ್ರೀಮತಿ ನ್ಯಾನಮ್ಮ ಬಿನ್/ಕೋಂ. ಲೇ|| ಎ.ಕೃಷ್ಣಪ್ಪ ಇವರು ಕೊಯಿರಾ ಗ್ರಾಮದ ಸರ್ವೆ ನಂ 215 ರಲ್ಲಿ 1.20 ಎಕರೆ ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಹೊಂದಿದ್ದು ಕೊಯಿರಾ ಗ್ರಾಮದ ಸರ್ವೆ/ಖಾತೆ ನಂ 215 ರಲ್ಲಿ 759 ಚದರಡಿ\n " +
+                    "     \n"+
+                    "ವಿಸ್ತೀರ್ಣದ  ಆರ್.ಸಿ.ಸಿ ಮೇಲ್ಚಾವಣಿಯ ಪ್ರತ್ಯೇಕ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಯನ್ನು ಅಂದಾಜು ರೂ.10.50 ಲಕ್ಷಗಳ ವೆಚ್ಚದಲ್ಲಿ (ಸ್ವಂತ ವೆಚ್ಚ/ಬ್ಯಾಂಕಿನಿಂದ ಸಾಲ ಪಡೆದು) ನಿರ್ಮಿಸಿರುವುದನ್ನು ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ದೇವನಹಳ್ಳಿ ಹಾಗೂ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು ದೇವನಹಳ್ಳಿ ವಿಭಾಗ ರವರು ಪರಿಶೀಲಿಸಿ ದೃಢೀಕರಿಸಿ ಸಲ್ಲಿಸಿದ ಎಲ್ಲಾ ಅಗತ್ಯ ದಾಖಲಾತಿಗಳನ್ನು ಒಳಗೊಂಡ ಪ್ರಸ್ತಾವನೆಯನ್ನು ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್, ಬೆಂಗಳೂರು ಗ್ರಾಮಾಂತರ ಇವರು ಪರಿಶೀಲಿಸಿ ದೃಢಿಕರಿಸಿ ಉಲ್ಲೇಖ (5) ರನ್ವಯ ಈ ಕಛೇರಿಗೆ ಶಿಫಾರಸ್ಸು ಮಾಡಿ ಸಲ್ಲಿಸಿದ್ದು, ಸದರಿ ಫಲಾನುಭವಿಗೆ ರೂ.2,43,750/-ಗಳ ಸಹಾಯಧನವನ್ನು ಮಂಜೂರು ಮಾಡುವಂತೆ ಕೋರಿರುತ್ತಾರೆ. ಮಂಜೂರಾತಿಗೆ ಕೋರಲಾಗಿರುವ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಲು ಉಲ್ಲೇಖ (3)ರ ಸರ್ಕಾರಿ ಆದೇಶದ ರೀತ್ಯಾ ಈ ಕಛೇರಿಯ ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜನೆ ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು, ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ ಸದರಿ ಕಾರ್ಯಕ್ರಮದ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ನೀಡಿರುವ ಮಾರ್ಗಸೂಚಿಯನ್ವಯ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಲು ಅನುದಾನ ಬಿಡುಗಡೆ ಮಾಡಲಾಗಿದೆ. ಅದರಂತೆ ಅಂತಿಮ ಹಂತದ/ಮೂರು ಹಂತದ ಜಿ.ಪಿ.ಎಸ್ ಪೋಟೊಗಳನ್ನು ಸಲ್ಲಿಸಿರುವುದರಿಂದ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಬಹುದಾಗಿದ್ದು, ಈ ಕೆಳಕಂಡ ಆದೇಶವನ್ನು ಹೊರಡಿಸಿದೆ. ");
             response.setHeader11("");
             response.setHeader12("ಆದೇಶ ");
             response.setHeader13("ಸಂಖ್ಯೆ ");
             response.setHeader14("ದಿನಾಂಕ ");
             response.setHeader15("");
-            response.setHeader16("             ಮೇಲಿನ  ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ  ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು , ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್    " +apiResponse.getContent().get(0).getDistrictName() +"    ರವರು   ಶಿಫಾರಸ್ಸು      ಮಾಡಿರುವಂತೆ     "+apiResponse.getContent().get(0).getTscName()+ "\n" +
-                    "                                             \n" +
-                    "ತಾಂತ್ರಿಕ   ಸೇವಾ  ಕೇಂದ್ರ    ವ್ಯಾಪ್ತಿಯ    "+apiResponse.getContent().get(0).getVillageName()+  "    ಗ್ರಾಮದ   ಸಾಮಾನ್ಯ /ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ ಗ್ರಾಮದ ಸಾಮಾನ್ಯ ಎಸ್ಸಿಪಿ  ಟಿಎಸ್ಪಿ ವರ್ಗಕ್ಕೆ ಸೇರಿದ ಶ್ರೀ . /ಶ್ರೀಮತಿ . "+ apiResponse.getContent().get(0).getFarmerFirstName()+"\n" +
-                    "                                              \n" +
-                    " ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು ಕೇಂದ್ರ   ವಲಯ ಸಿಲ್ಕ್    ಸಮಗ್ರ    ಯೋಜನೆಯಡಿ     "+apiResponse.getContent().get(0).getSpacingName() + "     ಚ.ಅಡಿಯ  ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಗೆ   ಘಟಕ ದರದ ಶೇ . 75 / 90 ರಷ್ಟು    \n" +
-                    "                                \n"+
-                    "ಸಹಾಯಧನ ರೂ .  " +apiResponse.getContent().get(0).getSanctionAmount()  + "   ಲಕ್ಷ (   __________________________________________________________________________________________________  ರೂ ಗಳು  ಮಾತ್ರ ) ಗಳಿಗೆ   ಮಂಜೂರಾತಿ \n" +
-                    "                                            \n" +
-                    "ನೀಡಿದೆ . ಈ ಸಹಾಯಧನದ ಪೈಕಿ   ರೂ .    " +apiResponse.getContent().get(0).getSanctionAmount()  + "    ಲಕ್ಷ   (__________________________________________________________________________________________________ ರೂ . ಗಳು ಮಾತ್ರ )\n" +
-                    "              \n" +
-                    "ಕೇಂದ್ರದ  ಪಾಲಾಗಿ ಕೇಂದ್ರ ರೇಷ್ಮೆ    ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತದಲ್ಲಿ      ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯದಿಂದ  ಡಿಬಿಟಿ  ಮುಖಾಂತರ  ಫಲಾನುಭವಿಗಳ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ  ನೇರವಾಗಿ \n" +
-                    "                                                \n" +
-                    "ಜಮಾ  ಮಾಡಲಾಗುವುದು  ಮತ್ತು     ರಾಜ್ಯದ   ಪಾಲಾಗಿ ರೂ .   " +apiResponse.getContent().get(0).getSanctionAmount()  + "   ಲಕ್ಷಗಳನ್ನು   ( __________________________________________________________________________________________________\n" +
-                    "                   \n" +
-                    "ರೂ  ಗಳು ಮಾತ್ರ ) ರಾಜ್ಯ    ರೇಷ್ಮೆ    ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ    "+apiResponse.getContent().get(0).getScHeadAccountName() + "   ರಡಿ  ಖಜಾನೆ ________________________________2 ರಲ್ಲಿ     ಬಿಡುಗೋಡೆಗಳಿಸಿರುವ   \n" +
-                    "                                             \n" +
-                    "ಸಹಾಯಧನವನ್ನು    ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು ಖಜಾನೆ ____________________________________________2  ಮೂಲಕ ಮುಖಾಂತರ ಫಲಾನುಭವಿ ಖಾತೆಗೆ ನೇರವಾಗಿ\n" +
-                    "                             \n" +
-                    "ಜಮಾ  ಮಾಡುವುದು . ಈ ವೆಚ್ಚವನ್ನು    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ      "+apiResponse.getContent().get(0).getScHeadAccountName() + "  (ಸಾಮಾನ್ಯ / ಎಸ್ಸಿಪಿ /ಟಿಎಸ್ಪಿ ) ಅಡಿ  ಭರಿಸುವುದು ." );
-            response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು ");
-            response.setHeader18("ಪ್ರತಿಯನ್ನು \n" +
-                    "                       \n" +
-                    "ಶ್ರೀ /.ಶ್ರೀಮತಿ. "+ apiResponse.getContent().get(0).getFarmerFirstName() +"  ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()  + "\n" +
-                    "                                      \n" +
-                    "ಗ್ರಾಮ    " +  apiResponse.getContent().get(0).getVillageName()+  " ಜಿಲ್ಲೆ    " + apiResponse.getContent().get(0).getDistrictName());
+            response.setHeader16("            ಮೇಲಿನ ಪೀಠಿಕೆಯಲ್ಲಿ ವಿವರಿಸಿರುವಂತೆ ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್, ಬೆಂಗಳೂರು ಗ್ರಾಮಾಂತರ ರವರು ಶಿಫಾರಸ್ಸು ಮಾಡಿರುವಂತೆ ದೇವನಹಳ್ಳಿ ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯ ಕೊಯಿರಾ ಗ್ರಾಮದ ಸಾಮಾನ್ಯ ವರ್ಗಕ್ಕೆ ಸೇರಿದ ಶ್ರೀ/ಶ್ರೀಮತಿ ನ್ಯಾನಮ್ಮ ಬಿನ್/ಕೋಂ. ಲೇ|| ಎ.ಕೃಷ್ಣಪ್ಪ ರವರು ಕೇಂದ್ರ ಪುರಸ್ಕೃತ “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” ಯೋಜನೆಯಡಿ 759 ಚದರಡಿ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಮನೆಗೆ ಘಟಕ ದರದ ಶೇಖಡ 75 ರಷ್ಟು ಸಹಾಯಧನ ರೂ.2,43,750/-(ರೂ.ಎರಡು ಲಕ್ಷÀ ನಲವತ್ತಮೂರು ಸಾವಿರದ ಏಳುನೂರ ಐವತ್ತುಗಳು ಮಾತ್ರ) ಗಳಿಗೆ ಮುಚ್ಚಳಿಕೆಯಲ್ಲಿನ ಷರತ್ತು ಮತ್ತು ತಗಾದೆಗಳಿಗೆ ಸಂಬAಧಿಸಿದ ಫಲಾನುಭವಿ ಹಾಗೂ ಶಿಫಾರಸ್ಸು ಮಾಡಿದ ಕ್ಷೇತ್ರಮಟ್ಟದ ಅಧಿಕಾರಿಗಳನ್ನು ಜವಾಬ್ದಾರಿ ಮಾಡಿ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಈ ಸಹಾಯ ದನದ ಪೈಕಿ ರೂ.1,62,500/-(ರೂ. ಒಂದು ಲಕ್ಷ ಅರವತ್ತೆರಡು ಸಾವಿರದ ಐನ್ನೂರು ಮಾತ್ರ) ಗಳು ಕೇಂದ್ರದ ಪಾಲಾಗಿ ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತದಲ್ಲಿ ಮತ್ತು ರಾಜ್ಯದ ಪಾಲಾಗಿ ರೂ.81,250/-(ರೂ.ಎಂಬತ್ತೊಂದು ಸಾವಿರದ ಇನ್ನೂರ ಐವತ್ತು ಮಾತ್ರ)ಗಳನ್ನು ರಾಜ್ಯ ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಯ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-1-35(106)ರಡಿ ಖಜಾನೆ-2 ರಲ್ಲಿ ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ ಸಹಾಯ ದನದ ಅನದಾನದಲ್ಲಿ, ಸಂಬAಧಿಸಿದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರುಗಳು ಖಜಾನೆ-2 ರಲ್ಲಿ ಡಿಬಿಟಿ ಮುಖಾಂತರ ಹಾಗೂ ಕೇಂದ್ರದ ಪಾಲಿನ ಮೊತ್ತವನ್ನು ಸಂಬಂಧಿಸಿದ ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರುಗಳು ಫಲಾನುಭವಿ ಖಾತೆಗೆ ನೇರವಾಗಿ ಡಿಬಿಟಿ ಮೂಲಕ ಜಮಾ ಮಾಡಲು ಸೂಚಿಸಿದೆ. \n" +
+            "ಈ ವೆಚ್ಚವನ್ನು ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-1-35(106) (ಸಾಮಾನ್ಯ) ಅಡಿ ಭರಿಸುವುದು.");
+            response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು\n" +
+                    "      \n"+
+                    "        ಬೆಂಗಳೂರು ವಿಭಾಗ, ಬೆಂಗಳೂರು\n");
+            response.setHeader18("ಇವರಿಗೆ \n" +
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ ನ್ಯಾನಮ್ಮ ಬಿನ್/ಕೋಂ. ಲೇ|| ಎ.ಕೃಷ್ಣಪ್ಪ\n" +
+                            "    \n"+
+                    "ಕೊಯಿರಾ ಗ್ರಾಮ ದೇವನಹಳ್ಳಿ ತಾಲ್ಲೂಕು \n" +
+                            "      \n"+
+                    "ಪ್ರತಿಗಳು:");
             response.setHeader19("");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
@@ -8369,11 +8528,11 @@ public class ReportsController {
             response.setTalukName(apiResponse.getContent().get(0).getTalukName() + " ತಾಲ್ಲೂಕು , ");
             response.setHobliName(apiResponse.getContent().get(0).getHobliName() + " ಹೋಬಳಿ , ");
             response.setVillageName(apiResponse.getContent().get(0).getVillageName()+ " ಹಳಿಯ ನಿವಾಸಿಯಾದ ");
-            response.setLineItemComment("  1. ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು ,ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್ ,    " +apiResponse.getContent().get(0).getDistrictName() +"   ರವರಿಗೆ  ಎಲ್ಲ    ಮೂಲ ದಾಖಲಾತಿಗಳೊಂದಿಗೆ  ಮುಂದಿನ ಅಗತ್ಯ    ಕ್ರಮಕ್ಕಾಗಿ ಕಳುಹಿಸಿದೆ .  \n"+
-                    "                                       \n"+
-                    " 2. ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು   " +apiResponse.getContent().get(0).getDistrictName() +"  ವಿಭಾಗರವರಿಗೆ  ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .  \n"+
-                    "                                       \n"+
-                    " 3. ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿ ,ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ      " +apiResponse.getContent().get(0).getTscName() +" ರವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ .");
+            response.setLineItemComment("1. ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, ದೇವನಹಳ್ಳಿ ವಿಭಾಗ ಇವರಿಗೆ ಎಲ್ಲಾ ಮೂಲ ದಾಖಲಾತಿಗಳೊಂದಿಗೆ ಮುಂದಿನ ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ ಕಳುಹಿಸಿದೆ. \n" +
+                    "      \n"+
+                    "2. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ, ತಾಂತ್ರಿಕ ಸೇವಾಕೇಂದ್ರ, ದೇವನಹಳ್ಳಿ ಇವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.\n" +
+                    "      \n"+
+                    "3. ರೇಷ್ಮೆಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್, ಬೆಂಗಳೂರು ಗ್ರಾಮಾಂತರ ಇವರ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.\n");
             response.setCost(apiResponse.getContent().get(0).getCost());
             response.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getFruitsId());
             response.setVendorName(apiResponse.getContent().get(0).getVendorName());
@@ -8388,11 +8547,12 @@ public class ReportsController {
             response.setSubSchemeNameInKannada(apiResponse.getContent().get(0).getSubSchemeNameInKannada());
             response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
             response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            sanctionOrderResponseList.add(response);
-        }
-//        countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        sanctionOrderResponseList.add(response);
+
+        // ✅ Change: Always return a JRBeanCollectionDataSource
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
+
 
 
     private JRDataSource getDataSourceForSanctionCompany(SanctionCompanyPrintRequest requestDto) throws JsonProcessingException {
