@@ -110,6 +110,9 @@ public class SanctionOrderResponse {
     private String userDistrict;
     private String userMarket;
     private Float totalCocoonsWeight;
+    private String  loggedinUserDistrictName;
+    private String loggedinUserTalukName;
+    private String loggedinUserTscName;
 
 
 }
