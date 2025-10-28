@@ -21,10 +21,15 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 import java.util.Collections;
@@ -357,28 +362,39 @@ public class ApiService {
         // Process the API response as needed
         //return apiResponse;
     }
+    private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
 
     public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
-        // Make a GET request to the API endpoint
-        String finalapiurl = dbtApiUrl +"service/sanctionOrderRH";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRH";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRHs";
 
-        // Define the request headers
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderRHs";
+
+
+        String finalapiurl = dbtApiUrl +"service/sanctionOrderRHs";
+
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
         HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
-        SanctionOrderResponse response = new SanctionOrderResponse();
-        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, SanctionOrder.class);
 
-        return response2;
-        // Process the API response as needed
-        //return apiResponse;
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            // Get the response body from the exception
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling sanction API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch sanction data: " + responseBody, httpEx);
+
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
     }
 
 
