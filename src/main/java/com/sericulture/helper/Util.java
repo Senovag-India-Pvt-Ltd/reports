@@ -14,6 +14,7 @@ import java.math.RoundingMode;
 import java.security.Principal;
 import java.text.DecimalFormat;
 import java.time.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -44,6 +45,19 @@ public final class Util {
 
     public static float objectToFloat(Object object) {
         return object == null ? 0 : Float.valueOf(decimalFormat.format(Float.parseFloat(String.valueOf(object))));
+    }
+
+    private String trimWords(String input, int maxWords) {
+        if (input == null || input.isBlank()) {
+            return "";
+        }
+
+        String[] words = input.trim().split("\\s+");
+        if (words.length <= maxWords) {
+            return input.trim();
+        }
+
+        return String.join(" ", Arrays.copyOfRange(words, 0, maxWords));
     }
 
     public static int objectToInteger(Object object) {
