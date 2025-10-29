@@ -41,6 +41,7 @@ import java.util.stream.Collectors;
 import java.text.DecimalFormat;
 
 import static com.google.common.math.DoubleMath.roundToLong;
+import static org.apache.http.client.utils.DateUtils.formatDate;
 import static org.hibernate.type.descriptor.java.CoercionHelper.toLong;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -8706,6 +8707,21 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
+    private String formatDate(Object dateObj, SimpleDateFormat sdf) {
+        if (dateObj == null) return "";
+        try {
+            return sdf.format(dateObj);
+        } catch (Exception e) {
+            return dateObj.toString();
+        }
+    }
+
+    /* ✅ Helper for clean rounding (removes .0, rounds .5 up) */
+    private static String formatAmount(Float amount) {
+        if (amount == null) return "0";
+        long rounded = Math.round(amount);
+        return String.valueOf(rounded);
+    }
 
             private JRDataSource getDataSourceForSanctionOrderRH(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
@@ -8721,66 +8737,61 @@ public class ReportsController {
         SanctionOrderResponse response = new SanctionOrderResponse();
 
 
-                String formattedDate = "";
-                try {
-                    String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+                // ✅ Date formatter (clean format)
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-                    // Parse input format
-                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                // ✅ Format date fields
+                String admGovtDate = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
+                String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
+                String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
+                String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
+                String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
-                    // Define output format
-                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                    // Convert and format
-                    Date date = inputFormat.parse(inputDate);
-                    formattedDate = outputFormat.format(date);
-
-                } catch (Exception e) {
-                    formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
-                }
-
-
-                // ✅ Added: Compute financial shares (75%, 50%, 25%, 25%)
+                // ✅ Financial calculations
                 Float actualAmount = apiResponse.getContent().get(0).getActualAmount() != null
                         ? apiResponse.getContent().get(0).getActualAmount()
                         : 0f;
 
-                Float sanctionAmount75 = actualAmount * 0.75f;      // Total subsidy (75%)
-                Float centralShare50 = actualAmount * 0.50f;        // Central share (50%)
-                Float stateShare25 = actualAmount * 0.25f;          // State share (25%)
-                Float beneficiaryShare25 = actualAmount * 0.25f;    // Beneficiary share (25%)
+                Float sanctionAmount75 = actualAmount * 0.75f;
+                Float centralShare50 = actualAmount * 0.50f;
+                Float stateShare25 = actualAmount * 0.25f;
+                Float beneficiaryShare25 = actualAmount * 0.25f;
 
-                // ✅ Added: Optional rounding for clean display
-                DecimalFormat df = new DecimalFormat("#.##");
-                String sanctionAmount75Str = df.format(sanctionAmount75);
-                String centralShare50Str = df.format(centralShare50);
-                String stateShare25Str = df.format(stateShare25);
-                String beneficiaryShare25Str = df.format(beneficiaryShare25);
 
-                // ✅ Added: Set computed values in response DTO (make sure fields exist in SanctionOrderResponse)
                 response.setSanctionAmount75(sanctionAmount75);
                 response.setCentralShare50(centralShare50);
                 response.setStateShare25(stateShare25);
                 response.setBeneficiaryShare25(beneficiaryShare25);
 
-                // ✅ New helper method usage to get first 2 Kannada letters
-                String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
-
                 String shortDistrictKannadas = getKannadaShortForm(apiResponse.getContent().get(0).getDistrictName());
 
 
-                // ✅ Convert amounts to Kannada words
-                String sanctionAmount75Words = KannadaNumberUtil.convertNumberToKannadaWords(sanctionAmount75.longValue());
-                String centralShare50Words = KannadaNumberUtil.convertNumberToKannadaWords(centralShare50.longValue());
-                String stateShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(stateShare25.longValue());
-                String beneficiaryShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShare25.longValue());
+                String sanctionAmount75Str = formatAmount(sanctionAmount75);
+                String centralShare50Str = formatAmount(centralShare50);
+                String stateShare25Str = formatAmount(stateShare25);
+                String beneficiaryShare25Str = formatAmount(beneficiaryShare25);
 
-// ✅ Set in response DTO
+                long sanctionAmount75Rounded = Long.parseLong(sanctionAmount75Str);
+                long centralShare50Rounded = Long.parseLong(centralShare50Str);
+                long stateShare25Rounded = Long.parseLong(stateShare25Str);
+                long beneficiaryShare25Rounded = Long.parseLong(beneficiaryShare25Str);
+
+                String sanctionAmount75Words = KannadaNumberUtil.convertNumberToKannadaWords(sanctionAmount75Rounded);
+                String centralShare50Words = KannadaNumberUtil.convertNumberToKannadaWords(centralShare50Rounded);
+                String stateShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(stateShare25Rounded);
+                String beneficiaryShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShare25Rounded);
+
                 response.setSanctionAmount75InWords(sanctionAmount75Words);
                 response.setCentralShare50InWords(centralShare50Words);
                 response.setStateShare25InWords(stateShare25Words);
                 response.setBeneficiaryShare25InWords(beneficiaryShare25Words);
 
+
+                // ✅ Short district name in Kannada
+                String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+
+                // ✅ Clean formatted date for sanction order
+                String formattedDate = formatDate(apiResponse.getContent().get(0).getDate(), new SimpleDateFormat("dd-MM-yyyy"));
 
                 String surveyNumber = Util.objectToString(apiResponse.getContent().get(0).getSurveyNumber());
                 String kaneshNo = Util.objectToString(apiResponse.getContent().get(0).getKaneshNo());
@@ -8803,19 +8814,19 @@ public class ReportsController {
                                   "          \n" +
                                   "                " +apiResponse.getContent().get(0).getScCategoryName() + "   ದಡಿ    ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
-            response.setHeader2("1. ಸರ್ಕಾರದ   ಆದೇಶ  ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " +apiResponse.getContent().get(0).getAdmGovtDate() + "\n" +
+            response.setHeader2("1. ಸರ್ಕಾರದ   ಆದೇಶ  ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " +admGovtDate  + "\n" +
                     "        \n" +
-                    "2. ರೇಷ್ಮೆ    ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋ ಲೆ   ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " \n" +
+                    "2. ರೇಷ್ಮೆ    ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋ ಲೆ  \n" +
                     "        \n" +
-                    "   ದಿನಾಂಕ :  " +apiResponse.getContent().get(0).getSchemeCircularDate() + " \n" +
+                    "   ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
                     "        \n" +
-                    "3. ಸರ್ಕಾರದ  ಆದೇಶ ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +apiResponse.getContent().get(0).getDeptDeleDate() + " \n" +
+                    "3. ಸರ್ಕಾರದ  ಆದೇಶ ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n" +
                     "        \n" +
-                    "4. ರೇಷ್ಮೆ  ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ  ರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಜ್ಞಾ  ಪನ  ಪತ್ರ  ದ  ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getAllotReleaseNo() + " \n" +
+                    "4. ರೇಷ್ಮೆ  ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ  ರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಜ್ಞಾ  ಪನ  ಪತ್ರ  ದ\n" +
                     "        \n" +
-                    "   ದಿನಾಂಕ : " +apiResponse.getContent().get(0).getAllotReleaseDate() + " \n" +
+                    "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getAllotReleaseNo() + "   ದಿನಾಂಕ : " +allotReleaseDate + " \n" +
                     "        \n" +
-                    "5. ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,    "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ಗ್ರಾಮಾಂತರ   ರವರ   ಪ್ರ  ಸ್ತಾ ವನೆ   ದಿನಾಂಕ :  "+ apiResponse.getContent().get(0).getProposalDate());
+                    "5. ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,    "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ಗ್ರಾಮಾಂತರ   ರವರ   ಪ್ರ  ಸ್ತಾ ವನೆ   ದಿನಾಂಕ :  "+  proposalDate);
             response.setHeader24("ಪೀಠಿಕೆ : ");
             response.setHeader8(  "               " + apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ  ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರ ಮಗಳ   ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ   ವಿವಿಧ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇ ಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು\n " +
                     "      \n " +
