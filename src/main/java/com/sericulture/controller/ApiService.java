@@ -365,12 +365,12 @@ public class ApiService {
     private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
 
     public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRHs";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRH";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderRHs";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderRH";
 
 
-        String finalapiurl = dbtApiUrl +"service/sanctionOrderRHs";
+        String finalapiurl = dbtApiUrl +"service/sanctionOrderRH";
 
 
         HttpHeaders headers = new HttpHeaders();
