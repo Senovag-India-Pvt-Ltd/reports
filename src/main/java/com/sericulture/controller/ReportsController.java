@@ -8754,6 +8754,14 @@ public class ReportsController {
                                 : apiResponse.getContent().get(0).getActualAmount()
                 ));
 
+                // ✅ Rounded actual amount (no .0)
+                long actualAmounts = Math.round(
+                        apiResponse.getContent().get(0).getActualAmount() == null
+                                ? 0f
+                                : apiResponse.getContent().get(0).getActualAmount()
+                );
+
+
 
                 Float sanctionAmount75 = actualAmount * 0.75f;
                 Float centralShare50 = actualAmount * 0.50f;
@@ -8857,7 +8865,7 @@ public class ReportsController {
                     "     \n" +
                     apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ   ಕೇಂದ್ರ   :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು 50:25:25  ಆಗಿರುತ್ತ  ದೆ.   " + trimWords(apiResponse.getContent().get(0).getSubSchemeNameInKannada(), 8) + "   ಘಟಕ\n " +
                     "                \n " +
-                    "ದರ  ರೂ.  " + actualAmount + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  75  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmount75Str +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
+                    "ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  75  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmount75Str +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
                     "             \n " +
                     "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ.50  ಅಂದರೆ   ರೂ.   " + centralShare50Str + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShare25Str + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
@@ -8884,16 +8892,16 @@ public class ReportsController {
                     "          \n " +
                     "ಇವರು  ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ    ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು   ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,\n " +
                     "        \n " +
-                    apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ    ಉಲ್ಲೇಖ (5)   ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ   ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + actualAmount +   " /-ಗಳ\n " +
+                    apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ    ಉಲ್ಲೇಖ (5)   ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ   ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + actualAmounts +   " /-ಗಳ\n " +
                     "      \n " +
-                    "ಸಹಾಯಧನವನ್ನು    ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.   ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಉಲ್ಲೇಖ (3)ರ   ಸರ್ಕಾರದ   ಆದೇಶದ   ರೀತ್ಯಾ \n " +
+                    "ಸಹಾಯಧನವನ್ನು    ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.   ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಉಲ್ಲೇಖ (3)ರ   ಸರ್ಕಾರದ \n " +
                             "           \n " +
 //                    "ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,  ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ    ಸದರಿ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ   ನೀಡಿರುವ  ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು\n " +
-                    "ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ  ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,   ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ     ಸದರಿ   ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ ನೀಡಿರುವ ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ\n" +
+                    "ಆದೇಶದ   ರೀತ್ಯಾ    ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ  ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,   ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ     ಸದರಿ   ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ ನೀಡಿರುವ\n" +
                     "       \n " +
-                    "ಮಂಜೂರು   ಮಾಡಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗಿದೆ.   ಅದರಂತೆ   ಅಂತಿಮ   ಹಂತದ/ಮೂರು  ಹಂತದ   ಜಿ.ಪಿ.ಎಸ್   ಪೋಟೊಗಳನ್ನು   ಸಲ್ಲಿ   ಸಿರುವುದರಿಂದ  ಸಹಾಯಧನ\n " +
+                    "ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ  ಮಂಜೂರು   ಮಾಡಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗಿದೆ.   ಅದರಂತೆ   ಅಂತಿಮ   ಹಂತದ/ಮೂರು  ಹಂತದ   ಜಿ.ಪಿ.ಎಸ್   ಪೋಟೊಗಳನ್ನು \n " +
                             "     \n " +
-                    "ಮಂಜೂರು   ಮಾಡಬಹುದಾಗಿದ್ದು ,  ಈ  ಕೆಳಕಂಡ  ಆದೇಶವನ್ನು  ಹೊರಡಿಸಿದೆ. ");
+                    "ಸಲ್ಲಿ ಸಿರುವುದರಿಂದ   ಸಹಾಯಧನ  ಮಂಜೂರು   ಮಾಡಬಹುದಾಗಿದ್ದು ,  ಈ  ಕೆಳಕಂಡ  ಆದೇಶವನ್ನು   ಹೊರಡಿಸಿದೆ. ");
             response.setHeader11("");
             response.setHeader12("ಆದೇಶ ");
             response.setHeader13("ಸಂಖ್ಯೆ  : ರೇಜಂನಿ / " +shortDistrictKannada  +  " ವಿ / ತಾಂ / ರೇಹುಸಾಮ / ಸಧನ / " +apiResponse.getContent().get(0).getScCategoryName() + "  / ಮಂ / "+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate + "\n");
