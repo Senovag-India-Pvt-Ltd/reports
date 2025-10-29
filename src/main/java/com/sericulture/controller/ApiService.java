@@ -365,7 +365,6 @@ public class ApiService {
     private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
 
     public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderRH";
 
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderRH";
 
@@ -618,8 +617,8 @@ public class ApiService {
 
     public WorkOrderReportResponse fetchDataApiWorkOrder(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl ="http://localhost:8013/dbt/v1/" + "service/workOrder";
-//        String finalapiurl =dbtApiUrl +"service/workOrder";
+//        String finalapiurl ="http://localhost:8013/dbt/v1/" + "service/workOrder";
+        String finalapiurl =dbtApiUrl +"service/workOrder";
 
 //        String finalapiurl ="http://localhost:8013/dbt/v1/" + "service/workOrder";
 
