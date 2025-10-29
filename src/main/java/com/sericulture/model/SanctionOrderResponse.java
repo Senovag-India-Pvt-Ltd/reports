@@ -3,6 +3,8 @@ package com.sericulture.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -113,6 +115,38 @@ public class SanctionOrderResponse {
     private String  loggedinUserDistrictName;
     private String loggedinUserTalukName;
     private String loggedinUserTscName;
+
+    // 🆕 Newly added fields from query
+    private String admGovtOrder;
+    private String schemeCircularNo;
+    private String deptDeleNo;
+    private String allotReleaseNo;
+    private Float actualAmount;
+    private String extentOfMulberry;
+    private String rhSqft;
+    private Float estimatedCost;
+    private String roofTypeNameInKannada;
+    private String kaneshNo;
+    private String releaseNo;
+    private Date admGovtDate;
+    private Date schemeCircularDate;
+    private Date deptDeleDate;
+    private Date allotReleaseDate;
+    private Date releaseDate;
+    private Date proposalDate;
+
+    private Float sanctionAmount75;
+    private Float centralShare50;
+    private Float stateShare25;
+    private Float beneficiaryShare25;
+
+    // 🆕 Kannada amount-in-words fields
+    private String sanctionAmount75InWords;
+    private String centralShare50InWords;
+    private String stateShare25InWords;
+    private String beneficiaryShare25InWords;
+
+
 
 
 }
