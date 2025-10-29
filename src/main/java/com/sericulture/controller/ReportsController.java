@@ -8475,47 +8475,76 @@ public class ReportsController {
 
         private static final String[] units = {
                 "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
-                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು", "ಹದಿನಾರು",
-                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು"
+                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು",
+                "ಹದಿನಾರು", "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು"
         };
 
-        private static final String[] tens = {
-                "", "", "ಇಪ್ಪತ್ತು", "ಮೂವತ್ತು", "ನಲವತ್ತು", "ಐವತ್ತು", "ಅರವತ್ತು",
-                "ಎಪ್ಪತ್ತು", "ಎಂಭತ್ತು", "ತೊಂಬತ್ತು"
+        // ✅ Exact Kannada words for 20–99
+        private static final String[] twoDigits = {
+                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
+                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು", "ಹದಿನಾರು",
+                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು", "ಇಪ್ಪತ್ತು", "ಇಪ್ಪತ್ತೊಂದು", "ಇಪ್ಪತ್ತೆರಡು", "ಇಪ್ಪತ್ತ್ಮೂರು",
+                "ಇಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಇಪ್ಪತ್ತೈದು", "ಇಪ್ಪತ್ತಾರು", "ಇಪ್ಪತ್ತೇಳು", "ಇಪ್ಪತ್ತೆಂಟು", "ಇಪ್ಪತ್ತೊಂಬತ್ತು",
+                "ಮೂವತ್ತು", "ಮೂವತ್ತೊಂದು", "ಮೂವತ್ತೆರಡು", "ಮೂವತ್ತ್ಮೂರು", "ಮೂವತ್ತ್ನಾಲ್ಕು", "ಮೂವತ್ತೈದು",
+                "ಮೂವತ್ತಾರು", "ಮೂವತ್ತೇಳು", "ಮೂವತ್ತೆಂಟು", "ಮೂವತ್ತೊಂಬತ್ತು", "ನಲವತ್ತು", "ನಲವತ್ತೊಂದು",
+                "ನಲವತ್ತೆರಡು", "ನಲವತ್ತ್ಮೂರು", "ನಲವತ್ತ್ನಾಲ್ಕು", "ನಲವತ್ತೈದು", "ನಲವತ್ತಾರು", "ನಲವತ್ತೇಳು",
+                "ನಲವತ್ತೆಂಟು", "ನಲವತ್ತೊಂಬತ್ತು", "ಐವತ್ತು", "ಐವತ್ತೊಂದು", "ಐವತ್ತೆರಡು", "ಐವತ್ತ್ಮೂರು",
+                "ಐವತ್ತ್ನಾಲ್ಕು", "ಐವತ್ತೈದು", "ಐವತ್ತಾರು", "ಐವತ್ತೇಳು", "ಐವತ್ತೆಂಟು", "ಐವತ್ತೊಂಬತ್ತು",
+                "ಅರವತ್ತು", "ಅರವತ್ತೊಂದು", "ಅರವತ್ತೆರಡು", "ಅರವತ್ತ್ಮೂರು", "ಅರವತ್ತ್ನಾಲ್ಕು", "ಅರವತ್ತೈದು",
+                "ಅರವತ್ತಾರು", "ಅರವತ್ತೇಳು", "ಅರವತ್ತೆಂಟು", "ಅರವತ್ತೊಂಬತ್ತು", "ಎಪ್ಪತ್ತು", "ಎಪ್ಪತ್ತೊಂದು",
+                "ಎಪ್ಪತ್ತೆರಡು", "ಎಪ್ಪತ್ತ್ಮೂರು", "ಎಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಎಪ್ಪತ್ತೈದು", "ಎಪ್ಪತ್ತಾರು", "ಎಪ್ಪತ್ತೇಳು",
+                "ಎಪ್ಪತ್ತೆಂಟು", "ಎಪ್ಪತ್ತೊಂಬತ್ತು", "ಎಂಭತ್ತು", "ಎಂಭತ್ತೊಂದು", "ಎಂಭತ್ತೆರಡು", "ಎಂಭತ್ತ್ಮೂರು",
+                "ಎಂಭತ್ತ್ನಾಲ್ಕು", "ಎಂಭತ್ತೈದು", "ಎಂಭತ್ತಾರು", "ಎಂಭತ್ತೇಳು", "ಎಂಭತ್ತೆಂಟು", "ಎಂಭತ್ತೊಂಬತ್ತು",
+                "ತೊಂಬತ್ತು", "ತೊಂಬತ್ತೊಂದು", "ತೊಂಬತ್ತೆರಡು", "ತೊಂಬತ್ತ್ಮೂರು", "ತೊಂಬತ್ತ್ನಾಲ್ಕು", "ತೊಂಬತ್ತೈದು",
+                "ತೊಂಬತ್ತಾರು", "ತೊಂಬತ್ತೇಳು", "ತೊಂಬತ್ತೆಂಟು", "ತೊಂಬತ್ತೊಂಬತ್ತು"
         };
 
         public static String convertNumberToKannadaWords(long number) {
-            if (number == 0) return "ಸೊನ್ನೆ";
+            if (number == 0) return "ಸೊನ್ನೆ ರೂಪಾಯಿ ಮಾತ್ರ";
             if (number < 0) return "ಋಣ " + convertNumberToKannadaWords(-number);
 
-            String words = "";
-            if ((number / 10000000) > 0) {
-                words += convertNumberToKannadaWords(number / 10000000) + " ಕೋಟಿ ";
+            String words = convertCore(number).trim();
+            return words + " ರೂಪಾಯಿ ಮಾತ್ರ";
+        }
+
+        private static String convertCore(long number) {
+            StringBuilder words = new StringBuilder();
+
+            if (number >= 10000000) { // Crore
+                words.append(convertCore(number / 10000000)).append(" ಕೋಟಿ ");
                 number %= 10000000;
             }
-            if ((number / 100000) > 0) {
-                words += convertNumberToKannadaWords(number / 100000) + " ಲಕ್ಷ ";
+            if (number >= 100000) { // Lakh
+                words.append(convertCore(number / 100000)).append(" ಲಕ್ಷ ");
                 number %= 100000;
             }
-            if ((number / 1000) > 0) {
-                words += convertNumberToKannadaWords(number / 1000) + " ಸಾವಿರ ";
+            if (number >= 1000) { // Thousand
+                words.append(convertCore(number / 1000)).append(" ಸಾವಿರ ");
                 number %= 1000;
             }
-            if ((number / 100) > 0) {
-                words += convertNumberToKannadaWords(number / 100) + " ನೂರು ";
+            if (number >= 100) { // Hundred
+                words.append(convertCore(number / 100)).append(" ನೂರು ");
                 number %= 100;
             }
             if (number > 0) {
-                if (number < 20) words += units[(int) number];
-                else {
-                    words += tens[(int) number / 10];
-                    if ((number % 10) > 0)
-                        words += " " + units[(int) number % 10];
+                if (number < 100) {
+                    words.append(twoDigits[(int) number]).append(" ");
                 }
             }
-            return words.trim() + " ರೂಪಾಯಿ ಮಾತ್ರ";
+
+            return words.toString().trim();
+        }
+
+        public static void main(String[] args) {
+            System.out.println(convertNumberToKannadaWords(158437));
+            System.out.println(convertNumberToKannadaWords(75000));
+            System.out.println(convertNumberToKannadaWords(1000000));
+            System.out.println(convertNumberToKannadaWords(250));
         }
     }
+
+
+
 
 
     private String trimWords(String input, int maxWords) {
@@ -8774,37 +8803,37 @@ public class ReportsController {
                     "     \n" +
                     "ನೀಡಲಾಗಿದೆ.   ಇಲಾಖೆಯು   ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿಯ    ಸಹಯೋಗದೊಂದಿಗೆ   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ  “ಸಿಲ್ಕ್   ಸಮಗ್ರ  -2’’   ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲಾಗುತ್ತಿ ದೆ.\n " +
                     "          \n" +
-                    "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ    " + apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "  ನೀಡಬೇಕಾಗಿದ್ದು,\n"+
+                    "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
                     "     \n" +
-                    "ಸಾಮಾನ್ಯ    ವರ್ಗದಡಿ   ಕೇಂದ್ರ   :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು 50:25:25  ಆಗಿರುತ್ತ  ದೆ.   " + trimWords(apiResponse.getContent().get(0).getSubSchemeNameInKannada(), 8) + "   ಘಟಕ  ದರ  ರೂ.  " + apiResponse.getContent().get(0).getActualAmount() + " \n " +
+                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ   ಕೇಂದ್ರ   :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು 50:25:25  ಆಗಿರುತ್ತ  ದೆ.   " + trimWords(apiResponse.getContent().get(0).getSubSchemeNameInKannada(), 8) + "   ಘಟಕ\n " +
                     "                \n " +
-                    "ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  75  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmount75Str +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ   ಪಾಲು\n" +
+                    "ದರ  ರೂ.  " + apiResponse.getContent().get(0).getActualAmount() + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  75  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmount75Str +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
                     "             \n " +
-                    "ಘಟಕ  ದರದ  ಶೇ.50  ಅಂದರೆ   ರೂ.   " + centralShare50Str + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShare25Str + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ \n " +
+                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ.50  ಅಂದರೆ   ರೂ.   " + centralShare50Str + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShare25Str + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
-                    "ರೇಷ್ಮೆ     ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾ ಂಕ್   ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾ ಂಕ್   ಖಾತೆಯಲ್ಲಿ \n " +
+                    "ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾ ಂಕ್   ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾ ಂಕ್   ಖಾತೆಯಲ್ಲಿ  \n " +
                     "      \n " +
                     "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShare50Str + "   ಗಳನ್ನು   (50%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
                     "              \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾ ಂಕ್   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತ ದೆ.\n " +
                     "      \n " +
-                    "ರಾಜ್ಯ  ದ    ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು    ರೇಷ್ಮೆ   ಅಭಿವೃ ದ್ದಿ    ಯೋಜನೆ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ :  " + apiResponse.getContent().get(0).getScHeadAccountName() + "    ರಡಿ   ರೇಷ್ಮೆ    ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ\n " +
+                    "ರಾಜ್ಯ  ದ   ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು    ರೇಷ್ಮೆ   ಅಭಿವೃ ದ್ದಿ    ಯೋಜನೆ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ :  " + apiResponse.getContent().get(0).getScHeadAccountName() + "    ರಡಿ   ರೇಷ್ಮೆ    ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ   ರೇಷ್ಮೆ\n " +
                             "        \n" +
-                            "ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು,  ಬೆಂಗಳೂರು   ರವರು   ಖಜಾನೆ-2   ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿ   ರಾಜ್ಯ  ದ   ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು     ಸಹ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ\n " +
+                            "ನಿರ್ದೇಶಕರು,  ಬೆಂಗಳೂರು   ರವರು   ಖಜಾನೆ-2   ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿ   ರಾಜ್ಯ  ದ   ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು     ಸಹ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿಯ\n " +
                             "     \n" +
-                            "ಫಲಾನುಭವಿಯ    ಬ್ಯಾ ಂಕ್    ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುವುದು." );
-            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "   ಜಿಲ್ಲೆ  ಯ    " +apiResponse.getContent().get(0).getTalukName() + "     ತಾಲ್ಲೂ  ಕಿನ    " +apiResponse.getContent().get(0).getTscName() + "     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ    ಕೇಂದ್ರ ದ    ವ್ಯಾ  ಪ್ತಿ ಯ   " +apiResponse.getContent().get(0).getVillageName() + "     ಗ್ರಾ  ಮದಲ್ಲಿ    " +apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ \n " +
+                            "ಬ್ಯಾ ಂಕ್    ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುವುದು." );
+            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "   ಜಿಲ್ಲೆ  ಯ    " +apiResponse.getContent().get(0).getTalukName() + "     ತಾಲ್ಲೂ  ಕಿನ    " +apiResponse.getContent().get(0).getTscName() + "     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ    ಕೇಂದ್ರ ದ    ವ್ಯಾ  ಪ್ತಿ ಯ   " +apiResponse.getContent().get(0).getVillageName() + "     ಗ್ರಾ  ಮದಲ್ಲಿ   " +apiResponse.getContent().get(0).getScCategoryName() + "\n " +
                     "      \n " +
-                    "ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ    " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ  ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ\n " +
+                    "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ \n " +
                     "       \n " +
-                    "ಹಿಪ್ಪು   ನೇರಳೆ   ತೋಟ   ಹೊಂದಿದ್ದು    " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ  ಸರ್ವೆ/ಖಾತೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + " / " +apiResponse.getContent().get(0).getKaneshNo() + "  ರಲ್ಲಿ    " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ\n " +
+                    "ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ     ಹಿಪ್ಪು   ನೇರಳೆ   ತೋಟ   ಹೊಂದಿದ್ದು    " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ  ಸರ್ವೆ/ಖಾತೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + " / " +apiResponse.getContent().get(0).getKaneshNo() + "  ರಲ್ಲಿ    " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ\n " +
                     "       \n " +
                             "     \n " +
-                    "ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ.   " +apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ   (ಸ್ವ ಂತ  ವೆಚ್ಚ  /ಬ್ಯಾ ಂಕಿನಿಂದ\n " +
+                    "ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ.   " +apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ   (ಸ್ವ ಂತ  ವೆಚ್ಚ  /ಬ್ಯಾ ಂಕಿನಿಂದ  ಸಾಲ\n " +
                     "     \n"+
-                    "ಸಾಲ  ಪಡೆದು)  ನಿರ್ಮಿಸಿರುವುದನ್ನು    ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು   ತಾಂತ್ರಿ  ಕ   ಸೇವಾ   ಕೇಂದ್ರ ದ     " +apiResponse.getContent().get(0).getTscName() + "  ಹಾಗೂ   ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ವಿಭಾಗ   ರವರು\n " +
+                    "ಪಡೆದು)  ನಿರ್ಮಿಸಿರುವುದನ್ನು    ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು   ತಾಂತ್ರಿ  ಕ   ಸೇವಾ   ಕೇಂದ್ರ ದ     " +apiResponse.getContent().get(0).getTscName() + "  ಹಾಗೂ   ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ವಿಭಾಗ   ರವರು\n " +
                     "          \n " +
-                    "ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ    ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು   ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,    " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಇವರು\n " +
+                    "ಇವರು  ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ    ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು   ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,    " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "\n " +
                     "        \n " +
                     "ಪರಿಶೀಲಿಸಿ   ದೃ ಢಿಕರಿಸಿ    ಉಲ್ಲೇಖ (5)   ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ   ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " +apiResponse.getContent().get(0).getActualAmount() +   " /-ಗಳ   ಸಹಾಯಧನವನ್ನು    ಮಂಜೂರು\n " +
                     "      \n " +
@@ -8820,11 +8849,11 @@ public class ReportsController {
             response.setHeader13("ಸಂಖ್ಯೆ  : ರೇಜಂನಿ / " +shortDistrictKannada  +  " ವಿ / ತಾಂ / ಸಿಸಮಗ್ರ-2 / " + apiResponse.getContent().get(0).getDistrictName() + " / ರೇಹುಸಾಮ / ಸಧನ / " +apiResponse.getContent().get(0).getScCategoryName() + "  / ಮಂ / "+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / "+apiResponse.getContent().get(0).getFinancialYear() + "   ದಿನಾಂಕ:  "+apiResponse.getContent().get(0).getDate() + "\n");
             response.setHeader14("ದಿನಾಂಕ ");
             response.setHeader15("");
-            response.setHeader16("            ಮೇಲಿನ   ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ   ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು   ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುವಂತೆ   " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "\n " +
+            response.setHeader16("            ಮೇಲಿನ   ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ   ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು   ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುವಂತೆ   " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ತಾಂತ್ರಿ  ಕ\n " +
                     "        \n " +
-                    "ತಾಂತ್ರಿ  ಕ   ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + "    ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು\n " +
+                    "ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + "    ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "\n " +
                     "               \n " +
-                    "ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಖಡ 75   ರಷ್ಟು     ಸಹಾಯಧನ \n " +
+                    "ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಖಡ 75   ರಷ್ಟು     ಸಹಾಯಧನ \n " +
                     "      \n " +
                     "ರೂ.  " +sanctionAmount75Str + "  /-  " +sanctionAmount75Words  + "  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು    ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ\n " +
                     "           \n " +

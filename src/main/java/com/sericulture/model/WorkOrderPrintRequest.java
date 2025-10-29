@@ -2,6 +2,8 @@ package com.sericulture.model;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -13,5 +15,12 @@ public class WorkOrderPrintRequest extends LotStatusRequest {
     private int stepId;
     private int schemeId;
     private int userId;
+
+
+    private int userMasterId;
+    private List<Long> applicationFormIds;
+
+    private int subSchemeId;
+    private int categoryId;
 
 }
