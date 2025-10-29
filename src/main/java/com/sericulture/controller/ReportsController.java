@@ -8782,15 +8782,17 @@ public class ReportsController {
                 response.setBeneficiaryShare25InWords(beneficiaryShare25Words);
 
 
+                String surveyNumber = Util.objectToString(apiResponse.getContent().get(0).getSurveyNumber());
+                String kaneshNo = Util.objectToString(apiResponse.getContent().get(0).getKaneshNo());
 
-//                response.setHeader13(
-//                        "ಸಂಖ್ಯೆ  : ರೇಜಂನಿ / " + shortDistrictKannada +
-//                                " /ತಾಂ4/ಸಿಸಮಗ್ರ-2/ಬೆಂಗ್ರಾ/ರೇಹುಸಾಮ/ಸಧನ/ಸಾ/ಮಂ/03/2025-26   ದಿನಾಂಕ:04.07.2025"
-//                );
+                String surveyText = "";
+                if (!surveyNumber.isEmpty()) {
+                    surveyText = "ಸರ್ವೆ ನಂ. " + surveyNumber;
+                } else if (!kaneshNo.isEmpty()) {
+                    surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
+                }
 
-//        if (apiResponse.getContent()!= null) {
-        // Add null check here
-        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
             throw new RuntimeException("No data returned from sanction API for applicationFormId: " + requestDto.getApplicationFormId());
         }
             response.setHeader1("ರೇಷ್ಮೆ    ಜಂಟಿ  ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ವಿಭಾಗ,  ಬೆಂಗಳೂರುರವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
@@ -8842,9 +8844,9 @@ public class ReportsController {
                             "ಬ್ಯಾಂಕ್   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುವುದು." );
             response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "   ಜಿಲ್ಲೆ  ಯ    " +apiResponse.getContent().get(0).getTalukName() + "     ತಾಲ್ಲೂ  ಕಿನ    " +apiResponse.getContent().get(0).getTscName() + "     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ    ಕೇಂದ್ರ ದ    ವ್ಯಾ  ಪ್ತಿ ಯ   " +apiResponse.getContent().get(0).getVillageName() + "     ಗ್ರಾ  ಮದಲ್ಲಿ   " +apiResponse.getContent().get(0).getScCategoryName() + "\n " +
                     "      \n " +
-                    "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ \n " +
+                    "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ  ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ  \n " +
                     "       \n " +
-                    "ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ     ಹಿಪ್ಪು   ನೇರಳೆ   ತೋಟ   ಹೊಂದಿದ್ದು    " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ  ಸರ್ವೆ/ಖಾತೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + " / " +apiResponse.getContent().get(0).getKaneshNo() + "  ರಲ್ಲಿ    " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ\n " +
+                    "ಹಿಪ್ಪು  ನೇರಳೆ  ತೋಟ ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   " + surveyText + "  ರಲ್ಲಿ     " + apiResponse.getContent().get(0).getRhSqft() + "   ಚದರ   ಅಡಿಗಳಲ್ಲಿ\n" +
                     "       \n " +
                             "     \n " +
                     "ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ.   " +apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ   (ಸ್ವ ಂತ  ವೆಚ್ಚ  /ಬ್ಯಾ ಂಕಿನಿಂದ  ಸಾಲ\n " +
