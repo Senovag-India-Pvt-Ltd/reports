@@ -8846,7 +8846,7 @@ public class ReportsController {
                     "      \n " +
                     "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ  ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ  \n " +
                     "       \n " +
-                    "ಹಿಪ್ಪು  ನೇರಳೆ  ತೋಟ ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   " + surveyText + "  ರಲ್ಲಿ     " + apiResponse.getContent().get(0).getRhSqft() + "   ಚದರ   ಅಡಿಗಳಲ್ಲಿ\n" +
+                    "ಹಿಪ್ಪು  ನೇರಳೆ   ತೋಟ    ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ    " + surveyText + "    ರಲ್ಲಿ      " + apiResponse.getContent().get(0).getRhSqft() + "    ಚದರಅಡಿ\n" +
                     "       \n " +
                             "     \n " +
                     "ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ.   " +apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ   (ಸ್ವ ಂತ  ವೆಚ್ಚ  /ಬ್ಯಾ ಂಕಿನಿಂದ  ಸಾಲ\n " +
