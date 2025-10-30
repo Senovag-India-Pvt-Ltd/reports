@@ -8736,32 +8736,92 @@ public class ReportsController {
 
         SanctionOrderResponse response = new SanctionOrderResponse();
 
-
-                // ✅ Date formatter (clean format)
+                // ✅ Date formatter
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-                // ✅ Format date fields
+                // ✅ Format date fields safely
                 String admGovtDate = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
                 String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
                 String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
                 String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
                 String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
-
                 String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
-                // ✅ Rounded actual amount (no .0)
+                // ✅ FIXED: Define actualAmount before using it
                 Float actualAmount = Float.valueOf(formatAmount(
                         apiResponse.getContent().get(0).getActualAmount() == null
                                 ? 0f
                                 : apiResponse.getContent().get(0).getActualAmount()
                 ));
 
-                // ✅ Rounded actual amount (no .0)
                 long actualAmounts = Math.round(
                         apiResponse.getContent().get(0).getActualAmount() == null
                                 ? 0f
                                 : apiResponse.getContent().get(0).getActualAmount()
                 );
+
+                // ✅ 4. Determine ratio by category
+                String scCategoryName = apiResponse.getContent().get(0).getScCategoryName();
+                float centralPercent, statePercent, beneficiaryPercent, totalPercent, totalsubsidy;
+                String ratioText, totalPercentText,percent50Text;
+
+                if ("ಸಾಮಾನ್ಯ".equals(scCategoryName)) {
+                    // ಸಾಮಾನ್ಯ — 50:25:25 (Total 75%)
+                    centralPercent = 0.50f;
+                    statePercent = 0.25f;
+                    beneficiaryPercent = 0.25f;
+                    totalsubsidy = 0.75f;
+                    totalPercent = 0.75f;
+                    ratioText = "50:25:25";
+                    totalPercentText = "75";
+                    percent50Text = "50";
+
+                } else {
+                    // ವಿಶೇಷ ಘಟಕ ಉಪ ಯೋಜನೆ / ಗಿರಿಜನ ಉಪ ಯೋಜನೆ — 65:25:10 (Total 90%)
+                    centralPercent = 0.65f;
+                    statePercent = 0.25f;
+                    beneficiaryPercent = 0.10f;
+                    totalsubsidy = 0.90f;
+                    totalPercent = 0.90f;
+                    ratioText = "65:25:10";
+                    totalPercentText = "90";
+                    percent50Text = "65";
+
+                }
+
+                // ✅ 5. Calculate shares (amounts)
+                Float sanctionAmount = actualAmount * totalPercent;
+                Float centralShare = actualAmount * centralPercent;
+                Float stateShare = actualAmount * statePercent;
+                Float beneficiaryShare = actualAmount * beneficiaryPercent;
+
+                // ✅ 6. Save in response bean
+                response.setSanctionAmount75(sanctionAmount);
+                response.setCentralShare50(centralShare);
+                response.setStateShare25(stateShare);
+                response.setBeneficiaryShare25(beneficiaryShare);
+
+                // ✅ 7. Format amounts (no decimals)
+                String sanctionAmountStr = formatAmount(sanctionAmount);
+                String centralShareStr = formatAmount(centralShare);
+                String stateShareStr = formatAmount(stateShare);
+                String beneficiaryShareStr = formatAmount(beneficiaryShare);
+
+                long sanctionAmtRounded = Long.parseLong(sanctionAmountStr);
+                long centralShareRounded = Long.parseLong(centralShareStr);
+                long stateShareRounded = Long.parseLong(stateShareStr);
+                long beneficiaryShareRounded = Long.parseLong(beneficiaryShareStr);
+
+                // ✅ 8. Convert all to Kannada words
+                String sanctionAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(sanctionAmtRounded);
+                String centralShareWords = KannadaNumberUtil.convertNumberToKannadaWords(centralShareRounded);
+                String stateShareWords = KannadaNumberUtil.convertNumberToKannadaWords(stateShareRounded);
+                String beneficiaryShareWords = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareRounded);
+
+                response.setSanctionAmount75InWords(sanctionAmountWords);
+                response.setCentralShare50InWords(centralShareWords);
+                response.setStateShare25InWords(stateShareWords);
+                response.setBeneficiaryShare25InWords(beneficiaryShareWords);
 
 
 
@@ -8839,7 +8899,7 @@ public class ReportsController {
             response.setHeader4("ವಿಷಯ  : ");
             response.setHeader20( "                " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ    ಇಲಾಖೆಯು  ಕೇಂದ್ರ    ರೇಷ್ಮೆ     ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾ  ನಗೊಳಿಸುತ್ತಿ ರುವ  ಕೇಂದ್ರ\n" +
                     "                    \n" +
-                                  "                ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್   ಸಮಗ್ರ  - 2”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "\n" +
+                                  "                ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್   ಸಮಗ್ರ  - 2”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getScComponentName() + "\n" +
                                   "          \n" +
                                   "                " +apiResponse.getContent().get(0).getScCategoryName() + "   ದಡಿ    ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
@@ -8863,17 +8923,17 @@ public class ReportsController {
                     "     \n" +
                     "ನೀಡಲಾಗಿದೆ.   ಇಲಾಖೆಯು   ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿಯ    ಸಹಯೋಗದೊಂದಿಗೆ   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ  “ಸಿಲ್ಕ್   ಸಮಗ್ರ  -2’’   ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲಾಗುತ್ತಿ ದೆ.\n " +
                     "          \n" +
-                    "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
+                    "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getScComponentName() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
                     "     \n" +
-                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ   ಕೇಂದ್ರ   :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು 50:25:25  ಆಗಿರುತ್ತ  ದೆ.   " + trimWords(apiResponse.getContent().get(0).getSubSchemeNameInKannada(), 8) + "   ಘಟಕ\n " +
+                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + ratioText + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
                     "                \n " +
-                    "ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  75  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmount75Str +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
+                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " + totalPercentText+ "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + totalsubsidy  +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
                     "             \n " +
-                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ.50  ಅಂದರೆ   ರೂ.   " + centralShare50Str + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShare25Str + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
+                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+percent50Text+"  ಅಂದರೆ   ರೂ.   " + centralShareStr + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShareStr  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
                     "ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾಂಕ್  ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಯಲ್ಲಿ  \n " +
                     "      \n " +
-                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShare50Str + "   ಗಳನ್ನು   (50%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
+                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareStr + "   ಗಳನ್ನು   ("+percent50Text+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
                     "              \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತ ದೆ.\n " +
                     "      \n " +
@@ -8894,7 +8954,7 @@ public class ReportsController {
                     "          \n " +
                     "ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ  ಉಲ್ಲೇಖ (5)\n " +
                     "      \n " +
-                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + actualAmounts +   " /-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
+                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + totalsubsidy +   " /-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
                             "           \n " +
 //                    "ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,  ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ    ಸದರಿ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ   ನೀಡಿರುವ  ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು\n " +
                     "ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಉಲ್ಲೇಖ (3)ರ  ಸರ್ಕಾರದ  ಆದೇಶದ   ರೀತ್ಯಾ    ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ  ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ\n " +
@@ -8913,15 +8973,15 @@ public class ReportsController {
                     "        \n " +
                     "ತಾಂತ್ರಿ  ಕ  ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + "\n " +
                     "               \n " +
-                    "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಖಡ\n " +
+                    "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
-                    "75   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " +sanctionAmount75Str + "  /-   (  ರೂ. " +sanctionAmount75Words  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
+                    totalPercentText  + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " +totalsubsidy  + "  /-   (  ರೂ. " +sanctionAmountWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
                     "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
                     "       \n "+
-                    "ಪೈಕಿ   ರೂ.  " +centralShare50Str + " /-  (  ರೂ.  " +centralShare50Words + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
+                    "ಪೈಕಿ   ರೂ.  " +centralShareStr  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
-                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShare25Str + "  /-  (  ರೂ. " +stateShare25Words + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
+                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareStr   + "  /-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
             "      \n " +
                     " ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
             "       \n " +
