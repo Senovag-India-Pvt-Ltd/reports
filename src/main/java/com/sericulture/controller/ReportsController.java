@@ -8745,6 +8745,8 @@ public class ReportsController {
                 String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
                 String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
                 String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
+                String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+
                 String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
                 // ✅ Rounded actual amount (no .0)
@@ -8851,7 +8853,7 @@ public class ReportsController {
                     "        \n" +
                     "4. ರೇಷ್ಮೆ  ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ  ರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಜ್ಞಾ  ಪನ  ಪತ್ರ  ದ\n" +
                     "        \n" +
-                    "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getAllotReleaseNo() + "   ದಿನಾಂಕ : " +allotReleaseDate + " \n" +
+                    "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
                     "        \n" +
                     "5. ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,    "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"  ರವರ   ಪ್ರ  ಸ್ತಾ ವನೆ   ದಿನಾಂಕ :  "+  proposalDate);
             response.setHeader24("ಪೀಠಿಕೆ : ");
