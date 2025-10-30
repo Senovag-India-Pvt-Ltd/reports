@@ -8501,11 +8501,11 @@ public class ReportsController {
         };
 
         public static String convertNumberToKannadaWords(long number) {
-            if (number == 0) return "ಸೊನ್ನೆ ರೂಪಾಯಿ ಮಾತ್ರ";
+            if (number == 0) return "ಸೊನ್ನೆ ಮಾತ್ರ";
             if (number < 0) return "ಋಣ " + convertNumberToKannadaWords(-number);
 
             String words = convertCore(number).trim();
-            return words + " ರೂಪಾಯಿ ಮಾತ್ರ";
+            return words + "  ಮಾತ್ರ";
         }
 
         private static String convertCore(long number) {
@@ -8913,13 +8913,13 @@ public class ReportsController {
                     "               \n " +
                     "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಖಡ\n " +
                     "      \n " +
-                    "75   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " +sanctionAmount75Str + "  /-  " +sanctionAmount75Words  + "  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
+                    "75   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " +sanctionAmount75Str + "  /-   (  ರೂ. " +sanctionAmount75Words  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
                     "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
                     "       \n "+
-                    "ಪೈಕಿ   ರೂ.  " +centralShare50Str + " /-( " +centralShare50Words + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
+                    "ಪೈಕಿ   ರೂ.  " +centralShare50Str + " /-  (  ರೂ.  " +centralShare50Words + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
-                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShare25Str + "  /-( ರೂ. " +stateShare25Words + "   ) ಗಳನ್ನು   ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
+                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShare25Str + "  /-  (  ರೂ. " +stateShare25Words + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
             "      \n " +
                     " ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
             "       \n " +
