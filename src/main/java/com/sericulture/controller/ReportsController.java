@@ -8665,11 +8665,11 @@ public class ReportsController {
                 number %= 10000000;
             }
             if (number >= 100000) { // Lakh
-                words.append(convertCore(number / 100000)).append(" ಲಕ್ಷ ");
+                words.append(convertCore(number / 100000)).append(" ಲಕ್ಷ ದ ");
                 number %= 100000;
             }
             if (number >= 1000) { // Thousand
-                words.append(convertCore(number / 1000)).append(" ಸಾವಿರ ");
+                words.append(convertCore(number / 1000)).append(" ಸಾವಿರದ ");
                 number %= 1000;
             }
             if (number >= 100) { // Hundred
@@ -8843,21 +8843,21 @@ public class ReportsController {
             response.setHeader24("ಪೀಠಿಕೆ : ");
             response.setHeader8(  "               " + apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ  ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರ ಮಗಳ   ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ   ವಿವಿಧ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇ ಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು\n " +
                     "      \n " +
-                    "ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು  ,  ಉಲ್ಲೇಖ (2)  ರಲ್ಲಿ    ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಕಾರ್ಯಕ್ರ  ಮದ   ಅನುಷ್ಠಾ  ನಕ್ಕಾ  ಗಿ   ಮಾರ್ಗಸೂಚಿಯನ್ನು \n " +
+                    "ಆಡಳಿತಾತ್ಮ ಕ  ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು  , ಉಲ್ಲೇಖ (2)  ರಲ್ಲಿ    ರೇಷ್ಮೆ  ಹುಳು  ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ  ಮಾರ್ಗಸೂಚಿಯನ್ನು\n " +
                     "     \n" +
-                    "ನೀಡಲಾಗಿದೆ.   ಇಲಾಖೆಯು   ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿಯ    ಸಹಯೋಗದೊಂದಿಗೆ   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ  “ಸಿಲ್ಕ್   ಸಮಗ್ರ  -2’’   ಯೋಜನೆಯನ್ನು     ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲಾಗುತ್ತಿ ದೆ.\n " +
+                    "ನೀಡಲಾಗಿದೆ.  ಇಲಾಖೆಯು  ಕೇಂದ್ರ  ರೇಷ್ಮೆ  ಮಂಡಳಿಯ  ಸಹಯೋಗದೊಂದಿಗೆ  ಕೇಂದ್ರ  ಪುರಸ್ಕೃ ತ  “ಸಿಲ್ಕ್   ಸಮಗ್ರ  -2’’  ಯೋಜನೆಯನ್ನು    ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲಾಗುತ್ತಿ ದೆ.\n " +
                     "          \n" +
                     "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getScComponentName() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
                     "     \n" +
-                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + centralSharePercentage + ":"  + stateSharePercentage + ":" + beneficiarySharePercentage + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
+                    apiResponse.getContent().get(0).getScCategoryName() + " ವರ್ಗದಡಿ  ಕೇಂದ್ರ :ರಾಜ್ಯ  :ಫಲಾನುಭವಿ  ಪಾಲು " + centralSharePercentage + ":"  + stateSharePercentage + ":" + beneficiarySharePercentage + " ಆಗಿರುತ್ತ ದೆ. " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
                     "                \n " +
-                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralSharePercentage +stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
+                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralSharePercentage +stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "/-  ಗಳನ್ನು   ಸಹಾಯಧನವಾಗಿ  ನೀಡಲಾಗುತ್ತಿ  ದೆ. ಇದರಲ್ಲಿ   ಕೇಂದ್ರ\n" +
                     "             \n " +
-                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralSharePercentage+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateSharePercentage+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
+                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralSharePercentage+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "/-  ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateSharePercentage+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "/-   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
                     "ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾಂಕ್  ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಯಲ್ಲಿ  \n " +
                     "      \n " +
-                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareAmount + "   ಗಳನ್ನು   ("+centralSharePercentage+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
+                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareAmount + "/-  ಗಳನ್ನು   ("+centralSharePercentage+"%)  ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
                     "              \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತ ದೆ.\n " +
                     "      \n " +
@@ -8878,7 +8878,7 @@ public class ReportsController {
                     "          \n " +
                     "ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ  ಉಲ್ಲೇಖ (5)\n " +
                     "      \n " +
-                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + (centralShareAmount + stateShareAmount) +   " /-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
+                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + (centralShareAmount + stateShareAmount) +   "/-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
                             "           \n " +
 //                    "ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,  ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ    ಸದರಿ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ   ನೀಡಿರುವ  ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು\n " +
                     "ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಉಲ್ಲೇಖ (3)ರ  ಸರ್ಕಾರದ  ಆದೇಶದ   ರೀತ್ಯಾ    ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ  ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ\n " +
@@ -8899,13 +8899,13 @@ public class ReportsController {
                     "               \n " +
                     "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
-                    (centralSharePercentage + stateSharePercentage)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "  /-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
+                    (centralSharePercentage + stateSharePercentage)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "/-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
                     "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
                     "       \n "+
                     "ಪೈಕಿ   ರೂ.  " +centralShareAmount  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
-                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "  /-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
+                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "/-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
             "      \n " +
                     " ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
             "       \n " +
