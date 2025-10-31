@@ -7357,7 +7357,7 @@ public class ReportsController {
 
             response.setHeader1("ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setHeader3("ಕೇಂದ್ರ ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್   ಸಮಗ್ರ  - 2”  ಯೋಜನೆ  " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
+            response.setHeader3("ಕೇಂದ್ರ   ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್    ಸಮಗ್ರ  - 2”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
             response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
                             "     \n " +
