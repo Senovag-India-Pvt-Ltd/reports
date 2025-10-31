@@ -152,6 +152,9 @@ public class SanctionOrderResponse {
     private Float centralSanctionAmount;
     private Float stateSanctionAmount;
 
+    private String description;
+    private String categoryShortName;
+
 
 
 
