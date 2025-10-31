@@ -8624,28 +8624,28 @@ public class ReportsController {
     public class KannadaNumberUtil {
 
         private static final String[] units = {
-                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
-                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು",
-                "ಹದಿನಾರು", "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು"
+                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು  ", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು  ",
+                "ಹತ್ತು  ", "ಹನ್ನೊಂದು", "ಹನ್ನೆ ರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು  ", "ಹದಿನೈದು",
+                "ಹದಿನಾರು", "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು  "
         };
 
         // ✅ Exact Kannada words for 20–99
         private static final String[] twoDigits = {
-                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
-                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು", "ಹದಿನಾರು",
-                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು", "ಇಪ್ಪತ್ತು", "ಇಪ್ಪತ್ತೊಂದು", "ಇಪ್ಪತ್ತೆರಡು", "ಇಪ್ಪತ್ತ್ಮೂರು",
-                "ಇಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಇಪ್ಪತ್ತೈದು", "ಇಪ್ಪತ್ತಾರು", "ಇಪ್ಪತ್ತೇಳು", "ಇಪ್ಪತ್ತೆಂಟು", "ಇಪ್ಪತ್ತೊಂಬತ್ತು",
-                "ಮೂವತ್ತು", "ಮೂವತ್ತೊಂದು", "ಮೂವತ್ತೆರಡು", "ಮೂವತ್ತ್ಮೂರು", "ಮೂವತ್ತ್ನಾಲ್ಕು", "ಮೂವತ್ತೈದು",
-                "ಮೂವತ್ತಾರು", "ಮೂವತ್ತೇಳು", "ಮೂವತ್ತೆಂಟು", "ಮೂವತ್ತೊಂಬತ್ತು", "ನಲವತ್ತು", "ನಲವತ್ತೊಂದು",
-                "ನಲವತ್ತೆರಡು", "ನಲವತ್ತ್ಮೂರು", "ನಲವತ್ತ್ನಾಲ್ಕು", "ನಲವತ್ತೈದು", "ನಲವತ್ತಾರು", "ನಲವತ್ತೇಳು",
-                "ನಲವತ್ತೆಂಟು", "ನಲವತ್ತೊಂಬತ್ತು", "ಐವತ್ತು", "ಐವತ್ತೊಂದು", "ಐವತ್ತೆರಡು", "ಐವತ್ತ್ಮೂರು",
-                "ಐವತ್ತ್ನಾಲ್ಕು", "ಐವತ್ತೈದು", "ಐವತ್ತಾರು", "ಐವತ್ತೇಳು", "ಐವತ್ತೆಂಟು", "ಐವತ್ತೊಂಬತ್ತು",
-                "ಅರವತ್ತು", "ಅರವತ್ತೊಂದು", "ಅರವತ್ತೆರಡು", "ಅರವತ್ತ್ಮೂರು", "ಅರವತ್ತ್ನಾಲ್ಕು", "ಅರವತ್ತೈದು",
-                "ಅರವತ್ತಾರು", "ಅರವತ್ತೇಳು", "ಅರವತ್ತೆಂಟು", "ಅರವತ್ತೊಂಬತ್ತು", "ಎಪ್ಪತ್ತು", "ಎಪ್ಪತ್ತೊಂದು",
-                "ಎಪ್ಪತ್ತೆರಡು", "ಎಪ್ಪತ್ತ್ಮೂರು", "ಎಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಎಪ್ಪತ್ತೈದು", "ಎಪ್ಪತ್ತಾರು", "ಎಪ್ಪತ್ತೇಳು",
-                "ಎಪ್ಪತ್ತೆಂಟು", "ಎಪ್ಪತ್ತೊಂಬತ್ತು", "ಎಂಭತ್ತು", "ಎಂಭತ್ತೊಂದು", "ಎಂಭತ್ತೆರಡು", "ಎಂಭತ್ತ್ಮೂರು",
-                "ಎಂಭತ್ತ್ನಾಲ್ಕು", "ಎಂಭತ್ತೈದು", "ಎಂಭತ್ತಾರು", "ಎಂಭತ್ತೇಳು", "ಎಂಭತ್ತೆಂಟು", "ಎಂಭತ್ತೊಂಬತ್ತು",
-                "ತೊಂಬತ್ತು", "ತೊಂಬತ್ತೊಂದು", "ತೊಂಬತ್ತೆರಡು", "ತೊಂಬತ್ತ್ಮೂರು", "ತೊಂಬತ್ತ್ನಾಲ್ಕು", "ತೊಂಬತ್ತೈದು",
+                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು  ", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು  ",
+                "ಹತ್ತು  ", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು ", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು  ", "ಹದಿನೈ ದು", "ಹದಿನಾರು",
+                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು", "ಇಪ್ಪ ತ್ತು  ", "ಇಪ್ಪ ತ್ತೊಂದು", "ಇಪ್ಪ ತ್ತೆ ರಡು", "ಇಪ್ಪ ತ್ತ್ಮೂ ರು",
+                "ಇಪ್ಪ ತ್ತ್ನಾ ಲ್ಕು  ", "ಇಪ್ಪ ತ್ತೈ ದು", "ಇಪ್ಪ ತ್ತಾ ರು", "ಇಪ್ಪ ತ್ತೇಳು", "ಇಪ್ಪ ತ್ತೆಂಟು", "ಇಪ್ಪ ತ್ತೊಂಬತ್ತು",
+                "ಮೂವತ್ತು ", "ಮೂವತ್ತೊಂದು", "ಮೂವತ್ತೆ ರಡು", "ಮೂವತ್ತ್ಮೂ ರು", "ಮೂವತ್ತ್ನಾ ಲ್ಕು  ", "ಮೂವತ್ತೈ ದು",
+                "ಮೂವತ್ತಾ ರು", "ಮೂವತ್ತ ೇಳು", "ಮೂವತ್ತೆ ಂಟು", "ಮೂವತ್ತೊಂಬತ್ತು  ", "ನಲವತ್ತು ", "ನಲವತ್ತೊಂದು",
+                "ನಲವತ್ತೆ ರಡು", "ನಲವತ್ತ್ಮೂ ರು", "ನಲವತ್ತ್ನಾ ಲ್ಕು ", "ನಲವತ್ತೈ ದು", "ನಲವತ್ತಾ ರು", "ನಲವತ್ತೇಳು",
+                "ನಲವತ್ತೆಂಟು", "ನಲವತ್ತೊಂಬತ್ತು ", "ಐವತ್ತು ", "ಐವತ್ತೊಂದು", "ಐವತ್ತೆ ರಡು", "ಎಪ್ಪ ತ್ತ  ಮೂರು",
+                "ಐವತ್ತ್ನಾ ಲ್ಕು ", "ಐವತ್ತೈ ದು", "ಐವತ್ತಾ ರು", "ಐವತ್ತೇಳು", "ಐವತ್ತೆಂಟು", "ಐವತ್ತೊಂಬತ್ತು",
+                "ಅರವತ್ತು ", "ಅರವತ್ತೊಂದು", "ಅರವತ್ತೆ ರಡು", "ಅರವತ್ತ್ಮೂ ರು", "ಅರವತ್ತ್ನಾ ಲ್ಕು ", "ಅರವತ್ತೈ ದು",
+                "ಅರವತ್ತಾ ರು", "ಅರವತ್ತೇಳು", "ಅರವತ್ತೆಂಟು", "ಅರವತ್ತೊಂಬತ್ತು ", "ಎಪ್ಪ ತ್ತು ", "ಎಪ್ಪ ತ್ತೊಂದು",
+                "ಎಪ್ಪ ತ್ತೆರಡು", "ಎಪ್ಪ ತ್ತ್ಮೂ ರು", "ಎಪ್ಪ ತ್ತ್ನಾ ಲ್ಕು  ", "ಎಪ್ಪ ತ್ತೈ ದು", "ಎಪ್ಪ ತ್ತಾ ರು", "ಎಪ್ಪ ತ್ತೇಳು",
+                "ಎಪ್ಪ ತ್ತೆಂಟು", "ಎಪ್ಪ ತ್ತೊಂಬತ್ತು", "ಎಂಭತ್ತು ", "ಎಂಭತ್ತೊಂದು", "ಎಂಭತ್ತೆ ರಡು", "ಎಂಭತ್ತ್ಮೂ ರು",
+                "ಎಂಭತ್ತ್ನಾ ಲ್ಕು ", "ಎಂಭತ್ತೈ ದು", "ಎಂಭತ್ತಾ ರು", "ಎಂಭತ್ತೇಳು", "ಎಂಭತ್ತೆಂಟು", "ಎಂಭತ್ತೊಂಬತ್ತು ",
+                "ತೊಂಬತ್ತು", "ತೊಂಬತ್ತೊಂದು", "ತೊಂಬತ್ತೆರಡು", "ತೊಂಬತ್ತ್ಮೂರು", "ತೊಂಬತ್ತ್ನಾ ಲ್ಕು", "ತೊಂಬತ್ತೈದು",
                 "ತೊಂಬತ್ತಾರು", "ತೊಂಬತ್ತೇಳು", "ತೊಂಬತ್ತೆಂಟು", "ತೊಂಬತ್ತೊಂಬತ್ತು"
         };
 
@@ -8797,30 +8797,23 @@ public class ReportsController {
                     surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
                 }
 
-                float centralShare = apiResponse.getContent().get(0).getCentralSharePercentage();
-                float stateShare = apiResponse.getContent().get(0).getStateSharePercentage();
+                int centralShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSanctionAmount())));
+                int stateShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSanctionAmount())));
+                int centralSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSharePercentage())));
+                int stateSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSharePercentage())));
 
-                float beneficiaryShare = 100 - (centralShare + stateShare);
-                if (beneficiaryShare < 0) beneficiaryShare = 0; // safety check
+                int beneficiarySharePercentage = 100 - (centralSharePercentage + stateSharePercentage);
+                if (beneficiarySharePercentage < 0) beneficiarySharePercentage = 0;
 
-                float centralShareAmount = apiResponse.getContent().get(0).getCentralSanctionAmount();
-                float stateShareAmount = apiResponse.getContent().get(0).getStateSanctionAmount();
+                int totalAmount = centralShareAmount + stateShareAmount;
+                int beneficiaryShareAmount = Math.round((totalAmount * beneficiarySharePercentage) / 100f);
 
-                centralShareAmount = Math.round(centralShareAmount);
-                stateShareAmount = Math.round(stateShareAmount);
+                String centralShareWords = KannadaNumberUtil.convertNumberToKannadaWords(centralShareAmount);
+                String stateShareWords = KannadaNumberUtil.convertNumberToKannadaWords(stateShareAmount);
+                String totalSubsidyWords = KannadaNumberUtil.convertNumberToKannadaWords(totalAmount);
 
-                String centralShareWords = KannadaNumberUtil.convertNumberToKannadaWords((long) centralShareAmount);
-                String stateShareWords = KannadaNumberUtil.convertNumberToKannadaWords((long) stateShareAmount);
-                String totalSubsidyWords = KannadaNumberUtil.convertNumberToKannadaWords((long) (centralShareAmount + stateShareAmount));
-
-
-
-                String shareText =
-                        apiResponse.getContent().get(0).getScCategoryName() +
-                                " ವರ್ಗದಡಿ  ಕೇಂದ್ರ : ರಾಜ್ಯ : ಫಲಾನುಭವಿ  ಪಾಲು  " +
-                                centralShare + " : " + stateShare + " : " + beneficiaryShare +
-                                " ಆಗಿರುತ್ತದೆ. " +
-                                apiResponse.getContent().get(0).getScComponentName() + "\n";
+                String shareDisplay = centralSharePercentage + ":" + stateSharePercentage + ":" + beneficiarySharePercentage;
+                String totalAmountDisplay = String.valueOf(totalAmount);
 
 
                 if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
@@ -8856,15 +8849,15 @@ public class ReportsController {
                     "          \n" +
                     "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getScComponentName() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
                     "     \n" +
-                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + centralShare + ":"  + stateShare + ":" + beneficiaryShare + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
+                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + centralSharePercentage + ":"  + stateSharePercentage + ":" + beneficiarySharePercentage + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
                     "                \n " +
-                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralShare + stateShare) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
+                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralSharePercentage +stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
                     "             \n " +
-                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralShare+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateShare+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
+                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralSharePercentage+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateSharePercentage+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
                     "ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾಂಕ್  ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಯಲ್ಲಿ  \n " +
                     "      \n " +
-                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareAmount + "   ಗಳನ್ನು   ("+centralShare+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
+                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareAmount + "   ಗಳನ್ನು   ("+centralSharePercentage+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
                     "              \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತ ದೆ.\n " +
                     "      \n " +
@@ -8906,7 +8899,7 @@ public class ReportsController {
                     "               \n " +
                     "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
-                    (centralShare + stateShare)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "  /-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
+                    (centralSharePercentage + stateSharePercentage)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "  /-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
                     "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
                     "       \n "+
