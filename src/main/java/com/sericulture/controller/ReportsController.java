@@ -8472,109 +8472,7 @@ public class ReportsController {
 //        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
 //    }
 
-    public class KannadaNumberUtil {
 
-        private static final String[] units = {
-                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
-                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು",
-                "ಹದಿನಾರು", "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು"
-        };
-
-        // ✅ Exact Kannada words for 20–99
-        private static final String[] twoDigits = {
-                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
-                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು", "ಹದಿನಾರು",
-                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು", "ಇಪ್ಪತ್ತು", "ಇಪ್ಪತ್ತೊಂದು", "ಇಪ್ಪತ್ತೆರಡು", "ಇಪ್ಪತ್ತ್ಮೂರು",
-                "ಇಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಇಪ್ಪತ್ತೈದು", "ಇಪ್ಪತ್ತಾರು", "ಇಪ್ಪತ್ತೇಳು", "ಇಪ್ಪತ್ತೆಂಟು", "ಇಪ್ಪತ್ತೊಂಬತ್ತು",
-                "ಮೂವತ್ತು", "ಮೂವತ್ತೊಂದು", "ಮೂವತ್ತೆರಡು", "ಮೂವತ್ತ್ಮೂರು", "ಮೂವತ್ತ್ನಾಲ್ಕು", "ಮೂವತ್ತೈದು",
-                "ಮೂವತ್ತಾರು", "ಮೂವತ್ತೇಳು", "ಮೂವತ್ತೆಂಟು", "ಮೂವತ್ತೊಂಬತ್ತು", "ನಲವತ್ತು", "ನಲವತ್ತೊಂದು",
-                "ನಲವತ್ತೆರಡು", "ನಲವತ್ತ್ಮೂರು", "ನಲವತ್ತ್ನಾಲ್ಕು", "ನಲವತ್ತೈದು", "ನಲವತ್ತಾರು", "ನಲವತ್ತೇಳು",
-                "ನಲವತ್ತೆಂಟು", "ನಲವತ್ತೊಂಬತ್ತು", "ಐವತ್ತು", "ಐವತ್ತೊಂದು", "ಐವತ್ತೆರಡು", "ಐವತ್ತ್ಮೂರು",
-                "ಐವತ್ತ್ನಾಲ್ಕು", "ಐವತ್ತೈದು", "ಐವತ್ತಾರು", "ಐವತ್ತೇಳು", "ಐವತ್ತೆಂಟು", "ಐವತ್ತೊಂಬತ್ತು",
-                "ಅರವತ್ತು", "ಅರವತ್ತೊಂದು", "ಅರವತ್ತೆರಡು", "ಅರವತ್ತ್ಮೂರು", "ಅರವತ್ತ್ನಾಲ್ಕು", "ಅರವತ್ತೈದು",
-                "ಅರವತ್ತಾರು", "ಅರವತ್ತೇಳು", "ಅರವತ್ತೆಂಟು", "ಅರವತ್ತೊಂಬತ್ತು", "ಎಪ್ಪತ್ತು", "ಎಪ್ಪತ್ತೊಂದು",
-                "ಎಪ್ಪತ್ತೆರಡು", "ಎಪ್ಪತ್ತ್ಮೂರು", "ಎಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಎಪ್ಪತ್ತೈದು", "ಎಪ್ಪತ್ತಾರು", "ಎಪ್ಪತ್ತೇಳು",
-                "ಎಪ್ಪತ್ತೆಂಟು", "ಎಪ್ಪತ್ತೊಂಬತ್ತು", "ಎಂಭತ್ತು", "ಎಂಭತ್ತೊಂದು", "ಎಂಭತ್ತೆರಡು", "ಎಂಭತ್ತ್ಮೂರು",
-                "ಎಂಭತ್ತ್ನಾಲ್ಕು", "ಎಂಭತ್ತೈದು", "ಎಂಭತ್ತಾರು", "ಎಂಭತ್ತೇಳು", "ಎಂಭತ್ತೆಂಟು", "ಎಂಭತ್ತೊಂಬತ್ತು",
-                "ತೊಂಬತ್ತು", "ತೊಂಬತ್ತೊಂದು", "ತೊಂಬತ್ತೆರಡು", "ತೊಂಬತ್ತ್ಮೂರು", "ತೊಂಬತ್ತ್ನಾಲ್ಕು", "ತೊಂಬತ್ತೈದು",
-                "ತೊಂಬತ್ತಾರು", "ತೊಂಬತ್ತೇಳು", "ತೊಂಬತ್ತೆಂಟು", "ತೊಂಬತ್ತೊಂಬತ್ತು"
-        };
-
-        public static String convertNumberToKannadaWords(long number) {
-            if (number == 0) return "ಸೊನ್ನೆ ಮಾತ್ರ";
-            if (number < 0) return "ಋಣ " + convertNumberToKannadaWords(-number);
-
-            String words = convertCore(number).trim();
-            return words + "  ಮಾತ್ರ";
-        }
-
-        private static String convertCore(long number) {
-            StringBuilder words = new StringBuilder();
-
-            if (number >= 10000000) { // Crore
-                words.append(convertCore(number / 10000000)).append(" ಕೋಟಿ ");
-                number %= 10000000;
-            }
-            if (number >= 100000) { // Lakh
-                words.append(convertCore(number / 100000)).append(" ಲಕ್ಷ ");
-                number %= 100000;
-            }
-            if (number >= 1000) { // Thousand
-                words.append(convertCore(number / 1000)).append(" ಸಾವಿರ ");
-                number %= 1000;
-            }
-            if (number >= 100) { // Hundred
-                words.append(convertCore(number / 100)).append(" ನೂರು ");
-                number %= 100;
-            }
-            if (number > 0) {
-                if (number < 100) {
-                    words.append(twoDigits[(int) number]).append(" ");
-                }
-            }
-
-            return words.toString().trim();
-        }
-
-        public static void main(String[] args) {
-            System.out.println(convertNumberToKannadaWords(158437));
-            System.out.println(convertNumberToKannadaWords(75000));
-            System.out.println(convertNumberToKannadaWords(1000000));
-            System.out.println(convertNumberToKannadaWords(250));
-        }
-    }
-
-
-
-
-
-    private String trimWords(String input, int maxWords) {
-        if (input == null || input.isBlank()) {
-            return "";
-        }
-
-        String[] words = input.trim().split("\\s+");
-        if (words.length <= maxWords) {
-            return input.trim();
-        }
-
-        return String.join(" ", Arrays.copyOfRange(words, 0, maxWords));
-    }
-
-//    private String getFirstTwoLetters(String input) {
-//        if (input == null || input.isBlank())
-
-
-        /* ✅ Helper method 2: Get first two visible Kannada letters */
-    private String getFirstTwoLetters(String input) {
-        if (input == null || input.isBlank()) return "";
-        return input.codePoints()
-                .limit(2) // takes 2 Unicode characters (safe for Kannada)
-                .collect(StringBuilder::new,
-                        StringBuilder::appendCodePoint,
-                        StringBuilder::append)
-                .toString();
-    }
 
     private JRDataSource getDataSourceForSanctionOrder(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
@@ -8723,6 +8621,110 @@ public class ReportsController {
         return String.valueOf(rounded);
     }
 
+    public class KannadaNumberUtil {
+
+        private static final String[] units = {
+                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
+                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು",
+                "ಹದಿನಾರು", "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು"
+        };
+
+        // ✅ Exact Kannada words for 20–99
+        private static final String[] twoDigits = {
+                "", "ಒಂದು", "ಎರಡು", "ಮೂರು", "ನಾಲ್ಕು", "ಐದು", "ಆರು", "ಏಳು", "ಎಂಟು", "ಒಂಬತ್ತು",
+                "ಹತ್ತು", "ಹನ್ನೊಂದು", "ಹನ್ನೆರಡು", "ಹದಿಮೂರು", "ಹದಿನಾಲ್ಕು", "ಹದಿನೈದು", "ಹದಿನಾರು",
+                "ಹದಿನೇಳು", "ಹದಿನೆಂಟು", "ಹತ್ತೊಂಬತ್ತು", "ಇಪ್ಪತ್ತು", "ಇಪ್ಪತ್ತೊಂದು", "ಇಪ್ಪತ್ತೆರಡು", "ಇಪ್ಪತ್ತ್ಮೂರು",
+                "ಇಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಇಪ್ಪತ್ತೈದು", "ಇಪ್ಪತ್ತಾರು", "ಇಪ್ಪತ್ತೇಳು", "ಇಪ್ಪತ್ತೆಂಟು", "ಇಪ್ಪತ್ತೊಂಬತ್ತು",
+                "ಮೂವತ್ತು", "ಮೂವತ್ತೊಂದು", "ಮೂವತ್ತೆರಡು", "ಮೂವತ್ತ್ಮೂರು", "ಮೂವತ್ತ್ನಾಲ್ಕು", "ಮೂವತ್ತೈದು",
+                "ಮೂವತ್ತಾರು", "ಮೂವತ್ತೇಳು", "ಮೂವತ್ತೆಂಟು", "ಮೂವತ್ತೊಂಬತ್ತು", "ನಲವತ್ತು", "ನಲವತ್ತೊಂದು",
+                "ನಲವತ್ತೆರಡು", "ನಲವತ್ತ್ಮೂರು", "ನಲವತ್ತ್ನಾಲ್ಕು", "ನಲವತ್ತೈದು", "ನಲವತ್ತಾರು", "ನಲವತ್ತೇಳು",
+                "ನಲವತ್ತೆಂಟು", "ನಲವತ್ತೊಂಬತ್ತು", "ಐವತ್ತು", "ಐವತ್ತೊಂದು", "ಐವತ್ತೆರಡು", "ಐವತ್ತ್ಮೂರು",
+                "ಐವತ್ತ್ನಾಲ್ಕು", "ಐವತ್ತೈದು", "ಐವತ್ತಾರು", "ಐವತ್ತೇಳು", "ಐವತ್ತೆಂಟು", "ಐವತ್ತೊಂಬತ್ತು",
+                "ಅರವತ್ತು", "ಅರವತ್ತೊಂದು", "ಅರವತ್ತೆರಡು", "ಅರವತ್ತ್ಮೂರು", "ಅರವತ್ತ್ನಾಲ್ಕು", "ಅರವತ್ತೈದು",
+                "ಅರವತ್ತಾರು", "ಅರವತ್ತೇಳು", "ಅರವತ್ತೆಂಟು", "ಅರವತ್ತೊಂಬತ್ತು", "ಎಪ್ಪತ್ತು", "ಎಪ್ಪತ್ತೊಂದು",
+                "ಎಪ್ಪತ್ತೆರಡು", "ಎಪ್ಪತ್ತ್ಮೂರು", "ಎಪ್ಪತ್ತ್ನಾಲ್ಕು", "ಎಪ್ಪತ್ತೈದು", "ಎಪ್ಪತ್ತಾರು", "ಎಪ್ಪತ್ತೇಳು",
+                "ಎಪ್ಪತ್ತೆಂಟು", "ಎಪ್ಪತ್ತೊಂಬತ್ತು", "ಎಂಭತ್ತು", "ಎಂಭತ್ತೊಂದು", "ಎಂಭತ್ತೆರಡು", "ಎಂಭತ್ತ್ಮೂರು",
+                "ಎಂಭತ್ತ್ನಾಲ್ಕು", "ಎಂಭತ್ತೈದು", "ಎಂಭತ್ತಾರು", "ಎಂಭತ್ತೇಳು", "ಎಂಭತ್ತೆಂಟು", "ಎಂಭತ್ತೊಂಬತ್ತು",
+                "ತೊಂಬತ್ತು", "ತೊಂಬತ್ತೊಂದು", "ತೊಂಬತ್ತೆರಡು", "ತೊಂಬತ್ತ್ಮೂರು", "ತೊಂಬತ್ತ್ನಾಲ್ಕು", "ತೊಂಬತ್ತೈದು",
+                "ತೊಂಬತ್ತಾರು", "ತೊಂಬತ್ತೇಳು", "ತೊಂಬತ್ತೆಂಟು", "ತೊಂಬತ್ತೊಂಬತ್ತು"
+        };
+
+        public static String convertNumberToKannadaWords(long number) {
+            if (number == 0) return "ಸೊನ್ನೆ ಮಾತ್ರ";
+            if (number < 0) return "ಋಣ " + convertNumberToKannadaWords(-number);
+
+            String words = convertCore(number).trim();
+            return words + "  ಮಾತ್ರ";
+        }
+
+        private static String convertCore(long number) {
+            StringBuilder words = new StringBuilder();
+
+            if (number >= 10000000) { // Crore
+                words.append(convertCore(number / 10000000)).append(" ಕೋಟಿ ");
+                number %= 10000000;
+            }
+            if (number >= 100000) { // Lakh
+                words.append(convertCore(number / 100000)).append(" ಲಕ್ಷ ");
+                number %= 100000;
+            }
+            if (number >= 1000) { // Thousand
+                words.append(convertCore(number / 1000)).append(" ಸಾವಿರ ");
+                number %= 1000;
+            }
+            if (number >= 100) { // Hundred
+                words.append(convertCore(number / 100)).append(" ನೂರು ");
+                number %= 100;
+            }
+            if (number > 0) {
+                if (number < 100) {
+                    words.append(twoDigits[(int) number]).append(" ");
+                }
+            }
+
+            return words.toString().trim();
+        }
+
+        public static void main(String[] args) {
+            System.out.println(convertNumberToKannadaWords(158437));
+            System.out.println(convertNumberToKannadaWords(75000));
+            System.out.println(convertNumberToKannadaWords(1000000));
+            System.out.println(convertNumberToKannadaWords(250));
+        }
+    }
+
+
+
+
+
+    private String trimWords(String input, int maxWords) {
+        if (input == null || input.isBlank()) {
+            return "";
+        }
+
+        String[] words = input.trim().split("\\s+");
+        if (words.length <= maxWords) {
+            return input.trim();
+        }
+
+        return String.join(" ", Arrays.copyOfRange(words, 0, maxWords));
+    }
+
+//    private String getFirstTwoLetters(String input) {
+//        if (input == null || input.isBlank())
+
+
+    /* ✅ Helper method 2: Get first two visible Kannada letters */
+    private String getFirstTwoLetters(String input) {
+        if (input == null || input.isBlank()) return "";
+        return input.codePoints()
+                .limit(2) // takes 2 Unicode characters (safe for Kannada)
+                .collect(StringBuilder::new,
+                        StringBuilder::appendCodePoint,
+                        StringBuilder::append)
+                .toString();
+    }
+
             private JRDataSource getDataSourceForSanctionOrderRH(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
         SanctionOrder apiResponse = apiService.fetchDataFromSanction(requestDto);
@@ -8760,107 +8762,10 @@ public class ReportsController {
                                 : apiResponse.getContent().get(0).getActualAmount()
                 );
 
-                // ✅ 4. Determine ratio by category
-                String scCategoryName = apiResponse.getContent().get(0).getScCategoryName();
-                float centralPercent, statePercent, beneficiaryPercent, totalPercent, totalsubsidy;
-                String ratioText, totalPercentText,percent50Text;
-
-                if ("ಸಾಮಾನ್ಯ".equals(scCategoryName)) {
-                    // ಸಾಮಾನ್ಯ — 50:25:25 (Total 75%)
-                    centralPercent = 0.50f;
-                    statePercent = 0.25f;
-                    beneficiaryPercent = 0.25f;
-                    totalsubsidy = 0.75f;
-                    totalPercent = 0.75f;
-                    ratioText = "50:25:25";
-                    totalPercentText = "75";
-                    percent50Text = "50";
-
-                } else {
-                    // ವಿಶೇಷ ಘಟಕ ಉಪ ಯೋಜನೆ / ಗಿರಿಜನ ಉಪ ಯೋಜನೆ — 65:25:10 (Total 90%)
-                    centralPercent = 0.65f;
-                    statePercent = 0.25f;
-                    beneficiaryPercent = 0.10f;
-                    totalsubsidy = 0.90f;
-                    totalPercent = 0.90f;
-                    ratioText = "65:25:10";
-                    totalPercentText = "90";
-                    percent50Text = "65";
-
-                }
-
-                // ✅ 5. Calculate shares (amounts)
-                Float sanctionAmount = actualAmount * totalPercent;
-                Float centralShare = actualAmount * centralPercent;
-                Float stateShare = actualAmount * statePercent;
-                Float beneficiaryShare = actualAmount * beneficiaryPercent;
-
-                // ✅ 6. Save in response bean
-                response.setSanctionAmount75(sanctionAmount);
-                response.setCentralShare50(centralShare);
-                response.setStateShare25(stateShare);
-                response.setBeneficiaryShare25(beneficiaryShare);
-
-                // ✅ 7. Format amounts (no decimals)
-                String sanctionAmountStr = formatAmount(sanctionAmount);
-                String centralShareStr = formatAmount(centralShare);
-                String stateShareStr = formatAmount(stateShare);
-                String beneficiaryShareStr = formatAmount(beneficiaryShare);
-
-                long sanctionAmtRounded = Long.parseLong(sanctionAmountStr);
-                long centralShareRounded = Long.parseLong(centralShareStr);
-                long stateShareRounded = Long.parseLong(stateShareStr);
-                long beneficiaryShareRounded = Long.parseLong(beneficiaryShareStr);
-
-                // ✅ 8. Convert all to Kannada words
-                String sanctionAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(sanctionAmtRounded);
-                String centralShareWords = KannadaNumberUtil.convertNumberToKannadaWords(centralShareRounded);
-                String stateShareWords = KannadaNumberUtil.convertNumberToKannadaWords(stateShareRounded);
-                String beneficiaryShareWords = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareRounded);
-
-                response.setSanctionAmount75InWords(sanctionAmountWords);
-                response.setCentralShare50InWords(centralShareWords);
-                response.setStateShare25InWords(stateShareWords);
-                response.setBeneficiaryShare25InWords(beneficiaryShareWords);
-
-
-
-                Float sanctionAmount75 = actualAmount * 0.75f;
-                Float centralShare50 = actualAmount * 0.50f;
-                Float stateShare25 = actualAmount * 0.25f;
-                Float beneficiaryShare25 = actualAmount * 0.25f;
-
-
-                response.setSanctionAmount75(sanctionAmount75);
-                response.setCentralShare50(centralShare50);
-                response.setStateShare25(stateShare25);
-                response.setBeneficiaryShare25(beneficiaryShare25);
-
                 String shortDistrictKannadas = getKannadaShortForm(apiResponse.getContent().get(0).getDistrictName());
 
 
-                String sanctionAmount75Str = formatAmount(sanctionAmount75);
-                String centralShare50Str = formatAmount(centralShare50);
-                String stateShare25Str = formatAmount(stateShare25);
-                String beneficiaryShare25Str = formatAmount(beneficiaryShare25);
 
-                long sanctionAmount75Rounded = Long.parseLong(sanctionAmount75Str);
-                long centralShare50Rounded = Long.parseLong(centralShare50Str);
-                long stateShare25Rounded = Long.parseLong(stateShare25Str);
-                long beneficiaryShare25Rounded = Long.parseLong(beneficiaryShare25Str);
-
-                String sanctionAmount75Words = KannadaNumberUtil.convertNumberToKannadaWords(sanctionAmount75Rounded);
-                String centralShare50Words = KannadaNumberUtil.convertNumberToKannadaWords(centralShare50Rounded);
-                String stateShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(stateShare25Rounded);
-                String beneficiaryShare25Words = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShare25Rounded);
-
-                response.setSanctionAmount75InWords(sanctionAmount75Words);
-                response.setCentralShare50InWords(centralShare50Words);
-                response.setStateShare25InWords(stateShare25Words);
-                response.setBeneficiaryShare25InWords(beneficiaryShare25Words);
-
-
-                // ✅ Short district name in Kannada
                 String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
 
                 // ✅ Clean formatted date for sanction order
@@ -8891,6 +8796,32 @@ public class ReportsController {
                 } else if (!kaneshNo.isEmpty()) {
                     surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
                 }
+
+                float centralShare = apiResponse.getContent().get(0).getCentralSharePercentage();
+                float stateShare = apiResponse.getContent().get(0).getStateSharePercentage();
+
+                float beneficiaryShare = 100 - (centralShare + stateShare);
+                if (beneficiaryShare < 0) beneficiaryShare = 0; // safety check
+
+                float centralShareAmount = apiResponse.getContent().get(0).getCentralSanctionAmount();
+                float stateShareAmount = apiResponse.getContent().get(0).getStateSanctionAmount();
+
+                centralShareAmount = Math.round(centralShareAmount);
+                stateShareAmount = Math.round(stateShareAmount);
+
+                String centralShareWords = KannadaNumberUtil.convertNumberToKannadaWords((long) centralShareAmount);
+                String stateShareWords = KannadaNumberUtil.convertNumberToKannadaWords((long) stateShareAmount);
+                String totalSubsidyWords = KannadaNumberUtil.convertNumberToKannadaWords((long) (centralShareAmount + stateShareAmount));
+
+
+
+                String shareText =
+                        apiResponse.getContent().get(0).getScCategoryName() +
+                                " ವರ್ಗದಡಿ  ಕೇಂದ್ರ : ರಾಜ್ಯ : ಫಲಾನುಭವಿ  ಪಾಲು  " +
+                                centralShare + " : " + stateShare + " : " + beneficiaryShare +
+                                " ಆಗಿರುತ್ತದೆ. " +
+                                apiResponse.getContent().get(0).getScComponentName() + "\n";
+
 
                 if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
             throw new RuntimeException("No data returned from sanction API for applicationFormId: " + requestDto.getApplicationFormId());
@@ -8925,15 +8856,15 @@ public class ReportsController {
                     "          \n" +
                     "ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getScComponentName() + "  ನೀಡಬೇಕಾಗಿದ್ದು , \n"+
                     "     \n" +
-                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + ratioText + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
+                    apiResponse.getContent().get(0).getScCategoryName() + "   ವರ್ಗದಡಿ  ಕೇಂದ್ರ  :  ರಾಜ್ಯ   :ಫಲಾನುಭವಿ  ಪಾಲು  " + centralShare + ":"  + stateShare + ":" + beneficiaryShare + "  ಆಗಿರುತ್ತ  ದೆ.   " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
                     "                \n " +
-                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " + totalPercentText+ "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + sanctionAmountStr  +  "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
+                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralShare + stateShare) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "   ಗಳನ್ನು    ಸಹಾಯಧನವಾಗಿ   ನೀಡಲಾಗುತ್ತಿ ದೆ.  ಇದರಲ್ಲಿ     ಕೇಂದ್ರ ದ\n" +
                     "             \n " +
-                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+percent50Text+"  ಅಂದರೆ   ರೂ.   " + centralShareStr + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ.25  ಅಂದರೆ   ರೂ.   " + stateShareStr  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
+                    "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralShare+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "   ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateShare+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
                     "ಮಂಡಳಿಯು   ಕೇಂದ್ರ ದ   ಪಾಲಿನ    ಅನುದಾನವನ್ನು     PFMS   ಮುಖಾಂತರ   ಒದಗಿಸಿದ್ದು     SBI, ಬ್ಯಾಂಕ್  ಬಹುಮಹಡಿ   ಕಟ್ಟ ಡ   ಶಾಖೆಯ  ಬ್ಯಾಂಕ್  ಖಾತೆಯಲ್ಲಿ  \n " +
                     "      \n " +
-                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareStr + "   ಗಳನ್ನು   ("+percent50Text+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
+                    "ಜಮೆಯಾಗಿರುತ್ತ ದೆ.   ಆದ್ದ ರಿಂದ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ  ಸಹಾಯಧನ   ರೂ.  " + centralShareAmount + "   ಗಳನ್ನು   ("+centralShare+"%)  ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ   ಭರಿಸುವುದರಿಂದ    ಇದನ್ನು    ಆಯಾ   ಜಿಲ್ಲೆ ಗಳ\n" +
                     "              \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್  ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರುಗಳ   ಕಛೇರಿಯಿಂದ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ    ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್  ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುತ್ತ ದೆ.\n " +
                     "      \n " +
@@ -8954,7 +8885,7 @@ public class ReportsController {
                     "          \n " +
                     "ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ  ಉಲ್ಲೇಖ (5)\n " +
                     "      \n " +
-                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + sanctionAmountStr +   " /-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
+                    "ರನ್ವ ಯ  ಈ  ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿ  ಸಲ್ಲಿ ಸಿದ್ದು,  ಸದರಿ   ಫಲಾನುಭವಿಗೆ   ರೂ.  " + (centralShareAmount + stateShareAmount) +   " /-ಗಳ  ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು  ಮಾಡುವಂತೆ   ಕೋರಿರುತ್ತಾ ರೆ.\n " +
                             "           \n " +
 //                    "ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ದ್ದು ,  ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ    ಸದರಿ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ  ನಕ್ಕಾ ಗಿ   ನೀಡಿರುವ  ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು\n " +
                     "ಮಂಜೂರಾತಿಗೆ   ಕೋರಲಾಗಿರುವ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಉಲ್ಲೇಖ (3)ರ  ಸರ್ಕಾರದ  ಆದೇಶದ   ರೀತ್ಯಾ    ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ  ಪ್ರ  ತ್ಯಾ ಯೋಜನೆ\n " +
@@ -8975,13 +8906,13 @@ public class ReportsController {
                     "               \n " +
                     "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
-                    totalPercentText  + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " +sanctionAmountStr  + "  /-   (  ರೂ. " +sanctionAmountWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
+                    (centralShare + stateShare)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "  /-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
                     "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
                     "       \n "+
-                    "ಪೈಕಿ   ರೂ.  " +centralShareStr  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
+                    "ಪೈಕಿ   ರೂ.  " +centralShareAmount  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
-                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareStr   + "  /-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
+                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "  /-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
             "      \n " +
                     " ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
             "       \n " +
