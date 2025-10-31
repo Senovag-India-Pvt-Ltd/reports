@@ -7357,7 +7357,7 @@ public class ReportsController {
 
             response.setHeader1("ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setHeader3("ಸಾಮಾನ್ಯ  / ವಿಶೇಷ  ಘಟಕ   ಉಪ  ಯೇಜನೆ / ಗಿರಿಜನ  ಉಪ  ಯೇಜನೆಯಡಿ  \n" +
+            response.setHeader3("ಕೇಂದ್ರ ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್   ಸಮಗ್ರ  - 2”  ಯೋಜನೆ  " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
             response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
                             "     \n " +
@@ -7369,9 +7369,9 @@ public class ReportsController {
                             "      \n "+
                                "ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n" +
                     "       \n"+
-                                        apiResponse.getContent().get(0).getVillageName() + "    ಗ್ರಾ  ಮದ    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   ರೇಷ್ಮೆ    ಹುಳು\n " +
+                                       "                     "+apiResponse.getContent().get(0).getVillageName() + "    ಗ್ರಾ  ಮದ    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,\n " +
                     "        \n " +
-                            "ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+                            "ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
             response.setHeader4        ("                    ಶ್ರೀ /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + " ( " + apiResponse.getContent().get(0).getFruitsId() +  " )   ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() + "\n" +
                             "      \n "+
                     "ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ  ಮ   " +apiResponse.getContent().get(0).getSurveyNumber() + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ   ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ  ಮನೆ   ನಿರ್ಮಿಸಲು\n " +
