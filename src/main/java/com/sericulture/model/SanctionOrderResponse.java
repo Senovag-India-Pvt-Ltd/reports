@@ -146,6 +146,12 @@ public class SanctionOrderResponse {
     private String stateShare25InWords;
     private String beneficiaryShare25InWords;
 
+    // 🆕 Central/State Share fields (added per new SQL)
+    private Float centralSharePercentage;
+    private Float stateSharePercentage;
+    private Float centralSanctionAmount;
+    private Float stateSanctionAmount;
+
 
 
 
