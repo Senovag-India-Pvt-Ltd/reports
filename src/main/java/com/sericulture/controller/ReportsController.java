@@ -8895,15 +8895,15 @@ public class ReportsController {
             response.setHeader15("");
             response.setHeader16("            ಮೇಲಿನ   ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ   ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು   ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುವಂತೆ   " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "\n " +
                     "        \n " +
-                    "ತಾಂತ್ರಿ  ಕ  ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getCategoryShortName() + "  ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + " (" +apiResponse.getContent().get(0).getFruitsId() + ")\n " +
+                    "ತಾಂತ್ರಿ  ಕ  ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getCategoryShortName() + "  ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + " (" +apiResponse.getContent().get(0).getFruitsId() + ")  ಬಿನ್ /ಕೋಂ.\n " +
                     "               \n " +
-                    "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
+                    apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
                     (centralSharePercentage + stateSharePercentage)   + "   ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  " + (centralShareAmount + stateShareAmount)+   "/-   (  ರೂ. " +totalSubsidyWords  + "  )  ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ   ಷರತ್ತು    ಮತ್ತು \n " +
                     "           \n " +
-                    "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ   ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ   ಮಾಡಿ  ಮಂಜೂರಾತಿ   ನೀಡಿದೆ.  ಈ   ಸಹಾಯದನದ \n " +
+                    "ತಗಾದೆಗಳಿಗೆ  ಸಂಬಂಧಧಿಸಿದ  ಫಲಾನುಭವಿ  ಹಾಗೂ  ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ   ಕ್ಷೇತ್ರ   ಮಟ್ಟ ದ  ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ  ಮಾಡಿ  ಮಂಜೂರಾತಿ  ನೀಡಿದೆ.  ಈ  ಸಹಾಯದನದ\n " +
                     "       \n "+
-                    "ಪೈಕಿ   ರೂ.  " +centralShareAmount  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
+                    "ಪೈಕಿ  ರೂ. " +centralShareAmount  + "/-  (ರೂ. " +centralShareWords + "   ) ಗಳು  ಕೇಂದ್ರ ದ  ಪಾಲಾಗಿ ಕೇಂದ್ರ  ರೇಷ್ಮೆ  ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
                     "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "/-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ  ಲೆಕ್ಕ \n " +
             "      \n " +
