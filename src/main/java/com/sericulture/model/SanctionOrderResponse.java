@@ -154,6 +154,13 @@ public class SanctionOrderResponse {
 
     private String description;
     private String categoryShortName;
+    private String divisionName;
+    private String username;
+
+    private String userName;
+    private Long userId;
+
+    private String userFullName;
 
 
 

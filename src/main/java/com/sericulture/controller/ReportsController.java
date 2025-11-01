@@ -8669,7 +8669,7 @@ public class ReportsController {
                 number %= 100000;
             }
             if (number >= 1000) { // Thousand
-                words.append(convertCore(number / 1000)).append(" ಸಾವಿರದ ");
+                words.append(convertCore(number / 1000)).append(" ಸಾವಿರ ");
                 number %= 1000;
             }
             if (number >= 100) { // Hundred
@@ -8819,7 +8819,7 @@ public class ReportsController {
                 if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
             throw new RuntimeException("No data returned from sanction API for applicationFormId: " + requestDto.getApplicationFormId());
         }
-            response.setHeader1("ರೇಷ್ಮೆ    ಜಂಟಿ  ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ವಿಭಾಗ,  ಬೆಂಗಳೂರುರವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
+            response.setHeader1("ರೇಷ್ಮೆ    ಜಂಟಿ  ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getDivisionName() +"   ವಿಭಾಗ,  ಬೆಂಗಳೂರುರವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
             response.setHeader4("ವಿಷಯ  : ");
             response.setHeader20( "                " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ    ಇಲಾಖೆಯು  ಕೇಂದ್ರ    ರೇಷ್ಮೆ     ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾ  ನಗೊಳಿಸುತ್ತಿ ರುವ  ಕೇಂದ್ರ\n" +
                     "                    \n" +
@@ -8851,7 +8851,7 @@ public class ReportsController {
                     "     \n" +
                     apiResponse.getContent().get(0).getScCategoryName() + " ವರ್ಗದಡಿ  ಕೇಂದ್ರ :ರಾಜ್ಯ  :ಫಲಾನುಭವಿ  ಪಾಲು " + centralSharePercentage + ":"  + stateSharePercentage + ":" + beneficiarySharePercentage + " ಆಗಿರುತ್ತ ದೆ. " + apiResponse.getContent().get(0).getScComponentName() + "\n " +
                     "                \n " +
-                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "    ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralSharePercentage +stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "/-  ಗಳನ್ನು   ಸಹಾಯಧನವಾಗಿ  ನೀಡಲಾಗುತ್ತಿ  ದೆ. ಇದರಲ್ಲಿ   ಕೇಂದ್ರ\n" +
+                    "ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "/- ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " +(centralSharePercentage +stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount)+   "/-  ಗಳನ್ನು   ಸಹಾಯಧನವಾಗಿ  ನೀಡಲಾಗುತ್ತಿ  ದೆ. ಇದರಲ್ಲಿ   ಕೇಂದ್ರ\n" +
                     "             \n " +
                     "ಪಾಲು  ಘಟಕ  ದರದ   ಶೇ."+centralSharePercentage+"  ಅಂದರೆ   ರೂ.   " + centralShareAmount + "/-  ಗಳು  ಮತ್ತು    ರಾಜ್ಯ  ದ   ಪಾಲು   ಘಟಕ  ದರದ  ಶೇ."+stateSharePercentage+"  ಅಂದರೆ   ರೂ.   " + stateShareAmount  + "/-   ಗಳು   ಆಗಿರುತ್ತ  ದೆ.   ಕೇಂದ್ರ   ರೇಷ್ಮೆ\n " +
                     "        \n " +
@@ -8866,15 +8866,15 @@ public class ReportsController {
                             "ನಿರ್ದೇಶಕರು,  ಬೆಂಗಳೂರು   ರವರು   ಖಜಾನೆ-2   ಮುಖಾಂತರ   ಬಿಡುಗಡೆಗೊಳಿಸಿ   ರಾಜ್ಯ  ದ   ಪಾಲಿನ   ಸಹಾಯಧನವನ್ನು     ಸಹ   ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿಯ\n " +
                             "     \n" +
                             "ಬ್ಯಾಂಕ್   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡಲಾಗುವುದು." );
-            response.setHeader10(  "              " +apiResponse.getContent().get(0).getDistrictName() + "   ಜಿಲ್ಲೆ  ಯ    " +apiResponse.getContent().get(0).getTalukName() + "     ತಾಲ್ಲೂ  ಕಿನ    " +apiResponse.getContent().get(0).getTscName() + "     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ    ಕೇಂದ್ರ ದ    ವ್ಯಾ  ಪ್ತಿ ಯ   " +apiResponse.getContent().get(0).getVillageName() + "     ಗ್ರಾ  ಮದಲ್ಲಿ   " +apiResponse.getContent().get(0).getScCategoryName() + "\n " +
+            response.setHeader10(  "              " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಜಿಲ್ಲೆ  ಯ    " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "     ತಾಲ್ಲೂ  ಕಿನ    " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ    ಕೇಂದ್ರ ದ    ವ್ಯಾ  ಪ್ತಿ ಯ   " +apiResponse.getContent().get(0).getVillageName() + "     ಗ್ರಾ  ಮದಲ್ಲಿ   " +apiResponse.getContent().get(0).getCategoryShortName() + "\n " +
                     "      \n " +
-                    "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "     ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ  ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ  \n " +
+                    "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + " (" +apiResponse.getContent().get(0).getFruitsId() + ")  ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ\n " +
                     "       \n " +
-                    "ಹಿಪ್ಪು  ನೇರಳೆ   ತೋಟ    ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ    " + surveyText + "    ರಲ್ಲಿ      " + apiResponse.getContent().get(0).getRhSqft() + "    ಚದರಅಡಿ   ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು\n" +
+                    "ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ    ಹಿಪ್ಪು  ನೇರಳೆ   ತೋಟ    ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ ಮದ    " + surveyText + "    ರಲ್ಲಿ      " + apiResponse.getContent().get(0).getRhSqft() + "    ಚದರಅಡಿ   ವಿಸ್ತೀ ರ್ಣದ    " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "    ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು\n" +
                     "       \n " +
                     "ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ.   " +apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ   (ಸ್ವಂತ  ವೆಚ್ಚ  /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು)  ನಿರ್ಮಿಸಿರುವುದನ್ನು    ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು\n " +
                     "     \n"+
-                    "ತಾಂತ್ರಿ  ಕ   ಸೇವಾ  ಕೇಂದ್ರ ದ     " +apiResponse.getContent().get(0).getTscName() + "  ಹಾಗೂ   ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ವಿಭಾಗ   ರವರು  ಇವರು  ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ \n " +
+                    "ತಾಂತ್ರಿ  ಕ   ಸೇವಾ  ಕೇಂದ್ರ ದ     " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ಹಾಗೂ   ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ವಿಭಾಗ   ರವರು  ಇವರು  ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ \n " +
                     "          \n " +
                     "ಅಗತ್ಯ   ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ   ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು    ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಪರಿಶೀಲಿಸಿ   ದೃಢಿಕರಿಸಿ  ಉಲ್ಲೇಖ (5)\n " +
                     "      \n " +
@@ -8895,7 +8895,7 @@ public class ReportsController {
             response.setHeader15("");
             response.setHeader16("            ಮೇಲಿನ   ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ   ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು   ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುವಂತೆ   " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "\n " +
                     "        \n " +
-                    "ತಾಂತ್ರಿ  ಕ  ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getCategoryShortName() + "  ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + "\n " +
+                    "ತಾಂತ್ರಿ  ಕ  ಸೇವಾ   ಕೇಂದ್ರ ದ     ವ್ಯಾಪ್ತಿಯ   " +apiResponse.getContent().get(0).getVillageName() + "   ಗ್ರಾ  ಮದ   " +apiResponse.getContent().get(0).getCategoryShortName() + "  ವರ್ಗಕ್ಕೆ    ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ   " +apiResponse.getContent().get(0).getFarmerFirstName() + " (" +apiResponse.getContent().get(0).getFruitsId() + ")\n " +
                     "               \n " +
                     "ಬಿನ್ /ಕೋಂ.  " +apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು   ಕೇಂದ್ರ    ಪುರಸ್ಕೃ ತ   “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”    ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ   ಮನೆಗೆ   ಘಟಕ    ದರದ   ಶೇಕಡ\n " +
                     "      \n " +
@@ -8905,9 +8905,9 @@ public class ReportsController {
                     "       \n "+
                     "ಪೈಕಿ   ರೂ.  " +centralShareAmount  + " /-  (  ರೂ.  " +centralShareWords + "   ) ಗಳು   ಕೇಂದ್ರ ದ   ಪಾಲಾಗಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ  ನೀಡಿರುವ  ಮೊತ್ತ ದಲ್ಲಿ\n " +
     "     \n" +
-                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "/-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ\n " +
+                    "ಮತ್ತು   ರಾಜ್ಯ ದ   ಪಾಲಾಗಿ  ರೂ.  " +stateShareAmount   + "/-  (  ರೂ. " +stateShareWords + "   ) ಗಳನ್ನು    ರಾಜ್ಯ    ರೇಷ್ಮೆ     ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ  ಲೆಕ್ಕ \n " +
             "      \n " +
-                    " ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  (" + apiResponse.getContent().get(0).getDescription() + ")  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
+                    "ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  (" + apiResponse.getContent().get(0).getDescription() + ")  ರಡಿ  ಖಜಾನೆ - 2 ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ   ಸಹಾಯಧನದ   ಅನದಾನದಲ್ಲಿ,   ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರುಗಳು\n " +
             "       \n " +
             "ಖಜಾನೆ-2  ರಲ್ಲಿ    ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಹಾಗೂ  ಕೇಂದ್ರ ದ  ಪಾಲಿನ   ಮೊತ್ತವನ್ನು    ಸಂಬಂಧಿಸಿದ  ಜಿಲ್ಲಾ   ಪಂಚಾಯತ್   ರೇಷ್ಮೆ   ಉಪ   ನಿರ್ದೇಶಕರುಗಳು   ಫಲಾನುಭವಿ\n " +
                             "     \n " +
@@ -8916,7 +8916,7 @@ public class ReportsController {
             "                                        ಈ ವೆಚ್ಚ ವನ್ನು    ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ   " +apiResponse.getContent().get(0).getScHeadAccountName() + "  (" + apiResponse.getContent().get(0).getDescription() +")   (  " +apiResponse.getContent().get(0).getScCategoryName() + "  ) ಅಡಿ ಭರಿಸುವುದು.");
             response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು\n" +
                     "      \n"+
-                    "        ಬೆಂಗಳೂರು ವಿಭಾಗ,   " +apiResponse.getContent().get(0).getDistrictName() + " \n");
+                    apiResponse.getContent().get(0).getDivisionName() + "   ವಿಭಾಗ\n");
             response.setHeader18("ಇವರಿಗೆ \n" +
                     "      \n"+
                     "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
