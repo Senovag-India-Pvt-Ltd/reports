@@ -5814,7 +5814,7 @@ public class ReportsController {
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
             response.setHeader(" ಸ್ವೀಕೃತಿ   ಪತ್ರ  ( ACKNOWLEDGEMENT LETTER )");
-            response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
             response.setAddressText( apiResponse.getContent().get(0).getAddressText());
@@ -5834,7 +5834,9 @@ public class ReportsController {
                     "ಈ   ನೋಂದಣಿ   ಸಂಖ್ಯೆಯನ್ನು      ಮುಂದಿನ  ವಿಚರಾಣೆಗೆ   ಉಪಯೋಗಿಸತಕದ್ದು  .");
             response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
                     "                        \n" +
-                    "______________________________  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ");
+                            apiResponse.getContent().get(0).getTscName() +"  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ");
+
+            response.setHeader2("ARN No:  " + apiResponse.getContent().get(0).getArn());
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
             response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
             response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
@@ -7369,7 +7371,7 @@ public class ReportsController {
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
             response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
                             "     \n " +
-                            "ಸಮಯದಲ್ಲಿ    ತಾಂತ್ರಿ  ಕ    ಸೇವಾ   ಕೇಂದ್ರ     " + apiResponse.getContent().get(0).getTscNameInKannada() + "  ಕ್ಕೆ    ಸೇರಿದ   ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳಾದ\n " +
+                            "ಸಮಯದಲ್ಲಿ    ತಾಂತ್ರಿ  ಕ    ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getUserTscName() + "  ಕ್ಕೆ    ಸೇರಿದ  ರೇಷ್ಮೆ  ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು\n " +
                     "      \n " +
                             "ಶ್ರೀ /ಶ್ರೀ ಮತಿ     " + apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ  "  + apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    ಸರ್ವೆ   ನಂಬರು   " + apiResponse.getContent().get(0).getSurveyNumber()  + "\n" +
                             "    \n " +
@@ -7382,9 +7384,11 @@ public class ReportsController {
                             "ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
             response.setHeader4        ("                    ಶ್ರೀ /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + " ( " + apiResponse.getContent().get(0).getFruitsId() +  " )   ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() + "\n" +
                             "      \n "+
-                    "ರವರು   " +apiResponse.getContent().get(0).getLandVillage()+"   ಗ್ರಾ  ಮ   " +surveyText + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ   ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ  ಮನೆ   ನಿರ್ಮಿಸಲು\n " +
+                            apiResponse.getContent().get(0).getVillageName() + "     ರವರು   " +apiResponse.getContent().get(0).getLandVillage()+"   ಗ್ರಾ  ಮ   " +surveyText + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ  \n " +
                                     "    \n" +
-                                    "ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getArn() + "   ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ");
+                                    "ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ     ಮನೆ   ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getArn() + "\n " +
+                            "     \n" +
+                            "ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ");
             response.setHeader5("ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು,\n" +
                     "     \n"+
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,\n" +

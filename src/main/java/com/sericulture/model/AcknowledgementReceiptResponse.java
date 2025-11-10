@@ -44,4 +44,5 @@ public class AcknowledgementReceiptResponse {
     private String vendorAccountNumber;
     private String vendorUPI;
     private String talukNameInKannada;
+    private String tscName;
 }
