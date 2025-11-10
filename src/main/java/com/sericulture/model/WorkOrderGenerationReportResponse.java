@@ -75,6 +75,8 @@ public class WorkOrderGenerationReportResponse {
     private String userTscName;
     private String createdTime;
     private String categoryName;
+    private String landVillage;
+    private String kaneshNo;
 
 
 

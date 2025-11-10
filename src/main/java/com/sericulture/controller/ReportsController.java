@@ -7353,11 +7353,19 @@ public class ReportsController {
                     }
                 }
             }
+            String surveyNumber = Util.objectToString(apiResponse.getContent().get(0).getSurveyNumber());
+            String kaneshNo = Util.objectToString(apiResponse.getContent().get(0).getKaneshNo());
 
+            String surveyText = "";
+            if (!surveyNumber.isEmpty()) {
+                surveyText = "ಸರ್ವೆ ನಂ. " + surveyNumber;
+            } else if (!kaneshNo.isEmpty()) {
+                surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
+            }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/ಸಿಲ್ಕ್   ಸಮಗ್ರ  /"  +apiResponse.getContent().get(0).getCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setHeader3("ಕೇಂದ್ರ   ಪುರಸ್ಕೃ ತ     “ಸಿಲ್ಕ್    ಸಮಗ್ರ  - 2”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
+            response.setHeader3("ಕೇಂದ್ರ   ವಲಯ    “ಸಿಲ್ಕ್    ಸಮಗ್ರ  - 2”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
             response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
                             "     \n " +
@@ -7374,7 +7382,7 @@ public class ReportsController {
                             "ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
             response.setHeader4        ("                    ಶ್ರೀ /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + " ( " + apiResponse.getContent().get(0).getFruitsId() +  " )   ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() + "\n" +
                             "      \n "+
-                    "ರವರು   " +apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ  ಮ   " +apiResponse.getContent().get(0).getSurveyNumber() + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ   ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ  ಮನೆ   ನಿರ್ಮಿಸಲು\n " +
+                    "ರವರು   " +apiResponse.getContent().get(0).getLandVillage()+"   ಗ್ರಾ  ಮ   " +surveyText + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ   ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ  ಮನೆ   ನಿರ್ಮಿಸಲು\n " +
                                     "    \n" +
                                     "ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getArn() + "   ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ");
             response.setHeader5("ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು,\n" +
@@ -7388,7 +7396,7 @@ public class ReportsController {
                     "     \n"+
                     "ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿ ಕ ಸೇವಾ ಕೇಂದ್ರ  ,  " + apiResponse.getContent().get(0).getUserTscName() + " .\n" +
                     "     \n"+
-                    "ಸಂಬಂಧಿಸಿದ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ,\n");
+                    "ಸಂಬಂಧಿಸಿದ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ\n");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
@@ -8870,9 +8878,9 @@ public class ReportsController {
                     "      \n " +
                     "ವರ್ಗಕ್ಕೆ     ಸೇರಿದ   ಶ್ರೀ  /ಶ್ರೀ  ಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + " (" +apiResponse.getContent().get(0).getFruitsId() + ")  ಬಿನ್ /ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan() + "  ಇವರು   " +apiResponse.getContent().get(0).getLandVillage() + "   ಗ್ರಾ ಮದ   ಸರ್ವೆ  ನಂ   " +apiResponse.getContent().get(0).getSurveyNumber() + "    ರಲ್ಲಿ   " +apiResponse.getContent().get(0).getExtentOfMulberry() + "  ಎಕರೆ\n " +
                     "       \n " +
-                    "ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ    ಹಿಪ್ಪು  ನೇರಳೆ   ತೋಟ  ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getLandVillage() + "   ಗ್ರಾ ಮದ   " + surveyText + "  ರಲ್ಲಿ     " + apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಅಡಿ   ವಿಸ್ತೀ ರ್ಣದ   " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "   ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ   ಹುಳು\n" +
+                    "ವಿಸ್ತೀ ರ್ಣದಲ್ಲಿ    ಹಿಪ್ಪು  ನೇರಳೆ   ತೋಟ  ಹೊಂದಿದ್ದು ,  " + apiResponse.getContent().get(0).getLandVillage() + "   ಗ್ರಾ ಮದ   " + surveyText + "  ರಲ್ಲಿ     " + apiResponse.getContent().get(0).getRhSqft() + "   ಚದರಅಡಿ   ವಿಸ್ತೀ ರ್ಣದ   " +apiResponse.getContent().get(0).getRoofTypeNameInKannada() + "   ಮೇಲ್ಚಾ  ವಣಿಯ  ಪ್ರ  ತ್ಯೇಕ  ರೇಷ್ಮೆ \n" +
                     "       \n " +
-                    "ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ. " +apiResponse.getContent().get(0).getEstimatedCost() + "   ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ    (ಸ್ವಂತ  ವೆಚ್ಚ  /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು)   ನಿರ್ಮಿಸಿರುವುದನ್ನು     ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು\n " +
+                    "ಹುಳು  ಸಾಕಾಣಿಕೆ  ಮನೆಯನ್ನು    ಅಂದಾಜು   ರೂ. " +apiResponse.getContent().get(0).getEstimatedCost() + "   ಲಕ್ಷ  ಗಳ  ವೆಚ್ಚ  ದಲ್ಲಿ    (ಸ್ವಂತ  ವೆಚ್ಚ  /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು)   ನಿರ್ಮಿಸಿರುವುದನ್ನು     ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು\n " +
                     "     \n"+
                     "ತಾಂತ್ರಿ  ಕ   ಸೇವಾ  ಕೇಂದ್ರ ದ     " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ಹಾಗೂ   ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ವಿಭಾಗ   ರವರು  ಪರಿಶೀಲಿಸಿ   ದೃ  ಢೀಕರಿಸಿ   ಸಲ್ಲಿ  ಸಿದ   ಎಲ್ಲಾ \n " +
                     "          \n " +
@@ -8890,7 +8898,7 @@ public class ReportsController {
                             "ಈ  ಕೆಳಕಂಡ  ಆದೇಶವನ್ನು   ಹೊರಡಿಸಿದೆ. ");
             response.setHeader11("");
             response.setHeader12("ಆದೇಶ ");
-            response.setHeader13("ಸಂಖ್ಯೆ  : ರೇಜಂನಿ / " +shortDistrictKannada  +  " ವಿ / ತಾಂ / ರೇಹುಸಾಮ / ಸಧನ ಮಂ / " +apiResponse.getContent().get(0).getScCategoryName() + " / "+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate + "\n");
+            response.setHeader13("ಸಂಖ್ಯೆ  : ರೇಜಂನಿ/ " +shortDistrictKannada  +  " ವಿ /ತಾಂ/ “ಸಿಲ್ಕ್   ಸಮಗ್ರ   - 2”/" +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + " /ರೇಹುಸಾಮ/ಸಧನ/ಸಾ/ಮಂ/" +apiResponse.getContent().get(0).getScCategoryName() + " / "+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate + "\n");
             response.setHeader14("ದಿನಾಂಕ ");
             response.setHeader15("");
             response.setHeader16("            ಮೇಲಿನ   ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವಂತೆ   ರೇಷ್ಮೆ    ಉಪನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು   ಶಿಫಾರಸ್ಸು    ಮಾಡಿರುವಂತೆ   " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "\n " +
