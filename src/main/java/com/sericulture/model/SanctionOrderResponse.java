@@ -88,7 +88,8 @@ public class SanctionOrderResponse {
     private String spacingName;
     private String referenceNo;
     private String tscName;
-    private int serialNumber;
+    // new
+    private Integer serialNumber;
     private int index;
     private Long applicationFormId;
     private String farmerMiddleName;
@@ -184,6 +185,8 @@ public class SanctionOrderResponse {
     private Long machineQuantity;
     private Float incentiveAmountPerKg;
     private String numberOfBasins;
+    private Float max;
+    private Date currentDate;
 
 
 
