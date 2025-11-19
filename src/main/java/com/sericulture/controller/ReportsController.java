@@ -6931,6 +6931,7 @@ public class ReportsController {
         String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+        String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
         // ✅ Clean formatted date for sanction order
@@ -6964,15 +6965,12 @@ public class ReportsController {
                 "            \n"+
                 "3) ರೇಷ್ಮೆ    ಆಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು , ಇವರ ಜ್ಞಾಪನ \n" +
                 "            \n"+
-                "     ಪಿ.ಎಸ್.5/ಬೆಸ್ತಿನಿಅಅಕಾ/52/2023-24  ದಿನಾ೦ಕ :-12/10/2023\n" +
+                "     ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getDeptDeleNo() + " ದಿನಾಂಕ :  " +deptDeleDate  + " \n" +
                 "            \n"+
-                "4) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು , ಮಾಗಡಿ  ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  /ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ  /ವಂ.ಮ.ಹ೦/\n" +
+                "4) ರೇಷ್ಮೆ  ಉಪ ನಿರ್ದೇಶಕರು , "+apiResponse.getContent().get(0).getLoggedinUserDistrictName() + " ರವರ  ಜ್ಞಾಪನ  ಪತ್ರದ   \n" +
                 "            \n"+
-                "     20/2024-25  ದಿನಾ೦ಕ :- 06/03/2025\n" +
+                "     ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSReleaseNo() + " ದಿನಾಂಕ :  " +sReleaseDate  + "\n" +
                 "               \n" +
-                "5) ಪ್ರತ್ಯಾಯೋಜನೆಯ  ಅಧಿಕಾರ  ಪರಿಷ್ಕರಿಸಿರುವ  ಸರ್ಕಾರದ  ಆದೇಶ  ಸ೦ಖ್ಯೆ  :ತೋಇ  61 ರೇಕೃವಿ  2019  ಬೆ೦ಗಳೂರು.\n" +
-                "            \n"+
-                "     ದಿನಾ೦ಕ:-22/08/2023            \n"+
                 "                           \n"+
                 "                           \n"+
                 "          ಮೈಸೂರು  ಬಿತ್ತನೆ.  ವಲಯದಲ್ಲಿ   ಬೆಳೆದ  ಶುದ್ಧ   ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ.  ಗೂಡುಗಳು  ಬಿತ್ತನೆಗೆ  ಯೋಗ್ಯವಾಗಿದ್ದು .\n" +
@@ -6994,7 +6992,7 @@ public class ReportsController {
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
         long amountLong = amountFloat.longValue();
 
-        String amountInWords = NumberToWordsConverter.convert(amountLong);
+        String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
         response.setHeader5("              ಮೇಲ್ಕಂಡ   ಉಲ್ಲೇಖ   (1)  ರಿ೦ದ  (4) ರ  ಸುತ್ತೋಲೆ , ಜ್ಞಾಪನ , ಆದೇಶಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ\n" +
                 "            \n"+
@@ -7004,14 +7002,14 @@ public class ReportsController {
                 "             \n" +
                 "(5)  ರಂತೆ   ಕೆಳಸಹಿದಾರರಿಗೆ  ಅಧಿಕಾರ  ಪ್ರಾಪ್ತವಿದ್ದು   ಕೆಳಕ೦ಡ೦ತೆ  ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
-        response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬೋನಸ್:ಮ೦/06/2024-25  ದಿನಾ೦ಕ:-06/03/2025");
+        response.setHeader6("ಮಂಜೂರಾತಿ  ಅದೇಶ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬೋನಸ್:ಮ೦ /"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ: "+ formattedDate);
         response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  , " +apiResponse.getContent().get(0).getUserMarket() + " ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02\n" +
                 "            \n"+
                 "ಜನ  ಮೈಸೂರು  ಬಿತ್ತನೆ  ತಳಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ   " +apiResponse.getContent().get(0).getCocoonsWeight() + " ಕೆ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ   ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರ೦ತೆ ಒಟ್ಟು \n" +
                 "            \n"+
                 "ರೂ  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " (ರೂಪಾಯಿ " + amountInWords +"  ರೂ ಮಾತ್ರ ) ಗಳಿಗೆ ಮ೦ಜೂರು ಮಾಡಿದೆ.  ಸದರಿ   ವೆಚ್ಚವನ್ನು\n" +
                 "            \n"+
-                "ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ  ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  ________________________ ರಲ್ಲಿ   \n" +
+                "ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ನಿಧಿ  ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  " +apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಲ್ಲಿ   \n" +
                 "       \n"+
                 "ಭರಿಸಲು  ಮ೦ಜೂರಾತಿ   ನೀಡಿದೆ.");
         response.setHeader8("ಇವರಿಗೆ,\n" +
@@ -7253,6 +7251,7 @@ public class ReportsController {
         String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+        String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
 
@@ -7315,7 +7314,7 @@ public class ReportsController {
                 "            \n"+
                 "3) ರೇಷ್ಮೆ    ಉಪ ನಿರ್ದೇಶಕರು,  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "  ರವರ ಜ್ಞಾಪನ ಪತ್ರದ \n" +
                 "            \n"+
-                "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
+                "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "   ದಿನಾಂಕ : " +sReleaseDate + " \n" +
                 "            \n"+
                 "4) ಸರ್ಕಾರದ  ಪ್ರತ್ಯಾಯೋಜನೆ   ಆದೇಶ   ಸ೦ಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n " +
                 "            \n"+
@@ -7348,7 +7347,7 @@ public class ReportsController {
                 "                 \n"+
                 "ಪ್ರಾಪ್ತವಿದ್ದು     ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
 
-        response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಪೋ್ರೋ:ಮ೦ /"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate+"\n");
+        response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಪೋ್ರೋ:ಮ೦ /"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
         response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ \n" +
                 "            \n"+
@@ -7356,7 +7355,7 @@ public class ReportsController {
                 "            \n"+
                 "(ರೂಪಾಯಿ " + amountInWords +"  ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ  ಮ೦ಜೂರು ಮಾಡಿದೆ ಸದರಿ ವೆಚ್ಚವನ್ನು \n" +
                 "            \n"+
-                "ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ  ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getCocoonsWeight() + " ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
+                "ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ  ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ   "+apiResponse.getContent().get(0).getScHeadAccountName() + " ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
         response.setHeader8("ಇವರಿಗೆ,\n" +
                 "            \n"+
                 "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
@@ -7436,6 +7435,62 @@ public class ReportsController {
 
         List<SanctionOrderResponse> sanctionOrderResponseList= new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
+
+        // ✅ Date formatter
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // ✅ Format date fields safely
+        String admGovtDate = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
+        String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
+        String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
+        String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
+        String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+        String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+        String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+
+
+        // ✅ Clean formatted date for sanction order
+        // ✅ Clean formatted date for sanction order
+        String formattedDate1 = "";
+        try {
+            // Example input: Wed Nov 19 05:30:00 IST 2025
+            String inputDate = apiResponse.getContent().get(0).getCurrentDate().toString();
+
+            // Input format (Java default Date.toString())
+            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+
+            // Output format → what you want
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            Date date = inputFormat.parse(inputDate);
+            formattedDate1 = outputFormat.format(date);
+
+        } catch (Exception e) {
+            // fallback
+            formattedDate1 = String.valueOf(apiResponse.getContent().get(0).getCurrentDate());
+        }
+
+
+
+        // ✅ Clean formatted date for sanction order
+// ✅ Clean formatted date for sanction order
+        String formattedDate = "";
+        try {
+            String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+            // Parse input format
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+            // Define output format
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            // Convert and format
+            Date date = inputFormat.parse(inputDate);
+            formattedDate = outputFormat.format(date);
+
+        } catch (Exception e) {
+            formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+        }
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ  ಕಚೇರಿ  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ  " +apiResponse.getContent().get(0).getUserMarket() + "  ದಿನಾ೦ಕ:  " +apiResponse.getContent().get(0).getMarketAuctionDate() );
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
@@ -7443,28 +7498,28 @@ public class ReportsController {
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
         long amountLong = amountFloat.longValue();
 
-        String amountInWords = NumberToWordsConverter.convert(amountLong);
+        String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
         response.setHeader1( "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಸರ್ಕಾರಿ  ಬಿತ್ತನೆ  ಕೋಠಿಗಳಿಗೆ ಬಿತ್ತನೆ  ಗೂಡು  ಖರೀಸಿದ\n" +
                 "            \n"+
                 " ಬಾಬ್ತು   ರೂ  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " /- ಗಳಿಗೆ  ಮಂಜೂರಾತಿ  ವೀಡುವ ಬಗ್ಗೆ.\n" +
                 "            \n"+
-                "1) ರೇಷ್ಮೆ   ಕೃಷಿ  ಆಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ  ರೇಷ್ಮೆ    ವಿರ್ದೇಶಕರು,  ಬೆ೦ಗಳೂರು  ರವರ  ಸುತ್ತೋಲೆ  ಪತ್ರದ ಸ೦ಖ್ಯೆ  :\n" +
+                "1) ರೇಷ್ಮೆ   ಕೃಷಿ  ಆಭಿವೃದ್ಧಿ    ಆಯುಕ್ತರು ಹಾಗೂ  ರೇಷ್ಮೆ    ವಿರ್ದೇಶಕರು,  ಬೆ೦ಗಳೂರು  ರವರ  ಸುತ್ತೋಲೆ  ಪತ್ರದ \n" +
                 "            \n"+
-                "     ತಾ೦01:ರೇ:ಬಿ: ರೇಷ್ಮೆ   :ಬಿಗೂಖ: 08.2011-12  ದಿನಾ೦ಕ: 16/08/2011\n" +
+                "   ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
                 "                     \n" +
-                "2) ರೇಷ್ಮೆ     ಉಪ ವಿರ್ದೇಶಕರು, ಮಾಗಡಿ  ರವರ ಜ್ನಾಪನ  ಪತ್ರದ ಸ೦ಖ್ಯೆ    ಸ೦ಖ್ಯೆ   /ರೇಉವನಿ/ಮಾ/ಲೆಕ್ಕ /ವ೦.ಮ.ಹ೦/\n" +
+                "2) ರೇಷ್ಮೆ     ಉಪ ವಿರ್ದೇಶಕರು,  "+apiResponse.getContent().get(0).getLoggedinUserTalukName() + "  ರವರ ಜ್ನಾಪನ  ಪತ್ರದ \n" +
                 "                     \n" +
-                "     20/2024-25  ದಿನಾ೦ಕ:-05/03/2025\n" +
+                "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "   ದಿನಾಂಕ : " +sReleaseDate + " \n" +
                 "                    \n" +
-                "3) ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ   :ಸಿ.ಪಿ:267: ಎಸ್.ಎಲ್.ಎಸ್:78  ದಿನಾ೦ಕ: 01/06/1981ರ ಭಾಗ ||| ರ ಕ್ರಮ   ಸ೦ಖ್ಯೆ   3 ರಂತೆ.\n" +
+                "3) ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ  ಸ೦ಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " ರ ಭಾಗ ||| ರ ಕ್ರಮ   ಸ೦ಖ್ಯೆ   3 ರಂತೆ.\n" +
                 "                     \n" +
                 "                                                                      ***************                   \n" +
                 "            \n"+
                 "            \n"+
                 "              ಉಲ್ಲೇಖ  (1)  ರಿ೦ದ (3) ರ  ವರೆಗಿನ  ಆದೇಶ, ಸುತ್ತೋಲೆ  ಹಾಗೂ  ಜ್ನ್ಞಾಪನಗಳಲ್ಲಿ    ಸೂಚಿಸಿರುವಂತೆ.  ಸರ್ಕಾರಿ \n" +
                 "            \n"+
-                "ರೇಷ್ಮೆ    ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸಂಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ:- 08/03/2025 ರಿ೦ದ  11/03/2025ರ  ವರೆಗೆ, ಸರ್ಕಾರಿ\n" +
+                "ರೇಷ್ಮೆ    ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸಂಸ್ಮೆಯಲ್ಲಿ    ದಿನಾ೦ಕ:"+ formattedDate1 +"ರ  ವರೆಗೆ, ಸರ್ಕಾರಿ\n" +
                 "            \n"+
                 "ಬಿತ್ತನೆ   ಕೋಠಿಗಳ ಉಪಯೋಗಕ್ಕಾಗಿ   ಮೈಸೂರು  ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು   , ಈ ಕೆಳಕಂಡ ರೈತರಿ೦ದ  ಖರೀದಿಸಿದ  ಗೂಡಿನ\n" +
                 "            \n"+
@@ -7477,16 +7532,16 @@ public class ReportsController {
                 "            \n"+
                 "ಸದರಿ   ವೆಚ್ಚವನ್ನು    ಬೆಲೆ  ಸ್ಥಿರೀಕರಣ  ವಿಧಿ ಅನುದಾನದಿ೦ದ  ಅನುಷ್ಕಾನಗೊಳ್ಳುವ  ಕಾರ್ಯಕ್ರಮಗಳು  ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ  \n" +
                 "            \n"+
-                "_________________________ರಲ್ಲಿ    ಭರಿಸಲು ಮ೦ಜೂರಾತಿ ನೀಡಿದೆ.\n");
+                apiResponse.getContent().get(0).getScHeadAccountName() + "  ರಲ್ಲಿ    ಭರಿಸಲು ಮ೦ಜೂರಾತಿ ನೀಡಿದೆ.\n");
 
-        response.setHeader6(" ( Rupees." +amountInWords + " Only )");
+        response.setHeader6(" ( Rupees." +amountInWords + " )");
         response.setHeader7("ಸಂ:ರೇಸನಿ:ರೇಗೂಮಾ :" +apiResponse.getContent().get(0).getUserMarket() + ": ಬಿಗೂಐ:ಮಂ:02:2024-25 ");
         response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
                 "            \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 "            \n"+
                 apiResponse.getContent().get(0).getUserMarket() +  " \n");
-        response.setHeader8("ಮಂಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:" +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಖ:ಮಂ:02:2024-25 ದಿನಾ೦ಕ:13/03/2025");
+        response.setHeader8("ಮಂಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:" +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಖ:ಮಂ:"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate+"\n");
         response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
         response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
         response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());

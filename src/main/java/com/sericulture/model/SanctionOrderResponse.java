@@ -188,6 +188,9 @@ public class SanctionOrderResponse {
     private Float max;
     private Date currentDate;
 
+    private String sReleaseNo;
+    private Date sReleaseDate;
+
 
 
 
