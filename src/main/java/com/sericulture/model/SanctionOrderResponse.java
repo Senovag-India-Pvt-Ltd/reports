@@ -112,6 +112,7 @@ public class SanctionOrderResponse {
     private String userDistrict;
     private String userMarket;
     private Float totalCocoonsWeight;
+    private Float totalCocoonsWeights;
     private String  loggedinUserDistrictName;
     private String loggedinUserTalukName;
     private String loggedinUserTscName;
@@ -140,13 +141,11 @@ public class SanctionOrderResponse {
     private Float stateShare25;
     private Float beneficiaryShare25;
 
-    // 🆕 Kannada amount-in-words fields
     private String sanctionAmount75InWords;
     private String centralShare50InWords;
     private String stateShare25InWords;
     private String beneficiaryShare25InWords;
 
-    // 🆕 Central/State Share fields (added per new SQL)
     private Float centralSharePercentage;
     private Float stateSharePercentage;
     private Float centralSanctionAmount;
@@ -162,6 +161,29 @@ public class SanctionOrderResponse {
 
     private String userFullName;
     private String landVillage;
+
+
+    private String reelerNumber;
+    private String reelerName;
+    private String reelerFatherName;
+    private Float schemeAmount;
+    private Float amountPerKg;
+    private String rendittaGrade;
+    private String silkTableBasinEnds;
+    private String noOfCocoonsNeedToProduce;
+    private String noOfRawSilkProduced;
+    private String raceName;
+    private String renditta;
+    private String silkTable;
+    private String form17jNo;
+    private String dailyLimit;
+    private Long machineTypeId;
+    private String machineTypeName;
+    private String roofTypeName;
+    private String createdDate;
+    private Long machineQuantity;
+    private Float incentiveAmountPerKg;
+    private String numberOfBasins;
 
 
 

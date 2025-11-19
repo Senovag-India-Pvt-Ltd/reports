@@ -16,5 +16,8 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private int schemeId;
     private int userMasterId;
     private int subSchemeId;
+    private int componentId;
+    private String sanctionOrderNumber;
+
     private List<Long> applicationFormIds;
 }

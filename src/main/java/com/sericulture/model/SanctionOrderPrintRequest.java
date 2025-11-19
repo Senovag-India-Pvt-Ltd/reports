@@ -22,5 +22,8 @@ public class SanctionOrderPrintRequest extends LotStatusRequest {
     private int subSchemeId;
     private int categoryId;
     private List<Integer> applicationFormIdss;
+    private String type;
+    private int componentId;
+    private String sanctionOrderNumber;
 
 }

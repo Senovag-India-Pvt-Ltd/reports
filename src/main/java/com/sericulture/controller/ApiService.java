@@ -1,5 +1,6 @@
 package com.sericulture.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sericulture.helper.Util;
 import com.sericulture.model.*;
@@ -20,6 +21,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -33,6 +35,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ApiService {
@@ -274,6 +279,30 @@ public class ApiService {
         //return apiResponse;
     }
 
+
+    public SanctionOrder fetchDataFromSilkIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl = dbtApiUrl +"service/sanctionOrderSilkIncentive";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderSilkIncentive";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SanctionOrderResponse response = new SanctionOrderResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response2 = objectMapper.readValue(response1, SanctionOrder.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
     public SanctionOrder fetchDataFromSeedCocoon(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
         String finalapiurl = dbtApiUrl +"service/getSanctionOrderForK2";
@@ -395,6 +424,41 @@ public class ApiService {
             throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
         }
     }
+
+
+
+    public List<SanctionOrderResponse> fetchDataOfSanctionAndAll(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException {
+
+        String finalapiurl = "http://localhost:8013/dbt/pdfDownload";
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("schemeId", requestDto.getSchemeId());
+        body.put("subSchemeId", requestDto.getSubSchemeId());
+        body.put("componentId", requestDto.getComponentId());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        try {
+            ResponseEntity<String> response =
+                    restTemplate.postForEntity(finalapiurl, requestEntity, String.class);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            return objectMapper.readValue(
+                    response.getBody(),
+                    new TypeReference<List<SanctionOrderResponse>>() {}
+            );
+
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to fetch sanction data: " + ex.getMessage(), ex);
+        }
+    }
+
 
 
     public AcknowledgementResponse fetchAcknowledgementPmksy(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
