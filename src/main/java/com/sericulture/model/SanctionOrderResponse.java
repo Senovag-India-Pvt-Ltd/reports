@@ -239,6 +239,15 @@ public class SanctionOrderResponse {
     private Long  totalFarmers;
 
 
+    private Float totalSubsidyAmountCa;
+
+    private Float transportAmount;
+    private Float totalTransportAmount;
+
+    private Float incentiveAmount;
+    private Float totalIncentiveAmount;
+
+
 
 
 }
