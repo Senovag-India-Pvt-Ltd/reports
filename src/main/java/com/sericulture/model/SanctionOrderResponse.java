@@ -227,7 +227,14 @@ public class SanctionOrderResponse {
     private String crcName;
     private String grainageMasterName;
 
-    private String totalNoOfDfls;
+
+    private Float schemeAmounts;
+    private Float totalQuantityOfCocoonsProduced;
+    private Float totalNoOfDfls;
+
+    public Float getSchemeAmounts() { return schemeAmounts; }
+    public void setSchemeAmounts(Float schemeAmounts) { this.schemeAmounts = schemeAmounts; }
+
 
 
 
