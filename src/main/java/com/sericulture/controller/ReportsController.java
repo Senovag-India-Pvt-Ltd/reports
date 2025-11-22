@@ -9911,6 +9911,10 @@ public class ReportsController {
         // ✅ NEW
         float totalTransportAmount = 0f;
 
+// NEW: totals
+        int   totalNoOfDfls     = 0;
+        float totalQtyCocoons   = 0f;
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         String admGovtDate        = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
@@ -10088,18 +10092,32 @@ public class ReportsController {
                     sanctionOrderResponse.setUnitCost(0f);
                 }
 
+                // --- NEW: parse DFLs safely for total ---
+                int noOfDflsRow = 0;
+                try {
+                    if (sanctionOrderResponse.getNoOfDfls() != null) {
+                        noOfDflsRow = Integer.parseInt(sanctionOrderResponse.getNoOfDfls().trim());
+                    }
+                } catch (Exception e) {
+                    noOfDflsRow = 0;
+                }
+                totalNoOfDfls += noOfDflsRow;
+
+// --- safe qty + unitCost for calculation ---
                 Float qty = sanctionOrderResponse.getQuantityOfCocoonsProduced();
                 if (qty == null) qty = 0f;
 
                 Float unitCostRow = sanctionOrderResponse.getUnitCost();
                 if (unitCostRow == null) unitCostRow = 0f;
 
+// row = qty * unit_cost
                 float schemeAmountRow = qty * unitCostRow;
-
                 sanctionOrderResponse.setSchemeAmounts(schemeAmountRow);
-
                 sanctionOrderResponse.setTransportAmount(schemeAmountRow);
+
+// NEW: accumulate totals
                 totalTransportAmount += schemeAmountRow;
+                totalQtyCocoons += qty;
 
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
@@ -10107,7 +10125,12 @@ public class ReportsController {
             }
         }
         // ✅ After detail loop finishes
+// ✅ After detail loop finishes
         response.setTotalTransportAmount(totalTransportAmount);
+
+// NEW: expose totals for report
+        response.setTotalNoOfDfls((float) totalNoOfDfls);
+        response.setGrandTotalQuantityOfCocoonsProduced(totalQtyCocoons);
 
 
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
@@ -10122,6 +10145,10 @@ public class ReportsController {
 
         // ✅ NEW
         float totalIncentiveAmount = 0f;
+        int   totalNoOfDfls     = 0;
+        float totalQtyCocoons   = 0f;
+
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         String admGovtDate        = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
@@ -10140,13 +10167,12 @@ public class ReportsController {
             formattedDate = apiResponse.getContent().get(0).getDate().toString();
         }
 
-//        Float totalAmount  = apiResponse.getContent().get(0).getTotalSchemeAmount(); // 2700
-//        long  totalLong    = totalAmount.longValue();
-//        String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(totalLong);
+        Float totalAmount = totalIncentiveAmount;
+        long totalLong = (long) totalIncentiveAmount;
+        String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(totalLong);
 
-                Float totalAmount = apiResponse.getContent().get(0).getTotalSchemeAmount();
-        long totalLong = 0L;
-        String amountInWords = "";
+
+
 
         if (totalAmount != null) {
             totalLong = totalAmount.longValue();
@@ -10288,13 +10314,40 @@ public class ReportsController {
                 if (sanctionOrderResponse.getUnitCost() == null) {
                     sanctionOrderResponse.setUnitCost(0f);
                 }
+                // NEW: safe defaults for quantity & unit cost
+                if (sanctionOrderResponse.getQuantityOfCocoonsProduced() == null) {
+                    sanctionOrderResponse.setQuantityOfCocoonsProduced(0f);
+                }
+                if (sanctionOrderResponse.getUnitCost() == null) {
+                    sanctionOrderResponse.setUnitCost(0f);
+                }
+
+// NEW: parse DFLs for total
+                int noOfDflsRow = 0;
+                try {
+                    if (sanctionOrderResponse.getNoOfDfls() != null) {
+                        noOfDflsRow = Integer.parseInt(sanctionOrderResponse.getNoOfDfls().trim());
+                    }
+                } catch (Exception e) {
+                    noOfDflsRow = 0;
+                }
+                totalNoOfDfls += noOfDflsRow;
+
+// safe values for multiplication
                 Float qty = sanctionOrderResponse.getQuantityOfCocoonsProduced();
+                if (qty == null) qty = 0f;
+
                 Float unitCostRow = sanctionOrderResponse.getUnitCost();
+                if (unitCostRow == null) unitCostRow = 0f;
 
+// row = qty * unit_cost
                 float incentiveAmountRow = qty * unitCostRow;
-
                 sanctionOrderResponse.setIncentiveAmount(incentiveAmountRow);
+
+// NEW: accumulate totals
                 totalIncentiveAmount += incentiveAmountRow;
+                totalQtyCocoons += qty;
+
 
 
                 if (sanctionOrderResponse.getAverageYield() == null) {
@@ -10313,6 +10366,10 @@ public class ReportsController {
 
         }
         response.setTotalIncentiveAmount(totalIncentiveAmount);
+
+// NEW: expose totals to Jasper
+        response.setTotalNoOfDfls((float) totalNoOfDfls);
+        response.setGrandTotalQuantityOfCocoonsProduced(totalQtyCocoons);
 
 
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
