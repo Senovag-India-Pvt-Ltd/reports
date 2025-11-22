@@ -191,6 +191,39 @@ public class SanctionOrderResponse {
     private String sReleaseNo;
     private Date sReleaseDate;
 
+    /* CONFIGURE BIVOLTINE AMOUNT */
+    private Float unitPrice;
+    private Float unitCost;
+    private Float subsidyAmount;
+
+    /* COMMERCIAL MARKET DATA */
+    private Long raceMasterId;
+    private Long grainageId;
+    private String receiptNo;
+    private String cdcmTransactionDate;
+
+    private String lotNo;
+    private String noOfDfls;
+
+    private Object dateOfBrushing;
+    private Object dateOfDistribution;
+
+    private Float chawkiPercentage;
+    private Object spunOnDate;
+
+    private Float quantityOfCocoonsProduced;
+    private Float averageYield;
+
+    private Long marketId;
+    private String cdcmBiddingSlipNo;
+
+    private Float cocoonRatePerKg;
+    private Object spunOnToDate;
+
+    private String crcName;
+    private String grainageMasterName;
+
+
 
 
 
