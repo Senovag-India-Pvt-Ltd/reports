@@ -232,10 +232,11 @@ public class SanctionOrderResponse {
     private Float totalQuantityOfCocoonsProduced;
     private Float totalNoOfDfls;
 
-    public Float getSchemeAmounts() { return schemeAmounts; }
-    public void setSchemeAmounts(Float schemeAmounts) { this.schemeAmounts = schemeAmounts; }
-
-
+    private Float grandTotalSubsidyAmount;
+    private Float grandTotalNoOfDfls;
+    private Float grandTotalSchemeAmount;
+    private Float grandTotalQuantityOfCocoonsProduced;
+    private Long  totalFarmers;
 
 
 
