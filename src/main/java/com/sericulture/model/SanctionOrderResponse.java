@@ -195,6 +195,10 @@ public class SanctionOrderResponse {
     private Float unitPrice;
     private Float unitCost;
     private Float subsidyAmount;
+    private Float subsidyAmountCa;
+
+    private Float totalSubsidyAmount;
+
 
     /* COMMERCIAL MARKET DATA */
     private Long raceMasterId;
@@ -222,6 +226,8 @@ public class SanctionOrderResponse {
 
     private String crcName;
     private String grainageMasterName;
+
+    private String totalNoOfDfls;
 
 
 
