@@ -332,23 +332,45 @@ public class ReportsController {
     }
 
     @PostMapping("/sanction-silk-incentive")
-    public ResponseEntity<?> getSanctionSilkIncentive(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    public ResponseEntity<?> getSanctionSilkIncentive(@RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to seed cocoon");
-            logger.info("enter to seed cocoon");
-            String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("sanctionOrderSilkIncentive.jrxml");
 
-            JRDataSource dataSource = getDataSourceForSanctionSilkIncentive(requestDto);
+            // Get the FULL list (header + detail + total)
+            JRBeanCollectionDataSource fullDs = getDataSourceForSanctionSilkIncentive(requestDto);
+            @SuppressWarnings("unchecked")
+            List<SanctionOrderResponse> fullList =
+                    (List<SanctionOrderResponse>) fullDs.getData();
+
+            // ---------- MAIN DATASOURCE: ONLY HEADER ----------
+            List<SanctionOrderResponse> headerList = new ArrayList<>();
+            if (!fullList.isEmpty()) {
+                headerList.add(fullList.get(0));   // first element is "response"
+            }
+            JRBeanCollectionDataSource mainDataSource =
+                    new JRBeanCollectionDataSource(headerList);
+
+            // ---------- TABLE FOR sanctionBonus (big table) ----------
+            // Exclude header (index 0)
+            List<SanctionOrderResponse> sanctionBonusList = new ArrayList<>();
+            if (fullList.size() > 1) {
+                sanctionBonusList.addAll(fullList.subList(1, fullList.size())); // detail + total
+            }
+            JRBeanCollectionDataSource sanctionBonusTableDataSource =
+                    new JRBeanCollectionDataSource(sanctionBonusList);
+
+            // ---------- TABLE FOR silk (top table) ----------
+            // If you want to show just the machine/category row, use header only:
+            JRBeanCollectionDataSource silkTableDataSource =
+                    new JRBeanCollectionDataSource(headerList);
 
             Map<String, Object> parameters = new HashMap<>();
-            // 1st table (silk)
-            parameters.put("CollectionBeanParam", dataSource);
-            // 2nd table (sanctionBonus)
-            parameters.put("CollectionBeanParam1", dataSource);
+            parameters.put("CollectionBeanParam", silkTableDataSource);      // subDataset "silk"
+            parameters.put("CollectionBeanParam1", sanctionBonusTableDataSource); // subDataset "sanctionBonus"
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
             HttpHeaders headers = new HttpHeaders();
@@ -368,7 +390,7 @@ public class ReportsController {
         }
     }
 
-        @PostMapping("/get-Permit")
+    @PostMapping("/get-Permit")
     public ResponseEntity<?> getPermit(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
@@ -7839,12 +7861,16 @@ public class ReportsController {
         response.setArn( apiResponse.getContent().get(0).getArn());
         response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        //        sanctionOrderResponseList.add(response);
-        response.setSerialNumber(0);
-        // ******************************************************************************
+        response.setSerialNumber(1);  // <-- UPDATED LINE
 
-        // Add header bean FIRST
         sanctionOrderResponseList.add(response);
+
+        // ---------- TOTALS ----------
+        float totalNoOfCocoonsNeedToProduce = 0f;
+        float totalNoOfRawSilkProduced = 0f;
+        float totalMachineQuantity = 0f;
+        float totalMax = 0f;
+        float totalSchemeAmount = 0f;
 
         if (apiResponse.getContent()!= null) {
 //            sanctionOrderResponseList.add(response);
@@ -7926,15 +7952,62 @@ public class ReportsController {
                 if (sanctionOrderResponse.getSanctionAmount() == null) {
                     sanctionOrderResponse.setSanctionAmount(0f);
                 }
-
-                // ✔ mandatory
                 sanctionOrderResponse.setSerialNumber(serialNo++);
+
+                totalNoOfCocoonsNeedToProduce += safeParseFloat(sanctionOrderResponse.getNoOfCocoonsNeedToProduce());
+                totalNoOfRawSilkProduced += safeParseFloat(sanctionOrderResponse.getNoOfRawSilkProduced());
+                totalMachineQuantity += (sanctionOrderResponse.getMachineQuantity() == null ? 0f : sanctionOrderResponse.getMachineQuantity());
+                totalMax += (sanctionOrderResponse.getMax() == null ? 0f : sanctionOrderResponse.getMax());
+                totalSchemeAmount += (sanctionOrderResponse.getSchemeAmount() == null ? 0f : sanctionOrderResponse.getSchemeAmount());
 
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
         }
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        SanctionOrderResponse totalRow = new SanctionOrderResponse();
+
+        totalRow.setReelerName("ಒಟ್ಟು");
+
+        totalRow.setSerialNumber(null);
+
+        // Set totals
+        totalRow.setNoOfCocoonsNeedToProduce(formatFloat(totalNoOfCocoonsNeedToProduce));
+        totalRow.setNoOfRawSilkProduced(formatFloat(totalNoOfRawSilkProduced));
+        totalRow.setMachineQuantity(totalMachineQuantity);
+        totalRow.setMax(totalMax);
+        totalRow.setSchemeAmount(totalSchemeAmount);
+
+        totalRow.setMonth("");
+        totalRow.setNumberOfBasins("");
+        totalRow.setRendittaGrade("");
+        totalRow.setSilkExchangeName("");
+        totalRow.setForm17jNo("");
+
+        sanctionOrderResponseList.add(totalRow);
+
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+    }
+
+    /**
+     * Safely parse String to float. Returns 0f if null/empty/invalid.
+     */
+    private float safeParseFloat(String val) {
+        if (val == null) return 0f;
+        String t = val.trim();
+        if (t.isEmpty()) return 0f;
+        try {
+            return Float.parseFloat(t);
+        } catch (Exception e) {
+            return 0f;
+        }
+    }
+
+    /**
+     * Helper to format float as string (you can customize decimals).
+     */
+    private String formatFloat(float value) {
+        // If you want fixed 3 decimals like 1.000, use DecimalFormat
+        // return new DecimalFormat("#0.000").format(value);
+        return String.valueOf(value);
     }
 
 
