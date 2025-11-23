@@ -342,34 +342,29 @@ public class ReportsController {
 
             JRDataSource dataSource = getDataSourceForSanctionSilkIncentive(requestDto);
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
+            Map<String, Object> parameters = new HashMap<>();
+            // 1st table (silk)
             parameters.put("CollectionBeanParam", dataSource);
-
-            // 3. datasource "java object"
+            // 2nd table (sanctionBonus)
+            parameters.put("CollectionBeanParam1", dataSource);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "report.pdf");
-
 
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
             pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
         }
     }
 
@@ -7803,7 +7798,7 @@ public class ReportsController {
                         "       \n " +
                         "ಮಾಡಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ.   ಅದರಂತೆ   ಈ  ಕೆಳಕಂಡ  ಮಂಜೂರಾತಿ  ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
         response.setHeader9("ಸಂಖ್ಯೆ  :  ರೇಸನಿ/ಗೂನಚ/"+ shortDistrictKannada +  "  /ಬೆಸ್ಥಿಅ/"+ apiResponse.getContent().get(0).getScCategoryName() +" /ಕ.ರೇಷ್ಮೆ/ಪ್ರೋಧನ/ "+ apiResponse.getContent().get(0).getArn() +" /"+ apiResponse.getContent().get(0).getFinancialYear() +"/ದಿನಾಂಕ : "+ apiResponse.getContent().get(0).getCreatedDate());
-        response.setHeader10("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವಂತೆ      ತಾಂತ್ರಿ ಕ      ಸೇವಾ    ಕೇಂದ್ರ   "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"    ವ್ಯಾಪ್ತಿ ಯಲ್ಲಿ ರುವ     05    ಜನ   ರೇಷ್ಮೆ  ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು\n " +
+        response.setHeader10("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವಂತೆ      ತಾಂತ್ರಿ ಕ      ಸೇವಾ    ಕೇಂದ್ರ   "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"    ವ್ಯಾಪ್ತಿ ಯಲ್ಲಿ ರುವ   "+ apiResponse.getContent().get(0).getTotalReelers() +"   ಜನ   ರೇಷ್ಮೆ  ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು\n " +
                 "     \n " +
                 "ತಮ್ಮ     ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      ಅನುಬಂಧದಲ್ಲಿ       ತೋರಿಸಿರುವಂತೆ   ಉತ್ಪಾ ದಿಸಿದ     "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() + "   ಕೆ.ಜಿ   "+ apiResponse.getContent().get(0).getRaceName() + "   ರೇಷ್ಮೆಗೆ    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() + " /-    ಗಳಂತೆ \n" +
                 "      \n " +

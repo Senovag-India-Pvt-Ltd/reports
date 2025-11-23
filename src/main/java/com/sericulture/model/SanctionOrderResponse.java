@@ -183,6 +183,7 @@ public class SanctionOrderResponse {
     private String roofTypeName;
     private String createdDate;
     private Float machineQuantity;
+    private Long totalReelers;
     private Float incentiveAmountPerKg;
     private String numberOfBasins;
     private Float max;
