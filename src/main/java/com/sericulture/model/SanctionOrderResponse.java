@@ -247,6 +247,14 @@ public class SanctionOrderResponse {
     private Float incentiveAmount;
     private Float totalIncentiveAmount;
 
+    private String totalQuantityOfCocoonsProducedInWords;
+    private String totalTransportAmountInWords;
+
+// getters & setters
+private String totalIncentiveAmountInWords;
+// + getter & setter
+
+
 
 
 
