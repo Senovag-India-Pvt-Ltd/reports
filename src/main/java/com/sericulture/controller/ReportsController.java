@@ -10693,9 +10693,9 @@ public class ReportsController {
 
         response.setHeader7(
                 "    ಪೀಠಿಕೆಯಲ್ಲೆ     ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ,     " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + "     ತಾಲ್ಲೂಕಿನ     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ     " + apiResponse.getContent().get(0).getLoggedinUserTscName()+"\n\n"
-                        + "ವ್ಯಾಪ್ತಿಯ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ,     ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ     ಒಟ್ಟು     " + totalQtyKg  + "     ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"  ರೇಷ್ಮೆ\n\n"
-                        +"ಗೂಡಿಗೆ     ಪ್ರತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +  apiResponse.getContent().get(0).getUnitCost() +  "/-     ರಂತೆ     "+apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ರೂ. " +   totalIncentiveAmount      + "/-     (ರೂಪಾಯಿ     " + totalIncentiveInWords  + " )\n\n"
-                        +"ಗಳನ್ನು     ಮಂಜೂರು   ಮಾಡಲಾಗಿದೆ.   ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಯೋಜನೆಯ  ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " + apiResponse.getContent().get(0).getScHeadAccountName() + "("+ apiResponse.getContent().get(0).getDescription()+ ")   ಅಡಿ   ಖಜಾನೆ-2   ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಂಡಿರುವ\n\n" +
+                        + "ವ್ಯಾಪ್ತಿಯ  " + apiResponse.getContent().get(0).getTotalFarmers() +" ಜನ   ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ,   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ     ಒಟ್ಟು     " + totalQtyKg  + "     ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"\n\n"
+                        +"ರೇಷ್ಮೆ   ಗೂಡಿಗೆ   ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ   ರೂ. " +  apiResponse.getContent().get(0).getUnitCost() +  "/- ರಂತೆ     "+apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ರೂ. " +   totalIncentiveAmount      + "/- (ರೂಪಾಯಿ  " + totalIncentiveInWords  + " ) ಗಳನ್ನು  \n\n"
+                        +"ಮಂಜೂರು   ಮಾಡಲಾಗಿದೆ.   ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ   ಯೋಜನೆಯ  ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ   " + apiResponse.getContent().get(0).getScHeadAccountName() + "("+ apiResponse.getContent().get(0).getDescription()+ ")   ಅಡಿ   ಖಜಾನೆ-2   ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಂಡಿರುವ\n\n" +
                         "ಅನುದಾನದಲ್ಲಿ    ಡಿ.ಬಿ.ಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿಗಳ     ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡಬೇಕು. \n\n"
                         + "ಸದರಿ     ವೆಚ್ಚವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ     " + apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription()+ ")  ಅಡಿ  ಭರಿಸುವುದು.");
 
