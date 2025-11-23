@@ -10398,8 +10398,8 @@ public class ReportsController {
                 if (unitCostRow == null) unitCostRow = 0f;
 
                 // 🔹 scheme is per 100 kg → convert 50 kg → 0.5 units (for calc only)
-                float qtyUnits = qtyKg / 100f;
-                float schemeAmountRow = qtyUnits * unitCostRow;  // correct amount
+                float schemeAmountRow = qtyKg * unitCostRow;
+//                float schemeAmountRow = qtyUnits * unitCostRow;  // correct amount
 
 // CHANGED: keep ACTUAL KG (50, 100, …) for display in JRXML
                 sanctionOrderResponse.setQuantityOfCocoonsProduced(qtyKg);
@@ -10409,13 +10409,8 @@ public class ReportsController {
                 sanctionOrderResponse.setSchemeAmounts(schemeAmountRow);
                 sanctionOrderResponse.setTransportAmount(schemeAmountRow);
 
-                // accumulate totals in **units of 100 kg**
-                // accumulate totals
                 totalTransportAmount += schemeAmountRow;
-                totalQtyUnits        += qtyUnits;  // still kept if needed later
-                totalQtyKg           += qtyKg;     // NEW: real kg total
-
-// expose RUNNING totals on each row
+                totalQtyKg           += qtyKg;
                 sanctionOrderResponse.setTotalTransportAmount(totalTransportAmount);
                 sanctionOrderResponse.setGrandTotalNoOfDfls((float) totalNoOfDfls);
 
@@ -10642,19 +10637,16 @@ public class ReportsController {
                 Float unitCostRow = sanctionOrderResponse.getUnitCost();
                 if (unitCostRow == null) unitCostRow = 0f;
 
-// 🔹 scheme is per 100 kg → use units ONLY for amount calculation
-                float qtyUnits = qtyKg / 100f;
-                float incentiveAmountRow = qtyUnits * unitCostRow;
+                float incentiveAmountRow = qtyKg * unitCostRow;
 
-// CHANGED: keep ACTUAL KG in field bound to JRXML ($F{quantityOfCocoonsProduced})
                 sanctionOrderResponse.setQuantityOfCocoonsProduced(qtyKg);
 
                 sanctionOrderResponse.setIncentiveAmount(incentiveAmountRow);
 
 // accumulate totals
                 totalIncentiveAmount += incentiveAmountRow;
-                totalQtyUnits        += qtyUnits;   // for reference if needed
-                totalQtyKg           += qtyKg;      // NEW: this is what we display (50, 100, …)
+                totalQtyKg           += qtyKg;
+
 
 // running totals for footer/header
                 sanctionOrderResponse.setTotalIncentiveAmount(totalIncentiveAmount);
@@ -10683,6 +10675,7 @@ public class ReportsController {
         // numeric totals on header (ACTUAL KG)
         response.setTotalIncentiveAmount(totalIncentiveAmount);
         response.setGrandTotalNoOfDfls((float) totalNoOfDfls);
+        response.setGrandTotalSchemeAmount(totalIncentiveAmount);
 
 // CHANGED: keep total in kg
         response.setGrandTotalQuantityOfCocoonsProduced(totalQtyKg);
