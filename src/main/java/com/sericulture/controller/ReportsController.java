@@ -7795,19 +7795,19 @@ public class ReportsController {
                       "ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು  ಬೆಂಗಳೂರು   ರವರ    ಸುತ್ತೋ ಲೆಯ   ಮಾರ್ಗ   ಸೂಚಿಯಂತೆ    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"\n\n " +
                       apiResponse.getContent().get(0).getScCategoryName() +  "    ಅಡಿ    ಅನುಬಂಧದಲ್ಲಿ    ತೋ ರಿಸಿರುವಂತೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       ಪಡೆಯಲು ಅರ್ಹ ರಿರುತ್ತಾರೆ.");
 
-        response.setHeader8("              ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ      ನೂಲು     ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ      ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ       ಉತ್ಪಾದಿಸಿ     ವಹಿವಾಟು     ಮಾಡಿದ    "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() +"     ಪ್ರಮಾಣದ    "+ apiResponse.getContent().get(0).getRaceName() +"     ರೇಷ್ಮೆಗೆ    ಪ್ರತಿ  \n " +
+        response.setHeader8("              ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ      ನೂಲು     ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ      ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ       ಉತ್ಪಾದಿಸಿ     ವಹಿವಾಟು     ಮಾಡಿದ    "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() +"     ಪ್ರಮಾಣದ    "+ apiResponse.getContent().get(0).getRaceName() +"\n " +
                         "      \n " +
-                        "ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() +"/-  ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನವನ್ನು     ಉಲ್ಲೇಖ (3) ರ   ಸರ್ಕಾರದ   ಆದೇಶದ   ರೀತ್ಯಾ   ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ   ಪ್ರತ್ಯಾಯೋಜನೆ   ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು,  ಉಲ್ಲೇಖ (4)\n " +
+                        "ರೇಷ್ಮೆಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() +"/-  ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನವನ್ನು     ಉಲ್ಲೇಖ (3) ರ   ಸರ್ಕಾರದ   ಆದೇಶದ   ರೀತ್ಯಾ   ಈ   ಕಛೇರಿಯ   ಅಧಿಕಾರ\n " +
                         "       \n " +
-                        "ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರಮದ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿಯನ್ವಯ   ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ  \n " +
+                        "ಪ್ರತ್ಯಾಯೋಜನೆ   ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು,  ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರಮದ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿಯನ್ವಯ   ಸಹಾಯಧನ   ಮಂಜೂರು\n " +
                         "       \n " +
-                        "ಮಾಡಲಾಗಿದೆ.   ಅದರಂತೆ   ಈ  ಕೆಳಕಂಡ  ಮಂಜೂರಾತಿ  ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
+                        "ಮಾಡಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ.   ಅದರಂತೆ   ಈ  ಕೆಳಕಂಡ  ಮಂಜೂರಾತಿ  ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
         response.setHeader9("ಸಂಖ್ಯೆ  :  ರೇಸನಿ/ಗೂನಚ/"+ shortDistrictKannada +  "  /ಬೆಸ್ಥಿಅ/"+ apiResponse.getContent().get(0).getScCategoryName() +" /ಕ.ರೇಷ್ಮೆ/ಪ್ರೋಧನ/ "+ apiResponse.getContent().get(0).getArn() +" /"+ apiResponse.getContent().get(0).getFinancialYear() +"/ದಿನಾಂಕ : "+ apiResponse.getContent().get(0).getCreatedDate());
         response.setHeader10("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವಂತೆ      ತಾಂತ್ರಿ ಕ      ಸೇವಾ    ಕೇಂದ್ರ   "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"    ವ್ಯಾಪ್ತಿ ಯಲ್ಲಿ ರುವ     05    ಜನ   ರೇಷ್ಮೆ  ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು\n " +
                 "     \n " +
-                "ತಮ್ಮ    ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಅನುಬಂಧದಲ್ಲಿ   ತೋರಿಸಿರುವಂತೆ   ಉತ್ಪಾ ದಿಸಿದ   "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() + "   ಕೆ.ಜಿ   "+ apiResponse.getContent().get(0).getRaceName() + "  ರೇಷ್ಮೆಗೆ    ಪ್ರ ತಿ   ಕೆ.ಜಿ.ಗೆ   ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() + " /- \n" +
+                "ತಮ್ಮ     ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      ಅನುಬಂಧದಲ್ಲಿ       ತೋರಿಸಿರುವಂತೆ   ಉತ್ಪಾ ದಿಸಿದ     "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() + "   ಕೆ.ಜಿ   "+ apiResponse.getContent().get(0).getRaceName() + "   ರೇಷ್ಮೆಗೆ    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() + " /-    ಗಳಂತೆ \n" +
                 "      \n " +
-                "ಗಳಂತೆ ಒಟ್ಟು  ರೂ.  "+ apiResponse.getContent().get(0).getSchemeAmount() + "  ( ರೂ.  "+ schemeAmountWords + "  ಮಾತ್ರ  ) ಗಳಿಗೆ   ಪ್ರೋ ತ್ಸಾ ಹಧನ ಮಂಜೂರು ಮಾಡಿದೆ. \n" +
+                "ಒಟ್ಟು     ರೂ.  "+ apiResponse.getContent().get(0).getSchemeAmount() + "  ( ರೂ.  "+ schemeAmountWords + "  ಮಾತ್ರ  ) ಗಳಿಗೆ   ಪ್ರೋ ತ್ಸಾ ಹಧನ ಮಂಜೂರು ಮಾಡಿದೆ. \n" +
                 "\n" +
                 "ಈ    ವೆಚ್ಚ ವನ್ನು     ಲೆಕ್ಕ     ಶೀ ರ್ಷಿಕೆ    "+ apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription() +") ( "+ apiResponse.getContent().get(0).getScCategoryName() + ")  ಅಡಿ ಭರಿಸುವುದು.\n");
         response.setLineItemComment( "ರೇಷ್ಮೆ     ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು\n" +
