@@ -7792,8 +7792,8 @@ public class ReportsController {
                         "       \n " +
                 "ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮಂಜೂರಾತಿಗಾಗಿ   ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ಪ್ರಸ್ತಾ ವನೆಯನ್ನು   ಪರಿಶೀ ಲಿಸಿದ್ದು     ಉಲ್ಲೇ ಖ (2) ರ   ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು\n " +
                         "        \n" +
-                      "ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು  ಬೆಂಗಳೂರು   ರವರ    ಸುತ್ತೋ ಲೆಯ   ಮಾರ್ಗ   ಸೂಚಿಯಂತೆ    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  "+ apiResponse.getContent().get(0).getScCategoryName() +  "\n\n " +
-                      "ಅಡಿ    ಅನುಬಂಧದಲ್ಲಿ    ತೋ ರಿಸಿರುವಂತೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       ಪಡೆಯಲು ಅರ್ಹ ರಿರುತ್ತಾರೆ.");
+                      "ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು  ಬೆಂಗಳೂರು   ರವರ    ಸುತ್ತೋ ಲೆಯ   ಮಾರ್ಗ   ಸೂಚಿಯಂತೆ    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"\n\n " +
+                      apiResponse.getContent().get(0).getScCategoryName() +  "    ಅಡಿ    ಅನುಬಂಧದಲ್ಲಿ    ತೋ ರಿಸಿರುವಂತೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       ಪಡೆಯಲು ಅರ್ಹ ರಿರುತ್ತಾರೆ.");
 
         response.setHeader8("            ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ   ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ತಮ್ಮ    ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಉತ್ಪಾದಿಸಿ   ವಹಿವಾಟು ಮಾಡಿದ  "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() +"  ಪ್ರಮಾಣದ    "+ apiResponse.getContent().get(0).getRaceName() +"   ರೇಷ್ಮೆಗೆ ಪ್ರತಿ   ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() +"/-  ರಂತೆ\n " +
                         "      \n " +
@@ -7821,7 +7821,6 @@ public class ReportsController {
                 "ರೇಷ್ಮೆ    ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,\n" +
                 "  \n" +
                 "ಗೂಡಿನ    ನಂತರದ   ಚಟುವಟಿಕೆ,   ಶಿಡ್ಲ ಘಟ್ಟ   " +apiResponse.getContent().get(0).getLoggedinUserTalukName());
-        response.setHeader8("ಮಂಜೂರಾತಿ ಆದೇಶ ಸ೦ಖ್ಯೆ  ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ:" +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಖ:ಮಂ:02:2024-25 ದಿನಾ೦ಕ:13/03/2025");
         response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
         response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
         response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
@@ -7862,6 +7861,13 @@ public class ReportsController {
                 if (sanctionOrderResponse.getVillageNameInKannada() == null){
                     sanctionOrderResponse.setVillageNameInKannada("");
                 }
+
+                if (sanctionOrderResponse.getReelerName() == null){
+                    sanctionOrderResponse.setReelerName("");
+                }
+//                if (sanctionOrderResponse.getMonth() == null){
+//                    sanctionOrderResponse.setMo("");
+//                }
                 if (sanctionOrderResponse.getMachineTypeName() == null){
                     sanctionOrderResponse.setMachineTypeName("");
                 }
