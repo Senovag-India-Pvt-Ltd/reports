@@ -182,7 +182,7 @@ public class SanctionOrderResponse {
     private String machineTypeName;
     private String roofTypeName;
     private String createdDate;
-    private Long machineQuantity;
+    private Float machineQuantity;
     private Float incentiveAmountPerKg;
     private String numberOfBasins;
     private Float max;
@@ -237,6 +237,9 @@ public class SanctionOrderResponse {
     private Float grandTotalSchemeAmount;
     private Float grandTotalQuantityOfCocoonsProduced;
     private Long  totalFarmers;
+
+    private String month;
+    private String silkExchangeName;
 
 
     private Float totalSubsidyAmountCa;
