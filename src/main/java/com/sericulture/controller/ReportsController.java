@@ -7764,33 +7764,36 @@ public class ReportsController {
                 "        \n" +
                 "2. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋ ಲೆ  \n" +
                 "        \n" +
-                "   ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
+                "     ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
                 "        \n" +
-                "3. ಸರ್ಕಾರದ  ಆದೇಶ ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n" +
+                "3. ಸರ್ಕಾರದ  ಆದೇಶ   ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n" +
                 "        \n" +
                 "4. ರೇಷ್ಮೆ  ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ  ರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋಲೆ\n" +
                 "        \n" +
-                "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
+                "     ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
                 "        \n" +
                 "5. ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() +"  ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+  proposalDate);
-        response.setHeader6("              " +apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ  ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1) ರ   ಸರ್ಕಾರದ   ಆದೇಶ   ಹಾಗೂ   ಉಲ್ಲೇ ಖ (2) ರಲ್ಲಿ     ರೇಷ್ಮೆ   ಕೃಷಿ    ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ   ನಿರ್ದೇಶಕರು,\n" +
+        response.setHeader6("              " +apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ  ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1) ರ   ಸರ್ಕಾರದ   ಆದೇಶ   ಹಾಗೂ   ಉಲ್ಲೇ ಖ (2) ರಲ್ಲಿ     ರೇಷ್ಮೆ   ಕೃಷಿ    ಅಭಿವೃ ದ್ದಿ \n" +
                 "            \n"+
-                           "ಬೆಂಗಳೂರು  ರವರು  “ "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"”  " +apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ   ರಾಜ್ಯ ದಲ್ಲಿ    ರೇಷ್ಮೆ   ನೂಲು  ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು   ಉತ್ಪಾ ದಿಸಿದ  ಗುಣಮಟ್ಟ ದ \n" +
+                           "ಆಯುಕ್ತ ರು   ಹಾಗೂ   ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು  ರವರು  “ "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"”\n" +
                 "            \n"+
-                "ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ನೀಡುವ   ಕಾರ್ಯಕ್ರ ಮವನ್ನು    ಅನುಷ್ಟಾನಗೊಳಿಸಲು   ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಿರುತ್ತಾ ರೆ,  ವಿವರಗಳು   ಈ  ಕೆಳಕಂಡಂತಿದೆ.\n");
+                apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ   ರಾಜ್ಯ ದಲ್ಲಿ    ರೇಷ್ಮೆ   ನೂಲು  ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು   ಉತ್ಪಾ ದಿಸಿದ   ಗುಣಮಟ್ಟ ದ    ಕಚ್ಚಾ  \n\n"+
+                "ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ನೀಡುವ   ಕಾರ್ಯಕ್ರ ಮವನ್ನು    ಅನುಷ್ಟಾನಗೊಳಿಸಲು   ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಿರುತ್ತಾ ರೆ,  ವಿವರಗಳು\n\n" +
+                "ಈ  ಕೆಳಕಂಡಂತಿದೆ.");
 
 //        response.setHeader6(" ( Rupees." +amountInWords + " Only )");
-        response.setHeader7("           ಉಲ್ಲೇಖ (5) ರಲ್ಲಿ    ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ  "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"   ಇವರು   ಅನುಬಂಧದಲ್ಲಿ    ತೋರಿಸಿರುವ   ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ಸರ್ಕಾರಿ  \n " +
+      response.setHeader7("            ಉಲ್ಲೇಖ (5) ರಲ್ಲಿ      ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿ ಕ    ಸೇವಾ   ಕೇಂದ್ರ    "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"     ಇವರು    ಅನುಬಂಧದಲ್ಲಿ       ತೋರಿಸಿರುವ     ರೇಷ್ಮೆ   ನೂಲು \n " +
                 "      \n" +
-                "ರೇಷ್ಮೆ   ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆಯಿಂದ   ಗೂಡು   ಖರೀದಿಸಿದ   ವರದಿ,  ರೇಷ್ಮೆ   ಪರೀಕ್ಷಣಾ   ವರದಿ,   ( ರೇಷ್ಮೆ ಮಾರಾಟ   ಮಾಡುವ   ಮುನ್ನಾ    ಮಲ್ಟಿ    ಎಂಡ್‌   ರೀಲಿಂಗ್‌   ಮತ್ತು    ಸ್ವಯಂ   ಚಾಲಿತ   ರೀಲಿಂಗ್‌   ಘಟಕದಲ್ಲಿ    ಉತ್ಪಾ ದಿಸಿದ ರೇಷ್ಮೆ ಗೆ )  ರೇಷ್ಮೆ ಉತ್ಪಾದನೆ   ಹಾಗೂ\n" +
+                "ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ     ಗೂಡು     ಖರೀದಿಸಿದ   ವರದಿ,    ರೇಷ್ಮೆ     ಪರೀಕ್ಷಣಾ    ವರದಿ,   ( ರೇಷ್ಮೆ    ಮಾರಾಟ     ಮಾಡುವ \n" +
                 "    \n"+
-                "ಮಾರಾಟ   ಮತ್ತು     ಇತರೆ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಈ   ಕೆಳಕಂಡ   ರೇಷ್ಮೆ  ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆದಾರರು   ತಮ್ಮ    "+ apiResponse.getContent().get(0).getMachineTypeName() +  "  ದಲ್ಲಿ    "+ apiResponse.getContent().get(0).getRaceName() + "   ರೇಷ್ಮೆ   ನೂಲು   ಉತ್ಪಾದನೆ   ಮಾಡಿರುವುದಕ್ಕಾ ಗಿ   ಪ್ರತಿ   ಕೆ.ಜಿ.ಗೆ   ರೂ. " +apiResponse.getContent().get(0).getAmountPerKg() +"/-\n " +
+                "ಮುನ್ನಾ      ಮಲ್ಟಿ    ಎಂಡ್‌   ರೀಲಿಂಗ್‌   ಮತ್ತು      ಸ್ವಯಂ   ಚಾಲಿತ   ರೀಲಿಂಗ್‌   ಘಟಕದಲ್ಲಿ     ಉತ್ಪಾ ದಿಸಿದ    ರೇಷ್ಮೆ ಗೆ )  ರೇಷ್ಮೆ ಉತ್ಪಾದನೆ   ಹಾಗೂ   ಮಾರಾಟ   ಮತ್ತು     ಇತರೆ\n " +
                 "     \n " +
-                "ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮಂಜೂರಾತಿಗಾಗಿ   ಪ್ರಸ್ತಾ ವನೆಯನ್ನು    ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ಪ್ರಸ್ತಾ ವನೆಯನ್ನು   ಪರಿಶೀ ಲಿಸಿದ್ದು    ಉಲ್ಲೇ ಖ (2) ರ   ರೇಷ್ಮೆ  ಕೃಷಿ   ಅಭಿವೃದ್ದಿ \n " +
+                "ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಈ   ಕೆಳಕಂಡ   ರೇಷ್ಮೆ  ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆದಾರರು   ತಮ್ಮ    "+ apiResponse.getContent().get(0).getMachineTypeName() +  "  ದಲ್ಲಿ    "+ apiResponse.getContent().get(0).getRaceName() + "   ರೇಷ್ಮೆ   ನೂಲು   ಉತ್ಪಾದನೆ   ಮಾಡಿರುವುದಕ್ಕಾ ಗಿ   ಪ್ರತಿ   ಕೆ.ಜಿ.ಗೆ   ರೂ. " +apiResponse.getContent().get(0).getAmountPerKg() +"/-\n " +
                         "       \n " +
-                "ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು  ಬೆಂಗಳೂರು ರವರ  ಸುತ್ತೋ ಲೆಯ ಮಾರ್ಗ  ಸೂಚಿಯಂತೆ  “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"\n " +
+                "ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮಂಜೂರಾತಿಗಾಗಿ   ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ಪ್ರಸ್ತಾ ವನೆಯನ್ನು   ಪರಿಶೀ ಲಿಸಿದ್ದು     ಉಲ್ಲೇ ಖ (2) ರ   ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು\n " +
                         "        \n" +
-                ""+ apiResponse.getContent().get(0).getScCategoryName() +  " ಅಡಿ  ಅನುಬಂಧದಲ್ಲಿ  ತೋ ರಿಸಿರುವಂತೆ  ಪ್ರೋ ತ್ಸಾ ಹಧನ ಪಡೆಯಲು ಅರ್ಹ ರಿರುತ್ತಾರೆ.");
+                      "ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು  ಬೆಂಗಳೂರು   ರವರ    ಸುತ್ತೋ ಲೆಯ   ಮಾರ್ಗ   ಸೂಚಿಯಂತೆ    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  "+ apiResponse.getContent().get(0).getScCategoryName() +  "\n\n " +
+                      "ಅಡಿ    ಅನುಬಂಧದಲ್ಲಿ    ತೋ ರಿಸಿರುವಂತೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       ಪಡೆಯಲು ಅರ್ಹ ರಿರುತ್ತಾರೆ.");
 
         response.setHeader8("            ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ   ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ತಮ್ಮ    ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಉತ್ಪಾದಿಸಿ   ವಹಿವಾಟು ಮಾಡಿದ  "+ apiResponse.getContent().get(0).getNoOfRawSilkProduced() +"  ಪ್ರಮಾಣದ    "+ apiResponse.getContent().get(0).getRaceName() +"   ರೇಷ್ಮೆಗೆ ಪ್ರತಿ   ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getAmountPerKg() +"/-  ರಂತೆ\n " +
                         "      \n " +
