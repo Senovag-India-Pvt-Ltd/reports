@@ -7124,7 +7124,7 @@ public class ReportsController {
                 "ಬಿತ್ತನೆ   ಗೂಡುಗಳು  ನೂಲ  ಬಿಚ್ಚಾಣಿಕೆಗೆ  ವಿಲೇವಾರಿಯಾಗಿರುತ್ತದೆ.  ಪ್ರತಿ  ಕೆ.ಜಿ.ಗೆ  ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " \n" +
                 "            \n"+
                 "ರೂ. ಗಳ  ಬೋನಸ್  ಪಾವತಿಸಬೇಕಾಗಿರುತ್ತದೆ. ವಿವರ  ಕೆಳಗಿನಂತಿದೆ.\n");
-        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
+        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು");
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -7223,154 +7223,6 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
-//    private JRBeanCollectionDataSource getDataSourceForIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
-//
-//        SanctionOrder apiResponse = apiService.fetchDataFromIncentive(requestDto);
-//        //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
-//
-//        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
-//        SanctionOrderResponse response = new SanctionOrderResponse();
-//        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರ  ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + " ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು :- ");
-//        response.setHeader2("ವಿಷಯ: ");
-//        response.setHeader3("ಉಲ್ಲೇಖ: ");
-//        response.setHeader4("ಪೀಠಿಕೆ:-1");
-//
-//        response.setHeader1(  "2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ   ಉತ್ಪಾದಕತೆ  ಮತ್ತು    ಗುಣಮಟ್ಟ    ಅಧಾರದ  ಪ್ರೋತ್ಸಾಹಧನ  ಬಾಬ್ತು  ರೂ   " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " ಗಳಿಗೆ\n" +
-//                "            \n"+
-//                "    ಮ೦ಜೂರು ಮಾಡುವ ಕುರಿತು.\n" +
-//                "            \n"+
-//                "1) ಸರ್ಕಾರದ  ಆದೇಶ ಸ೦ಖ್ಯೆ  : ರೇಷ್ಮೆ  79 ರೇಕೃವಿ 2022 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:- 15/05/2022\n" +
-//                "            \n"+
-//                "2) ರೇಷ್ಮೆ    ಆಭಿವೃದ್ಧಿ   ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ಇವರ ಸುತ್ತೋಲೆ  ಸಂ:ಯೋಜನೆ/ಎ.ಎಸ್1/\n" +
-//                "            \n"+
-//                "     ಯೋಕ/ಮೊಸು/15/2022-23 ದಿನಾ೦ಕ:-05/05/2022\n" +
-//                "            \n"+
-//                "3) ರೇಷ್ಮೆ    ಉಪ ನಿರ್ದೇಶಕರು, ಮಾಗಡಿ  " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ರವರ ಜ್ಞಾಪನ ಪತ್ರದ ಸ೦ಖ್ಯೆ   ಸ೦ಖ್ಯೆ  / ರೇಉವಿ/ಮಾ/ಲೆಕ್ಕ/ವ೦.ಮ.ಹ೦//20/\n" +
-//                "            \n"+
-//                "     2024/25  ದಿನಾ೦ಕ: 05/03/2025\n" +
-//                "            \n"+
-//                "4) ಸರ್ಕಾರದ ಪ್ರತ್ಯಾಯೋಜನೆ ಆದೇಶ ಸ೦ಖ್ಯೆ:ತೋಇ:61:ರೇಕೃವಿ:2019 ಬೆ೦ಗಳೂರು. ದಿನಾ೦ಕ:-22/08/2023\n" +
-//                "            \n"+
-//
-//                "            \n"+
-//                "            \n"+
-//                "                2024-25   ನೇ ಸಾಲಿನಲ್ಲಿ     ನಿರಂತರ  ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು     ಉತ್ಪಾದಿಸಿ ಸರಬರಾಜು ಮಾಡುವ ಉದ್ದೇಶದಿ೦ದ ಸರ್ಕಾರವು \n" +
-//                "            \n"+
-//                "ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ    ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟಾಗುವ  ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ  ಉತ್ಪಾದಕತೆ ಮತ್ತು     ಗುಣಮಟ್ಟ      ಅಧರಿಸಿ  ಪ್ರತಿ \n" +
-//                "            \n"+
-//                "ಕೆ.ಜಿ.ಗೆ    ರೂ   " +apiResponse.getContent().get(0).getPerKgRate() + " /- ರಂತೆ  ಪ್ರೋತ್ಸಾಹಧನ ನೀಡಲು ಉದ್ದೇಶಿಸಿ ಉಲ್ಲೇಖ (1) ಮತ್ತು (2) ರಲ್ಲಿ    ಅದೇಶಿಸಿರುತ್ತಾರೆ.\n" +
-//                "            \n"+
-//                "            \n"+
-//                "               ಉಲ್ಲೇಖ (1) ಮತ್ತು   (2) ರಲ್ಲಿ     ಈ ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಿದ್ದು , ಅದರ೦ತೆ ಉಲ್ಲೇಖ (4)  ರಲ್ಲಿ  \n" +
-//                "            \n"+
-//                "ಮಂಜೂರಾತಿ  ನೀಡಲು   ಅಧಿಕಾರ  ಪ್ರತ್ಯಾಯೋಜಿಸಲಾಗಿದೆ. ಪ್ರಯುಕ್ತ    ರೇಷ್ಮೆ    ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ , \n" +
-//                "            \n"+
-//                apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ದಿನಾ೦ಕ:-11-03-2025   ರಿ೦ದ  13-03-2025 ರ ಮಾಹೆಯಲ್ಲಿ      ವಹಿವಾಟಾದ ಬಿತ್ತನೆ\n " +
-//                        "      \n " +
-//                "ಗೂಡುಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹಧನದ   ವಿವರ ಕೆಳಗಿನಂತಿದೆ.");
-//        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
-//        long amountLong = amountFloat.longValue();
-//
-//        String amountInWords = NumberToWordsConverter.convert(amountLong);
-//        response.setHeader5("              ಉಲ್ಲೇಖ (1)  ಮತ್ತು   (2) ರ ಸೂತ್ತೋಲೆಗಳಲ್ಲಿ   ಸೂಚಿಸಿರುವ  ಅರ್ಹತಾ  ಅ೦ಶಗಳನ್ನು    ಪರಿಶೀಲಿಸಿ ರೂ " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "/-  (ರೂಪಾಯಿ \n" +
-//                "            \n"+
-//                amountInWords +"  ರೂಗಳು ಮಾತ್ರ  )ಗಳಿಗೆ   ಪ್ರೋತ್ಸಾಹ   ಧನವನ್ನು     ಪಟ್ಟೆಯಲ್ಲಿ    ಲಗತ್ತಿಸಿರುವ\n" +
-//                "            \n"+
-//                "02 ಜನರ ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ ಹೆಸರಿನಲ್ಲಿ    ಮ೦ಜೂರು   ಮಾಡಬಹುದಾಗಿರುತ್ತದೆ. ಉಲ್ಲೇಖ (4) ರಂತೆ ಕೆಳಸಹಿದಾರರಿಗೆ ಅಧಿಕಾರ \n"+
-//                "                 \n"+
-//                "ಪ್ರಾಪ್ತವಿದ್ದು     ಕೆಳಕ೦ಡ೦ತೆ ಮ೦ಜೂರಾತಿ ನೀಡಲಾಗಿದೆ.");
-//
-//        response.setHeader6("ಮಂ೦ಜೂರಾತಿ ಅದೇಶ ಸ೦:ರೇಸನಿ:ರೇಗೂಮಾ: " +apiResponse.getContent().get(0).getUserMarket() + " :ಬಿಗೂಪೋ್ರೋ:ಮ೦/604(2)2024-25 ದಿನಾ೦ಕ:13/03/2025");
-//
-//        response.setHeader7("            ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ   ವಿವರಿಸಿರುವ೦ತೆ  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಸ೦ಸ್ಮೆಯಲ್ಲಿ   ಮೇಲ್ಕಂಡ 02 ಜನ ಮೈಸೂರು\n" +
-//                "            \n"+
-//                "ಬಿತ್ತನೆ ತಳಿ ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರಿಗೆ  " +apiResponse.getContent().get(0).getCocoonsWeight() + " ಕ.ಜಿ. ಬಿತ್ತನೆ ಗೂಡುಗಳಿಗೆ ಕ.ಜಿ. ಒ೦ದಕ್ಕೆ ರೂ  " +apiResponse.getContent().get(0).getPerKgRate() + "/- ರಂತೆ ಒಟ್ಟು ರೂ. " +apiResponse.getContent().get(0).getTotalSchemeAmount() + " /-\n" +
-//                "            \n"+
-//                "(ರೂಪಾಯಿ " + amountInWords +"  ರೂಗಳು ಮಾತ್ರ) ಗಳಿಗೆ  ಮ೦ಜೂರು ಮಾಡಿದೆ ಸದರಿ ವೆಚ್ಚವನ್ನು \n" +
-//                "            \n"+
-//                "ಬೆಲೆ  ಸ್ಮಿರೀಕರಣ ನಿಧಿ  ಅನುದಾನದ ಯೋಜನೆ ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ _________________________ ರಲ್ಲಿ   ಭರಿಸಲು ಮ೦ಜೂರಾತಿ  ನೀಡಿದೆ.");
-//        response.setHeader8("ಇವರಿಗೆ,\n" +
-//                "            \n"+
-//                "ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n");
-//        response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
-//        response.setDate(apiResponse.getContent().get(0).getDate());
-//        response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-//        response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-//        response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-//        response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-//        response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-//        response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-//        response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-//        response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
-//                "            \n"+
-//                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
-//                "            \n"+
-//                apiResponse.getContent().get(0).getUserMarket() +  " \n");
-//        response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-//        response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-//        response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-//        response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-//        response.setArn( apiResponse.getContent().get(0).getArn());
-//        response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-//        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-////        sanctionOrderResponseList.add(response);
-//
-//        // ---------------- Calculate total cocoon weight ----------------
-//        float totalCocoonWeight = 0f;
-//        if (apiResponse.getContent() != null) {
-//            for (SanctionOrderResponse s : apiResponse.getContent()) {
-//                if (s.getCocoonsWeight() == null) s.setCocoonsWeight(0f);
-//                totalCocoonWeight += s.getCocoonsWeight();
-//            }
-//        }
-//
-//        response.setTotalCocoonsWeights(totalCocoonWeight);
-//
-//        // Add header to list first
-//        sanctionOrderResponseList.add(response);
-//
-//
-//        if (apiResponse.getContent()!= null) {
-//
-//
-//            int serialNo = 1;
-//            for(SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()){
-//                if (sanctionOrderResponse.getFarmerFirstName() == null){
-//                    sanctionOrderResponse.setFarmerFirstName("");
-//                }
-//                if (sanctionOrderResponse.getVillageNameInKannada() == null){
-//                    sanctionOrderResponse.setVillageNameInKannada("");
-//                }
-//                if (sanctionOrderResponse.getPerKgRate() == null){
-//                    sanctionOrderResponse.setPerKgRate(0f);
-//                }
-//                if (sanctionOrderResponse.getCocoonsWeight() == null){
-//                    sanctionOrderResponse.setCocoonsWeight(0f);
-//                }
-//
-//                if (sanctionOrderResponse.getLotWeight() == null){
-//                    sanctionOrderResponse.setLotWeight(0f);
-//                }
-//                if (sanctionOrderResponse.getMarketAuctionDate() == null) {
-//                    sanctionOrderResponse.setMarketAuctionDate("");
-//                }
-//                if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
-//                    sanctionOrderResponse.setTotalCocoonsWeight(0f);
-//                }
-//                if (sanctionOrderResponse.getTotalSchemeAmount() == null) {
-//                    sanctionOrderResponse.setTotalSchemeAmount(0f);
-//                }
-//                if (sanctionOrderResponse.getSanctionAmount() == null) {
-//                    sanctionOrderResponse.setSanctionAmount(0f);
-//                }
-//
-//                sanctionOrderResponse.setSerialNumber(serialNo++);
-//                sanctionOrderResponseList.add(sanctionOrderResponse);
-//            }
-//        }
-//        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
-//        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
-//    }
 
 
     private JRBeanCollectionDataSource getDataSourceForIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
@@ -7437,10 +7289,10 @@ public class ReportsController {
         } catch (Exception e) {
             formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
         }
-        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ   ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಇವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು :- ");
+        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ   ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಇವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
-        response.setHeader4("ಪೀಠಿಕೆ:-1");
+        response.setHeader4("ಪೀಠಿಕೆ:-");
 
         response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ    ಉತ್ಪಾದಕತೆ    ಮತ್ತು      ಗುಣಮಟ್ಟ     ಅಧಾರದ   ಪ್ರೋತ್ಸಾಹಧನ  ಬಾಬ್ತು      ರೂ.  " +apiResponse.getContent().get(0).getTotalSchemeAmount() + "   ಗಳಿಗೆ\n" +
                 "            \n"+
@@ -7898,8 +7750,8 @@ public class ReportsController {
                 if (sanctionOrderResponse.getNoOfRawSilkProduced() == null){
                     sanctionOrderResponse.setNoOfRawSilkProduced("");
                 }
-                if (sanctionOrderResponse.getRendittaGrade() == null){
-                    sanctionOrderResponse.setRendittaGrade("");
+                if (sanctionOrderResponse.getRenditta() == null){
+                    sanctionOrderResponse.setRenditta("");
                 }
                 if (sanctionOrderResponse.getSilkExchangeName() == null){
                     sanctionOrderResponse.setSilkExchangeName("");
@@ -7978,7 +7830,7 @@ public class ReportsController {
 
         totalRow.setMonth("");
         totalRow.setNumberOfBasins("");
-        totalRow.setRendittaGrade("");
+        totalRow.setRenditta("");
         totalRow.setSilkExchangeName("");
         totalRow.setForm17jNo("");
 
@@ -9870,7 +9722,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getDivisionName()
                         + "     ವಿಭಾಗ,     "
                         + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-                        + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು     :-"
+                        + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು"
         );
 
 // ವಿಷಯ – with scheme & subscheme
@@ -9921,7 +9773,7 @@ public class ReportsController {
 
 // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line – short, fine
         response.setHeader7(
-                "ಸಂಖ್ಯೆ :ರೇಉನಿ/ಮೈ  ಬಿಪ್ರ /" + apiResponse.getContent().get(0).getLoggedinUserTalukName()+"/ತಾಂ/ ರೇ ಅಯೋ  /ಮೈ ತಳಿ/ಚಾಸೇ ಶು/ಮಂ/SON." + apiResponse.getContent().get(0).getSanctionOrderNumber() +"  ದಿನಾಂಕ:  " + formattedDate);
+                "ಸಂಖ್ಯೆ :ರೇಉನಿ/ಮೈ  ಬಿಪ್ರ /" + apiResponse.getContent().get(0).getLoggedinUserTalukName()+"/ತಾಂ/ ರೇ ಅಯೋ  /ಮೈ ತಳಿ/ಚಾಸೇ ಶು/ಮಂ/" + apiResponse.getContent().get(0).getSanctionOrderNumber() +"  ದಿನಾಂಕ:  " + formattedDate);
 
 // Detailed sanction – final justification paragraph
 //        response.setHeader8(
@@ -10127,7 +9979,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getDivisionName()
                         + "     ವಿಭಾಗ,     "
                         + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-                        + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು     :-"
+                        + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು"
         );
 
 // ವಿಷಯ – with scheme & subscheme
@@ -10178,7 +10030,7 @@ public class ReportsController {
 
 // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line – short, fine
         response.setHeader7(
-                "ಸಂಖ್ಯೆ :ರೇಉನಿ/ಮೈ  ಬಿಪ್ರ /" + apiResponse.getContent().get(0).getLoggedinUserTalukName()+"/ತಾಂ/ ರೇ ಅಯೋ  /ಮೈ ತಳಿ/ಚಾಸೇ ಶು/ಮಂ/SON." + apiResponse.getContent().get(0).getSanctionOrderNumber() +"  ದಿನಾಂಕ:  " + formattedDate);
+                "ಸಂಖ್ಯೆ :ರೇಉನಿ/ಮೈ  ಬಿಪ್ರ /" + apiResponse.getContent().get(0).getLoggedinUserTalukName()+"/ತಾಂ/ ರೇ ಅಯೋ  /ಮೈ ತಳಿ/ಚಾಸೇ ಶು/ಮಂ/" + apiResponse.getContent().get(0).getSanctionOrderNumber() +"  ದಿನಾಂಕ:  " + formattedDate);
 
 // Detailed sanction – final justification paragraph
 //        response.setHeader8(
@@ -10408,7 +10260,7 @@ public class ReportsController {
 
         // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line
         response.setHeader6(
-                "ಆದೇಶ     ಸಂಖ್ಯೆ  :     ರೇಸನಿ:" + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " ತಾಂ:ದ್ವಿ.ಚಾ.ಸಾ.ವೆಚ್ಚ:ಸಧನ: SON." + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
+                "ಆದೇಶ     ಸಂಖ್ಯೆ  :     ರೇಸನಿ:" + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " ತಾಂ:ದ್ವಿ.ಚಾ.ಸಾ.ವೆಚ್ಚ:ಸಧನ:" + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
 
         // ಪೀಠಿಕೆಯಲ್ಲಿನ ಅಂತಿಮ ಪ್ಯಾರಾ (bottom para of page 3) :contentReference[oaicite:4]{index=4}
 
@@ -11002,7 +10854,7 @@ public class ReportsController {
                     "                                                                                \n" +
                     " 6. ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ :ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ :ತೋಇ/61/ರೇಕೃವಿ/2019.ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n" +
                     "                                                                            \n" +
-                    " 7. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ .ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ /ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು -ವಿಭಾಗರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ : - ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n"
+                    " 7. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ .ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ /ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು -ವಿಭಾಗರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ :- ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n"
 
             );
 
@@ -11145,7 +10997,7 @@ public class ReportsController {
                     "                                                                                \n" +
                     " 6. ಆರ್ಥಿಕ ಪ್ರತ್ಯಾಯೋಜನೆ :ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ :ತೋಇ/61/ರೇಕೃವಿ/2019.ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n" +
                     "                                                                            \n" +
-                    " 7. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ .ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ /ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು -ವಿಭಾಗರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ : - ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n"
+                    " 7. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ .ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ /ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು -ವಿಭಾಗರವರ ಪ್ರಸ್ತಾವನೆ ಸಂಖ್ಯೆ :- ದಿನಾಂಕ " + apiResponse.getContent().get(0).getDate() + "\n"
 
             );
 
