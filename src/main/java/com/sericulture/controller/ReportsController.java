@@ -9640,7 +9640,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForMscSeedChawki1000(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchSanctionOrderForSeedMarketDetails(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromMscCommercialMarket(requestDto);
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
@@ -9897,7 +9897,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForMscSeedChawki(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromMscCommercialMarket(requestDto);
+        SanctionOrder apiResponse = apiService.fetchSanctionOrderForSeedMarketDetails(requestDto);
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
