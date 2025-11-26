@@ -187,6 +187,28 @@ public class ApiService {
         return response;
     }
 
+    public SanctionOrder fetchDataFromCommercialMarket(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl + "service/commercialAcknowledgement";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/commercialAcknowledgement";
+        // or use /getSanctionOrderForK2 with MSC scheme/subscheme
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        SanctionOrder response = objectMapper.readValue(responseBody, SanctionOrder.class);
+
+        return response;
+    }
+
 
     public SanctionOrder fetchSanctionOrderForSeedMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
