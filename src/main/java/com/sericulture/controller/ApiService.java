@@ -187,11 +187,13 @@ public class ApiService {
         return response;
     }
 
-    public SanctionOrder fetchDataFromCommercialMarket(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl + "service/commercialAcknowledgement";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/commercialAcknowledgement";
+    public AcknowledgementResponse fetchDataReelerAcknowledgement(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl + "service/reelerAcknowledgement";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/reelerAcknowledgement";
         // or use /getSanctionOrderForK2 with MSC scheme/subscheme
 
         HttpHeaders headers = new HttpHeaders();
@@ -199,12 +201,33 @@ public class ApiService {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setBearerAuth(Util.getTokenData());
 
-        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
 
         String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        SanctionOrder response = objectMapper.readValue(responseBody, SanctionOrder.class);
+        AcknowledgementResponse response = objectMapper.readValue(responseBody, AcknowledgementResponse.class);
+
+        return response;
+    }
+
+    public AcknowledgementResponse fetchDataFromCommercialMarket(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl + "service/commercialAcknowledgement";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/service/commercialAcknowledgement";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AcknowledgementResponse response = objectMapper.readValue(responseBody, AcknowledgementResponse.class);
 
         return response;
     }
