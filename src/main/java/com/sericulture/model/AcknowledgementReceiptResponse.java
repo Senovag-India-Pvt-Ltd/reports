@@ -15,6 +15,11 @@ public class AcknowledgementReceiptResponse {
     private String header;
     private String header1;
     private String header2;
+    private String header3;
+    private String header4;
+    private String header5;
+
+
     private String acceptedDate;
     private String date;
     private String farmerFirstName;
@@ -45,4 +50,24 @@ public class AcknowledgementReceiptResponse {
     private String vendorUPI;
     private String talukNameInKannada;
     private String tscName;
+    private String  loggedinUserDistrictName;
+    private String loggedinUserTalukName;
+    private String loggedinUserTscName;
+    private Float unitPrice;
+    private Float unitCost;
+    private Float subsidyAmount;
+    private Float schemeAmount;
+
+    private String lotNo;
+    private String noOfDfls;
+    private String reelerNumber;
+    private String reelingLicenseNumber;
+    private String componentName;
+    private String machineTypeName;
+    private String categoryName;
+    private String userName;
+    private Long userMasterId;
+    private String reelerName;
+
+    private Float quantityOfCocoonsProduced;
 }
