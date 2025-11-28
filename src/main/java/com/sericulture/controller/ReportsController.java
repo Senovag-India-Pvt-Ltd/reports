@@ -8401,9 +8401,9 @@ public class ReportsController {
         response.setHeader("ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು,     ಗೂಡಿನ     ನಂತರದ     ಚಟುವಟಿಕೆ,     " + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "     ರವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
         response.setHeader2("ವಿಷಯ:");
         response.setHeader5(
-                apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ   ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  " + apiResponse.getContent().get(0).getScCategoryName() + "\n\n"
-                        +"ಅಡಿ    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "+ apiResponse.getContent().get(0).getReelerName() + " (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + ",  " + apiResponse.getContent().get(0).getVillageName() + ",  " + apiResponse.getContent().get(0).getHobliName() + ",\n\n"
-                        +"ಹೋಬಳಿ,    "+ apiResponse.getContent().get(0).getTalukName() + "    ತಾ.   " + apiResponse.getContent().get(0).getDistrictName() + "     ಇವರು    ತಮ್ಮ     ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ     " + apiResponse.getContent().get(0).getSubSchemeNameInKannada()  + "    ಅಳವಡಿಕೆಗೆ \n\n"
+                apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ   ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  " + apiResponse.getContent().get(0).getScCategoryName() +
+                        "ಅಡಿ    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "+ apiResponse.getContent().get(0).getReelerName() + " (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + ",  " + apiResponse.getContent().get(0).getVillageName() + ",  " + apiResponse.getContent().get(0).getHobliName() + ","
+                        +"ಹೋಬಳಿ,    "+ apiResponse.getContent().get(0).getTalukName() + "    ತಾ.   " + apiResponse.getContent().get(0).getDistrictName() + "     ಇವರು    ತಮ್ಮ     ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ     " + apiResponse.getContent().get(0).getSubSchemeNameInKannada()  + "    ಅಳವಡಿಕೆಗೆ"
                 +"ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡುವ   ಬಗ್ಗೆ.");
 
         response.setHeader3("ಉಲ್ಲೇಖ:");
@@ -8422,59 +8422,48 @@ public class ReportsController {
                         +"       "+ apiResponse.getContent().get(0).getSReleaseNo()  + "  ದಿನಾಂಕ  :  " + sReleaseDate +"\n\n"
                         + "6.  ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ   (ರೀಲಿಂಗ್),  " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ಇವರ  ಪ್ರಸ್ತಾವನೆ  ದಿನಾಂಕ  :  " + proposalDate);
 
-        response.setHeader6(apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ   ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1)ರ    ಸರ್ಕಾರಿ   ಆದೇಶ  ಹಾಗೂ    ಉಲ್ಲೇಖ(2)ರ    ಮೂಲಕ   ರೇಷ್ಮೆ     ಕೃಷಿ    ಅಭಿವೃದ್ದಿ \n\n"
-                        + "ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು,   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ರವರು   ”"+  apiResponse.getContent().get(0).getSchemeNameInKannada() + "”\n\n"
-                        + apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ  ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"\n\n"
-                + "ಅಳವಡಿಕೆಗೆ  ಘಟಕ  ದರ  ರೂ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost()) + "/-  ಗಳಿಗೆ  ಶೇ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost())     // 75 – adjust getter name+ "  ರಂತೆ  ರೂ. "+ formatAmount(apiResponse.getContent().get(0).getSubsidyAmount())
-                + "/-  ಸಹಾಯಧನ    ನೀಡುವ     ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಠಾನಗೊಳಿಸಲು\n\n"
-                        + "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n\n"
-                +"ಉಲ್ಲೇಖ(5)  ರಲ್ಲಿ      ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ಇವರು    ಶ್ರೀ./ಶ್ರೀಮತಿ.\n\n"+
-                apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+" ,   "+apiResponse.getContent().get(0).getVillageName()+ "  ,   "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.\n\n" +
-                        apiResponse.getContent().get(0).getDistrictName()+ "    ಇವರು   " +apiResponse.getContent().get(0).getScCategoryName()+ "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ್ದು  ,   ರೀಲಿಂಗ್    ರಹದಾರಿ   ಸಂಖ್ಯೆ    "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"\n\n" +
-                        "ರಲ್ಲಿ       "+apiResponse.getContent().get(0).getNumberOfBasins()+  "   ಬೇಸಿನ್    "+apiResponse.getContent().get(0).getMachineTypeName()+ "  ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿದ್ದು ,\n\n" +
-                "ಇವರು  " +apiResponse.getContent().get(0).getFinancialYear()+ "  ನೇ  ಸಾಲಿಗೆ   ಉಲ್ಲೇಖ(3)  ರನ್ವಯ  "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "  ಅಳವಡಿಸಲು  ಆಯ್ಕೆಗೊಂಡ  ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ\n\n" +
-                "(ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ   ಸಂ.25,  "+apiResponse.getContent().get(0).getFinancialYear()+"   ವ್ಯಾಪ್ತಿಯಲ್ಲಿ     ಸಂಖ್ಯೆ     4   ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಶ್ರೀ   ರಾಘವೇಂದ್ರ ಎಂಟರ್ಪ್ರೈಸಸ್,");
+//        response.setHeader6(apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ   ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1)ರ    ಸರ್ಕಾರಿ   ಆದೇಶ  ಹಾಗೂ    ಉಲ್ಲೇಖ(2)ರ    ಮೂಲಕ   ರೇಷ್ಮೆ     ಕೃಷಿ    ಅಭಿವೃದ್ದಿ \n\n"
+//                        + "ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು,   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ರವರು   ”"+  apiResponse.getContent().get(0).getSchemeNameInKannada() + "”\n\n"
+//                        + apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ  ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"\n\n"
+//                + "ಅಳವಡಿಕೆಗೆ  ಘಟಕ  ದರ  ರೂ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost()) + "/-  ಗಳಿಗೆ  ಶೇ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost())     // 75 – adjust getter name+ "  ರಂತೆ  ರೂ. "+ formatAmount(apiResponse.getContent().get(0).getSubsidyAmount())
+//                + "/-  ಸಹಾಯಧನ    ನೀಡುವ     ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಠಾನಗೊಳಿಸಲು\n\n"
+//                        + "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n\n"
+//                +"ಉಲ್ಲೇಖ(5)  ರಲ್ಲಿ      ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ಇವರು    ಶ್ರೀ./ಶ್ರೀಮತಿ.\n\n"+
+//                apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+" ,   "+apiResponse.getContent().get(0).getVillageName()+ "  ,   "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.\n\n" +
+//                        apiResponse.getContent().get(0).getDistrictName()+ "    ಇವರು   " +apiResponse.getContent().get(0).getScCategoryName()+ "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ್ದು  ,   ರೀಲಿಂಗ್    ರಹದಾರಿ   ಸಂಖ್ಯೆ    "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"\n\n" +
+//                        "ರಲ್ಲಿ       "+apiResponse.getContent().get(0).getNumberOfBasins()+  "   ಬೇಸಿನ್    "+apiResponse.getContent().get(0).getMachineTypeName()+ "  ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿದ್ದು ,\n\n" +
+//                "ಇವರು  " +apiResponse.getContent().get(0).getFinancialYear()+ "  ನೇ  ಸಾಲಿಗೆ   ಉಲ್ಲೇಖ(3)  ರನ್ವಯ  "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "  ಅಳವಡಿಸಲು  ಆಯ್ಕೆಗೊಂಡ  ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ\n\n" +
+//                "(ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ   ಸಂ.25,  "+apiResponse.getContent().get(0).getFinancialYear()+"   ವ್ಯಾಪ್ತಿಯಲ್ಲಿ     ಸಂಖ್ಯೆ     4   ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಶ್ರೀ   ರಾಘವೇಂದ್ರ ಎಂಟರ್ಪ್ರೈಸಸ್,");
 
-//        response.setHeader7(
-//                "ಶ್ರೀ./ಶ್ರೀಮತಿ.  " + apiResponse.getContent().get(0).getReelerName() + " (" + apiResponse.getContent().get(0).getFruitsId() + ")  ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getReelerFatherName() + ",  "
-//                        + apiResponse.getContent().get(0).getVillageName() + ",  "
-//                        + apiResponse.getContent().get(0).getHobliName() + ",  ಹೋಬಳಿ,  "
-//                        + apiResponse.getContent().get(0).getTalukName() + "  ತಾ.  "
-//                        + apiResponse.getContent().get(0).getDistrictName() + "  ಜಿಲ್ಲೆ  ಇವರು  "
-//                        + apiResponse.getContent().get(0).getScCategoryName()
-//                        + "  ವರ್ಗಕ್ಕೆ  ಸೇರಿದವರಾಗಿದ್ದು,\n\n"
-//                        + "ರಿೀಲಿಂಗ್  ರಹದಾರಿ  ಸಂಖ್ಯೆ  "
-//                        + apiResponse.getContent().get(0).getReelingLicenseNumber()
-//                        + "  ರಲ್ಲಿ  0" + apiResponse.getContent().get(0).getNumberOfBasins()
-//                        + "  ಬೇಸಿನ್  "
-//                        + apiResponse.getContent().get(0).getMachineTypeName()
-//                        + "  ರೀಲಿಂಗ್  ಘಟಕ  ಹೊಂದಿರುತ್ತಾರೆ.\n\n"
-//                        + apiResponse.getContent().get(0).getFinancialYear()
-//                        + "  ನೇ  ಸಾಲಿಗೆ  ಉಲ್ಲೇಖ  (3)  ರನ್ವಯ  "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"  ಅಳವಡಿಸಲು  ಆಯ್ಕೆಗೊಂಡ  ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ\n\n"
-//                        + "(ಆಯ್ಕೆ  ಪಟ್ಟಿ  ಕ್ರಮ  ಸಂ. "
-//                        + apiResponse.getContent().get(0).getUnitCost()
-//                        + ",  "
-//                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-//                        + "  ವ್ಯಾಪ್ತಿಯಲ್ಲಿ  ಸಂಖ್ಯೆ  "
-//                        + apiResponse.getContent().get(0).getUnitCost()
-//                        + ").\n\n"
-//                        + "ತಮ  ರೀಲಿಂಗ್  ಘಟಕದಲ್ಲಿ  "
-//                        + apiResponse.getContent().get(0).getUnitCost()
-//                        + "  ಸಂಸ್ಥೆಯ  ಮೂಲಕ  ಟ್ಯಾಕ್ಸ್  ಇನ್‌ವಾಯ್ಸ್  ಸಂಖ್ಯೆ  "
-//                        + apiResponse.getContent().get(0).getUnitCost()
-//                        + "  ದಿನಾಂಕ  :  "
-//                        + formatDate(apiResponse.getContent().get(0).getUnitCost(), sdf)
-//                        + "  ರಂತೆ  ರೂ. "
-//                        + formatAmount(apiResponse.getContent().get(0).getUnitCost())
-//                        + "/-  ವೆಚ್ಚದಲ್ಲಿ  "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"  ಖರೀದಿಸಿ  ಅಳವಡಿಸಿಕೊಂಡಿರುತ್ತಾರೆ.\n\n"
-//                        + "ಸಹಾಯಧನ  ಮಂಜೂರಾತಿಗಾಗಿ  ಅಗತ್ಯ  ದಾಖಲೆಗಳನ್ನು  ಸೇರಿಸಿ  ಸಲ್ಲಿಸಿರುವ  ಪ್ರಸ್ತಾವನೆಯನ್ನು\n\n"
-//                        + "ಉಲ್ಲೇಖ  (2)  ರ  ಮಾರ್ಗಸೂಚಿಯ  ಅನ್ವಯ  ಪರಿಶೀಲಿಸಿರುವದರಿಂದ,  ಯೋಜನೆಯಡಿ  ಸಹಾಯಧನ\n\n"
-//                        + "ಪಡೆಯಲು  ಅರ್ಹರಾಗಿದ್ದಾರೆಂದು  ತೋರುತ್ತದೆ."
-//        );
 
-        response.setHeader7(
-                "ಶಿಡ್ಲಘಟ್ಟ     ಇವರ   ಟ್ಯಾಕ್ಸ್     ಇನ್ವಾಯ್ಸ್     ಸಂ:   848     ದಿನಾಂಕ     28/07/2025     ರಂತೆ     ರೂ.     25,000/-     ಗಳ     ವೆಚ್ಚದಲ್ಲಿ     Equipment     Type     ಘಟಕ     ಖರೀದಿಸಿ     ಅಳವಡಿಸಿದ್ದು     ಸಹಾಯಧನ     ಮಂಜೂರಾತಿಗಾಗಿ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದಾರೆ.     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿದ್ದು     ಉಲ್ಲೇಖ(2)ರ     ರೇಷ್ಮೆ     ಕೃಷಿ     ಅಭಿವೃದ್ದಿ     ಆಯುಕ್ತರು     ಹಾಗು     ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು     "
-                        + apiResponse.getContent().get(0).getLoggedinUserDistrictName() +
+        response.setHeader6(
+                "              " + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ನೇ    ಸಾಲಿನಲ್ಲಿ    ಉಲ್ಲೇಖ(1)ರ    ಸರ್ಕಾರಿ    ಆದೇಶ    ಹಾಗೂ    ಉಲ್ಲೇಖ(2)ರ    ಮೂಲಕ    ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ    "
+                        + "ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು,    " + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರು    ”"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    "
+                        + apiResponse.getContent().get(0).getScCategoryName() + "    ಅಡಿ    ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
+                        + apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "    "
+                        + "ಅಳವಡಿಕೆಗೆ    ಘಟಕ    ದರ    ರೂ.    " + formatAmount(apiResponse.getContent().get(0).getUnitCost()) + "/-    ಗಳಿಗೆ    ಶೇ.    "
+                        + formatAmount(apiResponse.getContent().get(0).getUnitCost()) + "/-    ಸಹಾಯಧನ    ನೀಡುವ    ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಠಾನಗೊಳಿಸಲು    "
+                        + "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n"
+                        + "ಉಲ್ಲೇಖ(5)    ರಲ್ಲಿ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    "
+                        + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ಇವರು    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "
+                        + apiResponse.getContent().get(0).getReelerName() + "(" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName() + "    ,    " + apiResponse.getContent().get(0).getVillageName()
+                        + "    ,    " + apiResponse.getContent().get(0).getHobliName() + "    ,    ಹೋಬಳಿ,    "
+                        + apiResponse.getContent().get(0).getTalukName() + "    ತಾ.    "
+                        + apiResponse.getContent().get(0).getDistrictName() + "    ಇವರು    "
+                        + apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ್ದು    ,    ರೀಲಿಂಗ್    ರಹದಾರಿ    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getReelingLicenseNumber() + "    "
+                        + "ರಲ್ಲಿ    " + apiResponse.getContent().get(0).getNumberOfBasins() + "    ಬೇಸಿನ್    "
+                        + apiResponse.getContent().get(0).getMachineTypeName() + "    ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿದ್ದು    ,    "
+                        + "ಇವರು    " + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ನೇ    ಸಾಲಿಗೆ    ಉಲ್ಲೇಖ(3)    ರನ್ವಯ    " + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
+                        + "    ಅಳವಡಿಸಲು    ಆಯ್ಕೆಗೊಂಡ    ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ    "
+                        + "(ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ    ಸಂ.25,    " + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    ಸಂಖ್ಯೆ    4    ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    ಶ್ರೀ    ರಾಘವೇಂದ್ರ    ಎಂಟರ್ಪ್ರೈಸಸ್,   ಶಿಡ್ಲಘಟ್ಟ     ಇವರ   ಟ್ಯಾಕ್ಸ್     ಇನ್ವಾಯ್ಸ್     ಸಂ:   848     ದಿನಾಂಕ     28/07/2025     ರಂತೆ     ರೂ.     25,000/-     ಗಳ     ವೆಚ್ಚದಲ್ಲಿ     Equipment     Type     ಘಟಕ     ಖರೀದಿಸಿ     ಅಳವಡಿಸಿದ್ದು     ಸಹಾಯಧನ     ಮಂಜೂರಾತಿಗಾಗಿ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದಾರೆ.     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿದ್ದು     ಉಲ್ಲೇಖ(2)ರ     ರೇಷ್ಮೆ     ಕೃಷಿ     ಅಭಿವೃದ್ದಿ ");
+
+        response.setHeader7("    ಆಯುಕ್ತರು     ಹಾಗು     ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು   " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() +
                         "     ರವರ     ಸುತ್ತೋಲೆಯ     ಮಾರ್ಗಸೂಚಿಯಂತೆ     “"
                         + apiResponse.getContent().get(0).getSchemeNameInKannada() +
                         "”     "
@@ -8497,18 +8486,18 @@ public class ReportsController {
                         "ಕೆಳಗೆ     ವಿವರಿಸಿದಂತೆ     ಮಂಜೂರಾತಿ     ನೀಡಿದೆ.");
 
         response.setHeader10(
-                "(ರೂ.     " + schemeAmountWords + "     ಮಾತ್ರ)\n\n"
-                        + "ಮೇಲ್ಕಂಡ     ಫಲಾನುಭವಿಯು     ತನ್ನ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿತ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿರುವುದರಿಂದ,\n\n"
+                "(ರೂ.     " + schemeAmountWords + "     ಮಾತ್ರ)"
+                        + "ಮೇಲ್ಕಂಡ     ಫಲಾನುಭವಿಯು     ತನ್ನ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿತ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿರುವುದರಿಂದ,"
                         + "ಸಹಾಯಧನದ     ಮೊತ್ತ     ರೂ.     " + formatAmount(apiResponse.getContent().get(0).getSubsidyAmount())
                         + "/-     ಗಳನ್ನು     "
                         + apiResponse.getContent().get(0).getUnitCost()
-                        + "     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಲು     ಆದೇಶಿಸಲಾಗುತ್ತದೆ.\n\n"
+                        + "     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಲು     ಆದೇಶಿಸಲಾಗುತ್ತದೆ."
                         + "ಸದರಿ     ವೆಚ್ಚವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ     "
                         + apiResponse.getContent().get(0).getScHeadAccountName()
-                        + "     ಯೋಜನೆ     ಅಡಿಯಲ್ಲಿ     ಭರಿಸುವುದು.\n\n"
+                        + "     ಯೋಜನೆ     ಅಡಿಯಲ್ಲಿ     ಭರಿಸುವುದು."
 
-                        + "ರೂ.     ಹದಿನೆಂಟು     ಸಾವಿರದ     ಎರಡು     ನೂರ     ಐವತ್ತು     ಮಾತ್ರ     (Subsidy     Amount     in     Kannada)\n\n"
-                        + "ಮೇಲ್ಕಂಡ     ಫಲಾನುಭವಿಯು     ತನ್ನ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿಸಿದ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿರುತ್ತಾರೆ.     ಆದುದರಿಂದ     ಸಹಾಯಧನದ     ಮೊತ್ತ     ರೂ.     18250/-     ಗಳನ್ನು     ಶ್ರೀ     ರಾಘವೇಂದ್ರ     ಎಂಟರ್‌     ಪ್ರೈಸಸ್‌,     ಶಿಡ್ಲಘಟ್ಟ     (Empanelled     vender     Address)     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸುವುದು.     ನಿಯಮಾನುಸಾರ     ಕಡಿತಗಳನ್ನು     ಕಟಾಯಿಸಿ     ಉಳಿಕೆ     ಮೊತ್ತವನ್ನು     ಪಾವತಿಸುವುದು.\n\n"
+                        + "ರೂ.     ಹದಿನೆಂಟು     ಸಾವಿರದ     ಎರಡು     ನೂರ     ಐವತ್ತು     ಮಾತ್ರ  "
+                        + "ಮೇಲ್ಕಂಡ     ಫಲಾನುಭವಿಯು     ತನ್ನ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿಸಿದ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿರುತ್ತಾರೆ.     ಆದುದರಿಂದ     ಸಹಾಯಧನದ     ಮೊತ್ತ     ರೂ.     18250/-     ಗಳನ್ನು     ಶ್ರೀ     ರಾಘವೇಂದ್ರ     ಎಂಟರ್‌     ಪ್ರೈಸಸ್‌,     ಶಿಡ್ಲಘಟ್ಟ     (Empanelled     vender     Address)     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸುವುದು.     ನಿಯಮಾನುಸಾರ     ಕಡಿತಗಳನ್ನು     ಕಟಾಯಿಸಿ     ಉಳಿಕೆ     ಮೊತ್ತವನ್ನು     ಪಾವತಿಸುವುದು."
                         + "ಸದರಿ     ವೆಚ್ಚವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ      "+ apiResponse.getContent().get(0).getScHeadAccountName() +"    (" + apiResponse.getContent().get(0).getDescription()+")     " + apiResponse.getContent().get(0).getScCategoryName()+"    ಅಡಿ     ಭರಿಸುವುದು.");
 
 
@@ -8521,9 +8510,10 @@ public class ReportsController {
 
         // COPY-TO BLOCK
         response.setHeader11(
-                "ಈ  ಕಚೇರಿಯ  ಲೆಕ್ಕ    ಶಾಖೆಗೆ"
-                        + "ಇವರಿಗೆ,"
-                        + "1.  ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ   ಸೇವಾ  ಕೇಂದ್ರ   (ರೀಲಿಂಗ್),  "
+                "ಈ  ಕಚೇರಿಯ  ಲೆಕ್ಕ    ಶಾಖೆಗೆ\n"
+                        + "ಇವರಿಗೆ,\n"
+                        + "ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,\n"
+                +"ತಾಂತ್ರಿಕ   ಸೇವಾ  ಕೇಂದ್ರ   (ರೀಲಿಂಗ್),\n"
                         + apiResponse.getContent().get(0).getLoggedinUserTscName());
 
 //        // OPTIONAL – Page-3 “ರೈತರ ಅರ್ಜಿಯ ಸ್ಥವೀಕೃತಿ” – put into header12 if you design 3rd page
