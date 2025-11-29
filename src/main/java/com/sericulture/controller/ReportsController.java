@@ -488,22 +488,44 @@ public class ReportsController {
         try {
             JasperReport jasperReport = getJasperReport("sanctionOrderReelingShed.jrxml");
 
+            // 1️⃣ Get full data source from service method
             JRBeanCollectionDataSource fullDs = getDataSourceForPsfaReelingShed(requestDto);
+
+            // 2️⃣ Extract the underlying list (all rows: header + detail rows)
             @SuppressWarnings("unchecked")
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            // 3️⃣ Build mainDataSource: ONLY header bean (first element)
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
-                headerList.add(fullList.get(0));
+                headerList.add(fullList.get(0));      // use first row as header bean
             }
             JRBeanCollectionDataSource mainDataSource = new JRBeanCollectionDataSource(headerList);
 
-            Map<String, Object> parameters = new HashMap<>();
-            // if you have any sub-datasets, set them here (like silk, sanctionBonus)
+            // 4️⃣ Build reelingShedList: single row for subDataset "reelingshed"
+            List<SanctionOrderResponse> reelingShedList = new ArrayList<>();
+            if (fullList.size() > 1) {
+                // if you have detail rows, use the first detail row
+                reelingShedList.add(fullList.get(1));
+            } else if (!fullList.isEmpty()) {
+                // fallback: if only header exists, still show that row
+                reelingShedList.add(fullList.get(0));
+            }
 
+            // 5️⃣ JRBeanCollectionDataSource for subDataset "reelingshed"
+            JRBeanCollectionDataSource reelingShedDs =
+                    new JRBeanCollectionDataSource(reelingShedList);
+
+            // 6️⃣ Parameters map – pass subdataset DS here
+            Map<String, Object> parameters = new HashMap<>();
+            // This must match the parameter name in JRXML: CollectionBeanParam1
+            parameters.put("CollectionBeanParam1", reelingShedDs);
+
+            // 7️⃣ Fill report using header bean as main data source
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
+            // 8️⃣ Export to PDF (unchanged)
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
@@ -8100,66 +8122,128 @@ public class ReportsController {
 
         response.setHeader2("ವಿಷಯ");
 
-        response.setHeader5(apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ   ಸಾಲಿನ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada()+ "”     " + apiResponse.getContent().get(0).getScCategoryName()+"\n\n"
-                        + "ವರ್ಗಕ್ಕೆ      ಸೇರಿದ    ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+  "    "+apiResponse.getContent().get(0).getVillageName()+ "  ,\n\n" +
-                apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.   " +apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರು    ನಿರ್ಮಿಸಿರುವ   ರೀಲಿಂಗ್   ಶೆಡ್ಗೆ    ಸಹಾಯಧನ    ಮಂಜೂರು\n\n"
-                +"ಮಾಡುವ    ಬಗ್ಗೆ.");
+        response.setHeader5(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನ    “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    ಅಡಿ   " + apiResponse.getContent().get(0).getScCategoryName() + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ    ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName() + "    (" + apiResponse.getContent().get(0).getFruitsId()
+                        + ")    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName()
+                        + "    "
+                        + apiResponse.getContent().get(0).getVillageName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getHobliName()
+                        + "    ,    ಹೋಬಳಿ,    "
+                        + apiResponse.getContent().get(0).getTalukName()
+                        + "    ತಾ.    "
+                        + apiResponse.getContent().get(0).getDistrictName()
+                        + "   ಜಿಲ್ಲೆ     ಇವರು    ನಿರ್ಮಿಸಿರುವ    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡುವ    ಬಗ್ಗೆ."
+        );
+
 
         response.setHeader3("ಉಲ್ಲೇಖ:     ");
         response.setHeader4("ಪೀಠಿಕೆ:     ");
 
         response.setHeader1(
                           "1. ಸರ್ಕಾರದ     ಆದೇಶ     ಸಂಖ್ಯೆ     :     " + apiResponse.getContent().get(0).getAdmGovtOrder() + "     ದಿನಾಂಕ     :     " + admGovtDate + " \n\n"
-                        + "2. ರೇಷ್ಮೆ     ಕೃಷಿ     ಅಭಿವೃದ್ದಿ     ಆಯುಕ್ತರು     ಹಾಗೂ     ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,     ಬೆಂಗಳೂರು     ರವರ     ಸುತ್ತೋಲೆ     \n\n"
+                        + "2. ರೇಷ್ಮೆ     ಕೃಷಿ     ಅಭಿವೃದ್ದಿ     ಆಯುಕ್ತರು     ಹಾಗೂ     ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"     ರವರ     ಸುತ್ತೋಲೆ \n\n"
                         + "     ಸಂಖ್ಯೆ     :     " + apiResponse.getContent().get(0).getSchemeCircularNo() + "     ದಿನಾಂಕ     :     " + schemeCircularDate + "\n\n"
                         + "3. ಸರ್ಕಾರದ     ಆದೇಶ     ಸಂಖ್ಯೆ     :     " + apiResponse.getContent().get(0).getDeptDeleNo() + "     ದಿನಾಂಕ     :     " + deptDeleDate + " \n\n"
                         + "4. " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನ     ಗೂಡಿನ    ನಂತರದ   ಚಟುವಟಿಕೆ    ಕಾರ್ಯಕ್ರಮಗಳ     ಅನುಷ್ಠಾನಕ್ಕಾಗಿ \n\n" +
-                        "       ಫಲಾನುಭವಿಗಳ    ಪಟ್ಟಿಯ ಅನುಮೋದನೆ.   ದಿನಾಂಕ :  "+ proposalDate+"\n\n"
+                        "      ಫಲಾನುಭವಿಗಳ    ಪಟ್ಟಿಯ ಅನುಮೋದನೆ   ದಿನಾಂಕ :  "+ proposalDate+"\n\n"
                         + "5. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ     ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ರವರ    ಜ್ಞಾಪನ    ಪತ್ರದ \n\n"
                         + "     ಸಂಖ್ಯೆ   :  "+apiResponse.getContent().get(0).getSReleaseNo() +"   ದಿನಾಂಕ  :   " +sReleaseDate  + "\n\n"
-                        + "6. ರೇಷ್ಮೆ   ಉಪ  ನಿರ್ದೇಶಕರು,  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ,    ಕೊಳ್ಳೇಗಾಲ    ಇವರ   ಪ್ರಸ್ತಾವನೆ    ದಿನಾಂಕ :  "+proposalDate+"");
+                        + "6. ರೇಷ್ಮೆ   ಉಪ  ನಿರ್ದೇಶಕರು,  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ,    "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"    ಇವರ   ಪ್ರಸ್ತಾವನೆ    ದಿನಾಂಕ :  "+proposalDate+"");
 
 
 
-        response.setHeader6("              " + apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ      ಇಲಾಖೆಯ     ವಿವಿಧ     ಕಾರ್ಯಕ್ರಮಗಳ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ವಿವಿಧ   ಲೆಕ್ಕ \n\n"
-                +"ಶೀರ್ಷಿಕೆಗಳಡಿ     ಉಲ್ಲೇಖ     (1)     ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮಕ     ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು,     ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ \n\n"
-                +"ರೀಲಿಂಗ್‌     ಶೆಡ್‌     ನಿರ್ಮಾಣ   ಕಾರ್ಯಕ್ರಮದ     ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.     ಇಲಾಖೆಯು\n\n"
-                +"“"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”   "+ apiResponse.getContent().get(0).getScCategoryName() +"   ಅಡಿ   ರೀಲಿಂಗ್   ಶೆಡ್ \n\n"
-                +"ನಿರ್ಮಾಣಕ್ಕೆ     ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ     ದರ /ಸಹಾಯಧನದ     ವಿವರ     ಇಂತಿದೆ;");
+        response.setHeader6(
+                "              " + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ನೇ    ಸಾಲಿನಲ್ಲಿ    ರೇಷ್ಮೆ    ಇಲಾಖೆಯ    ವಿವಿಧ    ಕಾರ್ಯಕ್ರಮಗಳ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ವಿವಿಧ    ಲೆಕ್ಕ "
+                        + "ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ    ಸರ್ಕಾರವು    ಆಡಳಿತಾತ್ಮಕ    ಅನುಮೋದನೆಯನ್ನು    ನೀಡಿದ್ದು,    ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ "
+                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +  "  ನಿರ್ಮಾಣ    ಕಾರ್ಯಕ್ರಮದ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.    ಇಲಾಖೆಯು "
+                        + "“" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ/ಸಹಾಯಧನದ    ವಿವರ    ಇಂತಿದೆ;"
+        );
 
 
-        response.setHeader7("ಶ್ರೀ./ಶ್ರೀಮತಿ.    " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+" ,  " +apiResponse.getContent().get(0).getVillageName()+ " ,   "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ, "+ apiResponse.getContent().get(0).getTalukName()+ "\n\n"
-                              +"ತಾ.  "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ     ಇವರು    "+apiResponse.getContent().get(0).getFinancialYear()+ "    ನೇ     ಸಾಲಿಗೆ     ಉಲ್ಲೇಖ (3)   ರನ್ವಯ     ರೀಲಿಂಗ್     ಶೆಡ್   ನಿರ್ಮಾಣದ \n\n"
-                            +"ಆಯ್ಕೆಗೊಂಡ     ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ    (ಆಯ್ಕೆ     ಪಟ್ಟಿ     ಕ್ರಮ     ಸಂ.25,  ಕೊಳ್ಳೇಗಾಲ     ವ್ಯಾಪ್ತಿಯಲ್ಲಿ     ಸಂಖ್ಯೆ     4  ಸದರಿಯವರು\n\n"
-                            +apiResponse.getContent().get(0).getDistrictName()+ "   ಜಿಲ್ಲೆ     "+apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,     "+apiResponse.getContent().get(0).getTalukName()+ "    ಗ್ರಾಮದ     ಸ್ವತ್ತಿನ     ಸಂಖ್ಯೆ:344 ರ    9.144ಮೀX12.192ಮೀ=111.48\n\n"
-                            +"ಚ.ಮೀಟರ್     ನಿವೇಶನದಲ್ಲಿ     30’X31’=930   ಚದರ     ಅಡಿಗಳ     ರೀಲಿಂಗ್     ಶೆಡ್     ನಿರ್ಮಿಸಿದ್ದು,     ಇವರು     36     ಕೊನೆಗಳ  "+ apiResponse.getContent().get(0).getNumberOfBasins()+"\n\n"
-                            +"ಬೇಸಿನ್    ಸುಧಾರಿತ   "+ apiResponse.getContent().get(0).getMachineTypeName()+"  ರೀಲಿಂಗ್    ಯಂತ್ರೋಪಕರಣ     ಅಳವಡಿಸಿರುತ್ತಾರೆ.\n\n"
-                            +"ಹಾಗೂ   ಸದರಿಯವರು     ಚಾಲ್ತಿಯಲ್ಲಿರುವ   ರೀಲಿಂಗ್    ರಹದಾರಿ     (ಸಂಖ್ಯೆ    "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+" )   ಅನ್ನು     ಹೊಂದಿರುತ್ತಾರೆ     ಸದರಿಯವರು   900\n\n"
-                            +"ಚದರ   ಅಡಿ   ನಿರ್ಮಾಣದ   ರೀಲೀಂಗ್    ಶೆಡ್ ಗೆ    ಸಹಾಯಧನ     ಪಡೆಯಲು    ಅರ್ಹರಿದ್ದು,     ನಿರ್ಮಿಸಿರುವ    930   ಚ.ಅಡಿಗಳ\n\n"
-                            +"ರೀಲಿಂಗ್   ಶೆಡ್   ಅನ್ನು     900   ಚ.ಅಡಿಗಳಿಗೆ     ಸೀಮಿತಗೊಳಿಸಿ,     ಘಟಕ     ದರ     ರೂ.    " + apiResponse.getContent().get(0).getUnitCost()+"/-    ಗಳ     ಶೇಕಡಾ   50ರ  ಸಹಾಯಧನ\n\n"
-                            +"ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount()+"/-  ಗಳನ್ನು     ಮಂಜೂರುಮಾಡುವಂತೆ     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ    (ರೀ),  "+ apiResponse.getContent().get(0).getLoggedinUserTscName()+"\n\n"
-                            +"ಇವರು     ಸಲ್ಲಿಸಿರುವ     ಪ್ರಸ್ತಾವನೆಯು   ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು,     ಗೂ.ನಂ.ಚ.    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName()+"     ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು,\n\n"
-                            +"ರೇ.ಗೂ.ಮಾ.  "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"     ಇವರಿಂದ     ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ     ಶಿಫಾರಸ್ಸುಗೊಂಡಿರುತ್ತದೆ.\n\n"+
 
-                             "ಈ     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಉಲ್ಲೇಖ(2)ರ     ಮಾರ್ಗಸೂಚಿಯನ್ವಯ     ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,     ಎಲ್ಲಾ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳನ್ನು \n\n"
-                             +"ಒಳಗೊಂಡಿರುತ್ತದೆ.     ಆದ್ದರಿಂದ,    ಶ್ರೀ./ಶ್ರೀಮತಿ.    " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")    ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+ ",\n\n"
-                              +apiResponse.getContent().get(0).getVillageName()+ " ,   "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "    ತಾ.     "+apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರಿಗೆ   900     ಚದರ     ಅಡಿಗಳ     ರೀಲಿಂಗ್     ಶೆಡ್ \n\n"
-                             +"ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ     ಮಂಜೂರು     ಮಾಡಬಹುದಾಗಿದೆ.     ಅದರಂತೆ     ಈ     ಆದೇಶ.");
+        response.setHeader7(
+                "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName()
+                        + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName() + "    ,    "
+                        + apiResponse.getContent().get(0).getVillageName() + "    ,    "
+                        + apiResponse.getContent().get(0).getHobliName() + "    ,    ಹೋಬಳಿ,    "
+                        + apiResponse.getContent().get(0).getTalukName()
+                        + "    ತಾ.    " + apiResponse.getContent().get(0).getDistrictName()
+                        + "    ಜಿಲ್ಲೆ    ಇವರು    " + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ನೇ    ಸಾಲಿಗೆ    ಉಲ್ಲೇಖ    (3)    ರನ್ವಯ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣದ    "
+                        + "ಆಯ್ಕೆಗೊಂಡ    ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ    (ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ    ಸಂ.25,   "+  apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    ಸಂಖ್ಯೆ   "+  apiResponse.getContent().get(0).getSanctionNo() +"   ಸದರಿಯವರು    "
+                        + apiResponse.getContent().get(0).getDistrictName() + "    ಜಿಲ್ಲೆ    "
+                        + apiResponse.getContent().get(0).getTalukName()
+                        + "    ತಾಲ್ಲೂಕು,    " + apiResponse.getContent().get(0).getReelingShedDetails()
+                        + "    ಗ್ರಾಮದ    ಸ್ವತ್ತಿನ    ಸಂಖ್ಯೆ   :__________    ರ    "+  apiResponse.getContent().get(0).getRhSqft() +"    "
+                        + "ಚ.ಮೀಟರ್    ನಿವೇಶನದಲ್ಲಿ    _____________    ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಿಸಿದ್ದು,    ಇವರು   __________  ಕೊನೆಗಳ    "
+                        + apiResponse.getContent().get(0).getNumberOfBasins()
+                        + "    ಬೇಸಿನ್    ಸುಧಾರಿತ    "
+                        + apiResponse.getContent().get(0).getMachineTypeName()
+                        + "    ರೀಲಿಂಗ್    ಯಂತ್ರೋಪಕರಣ    ಅಳವಡಿಸಿರುತ್ತಾರೆ.    "
+                        + "ಹಾಗೂ    ಸದರಿಯವರು    ಚಾಲ್ತಿಯಲ್ಲಿರುವ    ರೀಲಿಂಗ್    ರಹದಾರಿ    (ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getReelingLicenseNumber()
+                        + "    )    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ    ಸದರಿಯವರು    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    "
+                        + "ಚದರ    ಅಡಿ    ನಿರ್ಮಾಣದ    ರೀಲೀಂಗ್    ಶೆಡ್    ಗೆ    ಸಹಾಯಧನ    ಪಡೆಯಲು    ಅರ್ಹರಿದ್ದು,    ನಿರ್ಮಿಸಿರುವ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿಗಳ    "
+                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ಅನ್ನು    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿಗಳಿಗೆ    ಸೀಮಿತಗೊಳಿಸಿ,    ಘಟಕ    ದರ    ರೂ.    "
+                        + apiResponse.getContent().get(0).getUnitPrice()
+                        + "/-    ಗಳ    ಶೇಕಡಾ    "+  apiResponse.getContent().get(0).getStateSharePercentage() +"ರ    ಸಹಾಯಧನ    ರೂ.    "
+                        + apiResponse.getContent().get(0).getSubsidyAmount()
+                        + "/-    ಗಳನ್ನು    ಮಂಜೂರುಮಾಡುವಂತೆ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀ),    "
+                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
+                        + "    ಇವರು    ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯು    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂ.ನಂ.ಚ.    "
+                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
+                        + "    ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,    ರೇ.ಗೂ.ಮಾ.    "
+                        + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
+                        + "    ಇವರಿಂದ    ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ    ಶಿಫಾರಸ್ಸುಗೊಂಡಿರುತ್ತದೆ. \n   "
+                        + "ಈ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಉಲ್ಲೇಖ(2)ರ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,    ಎಲ್ಲಾ    ಅಗತ್ಯ    ದಾಖಲೆಗಳನ್ನು    "
+                        + "ಒಳಗೊಂಡಿರುತ್ತದೆ.    ಆದ್ದರಿಂದ,    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "
+                        + apiResponse.getContent().get(0).getReelerName()
+                        + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName()
+                        + "    ,    " + apiResponse.getContent().get(0).getVillageName() + "    ,    "
+                        + apiResponse.getContent().get(0).getHobliName() + "    ,    ಹೋಬಳಿ,    "
+                        + apiResponse.getContent().get(0).getTalukName() + "    ತಾ.    "
+                        + apiResponse.getContent().get(0).getDistrictName()
+                        + "    ಇವರಿಗೆ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದೆ.    ಅದರಂತೆ    ಈ    ಆದೇಶ."
+        );
 
 
         response.setHeader8("ಸಂಖ್ಯೆ  : ರೇಜಂನಿ/" + shortDistrictKannada + "ವಿ/ತಾಂ/" + apiResponse.getContent().get(0).getSubSchemeNameInKannada() + "/" + apiResponse.getContent().get(0).getReelerName() + "/" + apiResponse.getContent().get(0).getSanctionOrderNumber()+ "/ದಿನಾಂಕ : " + proposalDate);
 
-        response.setHeader9("         ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿವರಿಸಿದಂತೆ,     "+ apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನ     “"+ apiResponse.getContent().get(0).getSchemeNameInKannada()+"”   \n\n" +
-                apiResponse.getContent().get(0).getScCategoryName()+ "    ಅಡಿ    900   ಚ.ಅಡಿ   ರೀಲಿಂಗ್  ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕೆ    ಉಲ್ಲೇಖ(3)ರ    ವಿತ್ತೀಯ    ಪ್ರತ್ಯಾಧಿಕಾರದನ್ವಯ\n\n"
-                +"ಫಲಾನುಭವಿಗಳ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ    ಸಹಾಯಧನ   ಮಂಜೂರು   ಮಾಡಲು  ರೇಷ್ಮೆ    ಜಂಟಿ   ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getDivisionName()+"\n\n"
-                +"ವಿಭಾಗ,     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"  ರವರಿಗೆ   ಪೂರ್ಣ   ಅಧಿಕಾರವಿದ್ದು,   ಈ   ಕೆಳಗೆ    ವಿವರಿಸಿದಂತೆ    ಮಂಜೂರಾತಿ   ನೀಡಿದೆ. ");
+        response.setHeader9(
+                "         ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿದಂತೆ,    "
+                        + apiResponse.getContent().get(0).getFinancialYear()
+                        + "    ನೇ    ಸಾಲಿನ    “"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada()
+                        + "”    "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ಉಲ್ಲೇಖ(3)ರ    ವಿತ್ತೀಯ    ಪ್ರತ್ಯಾಧಿಕಾರದನ್ವಯ    "
+                        + "ಫಲಾನುಭವಿಗಳ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ    ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡಲು    ರೇಷ್ಮೆ    ಜಂಟಿ    ನಿರ್ದೇಶಕರು,    "
+                        + apiResponse.getContent().get(0).getDivisionName()
+                        + "    ವಿಭಾಗ,    "
+                        + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
+                        + "    ರವರಿಗೆ    ಪೂರ್ಣ    ಅಧಿಕಾರವಿದ್ದು,    ಈ    ಕೆಳಗೆ    ವಿವರಿಸಿದಂತೆ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ."
+        );
 
-        response.setHeader10("(ರೂ. ಎರಡು ಲಕ್ಷ ಎಪ್ಪತ್ತು ಸಾವಿರ ಮಾತ್ರ)    \n\n"+
-                        "              ಸದರಿ    ಮೊತ್ತವನ್ನು    “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"” "+ apiResponse.getContent().get(0).getScCategoryName() +" \n\n" +
-                        "ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+ apiResponse.getContent().get(0).getScHeadAccountName() +"   ಯೋಜನೆ   ಅಡಿಯಲ್ಲಿ    ಭರಿಸುವುದು.    ಖಜಾನೆ-2 ರಲ್ಲಿ     ಸಹಾಯಧನದ   ಮೊತ್ತವನ್ನು \n\n"
-                +"ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿ   ಖಾತೆಗೆ    ಜಮಾ   ಮಾಡುವುದು.");
+        response.setHeader10(
+                "(ರೂ.    ಎರಡು    ಲಕ್ಷ    ಎಪ್ಪತ್ತು    ಸಾವಿರ    ಮಾತ್ರ   ) \n  "
+                        + "              ಸದರಿ    ಮೊತ್ತವನ್ನು    “"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada()
+                        + "”    "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ:    "
+                        + apiResponse.getContent().get(0).getScHeadAccountName()
+                        + "    ಯೋಜನೆ    ಅಡಿಯಲ್ಲಿ    ಭರಿಸುವುದು.    ಖಜಾನೆ-2    ರಲ್ಲಿ    ಸಹಾಯಧನದ    ಮೊತ್ತವನ್ನು    "
+                        + "ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಖಾತೆಗೆ    ಜಮಾ    ಮಾಡುವುದು."
+        );
 
-        response.setLineItemComment("ರೇಷ್ಮೆ     ಜಂಟಿ     ನಿರ್ದೇಶಕರು\n\n" + apiResponse.getContent().get(0).getDivisionName() + "   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+
+        response.setLineItemComment("ರೇಷ್ಮೆ     ಜಂಟಿ     ನಿರ್ದೇಶಕರು\n\n" + apiResponse.getContent().get(0).getDivisionName() + "   ವಿಭಾಗ,   " + apiResponse.getContent().get(0).getLoggedinUserDistrictName());
 
         response.setHeader11("ಇವರಿಗೆ,\n\n"
                         + "ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು,\n\n"
@@ -8204,72 +8288,21 @@ public class ReportsController {
                 if (sanctionOrderResponse.getFarmerFirstName() == null) {
                     sanctionOrderResponse.setFarmerFirstName("");
                 }
-                if (sanctionOrderResponse.getVillageNameInKannada() == null) {
-                    sanctionOrderResponse.setVillageNameInKannada("");
-                }
+
                 if (sanctionOrderResponse.getReelerName() == null) {
                     sanctionOrderResponse.setReelerName("");
                 }
-                if (sanctionOrderResponse.getMonth() == null) {
-                    sanctionOrderResponse.setMonth("");
-                }
-                if (sanctionOrderResponse.getNumberOfBasins() == null) {
-                    sanctionOrderResponse.setNumberOfBasins("");
-                }
-                if (sanctionOrderResponse.getNoOfCocoonsNeedToProduce() == null) {
-                    sanctionOrderResponse.setNoOfCocoonsNeedToProduce("");
-                }
-                if (sanctionOrderResponse.getNoOfRawSilkProduced() == null) {
-                    sanctionOrderResponse.setNoOfRawSilkProduced("");
-                }
-                if (sanctionOrderResponse.getRenditta() == null) {
-                    sanctionOrderResponse.setRenditta("");
-                }
-                if (sanctionOrderResponse.getSilkExchangeName() == null) {
-                    sanctionOrderResponse.setSilkExchangeName("");
-                }
-                if (sanctionOrderResponse.getForm17jNo() == null) {
-                    sanctionOrderResponse.setForm17jNo("");
-                }
-                if (sanctionOrderResponse.getMachineQuantity() == null) {
-                    sanctionOrderResponse.setMachineQuantity(0f);
-                }
-                if (sanctionOrderResponse.getMax() == null) {
-                    sanctionOrderResponse.setMax(0f);
-                }
+
                 if (sanctionOrderResponse.getSchemeAmount() == null) {
                     sanctionOrderResponse.setSchemeAmount(0f);
                 }
-                if (sanctionOrderResponse.getMachineTypeName() == null) {
-                    sanctionOrderResponse.setMachineTypeName("");
+                if (sanctionOrderResponse.getUnitPrice() == null) {
+                    sanctionOrderResponse.setUnitPrice(0f);
                 }
-                if (sanctionOrderResponse.getScCategoryName() == null) {
-                    sanctionOrderResponse.setScCategoryName("");
+                if (sanctionOrderResponse.getScComponentName() == null) {
+                    sanctionOrderResponse.setScComponentName("");
                 }
-                if (sanctionOrderResponse.getRenditta() == null) {
-                    sanctionOrderResponse.setRenditta("");
-                }
-                if (sanctionOrderResponse.getDailyLimit() == null) {
-                    sanctionOrderResponse.setDailyLimit("");
-                }
-                if (sanctionOrderResponse.getPerKgRate() == null) {
-                    sanctionOrderResponse.setPerKgRate(0f);
-                }
-                if (sanctionOrderResponse.getCocoonsWeight() == null) {
-                    sanctionOrderResponse.setCocoonsWeight(0f);
-                }
-                if (sanctionOrderResponse.getLotWeight() == null) {
-                    sanctionOrderResponse.setLotWeight(0f);
-                }
-                if (sanctionOrderResponse.getMarketAuctionDate() == null) {
-                    sanctionOrderResponse.setMarketAuctionDate("");
-                }
-                if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
-                    sanctionOrderResponse.setTotalCocoonsWeight(0f);
-                }
-                if (sanctionOrderResponse.getSanctionAmount() == null) {
-                    sanctionOrderResponse.setSanctionAmount(0f);
-                }
+
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
 
