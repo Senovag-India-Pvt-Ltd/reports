@@ -1662,9 +1662,93 @@ public class ReportsController {
             //return  ex.getMessage();
             //throw new RuntimeException("fail export file: " + ex.getMessage());
         }
+    }
+
+
+        @PostMapping("/getWorkOrderHRU")
+        public ResponseEntity<?> getWorkOrderForHRU(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+            try {
+                System.out.println("enter to getWorkOrder");
+                logger.info("enter to getWorkOrder");
+                String destFileName = "report_kannada.pdf";
+                JasperReport jasperReport = getJasperReport("workOrderHRU.jrxml");
+
+                // 2. parameters "empty"
+                Map<String, Object> parameters = getParameters();
+
+                // 3. datasource "java object"
+                JRDataSource dataSource = getDataSourceHRUWorkOrder(requestDto);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+                ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_PDF);
+                headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+                JRPdfExporter pdfExporter = new JRPdfExporter();
+                pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+                pdfExporter.exportReport();
+                return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                logger.info(ex.getMessage() + ex.getStackTrace());
+                HttpHeaders headers = new HttpHeaders();
+                return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+                //return  ex.getMessage();
+                //throw new RuntimeException("fail export file: " + ex.getMessage());
+            }
 
 
         //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
+
+    @PostMapping("/getWorkOrderReelingShed")
+    public ResponseEntity<?> getWorkOrderForReelingShed(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getWorkOrder");
+            logger.info("enter to getWorkOrder");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("workOrderReelingShed.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceReelingShedWorkOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
 
     }
 
@@ -7592,8 +7676,6 @@ public class ReportsController {
 
 
 
-        // ✅ Clean formatted date for sanction order
-// ✅ Clean formatted date for sanction order
         String formattedDate = "";
         try {
             String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
@@ -8275,20 +8357,6 @@ public class ReportsController {
                         +"       "+ apiResponse.getContent().get(0).getSReleaseNo()  + "  ದಿನಾಂಕ  :  " + sReleaseDate +"\n\n"
                         + "6.  ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ   (ರೀಲಿಂಗ್),  " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ಇವರ  ಪ್ರಸ್ತಾವನೆ  ದಿನಾಂಕ  :  " + proposalDate);
 
-//        response.setHeader6(apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ   ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1)ರ    ಸರ್ಕಾರಿ   ಆದೇಶ  ಹಾಗೂ    ಉಲ್ಲೇಖ(2)ರ    ಮೂಲಕ   ರೇಷ್ಮೆ     ಕೃಷಿ    ಅಭಿವೃದ್ದಿ \n\n"
-//                        + "ಆಯುಕ್ತರು  ಹಾಗೂ  ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರು,   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ರವರು   ”"+  apiResponse.getContent().get(0).getSchemeNameInKannada() + "”\n\n"
-//                        + apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ  ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು    ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"\n\n"
-//                + "ಅಳವಡಿಕೆಗೆ  ಘಟಕ  ದರ  ರೂ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost()) + "/-  ಗಳಿಗೆ  ಶೇ. " + formatAmount(apiResponse.getContent().get(0).getUnitCost())     // 75 – adjust getter name+ "  ರಂತೆ  ರೂ. "+ formatAmount(apiResponse.getContent().get(0).getSubsidyAmount())
-//                + "/-  ಸಹಾಯಧನ    ನೀಡುವ     ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಠಾನಗೊಳಿಸಲು\n\n"
-//                        + "ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n\n"
-//                +"ಉಲ್ಲೇಖ(5)  ರಲ್ಲಿ      ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ಇವರು    ಶ್ರೀ./ಶ್ರೀಮತಿ.\n\n"+
-//                apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getReelerFatherName()+" ,   "+apiResponse.getContent().get(0).getVillageName()+ "  ,   "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.\n\n" +
-//                        apiResponse.getContent().get(0).getDistrictName()+ "    ಇವರು   " +apiResponse.getContent().get(0).getScCategoryName()+ "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ್ದು  ,   ರೀಲಿಂಗ್    ರಹದಾರಿ   ಸಂಖ್ಯೆ    "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"\n\n" +
-//                        "ರಲ್ಲಿ       "+apiResponse.getContent().get(0).getNumberOfBasins()+  "   ಬೇಸಿನ್    "+apiResponse.getContent().get(0).getMachineTypeName()+ "  ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿದ್ದು ,\n\n" +
-//                "ಇವರು  " +apiResponse.getContent().get(0).getFinancialYear()+ "  ನೇ  ಸಾಲಿಗೆ   ಉಲ್ಲೇಖ(3)  ರನ್ವಯ  "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "  ಅಳವಡಿಸಲು  ಆಯ್ಕೆಗೊಂಡ  ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ\n\n" +
-//                "(ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ   ಸಂ.25,  "+apiResponse.getContent().get(0).getFinancialYear()+"   ವ್ಯಾಪ್ತಿಯಲ್ಲಿ     ಸಂಖ್ಯೆ     4   ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ    ಶ್ರೀ   ರಾಘವೇಂದ್ರ ಎಂಟರ್ಪ್ರೈಸಸ್,");
-
-
         response.setHeader6(
                 "              " + apiResponse.getContent().get(0).getFinancialYear()
                         + "    ನೇ    ಸಾಲಿನಲ್ಲಿ    ಉಲ್ಲೇಖ(1)ರ    ಸರ್ಕಾರಿ    ಆದೇಶ    ಹಾಗೂ    ಉಲ್ಲೇಖ(2)ರ    ಮೂಲಕ    ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ    "
@@ -8504,99 +8572,119 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
+    // Use this at class level (outside any other method)
+    private String formatCreatedDateTime(String dateTime) {
+        if (dateTime == null || dateTime.isEmpty()) {
+            return "";
+        }
+        try {
+            SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+            return output.format(input.parse(dateTime));
+        } catch (Exception e) {
+            // log the error if you have a logger
+            // log.error("Error parsing createdDate: {}", dateTime, e);
+            return "";
+        }
+    }
+
+
     private JRBeanCollectionDataSource getDataSourceReelingShedWorkOrder(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataApiWorkOrderHRUReelingShed(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        SanctionOrderResponse first = apiResponse.getContent().get(0);
 
-        String admGovtDate = formatDate(first.getAdmGovtDate(), sdf);
-        String schemeCircularDate = formatDate(first.getSchemeCircularDate(), sdf);
-        String deptDeleDate = formatDate(first.getDeptDeleDate(), sdf);
-        String proposalDate = formatDate(first.getProposalDate(), sdf);
-        String sReleaseDate = formatDate(first.getSReleaseDate(), sdf);
+        String admGovtDate = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
+        String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
+        String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
+        String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+        String createdDate = formatCreatedDateTime(apiResponse.getContent().get(0).getCreatedDate());
 
-        String shortDistrictKannada = getKannadaShortForm(first.getLoggedinUserDistrictName());
 
-        int schemeAmount = Math.round(Float.parseFloat(formatAmount(first.getSchemeAmount())));
+
+
+
+        String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+
+        int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
 
-        response.setHeader(
-                "ಕರ್ನಾಟಕ     ಸರ್ಕಾರ\n(ರೇಷ್ಮೆ     ಇಲಾಖೆ)"
-        );
+
 
         response.setHeader2("ಕಾರ್ಯಾದೇಶ");
 
-        response.setHeader5(
-                first.getFinancialYear()
-                        + "  ನೇ  ಸಾಲಿನಲಿ  “"
-                        + first.getSchemeNameInKannada()
+        response.setHeader(
+                apiResponse.getContent().get(0).getFinancialYear()
+                        + "  ನೇ  ಸಾಲಿನಲ್ಲಿ  “"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada()
                         + "”  "
-                        + first.getScCategoryName()
-                        + "  ಅಡಿ  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣಕ್ಕೆ  ಸಹಾಯಧನ  ಮಂಜೂರಿಗೆ  ಸಂಬಂಧಿಸಿದ  ಕಾರ್ಯಾದೇಶ."
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "  ಅಡಿ  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣಕ್ಕೆ  ಸಹಾಯಧನ."
         );
 
-        response.setHeader3("ಸಂಖ್ಯೆ : " + first.getSanctionOrderNumber());
-        response.setHeader4("ದಿನಾಂಕ : " + proposalDate);
+        response.setHeader3("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getScCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader4("ದಿನಾಂಕ : " + createdDate);
 
-        // ---------------- Main body – from reeling shed work-order text ---------------- :contentReference[oaicite:5]{index=5}
         response.setHeader6(
-                "ಶ್ರೀ./ಶ್ರೀಮತಿ.  "
-                        + first.getReelerName()
-                        + " (" + first.getFruitsId() + ")  ಬಿನ್/ಕೋಂ  "
-                        + first.getReelerFatherName()
-                        + ",  "
-                        + first.getVillageName()
-                        + ",  "
-                        + first.getHobliName()
-                        + ",  "
-                        + first.getTalukName()
-                        + "  ತಾ.,  "
-                        + first.getDistrictName()
-                        + "  ಇವರ  ರೀಲಿಂಗ್  ರಹದಾರಿ  ಸಂಖ್ಯೆ  "
-                        + first.getReelingLicenseNumber()
-                        + "  ರಲ್ಲಿ  "
-                        + first.getNumberOfBasins()
-                        + "  ಬೇಸಿನ್  "
-                        + first.getMachineTypeName()
-                        + "  ರೀಲಿಂಗ್  ಘಟಕ  ಹೊಂದಿರುತ್ತಾರೆ.\n\n"
-                        + "ಸದರಿಯವರು  "
-                        + first.getUnitCost()
-                        + "  ರೂ.  ಘಟಕದ  900  ಚ.ಅಡಿ  ವಿಸ್ತೀರ್ಣದ  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣಕ್ಕಾಗಿ  "
-                        + first.getArn()
-                        + "  ARN  ಸಂಖ್ಯೆಯ  ಮೂಲಕ  ಅರ್ಜಿ  ಸಲ್ಲಿಸಿರುವುದು  ಉಲ್ಲೇಖಿತ  ರೇಷ್ಮೆ  ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳ  "
-                        + first.getLoggedinUserTscName()
-                        + "  ಕಚೇರಿಯಿಂದ  ಪರಿಶೀಲಿಸಲಾಗಿದೆ.\n\n"
-                        + "ಅರ್ಜಿಯ  ಹಾಗೂ  ದಾಖಲೆಗಳ  ಪೂರ್ವಪರಿಶೀಲನೆಯ  ಆಧಾರದ ಮೇಲೆ,  ಸರ್ವೇ  ಸಂಖ್ಯೆಯಲ್ಲಿ  ನಿರ್ಮಿಸಿರುವ  ಶೆಡ್  ಇಲಾಖೆಯ  ಮಾರ್ಗಸೂಚಿಗಳಿಗೆ  "
-                        + "ಅನುಗುಣವಾಗಿದ್ದು,  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣಕ್ಕೆ  ಸಹಾಯಧನ  ಮಂಜೂರಿಗಾಗಿ  ಈ  ಕಾರ್ಯಾದೇಶ  ನೀಡಲಾಗುತ್ತದೆ.\n\n"
-                        + "ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣ  ಪೂರ್ಣಗೊಂಡ  ನಂತರ,  ಅಗತ್ಯ  ದಾಖಲೆಗಳೊಂದಿಗೆ  ಪ್ರಸ್ತಾವನೆಯನ್ನು  ಸಲ್ಲಿಸಿದ  ಆಧಾರದ ಮೇಲೆ  ಸಹಾಯಧನ  ಮಂಜೂರಾತಿಗಾಗಿ  "
-                        + "ತದನಂತರ  ಕ್ರಮ  ಕೈಗೊಳ್ಳಲಾಗುವುದು.  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣದಲ್ಲಿ  ಇಲಾಖೆಯ  ಮಾರ್ಗಸೂಚಿ  ಉಲ್ಲಂಘನೆ  ಕಂಡುಬಂದಲ್ಲಿ,  ಈ  ಕಾರ್ಯಾದೇಶವನ್ನು  "
-                        + "ರದ್ದುಪಡಿಸುವ  ಅಧಿಕಾರ  ಇಲಾಖೆಯಲ್ಲಿರುತ್ತದೆ."
+                "                  ಶ್ರೀ/ಶ್ರೀಮತಿ    "
+                        + apiResponse.getContent().get(0).getReelerName()
+                        + "    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getVillageName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getHobliName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getTalukName()
+                        + "    ತಾ.    "
+                        + apiResponse.getContent().get(0).getDistrictName()
+                        + "    ಜಿಲ್ಲೆ    ಇವರು    "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿರುವರಾಗಿದ್ದು,    ರೀಲಿಂಗ್    ಪರವಾನಗಿ    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getReelingLicenseNumber()
+                        + "    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ.    ಸದರಿಯವರು    36    ಕೊನೆಗಳ    "
+                        + apiResponse.getContent().get(0).getNumberOfBasins()
+                        + "    ಬೇಸಿನ್‌    "
+                        + apiResponse.getContent().get(0).getMachineTypeName()
+                        + "    ರೀಲಿಂಗ್    ಘಟಕವನ್ನು    ಸ್ಥಾಪಿಸಿದ್ದು,    600    ಚದರ    ಅಡಿ    ವಿಸ್ತೀರ್ಣದ    ರೀಲಿಂಗ್‌    ಶೆಡ್‌    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಸಹಾಯಧನ    ಕೋರಿ    ARN    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getArn()
+                        + "    ರಂತೆ    ಅರ್ಜಿಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದಾರೆ.    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿ    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀಲಿಂಗ್),    "
+                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
+                        + "  ರವರು    ಅರ್ಜಿ    ಮತ್ತು    ದಾಖಲಾತಿಗಳ    ಪೂರ್ವಪರಿಶೀಲನೆಯನ್ನು    ದಿನಾಂಕ:    "
+                        + formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf)
+                        + "    ರಂದು    ಕೈಗೊಂಡಿದ್ದು,    ಅರ್ಜಿದಾರರು    ಸರ್ವೇ    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getSurveyNumber()
+                        + "    ಯ    ಜಾಗದಲ್ಲಿ      ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಕ್ರಮದ    ಸೌಲಭ್ಯಕ್ಕಾಗಿ    ಅರ್ಹತೆಯ    ಬಗ್ಗೆ    ದೃಢಪಡಿಸಿರುತ್ತಾರೆ.    ಅದರಂತೆ,    ಅರ್ಜಿದಾರರು    ಮೇಲ್ಕಾಣಿಸಿದ    ಸರ್ವೇ    ಸಂಖ್ಯೆಯ    ಜಾಗದಲ್ಲಿ    ಇಲಾಖೆಯ    ಮಾರ್ಗಸೂಚಿಗಳಂತೆ    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಾದೇಶ    ನೀಡಲಾಗಿದೆ.\n"+
+                        "               ರೀಲಿಂಗ್    ಶೆಡ್    ಪೂರ್ಣಗೊಳಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ನಂತರ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣದಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ    ಹೊಂದಿರುತ್ತದೆ."
         );
+
 
         // Signature – as per reeling shed pdf (ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ, ಕೊಳ್ಳೇಗಾಲ) :contentReference[oaicite:6]{index=6}
         response.setLineItemComment(
-                "ಅಧ್ಯಕ್ಷರು,\nಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ,     "
-                        + first.getLoggedinUserTalukName()
+                "ರೇಷ್ಮೆ   ಉಪ   ನಿರ್ದೇಶಕರು,\nಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ,  "
+                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
         );
 
         response.setHeader11(
-                "ಇವರಿಗೆ,\n\n"
+                "ಇವರಿಗೆ,\n"
                         + "1.  ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  "
-                        + first.getLoggedinUserTalukName()
-                        + "\n\n"
+                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
+                        + "\n"
                         + "2.  ರೇಷ್ಮೆ  ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ  (ರೀಲಿಂಗ್),  "
-                        + first.getLoggedinUserTscName()
-                        + "\n\n"
-                        + "3.  ಸಂಬಂಧಿತ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆದಾರರು."
+                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
+                        + "\n"
+                        + "3.  ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ನೂಲುಬಿಚ್ಚಾಣೆಕೆದಾರರಿಗೆ,"
         );
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
         sanctionOrderResponseList.add(response);
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
@@ -8606,7 +8694,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceHRUWorkOrder(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataApiWorkOrderHRUReelingShed(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -8878,9 +8966,9 @@ public class ReportsController {
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeName()+"  /"  +apiResponse.getContent().get(0).getCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setHeader3("ಕೇಂದ್ರ   ವಲಯ    “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
+            response.setHeader3("ಕೇಂದ್ರ   ವಲಯ    “"+apiResponse.getContent().get(0).getSchemeName()+"”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
             response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
                             "     \n " +
