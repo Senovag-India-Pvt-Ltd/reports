@@ -8166,7 +8166,7 @@ public class ReportsController {
 
 
         response.setHeader7(
-                "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName()
+                "              ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName()
                         + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
                         + apiResponse.getContent().get(0).getReelerFatherName() + "    ,    "
                         + apiResponse.getContent().get(0).getVillageName() + "    ,    "
@@ -8200,7 +8200,7 @@ public class ReportsController {
                         + "    ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,    ರೇ.ಗೂ.ಮಾ.    "
                         + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
                         + "    ಇವರಿಂದ    ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ    ಶಿಫಾರಸ್ಸುಗೊಂಡಿರುತ್ತದೆ. \n   "
-                        + "ಈ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಉಲ್ಲೇಖ(2)ರ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,    ಎಲ್ಲಾ    ಅಗತ್ಯ    ದಾಖಲೆಗಳನ್ನು    "
+                        + "              ಈ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಉಲ್ಲೇಖ(2)ರ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,    ಎಲ್ಲಾ    ಅಗತ್ಯ    ದಾಖಲೆಗಳನ್ನು    "
                         + "ಒಳಗೊಂಡಿರುತ್ತದೆ.    ಆದ್ದರಿಂದ,    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "
                         + apiResponse.getContent().get(0).getReelerName()
                         + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
@@ -8231,7 +8231,7 @@ public class ReportsController {
         );
 
         response.setHeader10(
-                "(ರೂ.    ಎರಡು    ಲಕ್ಷ    ಎಪ್ಪತ್ತು    ಸಾವಿರ    ಮಾತ್ರ   ) \n  "
+                "("+schemeAmountWords+") \n  "
                         + "              ಸದರಿ    ಮೊತ್ತವನ್ನು    “"
                         + apiResponse.getContent().get(0).getSchemeNameInKannada()
                         + "”    "
@@ -8302,6 +8302,23 @@ public class ReportsController {
                 if (sanctionOrderResponse.getScComponentName() == null) {
                     sanctionOrderResponse.setScComponentName("");
                 }
+
+                // 🆕 Build reelerDetails string for table "reelingshed"
+                String reelerDetails =
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                                + sanctionOrderResponse.getReelerFatherName()
+                                + "    "
+                                + sanctionOrderResponse.getVillageName()
+                                + "    ,    "
+                                + sanctionOrderResponse.getHobliName()
+                                + "    ,    ಹೋಬಳಿ,    "
+                                + sanctionOrderResponse.getTalukName()
+                                + "    ತಾ.    "
+                                + sanctionOrderResponse.getDistrictName()
+                                + "   ಜಿಲ್ಲೆ   ";
+
+                sanctionOrderResponse.setReelerDetails(reelerDetails);
 
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
