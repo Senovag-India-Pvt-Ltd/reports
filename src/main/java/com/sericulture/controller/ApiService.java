@@ -190,9 +190,9 @@ public class ApiService {
     public SanctionOrder fetchDataFromPsfaReelingShed(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl + "service/sanctionOrderPsfaReelingShed";
+        String finalapiurl = dbtApiUrl + "service/getReelingShedSanctionOrderDetails";
 
-//                String finalapiurl = "http://localhost:8013/dbt/v1/service/reelerAcknowledgement";
+//                String finalapiurl = "http://localhost:8013/dbt/v1/service/getReelingShedSanctionOrderDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
