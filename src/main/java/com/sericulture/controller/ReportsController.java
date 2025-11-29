@@ -8092,7 +8092,6 @@ public class ReportsController {
         int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
-        // ================== HEADERS WITH EXTRA SPACING ==================
 
         response.setHeader(
                 "ರೇಷ್ಮೆ     ಜಂಟಿ     ನಿರ್ದೇಶಕರು,     " + apiResponse.getContent().get(0).getDivisionName()

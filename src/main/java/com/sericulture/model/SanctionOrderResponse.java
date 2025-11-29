@@ -258,6 +258,9 @@ public class SanctionOrderResponse {
 private String totalIncentiveAmountInWords;
     private String reelingLicenseNumber;
 
+    private String reelingShedDetails;
+    private Float reelingShedSqft;
+
 // + getter & setter
 
 

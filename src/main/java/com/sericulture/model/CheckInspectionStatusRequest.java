@@ -20,4 +20,8 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private String sanctionOrderNumber;
 
     private List<Long> applicationFormIds;
+
+    private Float unitPrice;
+    private String reelingShedDetails;
+    private String reelingShedSqft;
 }
