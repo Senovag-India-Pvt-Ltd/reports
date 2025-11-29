@@ -8709,93 +8709,110 @@ public class ReportsController {
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
 
+        // Same as Reeling Shed – use createdDate (yyyy-MM-dd HH:mm:ss.SSS) -> dd/MM/yyyy
+        String createdDate        = formatCreatedDateTime(apiResponse.getContent().get(0).getCreatedDate());
+
         String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
 
         int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
-        if (apiResponse.getContent()!= null) {
+        // ---------- HEADER & TITLE (same style as Reeling Shed Work Order) ----------
 
-            response.setHeader(
-                    "ಕರ್ನಾಟಕ     ಸರ್ಕಾರ\n(ರೇಷ್ಮೆ     ಇಲಾಖೆ)"
-            );
+        response.setHeader2("ಕಾರ್ಯಾದೇಶ");
 
-            response.setHeader2("ಕಾರ್ಯಾದೇಶ");
+        // Subject line – from HRU Work Order PDF
+        response.setHeader(
+                apiResponse.getContent().get(0).getFinancialYear()
+                        + "  ನೇ  ಸಾಲಿನಲ್ಲಿ  “"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada()
+                        + "”  "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "  ಅಡಿ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
+                        + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
+                        + "  (Heat Recovery Unit)  ಅಳವಡಿಕೆಗೆ  ಸಹಾಯಧನ  ಕಾರ್ಯಾದೇಶ."
+        );
 
-            // Subject line – Scheme + Category + component
-            response.setHeader5(
-                    apiResponse.getContent().get(0).getFinancialYear()
-                            + "   ನೇ   ಸಾಲಿನಲ್ಲಿ   “"
-                            + apiResponse.getContent().get(0).getSchemeNameInKannada()
-                            + "”   "
-                            + apiResponse.getContent().get(0).getScCategoryName()
-                            + "   ಅಡಿ   ರೇಷ್ಮೆ   ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆದಾರರು   ತಮ್ಮ   ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "
-                            + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
-                            + "   (Heat Recovery Unit)   ಅಳವಡಿಕೆಗೆ   ಸಂಬಂಧಿಸಿದ   ಕಾರ್ಯಾದೇಶ."
-            );
+        // Number & Date – same pattern as Reeling Shed Work Order
+        response.setHeader3(
+                "ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"
+                        + apiResponse.getContent().get(0).getSchemeNameInKannada()
+                        + "  /"
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "/"
+                        + apiResponse.getContent().get(0).getWorkOrderNumber()
+        );
 
-            response.setHeader3("ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getSanctionOrderNumber());
-            response.setHeader4("ದಿನಾಂಕ :  " + proposalDate);
+        response.setHeader4("ದಿನಾಂಕ : " + createdDate);
 
-            // ---------------- Main body from HRU work-order text ---------------- :contentReference[oaicite:2]{index=2}
-            response.setHeader6(
-                    "ಶ್ರೀ./ಶ್ರೀಮತಿ.  "
-                            + apiResponse.getContent().get(0).getReelerName()
-                            + " (" + apiResponse.getContent().get(0).getFruitsId() + ")  ಬಿನ್/ಕೋಂ  "
-                            + apiResponse.getContent().get(0).getReelerFatherName()
-                            + ",  "
-                            + apiResponse.getContent().get(0).getVillageName()
-                            + ",  "
-                            + apiResponse.getContent().get(0).getHobliName()
-                            + ",  "
-                            + apiResponse.getContent().get(0).getTalukName()
-                            + "  ತಾ.,  "
-                            + apiResponse.getContent().get(0).getDistrictName()
-                            + "  ಜಿಲ್ಲೆ  ಇವರು  ಸಾಮಾನ್ಯ  ವರ್ಗಕ್ಕೆ  ಸೇರಿದ  ರೀಲರ್  ಆಗಿದ್ದು,  ರೀಲಿಂಗ್  ರಹದಾರಿ  ಸಂಖ್ಯೆ  "
-                            + apiResponse.getContent().get(0).getReelingLicenseNumber()
-                            + "  ರಲ್ಲಿ  "
-                            + apiResponse.getContent().get(0).getNumberOfBasins()
-                            + "  ಬೇಸಿನ್  "
-                            + apiResponse.getContent().get(0).getMachineTypeName()
-                            + "  ರೀಲಿಂಗ್  ಘಟಕ  ಹೊಂದಿರುತ್ತಾರೆ.\n\n"
-                            + "ಮೇಲ್ಕಂಡ  ಘಟಕದಲ್ಲಿ  "
-                            + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
-                            + "  (Heat Recovery Unit)  ಅಳವಡಿಸಲು  ಸಲ್ಲಿಸಿದ  ಅರ್ಜಿಯನ್ನು  ಉಲ್ಲೇಖಿತ  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ  "
-                            + apiResponse.getContent().get(0).getLoggedinUserTscName()
-                            + "  ವ್ಯಾಪ್ತಿಯ  ರೇಷ್ಮೆ  ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು  ಸ್ಥಳೀಯ  ಪರಿಶೀಲನೆ  ನಡೆಸಿದ್ದಾರೆ.\n\n"
-                            + "ಹೀಟ್  ರಿಕವರಿ  ಯುನಿಟ್  ಅಳವಡಿಸಲು  ಅನುಮೋದಿತ  ಸಂಸ್ಥೆಯಾಗಿರುವ  "
-                            + apiResponse.getContent().get(0).getUnitCost()
-                            + "  ಸಂಸ್ಥೆಯ  ಮೂಲಕ  ಇಲಾಖೆಯ  ಮಾರ್ಗಸೂಚಿಯನ್ವಯ  ಘಟಕವನ್ನು  ಸಂಪೂರ್ಣವಾಗಿ  ಅಳವಡಿಸಿರುವುದು  ದೃಢಪಟ್ಟಿರುವುದರಿಂದ,\n\n"
-                            + "ಹೀಟ್  ರಿಕವರಿ  ಯುನಿಟ್  ಸಂಪೂರ್ಣ  ಅಳವಡಿಕೆ  ಪೂರ್ಣಗೊಂಡ  ನಂತರ,  ಅಗತ್ಯ  ದಾಖಲಾತಿಗಳೊಂದಿಗೆ  ಸಲ್ಲಿಸಲ್ಪಟ್ಟ  ಪ್ರಸ್ತಾವನೆಯ  ಆಧಾರದ ಮೇಲೆ,\n"
-                            + "ಸಹಾಯಧನ  ಮಂಜೂರಾತಿಗಾಗಿ  ಕ್ರಮ  ಕೈಗೊಳ್ಳಲಾಗುವುದು.  ಅಳವಡಿಕೆಯಲ್ಲಿ  ಮಾರ್ಗಸೂಚಿ  ಉಲ್ಲಂಘನೆ  ಕಂಡುಬಂದಲ್ಲಿ,  ಈ  ಕಾರ್ಯಾದೇಶವನ್ನು  "
-                            + "ರದ್ದುಪಡಿಸುವ  ಅಧಿಕಾರ  ಇಲಾಖೆಯಲ್ಲಿರುತ್ತದೆ."
-            );
+        response.setHeader6(
+                "                  ಶ್ರೀ/ಶ್ರೀಮತಿ    "
+                        + apiResponse.getContent().get(0).getReelerName()
+                        + "    (FID    " + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        + apiResponse.getContent().get(0).getReelerFatherName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getVillageName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getHobliName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getTalukName()
+                        + "    ತಾ.    "
+                        + apiResponse.getContent().get(0).getDistrictName()
+                        + "    ಜಿಲ್ಲೆ    ಇವರು    "
+                        + apiResponse.getContent().get(0).getScCategoryName()
+                        + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ    ರೀಲರ್    ಆಗಿದ್ದು,    ರೀಲಿಂಗ್    ರಹದಾರಿ    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getReelingLicenseNumber()
+                        + "    ರಲ್ಲಿ    "
+                        + apiResponse.getContent().get(0).getNumberOfBasins()
+                        + "    ಬೇಸಿನ್    "
+                        + apiResponse.getContent().get(0).getMachineTypeName()
+                        + "    ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿರುತ್ತಾರೆ.    ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
+                        + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
+                        + "    (Heat    Recovery    Unit)    ಅಳವಡಿಸಲು    ARN    ಸಂಖ್ಯೆ    "
+                        + apiResponse.getContent().get(0).getArn()
+                        + "    ರಂತೆ    ಅರ್ಜಿಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದಾರೆ.\n"
+                        + "              ಮೇಲ್ಕಂಡ    ಅರ್ಜಿಯ    ಆಧಾರದ    ಮೇಲೆ    ದಿನಾಂಕ:    "
+                        + proposalDate
+                        + "    ರಂದು    "
+                        + apiResponse.getContent().get(0).getUnitCost()
+                        + "    ಗಂಟೆಗೆ    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀಲಿಂಗ್),    "
+                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
+                        + "    ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು    ಸ್ಥಳೀಯ    ಪರಿಶೀಲನೆ    ನಡೆಸಿದ್ದಾರೆ.\n"
+                        + "              ವಿಭಾಗದಿಂದ    "
+                        + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
+                        + "    (Heat    Recovery    Unit)    ಅಳವಡಿಸಲು    ಅನುಮೋದಿತ    ಸಂಸ್ಥೆಯಾದ    "
+                        + apiResponse.getContent().get(0).getVendorName()
+                        + "    ,    "
+                        + apiResponse.getContent().get(0).getUnitCost()
+                        + "    ರವರಿಂದ    ವಿಭಾಗದ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಘಟಕವನ್ನು    ಸಂಪೂರ್ಣವಾಗಿ    ಅಳವಡಿಸಿರುವುದು    ದೃಢಪಟ್ಟಿದೆ.\n"
+                        + "              ಹೀಟ್    ರಿಕವರಿ    ಯುನಿಟ್    ಸಂಪೂರ್ಣವಾಗಿ    ಅಳವಡಿಸಿದ    ನಂತರ,    ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ಆಧಾರದ    ಮೇಲೆ\n"
+                        + "ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    ಹೀಟ್    ರಿಕವರಿ    ಯುನಿಟ್    ಅಳವಡಿಕೆಯಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,\n"
+                        + "ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ವಿಭಾಗ    ಹೊಂದಿರುತ್ತದೆ."
+        );
 
-            // Signature block – HRU pdf bottom :contentReference[oaicite:3]{index=3}
-            response.setLineItemComment(
-                    "ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು,\nಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ,     "
-                            + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-            );
 
-            // Copy to: (header11)
-            response.setHeader11(
-                    "ಇವರಿಗೆ,\n\n"
-                            + "1.  ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  "
-                            + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-                            + "\n\n"
-                            + "2.  ರೇಷ್ಮೆ  ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ  (ರೀಲಿಂಗ್),  "
-                            + apiResponse.getContent().get(0).getLoggedinUserTscName()
-                            + "\n\n"
-                            + "3.  ಸಂಬಂಧಿತ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆದಾರರು,\n\n"
-                            + "4.  "
-                            + apiResponse.getContent().get(0).getUnitCost()
-                            + ",  "
-                            + apiResponse.getContent().get(0).getLoggedinUserTalukName()
-                            + "  (ಎಂಪ್ಯಾನೆಲ್ಡ್  ವೆಂಡರ್)."
-            );
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            sanctionOrderResponseList.add(response);
-        }
+
+        response.setLineItemComment(
+                "ರೇಷ್ಮೆ   ಉಪ   ನಿರ್ದೇಶಕರು,\nಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ,  "
+                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
+        );
+
+
+        response.setHeader11(
+                "ಇವರಿಗೆ,\n"
+                        + "1.  ರೇಷ್ಮೆ  ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  "
+                        + apiResponse.getContent().get(0).getLoggedinUserTalukName()
+                        + "\n"
+                        + "2.  ರೇಷ್ಮೆ  ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ  ಸೇವಾ  ಕೇಂದ್ರ  (ರೀಲಿಂಗ್),  "
+                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
+                        + "\n"
+                        + "3.  ಸಂಬಂಧಿತ  ರೇಷ್ಮೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆದಾರರು,\n"
+                        + "4.  ಎಂಪ್ಯಾನೆಲ್ಡ್  ವೆಂಡರ್  (Heat Recovery Unit  ಅಳವಡಿಕೆಯ  ಸಂಬಂಧ)."
+        );
+
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        sanctionOrderResponseList.add(response);
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
