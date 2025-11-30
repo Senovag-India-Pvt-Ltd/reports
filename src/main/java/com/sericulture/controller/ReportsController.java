@@ -8454,7 +8454,7 @@ public class ReportsController {
                         "ಕೆಳಗೆ     ವಿವರಿಸಿದಂತೆ     ಮಂಜೂರಾತಿ     ನೀಡಿದೆ.");
 
         response.setHeader10(
-                "(ರೂ.     " + schemeAmountWords + "     ಮಾತ್ರ)"
+                "(ರೂ.     " + schemeAmountWords + "     ಮಾತ್ರ)\n"
                         + "ಮೇಲ್ಕಂಡ     ಫಲಾನುಭವಿಯು     ತನ್ನ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿತ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿರುವುದರಿಂದ,"
                         + "ಸಹಾಯಧನದ     ಮೊತ್ತ     ರೂ.     " +apiResponse.getContent().get(0).getSchemeAmount()
                         + "/-     ಗಳನ್ನು     "
