@@ -18,6 +18,7 @@ public class AcknowledgementReceiptResponse {
     private String header3;
     private String header4;
     private String header5;
+    private String reelingShedSqft;
 
 
     private String acceptedDate;

@@ -375,6 +375,51 @@ public class ReportsController {
 
     }
 
+
+    @PostMapping("/getReelerAcknowledgementHRU")
+    public ResponseEntity<?> getReelerAcknowledgementHRU(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getReelerAcknowledgement");
+            logger.info("enter to getReelerAcknowledgement");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("ReelerAcknowledgementHRU.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceReelerAcknowledgementHRU(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
     @PostMapping("/get-seed-cocoon")
     public ResponseEntity<?> getSeedCocoon(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -6293,14 +6338,10 @@ public class ReportsController {
             response.setHobliName( apiResponse.getContent().get(0).getHobliName());
             response.setVillageName( apiResponse.getContent().get(0).getVillageName());
             response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ,\n " +
-                    "                                           \n"+
-                    apiResponse.getContent().get(0).getHobliNameInKannada()+ "    ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ   ನಿವಾಸಿಯಾದ   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  \n" +
-                    "                                    \n"+
-                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ಪಡೆಯಲು  ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸುತ್ತಾರೆ .\n" +
-                    "                                                              \n" +
-                    "ಇವರ  ನೋಂದಣಿ  ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ,\n" +
-                    "                       \n" +
+            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ   " +apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   ,  " +apiResponse.getContent().get(0).getTalukNameInKannada()+ "   ತಾಲ್ಲೂಕು ," +
+                    apiResponse.getContent().get(0).getHobliNameInKannada()+ "    ಹೋಬಳಿ,  " +apiResponse.getContent().get(0).getVillageNameInKannada()+ "  ಹಳ್ಳಿಯ   ನಿವಾಸಿಯಾದ   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getFarmerFirstName()+ "   ರವರಿಂದ  " +
+                    apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ಪಡೆಯಲು  ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸುತ್ತಾರೆ ." +
+                    "ಇವರ  ನೋಂದಣಿ  ಸಂಖ್ಯೆಯ  :  " +apiResponse.getContent().get(0).getFruitsId() + "  ಇದ್ದು   ,   Arn No : " +apiResponse.getContent().get(0).getArn()+" ," +
                     "ಈ   ನೋಂದಣಿ   ಸಂಖ್ಯೆಯನ್ನು      ಮುಂದಿನ  ವಿಚರಾಣೆಗೆ   ಉಪಯೋಗಿಸತಕದ್ದು  .");
             response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
                     "                        \n" +
@@ -6390,16 +6431,61 @@ public class ReportsController {
             response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
 
 
-            response.setLineItemComment( "              ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getFatherNameKan()+"\n" +
-                    "                                    \n"+
-                    apiResponse.getContent().get(0).getVillageName()+ "  ,  "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.   " +apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರು   " +apiResponse.getContent().get(0).getCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು,  \n\n" +
-                    "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   900 ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ \n\n"+
-                    "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  \n\n"+
+            response.setLineItemComment( "              ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getFatherNameKan()+"" +
+                    apiResponse.getContent().get(0).getVillageName()+ "  ,  "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.   " +apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರು   " +apiResponse.getContent().get(0).getCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು, " +
+                    "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
+                    "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
                             "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
             response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n\n" +
-                            "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ    "+apiResponse.getContent().get(0).getLoggedinUserTscName());
-            response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +"\n\n"+
+                            "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   \n "+apiResponse.getContent().get(0).getLoggedinUserTscName());
+            response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +""+
                             "ಅಡಿ   ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ");
+
+            response.setHeader2("ARN No:  " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+
+    private JRDataSource getDataSourceReelerAcknowledgementHRU(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataReelerAcknowledgement(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            response.setHeader(" ಸ್ವೀಕೃತಿ   ಪತ್ರ  ( ACKNOWLEDGEMENT LETTER )");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+
+            response.setLineItemComment( "              ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getFatherNameKan()+"" +
+                    apiResponse.getContent().get(0).getVillageName()+ "  ,  "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.   " +apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರು   " +apiResponse.getContent().get(0).getCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು, " +
+                    "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
+                    "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
+                    "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
+            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n\n" +
+                    "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ  \n  "+apiResponse.getContent().get(0).getLoggedinUserTscName());
+            response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +""+
+                    "ಅಡಿ   ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು   ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ     ಹೀಟ್     ರಿಕವರಿ  ಯೂನಿಟ್    ಅಳವಡಿಕೆಗೆ      ಸಹಾಯಧನ");
 
             response.setHeader2("ARN No:  " + apiResponse.getContent().get(0).getArn());
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
