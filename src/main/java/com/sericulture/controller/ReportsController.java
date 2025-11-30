@@ -8623,7 +8623,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceReelingShedWorkOrder(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataApiWorkOrderHRUReelingShed(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -8658,7 +8658,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getSchemeNameInKannada()
                         + "”  "
                         + apiResponse.getContent().get(0).getScCategoryName()
-                        + "  ಅಡಿ  ರೀಲಿಂಗ್  ಶೆಡ್  ನಿರ್ಮಾಣಕ್ಕೆ  ಸಹಾಯಧನ."
+                        + "  ಅಡಿ  "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"  ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ."
         );
 
         response.setHeader3("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getScCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
@@ -8669,11 +8669,11 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getReelerName()
                         + "    ಬಿನ್/ಕೋಂ    "
                         + apiResponse.getContent().get(0).getReelerFatherName()
-                        + "    ,    "
+                        + " ,    "
                         + apiResponse.getContent().get(0).getVillageName()
-                        + "    ,    "
+                        + "  ,    "
                         + apiResponse.getContent().get(0).getHobliName()
-                        + "    ,    "
+                        + "  ,    "
                         + apiResponse.getContent().get(0).getTalukName()
                         + "    ತಾ.    "
                         + apiResponse.getContent().get(0).getDistrictName()
@@ -8685,7 +8685,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getNumberOfBasins()
                         + "    ಬೇಸಿನ್‌    "
                         + apiResponse.getContent().get(0).getMachineTypeName()
-                        + "    ರೀಲಿಂಗ್    ಘಟಕವನ್ನು    ಸ್ಥಾಪಿಸಿದ್ದು,    600    ಚದರ    ಅಡಿ    ವಿಸ್ತೀರ್ಣದ    ರೀಲಿಂಗ್‌    ಶೆಡ್‌    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಸಹಾಯಧನ    ಕೋರಿ    ARN    ಸಂಖ್ಯೆ    "
+                        + "    ರೀಲಿಂಗ್    ಘಟಕವನ್ನು    ಸ್ಥಾಪಿಸಿದ್ದು,   "+ apiResponse.getContent().get(0).getReelingShedSqft()+ "   ಚದರ    ಅಡಿ    ವಿಸ್ತೀರ್ಣದ    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಸಹಾಯಧನ    ಕೋರಿ    ARN    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getArn()
                         + "    ರಂತೆ    ಅರ್ಜಿಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದಾರೆ.    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿ    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀಲಿಂಗ್),    "
                         + apiResponse.getContent().get(0).getLoggedinUserTscName()
@@ -8693,8 +8693,8 @@ public class ReportsController {
                         + formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf)
                         + "    ರಂದು    ಕೈಗೊಂಡಿದ್ದು,    ಅರ್ಜಿದಾರರು    ಸರ್ವೇ    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getSurveyNumber()
-                        + "    ಯ    ಜಾಗದಲ್ಲಿ      ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಕ್ರಮದ    ಸೌಲಭ್ಯಕ್ಕಾಗಿ    ಅರ್ಹತೆಯ    ಬಗ್ಗೆ    ದೃಢಪಡಿಸಿರುತ್ತಾರೆ.    ಅದರಂತೆ,    ಅರ್ಜಿದಾರರು    ಮೇಲ್ಕಾಣಿಸಿದ    ಸರ್ವೇ    ಸಂಖ್ಯೆಯ    ಜಾಗದಲ್ಲಿ    ಇಲಾಖೆಯ    ಮಾರ್ಗಸೂಚಿಗಳಂತೆ    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಾದೇಶ    ನೀಡಲಾಗಿದೆ.\n"+
-                        "               ರೀಲಿಂಗ್    ಶೆಡ್    ಪೂರ್ಣಗೊಳಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ನಂತರ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣದಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ    ಹೊಂದಿರುತ್ತದೆ."
+                        + "    ಯ    ಜಾಗದಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಕ್ರಮದ    ಸೌಲಭ್ಯಕ್ಕಾಗಿ    ಅರ್ಹತೆಯ    ಬಗ್ಗೆ    ದೃಢಪಡಿಸಿರುತ್ತಾರೆ.    ಅದರಂತೆ,    ಅರ್ಜಿದಾರರು    ಮೇಲ್ಕಾಣಿಸಿದ    ಸರ್ವೇ    ಸಂಖ್ಯೆಯ    ಜಾಗದಲ್ಲಿ    ಇಲಾಖೆಯ    ಮಾರ್ಗಸೂಚಿಗಳಂತೆ    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಾದೇಶ    ನೀಡಲಾಗಿದೆ.\n"+
+                        "    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ಪೂರ್ಣಗೊಳಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ನಂತರ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ನಿರ್ಮಾಣದಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ    ಹೊಂದಿರುತ್ತದೆ."
         );
 
 
@@ -8725,7 +8725,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceHRUWorkOrder(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataApiWorkOrderHRUReelingShed(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -8761,7 +8761,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getScCategoryName()
                         + "  ಅಡಿ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆದಾರರು  ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
                         + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
-                        + "  (Heat Recovery Unit)  ಅಳವಡಿಕೆಗೆ  ಸಹಾಯಧನ  ಕಾರ್ಯಾದೇಶ."
+                        + "  ಅಳವಡಿಕೆಗೆ  ಸಹಾಯಧನ  ಕಾರ್ಯಾದೇಶ."
         );
 
         // Number & Date – same pattern as Reeling Shed Work Order
@@ -8791,35 +8791,16 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getDistrictName()
                         + "    ಜಿಲ್ಲೆ    ಇವರು    "
                         + apiResponse.getContent().get(0).getScCategoryName()
-                        + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿದ    ರೀಲರ್    ಆಗಿದ್ದು,    ರೀಲಿಂಗ್    ರಹದಾರಿ    ಸಂಖ್ಯೆ    "
+                        + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿಿದ್ದು,    ರೀಲಿಂಗ್    ರಹದಾರಿ    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getReelingLicenseNumber()
                         + "    ರಲ್ಲಿ    "
                         + apiResponse.getContent().get(0).getNumberOfBasins()
                         + "    ಬೇಸಿನ್    "
                         + apiResponse.getContent().get(0).getMachineTypeName()
-                        + "    ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿರುತ್ತಾರೆ.    ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
+                        + "    ರೀಲಿಂಗ್    ಘಟಕ    ಹೊಂದಿಿದ್ದು.    ತಮ್ಮ    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ    "
                         + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
-                        + "    (Heat    Recovery    Unit)    ಅಳವಡಿಸಲು    ARN    ಸಂಖ್ಯೆ    "
-                        + apiResponse.getContent().get(0).getArn()
-                        + "    ರಂತೆ    ಅರ್ಜಿಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದಾರೆ.\n"
-                        + "              ಮೇಲ್ಕಂಡ    ಅರ್ಜಿಯ    ಆಧಾರದ    ಮೇಲೆ    ದಿನಾಂಕ:    "
-                        + proposalDate
-                        + "    ರಂದು    "
-                        + apiResponse.getContent().get(0).getUnitPrice()
-                        + "    ಗಂಟೆಗೆ    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀಲಿಂಗ್),    "
-                        + apiResponse.getContent().get(0).getLoggedinUserTscName()
-                        + "    ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು    ಸ್ಥಳೀಯ    ಪರಿಶೀಲನೆ    ನಡೆಸಿದ್ದಾರೆ.\n"
-                        + "              ವಿಭಾಗದಿಂದ    "
-                        + apiResponse.getContent().get(0).getSubSchemeNameInKannada()
-                        + "    (Heat    Recovery    Unit)    ಅಳವಡಿಸಲು    ಅನುಮೋದಿತ    ಸಂಸ್ಥೆಯಾದ    "
-                        + apiResponse.getContent().get(0).getVendorName()
-                        + "    ,    "
-                        + apiResponse.getContent().get(0).getUnitPrice()
-                        + "    ರವರಿಂದ    ವಿಭಾಗದ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಘಟಕವನ್ನು    ಸಂಪೂರ್ಣವಾಗಿ    ಅಳವಡಿಸಿರುವುದು    ದೃಢಪಟ್ಟಿದೆ.\n"
-                        + "              ಹೀಟ್    ರಿಕವರಿ    ಯುನಿಟ್    ಸಂಪೂರ್ಣವಾಗಿ    ಅಳವಡಿಸಿದ    ನಂತರ,    ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ಆಧಾರದ    ಮೇಲೆ\n"
-                        + "ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    ಹೀಟ್    ರಿಕವರಿ    ಯುನಿಟ್    ಅಳವಡಿಕೆಯಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,\n"
-                        + "ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ವಿಭಾಗ    ಹೊಂದಿರುತ್ತದೆ."
-        );
+                        + "  ಘಟಕ   ಅಳವಡಿಸಲು     ಅನುಮೋದಿಸಿದ    ಸಂಸ್ಥೆ    "+ apiResponse.getContent().get(0).getVendorName()
+                        +"ರವರಿಂದ     ರೇ ಷ್ಮೆ       ಇಲಾಖೆಯ     ಮಾರ್ಗ      ಸೂಚಿಯನ್ವ ಯ    ಸಂಪೂರ್ಣ ವಾಗಿ     ಘಟಕವನ್ನು     ಅಳವಡಿಸಿಕೊಳ್ಳು ವುದು.     "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ಸಂ ಪೂರ್ಣ ವಾಗಿ     ಅಳವಡಿಸಿಕೊಂಡ     ನಂತರ    ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ     ಪ್ರ ಸ್ತಾ ವನೆ    ಸಲ್ಲಿ ಸಿದಲ್ಲಿ      ಸಹಾಯಧನ     ಮಂಜೂರಾತಿಗಾಗಿ     ಕ್ರಮ     ಕೈಗೊಳ್ಳಲಾಗುವುದು. "+apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"     ಅಳವಡಿಕೆಯಲ್ಲಿ       ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ     ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ   ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ   ಹೊಂದಿರುತ್ತದೆ.");
 
 
 
@@ -8838,7 +8819,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getLoggedinUserTscName()
                         + "\n"
                         + "3.  ಸಂಬಂಧಿತ  ರೇಷ್ಮೆ  ನೂಲುಬಿಚ್ಚಾಣಿಕೆದಾರರು,\n"
-                        + "4.  ಎಂಪ್ಯಾನೆಲ್ಡ್  ವೆಂಡರ್  (Heat Recovery Unit  ಅಳವಡಿಕೆಯ  ಸಂಬಂಧ)."
+                        + "4.  "+apiResponse.getContent().get(0).getVendorName()+" , ಶಿಡ್ಲಘಟ್ಟ     ಇವರಿಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ"
         );
 
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
