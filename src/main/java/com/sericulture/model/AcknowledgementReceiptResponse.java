@@ -71,4 +71,6 @@ public class AcknowledgementReceiptResponse {
     private String reelerName;
 
     private Float quantityOfCocoonsProduced;
+    private String numberOfBasins;
+
 }
