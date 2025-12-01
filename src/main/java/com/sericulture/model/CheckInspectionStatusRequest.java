@@ -19,6 +19,8 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private int componentId;
     private String sanctionOrderNumber;
 
+    private int categoryId;
+
     private List<Long> applicationFormIds;
 
     private Float unitPrice;

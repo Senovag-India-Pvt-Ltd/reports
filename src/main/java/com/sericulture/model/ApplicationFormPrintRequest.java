@@ -12,5 +12,6 @@ public class ApplicationFormPrintRequest extends LotStatusRequest {
     private int applicationFormId;
 
     private int schemeId;
+    private int subSchemeId;
 
 }

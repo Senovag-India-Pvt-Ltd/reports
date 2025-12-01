@@ -10422,7 +10422,7 @@ public class ReportsController {
             response.setHeader4("ವಿಷಯ  : ");
             response.setHeader20( "                " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ    ಇಲಾಖೆಯು  ಕೇಂದ್ರ    ರೇಷ್ಮೆ     ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾ  ನಗೊಳಿಸುತ್ತಿ ರುವ  ಕೇಂದ್ರ\n" +
                     "                    \n" +
-                                  "                ವಲಯ   “"+ apiResponse.getContent().get(0).getFinancialYear() +"”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getScComponentName() + "\n" +
+                                  "                ವಲಯ   “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getScComponentName() + "\n" +
                                   "          \n" +
                                   "                " +apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ    ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
@@ -10878,7 +10878,7 @@ public class ReportsController {
 // ವಿಷಯ – with scheme & subscheme
         response.setHeader2(
                 apiResponse.getContent().get(0).getFinancialYear()
-                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆಯಡಿ   \n\n"+
+                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆಯಡಿ "+
                         apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"ಮಂಜೂರಾತಿ     ನೀಡುವ     ಬಗ್ಗೆ. ");
 
 // ಉಲ್ಲೇಖ – points with 5-space gaps
@@ -10898,27 +10898,27 @@ public class ReportsController {
 // ಪೀಠಿಕೆ
         response.setHeader4(
                 apiResponse.getContent().get(0).getFinancialYear()
-                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ     ವಿವಿಧ     ಕಾರ್ಯಕ್ರಮಗಳ     ಅನುಷ್ಠಾನಕ್ಕೆ     ವಿವಿಧ     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ  \n\n"
-                        + "ಉಲ್ಲೇಖ     (1)     ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮಕ     ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು,    ಉಲ್ಲೇಖ     (2)   ರಲ್ಲಿ   "+ apiResponse.getContent().get(0).getSchemeNameInKannada()+"\n\n"
-                        +"ಯೋಜನೆಯಡಿ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಮೊಟ್ಟೆಗಳಿಗೆ    ಚಾಕಿ   ಸಾಕಾಣಿಕೆ     ವೆಚ್ಚಕ್ಕೆ     ಸಹಾಯಧನ   ನೀಡುವ   ಕಾರ್ಯಕ್ರಮದ\n\n"
-                        + "ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.    ಸದರಿ     ಕಾರ್ಯಕ್ರಮದಡಿ   ವಾಣಿಜ್ಯ     ರೇಷ್ಮೆ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದನೆಯಲ್ಲಿ     ಶುದ್ಧ \n\n"
-                        +"ಮೈಸೂರು     ತಳಿ     ಹಾಗೂ  "+apiResponse.getContent().get(0).getRaceName()+"   ರೇಷ್ಮೆ     ಗೂಡುಗಳ     ಉತ್ಪಾದನೆ     ಬಹಳ     ಪ್ರಮುಖವಾದ  ಅಂಶವಾಗಿರುತ್ತದೆ.  ಮಿಶ್ರತಳಿ  ಹಾಗೂ \n\n"
-                        + apiResponse.getContent().get(0).getRaceName()+"    ಸಂಕರಣ  /  ಶುದ್ಧ     ತಳಿ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದಿಸಲು     ನಿರಂತರವಾಗಿ     ಗುಣಮಟ್ಟದ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಹಾಗೂ\n\n"
-                        +apiResponse.getContent().get(0).getRaceName()+"     ರೇಷ್ಮೆ     ಬಿತ್ತನೆ     ಗೂಡುಗಳ     ಅವಶ್ಯಕತೆಯಿರುತ್ತದೆ.    ಈ     ಅತ್ಯಾವಶ್ಯಕ     ಬೇಡಿಕೆಯನ್ನು     ಪೂರೈಸಲು   "+apiResponse.getContent().get(0).getRaceName()+"   ಮತ್ತು \n\n"
-                        + "ಮೈಸೂರು     ಬಿತ್ತನೆ     ವಲಯಗಳಲ್ಲಿ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರನ್ನು     ಪ್ರೋತ್ಸಾಹಿಸಲು     ಅನೇಕ     ಫಲಾನುಭವಿ     ಆಧಾರಿತ     ಕಾರ್ಯಕ್ರಮಗಳ\n\n"
-                        +"ಅನುಷ್ಠಾನದ     ಜೊತೆಗೆ     ತಾಂತ್ರಿಕ     ಮಾಹಿತಿಯನ್ನು     ಒದಗಿಸಲಾಗುತ್ತಿದೆ.\n\n"
-                        + "ಬಿತ್ತನೆ     ಗೂಡಿಗೆ     ಕೊರತೆಯಾಗದಂತೆ     ವೈಜ್ಞಾನಿಕವಾಗಿ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದನಾ     ಕಾರ್ಯಕ್ರಮವನ್ನು     ಹಮ್ಮಿಕೊಳ್ಳಲಾಗಿದೆ. \n\n"
-                        + "ಮೈಸೂರು  ಬಿತ್ತನ    ಪ್ರದೇಶದಲ್ಲಿ     ಚಾಕಿ   ಸಾಕಾಣಿಕೆಯನ್ನು     ಪ್ರೋತ್ಸಾಹಿಸುವ   ದೃಷ್ಟಿಯಿಂದ   ಈಗಾಗಲೇ   "+apiResponse.getContent().get(0).getRaceName()+"  ಮೊಟ್ಟೆಗಳಿಗೆ \n\n"
-                        +"ನೀಡುತ್ತಿರುವಂತೆ     ಖಾಸಗಿ   ಚಾಕಿ     ಸಾಕಾಣಿಕಾ   ಕೇಂದ್ರಗಳಲ್ಲಿ     ಪ್ರತಿ   100   ಮೊಟ್ಟೆಗಳಿಗೆ     ತಗಲಬಹುದಾದ  ಒಟ್ಟು     ವೆಚ್ಚ \n\n"
-                        +"ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-ಗಳಲ್ಲಿ   ಶೇ.50  ರಂತೆ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"/-ಗಳ   ಚಾಕಿ  ಸೇವಾ   ಶುಲ್ಕವನ್ನು    ನೀಡುವ   ಕಾರ್ಯಕ್ರಮವಿರುತ್ತದೆ. \n\n"
-                        + "ಉಲ್ಲೇಖ (5)    ರಂತೆ   ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ  ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ಇವರು  ಪರಿಶೀಲಿಸಿ  ದೃಢೀಕರಿಸಿ  ಎಲ್ಲಾ     ಅಗತ್ಯ  \n \n"
+                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ     ವಿವಿಧ     ಕಾರ್ಯಕ್ರಮಗಳ     ಅನುಷ್ಠಾನಕ್ಕೆ     ವಿವಿಧ     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ  "
+                        + "ಉಲ್ಲೇಖ     (1)     ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮಕ     ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು,    ಉಲ್ಲೇಖ     (2)   ರಲ್ಲಿ   "+ apiResponse.getContent().get(0).getSchemeNameInKannada()+""
+                        +"ಯೋಜನೆಯಡಿ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಮೊಟ್ಟೆಗಳಿಗೆ    ಚಾಕಿ   ಸಾಕಾಣಿಕೆ     ವೆಚ್ಚಕ್ಕೆ     ಸಹಾಯಧನ   ನೀಡುವ   ಕಾರ್ಯಕ್ರಮದ"
+                        + "ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.    ಸದರಿ     ಕಾರ್ಯಕ್ರಮದಡಿ   ವಾಣಿಜ್ಯ     ರೇಷ್ಮೆ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದನೆಯಲ್ಲಿ     ಶುದ್ಧ "
+                        +"ಮೈಸೂರು     ತಳಿ     ಹಾಗೂ  "+apiResponse.getContent().get(0).getRaceName()+"   ರೇಷ್ಮೆ     ಗೂಡುಗಳ     ಉತ್ಪಾದನೆ     ಬಹಳ     ಪ್ರಮುಖವಾದ  ಅಂಶವಾಗಿರುತ್ತದೆ.  ಮಿಶ್ರತಳಿ  ಹಾಗೂ "
+                        + apiResponse.getContent().get(0).getRaceName()+"    ಸಂಕರಣ  /  ಶುದ್ಧ     ತಳಿ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದಿಸಲು     ನಿರಂತರವಾಗಿ     ಗುಣಮಟ್ಟದ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಹಾಗೂ"
+                        +apiResponse.getContent().get(0).getRaceName()+"     ರೇಷ್ಮೆ     ಬಿತ್ತನೆ     ಗೂಡುಗಳ     ಅವಶ್ಯಕತೆಯಿರುತ್ತದೆ.    ಈ     ಅತ್ಯಾವಶ್ಯಕ     ಬೇಡಿಕೆಯನ್ನು     ಪೂರೈಸಲು   "+apiResponse.getContent().get(0).getRaceName()+"   ಮತ್ತು "
+                        + "ಮೈಸೂರು     ಬಿತ್ತನೆ     ವಲಯಗಳಲ್ಲಿ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರನ್ನು     ಪ್ರೋತ್ಸಾಹಿಸಲು     ಅನೇಕ     ಫಲಾನುಭವಿ     ಆಧಾರಿತ     ಕಾರ್ಯಕ್ರಮಗಳ"
+                        +"ಅನುಷ್ಠಾನದ     ಜೊತೆಗೆ     ತಾಂತ್ರಿಕ     ಮಾಹಿತಿಯನ್ನು     ಒದಗಿಸಲಾಗುತ್ತಿದೆ.\n"
+                        + "ಬಿತ್ತನೆ     ಗೂಡಿಗೆ     ಕೊರತೆಯಾಗದಂತೆ     ವೈಜ್ಞಾನಿಕವಾಗಿ     ಮೊಟ್ಟೆ     ಉತ್ಪಾದನಾ     ಕಾರ್ಯಕ್ರಮವನ್ನು     ಹಮ್ಮಿಕೊಳ್ಳಲಾಗಿದೆ. "
+                        + "ಮೈಸೂರು  ಬಿತ್ತನ    ಪ್ರದೇಶದಲ್ಲಿ     ಚಾಕಿ   ಸಾಕಾಣಿಕೆಯನ್ನು     ಪ್ರೋತ್ಸಾಹಿಸುವ   ದೃಷ್ಟಿಯಿಂದ   ಈಗಾಗಲೇ   "+apiResponse.getContent().get(0).getRaceName()+"  ಮೊಟ್ಟೆಗಳಿಗೆ "
+                        +"ನೀಡುತ್ತಿರುವಂತೆ     ಖಾಸಗಿ   ಚಾಕಿ     ಸಾಕಾಣಿಕಾ   ಕೇಂದ್ರಗಳಲ್ಲಿ     ಪ್ರತಿ   100   ಮೊಟ್ಟೆಗಳಿಗೆ     ತಗಲಬಹುದಾದ  ಒಟ್ಟು     ವೆಚ್ಚ "
+                        +"ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-ಗಳಲ್ಲಿ   ಶೇ.50  ರಂತೆ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"/-ಗಳ   ಚಾಕಿ  ಸೇವಾ   ಶುಲ್ಕವನ್ನು    ನೀಡುವ   ಕಾರ್ಯಕ್ರಮವಿರುತ್ತದೆ. "
+                        + "ಉಲ್ಲೇಖ (5)    ರಂತೆ   ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ  ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ಇವರು  ಪರಿಶೀಲಿಸಿ  ದೃಢೀಕರಿಸಿ  ಎಲ್ಲಾ     ಅಗತ್ಯ  "
                         +"ದಾಖಲಾತಿಗಳನ್ನು     ಒಳಗೊಂಡ     ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದು     ವಿವರಗಳು  ಸಲ್ಲಿಸಿದ   ಈ   ಕೆಳಕಂಡಂತಿವೆ. ");
         response.setHeader6(
-                "ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ     ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ನೋಂದಾಯಿತ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಚಾಕಿ     ಸಾಕಾಣಿಕಾ \n\n"
-                +"ಕೇಂದ್ರಗಳಿಂದ     ಪಡೆದ   "+ totalNoOfDfls +"   ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ರೇಷ್ಮೆ     ಮೊಟ್ಟೆಗಳಿಗೆ,     ಪ್ರತಿ    100  ಮೊಟ್ಟೆಗಳಿಗೆ   ತಗಲಬಹುದಾದ     ಒಟ್ಟು \n\n"
-                +"ವೆಚ್ಚ     ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-ಗಳ   ಚಾಕಿ   ಸೇವಾ   ಶುಲ್ಕ,   ಒಟ್ಟು   ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" /- ಗಳನ್ನು    ಚಾಕಿ   ಸೇವಾ   ಶುಲ್ಕ,   ಒಟ್ಟು   ರೂ. " + totalSubsidyAmountCa+" /- ಗಳನ್ನು     ಪಡೆಯಲು  \n\n"
-                +"ಅರ್ಹರಾಗಿರುತ್ತಾರೆ.    ಉಲ್ಲೇಖ (3) ರ     ಸರ್ಕಾರದ   ಆದೇಶದ   ರೀತ್ಯಾ    ಈ     ಕಛೇರಿಯ  ಅಧಿಕಾರ  ಪ್ರತ್ಯಾಯೋಜನೆ   ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು,     ಉಲ್ಲೇಖ (4)   ರಲ್ಲಿ \n\n"
-                +"ಸದರಿ   ಕಾರ್ಯಕ್ರಮದ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ   ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಸೇವಾಶುಲ್ಕ     ಮಂಜೂರು     ಮಾಡಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿದೆ.\n\n"
+                "ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ     ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ನೋಂದಾಯಿತ     ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ಚಾಕಿ     ಸಾಕಾಣಿಕಾ "
+                +"ಕೇಂದ್ರಗಳಿಂದ     ಪಡೆದ   "+ totalNoOfDfls +"   ಶುದ್ಧ     ಮೈಸೂರು     ತಳಿ     ರೇಷ್ಮೆ     ಮೊಟ್ಟೆಗಳಿಗೆ,     ಪ್ರತಿ    100  ಮೊಟ್ಟೆಗಳಿಗೆ   ತಗಲಬಹುದಾದ     ಒಟ್ಟು "
+                +"ವೆಚ್ಚ     ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-ಗಳ   ಚಾಕಿ   ಸೇವಾ   ಶುಲ್ಕ,   ಒಟ್ಟು   ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" /- ಗಳನ್ನು    ಚಾಕಿ   ಸೇವಾ   ಶುಲ್ಕ,   ಒಟ್ಟು   ರೂ. " + totalSubsidyAmountCa+" /- ಗಳನ್ನು     ಪಡೆಯಲು  "
+                +"ಅರ್ಹರಾಗಿರುತ್ತಾರೆ.    ಉಲ್ಲೇಖ (3) ರ     ಸರ್ಕಾರದ   ಆದೇಶದ   ರೀತ್ಯಾ    ಈ     ಕಛೇರಿಯ  ಅಧಿಕಾರ  ಪ್ರತ್ಯಾಯೋಜನೆ   ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು,     ಉಲ್ಲೇಖ (4)   ರಲ್ಲಿ "
+                +"ಸದರಿ   ಕಾರ್ಯಕ್ರಮದ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ   ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಸೇವಾಶುಲ್ಕ     ಮಂಜೂರು     ಮಾಡಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿದೆ."
                 +"ಅದರಂತೆ     ಈ     ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
 
 // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line – short, fine
@@ -10934,28 +10934,27 @@ public class ReportsController {
 //                        + "ಸದರಿ     ವೆಚ್ಚವನ್ನು     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆಯ     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ     " + apiResponse.getContent().get(0).getScHeadAccountName() + "     ಅಡಿ     ಖಜಾನೆ-2     ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಂಡಿರುವ     ಅನುದಾನದಿಂದ     ಡಿ.ಬಿ.ಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿಗಳ     ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡಬೇಕು. \n"
 //        );
 
-        response.setHeader8("ಪೀ ಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂ ಶಗಳನ್ನು     ಪರಶೀ ಲಿಸಲಾಗಿ,      "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ತಾಲ್ಲೂ ಕಿನ    ತಾಂತ್ರಿ ಕ    ಸೇ ವಾ    ಕೇಂ ದ್ರ   \n " +
-                "            \n " +
-                 apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ವ್ಯಾ ಪ್ತಿ ಯ   ಶುದ್ದ     ತಳಿ     ರೇ ಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಅನುಬಂಧದಲ್ಲಿ     ತೋ ರಿಸಿರುವಂತೆ     ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ\n\n"
-                +"ಖರೀ ದಿಸಿರುವ   "+ totalNoOfDfls  +"   ಶುದ್ದ    ಮೈ ಸೂರು    ತಳಿ    ರೇ ಷ್ಮೆ     ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಪ್ರ ತಿ    100    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು    ವೆಚ್ಚ  \n\n"
-                +"ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-   ಗಳಲ್ಲಿ    ಶೇ.50ರಂತೆ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"/- ಗಳ     ಚಾಕಿ    ಸೇ ವಾ    ಶುಲ್ಕ    ಒಟ್ಟು    ರೂ. "+ totalSubsidyAmountCa +"/-  ("+amountInWords+" )\n\n"
-                +"ಮಾಡಿದೆ.   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ:   "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ")  ರಡಿ   ಖಜಾನೆ-2\n\n "
-                +"ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ    ಅನದಾನದಲ್ಲಿ     ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿ   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡುವುದು.\n\n"
+        response.setHeader8("ಪೀ ಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂ ಶಗಳನ್ನು     ಪರಶೀ ಲಿಸಲಾಗಿ,      "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ತಾಲ್ಲೂ ಕಿನ    ತಾಂತ್ರಿ ಕ    ಸೇ ವಾ    ಕೇಂ ದ್ರ    " +
+                 apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ವ್ಯಾ ಪ್ತಿ ಯ   ಶುದ್ದ     ತಳಿ     ರೇ ಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಅನುಬಂಧದಲ್ಲಿ     ತೋ ರಿಸಿರುವಂತೆ     ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ"
+                +"ಖರೀ ದಿಸಿರುವ   "+ totalNoOfDfls  +"   ಶುದ್ದ    ಮೈ ಸೂರು    ತಳಿ    ರೇ ಷ್ಮೆ     ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಪ್ರ ತಿ    100    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು    ವೆಚ್ಚ  "
+                +"ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-   ಗಳಲ್ಲಿ    ಶೇ.50ರಂತೆ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"/- ಗಳ     ಚಾಕಿ    ಸೇ ವಾ    ಶುಲ್ಕ    ಒಟ್ಟು    ರೂ. "+ totalSubsidyAmountCa +"/-  ("+amountInWords+" )"
+                +"ಮಾಡಿದೆ.   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ:   "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ")  ರಡಿ   ಖಜಾನೆ-2"
+                +"ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ    ಅನದಾನದಲ್ಲಿ     ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿ   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡುವುದು.\n"
                +"ಸದರಿ   ವೆಚ್ಚ ವನ್ನು   ಲೆಕ್ಕ    ಶೀ ರ್ಷಿಕೆ:  "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ") ಅಡಿ ಭರಿಸುವುದು.");
 
 
 // Accounts / copies block (DD sanction case)
         response.setHeader9(
-                "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n\n"
-                        + "ಪ್ರತಿಯನ್ನು: \n\n"
-                        + "1.     ಸಂಬಂಧ     ಪಟ್ಟ     ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳಿಗೆ \n\n"
-                        + "2.     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು  /  ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ  \n\n"
+                "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
+                        + "ಪ್ರತಿಯನ್ನು: \n"
+                        + "1.     ಸಂಬಂಧ     ಪಟ್ಟ     ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳಿಗೆ \n"
+                        + "2.     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು  /  ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ  \n"
                           +"         " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
 
 // DDS block (in case DDS sanction)
         response.setHeader10(
-                "ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು, \n\n"
-                        + "ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್‌, \n\n"
+                "ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು, \n"
+                        + "ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್‌, \n"
                         + apiResponse.getContent().get(0).getLoggedinUserDistrictName());
 
 
