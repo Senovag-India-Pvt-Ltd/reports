@@ -6436,7 +6436,7 @@ public class ReportsController {
                     "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
                     "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
                             "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n\n" +
+            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು\n" +
                             "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   \n "+apiResponse.getContent().get(0).getLoggedinUserTscName());
             response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +""+
                             "ಅಡಿ   ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ");
@@ -6482,7 +6482,7 @@ public class ReportsController {
                     "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
                     "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
                     "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n\n" +
+            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು\n" +
                     "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ  \n  "+apiResponse.getContent().get(0).getLoggedinUserTscName());
             response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +""+
                     "ಅಡಿ   ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು   ತಮ್ಮ     ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ     ಹೀಟ್     ರಿಕವರಿ  ಯೂನಿಟ್    ಅಳವಡಿಕೆಗೆ      ಸಹಾಯಧನ");
