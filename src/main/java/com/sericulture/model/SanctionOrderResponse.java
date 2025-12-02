@@ -264,6 +264,7 @@ private String totalIncentiveAmountInWords;
     private String fullNameField;
     private String transactionDate;
     private Float noOfCocoonsPerKg;
+    private String bonusRNoAndDate;
 
 // + getter & setter
 
