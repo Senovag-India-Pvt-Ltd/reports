@@ -261,6 +261,9 @@ private String totalIncentiveAmountInWords;
     private String reelingShedDetails;
     private String reelerDetails;
     private Float reelingShedSqft;
+    private String fullNameField;
+    private String transactionDate;
+    private Float noOfCocoonsPerKg;
 
 // + getter & setter
 
