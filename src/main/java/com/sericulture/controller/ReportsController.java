@@ -8724,7 +8724,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getScCategoryName()
                         + "    ವರ್ಗಕ್ಕೆ    ಸೇರಿರುವರಾಗಿದ್ದು,    ರೀಲಿಂಗ್    ಪರವಾನಗಿ    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getReelingLicenseNumber()
-                        + "    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ.    ಸದರಿಯವರು    36    ಕೊನೆಗಳ    "
+                        + "    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ.    ಸದರಿಯವರು   "
                         + apiResponse.getContent().get(0).getNumberOfBasins()
                         + "    ಬೇಸಿನ್‌    "
                         + apiResponse.getContent().get(0).getMachineTypeName()
@@ -8737,7 +8737,7 @@ public class ReportsController {
                         + "    ರಂದು    ಕೈಗೊಂಡಿದ್ದು,    ಅರ್ಜಿದಾರರು    ಸರ್ವೇ    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getSurveyNumber()
                         + "    ಯ    ಜಾಗದಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಕ್ರಮದ    ಸೌಲಭ್ಯಕ್ಕಾಗಿ    ಅರ್ಹತೆಯ    ಬಗ್ಗೆ    ದೃಢಪಡಿಸಿರುತ್ತಾರೆ.    ಅದರಂತೆ,    ಅರ್ಜಿದಾರರು    ಮೇಲ್ಕಾಣಿಸಿದ    ಸರ್ವೇ    ಸಂಖ್ಯೆಯ    ಜಾಗದಲ್ಲಿ    ಇಲಾಖೆಯ    ಮಾರ್ಗಸೂಚಿಗಳಂತೆ    ರೀಲಿಂಗ್    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಕಾರ್ಯಾದೇಶ    ನೀಡಲಾಗಿದೆ.\n"+
-                        "    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ಪೂರ್ಣಗೊಳಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ನಂತರ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ನಿರ್ಮಾಣದಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ    ಹೊಂದಿರುತ್ತದೆ."
+                        "                  "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ಪೂರ್ಣಗೊಳಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ    ನಂತರ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿಗಾಗಿ    ಕ್ರಮ    ಕೈಗೊಳ್ಳಲಾಗುವುದು.    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"    ನಿರ್ಮಾಣದಲ್ಲಿ    ಮಾರ್ಗಸೂಚಿಯ    ಉಲ್ಲಂಘನೆ    ಕಂಡುಬಂದಲ್ಲಿ,    ಈ    ಕಾರ್ಯಾದೇಶವನ್ನು    ರದ್ದುಪಡಿಸುವ    ಅಧಿಕಾರವನ್ನು    ಇಲಾಖೆ    ಹೊಂದಿರುತ್ತದೆ."
         );
 
 
@@ -9040,39 +9040,25 @@ public class ReportsController {
 
             response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeName()+"  /"  +apiResponse.getContent().get(0).getCategoryName()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setHeader3("ಕೇಂದ್ರ   ವಲಯ    “"+apiResponse.getContent().get(0).getSchemeName()+"”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+  "\n " +
+            response.setHeader3("ಕೇಂದ್ರ   ವಲಯ    “"+apiResponse.getContent().get(0).getSchemeName()+"”  ಯೋಜನೆ   " +apiResponse.getContent().get(0).getCategoryName()+
                     "ರೇಷ್ಮೆ   ಹುಳು ಸಾಕಾಣಿಕೆ  ಮನೆ  ನಿರ್ಮಾಣಕ್ಕೆ   ಸಂಬಂಧಿಸಿದಂತೆ  ಕಾರ್ಯಾದೇಶ");
-            response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ\n " +
-                            "     \n " +
-                            "ಸಮಯದಲ್ಲಿ    ತಾಂತ್ರಿ  ಕ    ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getUserTscName() + "  ಕ್ಕೆ    ಸೇರಿದ  ರೇಷ್ಮೆ  ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು\n " +
-                    "      \n " +
-                            "ಶ್ರೀ /ಶ್ರೀ ಮತಿ     " + apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ  "  + apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    ಸರ್ವೆ   ನಂಬರು   " + apiResponse.getContent().get(0).getSurveyNumber()  + "\n" +
-                            "    \n " +
-                            "ರಲ್ಲಿ    " + apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರ  ದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪು ನೇರಳೆ\n " +
-                            "      \n "+
+            response.setLineItemComment("                    ಮೇಲ್ಕಾ ಣಿಸಿದ    ಇವರ    ಜಮೀನಿಗೆ   ದಿನಾಂಕ :   " + datePart  + "   ರಂದು    " + timePart  + "   ಘಂಟೆ" +
+                            "ಸಮಯದಲ್ಲಿ    ತಾಂತ್ರಿ  ಕ    ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getUserTscName() + "  ಕ್ಕೆ    ಸೇರಿದ  ರೇಷ್ಮೆ  ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು" +
+                            "ಶ್ರೀ /ಶ್ರೀ ಮತಿ     " + apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ  "  + apiResponse.getContent().get(0).getFatherNameKan() + "   ರವರು    ಸರ್ವೆ   ನಂಬರು   " + apiResponse.getContent().get(0).getSurveyNumber()  +
+                            "ರಲ್ಲಿ    " + apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರ  ದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪು ನೇರಳೆ " +
                                "ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n" +
-                    "       \n"+
-                                       "                     "+apiResponse.getContent().get(0).getVillageName() + "    ಗ್ರಾ  ಮದ    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,\n " +
-                    "        \n " +
+                                       "                     "+apiResponse.getContent().get(0).getVillageName() + "    ಗ್ರಾ  ಮದ    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ," +
                             "ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
-            response.setHeader4        ("                    ಶ್ರೀ /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + " ( " + apiResponse.getContent().get(0).getFruitsId() +  " )   ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() + "\n" +
-                            "      \n "+
-                            apiResponse.getContent().get(0).getVillageName() + "     ರವರು   " +apiResponse.getContent().get(0).getLandVillage()+"   ಗ್ರಾ  ಮ   " +surveyText + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ  \n " +
-                                    "    \n" +
-                                    "ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ     ಮನೆ   ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getArn() + "\n " +
-                            "     \n" +
+            response.setHeader4        ("                    ಶ್ರೀ /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan() + " ( " + apiResponse.getContent().get(0).getFruitsId() +  " )   ಬಿನ್/ಕೋಂ  " + apiResponse.getContent().get(0).getFatherNameKan() +
+                            apiResponse.getContent().get(0).getVillageName() + "     ರವರು   " +apiResponse.getContent().get(0).getLandVillage()+"   ಗ್ರಾ  ಮ   " +surveyText + "   ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ  " +
+                                    "ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ     ಮನೆ   ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getArn() +
                             "ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  ");
-            response.setHeader5("ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು,\n" +
-                    "     \n"+
+            response.setHeader5("ರೇಷ್ಮೆ   ಉಪ   ನಿರ್ದೇಶಕರು,\n" +
                     "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,\n" +
-                    "     \n"+
                     apiResponse.getContent().get(0).getUserDistrictName());
             response.setHeader6("ಇವರಿಗೆ,\n" +
-                    "     \n"+
                     "ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  " + apiResponse.getContent().get(0).getUserTaluk() + " ವಿಭಾಗ, \n" +
-                    "     \n"+
                     "ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿ ಕ ಸೇವಾ ಕೇಂದ್ರ  ,  " + apiResponse.getContent().get(0).getUserTscName() + " .\n" +
-                    "     \n"+
                     "ಸಂಬಂಧಿಸಿದ  ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ\n");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
@@ -10377,24 +10363,16 @@ public class ReportsController {
         }
             response.setHeader1("ರೇಷ್ಮೆ    ಜಂಟಿ  ನಿರ್ದೇಶಕರು,  "+ apiResponse.getContent().get(0).getDivisionName() +"   ವಿಭಾಗ,  "+ apiResponse.getContent().get(0).getDivisionName() +" ರವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
             response.setHeader4("ವಿಷಯ  : ");
-            response.setHeader20( "                " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ    ಇಲಾಖೆಯು  ಕೇಂದ್ರ    ರೇಷ್ಮೆ     ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾ  ನಗೊಳಿಸುತ್ತಿ ರುವ  ಕೇಂದ್ರ\n" +
-                    "                    \n" +
-                                  "                ವಲಯ   “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getScComponentName() + "\n" +
-                                  "          \n" +
-                                  "                " +apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ    ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
+            response.setHeader20( "                " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ ಸಾಲಿನಲ್ಲಿ    ಇಲಾಖೆಯು  ಕೇಂದ್ರ    ರೇಷ್ಮೆ     ಮಂಡಳಿಯಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾ  ನಗೊಳಿಸುತ್ತಿ ರುವ  ಕೇಂದ್ರ" +
+                                  "                ವಲಯ   “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”   ಯೋಜನೆಯಡಿ    " +apiResponse.getContent().get(0).getScComponentName() +
+                                  "       " +apiResponse.getContent().get(0).getScCategoryName() + "  ಅಡಿ    ಸಹಾಯಧನ   ಮಂಜೂರಾತಿ   ನೀಡುವ   ಕುರಿತು.");
             response.setHeader5( "ಉಲ್ಲೇಖ : ");
             response.setHeader2("1. ಸರ್ಕಾರದ   ಆದೇಶ  ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " +admGovtDate  + "\n" +
-                    "        \n" +
                     "2. ರೇಷ್ಮೆ    ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ ರು   ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಸುತ್ತೋ ಲೆ  \n" +
-                    "        \n" +
                     "   ಸಂಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
-                    "        \n" +
                     "3. ಸರ್ಕಾರದ  ಆದೇಶ ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n" +
-                    "        \n" +
                     "4. ರೇಷ್ಮೆ  ಕೃ ಷಿ  ಅಭಿವೃ ದ್ದಿ    ಆಯುಕ್ತ  ರು  ಹಾಗೂ  ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು  ರವರ  ಜ್ಞಾ  ಪನ  ಪತ್ರ  ದ\n" +
-                    "        \n" +
                     "   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
-                    "        \n" +
                     "5. ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,    "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"  ರವರ   ಪ್ರ  ಸ್ತಾ ವನೆ   ದಿನಾಂಕ :  "+  proposalDate);
             response.setHeader24("ಪೀಠಿಕೆ : ");
             response.setHeader8(  "               " + apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ  ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರ ಮಗಳ   ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ   ವಿವಿಧ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇ ಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು" +
@@ -10441,18 +10419,12 @@ public class ReportsController {
             response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು\n" +
                     apiResponse.getContent().get(0).getDivisionName() + "   ವಿಭಾಗ\n");
             response.setHeader18("ಇವರಿಗೆ \n" +
-                    "      \n"+
                     "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getFarmerFirstName() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
-                            "    \n"+
                     apiResponse.getContent().get(0).getVillageName() + "  ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getTalukName() + "   ತಾಲ್ಲೂಕು \n" +
-                            "      \n"+
                     "ಪ್ರತಿಗಳು: \n " +
-                    "      \n"+
                     "1. ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ವಿಭಾಗ  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
-                    "                    \n" +
                     "2. ರೇಷ್ಮೆ   ವಿಸ್ತರಣಾಧಿಕಾರಿ,  ತಾಂತ್ರಿಕ   ಸೇವಾ  ಕೇಂದ್ರ  , " +apiResponse.getContent().get(0).getLoggedinUserTscName() + "     ಇವರಿಗೆ   ಮಾಹಿತಿಗಾಗಿ  ಕಳುಹಿಸಿದೆ.\n" +
-                    "                    \n" +
-                    "3. ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ   ಪಂಚಾಯತ್,    " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಇವರ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.\n");
+                    "3. ರೇಷ್ಮೆ   ಉಪನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ   ಪಂಚಾಯತ್,    " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ಇವರ ಮಾಹಿತಿಗಾಗಿ ಕಳುಹಿಸಿದೆ.");
             response.setHeader19("");
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getFarmerFirstName() );
