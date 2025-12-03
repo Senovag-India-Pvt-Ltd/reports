@@ -10873,13 +10873,13 @@ public class ReportsController {
 
 
 
-        response.setHeader8("ಪೀ ಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂ ಶಗಳನ್ನು     ಪರಶೀ ಲಿಸಲಾಗಿ,      "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ತಾಲ್ಲೂ ಕಿನ    ತಾಂತ್ರಿ ಕ    ಸೇ ವಾ    ಕೇಂ ದ್ರ    " +
+        response.setHeader8("                 ಪೀ ಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂ ಶಗಳನ್ನು     ಪರಶೀ ಲಿಸಲಾಗಿ,      "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ತಾಲ್ಲೂ ಕಿನ    ತಾಂತ್ರಿ ಕ    ಸೇ ವಾ    ಕೇಂ ದ್ರ    " +
                  apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ವ್ಯಾ ಪ್ತಿ ಯ   ಶುದ್ದ     ತಳಿ     ರೇ ಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಅನುಬಂಧದಲ್ಲಿ     ತೋ ರಿಸಿರುವಂತೆ     ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ"
                 +"ಖರೀ ದಿಸಿರುವ   "+ totalNoOfDfls  +"   ಶುದ್ದ    ಮೈ ಸೂರು    ತಳಿ    ರೇ ಷ್ಮೆ     ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಪ್ರ ತಿ    100    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು    ವೆಚ್ಚ  "
                 +"ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +"/-   ಗಳಲ್ಲಿ    ಶೇ.50ರಂತೆ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"/- ಗಳ     ಚಾಕಿ    ಸೇ ವಾ    ಶುಲ್ಕ    ಒಟ್ಟು    ರೂ. "+ totalSubsidyAmountCa +"/-  ("+amountInWords+" )"
                 +"ಮಾಡಿದೆ.   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "  ಯೋಜನೆಯ   ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ:   "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ")  ರಡಿ   ಖಜಾನೆ-2"
-                +"ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ    ಅನದಾನದಲ್ಲಿ     ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿ   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡುವುದು.\n\n"
-               +"ಸದರಿ   ವೆಚ್ಚ ವನ್ನು   ಲೆಕ್ಕ    ಶೀ ರ್ಷಿಕೆ:  "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ") ಅಡಿ ಭರಿಸುವುದು.");
+                +"ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ    ಅನದಾನದಲ್ಲಿ     ಡಿಬಿಟಿ   ಮುಖಾಂತರ   ಫಲಾನುಭವಿ   ಖಾತೆಗೆ   ನೇರವಾಗಿ   ಜಮಾ   ಮಾಡುವುದು.\n"
+               +"                 ಸದರಿ   ವೆಚ್ಚ ವನ್ನು   ಲೆಕ್ಕ    ಶೀ ರ್ಷಿಕೆ:  "+ apiResponse.getContent().get(0).getScHeadAccountName() +"  ("+ apiResponse.getContent().get(0).getDescription()+ ") ಅಡಿ ಭರಿಸುವುದು.");
 
 
 // Accounts / copies block (DD sanction case)
