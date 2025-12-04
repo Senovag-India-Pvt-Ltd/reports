@@ -3,6 +3,7 @@ package com.sericulture.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -265,6 +266,15 @@ private String totalIncentiveAmountInWords;
     private String transactionDate;
     private Float noOfCocoonsPerKg;
     private String bonusRNoAndDate;
+
+    private String equipmentName;
+
+    private String taxInvoiceNo;
+    private String taxInvoiceDate;
+    private Long rearingEquipmentDetailsId;
+    private Float beneficiaryShareAmount;
+    private Float equipmentMaxSubsidyTotal;
+
 
 // + getter & setter
 

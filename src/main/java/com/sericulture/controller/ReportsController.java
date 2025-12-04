@@ -1308,6 +1308,76 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/getSanctionOrderRHEquipment")
+    public ResponseEntity<?> getSanctionOrderRHEquipmentPdf(
+            @RequestBody SanctionOrderPrintRequest requestDto
+    ) throws JsonProcessingException, JRException, FileNotFoundException {
+
+        try {
+            logger.info("enter to getSanctionOrderRHEquipmentPdf");
+
+            JasperReport jasperReport = getJasperReport("Sanction_OrderRHEquipment.jrxml");
+
+            // 🔹 This should return a JRBeanCollectionDataSource of your response beans
+            JRBeanCollectionDataSource fullDs =
+                    (JRBeanCollectionDataSource) getDataSourceForSanctionOrderRHEquipment(requestDto);
+
+            @SuppressWarnings("unchecked")
+            List<SanctionOrderResponse> fullList =
+                    (List<SanctionOrderResponse>) fullDs.getData();
+
+            if (fullList == null || fullList.isEmpty()) {
+                return ResponseEntity
+                        .status(HttpStatus.NO_CONTENT)
+                        .body("No data found for sanction order".getBytes(StandardCharsets.UTF_8));
+            }
+
+            // 🔹 1) HEADER BEAN – only first row
+            List<SanctionOrderResponse> headerList = new ArrayList<>();
+            headerList.add(fullList.get(0));  // use first row as header
+
+            JRBeanCollectionDataSource mainDataSource =
+                    new JRBeanCollectionDataSource(headerList);
+
+            // 🔹 2) TABLE BEANS – all equipment rows (could also be fullList.subList(1, ...) if needed)
+            List<SanctionOrderResponse> equipmentList = new ArrayList<>(fullList);
+
+            JRBeanCollectionDataSource equipmentDs =
+                    new JRBeanCollectionDataSource(equipmentList);
+
+            // 🔹 Parameters
+            Map<String, Object> parameters = getParameters(); // keep your existing parameters
+            parameters.put("CollectionBeanParam", equipmentDs);  // 👈 must match JRXML param name
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "SanctionOrderRHEquipment.pdf");
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+
+        } catch (Exception ex) {
+            logger.error("Error generating RHEquipment sanction order PDF", ex);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_PLAIN);
+            return new ResponseEntity<>(
+                    ex.getMessage().getBytes(StandardCharsets.UTF_8),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+
+
 
     @PostMapping("/download/sanction-order")
     public ResponseEntity<?> downloadSanctionOrder(@RequestBody SanctionOrderPrintRequest requestDto)
@@ -10481,6 +10551,255 @@ public class ReportsController {
         // ✅ Change: Always return a JRBeanCollectionDataSource
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
+
+    private String withFourSpaces(String text) {
+        if (text == null) return null;
+        // Replace every single space with four spaces
+        return text.replace(" ", "    ");
+    }
+
+    private JRDataSource getDataSourceForSanctionOrderRHEquipment(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromSanctionEquipment(requestDto);
+
+        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            logger.warn("No data returned from sanction RHEquipment API for applicationFormId: {}",
+                    requestDto.getApplicationFormId());
+            return new JREmptyDataSource();
+        }
+
+
+
+        List<SanctionOrderResponse> list = new ArrayList<>();
+        SanctionOrderResponse dto = new SanctionOrderResponse();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        String admGovtDate      = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
+        String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
+        String deptDeleDate     = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
+        String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
+        String releaseDate      = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+        String proposalDate     = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+
+        // Amounts & shares
+        int centralShareAmount = Math.round(
+                apiResponse.getContent().get(0).getCentralSanctionAmount() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getCentralSanctionAmount()
+        );
+        int stateShareAmount = Math.round(
+                apiResponse.getContent().get(0).getStateSanctionAmount() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getStateSanctionAmount()
+        );
+
+        int centralSharePercentage = Math.round(
+                apiResponse.getContent().get(0).getCentralSharePercentage() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getCentralSharePercentage()
+        );
+        int stateSharePercentage = Math.round(
+                apiResponse.getContent().get(0).getStateSharePercentage() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getStateSharePercentage()
+        );
+
+        int beneficiarySharePercentage = 100 - (centralSharePercentage + stateSharePercentage);
+        if (beneficiarySharePercentage < 0) beneficiarySharePercentage = 0;
+
+        int totalSubsidyAmount = centralShareAmount + stateShareAmount;
+
+        int beneficiaryShareAmount = Math.round(
+                apiResponse.getContent().get(0).getBeneficiaryShareAmount() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getBeneficiaryShareAmount()
+        );
+
+        String centralShareWords   = KannadaNumberUtil.convertNumberToKannadaWords(centralShareAmount);
+        String stateShareWords     = KannadaNumberUtil.convertNumberToKannadaWords(stateShareAmount);
+        String totalSubsidyWords   = KannadaNumberUtil.convertNumberToKannadaWords(totalSubsidyAmount);
+        String beneficiaryShareWords =
+                KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareAmount);
+
+        String shortDistrictKannada = getKannadaShortForm(
+                apiResponse.getContent().get(0).getLoggedinUserDistrictName()
+        );
+
+        // Date for sanction order number
+        String formattedDate;
+        try {
+            String inputDate = apiResponse.getContent().get(0).getDate().toString();
+            SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            SimpleDateFormat out = new SimpleDateFormat("dd-MM-yyyy");
+            Date d = in.parse(inputDate);
+            formattedDate = out.format(d);
+        } catch (Exception e) {
+            formattedDate = apiResponse.getContent().get(0).getDate().toString();
+        }
+
+        String surveyNumber = Util.objectToString(apiResponse.getContent().get(0).getSurveyNumber());
+        String kaneshNo = Util.objectToString(apiResponse.getContent().get(0).getKaneshNo());
+        String surveyText = "";
+        if (!surveyNumber.isEmpty()) {
+            surveyText = "ಸರ್ವೆ ನಂ. " + surveyNumber;
+        } else if (!kaneshNo.isEmpty()) {
+            surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
+        }
+
+        String financialYear       = Util.objectToString(apiResponse.getContent().get(0).getFinancialYear());
+        String schemeNameKannada   = Util.objectToString(apiResponse.getContent().get(0).getSchemeNameInKannada());
+        String schemeCategoryName  = Util.objectToString(apiResponse.getContent().get(0).getScCategoryName());
+        String componentName       = Util.objectToString(apiResponse.getContent().get(0).getScComponentName());
+        String headAccountName     = Util.objectToString(apiResponse.getContent().get(0).getScHeadAccountName());
+        String headDescription     = Util.objectToString(apiResponse.getContent().get(0).getDescription());
+        String divisionName        = Util.objectToString(apiResponse.getContent().get(0).getDivisionName());
+        String districtName        = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+        String talukName           = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserTalukName());
+        String tscName             = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserTscName());
+        String farmerVillage       = Util.objectToString(apiResponse.getContent().get(0).getVillageName());
+        String categoryShortName   = Util.objectToString(apiResponse.getContent().get(0).getCategoryShortName());
+        String farmerName          = Util.objectToString(apiResponse.getContent().get(0).getFarmerFirstName());
+        String fatherNameKan       = Util.objectToString(apiResponse.getContent().get(0).getFatherNameKan());
+        String fruitsId            = Util.objectToString(apiResponse.getContent().get(0).getFruitsId());
+        String extentOfMulberry    = Util.objectToString(apiResponse.getContent().get(0).getExtentOfMulberry());
+        String landVillage         = Util.objectToString(apiResponse.getContent().get(0).getLandVillage());
+        String equipmentName       = Util.objectToString(apiResponse.getContent().get(0).getEquipmentName());
+        String taxInvoiceNo        = Util.objectToString(apiResponse.getContent().get(0).getTaxInvoiceNo());
+        String taxInvoiceDate      = Util.objectToString(apiResponse.getContent().get(0).getTaxInvoiceDate());
+        String vendorName          = Util.objectToString(apiResponse.getContent().get(0).getVendorName());
+        String sanctionOrderNumber = Util.objectToString(apiResponse.getContent().get(0).getSanctionOrderNumber());
+
+        String loggedinUserDistrictName    = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+        String loggedinUserTalukName         = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserTalukName());
+        String loggedinUserTscName       = Util.objectToString(apiResponse.getContent().get(0).getLoggedinUserTscName());
+
+
+
+        dto.setHeader1(withFourSpaces(
+                "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು,  " + talukName + " ವಿಭಾಗ,  " + talukName + " ರವರ ಕಛೇರಿ ನಡವಳಿಗಳು"
+        ));
+
+        // Subject label
+        dto.setHeader4(withFourSpaces("ವಿಷಯ  : "));
+
+        // Subject content
+        dto.setHeader20(withFourSpaces(financialYear + " ನೇ ಸಾಲಿನಲ್ಲಿ ಇಲಾಖೆಯು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯ  ಸಹಯೋಗದೊಂದಿಗೆ ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ  ಕೇಂದ್ರ ಪುರಸ್ಕೃತ " + schemeNameKannada + "ಯೋಜನೆ " + schemeCategoryName + " ಅಡಿ   ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆಗಳನ್ನು  ಖರೀದಿಸಿರುವುದಕ್ಕಾಗಿ  ಸಹಾಯಧನ ಮಂಜೂರಾತಿ  ನೀಡುವ ಕುರಿತು."));
+
+        // "ಉಲ್ಲೇಖ : "
+        dto.setHeader5("ಉಲ್ಲೇಖ : ");
+
+        // Reference list (1..5)
+        dto.setHeader2(
+                "1. ಸರ್ಕಾರದ     ಆದೇಶ     ಸಂಖ್ಯೆ   :  " + apiResponse.getContent().get(0).getAdmGovtOrder() + " ,   ದಿನಾಂಕ :  " + admGovtDate + "\n"
+                        + "2. ರೇಷ್ಮೆ     ಕೃಷಿ    ಅಭಿವೃ ದ್ದಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ    ಸುತ್ತೋಲೆ\n" + "   ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getSchemeCircularNo()
+                        + " , ದಿನಾಂಕ : " + schemeCircularDate + "\n"
+                        + "3. ಸರ್ಕಾರದ    ಆದೇಶ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getDeptDeleNo()
+                        + " , ದಿನಾಂಕ : " + deptDeleDate + "\n"
+                        + "4. ರೇಷ್ಮೆ     ಉಪ ನಿರ್ದೇಶಕರು,    ಜಿಲ್ಲಾ       ಪಂಚಾಯತ್,   " + districtName + "   ರವರ   ಜ್ಞಾಪನಪತ್ರ    ಸಂ : " + apiResponse.getContent().get(0).getAllotReleaseNo()
+                        + " , ದಿನಾಂಕ : " + allotReleaseDate + "\n"
+                        + "5. ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು, " + talukName
+                        + " ವಿಭಾಗ    ರವರ    ಪ್ರಸ್ತಾವನೆ    ದಿನಾಂಕ : " + proposalDate);
+
+        // "ಪೀಠಿಕೆ : "
+        dto.setHeader24("ಪೀಠಿಕೆ : ");
+
+
+        dto.setHeader8(withFourSpaces("    " + financialYear + "  ನೇ ಸಾಲಿನಲ್ಲಿ ರೇಷ್ಮೆ ಇಲಾಖೆಯ ವಿವಿಧ ಕಾರ್ಯಕ್ರಮಗಳ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ವಿವಿಧ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆಗಳಡಿ ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ ಸರ್ಕಾರವು ಆಡಳಿತಾತ್ಮಕ ಅನುಮೋದನೆಯನ್ನು ನೀಡಿದ್ದು, ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ "+ componentName + " ಕಾರ್ಯಕ್ರಮದ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ಮಾರ್ಗಸೂಚಿಯನ್ನು ನೀಡಲಾಗಿದೆ. ಇಲಾಖೆಯು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯ ಸಹಯೋಗದೊಂದಿಗೆ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ " +
+                "“"+ schemeNameKannada +"’’ ಯೋಜನೆಯನ್ನು ಅನುಷ್ಟಾನಗೊಳಿಸಲಾಗುತ್ತಿದೆ. ಸದರಿ ಯೋಜನೆಯಡಿ ರೇಷ್ಮೆ ಬೆಳೆಗಾರರು ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆಗಳನ್ನು ಖರೀದಿಸಿರುವುದಕ್ಕಾಗಿ  ಸಹಾಯಧನ ನೀಡಬೇಕಾಗಿದ್ದು, "+ schemeCategoryName +"  ಅಡಿ ಕೇಂದ್ರ:ರಾಜ್ಯ:ಫಲಾನುಭವಿ ಪಾಲು "+ centralSharePercentage + ":" + stateSharePercentage + ":"
+                + beneficiarySharePercentage + " ಆಗಿರುತ್ತದೆ. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆಗಳನ್ನು ಖರೀದಿಸಲು  ಘಟಕ ದರ ರೂ."+ Math.round(apiResponse.getContent().get(0).getActualAmount() == null ? 0f : apiResponse.getContent().get(0).getActualAmount())
+                +"/-  ಗಳಿಗೆ ನಿಗಧಿಪಡಿಸಿದ್ದು, ಇದರಲ್ಲಿ ಶೇಕಡ "+(centralSharePercentage + stateSharePercentage)+"  ರಷ್ಟನ್ನು ಅಂದರೆ ರೂ. "+ totalSubsidyAmount+"/-  ಗಳನ್ನು ಸಹಾಯಧನವಾಗಿ ನೀಡಲಾಗುತ್ತಿದೆ. ಇದರಲ್ಲಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕ ದರದ ಶೇ."+centralSharePercentage+" ಅಂದರೆ ರೂ."+centralShareAmount+"/-"+
+                " ಗಳು ಮತ್ತು ರಾಜ್ಯದ ಪಾಲು ಘಟಕ ದರದ ಶೇ."+stateSharePercentage+" ಅಂದರೆ ರೂ."+stateShareAmount+"/- ಗಳು ಆಗಿರುತ್ತದೆ. ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯು ಕೇಂದ್ರದ ಪಾಲಿನ ಅನುದಾನವನ್ನು PFMS ಮುಖಾಂತರ ಒದಗಿಸಿದ್ದು SBI, ಬ್ಯಾಂಕ್ ಬಹುಮಹಡಿ ಕಟ್ಟಡ ಶಾಖೆಯ ಬ್ಯಾಂಕ್ ಖಾತೆಯಲ್ಲಿ ಜಮೆಯಾಗಿರುತ್ತದೆ. ಆದ್ದರಿಂದ ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನ ರೂ."+centralShareAmount+" ಗಳನ್ನು("+centralSharePercentage+"%) ಕೇಂದ್ರ ರೇಷ್ಮೆ " +
+                "ಮಂಡಳಿ ಭರಿಸುವುದರಿಂದ ಇದನ್ನು ಆಯಾ ಜಿಲ್ಲೆಗಳ ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರುಗಳ ಕಛೇರಿಯಿಂದ ಡಿಬಿಟಿ ಮುಖಾಂತರ  ಫಲಾನುಭವಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲಾಗುತ್ತದೆ. ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ರೇಷ್ಮೆ ಅಭಿವೃದ್ದಿ ಯೋಜನೆ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ:"+headAccountName+"("+headDescription+")"+
+        " ರಡಿ ರೇಷ್ಮೆ ಅಭಿವೃದ್ದಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು, ಬೆಂಗಳೂರು ರವರು ಖಜಾನೆ-2 ಮುಖಾಂತರ ಬಿಡುಗಡೆಗೊಳಿಸಿ ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ಸಹ ಡಿಬಿಟಿ ಮುಖಾಂತರ ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲಾಗುವುದು."));
+
+        dto.setHeader10(withFourSpaces("    "+ districtName +"   ಜಿಲ್ಲೆಯ   "+ talukName +" ತಾಲ್ಲೂಕಿನ "+ tscName + " ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯಲ್ಲಿ " + farmerVillage +
+                " ಗ್ರಾಮದಲ್ಲಿ "+ schemeCategoryName +" ವರ್ಗಕ್ಕೆ ಸೇರಿದ ಶ್ರೀ/ಶ್ರೀಮತಿ "+ farmerName + " (" + fruitsId + ") ಬಿನ್/ಕೋಂ. " + fatherNameKan + " ಇವರು  "+ landVillage + " ಗ್ರಾಮದ ಸರ್ವೆ ನಂ "+ surveyText
+                +" ರಲ್ಲಿ  "+extentOfMulberry+" ಎಕರೆ ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಹೊಂದಿರುತ್ತಾರೆ. ಸದರಿಯವರು ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆಯಾದ "+ equipmentName +"  ಯನ್ನು ರೇಷ್ಮೆ" +
+                " ಇಲಾಖೆಯಿಂದ ಅಧಿಕೃತವಾಗಿ ಗುರುತಿಸಿರುವ ರೇಷ್ಮೆ ಹುಳುಸಾಕಾಣಿಕೆ ಸಲಕರಣೆ ಸಂಸ್ಥೆ ಯಾದ ಮೆII "+ vendorName +"   ಇವರಿಂದ  ಟ್ಯಾಕ್ಸ್ ಇನ್ ವಾಯ್ಸ್   ಸಂಖ್ಯೆ "+ taxInvoiceNo + " ದಿನಾಂಕ :"+ taxInvoiceDate+
+                " ರಂತೆ  ರೂ."+ beneficiaryShareAmount+"/- ಗಳ ವೆಚ್ಚದಲ್ಲಿ ಖರೀದಿಸಲು ತಮ್ಮ ಪಾಲಿನ ಹಣ ರೂ."+ beneficiaryShareAmount+"/- ( ರೂ."+beneficiaryShareWords+" )  ಗಳನ್ನು (ಶೇ.10)(Percentage) " +
+                "ರಸೀದಿ  ಸಂಖ್ಯೆ"+ taxInvoiceNo +" ದಿನಾಂಕ:"+ taxInvoiceDate+"  ಪಾವತಿಸಿದ್ದು,  ಸದರಿ ಸಲಕರಣೆಗಳನ್ನು ಫಲಾನುಭವಿಗೆ ಸರಬರಾಜು ಮಾಡಿರುತ್ತಾರೆ.\n" +
+                "  ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ "+ loggedinUserDistrictName+" ಹಾಗೂ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು "+ divisionName+" ವಿಭಾಗ ರವರು ಪರಿಶೀಲಿಸಿ ದೃಢೀಕರಿಸಿ ಸಲ್ಲಿಸಿದ ಎಲ್ಲಾ ಅಗತ್ಯ " +
+                "ದಾಖಲಾತಿಗಳನ್ನು ಒಳಗೊಂಡ ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಉಲ್ಲೇಖ (5) ರನ್ವಯ ಈ ಕಛೇರಿಗೆ ಶಿಫಾರಸ್ಸು ಮಾಡಿ ಸಲ್ಲಿಸಿದ್ದು, ಸದರಿ ಫಲಾನುಭವಿಗೆ ರೂ. "+totalSubsidyAmount+"/- ಗಳ ಸಹಾಯಧನವನ್ನು ಮಂಜೂರು ಮಾಡುವಂತೆ ಕೋರಿರುತ್ತಾರೆ." +
+                " ಮಂಜೂರಾತಿಗೆ ಕೋರಲಾಗಿರುವ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಲು ಉಲ್ಲೇಖ (3)ರ ಸರ್ಕಾರಿ ಆದೇಶದ ರೀತ್ಯಾ ಈ ಕಛೇರಿಯ ಅಧಿಕಾರ ಪ್ರತ್ಯಾಯೋಜನೆ ವ್ಯಾಪ್ತಿಯಲ್ಲಿದ್ದು, ಉಲ್ಲೇಖ (4)ರಲ್ಲಿ ಸದರಿ ಕಾರ್ಯಕ್ರಮದ ಅನುಷ್ಠಾನಕ್ಕಾಗಿ ನೀಡಿರುವ ಮಾರ್ಗಸೂಚಿಯನ್ವಯ" +
+                " ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಲು ಅನುದಾನ ಬಿಡುಗಡೆ ಮಾಡಲಾಗಿದೆ. ಅದರಂತೆ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಬಹುದಾಗಿದ್ದು, ಈ ಕೆಳಕಂಡ ಆದೇಶವನ್ನು ಹೊರಡಿಸಿದೆ. "));
+
+
+        dto.setHeader12("ಆದೇಶ");
+
+        dto.setHeader13(withFourSpaces(
+                "ಸಂಖ್ಯೆ  : ರೇಜಂನಿ/ " + shortDistrictKannada + " ವಿ/ಸಲಕರಣೆ/\""
+                        + financialYear + "\"/" + districtName
+                        + "/ರೇಹುಸಾಮ/ಸಧನ/ಸಾ/ಮಂ/" + sanctionOrderNumber
+                        + " / ದಿನಾಂಕ:  " + formattedDate
+        ));
+
+        dto.setHeader16(withFourSpaces("  ಪೀಠಿಕೆಯಲ್ಲಿ ವಿವರಿಸಿದಂತೆ, "+financialYear+" ನೇ ಸಾಲಿನ ಕೇಂದ್ರ ಪುರಸ್ಕೃತ “"+schemeNameKannada+"”  ಯೋಜನೆ” "+schemeCategoryName+" ಅಡಿ "+tscName+"ತಾಂತ್ರಿಕ " +
+                "ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯ     "+districtName+" ಜಿಲ್ಲೆಯ "+ talukName + " ತಾಲ್ಲೂಕಿನ ದೇವನಹಳ್ಳಿ   "+ tscName +
+                "ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯಲ್ಲಿ "+ farmerVillage + " ಗ್ರಾಮದ ಶ್ರೀ/ಶ್ರೀಮತಿ "+ farmerName + " (" + fruitsId + ") ಬಿನ್/ಕೋಂ. " + fatherNameKan+" ಇವರು ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆ  ಖರೀದಿಸಿರುವ ವಿವರಗಳು ಈ ಕೆಳಕಂಡಂತಿದೆ. "));
+
+
+        dto.setHeader14(withFourSpaces(" (ರೂ. "+ totalSubsidyWords+")\n" +
+                "ಮೇಲ್ಕಂಡ ಸಹಾಯಧನ ರೂ."+totalSubsidyAmount+"/- ( ರೂ. "+totalSubsidyWords+" ) ಗಳಿಗೆ ಮುಚ್ಚಳಿಕೆಯಲ್ಲಿನ ಷರತ್ತು ಮತ್ತು ತಗಾದೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಫಲಾನುಭವಿ ಹಾಗೂ ಶಿಫಾರಸ್ಸು " +
+                "ಮಾಡಿದ ಕ್ಷೇತ್ರಮಟ್ಟದ ಅಧಿಕಾರಿಗಳನ್ನು ಜವಾಬ್ದಾರಿ ಮಾಡಿ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಈ  ಸಹಾಯಧನದ ಪೈಕಿ ರಾಜ್ಯದ ಪಾಲು ರೂ. "+beneficiaryShareAmount+"/-(ರೂ. "+beneficiaryShareWords+") ಮಾತ್ರ)ಗಳನ್ನು ರಾಜ್ಯ " +
+                "ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಯ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ "+headAccountName+"("+headDescription+")  ರಡಿ ಖಜಾನೆ-2 ರಲ್ಲಿ ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ ಅನುದಾನದಲ್ಲಿ, ಹಾಗೂ ಕೇಂದ್ರದ ಪಾಲು  ರೂ. "+centralShareAmount+"/-" +
+                " (ರೂ. "+centralShareWords+") ಗಳನ್ನು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತದಲ್ಲಿ ಸಂಬಂಧಿಸಿದ ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರುಗಳು ಸಲಕರಣೆ ಸರಬರಾಜು ಮಾಡಿದ ಸಂಸ್ಥೆಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಡಿಬಿಟಿ ಮೂಲಕ ಜಮಾ ಮಾಡಲಾಗುವುದು.\n" +
+                "     ಈ ವೆಚ್ಚವನ್ನು ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ "+headAccountName+"("+headDescription+")   "+ schemeCategoryName+"  ಅಡಿ ಭರಿಸುವುದು."));
+
+
+        dto.setVendorName(vendorName);
+        dto.setEquipmentName(equipmentName);
+        dto.setTaxInvoiceNo(taxInvoiceNo);
+        dto.setTaxInvoiceDate(taxInvoiceDate);
+
+        // If your SanctionOrderResponse has Float fields for these, you can use
+        // the original values from apiResponse or the rounded ints:
+        dto.setBeneficiaryShareAmount(
+                apiResponse.getContent().get(0).getBeneficiaryShareAmount()
+        );
+        dto.setCentralSanctionAmount(
+                apiResponse.getContent().get(0).getCentralSanctionAmount()
+        );
+        dto.setStateSanctionAmount(
+                apiResponse.getContent().get(0).getStateSanctionAmount()
+        );
+        dto.setSanctionAmount(
+                apiResponse.getContent().get(0).getSanctionAmount()
+        );
+
+        // Signatory – ADS
+        dto.setHeader17(withFourSpaces(
+                "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n"
+                        + divisionName + " ವಿಭಾಗ,\n" + talukName + ".\n"
+        ));
+
+        // Recipients – you can tweak as needed
+        dto.setHeader18(withFourSpaces("ಇವರಿಗೆ,\n" +
+                "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, \n" +
+                divisionName +"  ವಿಭಾಗ,  "+loggedinUserTalukName+". \n"
+                        + "ಪ್ರತಿಯನ್ನು:\n"
+                        + "1. ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿ, ತಾಂತ್ರಿಕ ಸೇವಾ  ಕೇಂದ್ರ,  " + loggedinUserDistrictName
+                        + " ಇವರ ಮಾಹಿತಿಗಾಗಿ.\n"
+                        + "2. ಶ್ರೀ/ಶ್ರೀಮತಿ "+farmerName+" ಬಿನ್/ಕೋಂ. "+fatherNameKan+" , "+ farmerVillage+" ಗ್ರಾಮ "+talukName+"" +
+                           " ತಾಲ್ಲೂಕು  ಇವರ ಮಾಹಿತಿಗಾಗಿ, " + tscName + " ಇವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ.\n"+
+                          "3.	ಮೆ|| "+vendorName+",  ಇವರ ಮಾಹಿತಿಗಾಗಿ" +
+                          "4. ಸಂಬಂಧಿಸಿದ ಸಂಸ್ಥೆಗೆ"));
+
+        dto.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        // (optional) set some common fields – if needed elsewhere
+        dto.setFarmerFirstName(" ಶ್ರೀ /.ಶ್ರೀಮತಿ.  " + farmerName);
+        dto.setFruitsId(" ರವರು (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + fruitsId + ")");
+        dto.setDistrictName(districtName + " ಜಿಲ್ಲೆ, ");
+        dto.setTalukName(talukName + " ತಾಲ್ಲೂಕು , ");
+        dto.setVillageName(farmerVillage + " ಗ್ರಾಮದ ನಿವಾಸಿಯಾದ ");
+
+        list.add(dto);
+        return new JRBeanCollectionDataSource(list);
+    }
+
+
 
 
     private JRBeanCollectionDataSource getDataSourceForMscSeedChawki1000(CheckInspectionStatusRequest requestDto)
