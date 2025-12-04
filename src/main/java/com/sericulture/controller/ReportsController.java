@@ -525,6 +525,59 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/getChawkiSanctionOrderPdf")
+    public ResponseEntity<?> getChawkiSanctionOrderPdf(
+            @RequestBody SanctionOrderPrintRequest requestDto
+    ) throws JsonProcessingException, JRException, FileNotFoundException {
+
+        try {
+            logger.info("enter to getChawkiSanctionOrderPdf");
+
+            JasperReport jasperReport = getJasperReport("Sanction_OrderCRC.jrxml");
+
+            JRBeanCollectionDataSource dataSource =
+                    (JRBeanCollectionDataSource) getDataSourceForChawkiSanctionOrder(requestDto);
+
+            @SuppressWarnings("unchecked")
+            List<SanctionOrderResponse> fullList =
+                    (List<SanctionOrderResponse>) dataSource.getData();
+
+            if (fullList == null || fullList.isEmpty()) {
+                return ResponseEntity
+                        .status(HttpStatus.NO_CONTENT)
+                        .body("No data found for CRC sanction order".getBytes(StandardCharsets.UTF_8));
+            }
+
+            Map<String, Object> parameters = getParameters(); // same helper used elsewhere
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "Chawki_Sanction_Order.pdf");
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+
+        } catch (Exception ex) {
+            logger.error("Error generating CRC sanction order PDF", ex);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_PLAIN);
+            return new ResponseEntity<>(
+                    ex.getMessage().getBytes(StandardCharsets.UTF_8),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+
 
     @PostMapping("/sanction-psfa-reeling-shed")
     public ResponseEntity<?> getPsfaReelingShedSanction(@RequestBody CheckInspectionStatusRequest requestDto)
@@ -10798,6 +10851,364 @@ public class ReportsController {
         list.add(dto);
         return new JRBeanCollectionDataSource(list);
     }
+
+
+
+    private JRDataSource getDataSourceForChawkiSanctionOrder(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromChawkiSanctionOrder(requestDto);
+
+        if (apiResponse == null
+                || apiResponse.getContent() == null
+                || apiResponse.getContent().isEmpty()) {
+
+            logger.warn("No data returned from CRC sanction API for applicationFormId: {}",
+                    requestDto.getApplicationFormId());
+            return new JREmptyDataSource();
+        }
+
+        List<SanctionOrderResponse> list = new ArrayList<>();
+        SanctionOrderResponse r = apiResponse.getContent().get(0);
+        SanctionOrderResponse dto = new SanctionOrderResponse();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        String admGovtDate        = formatDate(r.getAdmGovtDate(), sdf);
+        String schemeCircularDate = formatDate(r.getSchemeCircularDate(), sdf);
+        String deptDeleDate       = formatDate(r.getDeptDeleDate(), sdf);
+        String allotReleaseDate   = formatDate(r.getAllotReleaseDate(), sdf);
+        String releaseDate        = formatDate(r.getReleaseDate(), sdf);
+        String proposalDate       = formatDate(r.getProposalDate(), sdf);
+
+        // ---- Amounts & shares ----
+        int centralShareAmount = Math.round(
+                r.getCentralSanctionAmount() == null ? 0f : r.getCentralSanctionAmount());
+        int stateShareAmount = Math.round(
+                r.getStateSanctionAmount() == null ? 0f : r.getStateSanctionAmount());
+
+        int centralSharePercentage = Math.round(
+                r.getCentralSharePercentage() == null ? 0f : r.getCentralSharePercentage());
+        int stateSharePercentage = Math.round(
+                r.getStateSharePercentage() == null ? 0f : r.getStateSharePercentage());
+
+        // CRC side – total unit cost & subsidy from aggregated fields
+        int totalClaimedAmount = Math.round(
+                r.getTotalClaimed() == null ? 0f : r.getTotalClaimed());
+        int totalEligibleAmount = Math.round(
+                r.getTotalEligible() == null ? 0f : r.getTotalEligible());
+        int totalSubsidyAmount = Math.round(
+                r.getTotalSubsidy() == null ? 0f : r.getTotalSubsidy());
+
+        // number to words
+        String totalSubsidyWords   = KannadaNumberUtil.convertNumberToKannadaWords(totalSubsidyAmount);
+        String centralShareWords   = KannadaNumberUtil.convertNumberToKannadaWords(centralShareAmount);
+        String stateShareWords     = KannadaNumberUtil.convertNumberToKannadaWords(stateShareAmount);
+
+        // beneficiary share is just difference between unit cost and subsidy (if you need it)
+        int beneficiaryShareAmount = totalEligibleAmount - totalSubsidyAmount;
+        if (beneficiaryShareAmount < 0) beneficiaryShareAmount = 0;
+        String beneficiaryShareWords =
+                KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareAmount);
+
+        // ---- Common text fields from response ----
+        String financialYear      = Util.objectToString(r.getFinancialYear());
+        String schemeNameKannada  = Util.objectToString(r.getSchemeNameInKannada());
+        String categoryName       = Util.objectToString(r.getCategoryName());
+        String componentName      = Util.objectToString(r.getScComponentName());
+        String headAccountName    = Util.objectToString(r.getScHeadAccountName());
+        String headDescription    = Util.objectToString(r.getDescription());
+        String divisionName       = Util.objectToString(r.getDivisionName());
+        String districtName       = Util.objectToString(r.getLoggedinUserDistrictName());
+        String talukName          = Util.objectToString(r.getLoggedinUserTalukName());
+        String tscName            = Util.objectToString(r.getLoggedinUserTscName());
+        String farmerVillage      = Util.objectToString(r.getVillageNameInKannada());
+        String farmerName         = Util.objectToString(r.getFarmerFirstName());
+        String fatherNameKan      = Util.objectToString(r.getFatherNameKan());
+        String fruitsId           = Util.objectToString(r.getFruitsId());
+        String landVillage        = Util.objectToString(r.getLandVillage());
+        String surveyNumber       = Util.objectToString(r.getSurveyNumber());
+        String extentOfMulberry   = Util.objectToString(r.getExtentOfMulberry());
+
+        String shortDistrictKannada = getKannadaShortForm(districtName);
+
+        // Date for sanction order number (like RHEquipment)
+        String formattedDate;
+        try {
+            String inputDate = r.getCreatedDate();   // createdDate is string in your mapping
+            SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            SimpleDateFormat out = new SimpleDateFormat("dd-MM-yyyy");
+            Date d = in.parse(inputDate);
+            formattedDate = out.format(d);
+        } catch (Exception e) {
+            formattedDate = Util.objectToString(r.getCreatedDate());
+        }
+
+        String kaneshNo       = Util.objectToString(r.getKaneshNo());
+        String sanctionNo     = Util.objectToString(r.getSanctionNo());
+        String sanctionOrderNumber = Util.objectToString(r.getSanctionOrderNumber());
+
+        // ========= HEADER 1 – OFFICE =========
+        dto.setHeader1(withFourSpaces(
+                "ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ದಿ ಆಯುಕ್ತರು ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು ಇವರ ಕಛೇರಿ ನಡವಳಿಗಳು"
+        ));
+
+        // ========= SUBJECT =========
+        dto.setHeader4(withFourSpaces("ವಿಷಯ  : "));
+        dto.setHeader20(withFourSpaces(
+                financialYear
+                        + " ನೇ ಸಾಲಿನಲ್ಲಿ ಇಲಾಖೆಯು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯ ಸಹಯೋಗದೊಂದಿಗೆ ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ "
+                        + "ಕೇಂದ್ರ ವಲಯ “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” ಯೋಜನೆಯಡಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಲ್ಪಡುವ ನೊಂದಾಯಿತ ಖಾಸಗಿ "
+                        + "ದಿ.ತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರಗಳಿಗೆ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡುವ ಕುರಿತು."
+        ));
+
+        // ========= REFERENCES (ಉಲ್ಲೇಖ) =========
+        dto.setHeader5("ಉಲ್ಲೇಖ : ");
+
+        dto.setHeader2(
+                "1. ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ : " + r.getAdmGovtOrder() + " , ದಿನಾಂಕ : " + admGovtDate + "\n"
+                        + "2. ರೇಷ್ಮೆ ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆ ಸಂಖ್ಯೆ : " + r.getSchemeCircularNo()
+                        + " , ದಿನಾಂಕ : " + schemeCircularDate + "\n"
+                        + "3. ಸರ್ಕಾರದ ಆದೇಶ ಸಂಖ್ಯೆ : " + r.getDeptDeleNo()
+                        + " , ದಿನಾಂಕ : " + deptDeleDate + "\n"
+                        + "4. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, " + divisionName + " ವಿಭಾಗ ರವರ ಪತ್ರ ಸಂ : "
+                        + Util.objectToString(r.getAllotReleaseNo()) + " , ದಿನಾಂಕ : " + allotReleaseDate + "."
+        );
+
+        // ========= ಪೀಠಿಕೆ =========
+        dto.setHeader24("ಪೀಠಿಕೆ : ");
+
+        dto.setHeader8(withFourSpaces(
+                financialYear
+                        + " ನೇ ಸಾಲಿನಲ್ಲಿ ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯ ಸಹಯೋಗದೊಂದಿಗೆ ಇಲಾಖೆಯು ಕೇಂದ್ರ ವಲಯ “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” "
+                        + "ಯೋಜನೆಯಡಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರಗಳಿಗೆ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ "
+                        + "ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಸಲಕರಣೆ ಖರೀದಿಗೆ ಸಹಾಯಧನ ನೀಡಲು "
+                        + "ಉಲ್ಲೇಖ (1)ರ ಸುತ್ತೋಲೆಯಲ್ಲಿ ಮಾರ್ಗಸೂಚಿ ನೀಡಿ ಕಾರ್ಯಕ್ರಮವನ್ನು ಅನುಷ್ಟಾನಗೊಳಿಸಲಾಗುತ್ತಿದೆ. ಸದರಿ ಯೋಜನೆಯಡಿ "
+                        + "ಇದಕ್ಕಾಗಿ ಘಟಕ ದರ ರೂ.13.00 ಲಕ್ಷಗಳನ್ನು ನಿಗದಿಪಡಿಸಿದ್ದು, ಸಹಾಯಧನ ಸಾಮಾನ್ಯ ವರ್ಗಕ್ಕೆ ಶೇ 75 ರಷ್ಟು ಅಂದರೆ "
+                        + "ರೂ.9.75 ಲಕ್ಷ ನೀಡಲಾಗುವುದು. ಇದರ ಪೈಕಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕದರದ ಶೇ 50 ಅಂದರೆ ರೂ.6.50 ಲಕ್ಷ ಮತ್ತು ರಾಜ್ಯದ ಪಾಲು "
+                        + "ಘಟಕ ದರದ ಶೇ 25 ರೂ.3.25 ಲಕ್ಷಗಳಾಗಿದ್ದು, ಪರಿಶಿಷ್ಟ ಜಾತಿ/ಪರಿಶಿಷ್ಟ ಪಂಗಡದ ವರ್ಗಕ್ಕೆ ಶೇ.90ರಷ್ಟು ಅಂದರೆ "
+                        + "ರೂ.11.70 ಲಕ್ಷಗಳನ್ನು ನೀಡಲಾಗುವುದು. ಇದರ ಪೈಕಿ ಕೇಂದ್ರದ ಪಾಲು ಘಟಕ ದರದ ಶೇ.65 (ರೂ.8.45 ಲಕ್ಷ) ಮತ್ತು ರಾಜ್ಯದ ಪಾಲು "
+                        + "ಘಟಕ ದರದ ಶೇ.25 (ರೂ.3.25 ಲಕ್ಷ) ಗಳಾಗಿದ್ದು, ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ಭರಿಸುವುದರಿಂದ "
+                        + "ಇದನ್ನು ಆಯಾ ಜಿಲ್ಲೆಯ ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರುಗಳ ಕಚೇರಿಯಿಂದ ಡಿ.ಬಿ.ಟಿ ಮುಖಾಂತರ ಫಲಾನುಭವಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ "
+                        + "ನೇರವಾಗಿ ಸಹಾಯಧನವನ್ನು ಜಮಾ ಮಾಡಲಾಗುವುದು. ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ (ಸಾಮಾನ್ಯ) "
+                        + "ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-1-35 (106) ಅಡಿ ಖಜಾನೆ-2ರ ಮುಖಾಂತರ ಫಲಾನುಭವಿಯ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲಾಗುವುದು. "
+                        + "ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ: " + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ "
+                        + farmerVillage + " ಗ್ರಾಮದ ಶ್ರೀ/ಶ್ರೀಮತಿ " + farmerName + " (" + fruitsId + ") ಬಿನ್/ಕೋಂ. "
+                        + fatherNameKan + " ರವರು " + categoryName + " ವರ್ಗದವರಾಗಿದ್ದು, "
+                        + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + tscName
+                        + " ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯ " + landVillage
+                        + " ಗ್ರಾಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಅಮ್ಮ ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಹುಳು ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ "
+                        // 🔹 If you have CRC name from API, replace the empty string below:
+                        // + r.getCrcName()
+                        + " ಸ್ಥಾಪಿಸಲು ಕೇಂದ್ರೀಯ ರೇಷ್ಮೆ ಸಂಶೋಧನೆ ಮತ್ತು ತರಬೇತಿ ಸಂಸ್ಥೆ, ಮೈಸೂರುದಲ್ಲಿ ತರಬೇತಿಯನ್ನು ಪಡೆದಿದ್ದು, "
+                        + "ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯಿಂದ ನೋಂದಣಿಯನ್ನು ಪಡೆದಿರುತ್ತಾರೆ. ಇವರು ಕೇಂದ್ರ ವಲಯ “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” ಯೋಜನೆಯ "
+                        + "ಉಲ್ಲೇಖ (2) ರ ಮಾರ್ಗಸೂಚಿಯಂತೆ " + landVillage + " ಗ್ರಾಮದ ಸರ್ವೆ ನಂ. " + surveyNumber + " ರಲ್ಲಿ "
+                        + extentOfMulberry + " ಎಕರೆಗಳಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ಚಾಕಿ ತೋಟ ಸ್ಥಾಪನೆ ಮತ್ತು ನಿರ್ವಹಣೆ ಮಾಡಿರುವ ಬಗ್ಗೆ ಸಂಬಂಧಿಸಿದ "
+                        + "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು " + tscName + " ವಿಭಾಗ, " + districtName
+                        + ", ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ " + districtName
+                        + " ರವರ ಶಿಫಾರಸ್ಸಿನೊಂದಿಗೆ ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು " + divisionName
+                        + " ವಿಭಾಗ ರವರು ಪರಿಶೀಲಿಸಿ ಉಲ್ಲೇಖ (4) ರಲ್ಲಿ ಸಹಾಯಧನ ಮಂಜೂರಾತಿಗೆ ಪ್ರಸ್ತಾವನೆಯನ್ನು ಸಲ್ಲಿಸಿರುತ್ತಾರೆ."
+        ));
+
+
+        // ========= Beneficiary / CRC details – like second paragraph of PDF =========
+        dto.setHeader10(withFourSpaces("ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ: "
+                        + "ಶ್ರೀ/ಶ್ರೀಮತಿ " + farmerName + " ಬಿನ್ " + fatherNameKan + " ರವರು "
+                        + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ "
+                        + farmerVillage + " ಗ್ರಾಮದ ಸರ್ವೆ ನಂ. " + surveyNumber
+                        + " ರಲ್ಲಿ ಉದ್ದಗಲ " + Util.objectToString(r.getUnitCost()) + " X "
+                        + Util.objectToString(r.getUnitCost())
+                        + " ಅಡಿಗಳಂತೆ ಒಟ್ಟು " + Util.objectToString(r.getUnitCost())
+                        + " ಚದರಡಿ ವಿಸ್ತೀರ್ಣದ ಪ್ರತ್ಯೇಕ ಚಾಕಿ ಹುಳು ಸಾಕಾಣಿಕಾ ಮನೆಯನ್ನು ನಿರ್ಮಿಸಿದ್ದು, "
+                        + "ವಲಯಾಧಿಕಾರಿಗಳು ಪ್ರಸ್ತಾವನೆಯನ್ನು ಸಂಬಂಧಿಸಿದ ಮೇಲಧಿಕಾರಿಗಳ ಶಿಫಾರಸ್ಸಿನೊಂದಿಗೆ ಸಹಾಯಧನಕ್ಕಾಗಿ ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.\n\n"
+
+                        // ----------------------------------------------------
+                        // 🔵 ADDING PARAGRAPH 2 – “ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಸಲಕರಣೆಗಳ ಖರೀದಿ”
+                        // ----------------------------------------------------
+                        + "ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಸಲಕರಣೆಗಳ ಖರೀದಿ: "
+                        + "ಶ್ರೀ/ಶ್ರೀಮತಿ " + farmerName + " ಬಿನ್ " + fatherNameKan + " ರವರು "
+                        + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ "
+                        + farmerVillage + " ಗ್ರಾಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ ಅಮ್ಮ ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ "
+                        + "ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರದ ಉಪಯೋಗಕ್ಕಾಗಿ "
+                        + Util.objectToString(r.getCrcName())
+                        + " ಮಾರ್ಗಸೂಚಿಯ ರೀತ್ಯಾ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ ನಡೆಸುವುದಕ್ಕೆ ಅಗತ್ಯವಿರುವ "
+                        + "ಸಲಕರಣೆಗಳನ್ನು ಕೆಳಕಂಡಂತೆ ಖರೀದಿಸಿದ್ದು, ಸಹಾಯಧನಕ್ಕಾಗಿ ಪ್ರಸ್ತಾವನೆ ಸಲ್ಲಿಸಿರುತ್ತಾರೆ."
+        ));
+
+        // ========= ORDER – "ಆದೇಶ" heading =========
+        dto.setHeader12("ಆದೇಶ");
+
+        // sanction order number line (similar to CRC PDF)
+        dto.setHeader13(withFourSpaces(
+                "ಆದೇಶ ಸಂಖ್ಯೆ : DOS/CRC/" + shortDistrictKannada + "/" + financialYear
+                        + "/" + sanctionNo + " / ದಿನಾಂಕ : " + formattedDate
+        ));
+
+        // ==== Summary table values: use totalClaimed, totalEligible, totalSubsidy ====
+        // (You will show these directly in JRXML fields, not only in text)
+
+        // ORDER main paragraph (similar to last page of CRC PDF)
+        String jdInspectionDate = releaseDate; // or formatDate(r.getReleaseDate(), sdf);
+
+// ================== HEADER 16 – YOUR PARAGRAPH ==================
+        dto.setHeader16(withFourSpaces(
+                "ಉಪಕರಣಗಳ ಖರೀದಿಯನ್ನು ಪರಿಶೀಲಿಸಿದಾಗ, ಈ ಕಚೇರಿಯ ಉಲ್ಲೇಖ (2)ರ ಸುತ್ತೋಲೆಯಲ್ಲಿ ನಮೂದಿಸಿರುವಂತೆ  ಉಪಕರಣಗಳನ್ನು " +
+                        "ಖರೀದಿಸಲಾಗಿರುತ್ತದೆ. ಸಹಾಯಧನಕ್ಕಾಗಿ ಅರ್ಹವಿರುವ ಉಪಕರಣಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಮೌಲ್ಯವನ್ನು ಮೇಲಿನ ಪಟ್ಟಿಯಲ್ಲಿ ನಮೂದಿಸಿದೆ. " +
+                        "ಅದರಂತೆ ಸಹಾಯಧನಕ್ಕಾಗಿ ಅರ್ಹವಿರುವ ಬರುವ ಘಟಕದ ಮೊತ್ತವು ರೂ." + totalEligibleAmount + "/- (ಘಟಕದ ದರ) ಆಗಿದ್ದು, " +
+                        "ಸದರಿ ಫಲಾನುಭವಿಯು " + categoryName + " ವರ್ಗಕ್ಕೆ ಸೇರಿದ್ದು ಶೇ. " +
+                        (centralSharePercentage + stateSharePercentage) + " ರ ಸಹಾಯಧನಕ್ಕೆ ಅರ್ಹತೆ ಹೊಂದಿರುತ್ತಾರೆ. " +
+                        "ಅದರಂತೆ ಸಲಕರಣೆಗಳ ಖರೀದಿಗೆ ಸಹಾಯಧನದ ಮೊತ್ತ ರೂ." + totalSubsidyAmount +
+                        "/- (ಸಹಾಯಧನದ ಮೊತ್ತ) ಗಳನ್ನು ಪರಿಗಣಿಸಿದೆ.\n" +
+                        "ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, " + divisionName + " ವಿಭಾಗ ರವರು ದಿನಾಂಕ: " + jdInspectionDate +
+                        " ರಂದು ಶ್ರೀ " + farmerName + " ಬಿನ್ " + fatherNameKan + " ರವರು " +
+                        districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + farmerVillage +
+                        " ಗ್ರಾಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ ಅಮ್ಮ ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರದ " +
+                        "ಹಿಪ್ಪುನೇರಳೇ ಚಾಕಿ ತೋಟ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ಹಾಗೂ ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃಡೀಕರಿಸಿ " +
+                        "ಉಲ್ಲೇಖ (4)ರ ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಸ್ಥಾಪನೆ/ ನಿರ್ವಹಣೆ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಸಲಕರಣೆ " +
+                        "ಖರೀದಿಗೆ ಶೇ. " + (centralSharePercentage + stateSharePercentage) + " ರಷ್ಟು ಸಹಾಯಧನದ ಒಟ್ಟು ಮೊತ್ತ ರೂ." +
+                        totalSubsidyAmount + "/- (ರೂ. " + totalSubsidyWords +
+                        " ) ಗಳನ್ನು ಮಂಜೂರು ಮಾಡಲು ಶಿಫಾರಸ್ಸು ಮಾಡಿರುತ್ತಾರೆ. ಉಲ್ಲೇಖ(2)ರ ರೇಷ್ಮೆ ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆಯಲ್ಲಿ " +
+                        "ನೋಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ ಸ್ಥಾಪನೆಗೆ ನಿಗದಿಪಡಿಸಿರುವ ಮಾನದಂಡಗಳ ಪ್ರಕಾರ ಸಹಾಯಧನ " +
+                        "ಮಂಜೂರು ಮಾಡಲು ಅರ್ಹತಾ ಮೊತ್ತವನ್ನು ಪರಿಗಣಿಸಿರುವ ವಿವರ ಕೆಳಕಂಡಂತಿದೆ."
+        ));
+
+        // Detailed share break-up paragraph (like CRC PDF last pages)
+        dto.setHeader14(withFourSpaces(
+                "ಮೇಲನ ವಿಷಯಕ್ಕೆ ಸಂಬಂಧಿಸಿದಂತೆ, ಸಹಾಯಧನದ ಪೈಕಿ ಕೇಂದ್ರದ ಪಾಲಾಗಿ ರೂ." + centralShareAmount
+                        + "/- (ರೂ. " + centralShareWords + " ಮಾತ್ರ) ಹಾಗೂ ರಾಜ್ಯದ ಪಾಲಾಗಿ ರೂ." + stateShareAmount
+                        + "/- (ರೂ. " + stateShareWords + " ಮಾತ್ರ) ಆಗಿ ಒಟ್ಟು ರೂ." + totalSubsidyAmount
+                        + "/- (ರೂ. " + totalSubsidyWords
+                        + " ಮಾತ್ರ) ಗಳನ್ನು ಮಂಜೂರು ಮಾಡಲಾಗಿದೆ. ಉಳಿದ ರೂ." + beneficiaryShareAmount
+                        + "/- (ರೂ. " + beneficiaryShareWords
+                        + " ಮಾತ್ರ) ಗಳನ್ನು ಫಲಾನುಭವಿಯಿಂದಲೇ ಭರಿಸಬೇಕಾಗುತ್ತದೆ. "
+                        + "ಕೇಂದ್ರದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿಯು PFMS ಮುಖಾಂತರ ಬಿಡುಗಡೆ ಮಾಡಲಿದ್ದು, "
+                        + "ಸಂಬಂಧಿತ ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು Zero Balance Account ಮುಖಾಂತರ "
+                        + "ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಡಿಬಿಟಿ ಮೂಲಕ ಜಮಾ ಮಾಡಬೇಕು. ರಾಜ್ಯದ ಪಾಲಿನ ಸಹಾಯಧನವನ್ನು "
+                        + headAccountName + " (" + headDescription
+                        + ") ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ ಅಡಿ ಖಜಾನೆ-2 ಮುಖಾಂತರ ಬಿಡುಗಡೆಗೊಂಡ ಅನುದಾನದಿಂದ, "
+                        + "ಸಂಬಂಧಿತ ವಿಭಾಗದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರ ಕಛೇರಿಯಿಂದ ಡಿಬಿಟಿ ಮೂಲಕ ಫಲಾನುಭವಿಯ "
+                        + "ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಬೇಕು."
+        ));
+
+        // ========= Signatory =========
+        dto.setHeader17(withFourSpaces(
+                "ರೇಷ್ಮೆ ಕೃಷಿ ಅಭಿವೃದ್ದಿ ಆಯುಕ್ತರು\n"
+                        + "ಹಾಗೂ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರು."
+        ));
+
+        // ========= Recipients (ಪ್ರತಿ) =========
+        dto.setHeader18(withFourSpaces(
+                "ಇವರಿಗೆ,\n"
+                        + "ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, " + talukName + " ವಿಭಾಗ, " + districtName + " ಜಿಲೆ.\n"
+                        + "ಪ್ರತಿಯನ್ನು :\n"
+                        + "1. ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್, " + districtName + " ಜಿಲೆ.\n"
+                        + "2. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, " + divisionName + " ವಿಭಾಗ.\n"
+                        + "3. ತಹಸೀಲ್ದಾರ್, " + talukName + " ತಹಸಿಲ್, " + districtName + " ಜಿಲೆ.\n"
+                        + "4. ಶ್ರೀ/ಶ್ರೀಮತಿ " + farmerName + " ಬಿನ್/ಕೋಂ. " + fatherNameKan + ", "
+                        + farmerVillage + " ಗ್ರಾಮ, " + talukName + " ತಹಸಿಲ್, " + districtName
+                        + " ಜಿಲೆ – ಇವರ ಮಾಹಿತಿಗಾಗಿ."
+        ));
+
+
+        dto.setHeader19(withFourSpaces(
+                "ಪೀಠಿಕೆಯಲ್ಲಿ ವಿವರಿಸಿರುವಂತೆ ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, " + divisionName
+                        + " ವಿಭಾಗ ರವರು, ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ " + districtName
+                        + " ಮತ್ತು ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು, " + talukName
+                        + " ವಿಭಾಗ ಇವರು ಪರಿಶೀಲಿಸಿ, ಶಿಫಾರಸ್ಸು ಮಾಡಿರುವ ಪ್ರಕಾರ " + districtName
+                        + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + tscName
+                        + " ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ ವ್ಯಾಪ್ತಿಯ " + farmerVillage + " ಗ್ರಾಮದ ಶ್ರೀ/ಶ್ರೀಮತಿ "
+                        + farmerName + " (" + fruitsId + ") ಬಿನ್/ಕೋಂ. " + fatherNameKan
+                        + " ರವರು, " + Util.objectToString(r.getCrcName())
+                        + " ಅಮ್ಮ ನೋಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ ಪ್ರಾರಂಭಿಸಲು ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ, "
+                        + "ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಚಾಕಿ ಸಾಕಾಣಿಕೆ ಸಲಕರಣೆ ಖರೀದಿಗೆ, ಕೇಂದ್ರ ವಲಯ “ಸಿಲ್ಕ್ ಸಮಗ್ರ-2” "
+                        + "ಯೋಜನೆ-2 ರಡಿ ಘಟಕ ದರ ರೂ." + totalEligibleAmount + "/- ಗಳಿಗೆ ಶೇ 75/90 ರ ಸಹಾಯಧನ ರೂ."
+                        + totalSubsidyAmount + "/- (ರೂ. " + totalSubsidyWords
+                        + " ಮಾತ್ರ) ಗಳಿಗೆ ಮಂಜೂರಾತಿ ನೀಡಿದೆ. ಈ ಸಹಾಯಧನದ ಪೈಕಿ ಕೇಂದ್ರದ ಪಾಲಾಗಿ ರೂ."
+                        + centralShareAmount + "/- (ರೂ. " + centralShareWords
+                        + " ಮಾತ್ರ) ಗಳನ್ನು ರೇಷ್ಮೆ ನಿರ್ದೇಶನಾಲಯದಿಂದ ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ ನೀಡಿರುವ ಮೊತ್ತದಲ್ಲಿ ರೇಷ್ಮೆ ಉಪನಿರ್ದೇಶಕರು "
+                        + "ತೆರೆದಿರುವ Zero Balance Account ಗೆ RTGS ಮುಖಾಂತರ ಜಮಾ ಮಾಡಲಾಗುತ್ತದೆ. ಸಂಬಂಧಿಸಿದ ಜಿಲ್ಲೆಯ ರೇಷ್ಮೆ "
+                        + "ಉಪನಿರ್ದೇಶಕರು Zero Balance Account ನಿಂದ ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ RTGS ಮುಖಾಂತರ ನೇರವಾಗಿ ಸಹಾಯಧನವನ್ನು "
+                        + "ಜಮಾ ಮಾಡಲು ಸೂಚಿಸಿದೆ ಮತ್ತು ರಾಜ್ಯದ ಪಾಲಾಗಿ ರೂ." + stateShareAmount + "/- ( ರೂ. "
+                        + stateShareWords + " ಮಾತ್ರ) ಗಳನ್ನು ರಾಜ್ಯ ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಯ ಸಾಮಾನ್ಯ/ವಿಶೇಷ ಘಟಕ ಯೋಜನೆ/"
+                        + "ಗಿರಿಜನ ಉಪಯೋಜನೆಯ (" + schemeNameKannada
+                        + ") ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-107-00-1-35(106) (422), (423) HOA ವರ್ಗದಡಿ ಖಜಾನೆ-2 ರಲ್ಲಿ ಬಿಡುಗಡೆಗೊಳಿಸಿದ್ದು, "
+                        + "ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ ಸಹಾಯಧನವನ್ನು ಸಂಬಂಧಿಸಿದ ವಿಭಾಗದ ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು ಖಜಾನೆ-2ರ ಮುಖಾಂತರ "
+                        + "ಫಲಾನುಭವಿಯ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಡಿಬಿಟಿ ಮೂಲಕ ನೇರವಾಗಿ ಜಮಾ ಮಾಡಲು ಸೂಚಿಸಿದೆ.\n\n"
+
+                        + "ರಾಜ್ಯದ ಪಾಲಾಗಿ ರೂ." + stateShareAmount + "/- (ರೂ. " + stateShareWords
+                        + " ಮಾತ್ರ) ಗಳನ್ನು ರಾಜ್ಯ ರೇಷ್ಮೆ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಯಡಿ ಸಾಮಾನ್ಯ/ವಿಶೇಷ ಘಟಕ ಉಪ ಯೋಜನೆ/ಗಿರಿಜನ ಉಪಯೋಜನೆಯ "
+                        + "ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ : 2851-00-107-1-35(106) (ಸಾಮಾನ್ಯ) (422) (ವಿಶೇಷ ಘಟಕ ಉಪ ಯೋಜನೆ), 423 (ಗಿರಿಜನ ಉಪಯೋಜನೆ) "
+                        + "HOA ವರ್ಗದಡಿ ಭರಿಸುವುದು.\n\n"
+
+                        + "ಉಪಕರಣಗಳ ಖರೀದಿಯನ್ನು ಪರಿಶೀಲಿಸಿದಾಗ, ಈ ಕಚೇರಿಯ ಉಲ್ಲೇಖ (2)ರ ಸುತ್ತೋಲೆಯಲ್ಲಿ ನಮೂದಿಸಿರುವಂತೆ ಉಪಕರಣಗಳನ್ನು "
+                        + "ಖರೀದಿಸಲಾಗಿರುತ್ತದೆ. ಸಹಾಯಧನಕ್ಕಾಗಿ ಅರ್ಹವಿರುವ ಉಪಕರಣಗಳ ಸಂಖ್ಯೆ ಮತ್ತು ಮೌಲ್ಯವನ್ನು ಮೇಲಿನ ಪಟ್ಟಿಯಲ್ಲಿ "
+                        + "ನಮೂದಿಸಿದೆ. ಅದರಂತೆ ಸಹಾಯಧನಕ್ಕಾಗಿ ಅರ್ಹವಿರುವ ಬರುವ ಘಟಕದ ಮೊತ್ತವು ರೂ."
+                        + totalEligibleAmount + "/- ಆಗಿದ್ದು, ಸದರಿ ಫಲಾನುಭವಿಯು ಸಾಮಾನ್ಯ/ಪರಿಶಿಷ್ಟ ಜಾತಿ/ಪರಿಶಿಷ್ಟ ಪಂಗಡಕ್ಕೆ "
+                        + "ಸೇರಿದ್ದು ಶೇ 75/90 ರ ಸಹಾಯಧನಕ್ಕೆ ಅರ್ಹತೆ ಹೊಂದಿರುತ್ತಾರೆ. ಅದರಂತೆ ಸಲಕರಣೆಗಳ ಖರೀದಿಗೆ ಸಹಾಯಧನದ ಮೊತ್ತ "
+                        + "ರೂ." + totalSubsidyAmount + "/- ಗಳನ್ನು ಪರಿಗಣಿಸಿದೆ.\n\n"
+
+                        + "ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು, " + divisionName + " ವಿಭಾಗ ರವರು ದಿನಾಂಕ: " + proposalDate
+                        + " ರಂದು ಶ್ರೀ/ಶ್ರೀಮತಿ " + farmerName + " ಬಿನ್/ಕೋಂ. " + fatherNameKan + " ರವರು "
+                        + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + farmerVillage
+                        + " ಗ್ರಾಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ " + Util.objectToString(r.getCrcName())
+                        + " ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರದ ಹಿಪ್ಪುನೇರಳೆ ಚಾಕಿ ತೋಟ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ಹಾಗೂ "
+                        + "ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃಡೀಕರಿಸಿ ಉಲ್ಲೇಖ (4)ರ ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ "
+                        + "ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಸಲಕರಣೆ ಖರೀದಿಗೆ ಶೇ 75/90 ರಷ್ಟು ಸಹಾಯಧನದ ಒಟ್ಟು "
+                        + "ಮೊತ್ತ ರೂ." + totalSubsidyAmount + "/-ಗಳನ್ನು ಮಂಜೂರು ಮಾಡಲು ಶಿಫಾರಸ್ಸು ಮಾಡಿರುತ್ತಾರೆ. ಉಲ್ಲೇಖ(2)ರ ರೇಷ್ಮೆ "
+                        + "ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆಯಲ್ಲಿ ನೋಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ ಸ್ಥಾಪನೆಗೆ ನಿಗದಿಪಡಿಸಿರುವ "
+                        + "ಮಾನದಂಡಗಳ ಪ್ರಕಾರ ಸಹಾಯಧನ ಮಂಜೂರು ಮಾಡಲು ಅರ್ಹತಾ ಮೊತ್ತವನ್ನು ಪರಿಗಣಿಸಿರುವ ವಿವರ ಕೆಳಕಂಡಂತಿದೆ."
+        ));
+
+
+        // Logo
+        dto.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        // Some basic “identity” fields like you did in RHEquipment
+        dto.setFarmerFirstName(" ಶ್ರೀ / ಶ್ರೀಮತಿ " + farmerName);
+        dto.setFruitsId(" (ನೋಂದಣಿ ಸಂಖ್ಯೆ : " + fruitsId + ")");
+        dto.setDistrictName(districtName + " ಜಿಲ್ಲೆ, ");
+        dto.setTalukName(talukName + " ತಾಲ್ಲೂಕು, ");
+        dto.setVillageName(farmerVillage + " ಗ್ರಾಮ ");
+
+        // Set numeric fields you may directly show in CRC JRXML tables
+        dto.setTotalClaimed(r.getTotalClaimed());
+        dto.setTotalEligible(r.getTotalEligible());
+        dto.setTotalSubsidy(r.getTotalSubsidy());
+        dto.setEstablishmentOfMulberryGardenEligibleAmount(
+                r.getEstablishmentOfMulberryGardenEligibleAmount());
+        dto.setEstablishmentOfMulberryGardenClaimedAmount(
+                r.getEstablishmentOfMulberryGardenClaimedAmount());
+        dto.setEstablishmentOfMulberryGardenPercentageOfSubsidyAmount(
+                r.getEstablishmentOfMulberryGardenPercentageOfSubsidyAmount());
+
+        dto.setInstallationOfDripIrrigationEligibleAmount(
+                r.getInstallationOfDripIrrigationEligibleAmount());
+        dto.setInstallationOfDripIrrigationClaimedAmount(
+                r.getInstallationOfDripIrrigationClaimedAmount());
+        dto.setInstallationOfDripIrrigationPercentageOfSubsidyAmount(
+                r.getInstallationOfDripIrrigationPercentageOfSubsidyAmount());
+
+        dto.setChawkiRearingBuildingEligibleAmount(
+                r.getChawkiRearingBuildingEligibleAmount());
+        dto.setChawkiRearingBuildingClaimedAmount(
+                r.getChawkiRearingBuildingClaimedAmount());
+        dto.setChawkiRearingBuildingPercentageOfSubsidyAmount(
+                r.getChawkiRearingBuildingPercentageOfSubsidyAmount());
+
+        dto.setEquipmentEligibleTotal(r.getEquipmentEligibleTotal());
+        dto.setEquipmentPurchasedTotal(r.getEquipmentPurchasedTotal());
+        dto.setEquipmentPercentageTotal(r.getEquipmentPercentageTotal());
+
+        // shares & sanction amounts
+        dto.setCentralSanctionAmount(r.getCentralSanctionAmount());
+        dto.setStateSanctionAmount(r.getStateSanctionAmount());
+        dto.setCentralSharePercentage(r.getCentralSharePercentage());
+        dto.setStateSharePercentage(r.getStateSharePercentage());
+
+        list.add(dto);
+        return new JRBeanCollectionDataSource(list);
+    }
+
 
 
 

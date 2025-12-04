@@ -274,6 +274,33 @@ private String totalIncentiveAmountInWords;
     private Long rearingEquipmentDetailsId;
     private Float beneficiaryShareAmount;
     private Float equipmentMaxSubsidyTotal;
+    private String categoryName;
+    // CRC overall amounts
+    private Float totalClaimed;
+    private Float totalEligible;
+    private Float totalSubsidy;
+    // CRC component-wise subsidy breakup
+
+    // Mulberry garden
+    private Float establishmentOfMulberryGardenEligibleAmount;
+    private Float establishmentOfMulberryGardenClaimedAmount;
+    private Float establishmentOfMulberryGardenPercentageOfSubsidyAmount;
+
+    // Drip irrigation
+    private Float installationOfDripIrrigationEligibleAmount;
+    private Float installationOfDripIrrigationClaimedAmount;
+    private Float installationOfDripIrrigationPercentageOfSubsidyAmount;
+
+    // Chawki rearing building
+    private Float chawkiRearingBuildingEligibleAmount;
+    private Float chawkiRearingBuildingClaimedAmount;
+    private Float chawkiRearingBuildingPercentageOfSubsidyAmount;
+
+    // Equipment totals
+    private Float equipmentEligibleTotal;
+    private Float equipmentPurchasedTotal;
+    private Float equipmentPercentageTotal;
+
 
 
 // + getter & setter
