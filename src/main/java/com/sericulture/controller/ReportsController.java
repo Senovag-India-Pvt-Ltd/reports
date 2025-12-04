@@ -7443,12 +7443,11 @@ public class ReportsController {
                 "2) ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಆಭಿವೃ ದ್ಧಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ರವರ    ಸುತ್ತೋ ಲೆ    ಸಂಖ್ಯೆ  : \n" +
                 "     " + apiResponse.getContent().get(0).getSchemeCircularNo() + "   ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
                 "3) ಸರ್ಕಾರದ    ಆದೇಶ    ಸ೦ಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + "\n" +
-                "4) ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,    ಬೆ೦ಗಳೂರು   ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "\n" +
-                "     ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
-
+                "4) ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,    ಬೆ೦ಗಳೂರು   ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ \n" +
+                "      ಸಂಖ್ಯೆ   :" +apiResponse.getContent().get(0).getSReleaseNo() + "    ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
                 "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
                 apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇ ಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     ಶುದ್ಧ      "+apiResponse.getContent().get(0).getRaceName() +
-                "   ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ    ಗೂಡಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +apiResponse.getContent().get(0).getPerKgRate() +"/-   ಗಳ    ʼಬೋ ನಸ್    ಹಣ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.\n "+
+                "   ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ    ಗೂಡಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +apiResponse.getContent().get(0).getPerKgRate() +"/-   ಗಳ    ʼಬೋನಸ್    ಹಣ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.\n "+
 
                 "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ     ಬಿತ್ತ ನೆ      ಗೂಡು     ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ     ಬಿತ್ತ ನೆ     ಗೂಡಿನ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ. ");
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
