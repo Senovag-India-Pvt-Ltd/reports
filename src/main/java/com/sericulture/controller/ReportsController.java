@@ -7588,13 +7588,20 @@ public class ReportsController {
                 "ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು / ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ, "+apiResponse.getContent().get(0).getLoggedinUserTscName());
         response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
         response.setDate(apiResponse.getContent().get(0).getDate());
-        response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
         response.setAddressText( apiResponse.getContent().get(0).getAddressText());
         response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
         response.setTalukName( apiResponse.getContent().get(0).getTalukName());
         response.setHobliName( apiResponse.getContent().get(0).getHobliName());
         response.setVillageName( apiResponse.getContent().get(0).getVillageName());
         response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+        String headerFarmerName   = apiResponse.getContent().get(0).getFarmerFirstName() == null ? "" : apiResponse.getContent().get(0).getFarmerFirstName();
+        String headerFruitsId     = apiResponse.getContent().get(0).getFruitsId() == null ? "" : apiResponse.getContent().get(0).getFruitsId();
+        String headerFatherName   = apiResponse.getContent().get(0).getFatherNameKan() == null ? "" : apiResponse.getContent().get(0).getFatherNameKan();
+
+        String headerFullName = "ಶ್ರೀ./ಶ್ರೀಮತಿ. " + headerFarmerName
+                + " (" + headerFruitsId + ") ಬಿನ್/ಕೋಂ " + headerFatherName;
+
+        response.setFarmerFirstName(headerFullName);
         response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
                 apiResponse.getContent().get(0).getUserMarket());
@@ -7753,7 +7760,17 @@ public class ReportsController {
                 "ಪ್ರತಿಯನ್ನು    ರೇಷ್ಮೆ     ಉಪ ನಿರ್ದೇಶಕರು,    ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶ,   "+apiResponse.getContent().get(0).getUserDistrict());
         response.setAcceptedDate(" ಸ್ವೀಕೃತಿ ಪತ್ರದ  ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
         response.setDate(apiResponse.getContent().get(0).getDate());
-        response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+        SanctionOrderResponse first = apiResponse.getContent().get(0);
+
+        String headerFarmerName   = first.getFarmerFirstName() == null ? "" : first.getFarmerFirstName();
+        String headerFruitsId     = first.getFruitsId() == null ? "" : first.getFruitsId();
+        String headerFatherName   = first.getFatherNameKan() == null ? "" : first.getFatherNameKan();
+
+        String headerFullName = "ಶ್ರೀ./ಶ್ರೀಮತಿ. " + headerFarmerName
+                + " (" + headerFruitsId + ") ಬಿನ್/ಕೋಂ " + headerFatherName;
+
+        response.setFarmerFirstName(headerFullName);
+
         response.setAddressText( apiResponse.getContent().get(0).getAddressText());
         response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
         response.setTalukName( apiResponse.getContent().get(0).getTalukName());
@@ -7807,6 +7824,14 @@ public class ReportsController {
                 if (sanctionOrderResponse.getSanctionAmount() == null) {
                     sanctionOrderResponse.setSanctionAmount(0f);
                 }
+
+                // ✅ build full Kannada farmer name for list row
+                String fullName = "ಶ್ರೀ./ಶ್ರೀಮತಿ. "
+                        + sanctionOrderResponse.getFarmerFirstName()
+                        + " (" + sanctionOrderResponse.getFruitsId()
+                        + ") ಬಿನ್/ಕೋಂ " + sanctionOrderResponse.getFatherNameKan();
+
+                sanctionOrderResponse.setFarmerFirstName(fullName);
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
