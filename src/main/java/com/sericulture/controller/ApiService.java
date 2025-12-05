@@ -516,12 +516,15 @@ public class ApiService {
 
 
 
-    public SanctionOrder fetchDataFromChawkiSanctionOrder(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
-
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/getChawkiSanctionOrderFullDetails";
 
 
-        String finalapiurl = dbtApiUrl +"service/getChawkiSanctionOrderFullDetails";
+    public SanctionOrder fetchDataFromChawkiSanctionOrder(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException {
+
+        // Using the same base as other DBT calls
+        String finalapiurl = dbtApiUrl + "registeredPrivateChawki/getChawkiSanctionOrderFullDetails";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/registeredPrivateChawki/getChawkiSanctionOrderFullDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -537,16 +540,16 @@ public class ApiService {
             return objectMapper.readValue(response, SanctionOrder.class);
 
         } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
-            // Get the response body from the exception
             String responseBody = httpEx.getResponseBodyAsString();
-            logger.error("Error calling sanction API: {}", responseBody, httpEx);
+            logger.error("Error calling Chawki sanction API: {}", responseBody, httpEx);
             throw new RuntimeException("Failed to fetch sanction data: " + responseBody, httpEx);
 
         } catch (Exception ex) {
-            logger.error("Unexpected error calling sanction API: {}", ex.getMessage(), ex);
+            logger.error("Unexpected error calling Chawki sanction API: {}", ex.getMessage(), ex);
             throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
         }
     }
+
 
 
     public SanctionOrder fetchDataFromSanctionEquipment(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
