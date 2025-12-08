@@ -1856,6 +1856,47 @@ public class ReportsController {
     }
 
 
+    @PostMapping("/getWorkOrderRHEquipment")
+    public ResponseEntity<?> getWorkOrderEquipment(@RequestBody SanctionOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getWorkOrder");
+            logger.info("enter to getWorkOrder");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("workorderEquipment.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForWorkOrderRHEquipment(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+    }
+
+
         @PostMapping("/getWorkOrderHRU")
         public ResponseEntity<?> getWorkOrderForHRU(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -7511,6 +7552,20 @@ public class ReportsController {
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
 
 
+        // ✅ NEW: formatting helpers for amounts and weights
+// CHANGE: Round perKgRate for all usages (paragraph + table)
+        long roundedPerKgRate = Math.round(apiResponse.getContent().get(0).getPerKgRate());
+        String perKgRateText = String.valueOf(roundedPerKgRate);
+
+// CHANGE: Round totalSchemeAmount for paragraph
+        long roundedTotalSchemeAmount = Math.round(apiResponse.getContent().get(0).getTotalSchemeAmount());
+        String totalSchemeAmountText = String.valueOf(roundedTotalSchemeAmount);
+
+// CHANGE: Show totalCocoonsWeight with .00 in paragraph
+        String totalCocoonsWeightText = String.format("%.2f",
+                apiResponse.getContent().get(0).getTotalCocoonsWeight());
+
+
         // ✅ Clean formatted date for sanction order
         // ✅ Clean formatted date for sanction order
         String formattedDate1 = "";
@@ -7569,10 +7624,10 @@ public class ReportsController {
                 "4) ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,    ಬೆ೦ಗಳೂರು   ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ \n" +
                 "      ಸಂಖ್ಯೆ   :" +apiResponse.getContent().get(0).getSReleaseNo() + "    ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
                 "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇ ಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     ಶುದ್ಧ      "+apiResponse.getContent().get(0).getRaceName() +
-                "   ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ    ಗೂಡಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +apiResponse.getContent().get(0).getPerKgRate() +"/-   ಗಳ    ʼಬೋನಸ್    ಹಣ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.\n "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ   ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName() +
+                "   ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ    ಗೂಡಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +perKgRateText +"/-   ಗಳ    ʼಬೋನಸ್    ಹಣ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.\n "+
 
-                "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ     ಬಿತ್ತ ನೆ      ಗೂಡು     ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ     ಬಿತ್ತ ನೆ     ಗೂಡಿನ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ. ");
+                "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ   "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ     ಬಿತ್ತ ನೆ      ಗೂಡು     ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ     ಬಿತ್ತ ನೆ     ಗೂಡಿನ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ. ");
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
         long amountLong = amountFloat.longValue();
 
@@ -7580,7 +7635,7 @@ public class ReportsController {
 
         response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+shortRace +"  ತಳಿ /ಬೋನಸ್/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
-        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಯಲ್ಲಿ    ಅನುಬಂಧದಲ್ಲಿ     ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + apiResponse.getContent().get(0).getTotalCocoonsWeight()+ "  ಕೆ.ಜಿ    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತನೆ     ಗೂಡು     ಬಿತ್ತನೆಗೆ     ಯೋಗ್ಯವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲದೆ     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಹಿವಾಟಾದ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+apiResponse.getContent().get(0).getPerKgRate()+"    ರಂತೆ     ಬೋನಸ್     ಮೊತ್ತ     ರೂ.    "+apiResponse.getContent().get(0).getTotalSchemeAmount()+"   ಗಳನ್ನು      (ರೂ. "+amountInWords+" ) ಗಳನ್ನು      ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಸಹಾಯಧನದ      ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
+        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಯಲ್ಲಿ    ಅನುಬಂಧದಲ್ಲಿ     ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + totalCocoonsWeightText+ "  ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತನೆ     ಗೂಡು     ಬಿತ್ತನೆಗೆ     ಯೋಗ್ಯವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲದೆ     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಹಿವಾಟಾದ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+perKgRateText+"    ರಂತೆ     ಬೋನಸ್     ಮೊತ್ತ     ರೂ.    "+totalSchemeAmountText+"   ಗಳನ್ನು      (ರೂ. "+amountInWords+" ) ಗಳನ್ನು      ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಸಹಾಯಧನದ      ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
                 "            ಸದರಿ    ವೆಚ್ಚ ವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName() +"("+apiResponse.getContent().get(0).getDescription() +")  ಅಡಿ    ಭರಿಸುವುದು.");
 
         response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
@@ -7655,7 +7710,7 @@ public class ReportsController {
             }
         }
         response.setTotalCocoonsWeights(totalCocoonWeight);
-        response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ     ಶುದ್ಧ       "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ       ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಹಿವಾಟಾದ     "+totalCocoonWeight+"    ಕೆ.ಜಿ.    ರೇಷ್ಮೆ     ಗೂಡಿಗೆ      ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ      ರೂ. "+apiResponse.getContent().get(0).getPerKgRate() +"   ರಂತೆ    ಬೋನಸ್     ಮೊತ್ತ      ರೂ. "+apiResponse.getContent().get(0).getTotalSchemeAmount()+" ಗಳನ್ನು      ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ    ಆದೇಶದ    ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಬೋನಸ್     ಮೊತ್ತ ವನ್ನು     ಪಾವತಿಸಲು     ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
+        response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ    "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ       ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಹಿವಾಟಾದ     "+totalCocoonWeight+"    ಕೆ.ಜಿ.    ರೇಷ್ಮೆ     ಗೂಡಿಗೆ      ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ      ರೂ. "+perKgRateText +"   ರಂತೆ    ಬೋನಸ್     ಮೊತ್ತ      ರೂ. "+totalSchemeAmountText+" ಗಳನ್ನು      ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ    ಆದೇಶದ    ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಬೋನಸ್     ಮೊತ್ತ ವನ್ನು     ಪಾವತಿಸಲು     ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
 
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
@@ -7682,6 +7737,20 @@ public class ReportsController {
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+
+        // ✅ NEW: formatting helpers for amounts and weights
+// CHANGE: Round perKgRate for all usages (paragraph + table)
+        long roundedPerKgRate = Math.round(apiResponse.getContent().get(0).getPerKgRate());
+        String perKgRateText = String.valueOf(roundedPerKgRate);
+
+// CHANGE: Round totalSchemeAmount for paragraph
+        long roundedTotalSchemeAmount = Math.round(apiResponse.getContent().get(0).getTotalSchemeAmount());
+        String totalSchemeAmountText = String.valueOf(roundedTotalSchemeAmount);
+
+// CHANGE: Show totalCocoonsWeight with .00 in paragraph
+        String totalCocoonsWeightText = String.format("%.2f",
+                apiResponse.getContent().get(0).getTotalCocoonsWeight());
+
 
 
         // ✅ Clean formatted date for sanction order
@@ -7741,11 +7810,14 @@ public class ReportsController {
                         "4) ರೇಷ್ಮೆ    ಉಪ ನಿರ್ದೇಶಕರು,    " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "  ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "\n" +
                 "     ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
 
-                "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯ ಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     ಶುದ್ಧ      "+apiResponse.getContent().get(0).getRaceName() +
-                "ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟದ    ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ." +apiResponse.getContent().get(0).getPerKgRate() +"/-   ಗಳ    ಪ್ರೋತ್ಸಾಹಧನ     ನೀಡುವ      ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n "+
+                "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯ ಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ    " +
+                " ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName() +
+                "ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟದ    ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ." +perKgRateText +"/-   ಗಳ " +
+                "   ಪ್ರೋತ್ಸಾಹಧನ     ನೀಡುವ      ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n "+
 
-                "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ     ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾ ದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ ದ    ಆಧಾರದ    ಮೇಲೆ    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ."+apiResponse.getContent().get(0).getPerKgRate() +"/- ಗಳ    ಪ್ರೋತ್ಸಾಹಧನ  ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದಡಿ     ಪ್ರೋತ್ಸಾಹಧನದ  ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿದೆ.  ");
+                "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ  " +
+                "  "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ     ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾ ದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ ದ    ಆಧಾರದ    ಮೇಲೆ    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ."+perKgRateText +"/- ಗಳ    ಪ್ರೋತ್ಸಾಹಧನ  ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದಡಿ     ಪ್ರೋತ್ಸಾಹಧನದ  ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿದೆ.  ");
         Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
         long amountLong = amountFloat.longValue();
 
@@ -7753,7 +7825,11 @@ public class ReportsController {
 
         response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+shortRace +"  ತಳಿ /ಬಿಗೂಪ್ರೋ ಧನ :/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
-        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಇಲ್ಲಿ     ಅನುಬಂಧದಲ್ಲಿ     ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + apiResponse.getContent().get(0).getTotalCocoonsWeight()+ "  ಕೆ.ಜಿ    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾದಕತೆ    ಮತ್ತು    ಗುಣಮಟ್ಟದ    ಆಧಾರದ   ಮೇಲೆ    ಪ್ರ ತಿ   ಕೆ.ಜಿ.ಗೆ     ರೂ. "+apiResponse.getContent().get(0).getPerKgRate()+" ಗಳಂತೆ    ಪ್ರೋತ್ಸಾಹಧನದ    ಮೊತ್ತ    ರೂ. "+apiResponse.getContent().get(0).getTotalSchemeAmount()+" ಗಳನ್ನು   (ರೂ. "+amountInWords+" ) ಗಳನ್ನು      ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ     ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
+        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಇಲ್ಲಿ     ಅನುಬಂಧದಲ್ಲಿ  " +
+                "   ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + totalCocoonsWeightText + "  ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ " +
+                "    ಉತ್ಪಾದಕತೆ    ಮತ್ತು    ಗುಣಮಟ್ಟದ    ಆಧಾರದ   ಮೇಲೆ    ಪ್ರ ತಿ   ಕೆ.ಜಿ.ಗೆ     ರೂ. "+perKgRateText+" ಗಳಂತೆ    ಪ್ರೋತ್ಸಾಹಧನದ    ಮೊತ್ತ    ರೂ. "+totalSchemeAmountText+" ಗಳನ್ನು   (ರೂ. "+amountInWords+" ) ಗಳನ್ನು    " +
+                "  ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ   " +
+                "  ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
                             "            ಸದರಿ    ವೆಚ್ಚ ವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName() +"("+apiResponse.getContent().get(0).getDescription() +")  ಅಡಿ    ಭರಿಸುವುದು.");
 
         response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
@@ -7825,20 +7901,26 @@ public class ReportsController {
                     sanctionOrderResponse.setSanctionAmount(0f);
                 }
 
-                // ✅ build full Kannada farmer name for list row
-                String fullName = "ಶ್ರೀ./ಶ್ರೀಮತಿ. "
-                        + sanctionOrderResponse.getFarmerFirstName()
-                        + " (" + sanctionOrderResponse.getFruitsId()
-                        + ") ಬಿನ್/ಕೋಂ " + sanctionOrderResponse.getFatherNameKan();
+//                // ✅ build full Kannada farmer name for list row
+//                String fullName = "ಶ್ರೀ./ಶ್ರೀಮತಿ. "
+//                        + sanctionOrderResponse.getFarmerFirstName()
+//                        + " (" + sanctionOrderResponse.getFruitsId()
+//                        + ") ಬಿನ್/ಕೋಂ " + sanctionOrderResponse.getFatherNameKan();
 
-                sanctionOrderResponse.setFarmerFirstName(fullName);
+//                sanctionOrderResponse.setFarmerFirstName(fullName);
 
                 sanctionOrderResponse.setSerialNumber(serialNo++);
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
         }
+        // CHANGE: .00 format for totalCocoonWeight in paragraph
         response.setTotalCocoonsWeights(totalCocoonWeight);
-        response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ     ವಹಿವಾಟು    ಮಾಡಿದ   "+totalCocoonWeight+"    ಕೆ.ಜಿ.    ಶುದ್ಧ     "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾ ದಕತೆ    ಮತ್ತು    ಗುಣಮಟ್ಟ ದ     ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ."+apiResponse.getContent().get(0).getPerKgRate() +"/- ಗಳಂತೆ     ಪ್ರೋತ್ಸಾಹಧನ  ರೂ. "+apiResponse.getContent().get(0).getTotalSchemeAmount()+" ಗಳನ್ನು     ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ    ಆದೇಶದ    ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತ ವನ್ನು    ಪಾವತಿಸಲು    ಅನುದಾನ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
+        String totalCocoonWeightText = String.format("%.2f", totalCocoonWeight);
+        response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ     ವಹಿವಾಟು " +
+                "   ಮಾಡಿದ   "+totalCocoonsWeightText +"    ಕೆ.ಜಿ.   "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾ ದಕತೆ    ಮತ್ತು    ಗುಣಮಟ್ಟ ದ     ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ " +
+                "    ರೂ."+perKgRateText  +"/- ಗಳಂತೆ     ಪ್ರೋತ್ಸಾಹಧನ  ರೂ. "+totalSchemeAmountText+" ಗಳನ್ನು     ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ    ಆದೇಶದ " +
+                "   ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತ ವನ್ನು    ಪಾವತಿಸಲು " +
+                "   ಅನುದಾನ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
 
 
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -10853,6 +10935,190 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(list);
     }
 
+
+    private JRDataSource getDataSourceForWorkOrderRHEquipment(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException, JAXBException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromSanctionEquipment(requestDto);
+        List<SanctionOrderResponse> workOrderGenerationReportResponseList = new LinkedList<>();
+
+        if (apiResponse.getContent() != null && !apiResponse.getContent().isEmpty()) {
+
+            SanctionOrderResponse apiData = apiResponse.getContent().get(0);
+            SanctionOrderResponse response = new SanctionOrderResponse();
+
+            // ✅ Split created_date into date (dd/MM/yyyy) and time (HH:mm)
+            String createdDateTime = apiData.getCreatedDate();
+            String datePart = "";
+            String timePart = "";
+
+            if (createdDateTime != null && !createdDateTime.isEmpty()) {
+                try {
+                    // with milliseconds
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+                    DateTimeFormatter outputDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    DateTimeFormatter outputTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+                    LocalDateTime ldt = LocalDateTime.parse(createdDateTime, inputFormatter);
+                    datePart = ldt.format(outputDateFormatter);
+                    timePart = ldt.format(outputTimeFormatter);
+
+                } catch (Exception e1) {
+                    try {
+                        // without milliseconds
+                        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        DateTimeFormatter outputDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        DateTimeFormatter outputTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+                        LocalDateTime ldt = LocalDateTime.parse(createdDateTime, inputFormatter);
+                        datePart = ldt.format(outputDateFormatter);
+                        timePart = ldt.format(outputTimeFormatter);
+
+                    } catch (Exception e2) {
+                        try {
+                            // only date (yyyy-MM-dd)
+                            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            DateTimeFormatter outputDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                            LocalDate date = LocalDate.parse(createdDateTime.substring(0, 10), inputFormatter);
+                            datePart = date.format(outputDateFormatter);
+                            timePart = "";
+                        } catch (Exception e3) {
+                            // last fallback – simple reverse if separated by / or -
+                            if (createdDateTime.contains("/")) {
+                                String[] parts = createdDateTime.split("/");
+                                if (parts.length == 3) {
+                                    datePart = parts[2] + "/" + parts[1] + "/" + parts[0];
+                                }
+                            } else if (createdDateTime.contains("-")) {
+                                String[] parts = createdDateTime.split("-");
+                                if (parts.length == 3) {
+                                    datePart = parts[2] + "/" + parts[1] + "/" + parts[0];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // ------------ FIELD SHORTCUTS FROM SanctionOrderResponse ------------
+            String schemeNameKannada   = Util.objectToString(apiData.getSchemeNameInKannada());
+            String schemeCategoryName  = Util.objectToString(apiData.getScCategoryName());
+            String districtName        = Util.objectToString(apiData.getLoggedinUserDistrictName());
+            String talukName           = Util.objectToString(apiData.getLoggedinUserTalukName());
+            String tscName             = Util.objectToString(apiData.getLoggedinUserTscName());
+            String farmerName          = Util.objectToString(apiData.getFarmerFirstName());
+            String fatherNameKan       = Util.objectToString(apiData.getFatherNameKan());
+            String fruitsId            = Util.objectToString(apiData.getFruitsId());
+            String equipmentName       = Util.objectToString(apiData.getEquipmentName());
+            String vendorName          = Util.objectToString(apiData.getVendorName());
+            String arn                 = Util.objectToString(apiData.getArn());
+
+            // -------- HEADERS AS PER SS 2025-26 REARING-EQUIPMENT WORK ORDER --------
+
+            // ಸಂಖ್ಯೆ + ARN + ಕೆಲಸದ ಆದೇಶ ಸಂಖ್ಯೆ
+            response.setHeader1(
+                    "ಸಂಖ್ಯೆ  :  "
+                            + Util.objectToString(apiData.getWorkOrderNumber())
+                            + "     ARN ಸಂಖ್ಯೆ  :  "
+                            + arn
+            );
+
+            // ದಿನಾಂಕ
+            response.setHeader2("ದಿನಾಂಕ  :  " + datePart);
+
+            // Subject line: Scheme + Category + equipment subsidy work order
+            response.setHeader3(
+                    "ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ     “"
+                            + schemeNameKannada
+                            + "”     ಯೋಜನೆ     "
+                            + schemeCategoryName
+                            + "     ಅಡಿ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ರೇಷ್ಮೆ     ಹುಳು     ಸಾಕಾಣಿಕೆ"
+                            + "     ಸಲಕರಣೆಗಳ     ಖರೀದಿಗೆ     ಸಹಾಯಧನಕ್ಕೆ     ಸಂಬಂಧಿಸಿದಂತೆ     ಕಾರ್ಯಾದೇಶ"
+            );
+
+            // Main body paragraph – aligned with SS 2025-26 template
+            response.setLineItemComment(
+                    "              "
+                            + tscName
+                            + "     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರದ     ವ್ಯಾಪ್ತಿಯ     "
+                            + districtName
+                            + "     ಜಿಲ್ಲೆಯ     "
+                            + talukName
+                            + "     ತಾಲ್ಲೂಕಿನಲ್ಲಿ     ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿರುವ     "
+                            + schemeCategoryName
+                            + "     ವರ್ಗಕ್ಕೆ     ಸೇರಿದ     ಶ್ರೀ/ಶ್ರೀಮತಿ     "
+                            + farmerName
+                            + "     ಬಿನ್/ಕೋಂ.     "
+                            + fatherNameKan
+                            + "     ಇವರು     ಕೇಂದ್ರ     ಪುರಸ್ಕೃತ     “"
+                            + schemeNameKannada
+                            + "”     ಯೋಜನೆ     "
+                            + schemeCategoryName
+                            + "     ಅಡಿಯಲ್ಲಿ     ರೇಷ್ಮೆ     ಹುಳು     ಸಾಕಾಣಿಕೆ\n"
+                            + "ಸಲಕರಣೆಯಾದ     "
+                            + equipmentName
+                            + "     ಖರೀದಿಸಲು     ಹಾಗೂ     ಅಳವಡಿಕೆಗೆ     ಇಲಾಖೆಯ     ನಿಗದಿಪಡಿಸಿರುವ     ಘಟಕದರದ\n"
+                            + "ಅನುಸಾರ     ಸಹಾಯಧನ     ಪಡೆಯಲು     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುವುದು.\n"
+                            + "              ಸದರಿ     ಸಲಕರಣೆಯನ್ನು     ರೇಷ್ಮೆ     ಇಲಾಖೆಯಿಂದ     ಅಧಿಕೃತವಾಗಿ     ಗುರುತಿಸಲ್ಪಟ್ಟ\n"
+                            + "ರೇಷ್ಮೆ     ಹುಳುಸಾಕಾಣಿಕೆ     ಸಲಕರಣೆ     ಸಂಸ್ಥೆಯಾದ     ಮೆ||     "
+                            + vendorName
+                            + "     (ಎಂಪ್ಯಾನೆಲ್ಡ್     ವೆಂಡರ್)     ಇವರಿಂದ\n"
+                            + "ಖರೀದಿಸಲು     ಇಲಾಖೆಯ     ನಿಗದಿಪಡಿಸಿರುವ     ಘಟಕದರದ     ಅನುಸಾರ     ಖರೀದಿಸಿ     ಅಳವಡಿಸಿಕೊಳ್ಳಲು\n"
+                            + "ಫಲಾನುಭವಿಗೆ     ಅನುಮತಿ     ನೀಡಲಾಗಿದೆ.\n"
+                            + "              ಇದಕ್ಕೆ     ಸಂಬಂಧವಾಗಿ     ಫಲಾನುಭವಿಯು     ಸದರಿ     ಸಲಕರಣೆಗೆ     ನಿಗದಿಪಡಿಸಿರುವ\n"
+                            + "ತನ್ನ     ಪಾಲಿನ     ಶೇ.25     ರಷ್ಟು     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿತ     ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ,     ಅಗತ್ಯ\n"
+                            + "ದಾಖಲಾತಿಗಳನ್ನು     ಸೇರಿಸಿ     ಸಹಾಯಧನ     ಮಂಜೂರಾತಿಗಾಗಿ     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಬೇಕಾಗಿದೆ."
+            );
+
+            // ARN / registration note – small separate para like in sample
+            response.setHeader4(
+                    "                    ಶ್ರೀ/ಶ್ರೀಮತಿ     "
+                            + farmerName
+                            + "  ("
+                            + fruitsId
+                            + ")     ಬಿನ್/ಕೋಂ  "
+                            + fatherNameKan
+                            + "     ಇವರಿಂದ     ಮೇಲ್ಕಾಣಿಸಿದ     ಯೋಜನೆಯ     ಅಡಿಯಲ್ಲಿ     ಸಲಕರಣೆ\n"
+                            + "ಖರೀದಿಗಾಗಿ     ARN     ಸಂಖ್ಯೆ     "
+                            + arn
+                            + "     ರಂತೆ     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುವುದು     ದಾಖಲಾಗಿದೆ."
+            );
+
+            // Signature block – DDS (ZP)
+            response.setHeader5(
+                    "ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು,\n"
+                            + "ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,\n"
+                            + districtName
+            );
+
+            // Copy-to block
+            response.setHeader6(
+                    "ಇವರಿಗೆ,\n"
+                            + "ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು,  "
+                            + talukName
+                            + "     ವಿಭಾಗ,\n"
+                            + "ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ,  "
+                            + tscName
+                            + ".\n"
+                            + "ಸಂಬಂಧಿಸಿದ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ."
+            );
+
+            // --------- OTHER FIELDS (OPTIONAL / IF USED IN JRXML) ---------
+
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+            response.setFarmerFirstName(farmerName);
+            response.setFatherNameKan(fatherNameKan);
+            response.setFruitsId(fruitsId);
+            response.setSchemeNameInKannada(schemeNameKannada);
+            response.setScCategoryName(schemeCategoryName);
+
+            workOrderGenerationReportResponseList.add(response);
+        }
+
+        return new JRBeanCollectionDataSource(workOrderGenerationReportResponseList);
+    }
 
 
     private JRDataSource getDataSourceForChawkiSanctionOrder(SanctionOrderPrintRequest requestDto)
