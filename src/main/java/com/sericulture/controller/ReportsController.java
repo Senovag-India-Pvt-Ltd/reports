@@ -7559,7 +7559,7 @@ public class ReportsController {
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:-");
 
-        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ   ಶುದ್ದ     "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತ ನೆ      ಗೂಡು      ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ      ಇಲ್ಲ ದೆ      ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ    ಗೂಡಿಗೆ    ಬೋನಸ್    ಮೊತ್ತ ವನ್ನು     " +
+        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತ ನೆ      ಗೂಡು      ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ      ಇಲ್ಲ ದೆ      ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ    ಗೂಡಿಗೆ    ಬೋನಸ್    ಮೊತ್ತ ವನ್ನು     " +
                 "ಮಂಜೂರಾತಿ     ನೀಡುವ     ಬಗ್ಗೆ.\n\n"+
 
                 "1) ಸರ್ಕಾರದ    ಆದೇಶ    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " + admGovtDate  + "\n" +
@@ -7732,7 +7732,7 @@ public class ReportsController {
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:-");
 
-        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ   ಶುದ್ದ     "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ   ಮತ್ತು    ಗುಣಮಟ್ಟ ದ    ಆಧಾರದಮೇಲೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತವನ್ನು    ಮಂಜೂರಾತಿ   ನೀಡುವ    ಬಗ್ಗೆ.\n\n"+
+        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ   ಮತ್ತು    ಗುಣಮಟ್ಟ ದ    ಆಧಾರದಮೇಲೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತವನ್ನು    ಮಂಜೂರಾತಿ   ನೀಡುವ    ಬಗ್ಗೆ.\n\n"+
 
                 "1) ಸರ್ಕಾರದ    ಆದೇಶ    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " + admGovtDate  + "\n" +
                 "2) ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಆಭಿವೃ ದ್ಧಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ರವರ    ಸುತ್ತೋ ಲೆ    ಸಂಖ್ಯೆ  : \n" +
