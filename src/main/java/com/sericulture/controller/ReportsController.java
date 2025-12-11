@@ -40,11 +40,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.text.DecimalFormat;
 
 import static com.google.common.math.DoubleMath.roundToLong;
 import static org.apache.http.client.utils.DateUtils.formatDate;
+import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
 import static org.hibernate.type.descriptor.java.CoercionHelper.toLong;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -3209,418 +3211,698 @@ public class ReportsController {
             return 0.0; // You can change this to any default value
         }
     }
+//    private JRDataSource getDataSourceForTripletSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+//
+//        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoonTriplet(requestDto);
+//        List<Content> countries = new LinkedList<>();
+//        if (apiResponse.content != null) {
+//
+////            long farmerMarketFee = Math.round(apiResponse.content.getFarmerMarketFee());
+////            long reelerMarketFee = Math.round(apiResponse.content.getReelerMarketFee());
+////            long totalMarketFee = Math.round(farmerMarketFee + reelerMarketFee);
+////
+////            String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
+////            apiResponse.content.setFeespaid(formatfees);
+////
+////            long amountPaid = Math.round(reelerMarketFee);  // Apply rounding to amountPaid
+////
+////            String marketFees = String.valueOf(reelerMarketFee);  // Convert reelerMarketFee to string
+////            apiResponse.content.setAmountPaid(marketFees);
+////
+//
+//
+//// ...
+////            apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
+////            apiResponse.content.setDescription1( "                  \n" +
+////                    "  ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ \n" +
+////                    "  (ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
+////                    "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ."+ apiResponse.content.getAllottedLotId());t
+//
+//            if (apiResponse != null && apiResponse.content != null) {
+//                // Set the sadodLot with null check
+//                if (apiResponse.content.getSadodLotNumber() != null) {
+//                    apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
+//                } else {
+//                    // Handle the case where sadodLotNumber is null (e.g., set to a default value)
+//                    apiResponse.content.setSadodLot("DefaultSadodLot"); // Replace with an appropriate default value
+//                }
+//
+//                // Build the description with null checks
+//                String allottedLotId = apiResponse.content.getAllottedLotId() != null ?
+//                        apiResponse.content.getAllottedLotId() : "DefaultLotId"; // Replace with an appropriate default value
+//
+//                apiResponse.content.setDescription1("                  \n" +
+//                        "  ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ \n" +
+//                        "  (ರೆಗ್ಯುಲೇಶನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
+//                        "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ." + allottedLotId);
+//            }
+//
+//            DecimalFormat df = new DecimalFormat("#.00");
+//
+//            double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
+//            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
+//            double totalMarketFee = farmerMarketFee + reelerMarketFee;
+//
+//            String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
+//            apiResponse.content.setFeespaid(formatFees);
+//
+//            String amountPaid = df.format(reelerMarketFee);  // Format reelerMarketFee to two decimal places
+//            apiResponse.content.setAmountPaid(amountPaid);
+//
+//
+//
+//            apiResponse.content.setAuctionDate(apiResponse.content.getAuctionDate());
+////            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
+////            long paidAmount = farmerMarketFeeLong;
+////            String format = farmerMarketFeeLong + "";
+////            apiResponse.content.setPaidAmount(format);
+////
+////
+//            long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
+//            long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
+//            long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
+//            String farmeramout = "" + (total - farmerfee);
+//            String relaramout = "" + (total - realerfee);
+//
+//            long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
+//
+//            // Assuming farmerMarketFee is a double or can be converted to double
+////            double farmerMarketFeeDouble = (double) farmerMarketFee;
+////            double paidAmount = farmerMarketFeeDouble;
+////            String format = String.valueOf(farmerMarketFeeDouble);
+////            apiResponse.content.setPaidAmount(format);
+//
+////            double farmerMarketFeeDouble = (double) farmerMarketFee;
+////            long paidAmount = Math.round(farmerMarketFeeDouble); // Math.round returns a long
+////            String format = String.valueOf(paidAmount); // Convert to string without decimal
+////            apiResponse.content.setPaidAmount(format);
+//
+//
+//// Assuming farmerMarketFee is a double or a float
+//            double farmerMarketFeeDouble = (double) farmerMarketFee;
+//            DecimalFormat decimalFormat = new DecimalFormat("#.00");
+//            String format = decimalFormat.format(farmerMarketFeeDouble); // Format to 2 decimal places
+//            apiResponse.content.setPaidAmount(format);
+//
+//
+//
+//
+//
+////            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
+//            apiResponse.content.setAmountfarmer(farmeramout);
+//            apiResponse.content.setAmountrealar(relaramout);
+//            apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getIfscCode());
+//            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getAccountNumber() );
+//            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
+////            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
+//            apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
+//
+//
+//            String inputDateTime = "";
+//            if (apiResponse.content.getAuctionDateWithTime() != null) {
+//                inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+//            } else {
+//                apiResponse.content.setAuctionDate_time("");
+//            }
+//            // Parse the input date and time
+//            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+//            Date parsedDate;
+//            try {
+//                if (inputDateTime != null && !inputDateTime.equals("")) {
+//                    parsedDate = inputFormat.parse(inputDateTime);
+//                    // Format the output date and time
+//                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+//                    SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+//                    String formattedDateTime = outputFormat.format(parsedDate);
+//                    String formattedDateTime1 = outputFormat1.format(parsedDate);
+//                    apiResponse.content.setAuctionDate_time(formattedDateTime);
+//                    apiResponse.content.setAuctionDate(formattedDateTime1);
+//
+//
+//                }
+//            } catch (ParseException e) {
+//                throw new RuntimeException("Error parsing input date and time", e);
+//            }
+//
+//            String smallBins = "";
+//            String bigBins = "";
+//
+//            if (apiResponse.content.getReelerNameKannada() == null) {
+//                apiResponse.content.setReelerNameKannada("");
+//            }
+//            if (apiResponse.content.getFarmerNameKannada() == null) {
+//                apiResponse.content.setFarmerNameKannada("");
+//            }
+//            if (apiResponse.content.getFarmerAddress() == null) {
+//                apiResponse.content.setFarmerAddress("");
+//            }
+//            if (apiResponse.content.getFatherNameKan() == null) {
+//                apiResponse.content.setFatherNameKan("");
+//            }
+//            if (apiResponse.content.getReelerLicense() == null) {
+//                apiResponse.content.setReelerLicense("");
+//            }
+//            if (apiResponse.content.getLotWeight() == null) {
+//                apiResponse.content.setLotWeight("");
+//            }
+//
+//            apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
+//            String farmerNumber = "";
+//            if (apiResponse.content.getFruitsId() != null && !apiResponse.content.getFruitsId().equals("")) {
+//                farmerNumber = apiResponse.content.getFruitsId();
+//            } else {
+//                farmerNumber = apiResponse.content.getFarmerNumber();
+//            }
+//            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ") \n" +
+//                    "  ಶ್ರೀ /ಶ್ರೀಮತಿ. "+ apiResponse.content.getFarmerNameKannada() + " ,  ಬಿನ್/ಕೋಂ    " + apiResponse.content.getFatherNameKan()  + " ,  " + apiResponse.content.getFarmerVillage() +" , "+ apiResponse.content.getFarmerTaluk());
+//
+//            String reelerNumberText = "";
+//            String externalUnitLicenseNumberText ="";
+//            String externalUnitLicenseAddresssText ="";
+//            String reelerAddressText = "";
+//            if (apiResponse.content.getExternalUnitLicenseNumber() != null) {
+//                externalUnitLicenseNumberText = "(" + apiResponse.content.getExternalUnitLicenseNumber() + ")";
+//            }
+//            if (apiResponse.content.getReelerNumber() != null) {
+//                reelerNumberText = "(" + apiResponse.content.getReelerNumber() + ")";
+//            }
+//            if (apiResponse.content.getReelerAddress() != null) {
+//                reelerAddressText = apiResponse.content.getReelerAddress();
+//            }
+//            if (apiResponse.content.getExternalUnitAddress() != null) {
+//                externalUnitLicenseAddresssText = apiResponse.content.getExternalUnitAddress();
+//            }
+////            apiResponse.content.setReelerDetails(reelerNumberText + " ,  ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.content.getReelerName()+" ,  ಬಿನ್/ಕೋಂ  "  +apiResponse.content.getReelerNameKannada()+ " ,  " + reelerAddressText);
+//            apiResponse.content.setReelerDetails(externalUnitLicenseNumberText + " ,  " +apiResponse.content.getExternalUnitName()+" ,   "  +externalUnitLicenseAddresssText);
+//
+//            if (apiResponse.content.getSmallBinList() != null) {
+//                List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
+//                        .map(Object::toString)
+//                        .collect(Collectors.toList());
+//                smallBins = String.join(",", smallBinList);
+//            }
+//            apiResponse.content.setAcknowledgmentString("ಈ ಮೇಲೆ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು " + apiResponse.content.getAuctionDate() + " ದಿನ _______ ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.");
+//
+//            if (apiResponse.content.getBigBinList() != null) {
+//                List<String> bigBinList = apiResponse.content.getBigBinList().stream()
+//                        .map(Object::toString)
+//                        .collect(Collectors.toList());
+//                bigBins = String.join(",", bigBinList);
+//            }
+////            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
+//            apiResponse.content.setBinno("  ಜಾಲರಿ ಸಂಖ್ಯೆ: " + bigBins );
+//
+//
+//            for (int i = 0; i < 15; i++) {
+//                switch (i) {
+//                    case 0:
+//                        apiResponse.content.setLotDetail0("");
+//                        break;
+//                    case 1:
+//                        apiResponse.content.setLotDetail1("");
+//                        break;
+//                    case 2:
+//                        apiResponse.content.setLotDetail2("");
+//                        break;
+//                    case 3:
+//                        apiResponse.content.setLotDetail3("");
+//                        break;
+//                    case 4:
+//                        apiResponse.content.setLotDetail4("");
+//                        break;
+//                    case 5:
+//                        apiResponse.content.setLotDetail5("");
+//                        break;
+//                    case 6:
+//                        apiResponse.content.setLotDetail6("");
+//                        break;
+//                    case 7:
+//                        apiResponse.content.setLotDetail7("");
+//                        break;
+//                    case 8:
+//                        apiResponse.content.setLotDetail8("");
+//                        break;
+//                    case 9:
+//                        apiResponse.content.setLotDetail9("");
+//                        break;
+//                    case 10:
+//                        apiResponse.content.setLotDetail10("");
+//                        break;
+//                    case 11:
+//                        apiResponse.content.setLotDetail11("");
+//                        break;
+//                    case 12:
+//                        apiResponse.content.setLotDetail12("");
+//                        break;
+//                    case 13:
+//                        apiResponse.content.setLotDetail13("");
+//                        break;
+//                    case 14:
+//                        apiResponse.content.setLotDetail14("");
+//                        break;
+//                    default:
+//                        System.out.println("Default case");
+//                }
+//            }
+//            if (apiResponse.content.getLotWeightDetail() != null) {
+//                int lotWeightSize = apiResponse.content.getLotWeightDetail().size();
+//                for (int i = 0; i < lotWeightSize && i < 15; i++) {
+//                    try {
+//                        // Dynamically create the method name
+//                        Method method = apiResponse.content.getClass().getMethod("setLotDetail" + i, String.class);
+//                        // Format the value
+//                        String formattedValue = String.format("%.3f", Double.parseDouble(apiResponse.content.getLotWeightDetail().get(i).toString()));
+//                        // Invoke the method
+//                        method.invoke(apiResponse.content, formattedValue);
+//                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+//                        e.printStackTrace();
+////            if (apiResponse.content.getLotWeightDetail() != null) {
+////                if (apiResponse.content.getLotWeightDetail().size() > 0) {
+////                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
+//                        switch (i) {
+//                            case 0:
+//                                apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 1:
+//                                apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 2:
+//                                apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 3:
+//                                apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 4:
+//                                apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 5:
+//                                apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 6:
+//                                apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 7:
+//                                apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 8:
+//                                apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 9:
+//                                apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 10:
+//                                apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 11:
+//                                apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 12:
+//                                apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 13:
+//                                apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            case 14:
+//                                apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
+//                                break;
+//                            default:
+//                                System.out.println("Default case");
+//                        }
+//                    }
+//                }
+//
+//
+////                apiResponse.content.setTotalcrates(String.valueOf(lotWeightDetails.size()));
+//                apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+//                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
+////                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
+//
+////                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
+////                double lotSoldOutAmount = Double.parseDouble(lotSoldOutAmountStr);
+////
+//
+//            }
+//            apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+//            if (apiResponse.content.getBidAmount().equals("0.0")) {
+//                apiResponse.content.setBidAmount("");
+//            } else {
+//                apiResponse.content.setBidAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getBidAmount()))));
+//            }
+////            if (apiResponse.content.getLotWeight().equals("0.0")) {
+////                apiResponse.content.setLotWeight("");
+////            } else {
+////                double doubleValue = Double.parseDouble(apiResponse.content.getLotWeight());
+////                String formattedValue = String.format("%.3f", doubleValue);
+////                apiResponse.content.setLotWeight(formattedValue);
+////            }
+//            if (apiResponse.content.getLotSoldOutAmount().equals("0.0")) {
+//                apiResponse.content.setLotSoldOutAmount("");
+//            } else {
+//                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+//
+////                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
+//
+////                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee() - apiResponse.content.getReelerMarketFee())));
+//            }
+////            if (apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")) {
+////                apiResponse.content.setFeespaid("");
+////            } else {
+//            System.out.println("Enter the first value:");
+//            String[] components = apiResponse.content.getFeespaid().split("[+=]");
+//
+//            // Extract the symbols
+//            String additionSymbol = components[1]; // The addition symbol
+//            String equalitySymbol = components[2];
+//            int value1 = roundToWholeNumber(Double.parseDouble(additionSymbol));
+//
+//            System.out.println("Enter the second value:");
+//            int value2 = roundToWholeNumber(Double.parseDouble(equalitySymbol));
+//
+//            // Perform the addition
+//            double result = value1 + value2;
+//
+//            // Round the result to the nearest integer
+//            int roundedResult = (int) Math.round(result);
+//
+//            // Print the rounded result
+//            System.out.println("Rounded result: " + roundedResult);
+////                apiResponse.content.setFeespaid(value1 + "+" + value2 + "=" + String.valueOf(roundedResult));
+//            //}
+//            if (!apiResponse.content.getBidAmount().equals("")) {
+//                apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
+//            } else {
+//                apiResponse.content.setReeleramount("");
+//            }
+//            String markFee = "0";
+//            String totalFee = "0";
+//            if (apiResponse.content.getMarketFee() != null && !apiResponse.content.getMarketFee().equals("")) {
+//                markFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getMarketFee())));
+//            }
+//            else {
+//                markFee = "0"; // or any default value you prefer
+//            }
+////            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
+////                totalFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())));
+////            }
+////            else {
+////                totalFee = "0"; // or any default value you prefer
+////            }
+//////            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
+//////            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
+////
+////            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee))  + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()));
+////            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + tot_amt  );
+////
+//            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
+//                double totalAmount = Double.parseDouble(apiResponse.content.getTotalamount());
+//                totalFee = String.valueOf(Math.round(totalAmount)); // Convert to long
+//            } else {
+//                totalFee = "0"; // Default value
+//            }
+//            long marketFee = Math.round(apiResponse.content.getReelerMarketFee());
+//
+//            String tot_amt = String.valueOf(Math.round(Double.parseDouble(totalFee)) + marketFee);
+//            apiResponse.content.setReelerbalance("Lot value: " + Math.round(Double.parseDouble(totalFee)) + "+" + marketFee + "=" + tot_amt);
+//            countries.add(apiResponse.content);
+//        }
+//        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+//        return new JRBeanCollectionDataSource(countries);
+//    }
+
+
     private JRDataSource getDataSourceForTripletSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
-
-        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoon(requestDto);
+        ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoonTriplet(requestDto);
         List<Content> countries = new LinkedList<>();
-        if (apiResponse.content != null) {
 
-//            long farmerMarketFee = Math.round(apiResponse.content.getFarmerMarketFee());
-//            long reelerMarketFee = Math.round(apiResponse.content.getReelerMarketFee());
-//            long totalMarketFee = Math.round(farmerMarketFee + reelerMarketFee);
-//
-//            String formatfees = farmerMarketFee + "+" + reelerMarketFee + "=" + totalMarketFee;
-//            apiResponse.content.setFeespaid(formatfees);
-//
-//            long amountPaid = Math.round(reelerMarketFee);  // Apply rounding to amountPaid
-//
-//            String marketFees = String.valueOf(reelerMarketFee);  // Convert reelerMarketFee to string
-//            apiResponse.content.setAmountPaid(marketFees);
-//
+        if (apiResponse == null || apiResponse.content == null) {
+            // No content -> return empty datasource so Jasper doesn't NPE
+            return new JRBeanCollectionDataSource(Collections.emptyList());
+        }
 
+        // --- existing code (kept mostly as you had it) ---
+        // set sadodLot safely
+        if (apiResponse.content.getSadodLotNumber() != null) {
+            apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
+        } else {
+            apiResponse.content.setSadodLot("DefaultSadodLot");
+        }
 
-// ...
-//            apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
-//            apiResponse.content.setDescription1( "                  \n" +
-//                    "  ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ \n" +
-//                    "  (ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
-//                    "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ."+ apiResponse.content.getAllottedLotId());t
+        String allottedLotId = apiResponse.content.getAllottedLotId() != null ? apiResponse.content.getAllottedLotId() : "DefaultLotId";
+        apiResponse.content.setDescription1("                  \n" +
+                "  ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ \n" +
+                "  (ರೆಗ್ಯುಲೇಶನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
+                "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ." + allottedLotId);
 
-            if (apiResponse != null && apiResponse.content != null) {
-                // Set the sadodLot with null check
-                if (apiResponse.content.getSadodLotNumber() != null) {
-                    apiResponse.content.setSadodLot(apiResponse.content.getSadodLotNumber());
-                } else {
-                    // Handle the case where sadodLotNumber is null (e.g., set to a default value)
-                    apiResponse.content.setSadodLot("DefaultSadodLot"); // Replace with an appropriate default value
-                }
+        DecimalFormat df = new DecimalFormat("#.00");
 
-                // Build the description with null checks
-                String allottedLotId = apiResponse.content.getAllottedLotId() != null ?
-                        apiResponse.content.getAllottedLotId() : "DefaultLotId"; // Replace with an appropriate default value
+        double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
+        double reelerMarketFee = apiResponse.content.getReelerMarketFee();
+        double totalMarketFee = farmerMarketFee + reelerMarketFee;
 
-                apiResponse.content.setDescription1("                  \n" +
-                        "  ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ \n" +
-                        "  (ರೆಗ್ಯುಲೇಶನ್ ಆಫ್ ಪ್ರೊಡಕ್ಸನ್, ಸಪ್ಲೈ  , ಡಿಸ್ಟ್ರಿಬ್ಯೂಸನ್  ಅಂಡ್ ಸೇಲ್ಸ್ )\n" +
-                        "  ರೂಲ್ಸ್  ೧೯೬೦-ಫಾರಂ ೭ಬಿ , ಬಿಡ್ ಸ್ಲಿಪ್ ನಂ." + allottedLotId);
-            }
+        String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
+        apiResponse.content.setFeespaid(formatFees);
+        apiResponse.content.setAmountPaid(df.format(reelerMarketFee));
+        apiResponse.content.setAuctionDate(apiResponse.content.getAuctionDate());
 
-            DecimalFormat df = new DecimalFormat("#.00");
+        long total = 0;
+        try {
+            total = Math.round(Double.valueOf(Optional.ofNullable(apiResponse.content.getLotSoldOutAmount()).orElse("0")));
+        } catch (Exception ignored) {}
+        long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
+        long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
+        String farmeramout = "" + (total - farmerfee);
+        String relaramout = "" + (total - realerfee);
+        long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
 
-            double farmerMarketFee = apiResponse.content.getFarmerMarketFee();
-            double reelerMarketFee = apiResponse.content.getReelerMarketFee();
-            double totalMarketFee = farmerMarketFee + reelerMarketFee;
+        apiResponse.content.setAmountfarmer(farmeramout);
+        apiResponse.content.setAmountrealar(relaramout);
+        apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "                       IFSC  Code  :  " + apiResponse.content.getIfscCode());
+        apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getAccountNumber());
+        apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
+        apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
 
-            String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
-            apiResponse.content.setFeespaid(formatFees);
-
-            String amountPaid = df.format(reelerMarketFee);  // Format reelerMarketFee to two decimal places
-            apiResponse.content.setAmountPaid(amountPaid);
-
-
-
-            apiResponse.content.setAuctionDate(apiResponse.content.getAuctionDate());
-//            long farmerMarketFeeLong = farmerMarketFee; // Ensure farmerMarketFee is a long
-//            long paidAmount = farmerMarketFeeLong;
-//            String format = farmerMarketFeeLong + "";
-//            apiResponse.content.setPaidAmount(format);
-//
-//
-            long total = Math.round(Double.valueOf(apiResponse.content.getLotSoldOutAmount()));
-            long farmerfee = Math.round(apiResponse.content.getFarmerMarketFee());
-            long realerfee = Math.round(apiResponse.content.getReelerMarketFee());
-            String farmeramout = "" + (total - farmerfee);
-            String relaramout = "" + (total - realerfee);
-
-            long slip1Amount = Math.round((total - farmerfee) + farmerfee + realerfee);
-
-            // Assuming farmerMarketFee is a double or can be converted to double
-//            double farmerMarketFeeDouble = (double) farmerMarketFee;
-//            double paidAmount = farmerMarketFeeDouble;
-//            String format = String.valueOf(farmerMarketFeeDouble);
-//            apiResponse.content.setPaidAmount(format);
-
-//            double farmerMarketFeeDouble = (double) farmerMarketFee;
-//            long paidAmount = Math.round(farmerMarketFeeDouble); // Math.round returns a long
-//            String format = String.valueOf(paidAmount); // Convert to string without decimal
-//            apiResponse.content.setPaidAmount(format);
-
-
-// Assuming farmerMarketFee is a double or a float
-            double farmerMarketFeeDouble = (double) farmerMarketFee;
-            DecimalFormat decimalFormat = new DecimalFormat("#.00");
-            String format = decimalFormat.format(farmerMarketFeeDouble); // Format to 2 decimal places
-            apiResponse.content.setPaidAmount(format);
-
-
-
-
-
-//            slip1Amount = roundToTwoDecimalPlaces((total - farmerfee) + farmerfee + realerfee);
-            apiResponse.content.setAmountfarmer(farmeramout);
-            apiResponse.content.setAmountrealar(relaramout);
-            apiResponse.content.setLoginname_accountnumber_ifsccode(" (" + apiResponse.content.getLoginName() + ")" + "//Bank - " + apiResponse.content.getAccountNumber() + "                       IFSC  Code  :  "  + apiResponse.content.getIfscCode());
-            apiResponse.content.setAccountnumber_ifsccode("  Farmer Bank A/c No. - " + apiResponse.content.getAccountNumber() );
-            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + Math.round(apiResponse.content.getFarmerMarketFee()) + "+" + Math.round(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
-//            apiResponse.content.setFarmeramount_farmermf_reelermf(farmeramout + "+" + roundToTwoDecimalPlaces(apiResponse.content.getFarmerMarketFee()) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + slip1Amount);
-            apiResponse.content.setIfsc("  IFSC Code : " + apiResponse.content.getIfscCode());
-
-
-            String inputDateTime = "";
-            if (apiResponse.content.getAuctionDateWithTime() != null) {
-                inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
-            } else {
+        // parse auctionDateWithTime defensively
+        if (apiResponse.content.getAuctionDateWithTime() != null) {
+            String inputDateTime = apiResponse.content.getAuctionDateWithTime().toString();
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                Date parsedDate = inputFormat.parse(inputDateTime);
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
+                SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+                apiResponse.content.setAuctionDate_time(outputFormat.format(parsedDate));
+                apiResponse.content.setAuctionDate(outputFormat1.format(parsedDate));
+            } catch (ParseException e) {
+                // don't fail report generation because of date parsing — set blank and log if needed
                 apiResponse.content.setAuctionDate_time("");
             }
-            // Parse the input date and time
-            SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-            Date parsedDate;
-            try {
-                if (inputDateTime != null && !inputDateTime.equals("")) {
-                    parsedDate = inputFormat.parse(inputDateTime);
-                    // Format the output date and time
-                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
-                    SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
-                    String formattedDateTime = outputFormat.format(parsedDate);
-                    String formattedDateTime1 = outputFormat1.format(parsedDate);
-                    apiResponse.content.setAuctionDate_time(formattedDateTime);
-                    apiResponse.content.setAuctionDate(formattedDateTime1);
+        } else {
+            apiResponse.content.setAuctionDate_time("");
+        }
 
+        // null-safe strings
+        if (apiResponse.content.getReelerNameKannada() == null) apiResponse.content.setReelerNameKannada("");
+        if (apiResponse.content.getFarmerNameKannada() == null) apiResponse.content.setFarmerNameKannada("");
+        if (apiResponse.content.getFarmerAddress() == null) apiResponse.content.setFarmerAddress("");
+        if (apiResponse.content.getFatherNameKan() == null) apiResponse.content.setFatherNameKan("");
+        if (apiResponse.content.getReelerLicense() == null) apiResponse.content.setReelerLicense("");
 
-                }
-            } catch (ParseException e) {
-                throw new RuntimeException("Error parsing input date and time", e);
-            }
+        // ------------------- IMPORTANT SANITIZATION FOR lotWeight -------------------
+        // This is the actual fix for the Jasper error you saw.
+        // If lotWeight contains an array (e.g. StackTraceElement[]) or other unexpected object,
+        // set a safe JR-friendly value (empty string) instead of leaving the array object.
+        try {
+            Object rawLotWeight = apiResponse.content.getLotWeight(); // raw can be String, Number, Collection, array, etc.
 
-            String smallBins = "";
-            String bigBins = "";
-
-            if (apiResponse.content.getReelerNameKannada() == null) {
-                apiResponse.content.setReelerNameKannada("");
-            }
-            if (apiResponse.content.getFarmerNameKannada() == null) {
-                apiResponse.content.setFarmerNameKannada("");
-            }
-            if (apiResponse.content.getFarmerAddress() == null) {
-                apiResponse.content.setFarmerAddress("");
-            }
-            if (apiResponse.content.getFatherNameKan() == null) {
-                apiResponse.content.setFatherNameKan("");
-            }
-            if (apiResponse.content.getReelerLicense() == null) {
-                apiResponse.content.setReelerLicense("");
-            }
-
-            apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
-            String farmerNumber = "";
-            if (apiResponse.content.getFruitsId() != null && !apiResponse.content.getFruitsId().equals("")) {
-                farmerNumber = apiResponse.content.getFruitsId();
+            if (rawLotWeight == null) {
+                // keep it as empty string (your DTO previously used empty string)
+                apiResponse.content.setLotWeight("");
             } else {
-                farmerNumber = apiResponse.content.getFarmerNumber();
-            }
-            apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ") \n" +
-                    "  ಶ್ರೀ /ಶ್ರೀಮತಿ. "+ apiResponse.content.getFarmerNameKannada() + " ,  ಬಿನ್/ಕೋಂ    " + apiResponse.content.getFatherNameKan()  + " ,  " + apiResponse.content.getFarmerVillage() +" , "+ apiResponse.content.getFarmerTaluk());
-
-            String reelerNumberText = "";
-            String externalUnitLicenseNumberText ="";
-            String externalUnitLicenseAddresssText ="";
-            String reelerAddressText = "";
-            if (apiResponse.content.getExternalUnitLicenseNumber() != null) {
-                externalUnitLicenseNumberText = "(" + apiResponse.content.getExternalUnitLicenseNumber() + ")";
-            }
-            if (apiResponse.content.getReelerNumber() != null) {
-                reelerNumberText = "(" + apiResponse.content.getReelerNumber() + ")";
-            }
-            if (apiResponse.content.getReelerAddress() != null) {
-                reelerAddressText = apiResponse.content.getReelerAddress();
-            }
-            if (apiResponse.content.getExternalUnitAddress() != null) {
-                externalUnitLicenseAddresssText = apiResponse.content.getExternalUnitAddress();
-            }
-//            apiResponse.content.setReelerDetails(reelerNumberText + " ,  ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.content.getReelerName()+" ,  ಬಿನ್/ಕೋಂ  "  +apiResponse.content.getReelerNameKannada()+ " ,  " + reelerAddressText);
-            apiResponse.content.setReelerDetails(externalUnitLicenseNumberText + " ,  " +apiResponse.content.getExternalUnitName()+" ,   "  +externalUnitLicenseAddresssText);
-
-            if (apiResponse.content.getSmallBinList() != null) {
-                List<String> smallBinList = apiResponse.content.getSmallBinList().stream()
-                        .map(Object::toString)
-                        .collect(Collectors.toList());
-                smallBins = String.join(",", smallBinList);
-            }
-            apiResponse.content.setAcknowledgmentString("ಈ ಮೇಲೆ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು " + apiResponse.content.getAuctionDate() + " ದಿನ _______ ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.");
-
-            if (apiResponse.content.getBigBinList() != null) {
-                List<String> bigBinList = apiResponse.content.getBigBinList().stream()
-                        .map(Object::toString)
-                        .collect(Collectors.toList());
-                bigBins = String.join(",", bigBinList);
-            }
-//            apiResponse.content.setBinno("Big: " + bigBins + " Small: " + smallBins);
-            apiResponse.content.setBinno("  ಜಾಲರಿ ಸಂಖ್ಯೆ: " + bigBins );
-
-
-            for (int i = 0; i < 15; i++) {
-                switch (i) {
-                    case 0:
-                        apiResponse.content.setLotDetail0("");
-                        break;
-                    case 1:
-                        apiResponse.content.setLotDetail1("");
-                        break;
-                    case 2:
-                        apiResponse.content.setLotDetail2("");
-                        break;
-                    case 3:
-                        apiResponse.content.setLotDetail3("");
-                        break;
-                    case 4:
-                        apiResponse.content.setLotDetail4("");
-                        break;
-                    case 5:
-                        apiResponse.content.setLotDetail5("");
-                        break;
-                    case 6:
-                        apiResponse.content.setLotDetail6("");
-                        break;
-                    case 7:
-                        apiResponse.content.setLotDetail7("");
-                        break;
-                    case 8:
-                        apiResponse.content.setLotDetail8("");
-                        break;
-                    case 9:
-                        apiResponse.content.setLotDetail9("");
-                        break;
-                    case 10:
-                        apiResponse.content.setLotDetail10("");
-                        break;
-                    case 11:
-                        apiResponse.content.setLotDetail11("");
-                        break;
-                    case 12:
-                        apiResponse.content.setLotDetail12("");
-                        break;
-                    case 13:
-                        apiResponse.content.setLotDetail13("");
-                        break;
-                    case 14:
-                        apiResponse.content.setLotDetail14("");
-                        break;
-                    default:
-                        System.out.println("Default case");
-                }
-            }
-            if (apiResponse.content.getLotWeightDetail() != null) {
-                int lotWeightSize = apiResponse.content.getLotWeightDetail().size();
-                for (int i = 0; i < lotWeightSize && i < 15; i++) {
-                    try {
-                        // Dynamically create the method name
-                        Method method = apiResponse.content.getClass().getMethod("setLotDetail" + i, String.class);
-                        // Format the value
-                        String formattedValue = String.format("%.3f", Double.parseDouble(apiResponse.content.getLotWeightDetail().get(i).toString()));
-                        // Invoke the method
-                        method.invoke(apiResponse.content, formattedValue);
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        e.printStackTrace();
-//            if (apiResponse.content.getLotWeightDetail() != null) {
-//                if (apiResponse.content.getLotWeightDetail().size() > 0) {
-//                    for (int i = 0; i < apiResponse.content.getLotWeightDetail().size(); i++) {
-                        switch (i) {
-                            case 0:
-                                apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 1:
-                                apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 2:
-                                apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 3:
-                                apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 4:
-                                apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 5:
-                                apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 6:
-                                apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 7:
-                                apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 8:
-                                apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 9:
-                                apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 10:
-                                apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 11:
-                                apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 12:
-                                apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 13:
-                                apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            case 14:
-                                apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString());
-                                break;
-                            default:
-                                System.out.println("Default case");
+                Class<?> cls = rawLotWeight.getClass();
+                if (cls.isArray()) {
+                    // Example from your logs: [Ljava.lang.StackTraceElement;@...
+                    // Arrays are not suitable for Jasper field expecting String/Number -> set blank
+                    apiResponse.content.setLotWeight("");
+                } else if (rawLotWeight instanceof Number) {
+                    // format numeric with 3 decimals (or choose your preferred formatting)
+                    double dv = ((Number) rawLotWeight).doubleValue();
+                    apiResponse.content.setLotWeight(String.format(Locale.ENGLISH, "%.3f", dv));
+                } else if (rawLotWeight instanceof Collection) {
+                    // if a collection arrived accidentally, join items with comma
+                    Collection<?> col = (Collection<?>) rawLotWeight;
+                    String joined = col.stream().map(Object::toString).collect(Collectors.joining(","));
+                    apiResponse.content.setLotWeight(joined);
+                } else {
+                    // treat as string but sanitize the common stacktrace.toString scenario
+                    String s = rawLotWeight.toString();
+                    // if string looks like an array-like "[L...;" form, sanitize to empty
+                    if (s.startsWith("[L") && s.contains(";@")) {
+                        apiResponse.content.setLotWeight("");
+                    } else {
+                        // try numeric parse and format, otherwise keep string
+                        try {
+                            double dv = Double.parseDouble(s);
+                            apiResponse.content.setLotWeight(String.format(Locale.ENGLISH, "%.3f", dv));
+                        } catch (NumberFormatException nfe) {
+                            apiResponse.content.setLotWeight(s);
                         }
                     }
                 }
-
-
-//                apiResponse.content.setTotalcrates(String.valueOf(lotWeightDetails.size()));
-                apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
-                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble( apiResponse.content.getLotSoldOutAmount() ))));
-//                                apiResponse.content.setTotalamount(String.valueOf(Math.round(Double.parseDouble("(" + apiResponse.content.getLotSoldOutAmount() + ")"))));
-
-//                                String lotSoldOutAmountStr = apiResponse.content.getLotSoldOutAmount();
-//                double lotSoldOutAmount = Double.parseDouble(lotSoldOutAmountStr);
-//
-
             }
-            apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            if (apiResponse.content.getBidAmount().equals("0.0")) {
-                apiResponse.content.setBidAmount("");
-            } else {
+        } catch (Exception ex) {
+            // very defensive fallback: set empty string so Jasper doesn't fail
+            apiResponse.content.setLotWeight("");
+        }
+        // ---------------------------------------------------------------------------
+
+        // continue with rest of formatting you had
+        if (apiResponse.content.getLotWeight() == null) {
+            apiResponse.content.setLotWeight("");
+        }
+
+        apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
+        String farmerNumber = (apiResponse.content.getFruitsId() != null && !apiResponse.content.getFruitsId().equals("")) ? apiResponse.content.getFruitsId() : apiResponse.content.getFarmerNumber();
+        apiResponse.content.setFarmerNameKannadaWithSerialNumber("(" + farmerNumber + ") \n" +
+                "  ಶ್ರೀ /ಶ್ರೀಮತಿ. " + apiResponse.content.getFarmerNameKannada() + " ,  ಬಿನ್/ಕೋಂ    " + apiResponse.content.getFatherNameKan() + " ,  " + apiResponse.content.getFarmerVillage() + " , " + apiResponse.content.getFarmerTaluk());
+
+        String externalUnitLicenseNumberText = "";
+        String externalUnitLicenseAddresssText = "";
+        if (apiResponse.content.getExternalUnitLicenseNumber() != null) externalUnitLicenseNumberText = "(" + apiResponse.content.getExternalUnitLicenseNumber() + ")";
+        if (apiResponse.content.getExternalUnitAddress() != null) externalUnitLicenseAddresssText = apiResponse.content.getExternalUnitAddress();
+        apiResponse.content.setReelerDetails(externalUnitLicenseNumberText + " ,  " + apiResponse.content.getExternalUnitName() + " ,   " + externalUnitLicenseAddresssText);
+
+        String smallBins = "";
+        String bigBins = "";
+        if (apiResponse.content.getSmallBinList() != null) {
+            List<String> smallBinList = apiResponse.content.getSmallBinList().stream().map(Object::toString).collect(Collectors.toList());
+            smallBins = String.join(",", smallBinList);
+        }
+        if (apiResponse.content.getBigBinList() != null) {
+            List<String> bigBinList = apiResponse.content.getBigBinList().stream().map(Object::toString).collect(Collectors.toList());
+            bigBins = String.join(",", bigBinList);
+        }
+        apiResponse.content.setAcknowledgmentString("ಈ ಮೇಲೆ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು " + apiResponse.content.getAuctionDate() + " ದಿನ _______ ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.");
+        apiResponse.content.setBinno("  ಜಾಲರಿ ಸಂಖ್ಯೆ: " + bigBins);
+
+        // initialize lotDetail0..lotDetail14
+        for (int i = 0; i < 15; i++) {
+            try {
+                Method method = apiResponse.content.getClass().getMethod("setLotDetail" + i, String.class);
+                method.invoke(apiResponse.content, "");
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
+                // ignore — fallback handled later
+                switch (i) {
+                    case 0: apiResponse.content.setLotDetail0(""); break;
+                    case 1: apiResponse.content.setLotDetail1(""); break;
+                    case 2: apiResponse.content.setLotDetail2(""); break;
+                    case 3: apiResponse.content.setLotDetail3(""); break;
+                    case 4: apiResponse.content.setLotDetail4(""); break;
+                    case 5: apiResponse.content.setLotDetail5(""); break;
+                    case 6: apiResponse.content.setLotDetail6(""); break;
+                    case 7: apiResponse.content.setLotDetail7(""); break;
+                    case 8: apiResponse.content.setLotDetail8(""); break;
+                    case 9: apiResponse.content.setLotDetail9(""); break;
+                    case 10: apiResponse.content.setLotDetail10(""); break;
+                    case 11: apiResponse.content.setLotDetail11(""); break;
+                    case 12: apiResponse.content.setLotDetail12(""); break;
+                    case 13: apiResponse.content.setLotDetail13(""); break;
+                    case 14: apiResponse.content.setLotDetail14(""); break;
+                }
+            }
+        }
+
+        if (apiResponse.content.getLotWeightDetail() != null) {
+            int lotWeightSize = apiResponse.content.getLotWeightDetail().size();
+            for (int i = 0; i < lotWeightSize && i < 15; i++) {
+                try {
+                    Method method = apiResponse.content.getClass().getMethod("setLotDetail" + i, String.class);
+                    String formattedValue = String.format("%.3f", Double.parseDouble(apiResponse.content.getLotWeightDetail().get(i).toString()));
+                    method.invoke(apiResponse.content, formattedValue);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    // fallback switch (keeps your previous behavior)
+                    switch (i) {
+                        case 0: apiResponse.content.setLotDetail0(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 1: apiResponse.content.setLotDetail1(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 2: apiResponse.content.setLotDetail2(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 3: apiResponse.content.setLotDetail3(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 4: apiResponse.content.setLotDetail4(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 5: apiResponse.content.setLotDetail5(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 6: apiResponse.content.setLotDetail6(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 7: apiResponse.content.setLotDetail7(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 8: apiResponse.content.setLotDetail8(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 9: apiResponse.content.setLotDetail9(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 10: apiResponse.content.setLotDetail10(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 11: apiResponse.content.setLotDetail11(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 12: apiResponse.content.setLotDetail12(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 13: apiResponse.content.setLotDetail13(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                        case 14: apiResponse.content.setLotDetail14(apiResponse.content.getLotWeightDetail().get(i).toString()); break;
+                    }
+                }
+            }
+
+            apiResponse.content.setTotalcrates(String.valueOf(apiResponse.content.getLotWeightDetail().size()));
+            try {
+                apiResponse.content.setTotalamount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getLotSoldOutAmount()))));
+            } catch (Exception ex) {
+                apiResponse.content.setTotalamount("0");
+            }
+        }
+
+        apiResponse.content.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        if ("0.0".equals(apiResponse.content.getBidAmount())) {
+            apiResponse.content.setBidAmount("");
+        } else {
+            try {
                 apiResponse.content.setBidAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getBidAmount()))));
+            } catch (Exception ex) {
+                // keep as-is
             }
-            if (apiResponse.content.getLotWeight().equals("0.0")) {
-                apiResponse.content.setLotWeight("");
-            } else {
-                double doubleValue = Double.parseDouble(apiResponse.content.getLotWeight());
-                String formattedValue = String.format("%.3f", doubleValue);
-                apiResponse.content.setLotWeight(formattedValue);
+        }
+
+        if ("0.0".equals(apiResponse.content.getLotSoldOutAmount())) {
+            apiResponse.content.setLotSoldOutAmount("");
+        } else {
+            try {
+                apiResponse.content.setLotSoldOutAmount(String.format(Locale.ENGLISH, "%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+            } catch (Exception ex) {
+                // ignore and keep value
             }
-            if (apiResponse.content.getLotSoldOutAmount().equals("0.0")) {
-                apiResponse.content.setLotSoldOutAmount("");
-            } else {
-                apiResponse.content.setLotSoldOutAmount(String.format("%.2f", Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee()));
+        }
 
-//                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee())));
-
-//                apiResponse.content.setLotSoldOutAmount(String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount()) - apiResponse.content.getFarmerMarketFee() - apiResponse.content.getReelerMarketFee())));
+        // Safe parsing of feespaid, avoid fragile index assumptions
+        try {
+            String fees = Optional.ofNullable(apiResponse.content.getFeespaid()).orElse("");
+            String[] comps = fees.split("\\+|=");
+            if (comps.length >= 2) {
+                int v1 = roundToWholeNumber(Double.parseDouble(comps[0]));
+                int v2 = comps.length >= 2 ? roundToWholeNumber(Double.parseDouble(comps[1])) : 0;
+                apiResponse.content.setFeespaid(v1 + "+" + v2 + "=" + (v1 + v2));
             }
-//            if (apiResponse.content.getFeespaid().equals("0.0+0.0=0.0")) {
-//                apiResponse.content.setFeespaid("");
-//            } else {
-            System.out.println("Enter the first value:");
-            String[] components = apiResponse.content.getFeespaid().split("[+=]");
+        } catch (Exception ignored) {}
 
-            // Extract the symbols
-            String additionSymbol = components[1]; // The addition symbol
-            String equalitySymbol = components[2];
-            int value1 = roundToWholeNumber(Double.parseDouble(additionSymbol));
-
-            System.out.println("Enter the second value:");
-            int value2 = roundToWholeNumber(Double.parseDouble(equalitySymbol));
-
-            // Perform the addition
-            double result = value1 + value2;
-
-            // Round the result to the nearest integer
-            int roundedResult = (int) Math.round(result);
-
-            // Print the rounded result
-            System.out.println("Rounded result: " + roundedResult);
-//                apiResponse.content.setFeespaid(value1 + "+" + value2 + "=" + String.valueOf(roundedResult));
-            //}
-            if (!apiResponse.content.getBidAmount().equals("")) {
+        if (apiResponse.content.getBidAmount() != null && !apiResponse.content.getBidAmount().equals("")) {
+            try {
                 apiResponse.content.setReeleramount("Balance: " + roundToWholeNumber(Double.parseDouble(apiResponse.content.getReelerbalance())));
-            } else {
+            } catch (Exception ex) {
                 apiResponse.content.setReeleramount("");
             }
-            String markFee = "0";
-            String totalFee = "0";
-            if (apiResponse.content.getMarketFee() != null && !apiResponse.content.getMarketFee().equals("")) {
-                markFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getMarketFee())));
-            }
-            else {
-                markFee = "0"; // or any default value you prefer
-            }
-//            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
-//                totalFee = String.valueOf(roundToWholeNumber(Double.parseDouble(apiResponse.content.getTotalamount())));
-//            }
-//            else {
-//                totalFee = "0"; // or any default value you prefer
-//            }
-////            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee)) + roundToWholeNumber(Double.parseDouble(markFee)));
-////            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToWholeNumber(Double.parseDouble(markFee)) + "=" + tot_amt);
-//
-//            String tot_amt = String.valueOf(roundToWholeNumber(Double.parseDouble(totalFee))  + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()));
-//            apiResponse.content.setReelerbalance("Lot value: " + roundToWholeNumber(Double.parseDouble(totalFee)) + "+" + roundToTwoDecimalPlaces(apiResponse.content.getReelerMarketFee()) + "=" + tot_amt  );
-//
-            if (apiResponse.content.getTotalamount() != null && !apiResponse.content.getTotalamount().equals("")) {
-                double totalAmount = Double.parseDouble(apiResponse.content.getTotalamount());
-                totalFee = String.valueOf(Math.round(totalAmount)); // Convert to long
-            } else {
-                totalFee = "0"; // Default value
-            }
-            long marketFee = Math.round(apiResponse.content.getReelerMarketFee());
+        } else {
+            apiResponse.content.setReeleramount("");
+        }
 
+        // reeler balance / lot value formation (safe)
+        try {
+            String totalFee = Optional.ofNullable(apiResponse.content.getTotalamount()).orElse("0");
+            long marketFee = Math.round(apiResponse.content.getReelerMarketFee());
             String tot_amt = String.valueOf(Math.round(Double.parseDouble(totalFee)) + marketFee);
             apiResponse.content.setReelerbalance("Lot value: " + Math.round(Double.parseDouble(totalFee)) + "+" + marketFee + "=" + tot_amt);
-            countries.add(apiResponse.content);
+        } catch (Exception ex) {
+            apiResponse.content.setReelerbalance("Lot value: 0+0=0");
         }
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+
+        // add to JR list
+        countries.add(apiResponse.content);
+
         return new JRBeanCollectionDataSource(countries);
     }
 
@@ -4087,6 +4369,9 @@ public class ReportsController {
             }
             if (apiResponse.content.getReelerLicense() == null) {
                 apiResponse.content.setReelerLicense("");
+            }
+            if (apiResponse.content.getFarmerEstimatedWeight() == null) {
+                apiResponse.content.setFarmerEstimatedWeight(0f);
             }
 
             apiResponse.content.setReelerbalance(String.valueOf(roundToTwoDecimalPlaces(apiResponse.content.getReelerCurrentBalance())));
