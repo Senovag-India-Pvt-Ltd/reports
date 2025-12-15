@@ -1,6 +1,7 @@
 package com.sericulture.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sericulture.helper.Util;
 import com.sericulture.model.*;
@@ -21,15 +22,9 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestClientResponseException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.web.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,26 +95,83 @@ public class ApiService {
         //return apiResponse;
     }
 
-    public ContentRoot fetchDataFromApiSeedCocoonTriplet(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
-        // Make a GET request to the API endpoint
-        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+//    public ContentRoot fetchDataFromApiSeedCocoonTriplet(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+//        // Make a GET request to the API endpoint
+////        String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
 //        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+//
+//        // Define the request headers
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setBearerAuth(Util.getTokenData());
+//
+//        HttpEntity<MarketAuctionForPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+//        MarketAuctionForPrintResponse response = new MarketAuctionForPrintResponse();
+//        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        ContentRoot response2 = objectMapper.readValue(response1, ContentRoot.class);
+//
+//        return response2;
+//        // Process the API response as needed
+//        //return apiResponse;
+//    }
 
-        // Define the request headers
+
+    public ContentRoot fetchDataFromApiSeedCocoonTriplet(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
+
+                String finalapiurl = apiUrl + "auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+
+//        final String finalapiurl = "http://localhost:8002/market-auction/v1/auction/print/getPrintableDataForLotForSeedCocoonTriplet";
+
+        // Build headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(Util.getTokenData());
+
+        String token = Util.getTokenData();
+        if (token != null && !token.trim().isEmpty()) {
+            headers.setBearerAuth(token);
+        }
 
         HttpEntity<MarketAuctionForPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
-        MarketAuctionForPrintResponse response = new MarketAuctionForPrintResponse();
-        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
 
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity;
+
+        try {
+            responseEntity = restTemplate.exchange(finalapiurl, HttpMethod.POST, requestEntity, String.class);
+        } catch (RestClientException rce) {
+            throw new RuntimeException("Error calling remote API: " + rce.getMessage(), rce);
+        }
+
+        if (responseEntity == null || responseEntity.getBody() == null) {
+            throw new RuntimeException("Empty response from API: " + finalapiurl);
+        }
+
+        // ✅ FIX: Convert HttpStatusCode → HttpStatus
+        HttpStatus status = HttpStatus.valueOf(responseEntity.getStatusCode().value());
+        String body = responseEntity.getBody();
+
+        if (!status.is2xxSuccessful()) {
+            throw new RuntimeException("API call failed. status=" + status + ", body=" + body);
+        }
+
+        // JSON → ContentRoot
         ObjectMapper objectMapper = new ObjectMapper();
-        ContentRoot response2 = objectMapper.readValue(response1, ContentRoot.class);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        return response2;
-        // Process the API response as needed
-        //return apiResponse;
+        ContentRoot contentRoot;
+        try {
+            contentRoot = objectMapper.readValue(body, ContentRoot.class);
+        } catch (JsonProcessingException jpe) {
+            throw jpe;
+        }
+
+        if (contentRoot == null) {
+            contentRoot = new ContentRoot();
+        }
+
+        return contentRoot;
     }
 
     public AuthorisationResponse fetchDataFromAuth(AuthorisationLetterPrintRequest requestDto) throws JsonProcessingException {
@@ -258,7 +310,7 @@ public class ApiService {
     public SanctionOrder fetchSanctionOrderForSeedMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-                String finalapiurl = dbtApiUrl +"service/getSanctionOrderForSeedMarketDetails";
+      String finalapiurl = dbtApiUrl +"service/getSanctionOrderForSeedMarketDetails";
 
 
 //        String finalapiurl = "http://localhost:8013/dbt/v1/service/getSanctionOrderForSeedMarketDetails";
