@@ -7089,58 +7089,29 @@ public class ReportsController {
 
 
 
-            response.setHeader(formattedFromDate  + "   -   " +  formattedToDate  +"   ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/\n" +
-                    "      \n" +
-                    "ಮೈಸೂರು  ತಳಿ  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು    "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ  ಬಿತ್ತನೆ\n" +
-                    "               \n" +
-                    "ಗೂಡು  ಸಾಕಣೆಗೆ  ಅನುಜ್ಞಾ    ಪತ್ರ    ಪಡೆದಿರುವ   ಶ್ರೀ   "+ apiResponse.getContent().get(0).getFarmerFullName()  + "   ರವರಿಂದ\n" +
-                    "            \n" +
-                    apiResponse.getContent().get(0).getNoOfCocoonPerKg() + "  ಗೂಡುಗಳಿಗೆ   ರೂ.   "+ apiResponse.getContent().get(0).getAmount()  + "   ದರದ   ಪ್ರಕಾರ   "+ formattedMarketAuctionDate  + "  ರಂದು\n"+
-                    "     \n"+
-                    "ಕೊಂಡು __________________________ ಲಾಟಿಗೆ   ಉಪಯೋಗಿಸಲು   ಸಂಭಂದಿಸಿದ\n" +
-                    "            \n" +
-                    "ದಾಸ್ತಾನು  ಪುಸ್ತಕದ   ಪುಟ   _______________________ ರಲ್ಲಿ     " + formattedMarketAuctionDate  + "   ರಂದು\n"+
-                    "           \n"+
-                    "ದಾಖಲು  ಮಾಡಿಕೊಂಡು   _______________________________  ದ   ಬಿತ್ತನೆ    ಕೋಠಿಗೆ \n" +
+            response.setHeader(formattedFromDate  + "   -   " +  formattedToDate  +"   ರಲ್ಲಿ     ಹಣ್ಣಾದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈವೋಲ್ಟಿನ್/" +
+                    "  ಮೈಸೂರು    ತಳಿ    ಬಿತ್ತನೆ     ಗೂಡುಗಳನ್ನು      "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾಮದ   ಬಿತ್ತನೆ   " +
+                    "  ಗೂಡು    ಸಾಕಣೆಗೆ    ಅನುಜ್ಞಾ     ಪತ್ರ     ಪಡೆದಿರುವ    ಶ್ರೀ     "+ apiResponse.getContent().get(0).getFarmerFullName()  + "   ರವರಿಂದ    " +
+                    apiResponse.getContent().get(0).getNoOfCocoonPerKg() + "    ಗೂಡುಗಳಿಗೆ     ರೂ.   "+ apiResponse.getContent().get(0).getAmount()  + "" +
+                    "   ದರದ    ಪ್ರಕಾರ   "+ formattedMarketAuctionDate  + "  ರಂದು     ಕೊಂಡು __________________________ ಲಾಟಿಗೆ   ಉಪಯೋಗಿಸಲು   ಸಂಭಂದಿಸಿದ   ದಾಸ್ತಾನು  " +
+                    "  ಪುಸ್ತಕದ   ಪುಟ   _______________________ ರಲ್ಲಿ     " + formattedMarketAuctionDate  + "   ರಂದು  "+
+                    "   ದಾಖಲು    ಮಾಡಿಕೊಂಡು   _______________________________  ದ    ಬಿತ್ತನೆ     ಕೋಠಿಗೆ      ಸರಕು   ರವಾನೆ   ಮೂಲಕ    ರವಾನಿಸಲಾಗಿದೆಯೆಂದು    ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
                     "    \n" +
-                    "ಸರಕು  ರವಾನೆ   ಮೂಲಕ   ರವಾನಿಸಲಾಗಿದೆಯೆಂದು  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ .\n" +
-                    "             \n" +
-                    "             \n" +
+                    "ಒಟ್ಟು      ಮೊಬಲಗು    " +amountInKannada+ "   ರೂ. ಗಳನ್ನು     " +
+                    "   ನಗದು/ಚೆಕ್      ಸಂಖ್ಯೆ     ________________________________ ಕೊಡಲಾಗಿದೆ.");
+            response.setHeader1("ಬಿತ್ತನೆ      ಪ್ರಚಾರ    ಶಾಖೆ/ ಕೃಷಿ     ಕ್ಷೇತ್ರ   /ಕೋಠಿಯ    ಅಧಿಕಾರಿ      "+ apiResponse.getContent().get(0).getFarmerFullName()  +
+                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ    ತಾರೀಖು    " +formattedFromDate + "   -   " +  formattedFromDate  +
+                    "  ರಲ್ಲಿ       ಹಣ್ಣಾಗಿದ್ದು   ,  ಒಂದು     ಕಿಲೋಗೆ     "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "    ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ    " +
+                    "  ಬೈವೋಲ್ಟಿನ್ / ಮೈಸೂರು     ತಳಿ     ಬಿತ್ತನೆ     ಗೂಡನ್ನು       ದರ   "+  apiResponse.getContent().get(0).getAmount()  + " ಕ್ಕೆ      ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ   " +apiResponse.getContent().get(0).getMarketName()  +
+                    "   ರಿಂದ   ____________________________________________  ರವರೆಗೆ   ಒಟ್ಟು    ಕಿ.ಮೀ.   ____________________________ ಸಾಗಣೆ    ವೆಚ್ಚ  _____________________________  ಸೇರಿದಂತೆ   " +
+                    "ಒಟ್ಟು      ಮೊಬಲಗು    " +amountInKannada + "    ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
                     "    \n" +
-                    "ಒಟ್ಟು  ಮೊಬಲಗು  " +amountInKannada+ "  ರೂ. ಗಳನ್ನು  \n" +
-                    "                   \n" +
-                    "ನಗದು/ಚೆಕ್   ಸಂಖ್ಯೆ ________________________________ ಕೊಡಲಾಗಿದೆ.");
-            response.setHeader1("ಬಿತ್ತನೆ    ಪ್ರಚಾರ   ಶಾಖೆ/ ಕೃಷಿ   ಕ್ಷೇತ್ರ  /ಕೋಠಿಯ  ಅಧಿಕಾರಿ    "+ apiResponse.getContent().get(0).getFarmerFullName()  + " \n" +
-                    "               \n" +
-                    apiResponse.getContent().get(0).getFarmerVillage()  + "    ಅವರಿಂದ  ತಾರೀಖು   " +formattedFromDate + "   -   " +  formattedFromDate  +  "\n" +
-                    "    \n" +
-                    "ರಲ್ಲಿ     ಹಣ್ಣಾಗಿದ್ದು  , ಒಂದು   ಕಿಲೋಗೆ   "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "  ಸಂಖ್ಯೆಯಲ್ಲಿದ್ದ\n" +
-                    "     \n" +
-                    "ಬೈವೋಲ್ಟಿನ್ / ಮೈಸೂರು  ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡನ್ನು      ದರ   "+  apiResponse.getContent().get(0).getAmount()  + "   ಕ್ಕೆ\n"+
-                    "     \n" +
-                    " ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ  " +apiResponse.getContent().get(0).getMarketName()  + "\n"+
-                    "    \n"+
-                    "ರಿಂದ   ____________________________________________  ರವರೆಗೆ   ಒಟ್ಟು    ಕಿ.ಮೀ. \n"+
-                    "    \n" +
-                    " ____________________________ ಸಾಗಣೆ    ವೆಚ್ಚ  _____________________________  ಸೇರಿದಂತೆ\n" +
-                    "       \n" +
-                    "ಒಟ್ಟು     ಮೊಬಲಗು  " +amountInKannada + "  ಸ್ವೀಕರಿಸಿದ್ದೇನೆ.\n" +
-                    "    \n" +
-                    "    \n" +
-                    "    \n" +
-                    "                        ಅನುಜ್ಞಾ     ಪಾತ್ರ      ಪಡೆದಿರುವ     ಸಾಕಣೆದಾರನ    ಸಹಿ\n" +
-                    "         \n" +
-                    "ಅಥವಾ    ಹೆಬ್ಬೆಟ್ಟಿನ    ಗುರುತು.   ಪಾವತಿ    ಮಾಡಿರುವ    ದರ   ಚಾಲ್ತಿಯಲ್ಲಿರುವ\n" +
-                    "      \n"+
-                    "ಕೊಳ್ಳುವ    ದರಕ್ಕಿಂತ   ಹೆಚ್ಚಿಲ್ಲವೆಂದೂ   ಮೇಲಾಧಿಕಾರಿಯ  ಮಂಜೂರಾತಿಯನ್ನು \n" +
-                    "     \n" +
-                    "ದಿನಾಂಕ.   ________________________________  ರಂದು _______________________________________\n" +
-                    "    \n" +
-                    "ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ     ಪಡೆದ್ದಿದೆನೆಂದೂ   ಹಣಪಾವತಿ  ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
+                    "                        ಅನುಜ್ಞಾ      ಪಾತ್ರ      ಪಡೆದಿರುವ     ಸಾಕಣೆದಾರನ    ಸಹಿ    ಅಥವಾ    ಹೆಬ್ಬೆಟ್ಟಿನ    ಗುರುತು.   ಪಾವತಿ    ಮಾಡಿರುವ    ದರ   ಚಾಲ್ತಿಯಲ್ಲಿರುವ   " +
+                    "   ಕೊಳ್ಳುವ      ದರಕ್ಕಿಂತ     ಹೆಚ್ಚಿಲ್ಲವೆಂದೂ     ಮೇಲಾಧಿಕಾರಿಯ    ಮಂಜೂರಾತಿಯನ್ನು    ದಿನಾಂಕ.   ________________________________  ರಂದು _______________________________________" +
+                    "ರ  ಸಂಖ್ಯೆಯಲ್ಲಿ       ಪಡೆದ್ದಿದೆನೆಂದೂ     ಹಣಪಾವತಿ    ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
 
-            response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
-                    "     \n" +
-                    "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
+            response.setHeader3("ಬಿತ್ತನೆ    ಪ್ರಚಾರ   ಶಾಖೆ / ಕೃಷಿ   ಕ್ಷೇತ್ರ \n" +
+                    "ಕೋಠಿಯ    ಅಧಿಕಾರಿಯ   ಸಹಿ");
             response.setHeader4("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 //            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
@@ -7201,30 +7172,19 @@ public class ReportsController {
 
             String amountInKannadas = KannadaNumberToWords.convert(amountLong1);
             System.out.println("Amount in Kannada: " + amountInKannadas);
-            response.setHeader(apiResponse.getContent().get(0).getFarmerVillage() + "    ಗ್ರಾಮದ   ಶ್ರೀ   " +apiResponse.getContent().get(0).getFatherNameKan()+"   ಇವರ   ಮಗನಾದ /\n" +
-                    "   \n" +
-                    "ಮಗಳಾದ   ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getFarmerFullName() + "   ಇವರಿಂದ   ನೂಲು  ಬಿಚ್ಚುವ /\n" +
-                    "     \n" +
-                    "ರೇಷ್ಮೆ    ಗೂಡುಗಳ    ಮಾರಾಟ   ನಿಮಿತ್ತವಾಗಿ    ರೂ .  " + String.format("%.2f", apiResponse.getContent().get(0).getAmount()) + "\n" +
-                    "     \n"  +
-                    "ರೂ .  ( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + String.format("%.2f", apiResponse.getContent().get(0).getLotWeight()) + "\n" +
-                    "       \n" +
-                    "ಕೆ.ಜಿ.   " + String.format("%.2f", apiResponse.getContent().get(0).getMarketFee()) + "   ರೂಪಾಯಿ)  ಮಾತ್ರ     ಮಾರುಕಟ್ಟೆ     ಶುಲ್ಕವನ್ನು\n" +
-                    "     \n" +
-                    "ಪಡೆಯಲಾಗಿದೆ  .    ಈ   ಸರಕಿನ    ಒಟ್ಟು      ಮೌಲ್ಯ     " + String.format("%.2f", apiResponse.getContent().get(0).getSoldAmount()) + "\n" +
-                    "    \n" +
-                    "ರೂಪಾಯಿಗಳು");
+            response.setHeader(apiResponse.getContent().get(0).getFarmerVillage() + "    ಗ್ರಾಮದ    ಶ್ರೀ    " +apiResponse.getContent().get(0).getFatherNameKan()+"    ಇವರ    ಮಗನಾದ /" +
+                    "  ಮಗಳಾದ    ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getFarmerFullName() + "    ಇವರಿಂದ     ನೂಲು   ಬಿಚ್ಚುವ /" +
+                    "    ರೇಷ್ಮೆ     ಗೂಡುಗಳ     ಮಾರಾಟ    ನಿಮಿತ್ತವಾಗಿ     ರೂ .   " + String.format("%.2f", apiResponse.getContent().get(0).getAmount()) +
+                    "     ರೂ .  ( ಅಕ್ಷರಗಳಲ್ಲಿ  )   "+ amountInKannadas + "    ಇದರಿಂದ   " + String.format("%.2f", apiResponse.getContent().get(0).getLotWeight()) +
+                    "     ಕೆ.ಜಿ.   " + String.format("%.2f", apiResponse.getContent().get(0).getMarketFee()) + "    ರೂಪಾಯಿ)    ಮಾತ್ರ       ಮಾರುಕಟ್ಟೆ       ಶುಲ್ಕವನ್ನು     " +
+                    "  ಪಡೆಯಲಾಗಿದೆ  .    ಈ    ಸರಕಿನ     ಒಟ್ಟು       ಮೌಲ್ಯ      " + String.format("%.2f", apiResponse.getContent().get(0).getSoldAmount()) + "   ರೂಪಾಯಿಗಳು");
 
-            response.setHeader3("ಬಿತ್ತನೆ ಪ್ರಚಾರ ಶಾಖೆ / ಕೃಷಿ ಕ್ಷೇತ್ರ \n" +
-                    "     \n" +
-                    "ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ");
-            response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
-                    "              \n" +
-                    "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
-                    "           \n"+
+            response.setHeader3("ಬಿತ್ತನೆ   ಪ್ರಚಾರ   ಶಾಖೆ / ಕೃಷಿ    ಕ್ಷೇತ್ರ    " +
+                    "ಕೋಠಿಯ   ಅಧಿಕಾರಿಯ    ಸಹಿ");
+            response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು\n" +
+                    "ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆ     " +
                     apiResponse.getContent().get(0).getMarketName());
             response.setHeader4("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
-//            response.setHeader3("ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.");
 
             response.setLogurl("/reports/Seal_of_Karnataka.PNG");
             lotDistributeResponseList.add(response);
