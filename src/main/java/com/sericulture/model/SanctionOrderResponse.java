@@ -300,6 +300,8 @@ private String totalIncentiveAmountInWords;
     private Float equipmentEligibleTotal;
     private Float equipmentPurchasedTotal;
     private Float equipmentPercentageTotal;
+    private Long totalNoOfCocoonsPerKg;
+    private Float rawSilkProduced;
 
 
 
