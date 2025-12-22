@@ -43,6 +43,8 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.text.DecimalFormat;
+import java.text.BreakIterator;
+import java.util.Locale;
 
 import static com.google.common.math.DoubleMath.roundToLong;
 import static org.apache.http.client.utils.DateUtils.formatDate;
@@ -7777,23 +7779,38 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
     }
 
-    public static String getInitialsWithSpace(String text) {
+    public static String getKannadaInitialsFromSentence(String text) {
         if (text == null || text.trim().isEmpty()) {
             return "";
         }
 
-        StringBuilder initials = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+
+        // split by spaces (handles extra spaces)
         String[] words = text.trim().split("\\s+");
 
         for (String word : words) {
-            if (!word.isEmpty()) {
-                initials.append(word.substring(0, 1)).append(" ");
+            if (!word.isBlank()) {
+                result.append(getFirstKannadaAkshara(word));
             }
         }
 
-        // Remove trailing space
-        return initials.toString().trim();
+        return result.toString(); // ✅ NO SPACES
     }
+
+    private static String getFirstKannadaAkshara(String word) {
+        BreakIterator it = BreakIterator.getCharacterInstance(new Locale("kn"));
+        it.setText(word);
+
+        int start = it.first();
+        int end = it.next();
+
+        if (end != BreakIterator.DONE) {
+            return word.substring(start, end); // ✅ FULL AKSHARA
+        }
+        return "";
+    }
+
 
 
 
@@ -7875,11 +7892,13 @@ public class ReportsController {
         }
 
 
-        String schemeName = apiResponse.getContent().get(0).getSchemeNameInKannada();
+        String schemeNameKannada =
+                apiResponse.getContent().get(0).getSchemeNameInKannada();
 
-        response.setSchemeNameInKannada(
-                getInitialsWithSpace(schemeName)
-        );
+        String schemeInitials =
+                getKannadaInitialsFromSentence(schemeNameKannada);
+
+
 
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ   ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಇವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
         response.setHeader2("ವಿಷಯ: ");
@@ -7906,7 +7925,7 @@ public class ReportsController {
 
         String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
-        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeName +"  /ಬೋನಸ್/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
+        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeInitials +"  /ಬೋನಸ್/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
 
 //        response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
@@ -7941,11 +7960,14 @@ public class ReportsController {
         response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
         response.setArn( apiResponse.getContent().get(0).getArn());
         response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+        response.setVillageNameInKannada( apiResponse.getContent().get(0).getVillageNameInKannada());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
 //        sanctionOrderResponseList.add(response);
 
         long totalNoOfCocoonsPerKg = 0L;
         float totalQuantityOfCocoonsProduced = 0f;
+        float totalRawSilkProduced = 0f;
+
 
 
         if (apiResponse.getContent()!= null) {
@@ -7977,6 +7999,12 @@ public class ReportsController {
                 if (sanctionOrderResponse.getSanctionAmount() == null) {
                     sanctionOrderResponse.setSanctionAmount(0f);
                 }
+                if (sanctionOrderResponse.getRawSilkProduced() == null) {
+                    sanctionOrderResponse.setRawSilkProduced(0f);
+                }
+
+                totalRawSilkProduced += sanctionOrderResponse.getRawSilkProduced();
+
                 if (sanctionOrderResponse.getQuantityOfCocoonsProduced() == null) {
                     sanctionOrderResponse.setQuantityOfCocoonsProduced(0f);
                 }
@@ -8001,14 +8029,18 @@ public class ReportsController {
         response.setTotalNoOfCocoonsPerKg(totalNoOfCocoonsPerKg);
         response.setTotalQuantityOfCocoonsProduced(totalQuantityOfCocoonsProduced);
         String totalNoOfCocoonsPerKgText = String.valueOf(totalNoOfCocoonsPerKg);
+        String totalRawSilkProducedText =
+                String.format("%.2f", totalRawSilkProduced);
+        response.setRawSilkProduced(totalRawSilkProduced);
 
 
-        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಯಲ್ಲಿ    ಅನುಬಂಧದಲ್ಲಿ     ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + totalNoOfCocoonsPerKgText+ "  ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತನೆ     ಗೂಡು     ಬಿತ್ತನೆಗೆ     ಯೋಗ್ಯವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲದೆ     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಹಿವಾಟಾದ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+perKgRateText+"    ರಂತೆ     ಬೋನಸ್     ಮೊತ್ತ     ರೂ.    "+totalSchemeAmountText+"   ಗಳನ್ನು      (ರೂ. "+amountInWords+" ) ಗಳನ್ನು      ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಸಹಾಯಧನದ      ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
+
+        response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಯಲ್ಲಿ    ಅನುಬಂಧದಲ್ಲಿ     ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + totalRawSilkProducedText+ "  ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತನೆ     ಗೂಡು     ಬಿತ್ತನೆಗೆ     ಯೋಗ್ಯವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲದೆ     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಹಿವಾಟಾದ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  "+perKgRateText+"    ರಂತೆ     ಬೋನಸ್     ಮೊತ್ತ     ರೂ.    "+totalSchemeAmountText+"   ಗಳನ್ನು      (ರೂ. "+amountInWords+" ) ಗಳನ್ನು      ಮಂಜೂರು     ಮಾಡಿದೆ.    "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")  ರಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ     ಸಹಾಯಧನದ      ಅನದಾನದಲ್ಲಿ      ಡಿಬಿಟಿ    ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್      ಖಾತೆಗೆ   ನೇರವಾಗಿ    ಜಮಾ   ಮಾಡುವುದು.\n"+
                 "            ಸದರಿ    ವೆಚ್ಚ ವನ್ನು     ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ:  "+apiResponse.getContent().get(0).getScHeadAccountName() +"("+apiResponse.getContent().get(0).getDescription() +")  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
         response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ   " +
-                " "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ       ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಹಿವಾಟಾದ     "+totalNoOfCocoonsPerKgText+" " +
+                " "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ       ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಹಿವಾಟಾದ     "+totalRawSilkProducedText+" " +
                 "   ಕೆ.ಜಿ.    ರೇಷ್ಮೆ     ಗೂಡಿಗೆ      ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ      ರೂ. "+perKgRateText +"   ರಂತೆ    ಬೋನಸ್     ಮೊತ್ತ      ರೂ. "+totalSchemeAmountText+" ಗಳನ್ನು      ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ " +
                 "   ಆದೇಶದ    ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಬೋನಸ್     ಮೊತ್ತ ವನ್ನು     ಪಾವತಿಸಲು     ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
 
@@ -8086,11 +8118,13 @@ public class ReportsController {
             formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
         }
 
-        String schemeName = apiResponse.getContent().get(0).getSchemeNameInKannada();
+        String schemeNameKannada =
+                apiResponse.getContent().get(0).getSchemeNameInKannada();
 
-        response.setSchemeNameInKannada(
-                getInitialsWithSpace(schemeName)
-        );
+        String schemeInitials =
+                getKannadaInitialsFromSentence(schemeNameKannada);
+
+
 
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರ   ಕಛೇರಿ,  ರೇಷ್ಮೆ   ಗೂಡಿನ  ಮಾರುಕಟ್ಟೆ ,  " +apiResponse.getContent().get(0).getUserMarket() + "  ಇವರ  ಕಛೇರಿ  ನಡವಳಿಗಳು");
         response.setHeader2("ವಿಷಯ: ");
@@ -8119,7 +8153,7 @@ public class ReportsController {
 
         String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
-        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeName +"/ಬಿಗೂಪ್ರೋಧನ :/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
+        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeInitials +"/ಬಿಗೂಪ್ರೋಧನ :/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
 
         response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
@@ -8141,7 +8175,7 @@ public class ReportsController {
         response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
         response.setTalukName( apiResponse.getContent().get(0).getTalukName());
         response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-        response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+        response.setVillageNameInKannada( apiResponse.getContent().get(0).getVillageNameInKannada());
         response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
         response.setLineItemComment( "ರೇಷ್ಮೆ   ಸಹಾಯಕ ನಿರ್ದೇಶಕರು\n" +
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
@@ -8223,6 +8257,8 @@ public class ReportsController {
         String totalNoOfCocoonsPerKgText = String.valueOf(totalNoOfCocoonsPerKg);
         String totalQuantityProducedText =
                 String.format("%.2f", totalQuantityOfCocoonsProduced);
+
+
 
         response.setHeader7("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಶೀಲಿಸಲಾಗಿ,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() + "   ಇಲ್ಲಿ     ಅನುಬಂಧದಲ್ಲಿ  " +
                 "   ತೋರಿಸಿರುವ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ    ಸಂಬಂಧಿಸಿದ   " + totalQuantityProducedText + "  ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ತಳಿ   ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ " +
