@@ -45,6 +45,7 @@ import java.util.stream.Collectors;
 import java.text.DecimalFormat;
 import java.text.BreakIterator;
 import java.util.Locale;
+import java.text.Normalizer;
 
 import static com.google.common.math.DoubleMath.roundToLong;
 import static org.apache.http.client.utils.DateUtils.formatDate;
@@ -7784,9 +7785,10 @@ public class ReportsController {
             return "";
         }
 
-        StringBuilder result = new StringBuilder();
+        // ✅ Normalize Kannada text (CRITICAL for PDF)
+        text = Normalizer.normalize(text, Normalizer.Form.NFC);
 
-        // split by spaces (handles extra spaces)
+        StringBuilder result = new StringBuilder();
         String[] words = text.trim().split("\\s+");
 
         for (String word : words) {
@@ -7797,6 +7799,23 @@ public class ReportsController {
 
         return result.toString(); // ✅ NO SPACES
     }
+
+    private static String getFirstKannadaAkshara(String word) {
+        // ✅ Normalize each word
+        word = Normalizer.normalize(word, Normalizer.Form.NFC);
+
+        BreakIterator it = BreakIterator.getCharacterInstance(Locale.ROOT);
+        it.setText(word);
+
+        int start = it.first();
+        int end = it.next();
+
+        if (end != BreakIterator.DONE) {
+            return word.substring(start, end); // ✅ FULL AKSHARA (ಸ್ಥಿ, ಕ್ಷ, ಣ್ಯ)
+        }
+        return "";
+    }
+
 
     public static String removeFirstWord(String text) {
         if (text == null || text.trim().isEmpty()) {
@@ -7815,18 +7834,6 @@ public class ReportsController {
     }
 
 
-    private static String getFirstKannadaAkshara(String word) {
-        BreakIterator it = BreakIterator.getCharacterInstance(new Locale("kn"));
-        it.setText(word);
-
-        int start = it.first();
-        int end = it.next();
-
-        if (end != BreakIterator.DONE) {
-            return word.substring(start, end); // ✅ FULL AKSHARA
-        }
-        return "";
-    }
 
 
 
@@ -7945,7 +7952,7 @@ public class ReportsController {
 
         String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
-        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeInitials +"  /ಬೋನಸ್/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
+        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/ಬೆಸ್ಥಿನಿಅಅಕಾ/ಬೋನಸ್/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
 
 //        response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
@@ -8174,7 +8181,7 @@ public class ReportsController {
 
         String amountInWords = KannadaNumberUtil.convertNumberToKannadaWords(amountLong);
 
-        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/"+schemeInitials +"/ಬಿಗೂಪ್ರೋಧನ :/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
+        response.setHeader6("ಅದೇಶ ಸಂಖ್ಯೆ/ ರೇಸನಿ /ಸರೇಗೂಮಾ/ " +apiResponse.getContent().get(0).getUserMarket() + "/ತಾಂ/ಬೆಸ್ಥಿನಿಅಅಕಾ/ಬಿಗೂಪ್ರೋಧನ/ ಮಂ/"+apiResponse.getContent().get(0).getSanctionOrderNumber() + " / ದಿನಾಂಕ:  "+ formattedDate);
 
 
         response.setHeader8("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ಮುಂದಿನ   ಕ್ರಮಕ್ಕಾಗಿ\n" +
