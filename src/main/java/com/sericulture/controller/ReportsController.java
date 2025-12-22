@@ -752,7 +752,7 @@ public class ReportsController {
             System.out.println("enter to Cash Reciept");
             logger.info("enter to Cash Reciept");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Rasheedi .jrxml");
+            JasperReport jasperReport = getJasperReport("Rasheedi.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
