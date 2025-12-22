@@ -7798,6 +7798,23 @@ public class ReportsController {
         return result.toString(); // ✅ NO SPACES
     }
 
+    public static String removeFirstWord(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            return "";
+        }
+
+        String[] words = text.trim().split("\\s+");
+
+        // If only one word exists, return empty
+        if (words.length <= 1) {
+            return "";
+        }
+
+        // Join from 2nd word onwards
+        return String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+    }
+
+
     private static String getFirstKannadaAkshara(String word) {
         BreakIterator it = BreakIterator.getCharacterInstance(new Locale("kn"));
         it.setText(word);
@@ -7842,6 +7859,9 @@ public class ReportsController {
         long roundedTotalSchemeAmount = Math.round(apiResponse.getContent().get(0).getTotalSchemeAmount());
         String totalSchemeAmountText = String.valueOf(roundedTotalSchemeAmount);
 
+
+        String raceName = apiResponse.getContent().get(0).getRaceName();
+        String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
 
 
@@ -7905,7 +7925,7 @@ public class ReportsController {
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:-");
 
-        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತ ನೆ      ಗೂಡು      ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ      ಇಲ್ಲ ದೆ      ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ    ಗೂಡಿಗೆ    ಬೋನಸ್    ಮೊತ್ತ ವನ್ನು     " +
+        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     "+raceNameWithoutFirstWord+"    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತ ನೆ      ಗೂಡು      ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ      ಇಲ್ಲ ದೆ      ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ    ಗೂಡಿಗೆ    ಬೋನಸ್    ಮೊತ್ತ ವನ್ನು     " +
                 "ಮಂಜೂರಾತಿ     ನೀಡುವ     ಬಗ್ಗೆ.\n\n"+
 
                 "1) ಸರ್ಕಾರದ    ಆದೇಶ    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " + admGovtDate  + "\n" +
@@ -7916,7 +7936,7 @@ public class ReportsController {
                 "     ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
 
                 "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ   ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName() +
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ   "+raceNameWithoutFirstWord+"     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ     "+apiResponse.getContent().get(0).getRaceName() +
                 "   ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ    ಗೂಡಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ. " +perKgRateText +"/-   ಗಳ    ʼಬೋನಸ್    ಹಣ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿದೆ.\n "+
 
                 "                  ಬಿತ್ತ ನೆ     ಪ್ರ ದೇ ಶದಲ್ಲಿ       ನಿರಂತರ     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ      ಗೂಡುಗಳನ್ನು      ಉತ್ಪಾ ದಿಸಿ   ಸರಬರಾಜು    ಮಾಡುವ    ಉದ್ದೇಶದಿಂದ    ಸರ್ಕಾರಿ      ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,  "+apiResponse.getContent().get(0).getUserMarket() +"    ಇಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ   "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ     ಬಿತ್ತ ನೆ      ಗೂಡು     ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ     ಬಿತ್ತ ನೆ     ಗೂಡಿನ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ. ");
@@ -8076,7 +8096,8 @@ public class ReportsController {
         long roundedTotalSchemeAmount = Math.round(apiResponse.getContent().get(0).getTotalSchemeAmount());
         String totalSchemeAmountText = String.valueOf(roundedTotalSchemeAmount);
 
-
+        String raceName = apiResponse.getContent().get(0).getRaceName();
+        String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
         String formattedDate1 = "";
         try {
@@ -8131,7 +8152,7 @@ public class ReportsController {
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:-");
 
-        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     ಮೈಸೂರು    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ   ಮತ್ತು    ಗುಣಮಟ್ಟ ದ    ಆಧಾರದಮೇಲೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತವನ್ನು    ಮಂಜೂರಾತಿ   ನೀಡುವ    ಬಗ್ಗೆ.\n\n"+
+        response.setHeader1(  apiResponse.getContent().get(0).getFinancialYear() +  "   ನೇ   ಸಾಲಿನಲ್ಲಿ      "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ದಡಿ     "+raceNameWithoutFirstWord+"    ಬಿತ್ತನೆ    ಪ್ರದೇಶದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName()+"    ತಳಿ   ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ   ಮತ್ತು    ಗುಣಮಟ್ಟ ದ    ಆಧಾರದಮೇಲೆ    ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತವನ್ನು    ಮಂಜೂರಾತಿ   ನೀಡುವ    ಬಗ್ಗೆ.\n\n"+
 
                 "1) ಸರ್ಕಾರದ    ಆದೇಶ    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getAdmGovtOrder() + "  ದಿನಾಂಕ :  " + admGovtDate  + "\n" +
                 "2) ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಆಭಿವೃ ದ್ಧಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ರವರ    ಸುತ್ತೋ ಲೆ    ಸಂಖ್ಯೆ  : \n" +
@@ -8142,7 +8163,7 @@ public class ReportsController {
 
                 "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯ ಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ    " +
                 " ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮ ಕ    ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು ,   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ " +
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  ಮೈ ಸೂರು     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName() +
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ದಡಿ  "+raceNameWithoutFirstWord+"     ಬಿತ್ತ ನೆ      ಪ್ರ ದೇಶದಲ್ಲಿ     ಉತ್ಪಾ ದನೆಯಾಗುವ    "+apiResponse.getContent().get(0).getRaceName() +
                 "ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟದ    ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ." +perKgRateText +"/-   ಗಳ " +
                 "   ಪ್ರೋತ್ಸಾಹಧನ     ನೀಡುವ      ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.\n "+
 
