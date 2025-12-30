@@ -12494,6 +12494,8 @@ public class ReportsController {
         String deptDeleDate       = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
         String allotReleaseDate   = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+
 
         String formattedDate;
         try {
@@ -12552,7 +12554,7 @@ public class ReportsController {
                 + "         " +apiResponse.getContent().get(0).getSchemeCircularNo() + "        ದಿನಾಂಕ  :     " + schemeCircularDate + " \n"
                 + "3)     ಸರ್ಕಾರದ     ಆದೇಶ     ಸಂಖ್ಯೆ  :     " + apiResponse.getContent().get(0).getDeptDeleNo() + "     ದಿನಾಂಕ  :     " + deptDeleDate + " \n"
                 + "4)     ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು,     ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,     " + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "     ರವರ     ಜ್ಞಾಪನಪತ್ರ     ಸಂಖ್ಯೆ  :\n"
-                + "         "+apiResponse.getContent().get(0).getAllotReleaseNo() + "     ದಿನಾಂಕ  :     " + allotReleaseDate + " \n"
+                + "         "+apiResponse.getContent().get(0).getSReleaseNo() + "     ದಿನಾಂಕ  :     " + sReleaseDate + " \n"
                 + "5)     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ,     " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "     ಇವರ     ಪ್ರಸ್ತಾವನೆ     ದಿನಾಂಕ  :     " + proposalDate + " \n"
         );
 
@@ -12576,7 +12578,7 @@ public class ReportsController {
 
         // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line
         response.setHeader6(
-                "ಆದೇಶ     ಸಂಖ್ಯೆ  :     ರೇಸನಿ:" + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " ತಾಂ:ದ್ವಿ.ಚಾ.ಸಾ.ವೆಚ್ಚ:ಸಧನ:" + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
+                "ಆದೇಶ     ಸಂಖ್ಯೆ  :  ರೇಸನಿ : " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " : ತಾಂ : "+apiResponse.getContent().get(0).getRaceName()+" : ರೇಗೂ : ಸಾ.ವೆಚ್ಚ:  ಫ್ರೋಧನ: " + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
 
         // ಪೀಠಿಕೆಯಲ್ಲಿನ ಅಂತಿಮ ಪ್ಯಾರಾ (bottom para of page 3) :contentReference[oaicite:4]{index=4}
 
@@ -13261,6 +13263,8 @@ public class ReportsController {
         String deptDeleDate       = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
         String allotReleaseDate   = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+
 
         String formattedDate;
         try {
@@ -13303,7 +13307,7 @@ public class ReportsController {
                 + "         " +apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ  : " + schemeCircularDate + " \n"
                 + "3)     ಸರ್ಕಾರದ     ಆದೇಶ     ಸಂಖ್ಯೆ  :     " + apiResponse.getContent().get(0).getDeptDeleNo() + ",    ದಿನಾಂಕ  :  " + deptDeleDate + " \n"
                 + "4)     ರೇಷ್ಮೆ     ಉಪ     ನಿರ್ದೇಶಕರು,     ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್,     " + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "     ರವರ     ಜ್ಞಾಪನಪತ್ರ     ಸಂಖ್ಯೆ  :\n"
-                + "         "+apiResponse.getContent().get(0).getAllotReleaseNo() + " ,   ದಿನಾಂಕ  :  " + allotReleaseDate + " \n"
+                + "         "+apiResponse.getContent().get(0).getSReleaseNo() + " ,   ದಿನಾಂಕ  :  " + sReleaseDate + " \n"
                 + "5)     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ,     " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "   ಇವರ   ಪ್ರಸ್ತಾವನೆ     ದಿನಾಂಕ  :     " + proposalDate + " \n"
         );
 
@@ -13326,7 +13330,7 @@ public class ReportsController {
 
         // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line
         response.setHeader6(
-                "ಆದೇಶ     ಸಂಖ್ಯೆ  :     ರೇಸನಿ:" + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " ತಾಂ:ದ್ವಿ.ಚಾ.ಸಾ.ವೆಚ್ಚ:ಸಧನ: " + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
+                "ಆದೇಶ     ಸಂಖ್ಯೆ  :   ರೇಸನಿ : " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " : ತಾಂ : "+apiResponse.getContent().get(0).getRaceName()+" : ರೇಗೂ : ಸಾ.ವೆಚ್ಚ :  ಫ್ರೋಧನ " + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
 
         // ಪೀಠಿಕೆಯಲ್ಲಿನ ಅಂತಿಮ ಪ್ಯಾರಾ (bottom para of page 3) :contentReference[oaicite:4]{index=4}
 
