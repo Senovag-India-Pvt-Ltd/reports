@@ -13384,13 +13384,13 @@ public class ReportsController {
                 "                 "+apiResponse.getContent().get(0).getFinancialYear()
                         + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ     ವಿವಿಧ     ಕಾರ್ಯಕ್ರಮಗಳ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ     ವಿವಿಧ     ಲೆಕ್ಕ     "
                         +"ಶೀರ್ಷಿಕೆಗಳಡಿ     ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು     ಆಡಳಿತಾತ್ಮಕ     ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು,  ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ      "
-                        +apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆಯಡಿ    ಲೆಕ್ಕ      ಶೀರ್ಷಿಕೆ:  " + apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription()+ "    ರಡಿ   ರಾಜ್ಯ ದ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪ್ರತಿ   "+
-                        "100   ರೋಗರಹಿತ    "+apiResponse.getContent().get(0).getRaceName()+"    ಸಂಕರಣ     ಮೊಟ್ಟೆ  /ಚಾಕಿ    ಹುಳುಗಳಿಗೆ    60 ಕೆ.ಜಿ    ಗಿಂತ    ಹೆಚ್ಚು     ಇಳುವರಿ    ಹಾಗೂ"
+                        +apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆಯಡಿ    ಲೆಕ್ಕ      ಶೀರ್ಷಿಕೆ:  " + apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription()+ ")    ರಡಿ   ರಾಜ್ಯ ದ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪ್ರತಿ   "+
+                        "100   ರೋಗರಹಿತ    ದ್ವಿ ತಳಿ     ಸಂಕರಣ     ಮೊಟ್ಟೆ  /ಚಾಕಿ    ಹುಳುಗಳಿಗೆ    60 ಕೆ.ಜಿ    ಗಿಂತ    ಹೆಚ್ಚು     ಇಳುವರಿ    ಹಾಗೂ"
                          +"     ಗರಿಷ್ಠ     90    ಕೆ.ಜಿ    ರೇಷ್ಮೆ      ಗೂಡು    ಉತ್ಪಾ ದಿಸಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ ಗಳ      ಮೂಲಕ    "+
-                        "ವಹಿವಾಟಾಗುವ     "+apiResponse.getContent().get(0).getRaceName()+"     ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/- ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ   ನೀಡುವ "+
+                        "ವಹಿವಾಟಾಗುವ     ದ್ವಿ ತಳಿ      ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/- ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ   ನೀಡುವ "+
                         "      ಕಾರ್ಯಕ್ರಮದ     ಅನುಷ್ಠಾ ನಕ್ಕಾಗಿ    ಮಾರ್ಗ  ಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತದೆ.\n"
                         + "                 ಉಲ್ಲೇಖ(5)     ರಂತೆ     ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ,     " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "    ಇವರು     ಬೆಲೆಸ್ಥಿ ರಿಕರಣ    ನಿಧಿ    ಅನುದಾನದಿಂದ    "+
-                        "ರಾಜ್ಯ ದ     ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ     ವಹಿವಾಟಾಗುವ    "+apiResponse.getContent().get(0).getRaceName()+"     ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/-    ರಂತೆ      "+
+                        "ರಾಜ್ಯ ದ     ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ     ವಹಿವಾಟಾಗುವ    ದ್ವಿ ತಳಿ     ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರ ತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/-    ರಂತೆ      "+
                         "ಪ್ರೋತ್ಸಾಹಧನ    ನೀಡಲು    ಎಲ್ಲಾ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು     ವಿವರಗಳು   ಈ    ಕೆಳಕಂಡಂತಿದೆ.");
 
         // ಮೇಲ್ಕಂಡ ಉಲ್ಲೇಖಗಳು – summary
@@ -13398,7 +13398,7 @@ public class ReportsController {
 
         // ಮಂಜೂರಾತಿ ಆದೇಶ ಸಂಖ್ಯೆ line
         response.setHeader6(
-                "ಆದೇಶ     ಸಂಖ್ಯೆ  :   ರೇಸನಿ : " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " : ತಾಂ : "+apiResponse.getContent().get(0).getRaceName()+" : ರೇಗೂ : ಸಾ.ವೆಚ್ಚ :  ಫ್ರೋಧನ " + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
+                "ಆದೇಶ     ಸಂಖ್ಯೆ  :   ರೇಸನಿ : " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + " : ತಾಂ : ದ್ವಿ ತಳಿ  : ರೇಗೂ : ಸಾ.ವೆಚ್ಚ :  ಫ್ರೋಧನ " + apiResponse.getContent().get(0).getSanctionOrderNumber() + " /  ದಿನಾಂಕ  : " + proposalDate);
 
         // ಪೀಠಿಕೆಯಲ್ಲಿನ ಅಂತಿಮ ಪ್ಯಾರಾ (bottom para of page 3) :contentReference[oaicite:4]{index=4}
 
@@ -13556,12 +13556,12 @@ public class ReportsController {
         response.setTotalIncentiveAmountInWords(totalIncentiveInWords);
         response.setHeader2(
                 apiResponse.getContent().get(0).getFinancialYear()
-                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆಯಡಿ   ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ   ಗಳ     ಮೂಲಕ   ವಹಿವಾಟಾಗುವ     "+apiResponse.getContent().get(0).getRaceName()+"     ಸಂಕರಣ " +
+                        + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆಯಡಿ   ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ   ಗಳ     ಮೂಲಕ   ವಹಿವಾಟಾಗುವ     ದ್ವಿ ತಳಿ      ಸಂಕರಣ " +
                         "   ರೇಷ್ಮೆ      ಗೂಡುಗಳಿಗೆ    ಪ್ರ ತಿ    ಕೆ.ಜಿ   ರೇಷ್ಮೆ ಗೂಡಿಗೆ    ರೂ.  "+ apiResponse.getContent().get(0).getUnitCost() + "/-  ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿ     ನೀಡುವ     ಕುರಿತು. ");
 
         response.setHeader7(
                 "            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ     ಅಂಶಗಳನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ,     " + apiResponse.getContent().get(0).getLoggedinUserTalukName() + "     ತಾಲ್ಲೂಕಿನ     ತಾಂತ್ರಿಕ     ಸೇವಾ     ಕೇಂದ್ರ     " + apiResponse.getContent().get(0).getLoggedinUserTscName()+""
-                        + "     ವ್ಯಾಪ್ತಿಯ    " + apiResponse.getContent().get(0).getTotalFarmers() +"   ಜನ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು ,   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ     ಒಟ್ಟು     " + totalQtyKg  + "     ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+""
+                        + "     ವ್ಯಾಪ್ತಿಯ    " + apiResponse.getContent().get(0).getTotalFarmers() +"   ಜನ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು ,   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ     ವಹಿವಾಟು     ಮಾಡಿದ     ಒಟ್ಟು     " + totalQtyKg  + "     ಕೆ.ಜಿ   ದ್ವಿ ತಳಿ "
                         +"   ಸಂಕರಣ    ರೇಷ್ಮೆ   ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ.  " +  apiResponse.getContent().get(0).getUnitCost() +  "/- ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ    ರೂ. " +   totalIncentiveAmount      + "/- (ರೂಪಾಯಿ  " + totalIncentiveInWords  + " ) ಗಳನ್ನು    "
                         +"  ಮಂಜೂರು   ಮಾಡಿದೆ.   ರೇಷ್ಮೆ   ಅಭಿವೃದ್ಧಿ    ಯೋಜನೆಯ  ಲೆಕ್ಕ      ಶೀರ್ಷಿಕೆ    " + apiResponse.getContent().get(0).getScHeadAccountName() + "("+ apiResponse.getContent().get(0).getDescription()+ ")   ರಾಜ್ಯ    ವಲಯ   ಅಡಿ    ಖಜಾನೆ-2   ರಲ್ಲಿ      ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ " +
                         "   ಸಹಾಯಧನದ    ಅನುದಾನದಲ್ಲಿ    ಡಿ.ಬಿ.ಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್    ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡುವುದು. \n"
@@ -13569,7 +13569,7 @@ public class ReportsController {
 
         response.setHeader5(
                 "            ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ    ರೇಷ್ಮೆ    ಅಭಿವೃ ದ್ಧಿ     ಯೋಜನೆಯ    ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ    "+ apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription()+")     "+
-                        "ಅಡಿ    ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ      ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ  ಗಳಲ್ಲಿ    ವಹಿವಾಟು    ಮಾಡಿದ  "+  totalQtyKg +"   ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"   ರೇಷ್ಮೆ    ಗೂಡಿಗೆ     ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/-   ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ   ರೂ. "+totalIncentiveAmount+"/-    " +
+                        "ಅಡಿ    ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ      ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ  ಗಳಲ್ಲಿ    ವಹಿವಾಟು    ಮಾಡಿದ  "+  totalQtyKg +"   ಕೆ.ಜಿ    ದ್ವಿ ತಳಿ    ರೇಷ್ಮೆ    ಗೂಡಿಗೆ     ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"/-   ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ   ರೂ. "+totalIncentiveAmount+"/-    " +
                         "  ಗಳನ್ನು       ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ.    ಉಲ್ಲೇಖ (3) ರ   ಸರ್ಕಾರದ    ಆದೇಶದ    ರೀತ್ಯಾ   ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ    ವ್ಯಾಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ (4) ರಲ್ಲಿ   ಸದರಿ   ಕಾರ್ಯಕ್ರ ಮದ   ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ     ಮಾರ್ಗಸೂಚಿಯನ್ವಯ     "+
                         "ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರು    ಮಾಡಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿದೆ.    ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ. "
 
