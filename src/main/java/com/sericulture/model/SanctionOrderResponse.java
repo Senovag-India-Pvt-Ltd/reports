@@ -212,7 +212,8 @@ public class SanctionOrderResponse {
     private String noOfDfls;
 
     private Object dateOfBrushing;
-    private Object dateOfDistribution;
+    private Date dateOfDistribution;
+    private String dateOfDistributionString;
 
     private Float chawkiPercentage;
     private Object spunOnDate;
@@ -302,6 +303,8 @@ private String totalIncentiveAmountInWords;
     private Float equipmentPercentageTotal;
     private Long totalNoOfCocoonsPerKg;
     private Float rawSilkProduced;
+    private String afMarketName;
+
 
 
 
