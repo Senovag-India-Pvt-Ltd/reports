@@ -304,6 +304,10 @@ private String totalIncentiveAmountInWords;
     private Long totalNoOfCocoonsPerKg;
     private Float rawSilkProduced;
     private String afMarketName;
+    private Float sanctionAmountTotal;
+    private String sanctionAmountTotalInWords;
+    private Float totalSanctionAmount;
+    private String totalSanctionAmountInWords;
 
 
 
