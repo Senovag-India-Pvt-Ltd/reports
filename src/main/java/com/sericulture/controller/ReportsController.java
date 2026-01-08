@@ -291,14 +291,14 @@ public class ReportsController {
     }
 
 
-    @PostMapping("/getCommercialAcknowledgement")
-    public ResponseEntity<?> getCommercialAcknowledgement(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    @PostMapping("/getTransportationAck")
+    public ResponseEntity<?> getTransportationAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to getCommercialAcknowledgement");
-            logger.info("enter to getCommercialAcknowledgement");
+            System.out.println("enter to getTransportationAck");
+            logger.info("enter to getTransportationAck");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Acknowledgement.jrxml");
+            JasperReport jasperReport = getJasperReport("TransportationAcknowledgement.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -6867,7 +6867,11 @@ public class ReportsController {
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
         if (apiResponse.getContent()!= null) {
-            response.setHeader(" ಸ್ವೀಕೃತಿ   ಪತ್ರ  ( ACKNOWLEDGEMENT LETTER )");
+            response.setHeader(apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ  ಸಾಲಿನಲ್ಲಿ       "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "  ಯೋಜನೆ("+ apiResponse.getContent().get(0).getCategoryName()+")  ಅಡಿ   "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+
+                    "  ದ್ವಿ. ತಳಿ, ಬಿ.ವಿ. (ಬಿವಾಲ್ಟೈನ್) ಸಂಕರಣ ರೇಷ್ಮೆ ಗೂಡಿಗೆ\n" +
+                    "ಬೆಲೆಸ್ಥಿರಿಕರಣ ಪ್ರೋತ್ಸಾಹಧನ ಮಂಜೂರಾತಿ ನೀಡುವ ಕುರಿತು\n" +
+                    "ಅಧಿಕೃತ ಆದೇಶ / ಸ್ವೀಕೃತಿ ಪತ್ರ");
             response.setAcceptedDate("ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getDate());
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
