@@ -234,6 +234,7 @@ public class SanctionOrderResponse {
     private Float schemeAmounts;
     private Float totalQuantityOfCocoonsProduced;
     private Float totalNoOfDfls;
+    private Float totalDfl;
 
     private Float grandTotalSubsidyAmount;
     private Float grandTotalNoOfDfls;
@@ -308,6 +309,7 @@ private String totalIncentiveAmountInWords;
     private String sanctionAmountTotalInWords;
     private Float totalSanctionAmount;
     private String totalSanctionAmountInWords;
+    private Long amount;
 
 
 
