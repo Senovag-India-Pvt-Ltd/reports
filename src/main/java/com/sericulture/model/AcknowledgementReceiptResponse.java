@@ -73,4 +73,6 @@ public class AcknowledgementReceiptResponse {
     private Float quantityOfCocoonsProduced;
     private String numberOfBasins;
 
+    private Float cocoonsWeight;
+
 }
