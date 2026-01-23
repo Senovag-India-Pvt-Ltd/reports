@@ -12352,6 +12352,9 @@ public class ReportsController {
                 if (sanctionOrderResponse.getFatherNameKan() == null) {
                     sanctionOrderResponse.setFatherNameKan("");
                 }
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
+                }
                 if (sanctionOrderResponse.getCrcName() == null) {
                     sanctionOrderResponse.setCrcName("");
                 }
@@ -12883,6 +12886,9 @@ public class ReportsController {
                 if (sanctionOrderResponse.getVillageName() == null) {
                     sanctionOrderResponse.setVillageName("");
                 }
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
+                }
                 if (sanctionOrderResponse.getFruitsId() == null) {
                     sanctionOrderResponse.setFruitsId("");
                 }
@@ -13218,6 +13224,9 @@ public class ReportsController {
                 }
                 if (sanctionOrderResponse.getPerKgRate() == null) {
                     sanctionOrderResponse.setPerKgRate(0f);
+                }
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
                 }
                 if (sanctionOrderResponse.getCocoonsWeight() == null) {
                     sanctionOrderResponse.setCocoonsWeight(0f);
