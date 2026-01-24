@@ -8841,7 +8841,7 @@ public class ReportsController {
             }
         }
 
-        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "  ರವರ  ಕಛೇರಿ ನಡವಳಿಗಳು ");
+        response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "  ರವರ  ಕಛೇರಿ ನಡವಳಿಗಳು ");
         response.setHeader2("ವಿಷಯ: ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
         response.setHeader4("ಪೀಠಿಕೆ:");
@@ -8867,7 +8867,7 @@ public class ReportsController {
                 "3. ಸರ್ಕಾರದ    ಆದೇಶ     ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + " \n" +
                 "4. ರೇಷ್ಮೆ   ಕೃ ಷಿ   ಅಭಿವೃ ದ್ದಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು,  ಬೆಂಗಳೂರು  ರವರ   ಸುತ್ತೋಲೆ\n" +
                 "     ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getReleaseNo() + "   ದಿನಾಂಕ : " +releaseDate + " \n" +
-                "5. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿ ಕ    ಸೇವಾ    ಕೇಂದ್ರ    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() +"    ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+  proposalDate);
+                "5. ರೇಷ್ಮೆ     ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂಡಿನ    ನಂತರದ    ಚಟುವಟಿಕೆ      "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+  proposalDate);
         response.setHeader6("              " +apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ     ಉಲ್ಲೇಖ(1) ರ   ಸರ್ಕಾರದ   ಆದೇಶ   ಹಾಗೂ   ಉಲ್ಲೇಖ(2) ರಲ್ಲಿ       ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃ ದ್ದಿ " +
                            "ಆಯುಕ್ತ ರು    ಹಾಗೂ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು  ರವರು  “ "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"”" +
                 apiResponse.getContent().get(0).getScCategoryName() + "    ಅಡಿ    ರಾಜ್ಯ ದಲ್ಲಿ      ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    ಉತ್ಪಾ ದಿಸಿದ    ಗುಣಮಟ್ಟ ದ     ಕಚ್ಚಾ "+
@@ -9096,7 +9096,7 @@ public class ReportsController {
 //                "ಒಟ್ಟು     ರೂ.  "+ apiResponse.getContent().get(0).getSchemeAmount() + "  ( ರೂ.  "+ schemeAmountWords + "  ಮಾತ್ರ  ) ಗಳಿಗೆ   ಪ್ರೋ ತ್ಸಾ ಹಧನ ಮಂಜೂರು ಮಾಡಿದೆ. \n" +
 //                "    ಈ    ವೆಚ್ಚ ವನ್ನು     ಲೆಕ್ಕ     ಶೀ ರ್ಷಿಕೆ    "+ apiResponse.getContent().get(0).getScHeadAccountName() +"("+ apiResponse.getContent().get(0).getDescription() +") ( "+ apiResponse.getContent().get(0).getScCategoryName() + ")  ಅಡಿ ಭರಿಸುವುದು.");
 
-        response.setHeader10("              ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ    ತಾಂತ್ರಿಕ    ಸೇವಾ   ಕೇಂದ್ರ   "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +",   ವ್ಯಾಪ್ತಿಯಲ್ಲಿರುವ      "
+        response.setHeader10("              ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ    ರೇಷ್ಮೆ     ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,   ಗೂಡಿನ    ನಂತರದ    ಚಟುವಟಿಕೆ   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() +",   ವ್ಯಾಪ್ತಿಯಲ್ಲಿರುವ      "
                 + apiResponse.getContent().get(0).getTotalReelers() +"    ಜನ    ರೇಷ್ಮೆ   ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆದಾರರು   ತಮ್ಮ    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ     ಮೇಲ್ಕಂಡ     ಅನುಬಂಧದಲ್ಲಿ      "
                 +"ತೋರಿಸಿರುವಂತೆ     ಉತ್ಪಾದಿಸಿದ      "+ totalRawSilkProducedFormatted +" ಕೆ.ಜಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ   ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ      "
                 +"ರೂ."+ roundedAmountPerKg +"/-   ರಂತೆ    ಒಟ್ಟು      ರೂ.   "+ totalSchemeAmountFormatted +"/-   "
