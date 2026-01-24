@@ -75,5 +75,6 @@ public class AcknowledgementReceiptResponse {
 
     private Float cocoonsWeight;
     private String raceName;
-
+    private String month;
+    private Float machineQuantity;
 }

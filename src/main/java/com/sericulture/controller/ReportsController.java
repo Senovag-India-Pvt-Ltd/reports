@@ -481,7 +481,7 @@ public class ReportsController {
             Map<String, Object> parameters = getParameters();
 
             // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceReelerAcknowledgement(requestDto);
+            JRDataSource dataSource = getDataSourceSilkIncentiveAcknowledgement(requestDto);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -7207,16 +7207,24 @@ public class ReportsController {
             response.setVillageName( apiResponse.getContent().get(0).getVillageName());
             response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
 
+            response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ   ಸಾಲಿನಲ್ಲಿ        “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”      "+ apiResponse.getContent().get(0).getCategoryName() +""+
+                    "    ಅಡಿ      ರಾಜ್ಯದಲ್ಲಿ      ರೇಷ್ಮೆ     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆದಾರರು     ಉತ್ಪಾದಿಸಿದ    ಗುಣಮಟ್ಟದ    ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ      ಪ್ರೋತ್ಸಾಹಧನ ಕಾರ್ಯಕ್ರಮ");
 
-            response.setLineItemComment( "              ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ  "+apiResponse.getContent().get(0).getFatherNameKan()+"" +
-                    apiResponse.getContent().get(0).getVillageName()+ "  ,  "+ apiResponse.getContent().get(0).getHobliName()+ " ,  ಹೋಬಳಿ,   " +apiResponse.getContent().get(0).getTalukName()+ "  ತಾ.   " +apiResponse.getContent().get(0).getDistrictName()+ "   ಇವರು   " +apiResponse.getContent().get(0).getCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು, " +
-                    "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
-                    "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
-                    "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು\n" +
-                    "ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   \n "+apiResponse.getContent().get(0).getLoggedinUserTscName());
-            response.setHeader3("           "+ apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ      “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”    "+ apiResponse.getContent().get(0).getCategoryName() +""+
-                    "ಅಡಿ   ರೇಷ್ಮೆ    ನೂಲು   ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ");
+//            response.setLineItemComment( "           "+ apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ   ಸಾಲಿನಲ್ಲಿ        “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”  ಅಡಿ        ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")     ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+"    " +
+//                    "  ಗ್ರಾಮ     "+apiResponse.getContent().get(0).getVillageName()+ ",   ತಾಲ್ಲೂಕು     " +apiResponse.getContent().get(0).getTalukName()+ "    ಇವರು   " +apiResponse.getContent().get(0).getCategoryName()+ "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು, " +
+//                    "ರೀಲಿಂಗ್    ರಹದಾರಿ ಸಂಖ್ಯೆ    " +apiResponse.getContent().get(0).getReelingLicenseNumber()+ "   ಅನ್ನು     ಹೊಂದಿದ್ದು   "+apiResponse.getContent().get(0).getReelingShedSqft()+" ಚ.ಅಡಿ   "  +apiResponse.getContent().get(0).getSubSchemeNameInKannada()+ "   ನಿರ್ಮಾಣಕ್ಕೆ       ಸಹಾಯಧನ "+
+//                    "ಪಡೆಯಲು    ಅರ್ಜಿ ಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು,    ಅರ್ಜಿಯ   ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getArn() +"   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ    ಮುಂದಿನ    ಸ್ಥಿತಿಯನ್ನು  "+
+//                    "ತಿಳಿಯಲು    ARN    ಸಂಖ್ಯೆಯನ್ನು      ಉಪಯೋಗಿಸತಕ್ಕದ್ದು");
+
+            response.setLineItemComment("               " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "” ಅಡಿ    "+
+                    "   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  "     "+
+                    "   ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getVillageName()+ "  ,ತಾಲೂಕು   "+apiResponse.getContent().get(0).getTalukName()+  "   ರವರು   "+apiResponse.getContent().get(0).getMachineTypeName()+  "    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      "+
+                    apiResponse.getContent().get(0).getMonth()+ " ರ     ಮಾಹೆಯಲ್ಲಿ     " +apiResponse.getContent().get(0).getMachineQuantity()+ "    ಕೆ.ಜಿ     ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಯನ್ನು      ಉತ್ಪಾದಿಸಿದ್ದು ,      " +
+                            "ಪ್ರತಿ    ಕೆ.ಜಿ. ಗೆ    ನಿಗದಿ    ಪಡಿಸಿರುವ    ಘಟಕ    ದರ    ರೂ.   "+Math.round(apiResponse.getContent().get(0).getUnitCost())+"/- ಗಳಂತೆ     ಒಟ್ಟು      ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+"/- ಗಳ   ಪ್ರೋತ್ಸಾಹಧನ ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು      ಸಲ್ಲಿಸಿದ್ದು ,   "+
+                            "   ಇವರ    ನೋಂದಣಿ    ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getArn()+"    ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು    ತಿಳಿಯಲು     ARN    ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ   ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕ್ಕದ್ದು,");
+            response.setHeader1("ರೇಷ್ಮೆ    ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು\n"
+                    +"ಸರ್ಕಾರೀ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n "+
+                    apiResponse.getContent().get(0).getLoggedinUserDistrictName());
 
             response.setHeader2("ARN No:  " + apiResponse.getContent().get(0).getArn());
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
@@ -8165,7 +8173,7 @@ public class ReportsController {
 
     private JRBeanCollectionDataSource getDataSourceForBonus225(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromIncentive(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoon(requestDto);
         //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -8403,7 +8411,7 @@ public class ReportsController {
 
     private JRBeanCollectionDataSource getDataSourceForIncentive120(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromIncentive(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoon(requestDto);
         //  AcknowledgementReceiptResponse content = new AcknowledgementReceiptResponse();
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
