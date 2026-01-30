@@ -11407,22 +11407,19 @@ public class ReportsController {
                                 + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    ಯೋಜನೆಯಡಿ    "
                                 + apiResponse.getContent().get(0).getRhSqft() + "    ಚದರಡಿ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆಗೆ    ಘಟಕ    ದರದ    ಶೇಕಡ    "
                                 + (centralSharePercentage + stateSharePercentage) + "    ರಷ್ಟು    ಸಹಾಯಧನ    ರೂ.    "
-                                + (centralShareAmount + stateShareAmount) + "/-    (    ರೂ.    " + totalSubsidyWords
-                                + "    )    ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ    ನ    ಷರತ್ತು    ಮತ್ತು    ತಗಾದೆಗಳಿಗೆ    ಸಂಬಂಧಧಿಸಿದ    ಫಲಾನುಭವಿ    ಹಾಗೂ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ    ಕ್ಷೇತ್ರ    ಮಟ್ಟ    ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ    ಮಾಡಿ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ.    "
+                                + (centralShareAmount + stateShareAmount) + "/-    (ರೂ.    " + totalSubsidyWords
+                                + ")    ಗಳಿಗೆ    ಮುಚ್ಚ  ಳಿಕೆಯಲ್ಲಿ  ನ    ಷರತ್ತು    ಮತ್ತು    ತಗಾದೆಗಳಿಗೆ    ಸಂಬಂಧಧಿಸಿದ    ಫಲಾನುಭವಿ    ಹಾಗೂ    ಶಿಫಾರಸ್ಸು    ಮಾಡಿದ    ಕ್ಷೇತ್ರ    ಮಟ್ಟ    ದ    ಅಧಿಕಾರಿಗಳನ್ನು    ಜವಾಬ್ದಾ ರಿ    ಮಾಡಿ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ.    "
                                 + "ಈ    ಸಹಾಯದನದ    ಪೈಕಿ    ರೂ.    " + centralShareAmount + "/-    (ರೂ.    "
-                                + centralShareWords + "    )    ಗಳು    ಕೇಂದ್ರ    ದ    ಪಾಲಾಗಿ    ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ    ನೀಡಿರುವ    ಮೊತ್ತ    ದಲ್ಲಿ    "
-                                + "ಮತ್ತು    ರಾಜ್ಯ    ದ    ಪಾಲಾಗಿ    ರೂ.    " + stateShareAmount + "/-    (    ರೂ.    "
-                                + stateShareWords + "    )    ಗಳನ್ನು    ರಾಜ್ಯ    "
+                                + centralShareWords + ")    ಗಳು    ಕೇಂದ್ರ    ದ    ಪಾಲಾಗಿ    ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿ    ನೀಡಿರುವ    ಮೊತ್ತ    ದಲ್ಲಿ    "
+                                + "ಮತ್ತು    ರಾಜ್ಯ    ದ    ಪಾಲಾಗಿ    ರೂ.    " + stateShareAmount + "/-    (ರೂ.    "
+                                + stateShareWords + " )    ಗಳನ್ನು    ರಾಜ್ಯ    "
                                 + apiResponse.getContent().get(0).getSchemeNameInKannada()
                                 + "    ಯೋಜನೆಯ    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    "
                                 + apiResponse.getContent().get(0).getScHeadAccountName() + " ("
                                 + apiResponse.getContent().get(0).getDescription() + " )    ರಡಿ    ಖಜಾನೆ - 2    ರಲ್ಲಿ    ಬಿಡುಗಡೆಗೊಳಿಸಿರುವ    ಸಹಾಯಧನದ    ಅನದಾನದಲ್ಲಿ,    ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರುಗಳು    ಖಜಾನೆ-2    ರಲ್ಲಿ    "
                                 + "ಹಾಗು    ಕೇಂದ್ರ    ದ    ಪಾಲಿನ    ಮೊತ್ತವನ್ನು    ಸಂಬಂಧಿಸಿದ    ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್    ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರುಗಳು    ಡಿಬಿಟಿ    ಮೂಲಕ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್‌    ಖಾತೆಗೆ    ನೇರವಾಗಿ    ಜಮಾ    ಮಾಡಲು    ಸೂಚಿಸಿದೆ.\n"
-                                + "                                        ಈ    ವೆಚ್ಚ    ವನ್ನು    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    "
-                                + apiResponse.getContent().get(0).getScHeadAccountName() + " (  "
-                                + apiResponse.getContent().get(0).getDescription() + ")  ( "
-                                + apiResponse.getContent().get(0).getScCategoryName() + " )    ಅಡಿ    ಭರಿಸುವುದು."
-                );
+                                + "                                        ಈ    ವೆಚ್ಚ    ವನ್ನು    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    " + apiResponse.getContent().get(0).getScHeadAccountName() + " (" + apiResponse.getContent().get(0).getDescription() + ")  ("
+                                + apiResponse.getContent().get(0).getScCategoryName() + " )    ಅಡಿ    ಭರಿಸುವುದು.");
 
                 response.setHeader17("ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು\n" +
                     apiResponse.getContent().get(0).getDivisionName() + "   ವಿಭಾಗ\n");
