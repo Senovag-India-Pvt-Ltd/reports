@@ -7877,240 +7877,223 @@ public class ReportsController {
         return Float.parseFloat(String.format("%.2f", value));
     }
 
-    private JRBeanCollectionDataSource getDataSourceForPermit(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+    private String formatDate(String dateStr, String inputPattern) {
+        try {
+            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(inputPattern))
+                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+
+    private JRBeanCollectionDataSource getDataSourceForPermit(
+            LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
         SeedMarket apiResponse = apiService.fetchDataFromPermit(requestDto);
-        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
-        LotDistributeResponse response = new LotDistributeResponse();
-        lotDistributeResponseList.add(response);
+        List<LotDistributeResponse> list = new LinkedList<>();
 
-        if (apiResponse.getContent() != null) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
 
-            int serialNo = 1;
-//            lotDistributeResponseList.add(response);
+        double totalLotWeightSum = 0.0;
+        double totalSoldOutAmountSum = 0.0;
+        double totalNumberSum = 0.0;
+        double totalNoOfCocoonPerKg = 0.0;
 
-            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-//                if (lotDistributeResponse.getFarmerFullName() == null) {
-//                    lotDistributeResponse.setFarmerFullName("");
-//                }
+        int serialNo = 1;
 
-                String fullName = lotDistributeResponse.getFarmerFullName();
-                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+        // ✅ HEADER ROW
+        LotDistributeResponse headerRow = new LotDistributeResponse();
+        headerRow.setTotalRow(false);
+        list.add(headerRow);
 
-                if (fullName == null) {
-                    fullName = "";
-                }
-                if (fruitsId == null) {
-                    fruitsId = "";
-                }
+        // ✅ DATA ROWS
+        if (apiResponse.getContent() != null && !apiResponse.getContent().isEmpty()) {
 
-                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+            for (LotDistributeResponse row : apiResponse.getContent()) {
 
-                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
-                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
-                }
-                DecimalFormat df = new DecimalFormat("0.00");
-                df.setRoundingMode(RoundingMode.HALF_UP);
-
-                lotDistributeResponse.setTotalLotWeightStr(
-                        lotDistributeResponse.getTotalLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getTotalLotWeight())
-                );
-                lotDistributeResponse.setTotalSoldOutAmountStr(
-                        lotDistributeResponse.getTotalSoldOutAmount() == null ? "0.00" : df.format(lotDistributeResponse.getTotalSoldOutAmount())
+                row.setFarmerFullName(
+                        (row.getFarmerFullName() == null ? "" : row.getFarmerFullName()) + " " +
+                                (row.getFarmerFruitsId() == null ? "" : row.getFarmerFruitsId())
                 );
 
-                lotDistributeResponse.setLotWeightStr(
-                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
-                );
-                lotDistributeResponse.setTotalNumberStr(
-                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
-                );
-                lotDistributeResponse.setAmountStr(
-                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
-                );
-                lotDistributeResponse.setSoldAmountStr(
-                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
-                );
+                double lotWeight = row.getTotalLotWeight() == null ? 0.0 : row.getTotalLotWeight();
+                double soldAmount = row.getTotalSoldOutAmount() == null ? 0.0 : row.getTotalSoldOutAmount();
+                double amount = row.getAmount() == null ? 0.0 : row.getAmount();
+                double totalNumber = row.getTotalNumber() == null ? 0.0 : row.getTotalNumber();
+                double noOfCocoonPerKg = row.getNoOfCocoonPerKg() == null ? 0.0 : row.getNoOfCocoonPerKg();
 
-                if (lotDistributeResponse.getTestDate() == null) {
-                    lotDistributeResponse.setTestDate("");
-                }
+                // ✅ TOTALS
+                totalLotWeightSum += lotWeight;
+                totalSoldOutAmountSum += soldAmount;
+                totalNumberSum += totalNumber;
+                totalNoOfCocoonPerKg += noOfCocoonPerKg;
 
-                lotDistributeResponse.setSerialNumber(serialNo++);
-                lotDistributeResponseList.add(lotDistributeResponse);
+                // ✅ DISPLAY
+                row.setLotWeightStr(df.format(lotWeight));
+                row.setTotalNumberStr(df.format(totalNumber));
+                row.setAmountStr(df.format(amount));
+                row.setSoldAmountStr(df.format(soldAmount));
+
+                row.setSerialNumber(serialNo++);
+                row.setTotalRow(false);
+
+                list.add(row);
             }
         }
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedTestDate = "";
 
+        // ✅ TOTAL ROW
+        LotDistributeResponse totalRow = new LotDistributeResponse();
+        totalRow.setTotalRow(true);
+        totalRow.setSerialNumber(null);
+        totalRow.setFarmerFullName("ಒಟ್ಟು");
+        totalRow.setFarmerFruitsId("");
+        totalRow.setLotWeightStr(df.format(totalLotWeightSum));
+        totalRow.setTotalNumberStr(df.format(totalNumberSum));
+        totalRow.setSoldAmountStr(df.format(totalSoldOutAmountSum));
+
+        totalRow.setAmountStr("");
+        totalRow.setNoOfCocoonPerKg(null);
+
+        list.add(totalRow);
+
+        // ✅ DATE FORMATTING
+        String formattedToDate =
+                formatDate(apiResponse.getContent().get(0).getSpunToDate(), "yyyy-MM-dd");
+
+        String formattedFromDate =
+                formatDate(apiResponse.getContent().get(0).getSpunFromDate(), "yyyy-MM-dd");
+
+        String formattedMarketAuctionDate =
+                formatDate(apiResponse.getContent().get(0).getMarketAuctionDate(), "yyyy-MM-dd");
+
+
+        // ✅ HEADER TEXT
         try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunToDate(), inputFormatter);
-            formattedTestDate = testDate.format(outputFormatter);
-        } catch (Exception e) {
-            formattedTestDate = ""; // fallback if parsing fails
-        }
+            headerRow.setHeader("ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"   ಖಾಸಗಿ    ಬಿತ್ತನೆದಾರರು    ಈ   ದಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ    " +
+                            formattedFromDate + " - " + formattedToDate + "    ದಿನಾಂಕದಲ್ಲಿ      ಗೂಡು     ಕಟ್ಟಿದ     " + +  Math.round(totalLotWeightSum) +   "    ಕೆ.ಜಿ     ಒಟ್ಟು     ಸಂಖ್ಯೆ      "+Math.round(totalNumberSum)+
+                            "    ಮೈಸೂರು    ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     ಖರೀದಿಸಿರುತ್ತಾರೆ.    ಮೇಲ್ಕಂಡ    ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು      " + apiResponse.getContent().get(0).getMarketName() +
+                            "    ಇಂದ    " + apiResponse.getContent().get(0).getRspAddress() + "    ಇಲ್ಲಿಗೆ    ಸಾಗಿಸಲು    ಅನುಮತಿ    ನೀಡಲಾಗಿದೆ.    ಈ    ಪರ್ಮಿಟ್ಟಿನ    ಅವಧಿ    " + formattedMarketAuctionDate);
 
-        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedTestDate2 = "";
+            headerRow.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 
-        try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunFromDate(), inputFormatter2);
-            formattedTestDate2 = testDate.format(outputFormatter2);
-        } catch (Exception e) {
-            formattedTestDate2 = ""; // fallback if parsing fails
-        }
+            headerRow.setHeader2(
+                    "ರೇಷ್ಮೆ     ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು\n" +
+                            "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ\n" +
+                            apiResponse.getContent().get(0).getMarketName()
+            );
 
-        DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
-        DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            headerRow.setHeader3("ರಹದಾರಿ   ಸಂಖ್ಯೆ   :  " +
+                    apiResponse.getContent().get(0).getLicenseNo());
 
-        String formattedMarketAuctionDate = "";
-        try {
-            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter3);
-            formattedMarketAuctionDate = auctionDate.format(outputFormatter3);
-        } catch (Exception e) {
-            formattedMarketAuctionDate = ""; // fallback if parsing fails
-        }
+        } catch (Exception ignored) {}
 
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
-                "         \n"+
-                formattedTestDate2 + "   -   "  + formattedTestDate + "   ದಿನಾಂಕದಲ್ಲಿ     ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
-                "      \n" +
-                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
-                "      \n"+
-                apiResponse.getContent().get(0).getRspAddress()  +"\n" +
-                "               \n" +
-                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + formattedMarketAuctionDate);
-//        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
-        response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
-        response.setTotalLotWeightStr( String.format("%.2f", apiResponse.getContent().get(0).getTotalLotWeight()));
-        response.setTotalSoldOutAmountStr(String.format("%.2f", apiResponse.getContent().get(0).getTotalSoldOutAmount()));
-        response.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
-        response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
-                "              \n" +
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
-                "           \n"+
-                apiResponse.getContent().get(0).getMarketName());
-        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        headerRow.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
-        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+        return new JRBeanCollectionDataSource(list);
     }
 
     private JRBeanCollectionDataSource getDataSourceForPermit2(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
 
         SeedMarket apiResponse = apiService.fetchDataFromPermit(requestDto);
-        List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
-        LotDistributeResponse response = new LotDistributeResponse();
+        List<LotDistributeResponse> list = new LinkedList<>();
 
-//        lotDistributeResponseList.add(response);
-        if (apiResponse.getContent() != null) {
-            int serialNo = 1;
-            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-//                if (lotDistributeResponse.getFarmerFullName() == null) {
-//                    lotDistributeResponse.setFarmerFullName("");
-//                }
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
 
-                String fullName = lotDistributeResponse.getFarmerFullName();
-                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
+        double totalLotWeightSum = 0.0;
+        double totalSoldOutAmountSum = 0.0;
+        double totalNumberSum = 0.0;
+        double totalNoOfCocoonPerKg = 0.0;
 
-                if (fullName == null) {
-                    fullName = "";
-                }
-                if (fruitsId == null) {
-                    fruitsId = "";
-                }
+        int serialNo = 1;
 
-                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+        LotDistributeResponse headerRow = new LotDistributeResponse();
+        headerRow.setTotalRow(false);
 
-                if (lotDistributeResponse.getTestDate() == null) {
-                    lotDistributeResponse.setTestDate("");
-                }
-                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
-                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
-                }
 
-                DecimalFormat df = new DecimalFormat("0.00");
-                df.setRoundingMode(RoundingMode.HALF_UP);
-                lotDistributeResponse.setTotalLotWeightStr(
-                        lotDistributeResponse.getTotalLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getTotalLotWeight())
+        // ✅ DATA ROWS
+        if (apiResponse.getContent() != null && !apiResponse.getContent().isEmpty()) {
+
+            for (LotDistributeResponse row : apiResponse.getContent()) {
+
+                row.setFarmerFullName(
+                        (row.getFarmerFullName() == null ? "" : row.getFarmerFullName()) + " " +
+                                (row.getFarmerFruitsId() == null ? "" : row.getFarmerFruitsId())
                 );
-                lotDistributeResponse.setTotalSoldOutAmountStr(
-                        lotDistributeResponse.getTotalSoldOutAmount() == null ? "0.00" : df.format(lotDistributeResponse.getTotalSoldOutAmount())
-                );
-                lotDistributeResponse.setLotWeightStr(
-                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
-                );
-                lotDistributeResponse.setTotalNumberStr(
-                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
-                );
-                lotDistributeResponse.setAmountStr(
-                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
-                );
-                lotDistributeResponse.setSoldAmountStr(
-                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
-                );
-//
 
-                lotDistributeResponse.setSerialNumber(serialNo++);
-                lotDistributeResponseList.add(lotDistributeResponse);
+                double lotWeight = row.getTotalLotWeight() == null ? 0.0 : row.getTotalLotWeight();
+                double soldAmount = row.getTotalSoldOutAmount() == null ? 0.0 : row.getTotalSoldOutAmount();
+                double amount = row.getAmount() == null ? 0.0 : row.getAmount();
+                double totalNumber = row.getTotalNumber() == null ? 0.0 : row.getTotalNumber();
+                double noOfCocoonPerKg = row.getNoOfCocoonPerKg() == null ? 0.0 : row.getNoOfCocoonPerKg();
+
+                totalLotWeightSum += lotWeight;
+                totalSoldOutAmountSum += soldAmount;
+                totalNumberSum += totalNumber;
+
+                // ✅ DISPLAY
+                row.setLotWeightStr(df.format(lotWeight));
+                row.setTotalNumberStr(df.format(totalNumber));
+                row.setAmountStr(df.format(amount));
+                row.setSoldAmountStr(df.format(soldAmount));
+
+                row.setSerialNumber(serialNo++);
+                row.setTotalRow(false);
+
+                list.add(row);
             }
         }
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedTestDate = "";
 
+        // ✅ TOTAL ROW
+        LotDistributeResponse totalRow = new LotDistributeResponse();
+        totalRow.setTotalRow(true);
+        totalRow.setSerialNumber(null);
+        totalRow.setFarmerFullName("ಒಟ್ಟು");
+        totalRow.setFarmerFruitsId("");
+        totalRow.setLotWeightStr(df.format(totalLotWeightSum));
+        totalRow.setTotalNumberStr(df.format(totalNumberSum));
+        totalRow.setSoldAmountStr(df.format(totalSoldOutAmountSum));
+        totalRow.setAmountStr("");
+        totalRow.setNoOfCocoonPerKg(null);
+
+        list.add(totalRow);
+
+        // ✅ DATE FORMATTING
+        String formattedToDate =
+                formatDate(apiResponse.getContent().get(0).getSpunToDate(), "yyyy-MM-dd");
+
+        String formattedFromDate =
+                formatDate(apiResponse.getContent().get(0).getSpunFromDate(), "yyyy-MM-dd");
+
+        String formattedMarketAuctionDate =
+                formatDate(apiResponse.getContent().get(0).getMarketAuctionDate(), "yyyy-MM-dd");
+
+
+        // ✅ HEADER TEXT
         try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunToDate(), inputFormatter);
-            formattedTestDate = testDate.format(outputFormatter);
-        } catch (Exception e) {
-            formattedTestDate = ""; // fallback if parsing fails
-        }
+            headerRow.setHeader("ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"   ಖಾಸಗಿ    ಬಿತ್ತನೆದಾರರು    ಈ   ದಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ    " +
+                    formattedFromDate + " - " + formattedToDate + "    ದಿನಾಂಕದಲ್ಲಿ      ಗೂಡು     ಕಟ್ಟಿದ     " +  Math.round(totalLotWeightSum) +   "    ಕೆ.ಜಿ     ಒಟ್ಟು     ಸಂಖ್ಯೆ      "+Math.round(totalNumberSum)+
+                    "    ಮೈಸೂರು    ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     ಖರೀದಿಸಿರುತ್ತಾರೆ.    ಮೇಲ್ಕಂಡ    ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು      " + apiResponse.getContent().get(0).getMarketName() +
+                    "    ಇಂದ    " + apiResponse.getContent().get(0).getRspAddress() + "    ಇಲ್ಲಿಗೆ    ಸಾಗಿಸಲು    ಅನುಮತಿ    ನೀಡಲಾಗಿದೆ.    ಈ    ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ    " + formattedMarketAuctionDate);
 
-        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedTestDate2 = "";
+            headerRow.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 
-        try {
-            LocalDate testDate = LocalDate.parse(apiResponse.getContent().get(0).getSpunFromDate(), inputFormatter2);
-            formattedTestDate2 = testDate.format(outputFormatter2);
-        } catch (Exception e) {
-            formattedTestDate2 = ""; // fallback if parsing fails
-        }
-        DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
-        DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            headerRow.setHeader2(
+                    "ರೇಷ್ಮೆ     ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು\n" +
+                            "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ\n" +
+                            apiResponse.getContent().get(0).getMarketName()
+            );
 
-        String formattedMarketAuctionDate = "";
-        try {
-            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter3);
-            formattedMarketAuctionDate = auctionDate.format(outputFormatter3);
-        } catch (Exception e) {
-            formattedMarketAuctionDate = ""; // fallback if parsing fails
-        }
-        response.setHeader("ಶ್ರೀ   "+ apiResponse.getContent().get(0).getBuyerName()  +"  ಖಾಸಗಿ ಬಿತ್ತನೆದಾರರು ಈ ದಿನ ಮಾರುಕಟ್ಟೆಯಿಂದ\n" +
-                "         \n"+
-                formattedTestDate2 + "   -   "  + formattedTestDate + "   ದಿನಾಂಕದಲ್ಲಿ    ಗೂಡು  ಕಟ್ಟಿದ  " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +"  ಮೈಸೂರು  ಬಿತ್ತನೆ   ಗೂಡುಗಳನ್ನು\n" +
-                "      \n" +
-                "ಖರೀದಿಸಿರುತ್ತಾರೆ.  ಮೇಲ್ಕಂಡ ಬಿತ್ತನೆ  ಗೂಡುಗಳನ್ನು    " + apiResponse.getContent().get(0).getMarketName()  +"   ಇಂದ\n" +
-                "      \n"+
-                apiResponse.getContent().get(0).getRspAddress()  +"\n" +
-                "               \n" +
-                "ಇಲ್ಲಿಗೆ ಸಾಗಿಸಲು ಅನುಮತಿ  ನೀಡಲಾಗಿದೆ.  ಈ  ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ   " + formattedMarketAuctionDate);
+            headerRow.setHeader3("ರಹದಾರಿ   ಸಂಖ್ಯೆ   :  " +
+                    apiResponse.getContent().get(0).getLicenseNo());
 
-        response.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
+        } catch (Exception ignored) {}
 
-//        response.setHeader1("ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getMarketAuctionDate());
+        headerRow.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
-        response.setHeader2("ರೇಷ್ಮೆ     ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು\n" +
-                "              \n" +
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n" +
-                "           \n"+
-                apiResponse.getContent().get(0).getMarketName());
-
-        response.setHeader3("ರಹದಾರಿ  ಸಂಖ್ಯೆ  : " + apiResponse.getContent().get(0).getLicenseNo());
-
-        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-        return new JRBeanCollectionDataSource(lotDistributeResponseList);
+        return new JRBeanCollectionDataSource(list);
     }
 
     public static String getKannadaInitialsFromSentence(String text) {
@@ -8498,7 +8481,7 @@ public class ReportsController {
                 "2) ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಆಭಿವೃ ದ್ಧಿ     ಆಯುಕ್ತ ರು    ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು , ಬೆ೦ಗಳೂರು ರವರ    ಸುತ್ತೋ ಲೆ    ಸಂಖ್ಯೆ  : \n" +
                 "     " + apiResponse.getContent().get(0).getSchemeCircularNo() + "   ದಿನಾಂಕ :  " +schemeCircularDate  + " \n" +
                 "3) ಸರ್ಕಾರದ    ಆದೇಶ    ಸ೦ಖ್ಯೆ  :  " +apiResponse.getContent().get(0).getDeptDeleNo() + "    ದಿನಾಂಕ : " +deptDeleDate  + "\n" +
-                        "4) ರೇಷ್ಮೆ    ಉಪ ನಿರ್ದೇಶಕರು,    " +apiResponse.getContent().get(0).getLoggedinUserTalukName() + "  ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "\n" +
+                        "4) ರೇಷ್ಮೆ    ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು,    " +apiResponse.getContent().get(0).getUserMarket() + "  ರವರ   ಜ್ಞಾಪನ    ಪತ್ರದ   ಸಂಖ್ಯೆ   :  " +apiResponse.getContent().get(0).getSReleaseNo() + "\n" +
                 "     ದಿನಾಂಕ : " +sReleaseDate + " \n\n" +
 
                 "                 "+apiResponse.getContent().get(0).getFinancialYear() +"    ನೇ   ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ ಇಲಾಖೆಯ    ವಿವಿಧ     ಕಾರ್ಯ ಕ್ರ ಮಗಳ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ವಿವಿಧ    ಲೆಕ್ಕ    " +
@@ -8632,7 +8615,7 @@ public class ReportsController {
         response.setHeader5("ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ     " +apiResponse.getContent().get(0).getUserMarket() +"   ಇಲ್ಲಿ     ವಹಿವಾಟು " +
                 "   ಮಾಡಿದ   "+totalQuantityProducedText +"    ಕೆ.ಜಿ.   "+apiResponse.getContent().get(0).getRaceName() +"   ತಳಿ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳಿಗೆ     ಉತ್ಪಾ ದಕತೆ    ಮತ್ತು    ಗುಣಮಟ್ಟ ದ     ಆಧಾರದ    ಮೇಲೆ     ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ " +
                 "    ರೂ."+perKgRateText  +"/- ಗಳಂತೆ     ಪ್ರೋತ್ಸಾಹಧನ  ರೂ. "+totalSchemeAmountText+" ಗಳನ್ನು     ಪಡೆಯಲು    ಅರ್ಹರಿರುತ್ತಾರೆ     ಉಲ್ಲೇಖ (3) ರ    ಸರ್ಕಾರದ    ಆದೇಶದ " +
-                "   ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು,    ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತ ವನ್ನು    ಪಾವತಿಸಲು " +
+                "   ರೀತ್ಯಾ    ಈ    ಕಛೇರಿಯ    ಅಧಿಕಾರ    ಪ್ರತ್ಯಾ ಯೋಜನೆ   ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿದ್ದು ,     ಉಲ್ಲೇಖ(4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ    ನೀಡಿರುವ    ಮಾರ್ಗಸೂಚಿಯನ್ವ ಯ     ಪ್ರೋತ್ಸಾಹಧನ ಮೊತ್ತ ವನ್ನು    ಪಾವತಿಸಲು " +
                 "   ಅನುದಾನ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗಿದೆ,   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ   ಮಂಜೂರಾತಿ   ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
 
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
@@ -8842,9 +8825,9 @@ public class ReportsController {
         }
 
         response.setHeader("ರೇಷ್ಮೆ   ಸಹಾಯಕ  ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ  ನಂತರದ  ಚಟುವಟಿಕೆ,  " +apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "  ರವರ  ಕಛೇರಿ ನಡವಳಿಗಳು ");
-        response.setHeader2("ವಿಷಯ: ");
+        response.setHeader2("ವಿಷಯ : ");
         response.setHeader3("ಉಲ್ಲೇಖ: ");
-        response.setHeader4("ಪೀಠಿಕೆ:");
+        response.setHeader4("ಪೀಠಿಕೆ : ");
 //        Float amountFloat = apiResponse.getContent().get(0).getTotalSchemeAmount();
 //        long amountLong = amountFloat.longValue();
 
@@ -11378,7 +11361,7 @@ public class ReportsController {
                 response.setHeader8(
                         "    " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ  ಸಾಲಿನಲ್ಲಿ     ರೇಷ್ಮೆ     ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರ ಮಗಳ   ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ   ವಿವಿಧ   ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇ ಖ(1)ರಲ್ಲಿ     ಸರ್ಕಾರವು    " +
                                 "    ಆಡಳಿತಾತ್ಮ ಕ  ಅನುಮೋದನೆಯನ್ನು     ನೀಡಿದ್ದು  , ಉಲ್ಲೇಖ (2)  ರಲ್ಲಿ    ರೇಷ್ಮೆ  ಹುಳು  ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ  ಕಾರ್ಯಕ್ರ  ಮದ  ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ  ಮಾರ್ಗಸೂಚಿಯನ್ನು    " +
-                                "    ನೀಡಲಾಗಿದೆ.  ಇಲಾಖೆಯು  ಕೇಂದ್ರ  ರೇಷ್ಮೆ  ಮಂಡಳಿಯ  सहಯोगದೊಂದಿಗೆ  ಕೇಂದ್ರ  ವಲಯ  “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”  ಯೋಜನೆಯನ್ನು    ಅನುಷ್ಟಾ  ನಗೊಳಲಾಗುತ್ತಿ ದೆ.    " +
+                                "    ನೀಡಲಾಗಿದೆ.  ಇಲಾಖೆಯು  ಕೇಂದ್ರ  ರೇಷ್ಮೆ  ಮಂಡಳಿಯ  ಸಹಯೋಗದೊಂದಿಗೆ   ಕೇಂದ್ರ  ವಲಯ  “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”  ಯೋಜನೆಯನ್ನು    ಅನುಷ್ಟಾ  ನಗೊಳಲಾಗುತ್ತಿ ದೆ.    " +
                                 "    ಸದರಿ  ಯೋಜನೆಯಡಿ  ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ನಿರ್ಮಾಣ   ಮಾಡಿರುವ   " + apiResponse.getContent().get(0).getScComponentName() + "  ನೀಡಬೇಕಾಗಿದ್ದು ,    " +
                                 "    " + apiResponse.getContent().get(0).getScCategoryName() + " ಅಡಿ  ಕೇಂದ್ರ :ರಾಜ್ಯ  :ಫಲಾನುಭವಿ  ಪಾಲು " + centralSharePercentage + ":"  + stateSharePercentage + ":" + beneficiarySharePercentage + " ಆಗಿರುತ್ತ ದೆ.    " +
                                 "    " + apiResponse.getContent().get(0).getScComponentName() + " ಘಟಕ  ದರ  ರೂ.  " + actualAmounts + "/- ಗಳಿಗೆ   ನಿಗಧಿಪಡಿಸಿದ್ದು,  ಇದರಲ್ಲಿ   ಶೇಕಡ  " + (centralSharePercentage + stateSharePercentage) + "  ರಷ್ಟ ನ್ನು   ಅಂದರೆ  ರೂ.   " + (centralShareAmount + stateShareAmount) + "/-  ಗಳನ್ನು   ಸಹಾಯಧನವಾಗಿ  ನೀಡಲಾಗುತ್ತಿ  ದೆ.    " +

@@ -106,11 +106,13 @@ public class LotDistributeResponse extends ResponseBody{
     private String remainingCocoonWeight;
     private String soldCocoonInKgs;
     private String lotWeightAfterWeighment;
-    private int serialNumber;
+    private Integer serialNumber;
     private String farmerFullName;
     private Float totalNumber;
     private Float totalLotWeight;
     private Float totalSoldOutAmount;
+    private Float totalAmountStr;
+
     private String licenseNo;
     private String spunFromDate;
     private String spunToDate;
@@ -131,6 +133,9 @@ public class LotDistributeResponse extends ResponseBody{
     private String soldAmountStr;
     private String totalLotWeightStr;
     private String totalSoldOutAmountStr;
+    private Boolean totalRow;
+    private Long totalNoOfCocoonPerKg;
+    private Integer sL;
 
 
 
