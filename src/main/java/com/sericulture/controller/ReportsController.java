@@ -7220,7 +7220,7 @@ public class ReportsController {
                     "   ಶ್ರೀ./ಶ್ರೀಮತಿ.   " +apiResponse.getContent().get(0).getReelerName()+ "(" +apiResponse.getContent().get(0).getFruitsId()+")    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  "     "+
                     "   ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getVillageName()+ "  ,ತಾಲೂಕು   "+apiResponse.getContent().get(0).getTalukName()+  "   ರವರು   "+apiResponse.getContent().get(0).getMachineTypeName()+  "    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      "+
                     apiResponse.getContent().get(0).getMonth()+ " ರ     ಮಾಹೆಯಲ್ಲಿ     " +apiResponse.getContent().get(0).getMachineQuantity()+ "    ಕೆ.ಜಿ     ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಯನ್ನು      ಉತ್ಪಾದಿಸಿದ್ದು ,      " +
-                            "ಪ್ರತಿ    ಕೆ.ಜಿ. ಗೆ    ನಿಗದಿ    ಪಡಿಸಿರುವ    ಘಟಕ    ದರ    ರೂ.   "+Math.round(apiResponse.getContent().get(0).getUnitCost())+"/- ಗಳಂತೆ     ಒಟ್ಟು      ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+"/- ಗಳ   ಪ್ರೋತ್ಸಾಹಧನ ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು      ಸಲ್ಲಿಸಿದ್ದು ,   "+
+                            "ಪ್ರತಿ    ಕೆ.ಜಿ. ಗೆ    ನಿಗದಿ    ಪಡಿಸಿರುವ     ಒಟ್ಟು      ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+"/- ಗಳ   ಪ್ರೋತ್ಸಾಹಧನ ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು      ಸಲ್ಲಿಸಿದ್ದು ,   "+
                             "   ಇವರ    ನೋಂದಣಿ    ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getArn()+"    ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು    ತಿಳಿಯಲು     ARN    ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ   ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕ್ಕದ್ದು,");
             response.setHeader1("ರೇಷ್ಮೆ    ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು\n"
                     +"ಸರ್ಕಾರೀ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n "+
@@ -7531,6 +7531,27 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
     }
 
+    private String formatDate(String dateStr, String inputPattern) {
+        try {
+            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(inputPattern))
+                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private String formatDate1(String date) {
+        try {
+            return (date == null || date.isEmpty())
+                    ? ""
+                    : LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+
     private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
@@ -7580,35 +7601,14 @@ public class ReportsController {
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
 
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate = lotDistributeResponse.getSpunFromDate();
-                if (rawTestDate != null && !rawTestDate.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
-                        String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setSpunFromDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunFromDate("");
-                }
+                lotDistributeResponse.setSpunFromDate(
+                        formatDate1(lotDistributeResponse.getSpunFromDate())
+                );
 
-                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
-                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
-                        String formattedDate = parsedDate.format(outputFormatter3);
-                        lotDistributeResponse.setSpunToDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunToDate("");
-                }
+                lotDistributeResponse.setSpunToDate(
+                        formatDate1(lotDistributeResponse.getSpunToDate())
+                );
+
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
@@ -7627,24 +7627,17 @@ public class ReportsController {
         } catch (Exception e) {
             formattedMarketAuctionDate = "";
         }
-        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
-                "        \n"+
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
-                "           \n"+
+        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
+                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
                 apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "        \n"+
-                " ತಾರೀಖು   " + formattedMarketAuctionDate);
+                "ತಾರೀಖು     " + formattedMarketAuctionDate);
 
         response.setHeader1("ಗೆ,                \n" +
-                "        \n"+
-                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "        \n"+
+                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "__________________________");
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "    \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
-                "      \n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
         response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
@@ -7700,35 +7693,13 @@ public class ReportsController {
                 lotDistributeResponse.setSoldAmountStr(
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate = lotDistributeResponse.getSpunFromDate();
-                if (rawTestDate != null && !rawTestDate.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
-                        String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setSpunFromDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunFromDate("");
-                }
+                lotDistributeResponse.setSpunFromDate(
+                        formatDate1(lotDistributeResponse.getSpunFromDate())
+                );
 
-                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
-                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
-                        String formattedDate = parsedDate.format(outputFormatter3);
-                        lotDistributeResponse.setSpunToDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunToDate("");
-                }
+                lotDistributeResponse.setSpunToDate(
+                        formatDate1(lotDistributeResponse.getSpunToDate())
+                );
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
@@ -7738,24 +7709,17 @@ public class ReportsController {
 
             }
         }
-        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
-                "        \n"+
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
-                "           \n"+
+        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
+                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
                 apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "        \n"+
-                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                "ತಾರೀಖು    " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader1("ಗೆ,                \n" +
-                "        \n"+
                 "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "        \n"+
                 "__________________________");
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "    \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
-                "      \n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
@@ -7810,35 +7774,13 @@ public class ReportsController {
                 lotDistributeResponse.setSoldAmountStr(
                         lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
                 );
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate = lotDistributeResponse.getSpunFromDate();
-                if (rawTestDate != null && !rawTestDate.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate, inputFormatter);
-                        String formattedDate = parsedDate.format(outputFormatter);
-                        lotDistributeResponse.setSpunFromDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunFromDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunFromDate("");
-                }
+                lotDistributeResponse.setSpunFromDate(
+                        formatDate1(lotDistributeResponse.getSpunFromDate())
+                );
 
-                DateTimeFormatter inputFormatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                DateTimeFormatter outputFormatter3 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String rawTestDate1 = lotDistributeResponse.getSpunToDate();
-                if (rawTestDate1 != null && !rawTestDate1.isEmpty()) {
-                    try {
-                        LocalDate parsedDate = LocalDate.parse(rawTestDate1, inputFormatter3);
-                        String formattedDate = parsedDate.format(outputFormatter3);
-                        lotDistributeResponse.setSpunToDate(formattedDate);
-                    } catch (Exception e) {
-                        lotDistributeResponse.setSpunToDate(""); // fallback if parsing fails
-                    }
-                } else {
-                    lotDistributeResponse.setSpunToDate("");
-                }
+                lotDistributeResponse.setSpunToDate(
+                        formatDate1(lotDistributeResponse.getSpunToDate())
+                );
                 if (lotDistributeResponse.getInvoiceNumber() == null) {
                     lotDistributeResponse.setInvoiceNumber("");
                 }
@@ -7849,23 +7791,16 @@ public class ReportsController {
         }
 
         response.setHeader2("ರವರ ಕಛೆರಿ\n" +
-                "        \n"+
                 "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
-                "           \n"+
                 apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "        \n"+
                 " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
 
         response.setHeader1("ಗೆ,                \n" +
-                "        \n"+
                 "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "        \n"+
                 "__________________________");
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "    \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
-                "      \n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
 
@@ -7877,14 +7812,7 @@ public class ReportsController {
         return Float.parseFloat(String.format("%.2f", value));
     }
 
-    private String formatDate(String dateStr, String inputPattern) {
-        try {
-            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(inputPattern))
-                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } catch (Exception e) {
-            return "";
-        }
-    }
+
 
 
     private JRBeanCollectionDataSource getDataSourceForPermit(
