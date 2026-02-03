@@ -7385,7 +7385,7 @@ public class ReportsController {
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
         if (apiResponse.getContent()!= null) {
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
             String formattedFromDate = "";
@@ -7466,7 +7466,7 @@ public class ReportsController {
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
         LotDistributeResponse response = new LotDistributeResponse();
         if (apiResponse.getContent()!= null) {
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String formattedTestDate = "";
 
@@ -7555,68 +7555,82 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForInvoice(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+
+        double totalLotWeight = 0.0;
+        double totalTotalNumber = 0.0;
+        double totalSoldAmount = 0.0;
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
         LotDistributeResponse response = new LotDistributeResponse();
         lotDistributeResponseList.add(response);
 
-        if (apiResponse.getContent() != null) {
-
-            int serialNo = 1;
-            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-//                if (lotDistributeResponse.getFarmerFullName() == null) {
-//                    lotDistributeResponse.setFarmerFullName("");
-//                }
-
-                String fullName = lotDistributeResponse.getFarmerFullName();
-                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
-
-                if (fullName == null) {
-                    fullName = "";
-                }
-                if (fruitsId == null) {
-                    fruitsId = "";
-                }
-
-                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
-
-                if (lotDistributeResponse.getRace() == null) {
-                    lotDistributeResponse.setRace("");
-                }
-                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
-                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
-                }
-                DecimalFormat df = new DecimalFormat("0.00");
-                df.setRoundingMode(RoundingMode.HALF_UP);
+        int serialNo = 1;
+        for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
 
 
-                lotDistributeResponse.setLotWeightStr(
-                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
-                );
-                lotDistributeResponse.setTotalNumberStr(
-                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
-                );
-                lotDistributeResponse.setAmountStr(
-                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
-                );
-                lotDistributeResponse.setSoldAmountStr(
-                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
-                );
+            String fullName = lotDistributeResponse.getFarmerFullName();
+            String fruitsId = lotDistributeResponse.getFarmerFruitsId();
 
-                lotDistributeResponse.setSpunFromDate(
-                        formatDate1(lotDistributeResponse.getSpunFromDate())
-                );
+            if (fullName == null) fullName = "";
+            if (fruitsId == null) fruitsId = "";
 
-                lotDistributeResponse.setSpunToDate(
-                        formatDate1(lotDistributeResponse.getSpunToDate())
-                );
+            lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
 
-                if (lotDistributeResponse.getInvoiceNumber() == null) {
-                    lotDistributeResponse.setInvoiceNumber("");
-                }
-                lotDistributeResponse.setSerialNumber(serialNo++);
-                lotDistributeResponseList.add(lotDistributeResponse);
-
+            if (lotDistributeResponse.getRace() == null) {
+                lotDistributeResponse.setRace("");
             }
+            if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+                lotDistributeResponse.setNoOfCocoonPerKg(0L);
+            }
+
+            // ✅ DEFINE VALUES PROPERLY
+            double lotWeight = lotDistributeResponse.getLotWeight() == null
+                    ? 0.0 : lotDistributeResponse.getLotWeight();
+
+            double totalNumber = lotDistributeResponse.getTotalNumber() == null
+                    ? 0.0 : lotDistributeResponse.getTotalNumber();
+
+            double soldAmount = lotDistributeResponse.getSoldAmount() == null
+                    ? 0.0 : lotDistributeResponse.getSoldAmount();
+
+            // ✅ SUM
+            totalLotWeight += lotWeight;
+            totalTotalNumber += totalNumber;
+            totalSoldAmount += soldAmount;
+
+            // ✅ FORMAT
+            lotDistributeResponse.setLotWeightStr(df.format(lotWeight));
+            lotDistributeResponse.setTotalNumberStr(df.format(totalNumber));
+            lotDistributeResponse.setSoldAmountStr(df.format(soldAmount));
+            lotDistributeResponse.setAmountStr(
+                    lotDistributeResponse.getAmount() == null
+                            ? "0.00"
+                            : df.format(lotDistributeResponse.getAmount())
+            );
+
+            lotDistributeResponse.setSpunFromDate(formatDate1(lotDistributeResponse.getSpunFromDate()));
+            lotDistributeResponse.setSpunToDate(formatDate1(lotDistributeResponse.getSpunToDate()));
+
+            if (lotDistributeResponse.getInvoiceNumber() == null) {
+                lotDistributeResponse.setInvoiceNumber("");
+            }
+
+            lotDistributeResponse.setSerialNumber(serialNo++);
+            lotDistributeResponseList.add(lotDistributeResponse);
         }
+
+        LotDistributeResponse totalRow = new LotDistributeResponse();
+        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setLotWeightStr(df.format(totalLotWeight));
+        totalRow.setTotalNumberStr(df.format(totalTotalNumber));
+        totalRow.setSoldAmountStr(df.format(totalSoldAmount));
+        totalRow.setAmountStr("");
+//        totalRow.setSerialNumber(null);
+
+        lotDistributeResponseList.add(totalRow);
+
         DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
         DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -7650,79 +7664,104 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForInvoice2(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        double totalLotWeight = 0.0;
+        double totalTotalNumber = 0.0;
+        double totalSoldAmount = 0.0;
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
         LotDistributeResponse response = new LotDistributeResponse();
 
-        if (apiResponse.getContent() != null) {
-            int serialNo = 1;
-            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-//                if (lotDistributeResponse.getFarmerFullName() == null) {
-//                    lotDistributeResponse.setFarmerFullName("");
-//                }
-
-                String fullName = lotDistributeResponse.getFarmerFullName();
-                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
-
-                if (fullName == null) {
-                    fullName = "";
-                }
-                if (fruitsId == null) {
-                    fruitsId = "";
-                }
-
-                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
-
-                if (lotDistributeResponse.getRace() == null) {
-                    lotDistributeResponse.setRace("");
-                }
-                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
-                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
-                }
-                DecimalFormat df = new DecimalFormat("0.00");
-                df.setRoundingMode(RoundingMode.HALF_UP);
+        int serialNo = 1;
+        for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
 
 
-                lotDistributeResponse.setLotWeightStr(
-                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
-                );
-                lotDistributeResponse.setTotalNumberStr(
-                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
-                );
-                lotDistributeResponse.setAmountStr(
-                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
-                );
-                lotDistributeResponse.setSoldAmountStr(
-                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
-                );
-                lotDistributeResponse.setSpunFromDate(
-                        formatDate1(lotDistributeResponse.getSpunFromDate())
-                );
+            String fullName = lotDistributeResponse.getFarmerFullName();
+            String fruitsId = lotDistributeResponse.getFarmerFruitsId();
 
-                lotDistributeResponse.setSpunToDate(
-                        formatDate1(lotDistributeResponse.getSpunToDate())
-                );
-                if (lotDistributeResponse.getInvoiceNumber() == null) {
-                    lotDistributeResponse.setInvoiceNumber("");
-                }
+            if (fullName == null) fullName = "";
+            if (fruitsId == null) fruitsId = "";
 
-                lotDistributeResponse.setSerialNumber(serialNo++);
-                lotDistributeResponseList.add(lotDistributeResponse);
+            lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
 
+            if (lotDistributeResponse.getRace() == null) {
+                lotDistributeResponse.setRace("");
             }
+            if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+                lotDistributeResponse.setNoOfCocoonPerKg(0L);
+            }
+
+            // ✅ DEFINE VALUES PROPERLY
+            double lotWeight = lotDistributeResponse.getLotWeight() == null
+                    ? 0.0 : lotDistributeResponse.getLotWeight();
+
+            double totalNumber = lotDistributeResponse.getTotalNumber() == null
+                    ? 0.0 : lotDistributeResponse.getTotalNumber();
+
+            double soldAmount = lotDistributeResponse.getSoldAmount() == null
+                    ? 0.0 : lotDistributeResponse.getSoldAmount();
+
+            // ✅ SUM
+            totalLotWeight += lotWeight;
+            totalTotalNumber += totalNumber;
+            totalSoldAmount += soldAmount;
+
+            // ✅ FORMAT
+            lotDistributeResponse.setLotWeightStr(df.format(lotWeight));
+            lotDistributeResponse.setTotalNumberStr(df.format(totalNumber));
+            lotDistributeResponse.setSoldAmountStr(df.format(soldAmount));
+            lotDistributeResponse.setAmountStr(
+                    lotDistributeResponse.getAmount() == null
+                            ? "0.00"
+                            : df.format(lotDistributeResponse.getAmount())
+            );
+
+            lotDistributeResponse.setSpunFromDate(formatDate1(lotDistributeResponse.getSpunFromDate()));
+            lotDistributeResponse.setSpunToDate(formatDate1(lotDistributeResponse.getSpunToDate()));
+
+            if (lotDistributeResponse.getInvoiceNumber() == null) {
+                lotDistributeResponse.setInvoiceNumber("");
+            }
+
+            lotDistributeResponse.setSerialNumber(serialNo++);
+            lotDistributeResponseList.add(lotDistributeResponse);
+        }
+
+        LotDistributeResponse totalRow = new LotDistributeResponse();
+        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setLotWeightStr(df.format(totalLotWeight));
+        totalRow.setTotalNumberStr(df.format(totalTotalNumber));
+        totalRow.setSoldAmountStr(df.format(totalSoldAmount));
+        totalRow.setAmountStr("");
+//        totalRow.setSerialNumber(null);
+
+        lotDistributeResponseList.add(totalRow);
+
+        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String formattedMarketAuctionDate = "";
+        try {
+            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter2);
+            formattedMarketAuctionDate = auctionDate.format(outputFormatter2);
+        } catch (Exception e) {
+            formattedMarketAuctionDate = "";
         }
         response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
                 "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
                 apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "ತಾರೀಖು    " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                "ತಾರೀಖು     " + formattedMarketAuctionDate);
 
         response.setHeader1("ಗೆ,                \n" +
-                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "__________________________");
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
-        response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
+        response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
 
@@ -7732,82 +7771,109 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForInvoice3(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
         SeedMarket apiResponse = apiService.fetchDataFromInvoice(requestDto);
         List<LotDistributeResponse> lotDistributeResponseList = new LinkedList<>();
+        double totalLotWeight = 0.0;
+        double totalTotalNumber = 0.0;
+        double totalSoldAmount = 0.0;
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
         LotDistributeResponse response = new LotDistributeResponse();
-        if (apiResponse.getContent() != null) {
-            int serialNo = 1;
-            for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
-//                if (lotDistributeResponse.getFarmerFullName() == null) {
-//                    lotDistributeResponse.setFarmerFullName("");
-//                }
 
-                String fullName = lotDistributeResponse.getFarmerFullName();
-                String fruitsId = lotDistributeResponse.getFarmerFruitsId();
-
-                if (fullName == null) {
-                    fullName = "";
-                }
-                if (fruitsId == null) {
-                    fruitsId = "";
-                }
-
-                lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
-
-                if (lotDistributeResponse.getRace() == null) {
-                    lotDistributeResponse.setRace("");
-                }
-                if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
-                    lotDistributeResponse.setNoOfCocoonPerKg(0L);
-                }
-                DecimalFormat df = new DecimalFormat("0.00");
-                df.setRoundingMode(RoundingMode.HALF_UP);
+        int serialNo = 1;
+        for (LotDistributeResponse lotDistributeResponse : apiResponse.getContent()) {
 
 
-                lotDistributeResponse.setLotWeightStr(
-                        lotDistributeResponse.getLotWeight() == null ? "0.00" : df.format(lotDistributeResponse.getLotWeight())
-                );
-                lotDistributeResponse.setTotalNumberStr(
-                        lotDistributeResponse.getTotalNumber() == null ? "0.00" : df.format(lotDistributeResponse.getTotalNumber())
-                );
-                lotDistributeResponse.setAmountStr(
-                        lotDistributeResponse.getAmount() == null ? "0.00" : df.format(lotDistributeResponse.getAmount())
-                );
-                lotDistributeResponse.setSoldAmountStr(
-                        lotDistributeResponse.getSoldAmount() == null ? "0.00" : df.format(lotDistributeResponse.getSoldAmount())
-                );
-                lotDistributeResponse.setSpunFromDate(
-                        formatDate1(lotDistributeResponse.getSpunFromDate())
-                );
+            String fullName = lotDistributeResponse.getFarmerFullName();
+            String fruitsId = lotDistributeResponse.getFarmerFruitsId();
 
-                lotDistributeResponse.setSpunToDate(
-                        formatDate1(lotDistributeResponse.getSpunToDate())
-                );
-                if (lotDistributeResponse.getInvoiceNumber() == null) {
-                    lotDistributeResponse.setInvoiceNumber("");
-                }
-                lotDistributeResponse.setSerialNumber(serialNo++);
-                lotDistributeResponseList.add(lotDistributeResponse);
+            if (fullName == null) fullName = "";
+            if (fruitsId == null) fruitsId = "";
 
+            lotDistributeResponse.setFarmerFullName(fullName + " " + fruitsId);
+
+            if (lotDistributeResponse.getRace() == null) {
+                lotDistributeResponse.setRace("");
             }
+            if (lotDistributeResponse.getNoOfCocoonPerKg() == null) {
+                lotDistributeResponse.setNoOfCocoonPerKg(0L);
+            }
+
+            // ✅ DEFINE VALUES PROPERLY
+            double lotWeight = lotDistributeResponse.getLotWeight() == null
+                    ? 0.0 : lotDistributeResponse.getLotWeight();
+
+            double totalNumber = lotDistributeResponse.getTotalNumber() == null
+                    ? 0.0 : lotDistributeResponse.getTotalNumber();
+
+            double soldAmount = lotDistributeResponse.getSoldAmount() == null
+                    ? 0.0 : lotDistributeResponse.getSoldAmount();
+
+            // ✅ SUM
+            totalLotWeight += lotWeight;
+            totalTotalNumber += totalNumber;
+            totalSoldAmount += soldAmount;
+
+            // ✅ FORMAT
+            lotDistributeResponse.setLotWeightStr(df.format(lotWeight));
+            lotDistributeResponse.setTotalNumberStr(df.format(totalNumber));
+            lotDistributeResponse.setSoldAmountStr(df.format(soldAmount));
+            lotDistributeResponse.setAmountStr(
+                    lotDistributeResponse.getAmount() == null
+                            ? "0.00"
+                            : df.format(lotDistributeResponse.getAmount())
+            );
+
+            lotDistributeResponse.setSpunFromDate(formatDate1(lotDistributeResponse.getSpunFromDate()));
+            lotDistributeResponse.setSpunToDate(formatDate1(lotDistributeResponse.getSpunToDate()));
+
+            if (lotDistributeResponse.getInvoiceNumber() == null) {
+                lotDistributeResponse.setInvoiceNumber("");
+            }
+
+            lotDistributeResponse.setSerialNumber(serialNo++);
+            lotDistributeResponseList.add(lotDistributeResponse);
         }
 
-        response.setHeader2("ರವರ ಕಛೆರಿ\n" +
-                "ಸರ್ಕಾರಿ ರೇಷ್ಮೆ     ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ \n"+
+        LotDistributeResponse totalRow = new LotDistributeResponse();
+        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setLotWeightStr(df.format(totalLotWeight));
+        totalRow.setTotalNumberStr(df.format(totalTotalNumber));
+        totalRow.setSoldAmountStr(df.format(totalSoldAmount));
+        totalRow.setAmountStr("");
+//        totalRow.setSerialNumber(null);
+
+        lotDistributeResponseList.add(totalRow);
+
+        DateTimeFormatter inputFormatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // adjust if timestamp includes time
+        DateTimeFormatter outputFormatter2 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        String formattedMarketAuctionDate = "";
+        try {
+            LocalDate auctionDate = LocalDate.parse(apiResponse.getContent().get(0).getMarketAuctionDate(), inputFormatter2);
+            formattedMarketAuctionDate = auctionDate.format(outputFormatter2);
+        } catch (Exception e) {
+            formattedMarketAuctionDate = "";
+        }
+        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
+                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
                 apiResponse.getContent().get(0).getMarketName() + "\n"+
-                " ತಾರೀಖು   " + apiResponse.getContent().get(0).getMarketAuctionDate());
+                "ತಾರೀಖು     " + formattedMarketAuctionDate);
 
         response.setHeader1("ಗೆ,                \n" +
-                "ಶ್ರೀ  " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
+                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
                 "__________________________");
         response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "ದಿನಾಂಕ  : ______________________________________");
-        response.setInvoiceNumber(apiResponse.getContent().get(0).getInvoiceNumber());
-
+        response.setHeader4("ಪೀಠಿಕೆ: ");
+        response.setInvoiceNumber(" No : " + apiResponse.getContent().get(0).getInvoiceNumber());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         return new JRBeanCollectionDataSource(lotDistributeResponseList);
 
     }
+
     private Float roundTwoDecimals(Float value) {
         return Float.parseFloat(String.format("%.2f", value));
     }
