@@ -7622,7 +7622,7 @@ public class ReportsController {
         }
 
         LotDistributeResponse totalRow = new LotDistributeResponse();
-        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setFarmerFullName("ಒಟ್ಟು");
         totalRow.setLotWeightStr(df.format(totalLotWeight));
         totalRow.setTotalNumberStr(df.format(totalTotalNumber));
         totalRow.setSoldAmountStr(df.format(totalSoldAmount));
@@ -7729,7 +7729,7 @@ public class ReportsController {
         }
 
         LotDistributeResponse totalRow = new LotDistributeResponse();
-        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setFarmerFullName("ಒಟ್ಟು");
         totalRow.setLotWeightStr(df.format(totalLotWeight));
         totalRow.setTotalNumberStr(df.format(totalTotalNumber));
         totalRow.setSoldAmountStr(df.format(totalSoldAmount));
@@ -7836,7 +7836,7 @@ public class ReportsController {
         }
 
         LotDistributeResponse totalRow = new LotDistributeResponse();
-        totalRow.setFarmerFullName("TOTAL");
+        totalRow.setFarmerFullName("ಒಟ್ಟು");
         totalRow.setLotWeightStr(df.format(totalLotWeight));
         totalRow.setTotalNumberStr(df.format(totalTotalNumber));
         totalRow.setSoldAmountStr(df.format(totalSoldAmount));
@@ -9180,12 +9180,12 @@ public class ReportsController {
 
         response.setHeader6(
                 "              " + apiResponse.getContent().get(0).getFinancialYear()
-                        + "    ನೇ    ಸಾಲಿನಲ್ಲಿ    ರೇಷ್ಮೆ    ಇಲಾಖೆಯ    ವಿವಿಧ    ಕಾರ್ಯಕ್ರಮಗಳ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ವಿವಿಧ    ಲೆಕ್ಕ "
-                        + "ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ    ಸರ್ಕಾರವು    ಆಡಳಿತಾತ್ಮಕ    ಅನುಮೋದನೆಯನ್ನು    ನೀಡಿದ್ದು,    ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ "
-                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +  "  ನಿರ್ಮಾಣ    ಕಾರ್ಯಕ್ರಮದ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿದೆ.    ಇಲಾಖೆಯು "
+                        + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      ರೇಷ್ಮೆ       ಇಲಾಖೆಯ    ವಿವಿಧ    ಕಾರ್ಯಕ್ರಮಗಳ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ವಿವಿಧ    ಲೆಕ್ಕ    "
+                        + "   ಶೀರ್ಷಿಕೆಗಳಡಿ    ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ       ಸರ್ಕಾರವು       ಆಡಳಿತಾತ್ಮಕ     ಅನುಮೋದನೆಯನ್ನು       ನೀಡಿದ್ದು,    ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ     "
+                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +  "    ನಿರ್ಮಾಣ    ಕಾರ್ಯಕ್ರಮದ    ಅನುಷ್ಠಾನಕ್ಕಾಗಿ    ಮಾರ್ಗಸೂಚಿಯನ್ನು      ನೀಡಲಾಗಿದೆ.    ಇಲಾಖೆಯು    "
                         + "“" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    "
                         + apiResponse.getContent().get(0).getScCategoryName()
-                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ/ಸಹಾಯಧನದ    ವಿವರ    ಇಂತಿದೆ;"
+                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ      ನಿಗದಿಪಡಿಸಿದ      ಘಟಕ      ದರ/ಸಹಾಯಧನದ      ವಿವರ    ಇಂತಿದೆ;    "
         );
 
 
@@ -9193,48 +9193,42 @@ public class ReportsController {
         response.setHeader7(
                 "              ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName()
                         + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
-                        + apiResponse.getContent().get(0).getReelerFatherName() + "    ,    "
-                        + apiResponse.getContent().get(0).getVillageName() + "    ,    "
-                        + apiResponse.getContent().get(0).getHobliName() + "    ,    ಹೋಬಳಿ,    "
+                        + apiResponse.getContent().get(0).getReelerFatherName() + " ,   "
+                        + apiResponse.getContent().get(0).getVillageName() + " ,   "
+                        + apiResponse.getContent().get(0).getHobliName() + " ,  ಹೋಬಳಿ,   "
                         + apiResponse.getContent().get(0).getTalukName()
                         + "    ತಾ.    " + apiResponse.getContent().get(0).getDistrictName()
                         + "    ಜಿಲ್ಲೆ    ಇವರು    " + apiResponse.getContent().get(0).getFinancialYear()
-                        + "    ನೇ    ಸಾಲಿಗೆ    ಉಲ್ಲೇಖ    (3)    ರನ್ವಯ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣದ    "
-                        + "ಆಯ್ಕೆಗೊಂಡ    ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ    (ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ    ಸಂ.25,   "+  apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    ಸಂಖ್ಯೆ   "+  apiResponse.getContent().get(0).getSanctionNo() +"   ಸದರಿಯವರು    "
+                        + "    ನೇ    ಸಾಲಿಗೆ    ಉಲ್ಲೇಖ  (3)    ರನ್ವಯ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣದ    "
+                        + "ಆಯ್ಕೆಗೊಂಡ    ಫಲಾನುಭವಿಯಾಗಿರುತ್ತಾರೆ    (ಆಯ್ಕೆ    ಪಟ್ಟಿ    ಕ್ರಮ    ಸಂ.25,   "+  apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"    ವ್ಯಾಪ್ತಿಯಲ್ಲಿ    ಸಂಖ್ಯೆ     "+  apiResponse.getContent().get(0).getSanctionNo() +"   ಸದರಿಯವರು    "
                         + apiResponse.getContent().get(0).getDistrictName() + "    ಜಿಲ್ಲೆ    "
                         + apiResponse.getContent().get(0).getTalukName()
                         + "    ತಾಲ್ಲೂಕು,    " + apiResponse.getContent().get(0).getReelingShedDetails()
                         + "    ಗ್ರಾಮದ    ಸ್ವತ್ತಿನ    ಸಂಖ್ಯೆ   :__________    ರ    "+  apiResponse.getContent().get(0).getRhSqft() +"    "
-                        + "ಚ.ಮೀಟರ್    ನಿವೇಶನದಲ್ಲಿ    _____________    ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಿಸಿದ್ದು,    ಇವರು   __________  ಕೊನೆಗಳ    "
+                        + "ಚ.ಮೀಟರ್    ನಿವೇಶನದಲ್ಲಿ      "+  apiResponse.getContent().get(0).getScComponentName() + "   ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಿಸಿದ್ದು,    ಇವರು   __________  ಕೊನೆಗಳ    "
                         + apiResponse.getContent().get(0).getNumberOfBasins()
                         + "    ಬೇಸಿನ್    ಸುಧಾರಿತ    "
                         + apiResponse.getContent().get(0).getMachineTypeName()
                         + "    ರೀಲಿಂಗ್    ಯಂತ್ರೋಪಕರಣ    ಅಳವಡಿಸಿರುತ್ತಾರೆ.    "
                         + "ಹಾಗೂ    ಸದರಿಯವರು    ಚಾಲ್ತಿಯಲ್ಲಿರುವ    ರೀಲಿಂಗ್    ರಹದಾರಿ    (ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getReelingLicenseNumber()
-                        + "    )    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ    ಸದರಿಯವರು    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    "
-                        + "ಚದರ    ಅಡಿ    ನಿರ್ಮಾಣದ    ರೀಲೀಂಗ್    ಶೆಡ್    ಗೆ    ಸಹಾಯಧನ    ಪಡೆಯಲು    ಅರ್ಹರಿದ್ದು,    ನಿರ್ಮಿಸಿರುವ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿಗಳ    "
-                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ಅನ್ನು    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿಗಳಿಗೆ    ಸೀಮಿತಗೊಳಿಸಿ,    ಘಟಕ    ದರ    ರೂ.    "
-                        + apiResponse.getContent().get(0).getUnitPrice()
-                        + "/-    ಗಳ    ಶೇಕಡಾ    "+  apiResponse.getContent().get(0).getStateSharePercentage() +"ರ    ಸಹಾಯಧನ    ರೂ.    "
-                        + apiResponse.getContent().get(0).getSubsidyAmount()
-                        + "/-    ಗಳನ್ನು    ಮಂಜೂರುಮಾಡುವಂತೆ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀ),    "
+                        + ")    ಅನ್ನು    ಹೊಂದಿರುತ್ತಾರೆ    ಸದರಿಯವರು    "+  apiResponse.getContent().get(0).getScComponentName() +"    "
+                        + "ಚದರ    ಅಡಿ    ನಿರ್ಮಾಣದ    ರೀಲೀಂಗ್    ಶೆಡ್  ಗೆ    ಸಹಾಯಧನ    ಪಡೆಯಲು    ಅರ್ಹರಿದ್ದು,    ನಿರ್ಮಿಸಿರುವ    "+  apiResponse.getContent().get(0).getScComponentName() +"    ಚ.ಅಡಿಗಳ    "
+                        +  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ಅನ್ನು    "+  apiResponse.getContent().get(0).getScComponentName() +"    ಚ.ಅಡಿಗಳಿಗೆ    ಸೀಮಿತಗೊಳಿಸಿ,    ಘಟಕ    ದರ    ರೂ.    "
+                        + apiResponse.getContent().get(0).getUnitPrice() + "/-    ಗಳ    ಶೇಕಡಾ    "+  apiResponse.getContent().get(0).getStateSharePercentage() +" ರ    ಸಹಾಯಧನ    ರೂ.    "
+                        + apiResponse.getContent().get(0).getSchemeAmount()
+                        + "/-    ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡುವಂತೆ    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ  (ರೀ),   "
                         + apiResponse.getContent().get(0).getLoggedinUserTscName()
-                        + "    ಇವರು    ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯು    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂ.ನಂ.ಚ.    "
+                        + "    ಇವರು    ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯು    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂ.ನಂ.ಚ.  "
                         + apiResponse.getContent().get(0).getLoggedinUserTalukName()
                         + "    ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,    ರೇ.ಗೂ.ಮಾ.    "
                         + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
                         + "    ಇವರಿಂದ    ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ    ಶಿಫಾರಸ್ಸುಗೊಂಡಿರುತ್ತದೆ. \n   "
-                        + "              ಈ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಉಲ್ಲೇಖ(2)ರ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,    ಎಲ್ಲಾ    ಅಗತ್ಯ    ದಾಖಲೆಗಳನ್ನು    "
-                        + "ಒಳಗೊಂಡಿರುತ್ತದೆ.    ಆದ್ದರಿಂದ,    ಶ್ರೀ./ಶ್ರೀಮತಿ.    "
-                        + apiResponse.getContent().get(0).getReelerName()
-                        + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
-                        + apiResponse.getContent().get(0).getReelerFatherName()
-                        + "    ,    " + apiResponse.getContent().get(0).getVillageName() + "    ,    "
-                        + apiResponse.getContent().get(0).getHobliName() + "    ,    ಹೋಬಳಿ,    "
-                        + apiResponse.getContent().get(0).getTalukName() + "    ತಾ.    "
-                        + apiResponse.getContent().get(0).getDistrictName()
-                        + "    ಇವರಿಗೆ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದೆ.    ಅದರಂತೆ    ಈ    ಆದೇಶ."
+                        + "              ಈ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಉಲ್ಲೇಖ(2)ರ    ಮಾರ್ಗಸೂಚಿಯನ್ವಯ    ಪರಿಶೀಲಿಸಲಾಗಿದ್ದು,    ಎಲ್ಲಾ     ಅಗತ್ಯ     ದಾಖಲೆಗಳನ್ನು     "
+                        + "ಒಳಗೊಂಡಿರುತ್ತದೆ.    ಆದ್ದರಿಂದ,    ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + apiResponse.getContent().get(0).getReelerName()
+                        + "    (" + apiResponse.getContent().get(0).getFruitsId() + ")   ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getReelerFatherName() + " ,    " + apiResponse.getContent().get(0).getVillageName() + "  ,   "
+                        + apiResponse.getContent().get(0).getHobliName() + " ,  ಹೋಬಳಿ,  " + apiResponse.getContent().get(0).getTalukName() + "  ತಾ.  " + apiResponse.getContent().get(0).getDistrictName()
+                        + "   ಇವರಿಗೆ    "+  apiResponse.getContent().get(0).getScComponentName() +"    ಚದರ    ಅಡಿಗಳ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ      ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದೆ.    ಅದರಂತೆ    ಈ    ಆದೇಶ."
         );
 
 
@@ -9247,12 +9241,11 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getSchemeNameInKannada()
                         + "”    "
                         + apiResponse.getContent().get(0).getScCategoryName()
-                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getReelingShedSqft() +"    ಚ.ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ಉಲ್ಲೇಖ(3)ರ    ವಿತ್ತೀಯ    ಪ್ರತ್ಯಾಧಿಕಾರದನ್ವಯ    "
+                        + "    ಅಡಿ    "+  apiResponse.getContent().get(0).getScComponentName() +"    ಚ.ಅಡಿ    "+  apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ನಿರ್ಮಾಣಕ್ಕೆ    ಉಲ್ಲೇಖ(3)ರ    ವಿತ್ತೀಯ    ಪ್ರತ್ಯಾಧಿಕಾರದನ್ವಯ    "
                         + "ಫಲಾನುಭವಿಗಳ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ    ಸಹಾಯಧನ    ಮಂಜೂರು    ಮಾಡಲು    ರೇಷ್ಮೆ    ಜಂಟಿ    ನಿರ್ದೇಶಕರು,    "
-                        + apiResponse.getContent().get(0).getDivisionName()
-                        + "    ವಿಭಾಗ,    "
+                        + apiResponse.getContent().get(0).getDivisionName() + "    ವಿಭಾಗ,    "
                         + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
-                        + "    ರವರಿಗೆ    ಪೂರ್ಣ    ಅಧಿಕಾರವಿದ್ದು,    ಈ    ಕೆಳಗೆ    ವಿವರಿಸಿದಂತೆ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ."
+                        + "    ರವರಿಗೆ    ಪೂರ್ಣ    ಅಧಿಕಾರವಿದ್ದು,    ಈ    ಕೆಳಗೆ    ವಿವರಿಸಿದಂತೆ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ. "
         );
 
         response.setHeader10(
@@ -9705,7 +9698,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getNumberOfBasins()
                         + "    ಬೇಸಿನ್‌    "
                         + apiResponse.getContent().get(0).getMachineTypeName()
-                        + "    ರೀಲಿಂಗ್    ಘಟಕವನ್ನು    ಸ್ಥಾಪಿಸಿದ್ದು,   "+ apiResponse.getContent().get(0).getReelingShedSqft()+ "   ಚದರ    ಅಡಿ    ವಿಸ್ತೀರ್ಣದ    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಸಹಾಯಧನ    ಕೋರಿ    ARN    ಸಂಖ್ಯೆ    "
+                        + "    ರೀಲಿಂಗ್    ಘಟಕವನ್ನು    ಸ್ಥಾಪಿಸಿದ್ದು,   "+ apiResponse.getContent().get(0).getScComponentName()+ "   ಚದರ    ಅಡಿ    ವಿಸ್ತೀರ್ಣದ    "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada()+"   ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಸಹಾಯಧನ    ಕೋರಿ    ARN    ಸಂಖ್ಯೆ    "
                         + apiResponse.getContent().get(0).getArn()
                         + "    ರಂತೆ    ಅರ್ಜಿಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದಾರೆ.    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿ    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ    (ರೀಲಿಂಗ್),    "
                         + apiResponse.getContent().get(0).getLoggedinUserTscName()
