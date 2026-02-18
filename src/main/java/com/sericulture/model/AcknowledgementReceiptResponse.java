@@ -34,6 +34,7 @@ public class AcknowledgementReceiptResponse {
     private String financialYear;
     private String schemeNameInKannada;
     private String subSchemeNameInKannada;
+    private String scCategoryName;
     private String fatherNameKan;
     private String mobileNumber;
     private String arn;

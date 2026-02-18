@@ -6,12 +6,10 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SanctionOrderResponse {
     private String logurl;
@@ -281,24 +279,18 @@ private String totalIncentiveAmountInWords;
     private Float totalClaimed;
     private Float totalEligible;
     private Float totalSubsidy;
-    // CRC component-wise subsidy breakup
 
-    // Mulberry garden
     private Float establishmentOfMulberryGardenEligibleAmount;
     private Float establishmentOfMulberryGardenClaimedAmount;
     private Float establishmentOfMulberryGardenPercentageOfSubsidyAmount;
 
-    // Drip irrigation
     private Float installationOfDripIrrigationEligibleAmount;
     private Float installationOfDripIrrigationClaimedAmount;
     private Float installationOfDripIrrigationPercentageOfSubsidyAmount;
 
-    // Chawki rearing building
     private Float chawkiRearingBuildingEligibleAmount;
     private Float chawkiRearingBuildingClaimedAmount;
     private Float chawkiRearingBuildingPercentageOfSubsidyAmount;
-
-    // Equipment totals
     private Float equipmentEligibleTotal;
     private Float equipmentPurchasedTotal;
     private Float equipmentPercentageTotal;
@@ -310,13 +302,23 @@ private String totalIncentiveAmountInWords;
     private Float totalSanctionAmount;
     private String totalSanctionAmountInWords;
     private Long amount;
-
-
-
-
-// + getter & setter
-
-
+    private String status;
+    private String user;
+    private String designationName;
+    private String designationNameForSanctionOrder;
+    private String createdByDesignation;
+    private String createdByDesignationForSanctionOrder;
+    private String createdByDistrict;
+    private String createdByTaluk;
+    private String createdByTsc;
+    private String modifiedByDistrict;
+    private String modifiedByTaluk;
+    private String modifiedByTsc;
+    private String externalUserAddress;
+    private String externalUserLicenseNumber;
+    private String externalUserOrganisationName;
+    private String chawkiReceiptNo;
+    private String crcBillNo;
 
 
 
