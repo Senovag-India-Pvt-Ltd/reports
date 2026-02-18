@@ -304,6 +304,27 @@ public class ApiService {
         return response;
     }
 
+    public AcknowledgementResponse fetchDataFromSeedMarket(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AcknowledgementResponse response = objectMapper.readValue(responseBody, AcknowledgementResponse.class);
+
+        return response;
+    }
+
     public SanctionOrder fetchSanctionSeedMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
