@@ -12602,6 +12602,12 @@ public class ReportsController {
         // 🔹 CHANGED: Compute total subsidyAmountCa (∑ noOfDfls * subsidyAmount / 100) and totalNoOfDfls
         float totalSubsidyAmountCa = 0f;     // CHANGED: new accumulator
         int   totalNoOfDfls        = 0;      // CHANGED: new accumulator
+        Float sanctionAmountTotal = 0f;
+
+        Long amount = apiResponse.getContent().get(0).getAmount();
+        if (amount == null) {
+            amount = 0L;
+        }
 
         if (apiResponse.getContent() != null) {
             for (SanctionOrderResponse r : apiResponse.getContent()) {
@@ -12658,7 +12664,7 @@ public class ReportsController {
         } catch (Exception e) {
             formattedDate = apiResponse.getContent().get(0).getDate().toString();
         }
-
+        if (totalSubsidyAmountCa <= amount) {
         response.setHeader(apiResponse.getContent().get(0).getDesignationName() + ",     " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,     "
                         + apiResponse.getContent().get(0).getLoggedinUserTalukName() + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
 
@@ -12709,6 +12715,59 @@ public class ReportsController {
         response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
                         apiResponse.getContent().get(0).getLoggedinUserTalukName()   +"   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
 
+        }else {
+
+            response.setHeader(apiResponse.getContent().get(0).getDesignationName() + ",     " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + " ,    "
+                    + apiResponse.getContent().get(0).getLoggedinUserTalukName() + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
+
+            response.setHeader2(
+                    apiResponse.getContent().get(0).getFinancialYear()
+                            + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"   ಯೋಜನೆ  (  "+ apiResponse.getContent().get(0).getScCategoryName()+ "  )  ಯಡಿ     "+
+                            apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ಸಹಾಯಧನ     ಮಂಜೂರಾತಿ       ನೀಡುವ      ಬಗ್ಗೆ. ");
+
+            response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
+                    "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
+                    "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಮೈಸೂರು   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getSReleaseNo() +",\n" +
+                    "    ದಿನಾಂಕ: "+sReleaseDate+" \n" +
+                    "3. "+apiResponse.getContent().get(0).getDesignationName() + ",   " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+proposalDate+"\n" +
+                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
+
+
+            response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"   ಯೋಜನೆ  (  "+ apiResponse.getContent().get(0).getScCategoryName()+ " )  ಯಡಿ     "+
+                    "    ಪ್ರತಿ      100      ಶುದ್ದ     ಮೈಸೂರು   ತಳಿ    ಮೊಟ್ಟೆಗಳ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು       ವೆಚ್ಚ      ರೂ."+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/- ಗಳಿಗೆ   " +
+                    "  ಶೇ.50 ರಂತೆ    ರೂ."+ Math.round(apiResponse.getContent().get(0).getSubsidyAmount()) +"/- ಗಳನ್ನು      ಸಹಾಯಧನವಾಗಿ    ನೀಡುವ    ಕಾರ್ಯಕ್ರಮದ    ಅನುಷ್ಟಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ      ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು      ನೀಡಲಾಗಿರುತ್ತದೆ. \n" +
+                    "                 ಉಲ್ಲೇಖ (2)ರಲ್ಲಿ       ಸದರಿ      ಕಾರ್ಯಕ್ರಮ     ಅನುಷ್ಟಾನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.     ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ      "+apiResponse.getContent().get(0).getDesignationName() + ",     " +
+                     apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ಇವರು     ಸಲ್ಲಿಸಿರುವ     ಪ್ರಸ್ತಾವನೆಯನ್ನು      "+
+                    "    ಪರಿಶೀಲಿಸಲಾಗಿ      ನೋಂದಾಯಿತ     ಶುದ್ದ     ಮೈಸೂರು   ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪಡೆದ " +
+                    "    ಚಾಕಿ   ಹುಳುಗಳಿಗೆ   ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ವೆಚ್ಚದ    ಸಹಾಯಧನಕ್ಕಾಗಿ   ಅರ್ಹರಿರುವ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿವೆ:");
+
+            response.setHeader6("                 ಉಲ್ಲೇಖ (4)ರ    ಆರ್ಥಿಕ     ಅಧಿಕಾರ    ಪ್ರತ್ಯಾಯೋಜನೆ    ಅನ್ವಯ    ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ   " +
+                    " ಚಾಕಿ     ಸಾಕಾಣಿಕೆ    ವೆಚ್ಚದ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದ್ದು,   ಈ   ಕೆಳಕಂಡಂತೆ    ಮಂಜೂರಾತಿ   ಆದೇಶವನ್ನು    ಹೊರಡಿಸಿದೆ.");
+
+            response.setHeader8("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ      ಅಂಶಗಳನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ,    ತಾಂತ್ರಿಕ   ಸೇವಾ    ಕೇಂದ್ರ   "+apiResponse.getContent().get(0).getLoggedinUserTscName()+"    ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ     "+
+                    "ಬೆಳೆಗಾರರು    ಪಡೆದ    "+totalNoOfDfls+"    ಶುದ್ದ     ಮೈಸೂರು     ತಳಿ    ರೇಷ್ಮೆ   ಮೊಟ್ಟೆಗಳಿಗೆ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆ    ವೆಚ್ಚದ    ಸಹಾಯಧನ   ಪ್ರತಿ   100   ಮೊಟ್ಟೆಗಳಿಗೆ    ರೂ."+ Math.round(apiResponse.getContent().get(0).getSubsidyAmount()) +"/-   ರಂತೆ   "+
+                    " ಒಟ್ಟು     ರೂ.  "+totalSubsidyAmountCa+"  (ರೂ. "+amountInWords+"   ) ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡಿದೆ.    ಸಹಾಯಧನದ   ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2/ಡಿಬಿಟಿ    ಮುಖಾಂತರ      " +
+                    "ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್   ಖಾತೆಗೆ    ನೇರವಾಗಿ    ಜಮಾ    ಮಾಡುವುದು.  \n" +
+                    "              ಸದರಿ    ವೆಚ್ಚವನ್ನು     ರೇಷ್ಮೆ    ಅಭಿವೃದ್ಧಿ      ಯೋಜನೆಯ ("+apiResponse.getContent().get(0).getScCategoryName()+"  )   ಲೆಕ್ಕ     " +
+                    "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
+
+
+            response.setStatus("Approved By "
+                    + apiResponse.getContent().get(0).getUser());
+
+            response.setHeader7("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025\n" +
+                    "ಆದೇಶ ಸಂಖ್ಯೆ:ರೇಅಯೋ/ಸಾ/ಮೈ ತಳಿ/ಚಾಸಾವೆ/ಸಧನ/ಮಂ/S.O.No. SD1/2025-26    ದಿನಾಂಕ:09/06/2025  ");
+
+            response.setHeader11("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025");
+
+            response.setHeader9(
+                    "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
+                            + "ಪ್ರತಿಯನ್ನು       "+apiResponse.getContent().get(0).getDesignationName() + " ,     " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() +"    ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName());
+
+            response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
+                    "ಮೈಸೂರು    ಬಿತ್ತನೆ    ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName());
+
+        }
 
 
 // ಉಲ್ಲೇಖ – points with 5-space gaps
