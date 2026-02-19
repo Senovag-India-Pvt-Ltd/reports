@@ -12697,17 +12697,17 @@ public class ReportsController {
         response.setStatus("Approved By "
                 + apiResponse.getContent().get(0).getUser());
 
-        response.setHeader7("S.O.No.SDP/GEN/PM/CRC/SUB/S.O.No SD25000000/2025-26, Date:09/06/2025\n" +
-                "ಆದೇಶ ಸಂಖ್ಯೆ:ರೇಅಯೋ/ಸಾ/ಮೈ ತಳಿ/ಚಾಸಾವೆ/ಸಧನ/ಮಂ/S.O.No. SD25000000/2025-26    ದಿನಾಂಕ:09/06/2025  ");
+        response.setHeader7("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025\n" +
+                "ಆದೇಶ ಸಂಖ್ಯೆ:ರೇಅಯೋ/ಸಾ/ಮೈ ತಳಿ/ಚಾಸಾವೆ/ಸಧನ/ಮಂ/S.O.No. SD1/2025-26    ದಿನಾಂಕ:09/06/2025  ");
 
-        response.setHeader11("S.O.No.SDP/GEN/PM/CRC/SUB/S.O.No SD25000000/2025-26, Date:09/06/2025");
+        response.setHeader11("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025");
 
         response.setHeader9(
                 "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
                         + "ಪ್ರತಿಯನ್ನು    : ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ,   "+ apiResponse.getContent().get(0).getLoggedinUserTscName()+"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
         response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
-                        apiResponse.getContent().get(0).getLoggedinUserDistrictName()   +"   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getDivisionName());
+                        apiResponse.getContent().get(0).getLoggedinUserTalukName()   +"   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
 
 
 
