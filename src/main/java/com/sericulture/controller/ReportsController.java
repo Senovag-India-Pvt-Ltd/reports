@@ -12675,8 +12675,8 @@ public class ReportsController {
 
         response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                             "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getSReleaseNo() +",\n" +
-                "    ದಿನಾಂಕ: "+sReleaseDate+" \n" +
+                "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                "    "+apiResponse.getContent().get(0).getSReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
                 "3. ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ,   " + apiResponse.getContent().get(0).getLoggedinUserTscName()+ "   ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+proposalDate+"\n" +
                 "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
@@ -12713,7 +12713,7 @@ public class ReportsController {
                         + "ಪ್ರತಿಯನ್ನು    : ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು,  ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ,   "+ apiResponse.getContent().get(0).getLoggedinUserTscName()+"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
         response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
-                        apiResponse.getContent().get(0).getLoggedinUserTalukName()   +"   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
+                        apiResponse.getContent().get(0).getDesignationNameForSanctionOrder()   +"   ವಿಭಾಗ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName());
 
         }else {
 
@@ -12727,8 +12727,8 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಮೈಸೂರು   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getSReleaseNo() +",\n" +
-                    "    ದಿನಾಂಕ: "+sReleaseDate+" \n" +
+                    "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಮೈಸೂರು   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  : \n" +
+                    "    "+apiResponse.getContent().get(0).getSReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
                     "3. "+apiResponse.getContent().get(0).getDesignationName() + ",   " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+proposalDate+"\n" +
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
