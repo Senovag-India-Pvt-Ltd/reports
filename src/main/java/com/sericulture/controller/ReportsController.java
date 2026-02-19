@@ -7234,7 +7234,7 @@ public class ReportsController {
 //                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
             response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
                     "ತಾಂತ್ರಿಕ   ಸೇವಾ    ಕೇಂದ್ರ,\n"+
-                    apiResponse.getContent().get(0).getLoggedinUserTscName());
+                    apiResponse.getContent().get(0).getTscName());
 
             response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
             response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
