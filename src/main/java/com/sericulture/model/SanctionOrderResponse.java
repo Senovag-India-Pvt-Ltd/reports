@@ -319,6 +319,24 @@ private String totalIncentiveAmountInWords;
     private String externalUserOrganisationName;
     private String chawkiReceiptNo;
     private String crcBillNo;
+    private String designationNameInKannada;
+    private String designationNameInKannadaForSanctionOrder;
+    private String categoryNameInKannada;
+    private Float minAverageYield;
+    private Float maxNoOfCocoonsPerKg;
+    private String nameKan;
+    private String incentiveReceiptNo;
+    private String bonusReceiptNo;
+    private Float cocoonTransactedForSeedInKg;
+    private Float cocoonTransactedForReelingInKg;
+    private String scComponentNameInKannada;
+    private String caName;
+    private Long loggedinUserId;
+    private String loggedinUserFullName;
+    private String landVillageNameInKannada;
+    private Float unitCostConfigured;
+    private Date dateOfDistributionOfChawkiWorms;
+    private Float averageYieldCdcm;
 
 
 
