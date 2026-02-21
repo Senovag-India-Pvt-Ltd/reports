@@ -344,7 +344,7 @@ public class ApiService {
         return objectMapper.readValue(responseBody, SanctionOrder.class);
     }
 
-    public SanctionOrder fetchSanctionSeedIncentiveBonusDetails(CheckInspectionStatusRequest requestDto)
+    public SanctionOrder fetchSanctionSeedIncentiveBonus(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
         String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSeedMarketIncentiveBonusSanctionDetails";
