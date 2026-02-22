@@ -29,6 +29,7 @@ public class AcknowledgementReceiptResponse {
     private String talukName;
     private String hobliName;
     private String villageName;
+    private String marketName;
     private String fruitsId;
     private String lineItemComment;
     private String financialYear;
@@ -36,6 +37,8 @@ public class AcknowledgementReceiptResponse {
     private String subSchemeNameInKannada;
     private String scCategoryName;
     private String fatherNameKan;
+    private String designationNameInKannada;
+    private String designationNameInKannadaForSanctionOrder;
     private String mobileNumber;
     private String arn;
     private String logurl;
