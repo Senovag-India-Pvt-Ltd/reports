@@ -9943,7 +9943,7 @@ public class ReportsController {
             response.setHeader11(apiResponse.getContent().get(0).getSanctionOrderNumber());
 
             response.setHeader9("ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರಮಕ್ಕಾಗಿ.\n" +
-                    "ಪ್ರತಿಯನ್ನು     ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ      ಪಂಚಾಯತ್, "+apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ರವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                    "ಪ್ರತಿಯನ್ನು     ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ      ಪಂಚಾಯತ್,   "+apiResponse.getContent().get(0).getLoggedinUserDistrictName() +"   ರವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "\n    "
                     + apiResponse.getContent().get(0).getLoggedinUserTalukName());
@@ -9956,7 +9956,7 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "     "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ      ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,    "+apiResponse.getContent().get(0).getLoggedinUserTalukName() +"   ರವರ     ಜ್ಞಾಪನ    ಪತ್ರದ     ಸಂಖ್ಯೆ   :\n" +
+                    "2. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ      ಆಯುಕ್ತರು    ಹಾಗೂ    ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,    ಬೆಂಗಳೂರು    ರವರ     ಜ್ಞಾಪನ    ಪತ್ರದ     ಸಂಖ್ಯೆ   :\n" +
                     "     "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+". \n" +
                     "3. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
@@ -9992,9 +9992,11 @@ public class ReportsController {
 
             response.setHeader11(apiResponse.getContent().get(0).getSanctionOrderNumber());
 
-            response.setHeader9(
-                    "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರತಿಯನ್ನು ,     ರೇಷ್ಮೆ   ಜಂಟಿ    ನಿರ್ದೇಶಕರು ,   "+ apiResponse.getContent().get(0).getDivisionName()+"    ವಿಭಾಗ ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName()+"   ರವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+            response.setHeader9("ಇವರಿಗೆ,\n"+
+                    "ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,  \n" +
+                    "ಸರ್ಕಾರಿ     ರೆಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ\n"+
+                    apiResponse.getContent().get(0).getMarketName() +"\n"+
+                    "ಪ್ರತಿಯನ್ನು     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರಮಕ್ಕಾಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "\n    "
                     + apiResponse.getContent().get(0).getMarketName());
