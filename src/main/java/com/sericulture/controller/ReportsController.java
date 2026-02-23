@@ -295,16 +295,16 @@ public class ReportsController {
     public ResponseEntity<?> getTransportationAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to getTransportationAck");
-            logger.info("enter to getTransportationAck");
+            System.out.println("enter to getIncentive 30");
+            logger.info("enter to getChawki1500Ack");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("TransportationAcknowledgement.jrxml");
+            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
 
             // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceAcknowledgementTransportation(requestDto);
+            JRDataSource dataSource = getDataSourceAckTransport10(requestDto);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -339,10 +339,10 @@ public class ReportsController {
     public ResponseEntity<?> getIncentive30Ack(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to getIncentive30Ack");
-            logger.info("enter to getIncentive30Ack");
+            System.out.println("enter to getChawkiAck1500");
+            logger.info("enter to getChawki1500Ack");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("ACKIncentive30.jrxml");
+            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -7266,134 +7266,6 @@ public class ReportsController {
     }
 
 
-    private JRDataSource getDataSourceAcknowledgementTransportation(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
-
-        AcknowledgementResponse apiResponse = apiService.fetchDataFromCommercialMarket(requestDto);
-
-        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        if (apiResponse.getContent()!= null) {
-            String formattedDate = "";
-            try {
-                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
-
-                // Parse input format
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-                // Define output format
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                // Convert and format
-                Date date = inputFormat.parse(inputDate);
-                formattedDate = outputFormat.format(date);
-
-            } catch (Exception e) {
-                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
-            }
-            response.setHeader(apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ  ಸಾಲಿನಲ್ಲಿ       "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "    ಯೋಜನೆ("+ apiResponse.getContent().get(0).getCategoryName()+")  ಅಡಿ   ಉತ್ತರ   ಕರ್ನಾಟಕ    ಜಿಲ್ಲೆಗಳಲ್ಲಿ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಉತ್ಪಾದಿಸುವ   ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡನ್ನು    ರಾಜ್ಯದ    ಯಾವುದೇ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    "+
-                    "  ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ವಹಿವಾಟು     ಮಾಡಿದ   ದ್ವಿತಳಿ   ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ    ನೀಡುವ    ಕಾರ್ಯಕ್ರಮ");
-            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
-            response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ    ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +
-                     apiResponse.getContent().get(0).getFarmerFirstName()+  "   ಬಿನ್ /ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  "    ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getVillageNameInKannada()+
-                    "    ತಾಲ್ಲೂ ಕಿನ     "+apiResponse.getContent().get(0).getTalukNameInKannada()+  "     ಇವರು    ಉತ್ತರ   ಕರ್ನಾಟಕ    ಜಿಲ್ಲೆಗಳಲ್ಲಿ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಉತ್ಪಾದಿಸುವ   ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡನ್ನು    ರಾಜ್ಯದ    ಯಾವುದೇ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    " +
-                            "ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ವಹಿವಾಟು     ಮಾಡಿದ   ದ್ವಿತಳಿ   ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ    ನೀಡುವ    ಕಾರ್ಯಕ್ರಮದಡಿ    " +apiResponse.getContent().get(0).getCocoonsWeight()+
-                    "  ಕೆ.ಜಿ    ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ ಗೆ    ರೂ. "+Math.round(apiResponse.getContent().get(0).getUnitCost())+ "/-  ರಂತೆ   ಸಾಗಾಣಿಕಾ   ವೆಚ್ಚ   ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+
-                            " /-  ಗಳನ್ನು     ಪಡೆಯಲು    ಸಲ್ಲಿಸಿದ     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುತ್ತಾರೆ .   ಪಡೆಯಲು    ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getArn()+
-                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
-                    "ತಾಂತ್ರಿಕ   ಸೇವಾ    ಕೇಂದ್ರ,\n"+
-                    apiResponse.getContent().get(0).getLoggedinUserTscName());
-
-            response.setHeader2("ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getArn());
-            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-            response.setArn( apiResponse.getContent().get(0).getArn());
-            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            acknowledgementReceiptResponseList.add(response);
-
-            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
-        }
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
-        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
-    }
-
-
-    private JRDataSource getDataSourceAckIncentive30(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
-
-        AcknowledgementResponse apiResponse = apiService.fetchDataFromCommercialMarket(requestDto);
-
-        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        if (apiResponse.getContent()!= null) {
-            String formattedDate = "";
-            try {
-                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
-
-                // Parse input format
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-                // Define output format
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                // Convert and format
-                Date date = inputFormat.parse(inputDate);
-                formattedDate = outputFormat.format(date);
-
-            } catch (Exception e) {
-                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
-            }
-            response.setHeader(apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ  ಸಾಲಿನಲ್ಲಿ       "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "    ಯೋಜನೆ("+ apiResponse.getContent().get(0).getCategoryName()+")  ಅಡಿ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    "+
-                    "  ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ವಹಿವಾಟು     ಮಾಡಿದ   ದ್ವಿತಳಿ   ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರೋತ್ಸಾಹಧನ  ಕಾರ್ಯಕ್ರಮ");
-            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
-            response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ    ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +
-                    apiResponse.getContent().get(0).getFarmerFirstName()+  "   ಬಿನ್ /ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  "    ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getVillageNameInKannada()+
-                    "    ತಾಲ್ಲೂ ಕಿನ     "+apiResponse.getContent().get(0).getTalukNameInKannada()+  "     "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ "    ಜಿಲ್ಲೆ      ಇವರು    ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    " +
-                    "ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ವಹಿವಾಟು     ಮಾಡಿದ   ದ್ವಿತಳಿ   ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರೋತ್ಸಾಹಧನ  ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ     " +apiResponse.getContent().get(0).getCocoonsWeight()+
-                    "  ಕೆ.ಜಿ    ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ ಗೆ    ರೂ. "+Math.round(apiResponse.getContent().get(0).getUnitCost())+ "/-  ರಂತೆ   ಪ್ರೋತ್ಸಾಹಧನ   ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+
-                    " /-  ಗಳನ್ನು     ಪಡೆಯಲು     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುತ್ತಾರೆ .  ಅರ್ಜಿ    ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getArn()+
-                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು \n"+
-                    "ತಾಂತ್ರಿಕ   ಸೇವಾ    ಕೇಂದ್ರ,\n"+
-                    apiResponse.getContent().get(0).getLoggedinUserTscName());
-
-            response.setHeader2("ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getArn());
-            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-            response.setArn( apiResponse.getContent().get(0).getArn());
-            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            acknowledgementReceiptResponseList.add(response);
-
-            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
-        }
-        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
-        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
-    }
-
-
     private JRDataSource getDataSourceAckChawki1000(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
         AcknowledgementResponse apiResponse = apiService.fetchDataFromCommercialMarket(requestDto);
@@ -7455,6 +7327,131 @@ public class ReportsController {
             //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+    private JRDataSource getDataSourceAckIncentive30(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+            try {
+                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+                // Parse input format
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                // Define output format
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                // Convert and format
+                Date date = inputFormat.parse(inputDate);
+                formattedDate = outputFormat.format(date);
+
+            } catch (Exception e) {
+                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ        "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")  ಅಡಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ     " +
+                            "ಮಾರುಕಟ್ಟೆಗಳ    ಮೂಲಕ    ವಹಿವಾಟಾಗುವ    ದ್ವಿತಳಿ     ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳ    ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
+                    apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ     "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ        ("+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಿದ್ದು  .  ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
+                    "ವೆಬ್  ಸೈಟ್       https://e-reshme.karnataka.gov.in/seriui    ನಲ್ಲಿ      ARN/FID/Mob No.    ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+                    "ತಾಂತ್ರಿ ಕ     ಸೇವಾ     ಕೇಂದ್ರ,\n"+
+                    apiResponse.getContent().get(0).getTscName());
+
+            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+        }
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+    private JRDataSource getDataSourceAckTransport10(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+            try {
+                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+                // Parse input format
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                // Define output format
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                // Convert and format
+                Date date = inputFormat.parse(inputDate);
+                formattedDate = outputFormat.format(date);
+
+            } catch (Exception e) {
+                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ        "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")  ಅಡಿ     ಉತ್ತರ     "+
+                    "ಕರ್ನಾಟಕ    ಜಿಲ್ಲೆ     ಗಳಲ್ಲಿ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಉತ್ಪಾ ದಿಸಿದ    ದ್ವಿ ತಳಿ    ರೇಷ್ಮೆ     ಗೂಡನ್ನು     ರಾಜ್ಯ ದ      " +
+                    "ಯಾವುದೇ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ಮಾರಾಟ   ಮಾಡಲು    ಸಾಗಾಣಿಕೆ  ವೆಚ್ಚಕ್ಕಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
+                    apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ     "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ        ( "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಲಾಗಿದೆ.    ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
+                    "ವೆಬ್  ಸೈಟ್       https://e-reshme.karnataka.gov.in/seriui    ನಲ್ಲಿ      ARN/FID/Mob No.    ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+                    "ತಾಂತ್ರಿ ಕ    ಸೇವಾ    ಕೇಂದ್ರ ,\n"+
+                    apiResponse.getContent().get(0).getTscName());
+
+            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+        }
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
@@ -7558,7 +7555,7 @@ public class ReportsController {
                     "   ತಳಿ      ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ     ಆಧಾರಿತ    ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
                     apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ     "+
                     apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ        ( "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಲಾಗಿದೆ.    ಇವರ       ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
+                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
                     "ವೆಬ್ಸೈಟ್      https://e-reshme.karnataka.gov.in/seriui    ನಲ್ಲಿ      ARN/FID/Mob No.    ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -7806,6 +7803,74 @@ public class ReportsController {
 
 
 
+    private JRDataSource getDataSourceAck225BV(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+            try {
+                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+                // Parse input format
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                // Define output format
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                // Convert and format
+                Date date = inputFormat.parse(inputDate);
+                formattedDate = outputFormat.format(date);
+
+            } catch (Exception e) {
+                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ        "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")  ಅಡಿ     ದ್ವಿತಳಿ    ಬಿತ್ತನೆ      ವಲಯದಲ್ಲಿ      ಉತ್ಪಾ ದನೆಯಾಗುವ    "+
+                    "   ಶುದ್ದ     ದ್ವಿತಳಿ     ಬಿತ್ತನೆ    ಗೂಡು    ಬಿತ್ತನೆಗೆ     ಯೋಗ್ಯವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ    ಇಲ್ಲದೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ     ಗೂಡಿಗೆ   ಬೋನಸ್ ಗಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
+                    apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ     "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ        ( "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಲಾಗಿದೆ.    ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
+                    "ವೆಬ್ಸೈಟ್      https://e-reshme.karnataka.gov.in/seriui    ನಲ್ಲಿ      ARN/FID/Mob No.    ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+//            response.setLineItemComment( "              " +apiResponse.getContent().get(0).getFinancialYear() + "  ನೇ ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "     ಯೋಜನೆಯಡಿ    ಶ್ರೀ./ಶ್ರೀಮತಿ.  " +
+//                    apiResponse.getContent().get(0).getFarmerFirstName()+  "   ಬಿನ್ /ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  "    ಗ್ರಾಮ    " +apiResponse.getContent().get(0).getVillageNameInKannada()+
+//                    "    ತಾಲ್ಲೂ ಕಿನ     "+apiResponse.getContent().get(0).getTalukNameInKannada()+  "     "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ "    ಜಿಲ್ಲೆ      ಇವರು  " +raceNameWithoutFirstWord+"     ಮೊಟ್ಟೆಗಳಿಗೆ    ಚಾಕಿ   " +
+//                    "   ಸಾಕಾಣಿಕೆ    ವೆಚ್ಚದ     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರಮದಡಿ     " +apiResponse.getContent().get(0).getCocoonsWeight()+ "    ಕೆ.ಜಿ    "+raceNameWithoutFirstWord+"    ರೇಷ್ಮೆ    ಮೊಟ್ಟೆಗಳಿಗೆ ,  ಪ್ರತಿ  100   ಮೊಟ್ಟೆಗಳಿಗೆ   ಸಹಾಯಧನ   ರೂ. "+Math.round(apiResponse.getContent().get(0).getUnitCost())+ "/-  ರಂತೆ   ಒಟ್ಟು     ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+
+//                    " /-  ಗಳ    ಸಹಾಯಧನ   ಪಡೆಯಲು     ಅರ್ಜಿ    ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getArn()+
+//                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+                    "ಸರ್ಕಾರಿ   ದ್ವಿತಳಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,\n"+
+                    apiResponse.getContent().get(0).getMarketName());
+
+            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+            //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
+        }
+        //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
 
 
 
