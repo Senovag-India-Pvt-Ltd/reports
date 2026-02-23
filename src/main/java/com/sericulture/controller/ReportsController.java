@@ -7554,8 +7554,8 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ        "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")  ಅಡಿ      ಶುದ್ದ     ಮೈಸೂರು    ತಳಿ      ಬಿತ್ತನೆ    ಗೂಡು    ಬಿತ್ತನೆಗೆ      ಯೋಗ್ಯವಾಗಿದ್ದು      " +
-                            "ಬೇಡಿಕೆ    ಇಲ್ಲದೆ   ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ      ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ     ಗೂಡಿಗೆ    ಬೋನಸ್     ಮೊತ್ತಕ್ಕಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")  ಅಡಿ      ಶುದ್ದ     ಮೈಸೂರು " +
+                    "   ತಳಿ      ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ    ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ     ಆಧಾರಿತ    ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " +
                     apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮ     "+
                     apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ        ( "+apiResponse.getContent().get(0).getFruitsId()+") " +
                     "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಲಾಗಿದೆ.    ಇವರ       ಅರ್ಜಿಯ     ಪ್ರಸ್ತುತ     ಸ್ಥಿತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
