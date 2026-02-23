@@ -9562,13 +9562,13 @@ public class ReportsController {
                     + apiResponse.getContent().get(0).getMarketName() + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
 
             response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ    "+
-                    "     ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ     ಆಧಾರಿತ    ಶುದ್ದ      ಮೈಸೂರು   ತಳಿ    ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ ಮಂಜೂರಾತಿ    ನೀಡುವ     ಬಗ್ಗೆ. ");
+                    "     ಉತ್ಪಾದಕತೆ    ಮತ್ತು     ಗುಣಮಟ್ಟ     ಆಧಾರಿತ    ಶುದ್ದ      ಮೈಸೂರು   ತಳಿ    ಬಿತ್ತನೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ   ಮಂಜೂರಾತಿ    ನೀಡುವ     ಬಗ್ಗೆ. ");
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
-                    "     "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಮೈಸೂರು   ಬಿತ್ತನೆ    ವಲಯ   "+apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ರವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
-                    "     "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
-                    "3. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
+                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
+                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಮೈಸೂರು   ಬಿತ್ತನೆ    ವಲಯ,   "+apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ರವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "      "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
+                    "3. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
 
             response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ " )  ಅಡಿ      "+
@@ -9604,7 +9604,7 @@ public class ReportsController {
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರತಿಯನ್ನು ,     ರೇಷ್ಮೆ     ಉಪ    ನಿರ್ದೇಶಕರು,  ಮೈಸೂರು   ಬಿತ್ತನೆ   ವಲಯ    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName()+".");
+                            + "ಪ್ರತಿಯನ್ನು ,     ರೇಷ್ಮೆ     ಉಪ    ನಿರ್ದೇಶಕರು,  ಮೈಸೂರು   ಬಿತ್ತನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName()+".");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "\n    "
                     + apiResponse.getContent().get(0).getMarketName());
