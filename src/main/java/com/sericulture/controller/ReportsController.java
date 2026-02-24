@@ -9019,7 +9019,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9075,7 +9075,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9356,7 +9356,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9411,7 +9411,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9694,7 +9694,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9748,7 +9748,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -10034,7 +10034,7 @@ public class ReportsController {
 
 
             response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getUser());
+                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 

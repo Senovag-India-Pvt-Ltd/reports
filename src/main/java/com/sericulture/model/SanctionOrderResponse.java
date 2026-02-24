@@ -76,6 +76,8 @@ public class SanctionOrderResponse {
     private String scCategoryName;
     private String scHeadAccountName;
     private String sanctionOrderNumber;
+    private String securityKey;
+    private String sanctionOrderDownloadUrl;
     private Float sanctionAmount;
     private String workOrderNumber;
     private Long schemeId;
