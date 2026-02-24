@@ -9060,8 +9060,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9116,8 +9115,8 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")   ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9397,8 +9396,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9452,8 +9450,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+"("+apiResponse.getContent().get(0).getDescription()+")   ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9735,8 +9732,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -9789,8 +9785,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -10075,8 +10070,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -10131,8 +10125,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -10417,8 +10410,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -10467,8 +10459,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber()+ "    ದಿನಾಂಕ  :  "+proposalDate);
 
@@ -15083,8 +15074,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                 "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
         response.setHeader7("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025\n" +
                 "ಆದೇಶ ಸಂಖ್ಯೆ:ರೇಅಯೋ/ಸಾ/ಮೈ ತಳಿ/ಚಾಸಾವೆ/ಸಧನ/ಮಂ/S.O.No. SD1/2025-26    ದಿನಾಂಕ:09/06/2025  ");
@@ -15135,8 +15125,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
-            response.setStatus("Approved By "
-                    + apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+            response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
             response.setHeader7("S.O.No.SDP/GEN/PM/CRC/SD1/2025-26, Date:09/06/2025\n" +
                     "ಆದೇಶ ಸಂಖ್ಯೆ:ರೇಅಯೋ/ಸಾ/ಮೈ ತಳಿ/ಚಾಸಾವೆ/ಸಧನ/ಮಂ/S.O.No. SD1/2025-26    ದಿನಾಂಕ:09/06/2025  ");
