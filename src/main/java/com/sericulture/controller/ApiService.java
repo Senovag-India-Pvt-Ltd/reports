@@ -27,6 +27,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.io.StringReader;
 import java.util.Collections;
@@ -214,6 +217,42 @@ public class ApiService {
         return response2;
         // Process the API response as needed
         //return apiResponse;
+    }
+
+    public void uploadSanctionToDbt(byte[] pdfBytes, String fileName) {
+
+        try {
+
+            String uploadUrl = dbtApiUrl + "/v1/service/uploadSanctionOrder";
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.setBearerAuth(Util.getTokenData());
+
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+
+            ByteArrayResource fileResource = new ByteArrayResource(pdfBytes) {
+                @Override
+                public String getFilename() {
+                    return fileName;   // ✅ dynamic filename
+                }
+            };
+
+            body.add("multipartFile", fileResource);
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity =
+                    new HttpEntity<>(body, headers);
+
+            ResponseEntity<String> response =
+                    restTemplate.postForEntity(uploadUrl, requestEntity, String.class);
+
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                throw new RuntimeException("DBT Upload Failed");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error calling DBT upload API: " + e.getMessage());
+        }
     }
 
 
