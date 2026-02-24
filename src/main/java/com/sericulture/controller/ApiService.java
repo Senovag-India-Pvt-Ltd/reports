@@ -223,7 +223,9 @@ public class ApiService {
 
         try {
 
-            String uploadUrl = dbtApiUrl + "/v1/service/uploadSanctionOrder";
+            String uploadUrl = dbtApiUrl + "service/uploadSanctionOrder";
+//                    String uploadUrl = "http://localhost:8013/dbt/v1/service/uploadSanctionOrder";
+
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
