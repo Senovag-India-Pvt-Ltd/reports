@@ -9380,11 +9380,10 @@ public class ReportsController {
                             "    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತನೆ   ಗೂಡಿಗೆ   ಬೋನಸ್‌    ಮಂಜೂರಾತಿ    ನೀಡುವ    ಬಗ್ಗೆ . \n");
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
-                    "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                    "2. "+apiResponse.getContent().get(0).getDesignationNameInKannada() + ",     " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + " ,     "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ   : \n"+
-                    "    "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
-                    "3.  ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,   "+apiResponse.getContent().get(0).getMarketName() + "  ಇವರ    ಪ್ರಸ್ತಾವನೆ \n"+"    ದಿನಾಂಕ  : "+proposalDate+ "\n"+
-                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
+                    "     "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
+                    "2. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ      ಆಯುಕ್ತರು    ಹಾಗೂ     ರೇಷ್ಮೆ      ನಿರ್ದೇಶಕರು,    ಬೆಂಗಳೂರು    ರವರ     ಪತ್ರದ    ಸಂಖ್ಯೆ   :\n" +
+                    "     "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
+                    "3. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
 
             response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ      "+
@@ -9404,7 +9403,7 @@ public class ReportsController {
 
             response.setHeader8("            ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ      ಅಂಶಗಳನ್ನು      ಪರಶೀಲಿಸಲಾಗಿ,   ಸರ್ಕಾರಿ     ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ      "
                     +apiResponse.getContent().get(0).getMarketName() + "     ಇಲ್ಲಿ      ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ವಹಿವಾಟು     ಮಾಡಿದ     "+formattedWeight +"    ಕೆ.ಜಿ.    ಶುದ್ಧ     ಸಿ ಎಸ್ ಆರ್ 2    ದ್ವಿತಳಿ    ಬಿತ್ತನೆ       "+
-                            "ಗೂಡಿಗೆ      ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"    ಗಳಂತೆ    ಬೋನಸ್      ಮೊತ್ತ      "+
+                            "ಗೂಡಿಗೆ      ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ    ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-    ಗಳಂತೆ    ಬೋನಸ್      ಮೊತ್ತ      "+
                     "ರೂ. "+formattedAmount +"  (ರೂ. "+amountInWords+"   ) ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡಿದೆ.    ಸಹಾಯಧನದ   ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2/ಡಿಬಿಟಿ    ಮುಖಾಂತರ      " +
                     "ಫಲಾನುಭವಿ   ಬ್ಯಾಂಕ್   ಖಾತೆಗೆ    ನೇರವಾಗಿ    ಜಮಾ    ಮಾಡುವುದು.  \n" +
                     "              ಸದರಿ    ವೆಚ್ಚವನ್ನು      "+apiResponse.getContent().get(0).getSchemeNameInKannada()+ "      ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )   ಲೆಕ್ಕ     " +
