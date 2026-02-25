@@ -1293,7 +1293,7 @@ public class ReportsController {
             System.out.println("enter to get Incentive 30");
             logger.info("enter to get Incentive");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Transport10.jrxml");
+            JasperReport jasperReport = getJasperReport("Incentive30BV.jrxml");
 
             JRDataSource dataSource = getDataSourceForIncentive30(requestDto);
 
@@ -10578,13 +10578,15 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
 
             response.setHeader11(apiResponse.getContent().get(0).getSanctionOrderNumber());
 
-            response.setHeader9("ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ   ಶಾಖೆಗೆ ಮುಂದಿನ ಕ್ರಮಕ್ಕಾಗಿ.\n" +
-                    "ಪ್ರತಿಯನ್ನು " +
-                    "1.ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು, ಜಿಲ್ಲಾ ಪಂಚಾಯತ್, ವಿಜಯಪುರ ರವರಿಗೆ ಮಾಹಿತಿಗಾಗಿ.\n" +
-                    "2.ರೇಷ್ಮೆ ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿಕ ಸೇವಾ ಕೇಂದ್ರ, ವಿಜಯಪುರ \n");
+            response.setHeader9("ಇವರಿಗೆ;\n" +
+                    apiResponse.getContent().get(0).getAdsDesignationName() + "\n  " +
+                    apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+ "\n" +
+                    "ಪ್ರತಿಯನ್ನು  ; \n" +
+                    "   1.  ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿ ಕ ಸೇವಾ   ಕೇಂದ್ರ , "+apiResponse.getContent().get(0).getSeoTscName() +" \n" +
+                    "   2.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
 
-            response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n    " +
-                    "ವಿಜಯಪುರ   ವಿಭಾಗ,    ವಿಜಯಪುರ ");
+            response.setHeader10(apiResponse.getContent().get(0).getDdDesignationName() + "\n    " +
+                    "ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,    "+apiResponse.getContent().get(0).getDdDistrictName());
 
         }
         response.setAcceptedDate("ಸ್ವೀಕೃತಿ ಪತ್ರದ ದಿನಾಂಕ : " + apiResponse.getContent().get(0).getDate());
