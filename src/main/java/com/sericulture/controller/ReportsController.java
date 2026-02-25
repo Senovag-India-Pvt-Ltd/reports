@@ -1295,7 +1295,7 @@ public class ReportsController {
             String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("Transport10.jrxml");
 
-            JRDataSource dataSource = getDataSourceForPriceStabilizationIncentive(requestDto);
+            JRDataSource dataSource = getDataSourceForIncentive30(requestDto);
 
             // 2. parameters "empty"
             Map<String, Object> parameters = new HashMap<String, Object>();
@@ -1497,14 +1497,21 @@ public class ReportsController {
             String fileName = securityKey + ".pdf";
 
 //            apiService.uploadSanctionToDbt(pdfBytes, fileName);
-
+//
 //            return ResponseEntity.ok("BonusPM Generated & Uploaded Successfully");
+//
+//                        HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
 
-                        HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
+            byte[] pdfByte1 = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfByte1);
+
+//            return new ResponseEntity<>(pdfByte1, HttpStatus.OK);
 
         } catch (Exception ex) {
             logger.error("Error generating BonusPM", ex);
@@ -10471,37 +10478,40 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
             formattedDate = apiResponse.getContent().get(0).getDate().toString();
         }
         if (totalSchemeAmount <= amount) {
-            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + ",    ವಿಜಯಪುರ    ವಿಭಾಗ,    ವಿಜಯಪುರ    ಇವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
+            response.setHeader(apiResponse.getContent().get(0).getAdsDesignationName() + ",    "  +apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName() +"    ಇವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
-            response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"    ಸರ್ಕಾರಿ    "+
-                    "ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆಗಳ    ಮೂಲಕ     ವಹಿವಾಟಾಗುವ   ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ   ಮಂಜೂರಾತಿ    ನೀಡುವ     ಬಗ್ಗೆ.");
+            response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )   ಅಡಿ    ಸರ್ಕಾರಿ    "+
+                    "ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ ಗಳ    ಮೂಲಕ     ವಹಿವಾಟಾಗುವ   ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ   ಮಂಜೂರಾತಿ    ನೀಡುವ     ಬಗ್ಗೆ .");
 
-            response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
-                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್ ,    "+apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
-                    "      "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    "+apiResponse.getContent().get(0).getLoggedinUserTscName() + "    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+"\n"+
-                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
+            response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಅಭಿವೃ ದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
+                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
+                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
+                    "3. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    "+apiResponse.getContent().get(0).getSeoTscName() + "   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
-            response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ " )  ಅಡಿ      "+
-                    "     ರಾಜ್ಯದ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ಪ್ರತಿ    100     ರೋಗ    ರಹಿತ    ದ್ವಿತಳಿ     ಸಂಕರಣ     ಮೊಟ್ಟೆಗಳಿಗೆ   60    ಕೆ.ಜಿ    ಗಿಂತ    ಹೆಚ್ಚು     ಇಳುವರಿ      " +
-                    "ಹಾಗೂ    ಗರಿಷ್ಠ     90 ಕೆ.ಜಿ    ರೇಷ್ಮೆ     ಗೂಡು    ಉತ್ಪಾದಿಸಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ    ವಹಿವಾಟಾಗುವ     ದ್ವಿತಳಿ     ಸಂಕರಣ       " +
+            response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ      "+
+                    "     ರಾಜ್ಯದ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ಪ್ರತಿ    100     ರೋಗ    ರಹಿತ    ದ್ವಿತಳಿ     ಸಂಕರಣ     ಮೊಟ್ಟೆಗಳಿಗೆ   __________    ಕೆ.ಜಿ    ಗಿಂತ    ಹೆಚ್ಚು     ಇಳುವರಿ      " +
+                    "ಹಾಗೂ    ಗರಿಷ್ಠ     ________ ಕೆ.ಜಿ    ರೇಷ್ಮೆ     ಗೂಡು    ಉತ್ಪಾದಿಸಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ    ವಹಿವಾಟಾಗುವ     ದ್ವಿತಳಿ     ಸಂಕರಣ       " +
                             "ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ    ಪ್ರತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ   "+
                             "ನೀಡುವ     ಕಾರ್ಯಕ್ರಮದ       ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತದೆ.\n"+
 
-                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರಮವನ್ನು      ಅನುಷ್ಟಾನಗೊಳಿಸಲು    ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.    ಉಲ್ಲೇಖ (3) ರಂತೆ     ರೇಷ್ಮೆ      "+
-                            "ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ     ಕೇಂದ್ರ ,     ವಿಜಯಪುರ     ಇವರು     ವಿಜಯಪುರ     ತಾಲ್ಲೂಕಿನ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ      ಸಂಬಂಧಿಸಿದಂತೆ      "+
-                            "ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ      ಗೂಡುಗಳಿಗೆ      ಪ್ರೋತ್ಸಾಹಧನ   ಮಂಜೂರಾತಿಗಾಗಿ     ಅಗತ್ಯ      ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿಸಿದ್ದು      ವಿವರಗಳು     ಈ     ಕೆಳಕಂಡಂತಿದೆ. ");
+                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರಮವನ್ನು     ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ     ರೇಷ್ಮೆ     " +
+                    "ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು    ತಾಂತ್ರಿಕ   ಸೇವಾ    ಕೇಂದ್ರ ,    "+ apiResponse.getContent().get(0).getSeoTscName() +"     ಇವರು    ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ      "+
+                             apiResponse.getContent().get(0).getSeoTscName() +  "  ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     "+
+                    "ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
+                    "ಪ್ರಸ್ತಾ ವನೆ    ಸಲ್ಲಿ ಸಿದ್ದು    ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ; ");
 
             response.setHeader6("                 ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ      ಮೇಲ್ಕಂಡ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ದ್ವಿತಳಿ     ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ      ಪ್ರೋತ್ಸಾಹಧನವನ್ನು       ಮಂಜೂರು     ಮಾಡಬಹುದಾಗಿದ್ದು       "+
                             "ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ      ಆರ್ಥಿಕ     ಅಧಿಕಾರ    ಪ್ರತ್ಯಾಯೋಜನೆ      ಅನ್ವಯ      ಫಲಾನುಭವಿ     ಆಧಾರಿತ     ಕಾರ್ಯಕ್ರಮಗಳಡಿ     ಸಹಾಯಧನ     ಮಂಜೂರು     ಮಾಡಲು     ರೇಷ್ಮೆ     ಸಹಾಯಕ      " +
                             "ನಿರ್ದೇಶಕರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿದೆ.    ಅದರಂತೆ    ಈ    ಕೆಳಕಂಡ     ಆದೇಶ     ಹೊರಡಿಸಿದೆ.");
 
-            response.setHeader8("            ಪಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ      ಅಂಶಗಳನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ,    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು / ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ,     "+
-                            "ವಿಜಯಪುರ     ಇವರು    ವಿಜಯಪುರ    ತಾಲ್ಲೂಕಿನ      ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ      ವಹಿವಾಟು    ಮಾಡಿದ    "+formattedWeight +"  ಕೆ.ಜಿ.  " +
-                    "   ದ್ವಿತಳಿ    ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ   ರೂ.  "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +  "/-  ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ   ರೂ.  "+formattedAmount +"  (ರೂ. "+amountInWords+"   )"+
-                    "  ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡಿದೆ.    ಪ್ರೋತ್ಸಾಹಧನದ   ಮೊತ್ತವನ್ನು       ಖಜಾನೆ-2/ ಡಿಬಿಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡುವುದು.\n"+
+            response.setHeader8("            ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ    ಅಂಶಗಳನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ,   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ, ವಿಜಯಪುರ    ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     " +
+                            "ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆ  ಗಳಲ್ಲಿ     ವಹಿವಾಟು   ಮಾಡಿದ     "+formattedWeight +"  ಕೆ.ಜಿ.  " +
+                    "   ದ್ವಿತಳಿ    ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ   ರೂ.  "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +  "/- " +
+                    " ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ   ರೂ.  "+formattedAmount +"  (ರೂ. "+amountInWords+"   )  ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡಿದೆ.    ಪ್ರೋತ್ಸಾಹಧನದ   ಮೊತ್ತವನ್ನು       " +
+                    "ಖಜಾನೆ-2/ ಡಿಬಿಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡುವುದು.\n"+
 
                     "              ಸದರಿ    ವೆಚ್ಚ ವನ್ನು      "+apiResponse.getContent().get(0).getSchemeNameInKannada()+ "   ಯೋಜನೆ   ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )   ಲೆಕ್ಕ     " +
                     "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ರಾಜ್ಯ   ವಲಯ    ಅಡಿ    ಭರಿಸುವುದು.");
@@ -10515,50 +10525,51 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರತಿಯನ್ನು    \n"+
-                            "     1.  ರೇಷ್ಮೆ     ಉಪ    ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ  ಪಂಚಾಯತ್,   "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
-                            "     2.  ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    ವಿಜಯಪುರ");
+                            + "ಪ್ರ ತಿಯನ್ನು    \n"+
+                            "     1.  ರೇಷ್ಮೆ     ಉಪ    ನಿರ್ದೇಶಕರು,  ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,   "+ apiResponse.getContent().get(0).getAdsDistrictName()+"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
+                            "     2.  ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,   ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    "+ apiResponse.getContent().get(0).getSeoTscName()+".");
 
-            response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n" +
-                    "ವಿಜಯಪುರ    ವಿಭಾಗ,   ವಿಜಯಪುರ");
+            response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
+                    apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName());
         }else {
 
-            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + ",     ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್,  " + apiResponse.getContent().get(0).getLoggedinUserDistrictName() + " ,     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು.");
+            response.setHeader(apiResponse.getContent().get(0).getDdDesignationName() + ",    ಜಿಲ್ಲಾ      ಪಂಚಾಯತ್    "  +apiResponse.getContent().get(0).getDdDistrictName() +",    ಇವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
-            response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ    "+
-                    "    ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ   ವಹಿವಾಟಾಗುವ    ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ   ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿ    ನೀಡುವ    ಬಗ್ಗೆ. ");
+            response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"   )   ಅಡಿ    ಸರ್ಕಾರಿ    "+
+                    "ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ ಗಳ    ಮೂಲಕ     ವಹಿವಾಟಾಗುವ   ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ   ಮಂಜೂರಾತಿ    ನೀಡುವ     ಬಗ್ಗೆ .");
 
-            response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
-                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. "+apiResponse.getContent().get(0).getDesignationNameInKannada() + ",     ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ,     "+ apiResponse.getContent().get(0).getLoggedinUserDistrictName() + "    ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ   : \n"+
-                    "      "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು ,   ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ,    "+apiResponse.getContent().get(0).getTscName() + "  ಇವರ    ಪ್ರಸ್ತಾವನೆ \n"+"     ದಿನಾಂಕ  : "+proposalDate+ ".\n"+
-                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
-
-
-            response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ " )  ಅಡಿ      "+
-                    "   ರಾಜ್ಯದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು    ಪ್ರತಿ   100    ರೋಗ  ರಹಿತ     ದ್ವಿತಳಿ     ಸಂಕರಣ    ಮೊಟ್ಟೆಗಳಿಗೆ    60 ಕೆ.ಜಿ   ಗಿಂತ     ಹೆಚ್ಚು    ಇಳುವರಿ    ಹಾಗೂ     "+
-                    "ಗರಿಷ್ಠ    90 ಕೆ.ಜಿ    ರೇಷ್ಮೆ    ಗೂಡು    ಉತ್ಪಾದಿಸಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳ    ಮೂಲಕ    ವಹಿವಾಟಾಗುವ    ದ್ವಿತಳಿ     ಸಂಕರಣ     ರೇಷ್ಮೆ     " +
-                            "ಗೂಡುಗಳಿಗೆ    ಪ್ರತಿ     ಕೆ.ಜಿ ಗೆ    ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ  ನೀಡುವ     " +
-                            "ಕಾರ್ಯಕ್ರಮದ     ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ      ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತದೆ.\n"+
-
-                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಟಾನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.    ಉಲ್ಲೇಖ (3) ರಂತೆ     " +
-                            "ರೇಷ್ಮೆ     ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು/ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ   ಕೇಂದ್ರ,   ವಿಜಯಪುರ    ಇವರು    ವಿಜಯಪುರ    ತಾಲ್ಲೂಕಿನ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ      " +
-                            "ಸಂಬಂಧಿಸಿದಂತೆ    ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಿದ್ದು     ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿದೆ. ");
-
-            response.setHeader6("                 ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ     ಮೇಲ್ಕಂಡ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ದ್ವಿತಳಿ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನವನ್ನು     ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದ್ದು     "+
-                    "    ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ      ಆರ್ಥಿಕ    ಅಧಿಕಾರ     ಪ್ರತ್ಯಾಯೋಜನೆ    ಅನ್ವಯ     ಫಲಾನುಭವಿ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರಮಗಳಡಿ     ಸಹಾಯಧನ     ಮಂಜೂರು    ಮಾಡಲು     ರೇಷ್ಮೆ    ಸಹಾಯಕ     ನಿರ್ದೇಶಕರವರಿಗೆ    "+
-                    "ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿದೆ.     ಅದರಂತೆ     ಈ    ಕೆಳಕಂಡ    ಆದೇಶ   ಹೊರಡಿಸಿದೆ.");
+            response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಅಭಿವೃ ದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
+                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
+                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getDdDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
+                    "3. "+apiResponse.getContent().get(0).getAdsDesignationName() + ",   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
-            response.setHeader8("            ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿವರಿಸಿರುವ     ಎಲ್ಲಾ      ಅಂಶಗಳನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ,    ರೇಷ್ಮೆ    ವಿಸ್ತರಣಾಧಿಕಾರಿಗಳು / ಪ್ರಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ,     ವಿಜಯಪುರ     "+
-                    "ಇವರು    ವಿಜಯಪುರ    ತಾಲ್ಲೂಕಿನ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು      ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ    ವಹಿವಾಟು    ಮಾಡಿದ   ,    "+formattedWeight +"    ಕೆ.ಜಿ.  " +
-                    "   ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡಿಗೆ     ಪ್ರತಿ   ಕೆ.ಜಿ.ಗೆ    ರೂ.  " + Math.round(apiResponse.getContent().get(0).getUnitCost()) +  "/- ರಂತೆ     "+
-                    "  ಪ್ರೋತ್ಸಾಹಧನ   ರೂ. "+formattedAmount +"  (ರೂ. "+amountInWords+"   )"+
-                    "   ಗಳನ್ನು      ಮಂಜೂರು    ಮಾಡಿದೆ.    ಪ್ರೋತ್ಸಾಹಧನದ   ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2 / ಡಿಬಿಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿ     ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ    ನೇರವಾಗಿ     ಜಮಾ    ಮಾಡುವುದು.\n"+
+            response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ      "+
+                    "     ರಾಜ್ಯದ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ಪ್ರತಿ    100     ರೋಗ    ರಹಿತ    ದ್ವಿತಳಿ     ಸಂಕರಣ     ಮೊಟ್ಟೆಗಳಿಗೆ   __________    ಕೆ.ಜಿ    ಗಿಂತ    ಹೆಚ್ಚು     ಇಳುವರಿ      " +
+                    "ಹಾಗೂ    ಗರಿಷ್ಠ     ________ ಕೆ.ಜಿ    ರೇಷ್ಮೆ     ಗೂಡು    ಉತ್ಪಾದಿಸಿ    ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆಗಳ     ಮೂಲಕ    ವಹಿವಾಟಾಗುವ     ದ್ವಿತಳಿ     ಸಂಕರಣ       " +
+                    "ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ    ಪ್ರತಿ     ಕೆ.ಜಿ ಗೆ     ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-ರಂತೆ     ಪ್ರೋತ್ಸಾಹಧನದ   "+
+                    "ನೀಡುವ     ಕಾರ್ಯಕ್ರಮದ       ಅನುಷ್ಠಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತದೆ.\n"+
 
-                    "              ಸದರಿ    ವೆಚ್ಚ ವನ್ನು      "+apiResponse.getContent().get(0).getSchemeNameInKannada()+ "   ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )   ಲೆಕ್ಕ     " +
-                    "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ರಾಜ್ಯ   ವಲಯ     ಅಡಿ    ಭರಿಸುವುದು.");
+                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರಮವನ್ನು    ಅನುಷ್ಟಾ ನ ಗೊಳಿಸಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿರುತ್ತ ದೆ.    ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ  ,    "
+                    +apiResponse.getContent().get(0).getAdsDesignationName() + ",   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"" +
+                    "    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+ "   ಇವರು     ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ    "+apiResponse.getContent().get(0).getSeoTscName() +"  " +
+                    " ವ್ಯಾಪ್ತಿ ಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
+                    "ಪ್ರಸ್ತಾ ವನೆ    ಸಲ್ಲಿ ಸಿದ್ದು    ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ; ");
+
+            response.setHeader6("                 ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ      ಮೇಲ್ಕಂಡ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ದ್ವಿತಳಿ     ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ      ಪ್ರೋತ್ಸಾಹಧನವನ್ನು       ಮಂಜೂರು     ಮಾಡಬಹುದಾಗಿದ್ದು       "+
+                    "ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ      ಆರ್ಥಿಕ     ಅಧಿಕಾರ    ಪ್ರತ್ಯಾಯೋಜನೆ      ಅನ್ವಯ      ಫಲಾನುಭವಿ     ಆಧಾರಿತ     ಕಾರ್ಯಕ್ರಮಗಳಡಿ     ಸಹಾಯಧನ     ಮಂಜೂರು     ಮಾಡಲು     ರೇಷ್ಮೆ     ಸಹಾಯಕ      " +
+                    "ನಿರ್ದೇಶಕರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿದೆ.    ಅದರಂತೆ    ಈ    ಕೆಳಕಂಡ     ಆದೇಶ     ಹೊರಡಿಸಿದೆ.");
+
+            response.setHeader8("            ಪೀಠಿಕೆಯಲ್ಲಿ    ವಿವರಿಸಿರುವ    ಎಲ್ಲಾ    ಅಂಶಗಳನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ,   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ, ವಿಜಯಪುರ    ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     " +
+                    "ಸರ್ಕಾರಿ    ರೇಷ್ಮೆ ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆ  ಗಳಲ್ಲಿ     ವಹಿವಾಟು   ಮಾಡಿದ     "+formattedWeight +"  ಕೆ.ಜಿ.  " +
+                    "   ದ್ವಿತಳಿ    ಸಂಕರಣ     ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಪ್ರತಿ    ಕೆ.ಜಿ.ಗೆ   ರೂ.  "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +  "/- " +
+                    " ರಂತೆ    ಪ್ರೋತ್ಸಾಹಧನ   ರೂ.  "+formattedAmount +"  (ರೂ. "+amountInWords+"   )  ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡಿದೆ.    ಪ್ರೋತ್ಸಾಹಧನದ   ಮೊತ್ತವನ್ನು       " +
+                    "ಖಜಾನೆ-2/ ಡಿಬಿಟಿ     ಮುಖಾಂತರ     ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ     ನೇರವಾಗಿ     ಜಮಾ     ಮಾಡುವುದು.\n"+
+
+                    "              ಸದರಿ    ವೆಚ್ಚ ವನ್ನು      "+apiResponse.getContent().get(0).getSchemeNameInKannada()+ "   ಯೋಜನೆ   ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )   ಲೆಕ್ಕ     " +
+                    "  ಶೀರ್ಷಿಕೆ : "+apiResponse.getContent().get(0).getScHeadAccountName()+" ("+apiResponse.getContent().get(0).getDescription()+" )  ರಾಜ್ಯ   ವಲಯ    ಅಡಿ    ಭರಿಸುವುದು.");
 
 
             response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
