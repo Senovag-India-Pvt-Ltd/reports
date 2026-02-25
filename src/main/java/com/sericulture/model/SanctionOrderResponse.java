@@ -340,6 +340,18 @@ private String totalIncentiveAmountInWords;
     private Date dateOfDistributionOfChawkiWorms;
     private Float averageYieldCdcm;
 
+    private String adsDesignationName;
+    private String adsDivisionNameForSanctionOrder;
+    private String adsTalukName;
+    private String adsDistrictName;
+    private String seoTscName;
+    private String eligibleQuantityOfCocoonsProduced;
+
+    private String crcRspNameAndLicenceAddress;
+
+    private String ddDesignationName;
+    private String ddDistrictName;
+
 
 
 }
