@@ -228,7 +228,7 @@ public class ApiService {
 
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
             headers.setBearerAuth(Util.getTokenData());
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
@@ -245,11 +245,14 @@ public class ApiService {
             HttpEntity<MultiValueMap<String, Object>> requestEntity =
                     new HttpEntity<>(body, headers);
 
+            logger.info("Sanction Order file name is",fileName);
+
             ResponseEntity<String> response =
                     restTemplate.postForEntity(uploadUrl, requestEntity, String.class);
 
+
             if (!response.getStatusCode().is2xxSuccessful()) {
-                throw new RuntimeException("DBT Upload Failed");
+                throw new RuntimeException("DBT Upload Failed: " + response.getBody());
             }
 
         } catch (Exception e) {

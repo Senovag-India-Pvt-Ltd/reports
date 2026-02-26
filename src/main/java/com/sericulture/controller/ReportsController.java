@@ -1457,7 +1457,71 @@ public class ReportsController {
         }
     }
 
-    @PostMapping("/get-BonusPM")
+//    @PostMapping("/get-BonusPM")
+//    public ResponseEntity<?> getBonusPM(@RequestBody CheckInspectionStatusRequest requestDto)
+//            throws JsonProcessingException, FileNotFoundException, JRException {
+//
+//        try {
+//
+//            logger.info("enter to get BonusPM");
+//
+//            SanctionOrder apiResponse =
+//                    apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+//
+//            if (apiResponse.getContent() == null ||
+//                    apiResponse.getContent().isEmpty()) {
+//                throw new RuntimeException("No Data Found");
+//            }
+//
+//            String securityKey =
+//                    apiResponse.getContent().get(0).getSecurityKey();
+//
+//            JasperReport jasperReport = getJasperReport("SeedBonus225.jrxml");
+//
+//            JRDataSource dataSource = getDataSourceForBonus225PM(requestDto);
+//
+//            Map<String, Object> parameters = new HashMap<>();
+//            parameters.put("CollectionBeanParam", dataSource);
+//
+//            JasperPrint jasperPrint =
+//                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//
+//            byte[] pdfBytes = pdfStream.toByteArray();
+//            String fileName = securityKey + ".pdf";
+//
+////            apiService.uploadSanctionToDbt(pdfBytes, fileName);
+////
+////            return ResponseEntity.ok("BonusPM Generated & Uploaded Successfully");
+////
+////                        HttpHeaders headers = new HttpHeaders();
+////            headers.setContentType(MediaType.APPLICATION_PDF);
+////            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
+//
+//            byte[] pdfByte1 = JasperExportManager.exportReportToPdf(jasperPrint);
+//
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf")
+//                    .contentType(MediaType.APPLICATION_PDF)
+//                    .body(pdfByte1);
+//
+////            return new ResponseEntity<>(pdfByte1, HttpStatus.OK);
+//
+//        } catch (Exception ex) {
+//            logger.error("Error generating BonusPM", ex);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Failed to generate BonusPM");
+//        }
+//    }
+
+
+        @PostMapping("/get-BonusPM")
     public ResponseEntity<?> getBonusPM(@RequestBody CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -1478,7 +1542,8 @@ public class ReportsController {
 
             JasperReport jasperReport = getJasperReport("SeedBonus225.jrxml");
 
-            JRDataSource dataSource = getDataSourceForBonus225PM(requestDto);
+            JRDataSource dataSource =
+                    getDataSourceForBonus225PM(requestDto);
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", dataSource);
@@ -1486,32 +1551,27 @@ public class ReportsController {
             JasperPrint jasperPrint =
                     JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-
-            byte[] pdfBytes = pdfStream.toByteArray();
             String fileName = securityKey + ".pdf";
 
-//            apiService.uploadSanctionToDbt(pdfBytes, fileName);
-//
-//            return ResponseEntity.ok("BonusPM Generated & Uploaded Successfully");
-//
-//                        HttpHeaders headers = new HttpHeaders();
-//            headers.setContentType(MediaType.APPLICATION_PDF);
-//            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
+            // 🔥 Try S3 Upload separately
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
 
-            byte[] pdfByte1 = JasperExportManager.exportReportToPdf(jasperPrint);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
+            // 🔥 Always return PDF to browser
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf")
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)  // inline opens in new tab
                     .contentType(MediaType.APPLICATION_PDF)
-                    .body(pdfByte1);
-
-//            return new ResponseEntity<>(pdfByte1, HttpStatus.OK);
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
             logger.error("Error generating BonusPM", ex);
