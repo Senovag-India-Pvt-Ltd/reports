@@ -1389,73 +1389,76 @@ public class ReportsController {
 //    }
 
 
-    @PostMapping("/get-Bonus")
-    public ResponseEntity<?> getBonus(
-            @RequestBody CheckInspectionStatusRequest requestDto)
-            throws JsonProcessingException, FileNotFoundException, JRException {
+//    @PostMapping("/get-Bonus")
+//    public ResponseEntity<?> getBonus(
+//            @RequestBody CheckInspectionStatusRequest requestDto)
+//            throws JsonProcessingException, FileNotFoundException, JRException {
+//
+//        try {
+//
+//            logger.info("enter to get Bonus");
+//
+//            // 🔹 Fetch to get securityKey
+//            SanctionOrder apiResponse =
+//                    apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+//
+//            if (apiResponse.getContent() == null ||
+//                    apiResponse.getContent().isEmpty()) {
+//                throw new RuntimeException("No Data Found");
+//            }
+//
+//            String securityKey =
+//                    apiResponse.getContent().get(0).getSecurityKey();
+//
+//            JasperReport jasperReport =
+//                    getJasperReport("SeedBonus225.jrxml");
+//
+//            JRDataSource dataSource =
+//                    getDataSourceForBonus225(requestDto);
+//
+//            Map<String, Object> parameters = new HashMap<>();
+//            parameters.put("CollectionBeanParam", dataSource);
+//
+//            JasperPrint jasperPrint =
+//                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//
+//            byte[] pdfBytes = pdfStream.toByteArray();
+//
+//            // -----------------------------
+//            // 🔻 S3 / DBT UPLOAD COMMENTED
+//            // -----------------------------
+//
+//            // String fileName = securityKey + ".pdf";
+//            // apiService.uploadSanctionToDbt(pdfBytes, fileName);
+//            // logger.info("Sanction Order uploaded via DBT successfully");
+//
+//            // -----------------------------
+//            // ✅ Only Generate Report
+//            // -----------------------------
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
+//
+//            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+//
+//        } catch (Exception ex) {
+//
+//            logger.error("Error generating sanction order", ex);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Failed to generate sanction order");
+//        }
+//    }
 
-        try {
 
-            logger.info("enter to get Bonus");
 
-            // 🔹 Fetch to get securityKey
-            SanctionOrder apiResponse =
-                    apiService.fetchSanctionSeedIncentiveBonus(requestDto);
-
-            if (apiResponse.getContent() == null ||
-                    apiResponse.getContent().isEmpty()) {
-                throw new RuntimeException("No Data Found");
-            }
-
-            String securityKey =
-                    apiResponse.getContent().get(0).getSecurityKey();
-
-            JasperReport jasperReport =
-                    getJasperReport("SeedBonus225.jrxml");
-
-            JRDataSource dataSource =
-                    getDataSourceForBonus225(requestDto);
-
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("CollectionBeanParam", dataSource);
-
-            JasperPrint jasperPrint =
-                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-
-            byte[] pdfBytes = pdfStream.toByteArray();
-
-            // -----------------------------
-            // 🔻 S3 / DBT UPLOAD COMMENTED
-            // -----------------------------
-
-            // String fileName = securityKey + ".pdf";
-            // apiService.uploadSanctionToDbt(pdfBytes, fileName);
-            // logger.info("Sanction Order uploaded via DBT successfully");
-
-            // -----------------------------
-            // ✅ Only Generate Report
-            // -----------------------------
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
-
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-
-        } catch (Exception ex) {
-
-            logger.error("Error generating sanction order", ex);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to generate sanction order");
-        }
-    }
 
 //    @PostMapping("/get-BonusPM")
 //    public ResponseEntity<?> getBonusPM(@RequestBody CheckInspectionStatusRequest requestDto)
@@ -1520,6 +1523,68 @@ public class ReportsController {
 //        }
 //    }
 
+
+        @PostMapping("/get-Bonus")
+    public ResponseEntity<?> getBonus(
+            @RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+
+            logger.info("enter to get Bonus");
+
+            // 🔹 Fetch to get securityKey
+            SanctionOrder apiResponse =
+                    apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+
+            if (apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+
+            String securityKey =
+                    apiResponse.getContent().get(0).getSecurityKey();
+
+            JasperReport jasperReport =
+                    getJasperReport("SeedBonus225.jrxml");
+
+            JRDataSource dataSource =
+                    getDataSourceForBonus225(requestDto);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = securityKey + ".pdf";
+
+            // 🔥 Try S3 Upload separately
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
+
+            // 🔥 Always return PDF to browser
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)   // inline opens in browser
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+
+            logger.error("Error generating sanction order", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate sanction order");
+        }
+    }
 
         @PostMapping("/get-BonusPM")
     public ResponseEntity<?> getBonusPM(@RequestBody CheckInspectionStatusRequest requestDto)
@@ -1599,7 +1664,8 @@ public class ReportsController {
             String securityKey =
                     apiResponse.getContent().get(0).getSecurityKey();
 
-            JasperReport jasperReport = getJasperReport("SeedIncentive120.jrxml");
+            JasperReport jasperReport =
+                    getJasperReport("SeedIncentive120.jrxml");
 
             JRDataSource dataSource =
                     getDataSourceForIncentive120(requestDto);
@@ -1610,25 +1676,26 @@ public class ReportsController {
             JasperPrint jasperPrint =
                     JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-
-            byte[] pdfBytes = pdfStream.toByteArray();
             String fileName = securityKey + ".pdf";
 
-//            apiService.uploadSanctionToDbt(pdfBytes, fileName);
+            // 🔥 Try S3 Upload separately
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
-//            return ResponseEntity.ok("Incentive Generated & Uploaded Successfully");
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
-
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            // 🔥 Always return PDF to browser
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
             logger.error("Error generating Incentive", ex);
@@ -1656,7 +1723,8 @@ public class ReportsController {
             String securityKey =
                     apiResponse.getContent().get(0).getSecurityKey();
 
-            JasperReport jasperReport = getJasperReport("SeedIncentive120BV.jrxml");
+            JasperReport jasperReport =
+                    getJasperReport("SeedIncentive120BV.jrxml");
 
             JRDataSource dataSource =
                     getDataSourceForIncentive120BV(requestDto);
@@ -1667,25 +1735,26 @@ public class ReportsController {
             JasperPrint jasperPrint =
                     JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-
-            byte[] pdfBytes = pdfStream.toByteArray();
             String fileName = securityKey + ".pdf";
 
-//            apiService.uploadSanctionToDbt(pdfBytes, fileName);
+            // 🔥 Try S3 Upload separately
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
-//            return ResponseEntity.ok("IncentiveBV Generated & Uploaded Successfully");
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
-
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            // 🔥 Always return PDF to browser
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
             logger.error("Error generating IncentiveBV", ex);
@@ -1914,62 +1983,64 @@ public class ReportsController {
 
     }
 
-@PostMapping("/get-MscSeedChawki")
-public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequest requestDto)
-        throws JsonProcessingException, FileNotFoundException, JRException {
+    @PostMapping("/get-MscSeedChawki")
+    public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
 
-    try {
+        try {
 
-        logger.info("enter to get Msc Seed Chawki");
+            logger.info("enter to get Msc Seed Chawki");
 
-        SanctionOrder apiResponse =
-                apiService.fetchSanctionSeedMarketDetails(requestDto);
+            SanctionOrder apiResponse =
+                    apiService.fetchSanctionSeedMarketDetails(requestDto);
 
-        if (apiResponse.getContent() == null ||
-                apiResponse.getContent().isEmpty()) {
-            throw new RuntimeException("No Data Found");
+            if (apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+
+            String securityKey =
+                    apiResponse.getContent().get(0).getSecurityKey();
+
+            JasperReport jasperReport =
+                    getJasperReport("mscseedchawki1500.jrxml");
+
+            JRDataSource dataSource =
+                    getDataSourceForMscSeedChawki(requestDto);
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = securityKey + ".pdf";
+
+            // 🔥 Try S3 Upload separately
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
+
+            // 🔥 Always return PDF to browser
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating Msc Seed Chawki", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Msc Seed Chawki");
         }
-
-        String securityKey =
-                apiResponse.getContent().get(0).getSecurityKey();
-
-        JasperReport jasperReport = getJasperReport("mscseedchawki1500.jrxml");
-
-        JRDataSource dataSource =
-                getDataSourceForMscSeedChawki(requestDto);
-
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("CollectionBeanParam", dataSource);
-
-        JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-        ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
-        JRPdfExporter pdfExporter = new JRPdfExporter();
-        pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-        pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-        pdfExporter.exportReport();
-
-        byte[] pdfBytes = pdfStream.toByteArray();
-        String fileName = securityKey + ".pdf";
-
-//        apiService.uploadSanctionToDbt(pdfBytes, fileName);
-
-//        return ResponseEntity.ok("Msc Seed Chawki Generated & Uploaded Successfully");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", securityKey + ".pdf");
-
-        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-
-    } catch (Exception ex) {
-        logger.error("Error generating Msc Seed Chawki", ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Failed to generate report");
     }
-}
 
     @PostMapping("/get-MscSeedChawki1000")
     public ResponseEntity<?> getMscSeedChawki1000(@RequestBody CheckInspectionStatusRequest requestDto)
@@ -1978,7 +2049,7 @@ public ResponseEntity<?> getMscSeedChawki(@RequestBody CheckInspectionStatusRequ
         try {
             logger.info("enter to get Msc Seed Chawki report");
 
-            JasperReport jasperReport = getJasperReport("mscseedchawki1000.jrxml");
+            JasperReport jasperReport = getJasperReport("Incentive30BV.jrxml");
 
             JRDataSource dataSource = getDataSourceForMscSeedChawki1000(requestDto);
 
