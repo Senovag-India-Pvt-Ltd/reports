@@ -388,6 +388,25 @@ public class ApiService {
         return objectMapper.readValue(responseBody, SanctionOrder.class);
     }
 
+    public SanctionOrder fetchSanctionCommercialMarketDetails(CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(responseBody, SanctionOrder.class);
+    }
+
     public SanctionOrder fetchSanctionSeedIncentiveBonus(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 

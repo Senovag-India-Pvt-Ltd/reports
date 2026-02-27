@@ -7700,7 +7700,7 @@ public class ReportsController {
 
     private JRDataSource getDataSourceAckTransport10(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
-        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+        AcknowledgementResponse apiResponse = apiService.fetchSanctionCommercialMarketDetails(requestDto);
 
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
@@ -10543,7 +10543,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForIncentive30(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+        SanctionOrder apiResponse = apiService.fetchSanctionCommercialMarketDetails(requestDto);
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
@@ -15860,7 +15860,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForMscSeedChawki1000(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+        SanctionOrder apiResponse = apiService.fetchSanctionCommercialMarketDetails(requestDto);
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
