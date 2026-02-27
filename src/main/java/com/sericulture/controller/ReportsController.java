@@ -1256,7 +1256,7 @@ public class ReportsController {
 
             // 🔹 Fetch API to get securityKey
             SanctionOrder apiResponse =
-                    apiService.fetchSanctionSeedMarketDetails(requestDto);
+                    apiService.fetchSanctionCommercialMarketDetails(requestDto);
 
             if (apiResponse.getContent() == null ||
                     apiResponse.getContent().isEmpty()) {
@@ -1311,44 +1311,68 @@ public class ReportsController {
     }
 
     @PostMapping("/get-PriceStabilizationIncentive")
-    public ResponseEntity<?> getIncentive30(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    public ResponseEntity<?> getIncentive30(
+            @RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to get Incentive 30");
-            logger.info("enter to get Incentive");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Incentive30BV.jrxml");
 
-            JRDataSource dataSource = getDataSourceForIncentive30(requestDto);
+            logger.info("enter to get Incentive30");
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
+            // 🔹 Fetch API to get securityKey
+            SanctionOrder apiResponse =
+                    apiService.fetchSanctionCommercialMarketDetails(requestDto);
+
+            if (apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+
+            String securityKey =
+                    apiResponse.getContent().get(0).getSecurityKey();
+
+            // 🔹 Load JRXML
+            JasperReport jasperReport =
+                    getJasperReport("Incentive30BV.jrxml");
+
+            // 🔹 Prepare datasource
+            JRDataSource dataSource =
+                    getDataSourceForIncentive30(requestDto);
+
+            Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", dataSource);
 
-            // 3. datasource "java object"
+            // 🔹 Fill report
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            // 🔥 Generate PDF ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            String fileName = securityKey + ".pdf";
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            // 🔥 Upload to S3 (do not block download)
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Incentive30 uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            // 🔥 Always return PDF inline
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-        }
 
+            logger.error("Error generating Incentive30", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Incentive30");
+        }
     }
 
 //    @PostMapping("/get-Bonus")
@@ -2067,39 +2091,67 @@ public class ReportsController {
     }
 
     @PostMapping("/get-MscSeedChawki1000")
-    public ResponseEntity<?> getMscSeedChawki1000(@RequestBody CheckInspectionStatusRequest requestDto)
+    public ResponseEntity<?> getMscSeedChawki1000(
+            @RequestBody CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
+
             logger.info("enter to get Msc Seed Chawki report");
 
-            JasperReport jasperReport = getJasperReport("ChawkiBV1000.jrxml");
+            // 🔹 Fetch API to get securityKey
+            SanctionOrder apiResponse =
+                    apiService.fetchSanctionCommercialMarketDetails(requestDto);
 
-            JRDataSource dataSource = getDataSourceForMscSeedChawki1000(requestDto);
+            if (apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+
+            String securityKey =
+                    apiResponse.getContent().get(0).getSecurityKey();
+
+            // 🔹 Load JRXML
+            JasperReport jasperReport =
+                    getJasperReport("ChawkiBV1000.jrxml");
+
+            // 🔹 Prepare datasource
+            JRDataSource dataSource =
+                    getDataSourceForMscSeedChawki1000(requestDto);
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", dataSource);
 
+            // 🔹 Fill report
             JasperPrint jasperPrint =
                     JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            // 🔥 Generate PDF ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "Msc_Seed_Chawki_Report.pdf");
+            String fileName = securityKey + ".pdf";
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            // 🔥 Upload to S3 (do not block download)
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("MscSeedChawki1000 uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            // 🔥 Always return PDF inline
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            logger.error("Error generating Msc Seed Chawki report", ex);
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8),
-                    HttpStatus.OK);
+
+            logger.error("Error generating MscSeedChawki1000", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate MscSeedChawki1000");
         }
     }
 
@@ -7643,7 +7695,7 @@ public class ReportsController {
 //                    "   ಸಾಕಾಣಿಕೆ    ವೆಚ್ಚದ     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರ ಮದಡಿ     " +apiResponse.getContent().get(0).getCocoonsWeight()+ "    ಕೆ.ಜಿ    "+raceNameWithoutFirstWord+"    ರೇಷ್ಮೆ    ಮೊಟ್ಟೆ ಗಳಿಗೆ ,  ಪ್ರ ತಿ  100   ಮೊಟ್ಟೆ ಗಳಿಗೆ   ಸಹಾಯಧನ   ರೂ. "+Math.round(apiResponse.getContent().get(0).getUnitCost())+ "/-  ರಂತೆ   ಒಟ್ಟು     ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+
 //                    " /-  ಗಳ    ಸಹಾಯಧನ   ಪಡೆಯಲು     ಅರ್ಜಿ    ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getArn()+
 //                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿ ತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆ ಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು   ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,\n"+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+",\n"+
                     "ತಾಂತ್ರಿ ಕ   ಸೇವಾ    ಕೇಂದ್ರ,\n"+
                     apiResponse.getContent().get(0).getTscName());
 
@@ -7835,7 +7887,7 @@ public class ReportsController {
 //                    "   ಸಾಕಾಣಿಕೆ    ವೆಚ್ಚದ     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರ ಮದಡಿ     " +apiResponse.getContent().get(0).getCocoonsWeight()+ "    ಕೆ.ಜಿ    "+raceNameWithoutFirstWord+"    ರೇಷ್ಮೆ    ಮೊಟ್ಟೆ ಗಳಿಗೆ ,  ಪ್ರ ತಿ  100   ಮೊಟ್ಟೆ ಗಳಿಗೆ   ಸಹಾಯಧನ   ರೂ. "+Math.round(apiResponse.getContent().get(0).getUnitCost())+ "/-  ರಂತೆ   ಒಟ್ಟು     ರೂ.  "+Math.round(apiResponse.getContent().get(0).getSchemeAmount())+
 //                    " /-  ಗಳ    ಸಹಾಯಧನ   ಪಡೆಯಲು     ಅರ್ಜಿ    ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ    ಸಂಖ್ಯೆ : " + apiResponse.getContent().get(0).getArn()+
 //                    "   ಆಗಿರುತ್ತದೆ.    ಅರ್ಜಿಯ     ಸ್ಥಿ ತಿಯನ್ನು     ತಿಳಿಯಲು    ARN   ಸಂಖ್ಯೆ ಯನ್ನು    ಮುಂದಿನ    ವಿಚಾರಣೆಗೆ    ಉಪಯೋಗಿಸತಕದ್ದು .");
-            response.setHeader1("ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು \n"+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n"+
                     "ತಾಂತ್ರಿ ಕ   ಸೇವಾ    ಕೇಂದ್ರ,\n"+
                     apiResponse.getContent().get(0).getTscName());
 
@@ -15975,7 +16027,8 @@ public class ReportsController {
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
                     "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    "+apiResponse.getContent().get(0).getSeoTscName() + "   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "3. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ,    "+apiResponse.getContent().get(0).getSeoTscName() + "   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ \n"+
+                    "    ದಿನಾಂಕ : "+proposalDate+".\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ಬೆಂಗಳೂರು    ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
@@ -16030,7 +16083,8 @@ public class ReportsController {
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
                     "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. "+apiResponse.getContent().get(0).getAdsDesignationName() + ",   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "3. "+apiResponse.getContent().get(0).getAdsDesignationName() + ",   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ \n"+
+                    "      ದಿನಾಂಕ : "+proposalDate+".\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
