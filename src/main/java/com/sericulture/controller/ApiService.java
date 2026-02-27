@@ -350,9 +350,9 @@ public class ApiService {
 
     public AcknowledgementResponse fetchDataFromSeedMarket(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+//        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -372,9 +372,9 @@ public class ApiService {
     public SanctionOrder fetchSanctionSeedMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSanctionOrderForSeedMarketDetailsWithDesignation";
+//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSanctionOrderForSeedMarketDetailsWithDesignation";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getSanctionOrderForSeedMarketDetailsWithDesignation";
+        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getSanctionOrderForSeedMarketDetailsWithDesignation";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -391,9 +391,9 @@ public class ApiService {
     public SanctionOrder fetchSanctionCommercialMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
+//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
+        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getCommercialMarketSanctionDetails";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -410,9 +410,9 @@ public class ApiService {
     public SanctionOrder fetchSanctionSeedIncentiveBonus(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSeedMarketIncentiveBonusSanctionDetails";
+//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSeedMarketIncentiveBonusSanctionDetails";
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getSeedMarketIncentiveBonusSanctionDetails";
+        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getSeedMarketIncentiveBonusSanctionDetails";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

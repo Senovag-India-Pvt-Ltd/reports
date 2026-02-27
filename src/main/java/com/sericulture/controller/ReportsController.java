@@ -1246,44 +1246,68 @@ public class ReportsController {
 
 
     @PostMapping("/get-TransportSubsidy")
-    public ResponseEntity<?> getTransportation10(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    public ResponseEntity<?> getTransportation10(
+            @RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to get Transportation 10");
-            logger.info("enter to get Incentive");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Transport10.jrxml");
 
-            JRDataSource dataSource = getDataSourceForTrasportation10(requestDto);
+            logger.info("enter to get TransportSubsidy");
 
-            // 2. parameters "empty"
-            Map<String, Object> parameters = new HashMap<String, Object>();
+            // 🔹 Fetch API to get securityKey
+            SanctionOrder apiResponse =
+                    apiService.fetchSanctionSeedMarketDetails(requestDto);
+
+            if (apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+
+            String securityKey =
+                    apiResponse.getContent().get(0).getSecurityKey();
+
+            // 🔹 Load JRXML
+            JasperReport jasperReport =
+                    getJasperReport("Transport10.jrxml");
+
+            // 🔹 Prepare datasource
+            JRDataSource dataSource =
+                    getDataSourceForTrasportation10(requestDto);
+
+            Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", dataSource);
 
-            // 3. datasource "java object"
+            // 🔹 Fill report
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            // 🔥 Generate PDF bytes ONLY ONCE
+            byte[] pdfBytes =
+                    JasperExportManager.exportReportToPdf(jasperPrint);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            String fileName = securityKey + ".pdf";
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            // 🔥 Try S3 Upload (Do not block download if fails)
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("TransportSubsidy uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, but continuing PDF download", uploadEx);
+            }
 
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            // 🔥 Always return PDF to browser
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-        }
 
+            logger.error("Error generating TransportSubsidy", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate TransportSubsidy");
+        }
     }
 
     @PostMapping("/get-PriceStabilizationIncentive")
@@ -7700,7 +7724,7 @@ public class ReportsController {
 
     private JRDataSource getDataSourceAckTransport10(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
-        AcknowledgementResponse apiResponse = apiService.fetchSanctionCommercialMarketDetails(requestDto);
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
 
         List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
         AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
@@ -10197,7 +10221,7 @@ public class ReportsController {
     private JRBeanCollectionDataSource getDataSourceForTrasportation10(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchSanctionSeedIncentiveBonus(requestDto);
+        SanctionOrder apiResponse = apiService.fetchSanctionCommercialMarketDetails(requestDto);
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
