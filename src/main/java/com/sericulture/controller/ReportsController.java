@@ -10392,7 +10392,7 @@ public class ReportsController {
 
                     "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ      ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾನಗೊಳಿಸಲು    ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.     "+
                     "ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ      ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು     ತಾಂತ್ರಿ ಕ    ಸೇವಾ    ಕೇಂದ್ರ    ,    "+ apiResponse.getContent().get(0).getSeoTscName()+"      ಇವರು    ತಾಂತ್ರಿ ಕ     "+
-                    "ಸೇವಾ   ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getSeoTscName()+"     ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು    ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ     ಅಗತ್ಯ     "+
+                    "ಸೇವಾ   ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getSeoTscName()+"     ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು    ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ     ಅಗತ್ಯ     "+
                     "ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ     ಮಂಜೂರಾತಿಗಾಗಿ    ಪ್ರಸ್ತಾವನೆ   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿವೆ. ");
 
             response.setHeader6("                 ಉಲ್ಲೇಖ (4) ರ     ಆರ್ಥಿಕ    ಅಧಿಕಾರ     ಪ್ರ ತ್ಯಾ ಯೋಜನೆ    ಅನ್ವಯ    ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ     "+
@@ -10432,11 +10432,10 @@ public class ReportsController {
                     "ಮಾರಾಟ    ಮಾಡಲು    ಸಾಗಾಣಿಕೆ    ಮಾಡುವ    ಪ್ರ ತಿ    ಕೆ.ಜಿ   ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ     ಮಂಜೂರಾತಿ   ನೀಡುವ    ಕುರಿತು.");
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
-                    "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್ ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ಇವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
-                    "      "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,     "  +apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName() +"\n    "+
-                    "      ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+".\n"+
+                    "     "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
+                    "2. "+apiResponse.getContent().get(0).getAdsDesignationName() +",   ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್ ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ಇವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "     "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
+                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,     "  +apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName() +"    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+proposalDate+".\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
 
@@ -10450,7 +10449,7 @@ public class ReportsController {
                     "ಉಲ್ಲೇಖ (3) ರಂತೆ     ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,     "  +apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    " +
                     "ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName() +"  ,   ಇವರು    ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು    ತಾಂತ್ರಿ ಕ    ಸೇವಾ    ಕೇಂದ್ರ     "
                     + apiResponse.getContent().get(0).getSeoTscName()+"      ಇವರು    ತಾಂತ್ರಿ ಕ     ಸೇವಾ   ಕೇಂದ್ರ     "+ apiResponse.getContent().get(0).getSeoTscName()+"" +
-                    "     ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಸಲ್ಲಿಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ    ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ     ಮಂಜೂರಾತಿಗಾಗಿ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ್ದು    ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿದೆ; ");
+                    "     ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಸಲ್ಲಿ ಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು    ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ    ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳೊಂದಿಗೆ     ಸಾಗಾಣಿಕೆ    ವೆಚ್ಚ     ಮಂಜೂರಾತಿಗಾಗಿ    ಪ್ರಸ್ತಾವನೆ    ಸಲ್ಲಿಸಿದ್ದು    ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿದೆ; ");
 
             response.setHeader6("                 ಉಲ್ಲೇಖ (4) ರ     ಆರ್ಥಿಕ    ಅಧಿಕಾರ     ಪ್ರ ತ್ಯಾ ಯೋಜನೆ    ಅನ್ವಯ    ಮೇಲ್ಕಂಡ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು     ಸರ್ಕಾರಿ     "+
                     "ರೇಷ್ಮೆ    ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ಗಳಲ್ಲಿ     ವಹಿವಾಟು    ಮಾಡಿದ    ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ಗೂಡುಗಳಿಗೆ    ಸಾಗಾಣಿಕಾ    ವೆಚ್ಚ ವನ್ನು    ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದ್ದು     "+
@@ -10604,7 +10603,10 @@ public class ReportsController {
                     sanctionOrderResponse.setLotNo("");
                 }
                 if (sanctionOrderResponse.getReceiptDate() == null) {
-                    sanctionOrderResponse.setReceiptDate("");
+                    sanctionOrderResponse.setReceiptDate(null); // or leave it as is
+                }
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
                 }
 
                 if (sanctionOrderResponse.getSubsidyAmount() == null) {
@@ -10749,7 +10751,7 @@ public class ReportsController {
                     "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ     ರೇಷ್ಮೆ     " +
                     "ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು    ತಾಂತ್ರಿ ಕ   ಸೇವಾ    ಕೇಂದ್ರ ,    "+ apiResponse.getContent().get(0).getSeoTscName() +"     ಇವರು    ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ      "+
                              apiResponse.getContent().get(0).getSeoTscName() +  "  ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     "+
-                    "ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
+                    "ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
                     "ಪ್ರಸ್ತಾ ವನೆ    ಸಲ್ಲಿ ಸಿದ್ದು    ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ; ");
 
             response.setHeader6("                 ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ      ಮೇಲ್ಕಂಡ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ದ್ವಿ ತಳಿ     ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ      ಪ್ರೋತ್ಸಾಹಧನವನ್ನು       ಮಂಜೂರು     ಮಾಡಬಹುದಾಗಿದ್ದು       "+
@@ -10789,10 +10791,9 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಅಭಿವೃ ದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "2. "+apiResponse.getContent().get(0).getAdsDesignationName() + " ,   ಜಿಲ್ಲಾ     ಪಂಚಾಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,     "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ  \n" +
-                    "      ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,     "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+proposalDate+"\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
@@ -10805,7 +10806,7 @@ public class ReportsController {
                     "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮವನ್ನು    ಅನುಷ್ಟಾ ನ ಗೊಳಿಸಲು   ಅನುದಾನ   ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿರುತ್ತ ದೆ.    ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ  ,     "+
                     "ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು,   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"" +
                     "    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+ "   ಇವರು     ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ    "+apiResponse.getContent().get(0).getSeoTscName() +"  " +
-                    " ವ್ಯಾಪ್ತಿ ಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
+                    " ವ್ಯಾಪ್ತಿ ಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಗೂಡುಗಳಿಗೆ     ಪ್ರೋತ್ಸಾಹಧನ  ಮಂಜೂರಾತಿಗಾಗಿ      "+
                     "ಪ್ರಸ್ತಾ ವನೆ    ಸಲ್ಲಿ ಸಿದ್ದು    ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿದೆ; ");
 
             response.setHeader6("                 ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      ಪರಿಶೀಲಿಸಲಾಗಿ      ಮೇಲ್ಕಂಡ      ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರು     ದ್ವಿ ತಳಿ     ರೇಷ್ಮೆ     ಗೂಡುಗಳಿಗೆ      ಪ್ರೋತ್ಸಾಹಧನವನ್ನು       ಮಂಜೂರು     ಮಾಡಬಹುದಾಗಿದ್ದು       "+
@@ -10906,7 +10907,7 @@ public class ReportsController {
                     sanctionOrderResponse.setDate("");
                 }
                 if (sanctionOrderResponse.getReceiptDate() == null) {
-                    sanctionOrderResponse.setReceiptDate("");
+                    sanctionOrderResponse.setReceiptDate(null); // or leave it as is
                 }
 
                 if (sanctionOrderResponse.getAverageYield() == null) {
@@ -10914,6 +10915,10 @@ public class ReportsController {
                 }
                 if (sanctionOrderResponse.getSchemeAmount() == null) {
                     sanctionOrderResponse.setSchemeAmount(0f);
+                }
+
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
                 }
 
 
@@ -12414,7 +12419,7 @@ public class ReportsController {
                         + apiResponse.getContent().get(0).getSchemeAmount()
                         + "/-    ಗಳನ್ನು     ಮಂಜೂರು    ಮಾಡುವಂತೆ    ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,    ತಾಂತ್ರಿ ಕ    ಸೇವಾ    ಕೇಂದ್ರ  (ರೀ),   "
                         + apiResponse.getContent().get(0).getLoggedinUserTscName()
-                        + "    ಇವರು    ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯು    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂ.ನಂ.ಚ.  "
+                        + "    ಇವರು    ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾವನೆಯು    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    ಗೂ.ನಂ.ಚ.  "
                         + apiResponse.getContent().get(0).getLoggedinUserTalukName()
                         + "    ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,    ರೇ.ಗೂ.ಮಾ.    "
                         + apiResponse.getContent().get(0).getLoggedinUserDistrictName()
@@ -15018,7 +15023,7 @@ public class ReportsController {
                             + "ಸಲಕರಣೆಯಾದ     "
                             + equipmentName
                             + "     ಖರೀದಿಸಲು     ಹಾಗೂ     ಅಳವಡಿಕೆಗೆ     ಇಲಾಖೆಯ     ನಿಗದಿಪಡಿಸಿರುವ     ಘಟಕದರದ\n"
-                            + "ಅನುಸಾರ     ಸಹಾಯಧನ     ಪಡೆಯಲು     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುವುದು.\n"
+                            + "ಅನುಸಾರ     ಸಹಾಯಧನ     ಪಡೆಯಲು     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿ ಸಿರುವುದು.\n"
                             + "              ಸದರಿ     ಸಲಕರಣೆಯನ್ನು     ರೇಷ್ಮೆ     ಇಲಾಖೆಯಿಂದ     ಅಧಿಕೃತವಾಗಿ     ಗುರುತಿಸಲ್ಪಟ್ಟ\n"
                             + "ರೇಷ್ಮೆ     ಹುಳುಸಾಕಾಣಿಕೆ     ಸಲಕರಣೆ     ಸಂಸ್ಥೆಯಾದ     ಮೆ||     "
                             + vendorName
@@ -15041,7 +15046,7 @@ public class ReportsController {
                             + "     ಇವರಿಂದ     ಮೇಲ್ಕಾಣಿಸಿದ     ಯೋಜನೆಯ     ಅಡಿಯಲ್ಲಿ     ಸಲಕರಣೆ\n"
                             + "ಖರೀದಿಗಾಗಿ     ARN     ಸಂಖ್ಯೆ     "
                             + arn
-                            + "     ರಂತೆ     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿಸಿರುವುದು     ದಾಖಲಾಗಿದೆ."
+                            + "     ರಂತೆ     ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿ ಸಿರುವುದು     ದಾಖಲಾಗಿದೆ."
             );
 
             // Signature block – DDS (ZP)
@@ -15289,7 +15294,7 @@ public class ReportsController {
                         " ರಂದು ಶ್ರೀ " + farmerName + " ಬಿನ್ " + fatherNameKan + " ರವರು " +
                         districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + farmerVillage +
                         " ಗ್ರಾ ಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ ಅಮ್ಮ ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿ ತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರದ " +
-                        "ಹಿಪ್ಪುನೇರಳೇ ಚಾಕಿ ತೋಟ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ಹಾಗೂ ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃಡೀಕರಿಸಿ " +
+                        "ಹಿಪ್ಪುನೇರಳೇ ಚಾಕಿ ತೋಟ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ಹಾಗೂ ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃ ಡೀಕರಿಸಿ " +
                         "ಉಲ್ಲೇಖ (4)ರ ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಸ್ಥಾಪನೆ/ ನಿರ್ವಹಣೆ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಸಲಕರಣೆ " +
                         "ಖರೀದಿಗೆ ಶೇ. " + (centralSharePercentage + stateSharePercentage) + " ರಷ್ಟು ಸಹಾಯಧನದ ಒಟ್ಟು ಮೊತ್ತ ರೂ." +
                         totalSubsidyAmount + "/- (ರೂ. " + totalSubsidyWords +
@@ -15378,7 +15383,7 @@ public class ReportsController {
                         + districtName + " ಜಿಲ್ಲೆಯ " + talukName + " ತಾಲ್ಲೂಕಿನ " + farmerVillage
                         + " ಗ್ರಾ ಮದಲ್ಲಿ ಹೊಸದಾಗಿ ಸ್ಥಾಪಿಸಿರುವ " + Util.objectToString(r.getCrcName())
                         + " ನೊಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿ ತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರದ ಹಿಪ್ಪುನೇರಳೆ ಚಾಕಿ ತೋಟ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ಹಾಗೂ "
-                        + "ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃಡೀಕರಿಸಿ ಉಲ್ಲೇಖ (4)ರ ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ "
+                        + "ಸಲಕರಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಪರಿವೀಕ್ಷಿಸಿ ಮತ್ತು ದೃ ಡೀಕರಿಸಿ ಉಲ್ಲೇಖ (4)ರ ಪ್ರಸ್ತಾವನೆಯಲ್ಲಿ ಹಿಪ್ಪುನೇರಳೆ ತೋಟ "
                         + "ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ, ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮತ್ತು ಸಲಕರಣೆ ಖರೀದಿಗೆ ಶೇ 75/90 ರಷ್ಟು ಸಹಾಯಧನದ ಒಟ್ಟು "
                         + "ಮೊತ್ತ ರೂ." + totalSubsidyAmount + "/-ಗಳನ್ನು ಮಂಜೂರು ಮಾಡಲು ಶಿಫಾರಸ್ಸು ಮಾಡಿರುತ್ತಾರೆ. ಉಲ್ಲೇಖ(2)ರ ರೇಷ್ಮೆ "
                         + "ನಿರ್ದೇಶನಾಲಯದ ಸುತ್ತೋಲೆಯಲ್ಲಿ ನೋಂದಾಯಿತ ಖಾಸಗಿ ದ್ವಿ ತಳಿ ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರ ಸ್ಥಾಪನೆಗೆ ನಿಗದಿಪಡಿಸಿರುವ "
@@ -15776,7 +15781,7 @@ public class ReportsController {
                     "    ಪ್ರ ತಿ      100      ಶುದ್ದ     ಮೈ ಸೂರು   ತಳಿ    ಮೊಟ್ಟೆಗಳ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು       ವೆಚ್ಚ      ರೂ."+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/- ಗಳಿಗೆ   " +
                     "  ಶೇ.50 ರಂತೆ    ರೂ."+ Math.round(apiResponse.getContent().get(0).getSubsidyAmount()) +"/- ಗಳನ್ನು      ಸಹಾಯಧನವಾಗಿ    ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ    ಅನುಷ್ಟಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ      ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು      ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n" +
                     "                 ಉಲ್ಲೇಖ (2)ರಲ್ಲಿ       ಸದರಿ      ಕಾರ್ಯಕ್ರ ಮ     ಅನುಷ್ಟಾನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.     ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ      ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿ ಕ     ಸೇವಾ    ಕೇಂದ್ರ    ,   " +
-                    " "+apiResponse.getContent().get(0).getLoggedinUserTscName()+"     ಇವರು     ಸಲ್ಲಿಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      "+
+                    " "+apiResponse.getContent().get(0).getLoggedinUserTscName()+"     ಇವರು     ಸಲ್ಲಿ ಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      "+
                     "   ಪರಿಶೀಲಿಸಲಾಗಿ     ನೋಂದಾಯಿತ     ಶುದ್ದ     ಮೈ ಸೂರು   ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪಡೆದ " +
                     "  ಚಾಕಿ   ಹುಳುಗಳಿಗೆ   ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ವೆಚ್ಚದ    ಸಹಾಯಧನಕ್ಕಾಗಿ   ಅರ್ಹರಿರುವ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿವೆ:");
 
@@ -15816,7 +15821,7 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ    ನಿರ್ದೇಶಕರು,   ಮೈ ಸೂರು   ಬಿತ್ತ ನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  : \n" +
+                    "2. "+apiResponse.getContent().get(0).getDesignationName() + " ,   ಮೈ ಸೂರು   ಬಿತ್ತ ನೆ   ವಲಯ,   "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  : \n" +
                     "    "+apiResponse.getContent().get(0).getSReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
                     "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು,    , " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "   ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+proposalDate+"\n" +
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
@@ -15825,8 +15830,8 @@ public class ReportsController {
             response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"   ಯೋಜನೆ  (  "+ apiResponse.getContent().get(0).getScCategoryName()+ " )  ಯಡಿ     "+
                     "    ಪ್ರ ತಿ      100      ಶುದ್ದ     ಮೈ ಸೂರು   ತಳಿ    ಮೊಟ್ಟೆಗಳ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆಗೆ    ತಗಲಬಹುದಾದ    ಒಟ್ಟು       ವೆಚ್ಚ      ರೂ."+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/- ಗಳಿಗೆ   " +
                     "  ಶೇ.50 ರಂತೆ    ರೂ."+ Math.round(apiResponse.getContent().get(0).getSubsidyAmount()) +"/- ಗಳನ್ನು      ಸಹಾಯಧನವಾಗಿ    ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ    ಅನುಷ್ಟಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ (1)ರಲ್ಲಿ      ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು      ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n" +
-                    "                 ಉಲ್ಲೇಖ (2)ರಲ್ಲಿ       ಸದರಿ      ಕಾರ್ಯಕ್ರ ಮ     ಅನುಷ್ಟಾನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.     ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ      "+apiResponse.getContent().get(0).getDesignationName() + ",     " +
-                    apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ಇವರು     ಸಲ್ಲಿಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      "+
+                    "                 ಉಲ್ಲೇಖ (2)ರಲ್ಲಿ       ಸದರಿ      ಕಾರ್ಯಕ್ರ ಮ     ಅನುಷ್ಟಾನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆ     ಮಾಡಲಾಗಿರುತ್ತದೆ.     ಉಲ್ಲೇಖ (3)ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಸಹಾಯಕ      ನಿರ್ದೇಶಕರು,     " +
+                    apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ವಿಭಾಗ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() + "    ಇವರು     ಸಲ್ಲಿ ಸಿರುವ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು      "+
                     "    ಪರಿಶೀಲಿಸಲಾಗಿ      ನೋಂದಾಯಿತ     ಶುದ್ದ     ಮೈ ಸೂರು   ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರ ಗಳಿಂದ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪಡೆದ " +
                     "    ಚಾಕಿ   ಹುಳುಗಳಿಗೆ   ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ವೆಚ್ಚದ    ಸಹಾಯಧನಕ್ಕಾಗಿ   ಅರ್ಹರಿರುವ    ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿವೆ:");
 
@@ -15901,6 +15906,9 @@ public class ReportsController {
                 }
                 if (sanctionOrderResponse.getFatherNameKan() == null) {
                     sanctionOrderResponse.setFatherNameKan("");
+                }
+                if (sanctionOrderResponse.getExternalUserName() == null) {
+                    sanctionOrderResponse.setExternalUserName("");
                 }
                 if (sanctionOrderResponse.getCrcName() == null) {
                     sanctionOrderResponse.setCrcName("");
@@ -16086,7 +16094,7 @@ public class ReportsController {
                     "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮ    ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗಿರುತ್ತದೆ.  ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ     "+
                     "ರೇಷ್ಮೆ   ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು/ಪ್ರ ಭಾರಾಧಿಕಾರಿಗಳು    ತಾಂತ್ರಿ ಕ     ಸೇವಾ     ಕೇಂದ್ರ  ,    "+ apiResponse.getContent().get(0).getSeoTscName() +"     ಇವರು    ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ      "+
                     apiResponse.getContent().get(0).getSeoTscName() +  "  ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     "+
-                    "ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ     ನೋಂದಾಯಿತ    ದ್ವಿ ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರಗಳಿಂದ     "+
+                    "ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ     ನೋಂದಾಯಿತ    ದ್ವಿ ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರಗಳಿಂದ     "+
                     "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪಡೆದ     ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ವೆಚ್ಚ ದ    ಸಹಾಯಧನ      "+
                     "ಮಂಜೂರು    ಮಾಡಲು   ಕೋರಿದ್ದು , ಅದರಂತೆ     ಅರ್ಹರಿರುವ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ    ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿವೆ: ");
 
@@ -16127,10 +16135,9 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಅಭಿವೃ ದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
-                    "2. ರೇಷ್ಮೆ    ಉಪ   ನಿರ್ದೇಶಕರು,   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
+                    "2. "+apiResponse.getContent().get(0).getAdsDesignationName() + ",   ಜಿಲ್ಲಾ     ಪಂಚಾ ಯತ್  ,    "+apiResponse.getContent().get(0).getAdsDistrictName() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು ,    "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ \n"+
-                    "      ದಿನಾಂಕ : "+proposalDate+".\n"+
+                    "3. ರೇಷ್ಮೆ    ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು ,    "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +"    ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ    ದಿನಾಂಕ : "+proposalDate+".\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
@@ -16143,7 +16150,7 @@ public class ReportsController {
                     "ರೇಷ್ಮೆ     ಸಹಾಯಕ     ನಿರ್ದೇಶಕರು ,   "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +" " +
                     "   ವಿಭಾಗ,    "+apiResponse.getContent().get(0).getAdsTalukName()+"   ಇವರು    ತಾಂತ್ರಿ ಕ   ಸೇವಾ   ಕೇಂದ್ರ      "+
                     apiResponse.getContent().get(0).getSeoTscName() +  "  ವ್ಯಾಪ್ತಿಯ    ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು     "+
-                    "ಸಲ್ಲಿಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃಡೀಕರಿಸಿ     ನೋಂದಾಯಿತ    ದ್ವಿ ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರಗಳಿಂದ     "+
+                    "ಸಲ್ಲಿ ಸಿರುವ    ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಿ    ದೃ ಡೀಕರಿಸಿ     ನೋಂದಾಯಿತ    ದ್ವಿ ತಳಿ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರಗಳಿಂದ     "+
                     "ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರು    ಪಡೆದ     ದ್ವಿ ತಳಿ    ಸಂಕರಣ    ರೇಷ್ಮೆ    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ವೆಚ್ಚ ದ    ಸಹಾಯಧನ      "+
                     "ಮಂಜೂರು    ಮಾಡಲು   ಕೋರಿದ್ದು , ಅದರಂತೆ     ಅರ್ಹರಿರುವ   ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ    ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿವೆ: ");
 
@@ -16242,7 +16249,7 @@ public class ReportsController {
                     sanctionOrderResponse.setCocoonsWeight(0f);
                 }
                 if (sanctionOrderResponse.getReceiptDate() == null) {
-                    sanctionOrderResponse.setReceiptDate("");
+                    sanctionOrderResponse.setReceiptDate(null); // or leave it as is
                 }
                 if (sanctionOrderResponse.getDate() == null) {
                     sanctionOrderResponse.setDate("");
@@ -16259,6 +16266,9 @@ public class ReportsController {
                 }
                 if (sanctionOrderResponse.getSchemeAmount() == null) {
                     sanctionOrderResponse.setSchemeAmount(0f);
+                }
+                if (sanctionOrderResponse.getChawkiPercentage() == null) {
+                    sanctionOrderResponse.setChawkiPercentage(0f);
                 }
 
 
@@ -16434,7 +16444,7 @@ public class ReportsController {
                         +"  ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-   ರಂತೆ    "+apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"'     ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ      ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    "
                         +"    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ.\n\n"
                         + "                 ಉಲ್ಲೇಖ     (5)     ರಂತೆ     ರೇಷ್ಮೆ     ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು,     ತಾಂತ್ರಿ ಕ     ಸೇವಾ     ಕೇಂದ್ರ    ,     " + apiResponse.getContent().get(0).getLoggedinUserTscName() + "  ಇವರು     ಪರಿಶೀಲಿಸಿ    "
-                        + "    ದೃಢೀಕರಿಸಿ     ಸಲ್ಲಿಸಿರುವ     ಎಲ್ಲಾ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳನ್ನು     ಒಳಗೊಂಡ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದು,     ವಿವರಗಳು "
+                        + "    ದೃಢೀಕರಿಸಿ     ಸಲ್ಲಿ ಸಿರುವ     ಎಲ್ಲಾ     ಅಗತ್ಯ     ದಾಖಲಾತಿಗಳನ್ನು     ಒಳಗೊಂಡ     ಪ್ರಸ್ತಾ ವನೆಯನ್ನು     ಸಲ್ಲಿಸಿದ್ದು,     ವಿವರಗಳು "
                         +"   ಈ     ಕೆಳಕಂಡಂತಿವೆ. " );
 
 

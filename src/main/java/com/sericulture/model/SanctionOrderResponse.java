@@ -353,7 +353,8 @@ private String totalIncentiveAmountInWords;
     private String ddDistrictName;
     private Integer isAssigned;
 
-    private String receiptDate;
+    private Date receiptDate;
+    private String externalUserName;
 
 
 
