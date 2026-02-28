@@ -351,6 +351,9 @@ private String totalIncentiveAmountInWords;
 
     private String ddDesignationName;
     private String ddDistrictName;
+    private Integer isAssigned;
+
+    private String receiptDate;
 
 
 
