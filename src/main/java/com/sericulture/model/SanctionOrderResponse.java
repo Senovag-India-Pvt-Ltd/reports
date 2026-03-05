@@ -355,6 +355,13 @@ private String totalIncentiveAmountInWords;
 
     private Date receiptDate;
     private String externalUserName;
+    private String monthlyLimit;
+    private String assignedByUserDesignation;
+    private String assignedByUserDesignationForSanctionOrder;
+    private String assignedByUserProposalDate;
+
+    private String drawingOfficerDesignation;
+    private String drawingOfficerDesignationForSanctionOrder;
 
 
 

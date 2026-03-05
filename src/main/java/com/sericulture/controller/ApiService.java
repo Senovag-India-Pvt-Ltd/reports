@@ -522,8 +522,8 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSilkIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
-        String finalapiurl = dbtApiUrl +"service/sanctionOrderSilkIncentive";
-//        String finalapiurl = "http://localhost:8013/dbt/v1/service/sanctionOrderSilkIncentive";
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSilkIncentiveSanctionDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/getSilkIncentiveSanctionDetails";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
