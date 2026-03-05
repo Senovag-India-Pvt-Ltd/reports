@@ -632,10 +632,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanction(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "service/sanctionOrderRH";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getFarmerSanctionForRHDetails";
 
 
-        String finalapiurl = dbtApiUrl +"service/sanctionOrderRH";
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getFarmerSanctionForRHDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
