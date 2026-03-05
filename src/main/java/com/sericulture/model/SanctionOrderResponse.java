@@ -363,6 +363,14 @@ private String totalIncentiveAmountInWords;
     private String drawingOfficerDesignation;
     private String drawingOfficerDesignationForSanctionOrder;
 
+    private String length;
+    private String breadth;
+    private String height;
+
+    private String calculatedSqft;
+
+    private String modifiedDate;
+
 
 
 }
