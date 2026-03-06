@@ -78,6 +78,39 @@ public class WorkOrderGenerationReportResponse {
     private String landVillage;
     private String kaneshNo;
 
+    private String length;
+    private String breadth;
+    private String height;
+
+    private String calculatedSqft;
+
+    private String modifiedDate;
+    private String categoryNameInKannada;
+    private String landVillageNameInKannada;
+    private String  villageNameInKannada;
+    private String  districtNameInKannada;
+    private String  talukNameInKannada;
+    private String  hobliNameInKannada;
+
+    private String createdByAdDesignationName;
+    private String createdByAdDesignationNameForSanctionOrder;
+
+    private String createdByDesignation;
+    private String createdByDesignationForSanctionOrder;
+
+
+    private String designationNameInKannada;
+    private String designationNameInKannadaForSanctionOrder;
+
+    private String previousStepDesignation;
+
+    private String shareInPercentage;
+
+    private String previousStepDesignationForSanctionOrder;
+    private String selectionLetterDate;
+
+
+
 
 
 }
