@@ -12577,7 +12577,7 @@ public class ReportsController {
         }
 
         if (isAssigned == 0) {
-        response.setHeader(apiResponse.getContent().get(0).getAssignedByUserDesignation() + " ,     " + apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "    ರವರ    ಕಛೇರಿ   ನಡವಳಿಗಳು ");
+        response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + " ,     " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "    ರವರ    ಕಛೇರಿ   ನಡವಳಿಗಳು ");
 
         response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "   ನೇ     ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    " + apiResponse.getContent().get(0).getCategoryNameInKannada() +
                 "     ಅಡಿ      ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು     ಉತ್ಪಾ ದಿಸಿದ     ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ      ಪ್ರೋ ತ್ಸಾ ಹಧನ      ಮಂಜೂರು   ಮಾಡುವ    ಕುರಿತು.");
@@ -12601,7 +12601,7 @@ public class ReportsController {
                 "ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ      "+ apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +
                 "    ಇವರು    ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು     ಉತ್ಪಾ ದಿಸಿದ     ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ      ಪ್ರೋ ತ್ಸಾ ಹಧನ    ಮಂಜೂರು     ಮಾಡಲು     ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು     ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.    ವಿವರಗಳು     ಕೆಳಕಂಡಂತಿದೆ.");
 
-        response.setHeader6("              ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂ ಡ    ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    ಇಟಾಲಿಯನ್     ಮಾದರಿ     ಕಾಟೇಜ್    ಬೇಸಿನ್    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      " +
+        response.setHeader6("              ಪ್ರಸ್ತಾವನೆಯನ್ನು     ಪರಿಶೀಲಿಸಲಾಗಿ    ಮೇಲ್ಕಂ ಡ    ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    " +
                 "ಉತ್ಪಾ ದಿಸಿದ      "+apiResponse.getContent().get(0).getRaceName()+"      ಕಚ್ಚಾ ರೇಷ್ಮೆ ಯನ್ನು      ರೇಷ್ಮೆ   ವಿನಿಮಯ     ಕೇಂದ್ರ ದಲ್ಲಿ      ಮಾರಾಟಮಾಡಿದ    17ಜೆ    ಬಿಲ್ಲು ಗಳನ್ನು     ಹಾಗೂ     ಅಗತ್ಯ      ದಾಖಲಾತಿಗಳೊಂದಿಗೆ      ಪ್ರೋ ತ್ಸಾ ಹಧನ      " +
                 "ಮಂಜೂರಾತಿಗಾಗಿ    ಸಲ್ಲಿ ಸಿರುತ್ತಾ ರೆ.    ಅದರಂತೆ     ಉಲ್ಲೇಖ (3)ರ     ಆರ್ಥಿಕ     ಅಧಿಕಾರ    ಪ್ರ ತ್ಯಾ ಯೋಜನೆ     ಅನ್ವ ಯ     ಈ    ಕೆಳಕಂಡಂತೆ    ಮಂಜೂರಾತಿ      ಆದೇಶವನ್ನು     ಹೊರಡಿಸಿದೆ.");
 
