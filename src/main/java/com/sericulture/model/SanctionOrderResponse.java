@@ -60,6 +60,7 @@ public class SanctionOrderResponse {
     private String lineItemComment;
     private Float cost;
     private String vendorName;
+    private String vendorAddress;
     private String vendorAccountNumber;
     private String vendorBankName;
     private String vendorBankIfsc;
