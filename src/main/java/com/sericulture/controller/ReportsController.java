@@ -13023,7 +13023,6 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
 
-        response.setHeader(apiResponse.getContent().get(0).getDesignationName() +" ,     " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ರವರ     ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
         response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getScCategoryName() + "  )  " +
                 "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
@@ -13187,17 +13186,16 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
 
-        response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,     " + apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "     ರವರ     ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
         response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )  " +
                 "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
 
-        response.setHeader3("     ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ (ರೀಲಿಂಗ್)  ವಿಜಯಪುರ    ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
                  apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
                 apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   "+ apiResponse.getContent().get(0).getReelingShedSqft() +"  ಚದರ    ಅಡಿ    "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್      ಶೆಡ್     ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ      ಪಡೆಯಲು    ಫಲಾನುಭವಿಯಾಗಿ     ಆಯ್ಕೆ ಯಾಗಿರುತ್ತೀ ರಿ.    "+
-                "ಸದರಿ    ಯೋಜನೆಯಡಿ    ಇಲಾಖೆಯಿಂದ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ "+ apiResponse.getContent().get(0).getShareInPercentage()
+                "ಸದರಿ    ಯೋಜನೆಯಡಿ    ಇಲಾಖೆಯಿಂದ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  50"
                 +"   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +" ಗಳಾಗಿರುತ್ತದೆ.   \n\n" +
-                "ಕಾರ್ಯಕ್ರಮವನ್ನು      ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ      ಅಗತ್ಯ       ದಾಖಲೆಗಳೊಂದಿಗೆ      ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿ ಸಬೇಕು.    ದಾಖಲೆಗಳ     ಹಾಗೂ    ಸ್ಥಳ    ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "ಕಾರ್ಯಕ್ರಮವನ್ನು      ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ      ಅಗತ್ಯ       ದಾಖಲೆಗಳೊಂದಿಗೆ      ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿ ಸಬೇಕು.    ದಾಖಲೆಗಳ     ಹಾಗೂ    ಸ್ಥ ಳ    ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
