@@ -12761,7 +12761,7 @@ public class ReportsController {
         response.setHeader4("              " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”  " +
                 "("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )  ಅಡಿ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    ‘ರೀಲಿಂಗ್   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ      "+
                 "ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ     ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ .   ಅದರಂತೆ   "+ apiResponse.getContent().get(0).getReelingShedSqft()+"    ಚದರಡಿ    ವಿಸ್ತೀ ರ್ಣದ     "+apiResponse.getContent().get(0).getMachineTypeName()+"       ರೀಲಿಂಗ್    ಶೆಡ್      ನಿರ್ಮಾಣದ     ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +" ಲಕ್ಷ  ಗಳಿಗೆ      "+
-                "ನಿಗದಿ    ಪಡಿಸಿದ್ದು  ,     ಇದರಲ್ಲಿ     ಶೇಕಡ  "+ apiResponse.getContent().get(0).getShareInPercentage() +"   ರಷ್ಟ ನ್ನು    ಅಂದರೆ ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +"   ಲಕ್ಷ ಗಳನ್ನು     ಸಹಾಯಧನವಾಗಿ   ನೀಡುವ     ಕಾರ್ಯಕ್ರಮವಿರುತ್ತ ದೆ.\n\n" +
+                "ನಿಗದಿ    ಪಡಿಸಿದ್ದು  ,     ಇದರಲ್ಲಿ     ಶೇಕಡ  "+ apiResponse.getContent().get(0).getShareInPercentage() +"   ರಷ್ಟ ನ್ನು    ಅಂದರೆ ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +"   ಲಕ್ಷ ಗಳನ್ನು     ಸಹಾಯಧನವಾಗಿ   ನೀಡುವ     ಕಾರ್ಯಕ್ರ  ಮವಿರುತ್ತ ದೆ.\n\n" +
 
                             "               ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು      ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.     "+
                 "ಉಲ್ಲೇಖ (3) ರನ್ವ ಯ      "+ apiResponse.getContent().get(0).getDistrictNameInKannada()+"   ಜಿಲ್ಲೆಯ    "+ apiResponse.getContent().get(0).getTalukNameInKannada()+"     ತಾಲ್ಲೂಕಿನ    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"    "+
@@ -12838,7 +12838,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
             response.setHeader4("              " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”  " +
                     "("+ apiResponse.getContent().get(0).getCategoryNameInKannada()+"  )  ಅಡಿ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು    ‘ರೀಲಿಂಗ್   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ      "+
                     "ಅನುಷ್ಟಾ ನಕ್ಕಾ ಗಿ     ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ .   ಅದರಂತೆ   "+ apiResponse.getContent().get(0).getReelingShedSqft()+"    ಚದರಡಿ    ವಿಸ್ತೀ ರ್ಣದ     "+apiResponse.getContent().get(0).getMachineTypeName()+"       ರೀಲಿಂಗ್    ಶೆಡ್      ನಿರ್ಮಾಣದ     ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +" ಲಕ್ಷ  ಗಳಿಗೆ      "+
-                    "ನಿಗದಿ    ಪಡಿಸಿದ್ದು  ,     ಇದರಲ್ಲಿ     ಶೇಕಡ  "+ apiResponse.getContent().get(0).getShareInPercentage() +"   ರಷ್ಟ ನ್ನು    ಅಂದರೆ ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +"   ಲಕ್ಷ ಗಳನ್ನು     ಸಹಾಯಧನವಾಗಿ   ನೀಡುವ     ಕಾರ್ಯಕ್ರಮವಿರುತ್ತ ದೆ.\n\n" +
+                    "ನಿಗದಿ    ಪಡಿಸಿದ್ದು  ,     ಇದರಲ್ಲಿ     ಶೇಕಡ  "+ apiResponse.getContent().get(0).getShareInPercentage() +"   ರಷ್ಟ ನ್ನು    ಅಂದರೆ ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +"   ಲಕ್ಷ ಗಳನ್ನು     ಸಹಾಯಧನವಾಗಿ   ನೀಡುವ     ಕಾರ್ಯಕ್ರ  ಮವಿರುತ್ತ ದೆ.\n\n" +
 
                     "               ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು      ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.     "+
                     "ಉಲ್ಲೇಖ (3) ರನ್ವ ಯ      "+ apiResponse.getContent().get(0).getDistrictNameInKannada()+"   ಜಿಲ್ಲೆಯ    "+ apiResponse.getContent().get(0).getTalukNameInKannada()+"     ತಾಲ್ಲೂಕಿನ    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"    "+
@@ -13043,11 +13043,12 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                 + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  90   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +" ಗಳಾಗಿರುತ್ತ ದೆ.    ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ 10   ರಂತೆ    ರೂ. "+beneficiaryShareFormatted +" ಗಳಾಗಿರುತ್ತ ದೆ\n\n" +
 
                 "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತ ವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ     ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
+                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ \n"+
+                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
                 "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀ ಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರ ಮವಹಿಸದಿದ್ದ ಲ್ಲಿ     ಆಯ್ಕೆ ಯು\n" +
                 "               ತನ್ನ ಷ್ಟ  ಕ್ಕೆ    ತಾನೇ ರದ್ದಾ ಗುತ್ತ ದೆ.\n\n"+
 
-                           "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                           "          ಕಾರ್ಯಕ್ರ  ಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥ ಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
@@ -13205,7 +13206,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                 apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   "+ apiResponse.getContent().get(0).getReelingShedSqft() +"  ಚದರ    ಅಡಿ    "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್      ಶೆಡ್     ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ      ಪಡೆಯಲು    ಫಲಾನುಭವಿಯಾಗಿ     ಆಯ್ಕೆ ಯಾಗಿರುತ್ತೀ ರಿ.    "+
                 "ಸದರಿ    ಯೋಜನೆಯಡಿ    ಇಲಾಖೆಯಿಂದ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  50"
                 +"   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +" ಗಳಾಗಿರುತ್ತದೆ.   \n\n" +
-                "ಕಾರ್ಯಕ್ರಮವನ್ನು      ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ      ಅಗತ್ಯ       ದಾಖಲೆಗಳೊಂದಿಗೆ      ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿ ಸಬೇಕು.    ದಾಖಲೆಗಳ     ಹಾಗೂ    ಸ್ಥ ಳ    ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "ಕಾರ್ಯಕ್ರ  ಮವನ್ನು      ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ      ಅಗತ್ಯ       ದಾಖಲೆಗಳೊಂದಿಗೆ      ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿ ಸಬೇಕು.    ದಾಖಲೆಗಳ     ಹಾಗೂ    ಸ್ಥ ಳ    ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
