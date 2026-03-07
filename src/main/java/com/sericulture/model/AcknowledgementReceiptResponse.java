@@ -82,5 +82,6 @@ public class AcknowledgementReceiptResponse {
     private String month;
     private Float machineQuantity;
     private String boilerInKg;
+    private String icbBasinEnds;
 
 }
