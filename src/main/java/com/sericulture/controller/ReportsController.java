@@ -1240,7 +1240,7 @@ public class ReportsController {
     }
 
     @PostMapping("/selection-boiler")
-    public ResponseEntity<?> getSelectionBoiler(@RequestBody CheckInspectionStatusRequest requestDto)
+    public ResponseEntity<?> getSelectionBoiler(@RequestBody SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
@@ -12997,10 +12997,10 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
     }
 
 
-    private JRBeanCollectionDataSource getDataSourceForBoilerSelection(CheckInspectionStatusRequest requestDto)
+    private JRBeanCollectionDataSource getDataSourceForBoilerSelection(SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromSanctionBoilerSelection(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -13015,6 +13015,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         String releaseDate        = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+        String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
+        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+
 
 
         String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
@@ -13022,42 +13025,50 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
         String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
 
+        float unitCost = apiResponse.getContent().get(0).getUnitCost() == null
+                ? 0f
+                : apiResponse.getContent().get(0).getUnitCost();
+
+        float beneficiaryShare = unitCost * 0.10f;
+        String beneficiaryShareFormatted = String.format("%.2f", beneficiaryShare);
+
 
 
         response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getScCategoryName() + "  )  " +
                 "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
 
-        response.setHeader3("     ತಾಂತ್ರಿ ಕ    ಸೇವಾ     ಕೇಂದ್ರ (ರೀಲಿಂಗ್)  ವಿಜಯಪುರ    ಶ್ರೀ/ಶ್ರೀಮತಿ ನ್ಯಾನಮ್ಮ    ಬಿನ್/ಕೋಂ. ಲೇ|| ಎ.ಕೃಷ್ಣಪ್ಪ     ಕೊಯಿರಾ    ಗ್ರಾಮ     ದೇವನಹಳ್ಳಿ     ತಾಲ್ಲೂಕು     "+
-                "ಬೆಂಗಳೂರು    ಗ್ರಾಮಾಂತರ     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No.SD0000     ದಿನಾಂಕ: 07/02/2026     ಅನ್ನು    ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( ಸಾಮಾನ್ಯ  )    ಯಡಿ     ಹೊಸದಾಗಿ   ಪ್ರ ತಿ     ಗಂಟೆಗೆ    50 ಕೆ.ಜಿ    ಹಬೆ     ಉತ್ಪಾದನಾ     ಸಾಮರ್ಥ್ಯದ   ಬಾಯ್ಲರ್      ಅಳವಡಿಸಲು      "+
-                "ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆ ಯಾಗಿರುತ್ತೀ ರಿ.     ಸದರಿ    ಯೋಜನೆಯಡಿ     ಯಂತ್ರೋ ಪಕರಣದ      ಘಟಕ    ದರ    ರೂ. 158000.00  ಆಗಿದ್ದು , ಶೇ 90 ರಂತೆ    ಸಹಾಯಧನ: ರೂ. 142200.00 ಗಳಾಗಿರುತ್ತದೆ.    ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ 10 ರಂತೆ ರೂ. 15800.00  ಗಳಾಗಿರುತ್ತದೆ.\n\n"+
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ /ಶ್ರೀ ಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾ  ಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ  ಕು     "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಯಡಿ     ಹೊಸದಾಗಿ    ಪ್ರ  ತಿ    ಗಂಟೆಗೆ     "+ apiResponse.getContent().get(0).getBoilerInKg() +" ಕೆ.ಜಿ    ಹಬೆ      "+
+                        "ಉತ್ಪಾ ದನಾ    ಸಾಮರ್ಥ್ಯ ದ    ಬಾಯ್ಲ ರ್     ಅಳವಡಿಸಲು    ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆ  ಯಾಗಿರುತ್ತೀ ರಿ .     ಸದರಿ    ಯೋಜನೆಯಡಿ    ಯಂತ್ರೋ ಪಕರಣದ      ಘಟಕ    ದರ    ರೂ.   "
+                + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  90   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSchemeAmount() +" ಗಳಾಗಿರುತ್ತ ದೆ.    ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ 10   ರಂತೆ    ರೂ. "+beneficiaryShareFormatted +" ಗಳಾಗಿರುತ್ತ ದೆ\n\n" +
 
-        "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತ ವನ್ನು    ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ     ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-        "           2. ಆಯ್ಕೆ    ಪತ್ರ    ಸ್ವೀ ಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರ ಮವಹಿಸದಿದ್ದ ಲ್ಲಿ     ಆಯ್ಕೆ ಯು     ತನ್ನಷ್ಟಕ್ಕೆ    ತಾನೇ ರದ್ದಾ ಗುತ್ತ ದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತ ವನ್ನು  \n" +
+                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ     ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀ ಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರ ಮವಹಿಸದಿದ್ದ ಲ್ಲಿ     ಆಯ್ಕೆ ಯು\n" +
+                "               ತನ್ನ ಷ್ಟ  ಕ್ಕೆ    ತಾನೇ ರದ್ದಾ ಗುತ್ತ ದೆ.\n\n"+
 
-                "ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ ಪರಿಶೀಲನೆಯ ನಂತರ ಸಹಾಯಧನವನ್ನು ಮಂಜೂರು ಮಾಡಲಾಗುವುದು.");
+                           "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getSanctionOrderNumber() + "    ದಿನಾಂಕ  :  " + proposalDate);
+        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(apiResponse.getContent().get(0).getSanctionOrderNumber());
+        response.setHeader11(selectionLetterDate);
 
 
 
-        response.setHeader10( apiResponse.getContent().get(0).getDesignationName() + "\n " +
-                apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
+        response.setHeader10( apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n " +
+                apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                "ಕೊಯಿರಾ   ಗ್ರಾ ಮ    ದೇವನಹಳ್ಳಿ    ತಾಲ್ಲೂ ಕು \n" +
-                "ಬೆಂಗಳೂರು   ಗ್ರಾ ಮಾಂತರ    ಜಿಲ್ಲೆ .\n\n"
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂ ಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
                 +"ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ರೇಷ್ಮೆ    ಉಪ  ನಿರ್ದೇಶಕರು,    ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,    "+ apiResponse.getContent().get(0).getLoggedinUserTalukName() +"\n"
-                +"   3. ರೇಷ್ಮೆ    ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು ,    ಗೂಡಿನ    ನಂತರದ    ಚಟುವಟಿಕೆ ,    ದೇವನಹಳ್ಳಿ    \n"
-                +"   3. ರೇಷ್ಮೆ    ವಿಸ್ತ ರಣಾಧಿಕಾರಿಗಳು, ತಾಂತ್ರಿ ಕ    ಸೇವಾ  ಕೇಂದ್ರ (ರೀಲಿಂಗ್) ,   "+ apiResponse.getContent().get(0).getLoggedinUserTscName() +"   ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
-
+                +"   1. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
