@@ -80,6 +80,10 @@ public class SanctionOrderResponse {
     private String sanctionOrderDownloadUrl;
     private Float sanctionAmount;
     private String workOrderNumber;
+    private String selectionLetterDate;
+    private String previousStepDesignation;
+    private String shareInPercentage;
+    private String previousStepDesignationForSanctionOrder;
     private Long schemeId;
     private Long subSchemeId;
     private Long approvalStageId;
@@ -263,7 +267,7 @@ private String totalIncentiveAmountInWords;
 
     private String reelingShedDetails;
     private String reelerDetails;
-    private Float reelingShedSqft;
+    private String reelingShedSqft;
     private String fullNameField;
     private String transactionDate;
     private Float noOfCocoonsPerKg;
@@ -370,7 +374,22 @@ private String totalIncentiveAmountInWords;
     private String calculatedSqft;
 
     private String modifiedDate;
+    private String kaneshDistrictName;
+    private String kaneshTalukName;
+    private String kaneshVillageName;
+    private String modifiedByDesignationForSanctionOrder;
+    private String modifiedByDesignation;
 
+    private String hierarchyDesignationForSanctionOrder;
+    private String hierarchyDesignation;
+
+    private String boilerInKg;
+    private String empanelledVendorApprovedBy;
+    private String letterNo;
+    private String empanelledVendorDate;
+
+    private String icbBasinEnds;
+    private String imcbTable;
 
 
 }
