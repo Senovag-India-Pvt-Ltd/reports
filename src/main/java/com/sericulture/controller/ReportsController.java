@@ -8075,13 +8075,12 @@ public class ReportsController {
 
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ   " +
-                    "   ತಾಂತ್ರಿ  ಕ     ಸೇವಾ     ಕೇಂದ್ರ  (ರೀಲೀಂಗ್)     " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾ ಪ್ತಿ ಯ     " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ      ತಾಂತ್ರಿ  ಕ     ಸೇವಾ     ಕೇಂದ್ರ  (ರೀಲೀಂಗ್)     " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾ ಪ್ತಿ ಯ     " +
                     "ಶ್ರೀ ಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ    " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " ,    "   +apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮ ,     "+
-                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ    ("+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ    (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
                     "   ಇವರು    "+ apiResponse.getContent().get(0).getScCategoryName()+"    ವರ್ಗಕ್ಕೆ      ಸೇರಿದ್ದು ,    ಸದರಿಯವರು     " +
-                    "ರೀಲಿಂಗ್   ರಹದಾರಿ     ಸಂಖ್ಯೆ  :   SDL 1325    ಅನ್ನು     ಹೊಂದಿದ್ದು ,   ಹೊಸದಾಗಿ    ಪ್ರ ತಿ    ಗಂಟೆಗೆ    50    ಕೆ.ಜಿ    ಹಬೆ      " +
+                    "ರೀಲಿಂಗ್   ರಹದಾರಿ     ಸಂಖ್ಯೆ  :   "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+"    ಅನ್ನು     ಹೊಂದಿದ್ದು ,   ಹೊಸದಾಗಿ    ಪ್ರ ತಿ    ಗಂಟೆಗೆ    "+ apiResponse.getContent().get(0).getBoilerInKg()+"    ಕೆ.ಜಿ    ಹಬೆ      " +
                     "ಉತ್ಪಾ ದನಾ     ಸಾಮರ್ಥ್ಯ ದ     ಬಾಯ್ಲ ರ್     ಅಳವಡಿಕೆಗೆ     ಸಹಾಯಧನ    ಪಡೆಯಲು    ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿ ಸಿದ್ದು ,    ಅರ್ಜಿಯ    ಪ್ರ ಸ್ತು ತ    " +
                     "ಸ್ಥಿ ತಿಯನ್ನು    ಇ-ರೇಷ್ಮೆ    ವೆಬ್   ಸೈಟ್     https://e-reshme.karnataka.gov.in/seriui  ನಲ್ಲಿ      ARN/FID/Mob.No.  ನಮೂದಿಸಿ ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
