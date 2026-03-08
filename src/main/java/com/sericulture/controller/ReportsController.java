@@ -9276,7 +9276,7 @@ public class ReportsController {
                     "     ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ     ತಾಂತ್ರಿ  ಕ    ಸೇವಾ     ಕೇಂದ್ರ (ರೀಲೀಂಗ್)    "+apiResponse.getContent().get(0).getTscName() +"   ವ್ಯಾ ಪ್ತಿ ಯ     ಶ್ರೀ ಮತಿ/ ಶ್ರೀ    " +
                     apiResponse.getContent().get(0).getReelerName()+  ",   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " , " +
                     "     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮ ,     "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ     (FRUIS ID :  +"+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ     (FRUIS ID :  "+apiResponse.getContent().get(0).getFruitsId()+") " +
                     "   ಇವರು     "+ apiResponse.getContent().get(0).getScCategoryName()+"    ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು  ,     ಸದರಿಯವರು    ರೀಲಿಂಗ್    ರಹದಾರಿ     ಸಂಖ್ಯೆ  :   "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"     "+
                     "ಅನ್ನು    ಹೊಂದಿದ್ದು  ,     "+apiResponse.getContent().get(0).getReelingShedSqft()+"    ಚದರ    ಅಡಿ     ವಿಸ್ತೀ ರ್ಣದ     "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ    ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು     ಸಲ್ಲಿ ಸಿದ್ದು  ,     ಅರ್ಜಿಯ    ಪ್ರ ಸ್ತು ತ     "+
                     "ಸ್ಥಿ ತಿಯನ್ನು     ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್    https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ     ARN/FID/Mob.No.    ನಮೂದಿಸಿ     ಪರಿಶೀಲಿಸಬಹುದು. ");
@@ -10630,7 +10630,7 @@ public class ReportsController {
         }
 
         if (isAssigned == 0) {
-            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + " ,    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
+            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + " ,    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + " ,    ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
 
             response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ    "+
                             "   ದ್ವಿ ತಳಿ     ಬಿತ್ತ ನೆ     ವಲಯದಲ್ಲಿ     ಉತ್ಪಾದನೆಯಾಗುವ     ಶುದ್ದ       ದ್ವಿ ತಳಿ    ಬಿತ್ತ ನೆ    ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು ,     ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆಗೆ    ವಿಲೇವಾರಿಯಾದ    ಬಿತ್ತ ನೆ     ಗೂಡಿಗೆ    ಬೋನಸ್‌    ಮಂಜೂರಾತಿ   ನೀಡುವ    ಬಗ್ಗೆ .");
@@ -10648,7 +10648,7 @@ public class ReportsController {
                             "ತೂಗುವ      ಗೂಡುಗಳ     ಸಂಖ್ಯೆ      "+Math.round(apiResponse.getContent().get(0).getMaxNoOfCocoonsPerKg())+" ಕ್ಕಿಂತ    ಕಡಿಮೆ    ಇದ್ದಲ್ಲಿ      ಪ್ರ ತಿ    ಕೆ.ಜಿ.    ರೇಷ್ಮೆ    ಗೂಡಿಗೆ      ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) +"/-  ಗಳ    " +
                     "   ಬೋನಸ್      ನೀಡುವ      ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ    ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ      ಇಲಾಖೆಯಿಂದ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n"+
                                 "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ      ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು      ಅನುಷ್ಟಾನಗೊಳಿಸಲು     ಅನುದಾನ     ಬಿಡುಗಡೆಮಾಡಿರುತ್ತಾರೆ.      "+
-                    "ಸರ್ಕಾರಿ    ದ್ವಿ ತಳಿ    ರೇಷ್ಮೆ     ಗೂಡಿನ     ಮಾರುಕಟ್ಟೆ ,     "+ apiResponse.getContent().get(0).getMarketName() + "    ಇಲ್ಲಿ      ರೇಷ್ಮೆ     "+
+                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "    ಇಲ್ಲಿ      ರೇಷ್ಮೆ     "+
                     "  ಬೆಳೆಗಾರರು        ವಹಿವಾಟು      ಮಾಡಿದ     ಶುದ್ದ     ಸಿ ಎಸ್ ಆರ್  2      ದ್ವಿ ತಳಿ      ಬಿತ್ತ ನೆ      ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು ,    ಬೇಡಿಕೆ    ಇಲ್ಲ ದೆ     "+
                     "     ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆಗೆ      ವಹಿವಾಟಾದ     ರೇಷ್ಮೆ      ಗೂಡಿಗೆ     ಬೋನಸ್     ಪಡೆಯಲು    ಅರ್ಹರಿರುವ     ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರ     ವಿವರಗಳು    ಈ    ಕೆಳಕಂಡಂತಿವೆ : ");
 
@@ -10680,7 +10680,7 @@ public class ReportsController {
 
         }else {
 
-            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + " ,    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "     ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
+            response.setHeader(apiResponse.getContent().get(0).getDesignationNameInKannada() + " ,    " + apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + " ,    ಇವರ     ಕಛೇರಿ     ನಡವಳಿಗಳು");
 
             response.setHeader2(
                     apiResponse.getContent().get(0).getFinancialYear()
@@ -10690,10 +10690,9 @@ public class ReportsController {
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + ",   ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
-                    "2. "+apiResponse.getContent().get(0).getDesignationNameInKannada() + ",    "+ apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() + "    ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ   : \n"+
-                    "    "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
-                    "3.  "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಇವರ    ಪ್ರಸ್ತಾವನೆ \n"+"    ದಿನಾಂಕ  : "+assignedByUserProposalDate+ "\n"+
-                    "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
+                    "2. ರೇಷ್ಮೆ    ಕೃಷಿ    ಅಭಿವೃದ್ಧಿ      ಆಯುಕ್ತರು    ಹಾಗೂ     ರೇಷ್ಮೆ      ನಿರ್ದೇಶಕರು,    ಬೆಂಗಳೂರು    ರವರ     ಪತ್ರದ    ಸಂಖ್ಯೆ   :\n" +
+                    "     "+apiResponse.getContent().get(0).getReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
+                    "3. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+",   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
 
             response.setHeader4("                 "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿನಲ್ಲಿ      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"     ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+ "  )  ಅಡಿ      "+
@@ -10702,8 +10701,8 @@ public class ReportsController {
                     "   "+Math.round(apiResponse.getContent().get(0).getMinAverageYield())+"   ಕೆ.ಜಿ. ಗಿಂತಲೂ   ಕಡಿಮೆ    ಇಲ್ಲದಂತೆ    ಹಾಗೂ    ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ    ತೂಗುವ    ಗೂಡುಗಳ    ಸಂಖ್ಯೆ    "+Math.round(apiResponse.getContent().get(0).getMaxNoOfCocoonsPerKg())+" ಕ್ಕಿಂತ     ಕಡಿಮೆ    ಇದ್ದಲ್ಲಿ      " +
                             "ಪ್ರ ತಿ   ಕೆ.ಜಿ.   ರೇಷ್ಮೆ    ಗೂಡಿಗೆ    ರೂ. "+ Math.round(apiResponse.getContent().get(0).getUnitCost()) + "/-"+
                     " ಗಳ    ಬೋನಸ್    ನೀಡುವ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಟಾನಕ್ಕಾಗಿ     ಉಲ್ಲೇಖ(1) ರಲ್ಲಿ      ಇಲಾಖೆಯಿಂದ    ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n "+
-                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ     ಮಾಡಿರುತ್ತಾರೆ.     ಸರ್ಕಾರಿ    " +
-                            "  ದ್ವಿ ತಳಿ     "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"   ಇಲ್ಲಿ     ರೇಷ್ಮೆ     " +
+                    "                 ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆ     ಮಾಡಿರುತ್ತಾರೆ.    " +
+                            " "+apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() +"    ಇಲ್ಲಿ     ರೇಷ್ಮೆ     " +
                     "ಬೆಳೆಗಾರರು    ವಹಿವಾಟು    ಮಾಡಿದ    ಶುದ್ದ     ಸಿ ಎಸ್ ಆರ್ 2   ದ್ವಿ ತಳಿ    ಬಿತ್ತ ನೆ    ಗೂಡು     ಬಿತ್ತ ನೆಗೆ     ಯೋಗ್ಯ ವಾಗಿದ್ದು,    ಬೇಡಿಕೆ     ಇಲ್ಲ ದೆ     "+
                     " ನೂಲು     ಬಿಚ್ಚಾಣಿಕೆಗೆ     ವಹಿವಾಟಾದ    ರೇಷ್ಮೆ     ಗೂಡಿಗೆ      ಬೋನಸ್    ಪಡೆಯಲು    ಅರ್ಹರಿರುವ     ರೇಷ್ಮೆ  ಬೆಳೆಗಾರರ   ವಿವರಗಳು   ಈ   ಕೆಳಕಂಡಂತಿವೆ:");
 
@@ -11293,6 +11292,8 @@ public class ReportsController {
 //        String releaseDate        = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
+
 
         // Date for sanction order number line
         String formattedDate;
@@ -11377,7 +11378,7 @@ public class ReportsController {
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
                     "2. "+apiResponse.getContent().get(0).getAdsDesignationName() + " ,    "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,    ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,    ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+assignedUserProposalDate+"\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
@@ -11650,6 +11651,8 @@ public class ReportsController {
 //        String releaseDate        = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
+
 
         // Date for sanction order number line
         String formattedDate;
@@ -11733,7 +11736,7 @@ public class ReportsController {
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
                     "2. "+apiResponse.getContent().get(0).getAdsDesignationName() + " ,    "+apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,    ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+proposalDate+"\n"+
+                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +",     "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,    ಇವರ  ಪ್ರ ಸ್ತಾ ವನೆ   ದಿನಾಂಕ : "+assignedUserProposalDate+"\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+" ,   ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
@@ -12929,9 +12932,9 @@ public class ReportsController {
         String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
         String deptDeleDate = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
         String sReleaseDate = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
-        String createdDate = formatDate(apiResponse.getContent().get(0).getCreatedDate(), sdf);
+        String createdDate = formatDate(apiResponse.getContent().get(0).getCreatedDate());
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate(), sdf);
+        String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
 
 
@@ -13145,7 +13148,7 @@ public class ReportsController {
 
 
         response.setHeader4("              " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ     “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”     " +
-                apiResponse.getContent().get(0).getScCategoryName() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
+                apiResponse.getContent().get(0).getCategoryNameInKannada() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
                 "ನೀಡುವ       ಕಾರ್ಯಕ್ರ ಮವನ್ನು       ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು     ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ      ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ .    ಅದರಂತೆ ,    " + apiResponse.getContent().get(0).getCategoryNameInKannada() + "    ಯಡಿ       " +
                 apiResponse.getContent().get(0).getMachineTypeName() + "    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      ಉತ್ಪಾದಿಸಿದ     "+apiResponse.getContent().get(0).getRenditta() +"    ರೆಂಡಿಟ್ಟಾ     ಒಳಪಟ್ಟ      "+apiResponse.getContent().get(0).getRaceName()+"      " +
                 "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ." + apiResponse.getContent().get(0).getAmountPerKg() + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
@@ -13197,7 +13200,7 @@ public class ReportsController {
 
 
         response.setHeader4("              " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ     “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”     " +
-                apiResponse.getContent().get(0).getScCategoryName() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
+                apiResponse.getContent().get(0).getCategoryNameInKannada() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
                 "ನೀಡುವ       ಕಾರ್ಯಕ್ರ ಮವನ್ನು       ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು     ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿರುತ್ತ ದೆ .    ಅದರಂತೆ ,    " + apiResponse.getContent().get(0).getCategoryNameInKannada() + "    ಯಡಿ       " +
                 apiResponse.getContent().get(0).getMachineTypeName() + "   ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ       ಉತ್ಪಾದಿಸಿದ     "+apiResponse.getContent().get(0).getRenditta() +"    ರೆಂಡಿಟ್ಟಾ     ಒಳಪಟ್ಟ      "+apiResponse.getContent().get(0).getRaceName()+"      " +
                 "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ." + apiResponse.getContent().get(0).getAmountPerKg() + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
@@ -13367,8 +13370,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                 apiResponse.getContent().get(0).getDistrictNameInKannada()+"    ಜಿಲ್ಲೆ .\n\n"
                 +"ಪ್ರ ತಿಯನ್ನು   ;\n"
                 +"   1. ಸಂಬಂಧಿಸಿದ    ಉಪ  ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳು,\n"
-                +"   2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
-                +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
+                +"   3. "+apiResponse.getContent().get(0).getDrawingOfficerDesignation() +" ,    "+apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
+                +"   4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
         }
         else
         {
@@ -13444,9 +13448,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     apiResponse.getContent().get(0).getDistrictNameInKannada()+"    ಜಿಲ್ಲೆ .\n\n"
                     +"ಪ್ರ ತಿಯನ್ನು   ;\n"
                     +"   1. ಸಂಬಂಧಿಸಿದ    ಉಪ  ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳು,\n"
-                    +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
-                    +"   3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
-                    +"   4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                    +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
+                    +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+
         }
 
 
@@ -13586,7 +13590,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getScCategoryName() + "  )  " +
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )  " +
                 "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
 
         response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ /ಶ್ರೀ ಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾ  ಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ  ಕು     "+
@@ -13606,9 +13610,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
 
 
 
@@ -13778,9 +13782,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
 
 
 
@@ -13951,9 +13955,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
 
 
 
@@ -14122,9 +14126,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
 
 
 
@@ -14282,9 +14286,9 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7(apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11(selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
 
 
 
@@ -15107,18 +15111,20 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
             } catch (Exception e) {
                 datePart = selectionDate;
             }
-            String createdDate = apiData.getCreatedDate();
 
-            try {
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SS");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-                LocalDateTime ldt = LocalDateTime.parse(createdDate, inputFormatter);
-                createdDateFormatted = ldt.format(outputFormatter);
-
-            } catch (Exception e) {
-                createdDateFormatted = createdDate;
-            }
+//            String createdDate = apiData.getCreatedDate();   // keep this
+//
+//            try {
+//                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SS");
+//                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//
+//                LocalDateTime ldt = LocalDateTime.parse(createdDate, inputFormatter);
+//                createdDateFormatted = ldt.format(outputFormatter);
+//
+//            } catch (Exception e) {
+//                createdDateFormatted = createdDate;
+//            }
+            String createdDate        = formatCreatedDateTime(apiResponse.getContent().get(0).getCreatedDate());
 
             String surveyNumber = Util.objectToString(apiData.getSurveyNumber());
             String kaneshNo = Util.objectToString(apiData.getKaneshNo());
@@ -15139,8 +15145,8 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     "ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀ ಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+  "   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
                     "("+apiResponse.getContent().get(0).getFruitsId()+")     ಇವರು    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ     " +surveyText+
                     "    ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  \n\n" +
-                                "               ಮೇಲ್ಕಾ ಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ:" +createdDateFormatted+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ     ರೇಷ್ಮೆ     "+apiResponse.getContent().get(0).getCreatedByDesignation()+"ಯಾದ     ಗ್ರಾ ಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ /ಶ್ರೀ ಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                                "               ಮೇಲ್ಕಾ ಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ:" +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+"ಯಾದ     ಗ್ರಾ ಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ /ಶ್ರೀ ಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
                     "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
                      apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರ  ದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪು ನೇರಳೆ " +
                     "     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
@@ -16452,10 +16458,30 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
                 }
 
-                int centralShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSanctionAmount())));
-                int stateShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSanctionAmount())));
-                int centralSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSharePercentage())));
-                int stateSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSharePercentage())));
+//                int centralShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSanctionAmount())));
+//                int stateShareAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSanctionAmount())));
+//                int centralSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getCentralSharePercentage())));
+//                int stateSharePercentage = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getStateSharePercentage())));
+
+                int centralShareAmount = 0;
+                int stateShareAmount = 0;
+                int centralSharePercentage = 0;
+                int stateSharePercentage = 0;
+
+                for (SanctionOrderResponse row : apiResponse.getContent()) {
+
+                    if (row.getCentralSanctionAmount() != null)
+                        centralShareAmount += Math.round(row.getCentralSanctionAmount());
+
+                    if (row.getStateSanctionAmount() != null)
+                        stateShareAmount += Math.round(row.getStateSanctionAmount());
+
+                    if (row.getCentralSharePercentage() != null)
+                        centralSharePercentage += Math.round(row.getCentralSharePercentage());
+
+                    if (row.getStateSharePercentage() != null)
+                        stateSharePercentage += Math.round(row.getStateSharePercentage());
+                }
 
                 int beneficiarySharePercentage = 100 - (centralSharePercentage + stateSharePercentage);
                 if (beneficiarySharePercentage < 0) beneficiarySharePercentage = 0;
@@ -19050,7 +19076,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
             response.setHeader2(
                     apiResponse.getContent().get(0).getFinancialYear()
                             + "     ನೇ     ಸಾಲಿನಲ್ಲಿ    " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"   ಯೋಜನೆ  (  "+ apiResponse.getContent().get(0).getScCategoryName()+ "  )  ಯಡಿ     "+
-                            apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ಸಹಾಯಧನ     ಮಂಜೂರಾತಿ       ನೀಡುವ      ಬಗ್ಗೆ. ");
+                            " ಮೈ ಸೂರು    ಶುದ್ಧ    ತಳಿ   ಚಾಕಿ    ಸಾಕಾಣಿಕಾ   ವೆಚ್ಚ ದ     ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ    ನೀಡುವ    ಬಗ್ಗೆ . ");
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃಷಿ     ಅಭಿವೃದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋಲೆ   ಸಂಖ್ಯೆ   :\n" +
                     "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
@@ -19105,7 +19131,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     "    "+apiResponse.getContent().get(0).getSchemeCircularNo() + "  ದಿನಾಂಕ :  " + schemeCircularDate + " \n"+
                     "2. "+apiResponse.getContent().get(0).getDesignationName() + " ,   "+ apiResponse.getContent().get(0).getDesignationNameForSanctionOrder() + "   ಇವರ   ಪತ್ರದ    ಸಂಖ್ಯೆ  : \n" +
                     "    "+apiResponse.getContent().get(0).getSReleaseNo() +",    ದಿನಾಂಕ : "+sReleaseDate+" \n" +
-                    "3. "+ apiResponse.getContent().get(0).getCreatedByAdDesignationName() +",    , " + apiResponse.getContent().get(0).getCreatedByAdDesignationNameForSanctionOrder() + " ,    ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+assignedByUserProposalDate+"\n" +
+                    "3. "+ apiResponse.getContent().get(0).getCreatedByAdDesignationName() +",  " + apiResponse.getContent().get(0).getCreatedByAdDesignationNameForSanctionOrder() + " ,    ಇವರ    ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ: "+assignedByUserProposalDate+"\n" +
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ದಿನಾಂಕ:   "+deptDeleDate+".");
 
 
@@ -19332,6 +19358,8 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
+        String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
+
 
         // Date for sanction order number line
         String formattedDate;
@@ -19409,14 +19437,13 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
             response.setHeader(apiResponse.getContent().get(0).getAdsDesignationName() + ",    "  +apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder() +" ,    ಇವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
             response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ     ಸಾಲಿನಲ್ಲಿ     " + apiResponse.getContent().get(0).getSchemeNameInKannada() +"("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"   )   " +
-                    "ಅಡಿ     ದ್ಧಿ ತಳಿ    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆ   ವೆಚ್ಚ ದ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ  ಕುರಿತು..");
+                    "ಅಡಿ     ದ್ಧಿ ತಳಿ    ಮೊಟ್ಟೆ ಗಳಿಗೆ    ಚಾಕಿ    ಸಾಕಾಣಿಕೆ   ವೆಚ್ಚ ದ    ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ  ಕುರಿತು.");
 
             response.setHeader3("1. ರೇಷ್ಮೆ    ಕೃ ಷಿ     ಅಭಿವೃ ದ್ದಿ      ಆಯುಕ್ತರು    ಹಾಗೂ   ರೇಷ್ಮೆ     ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಸುತ್ತೋ ಲೆ    ಪತ್ರ ದ    ಸಂಖ್ಯೆ   :\n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " + schemeCircularDate + ".\n"+
                     "2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "   ರವರ    ಪತ್ರದ    ಸಂಖ್ಯೆ  :  \n" +
                     "      "+apiResponse.getContent().get(0).getReleaseNo() +" ,    ದಿನಾಂಕ : "+sReleaseDate+".\n" +
-                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ \n"+
-                    "    ದಿನಾಂಕ : "+createdDate+".\n"+
+                    "3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "   ಇವರ    ಪ್ರ ಸ್ತಾ ವನೆ     ದಿನಾಂಕ : "+assignedUserProposalDate+".\n"+
                     "4. ಸರ್ಕಾರದ    ಆದೇಶ   ಸಂಖ್ಯೆ  : "+ apiResponse.getContent().get(0).getDeptDeleNo()+"   ಬೆಂಗಳೂರು    ದಿನಾಂಕ:   "+deptDeleDate+" .");
 
 
