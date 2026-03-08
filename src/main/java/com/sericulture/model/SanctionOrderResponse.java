@@ -392,5 +392,8 @@ private String totalIncentiveAmountInWords;
     private String icbBasinEnds;
     private String imcbTable;
 
+    private String createdByAdDesignationName;
+    private String createdByAdDesignationNameForSanctionOrder;
+
 
 }
