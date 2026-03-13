@@ -14,4 +14,7 @@ public class ApplicationFormPrintRequest extends LotStatusRequest {
     private int schemeId;
     private int subSchemeId;
 
+    private String fruitsId;
+    private Long fitnessCertificateId;
+
 }

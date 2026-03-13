@@ -84,4 +84,15 @@ public class AcknowledgementReceiptResponse {
     private String boilerInKg;
     private String icbBasinEnds;
 
+    private String lotNumber;
+    private Long numberOfDflsDisposed;
+    private String spunDate;
+    private String noOfChandies;
+    private String expectedCocoon;
+    private String farmerNameKan;
+    private Long fitnessCertificateId;
+    private String sno;
+    private String marketAuctionDate;
+
+
 }

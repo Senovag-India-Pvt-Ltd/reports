@@ -645,6 +645,50 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/getFitenessCertificate")
+    public ResponseEntity<?> getFitenessCertificate(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getFitenessCertificate");
+            logger.info("enter to getChawki1000Ack");
+            String destFileName = "report_kannada.pdf";
+            JasperReport jasperReport = getJasperReport("fitnessCertificate.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceFitnessCertificate(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "report.pdf");
+
+
+            JRPdfExporter pdfExporter = new JRPdfExporter();
+            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+            pdfExporter.exportReport();
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            logger.info(ex.getMessage() + ex.getStackTrace());
+            HttpHeaders headers = new HttpHeaders();
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            //return  ex.getMessage();
+            //throw new RuntimeException("fail export file: " + ex.getMessage());
+        }
+
+
+        //JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+
+    }
+
 
     @PostMapping("/getChawkiAck1500")
     public ResponseEntity<?> getChawkiAck1500(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
@@ -8603,6 +8647,84 @@ public class ReportsController {
             //  acknowledgementReceiptResponseList.add(acknowledgementReceiptResponseList);
         }
         //countries.add(new Country("IS", "Iceland", "https://i.pinimg.com/originals/72/b4/49/72b44927f220151547493e528a332173.png"));
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
+    private JRDataSource getDataSourceFitnessCertificate(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromFitnessCertificate(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+
+            Object dateObj = apiResponse.getContent().get(0).getDate();
+
+            if (dateObj != null) {
+                try {
+                    String inputDate = dateObj.toString();
+
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                    Date date = inputFormat.parse(inputDate);
+                    formattedDate = outputFormat.format(date);
+
+                } catch (Exception e) {
+                    formattedDate = dateObj.toString();
+                }
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setSno("ಕ್ರ ಮ    ಸಂಖ್ಯೆ  : "+apiResponse.getContent().get(0).getFitnessCertificateId());
+
+            response.setHeader3("ಕೋಡ್    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLotNumber());
+
+            response.setHeader2("ವಹಿವಾಟು  ಮಾಡುವ   ದಿನಾಂಕ  : " +apiResponse.getContent().get(0).getMarketAuctionDate());
+
+
+            response.setHeader(apiResponse.getContent().get(0).getTscName() +"    ವಲಯದ     "+apiResponse.getContent().get(0).getVillageName() +"      ಗ್ರಾ ಮದ       ಶ್ರೀ /ಶ್ರೀ ಮತಿ   " +
+                    "   "+apiResponse.getContent().get(0).getFarmerNameKan() +" ,    ಬಿನ್/ಕೋಂ      "+apiResponse.getContent().get(0).getFatherNameKan() +
+                    "     ರವರು      ಬೆಳೆದ        ತಂಡದ       ಸಂಖ್ಯೆ      "+apiResponse.getContent().get(0).getLotNumber() +"    ಗುಂಪಿನ     "+apiResponse.getContent().get(0).getNumberOfDflsDisposed() +"      ಮೊಟ್ಟೆ ಗಳ       " +
+                    "  ರೇಷ್ಮೆ       ಬೆಳೆಯನ್ನು       1/2/3/4/5      ನೇ    ಹಂತಗಳಲ್ಲಿ       ಪರಿಶೀಲಿಸಿರುತ್ತೇ ನೆ .      ಈ      ಬೆಳೆಯು     ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getSpunDate() +"    " +
+                    "  ರಂದು       "+apiResponse.getContent().get(0).getNoOfChandies() +"      ಚಂದ್ರಿ ಕೆಗಳಲ್ಲಿ       ಗೂಡು     ಕಟ್ಟಿ ರುತ್ತ ದೆ.    ಈ     ಬೆಳೆಯಲ್ಲಿ       "+
+                    "    ಸುಮಾರು      "+apiResponse.getContent().get(0).getExpectedCocoon() +"     ರೇಷ್ಮೆ      ಗೂಡುಗಳು        ದೊರೆಯಬಹುದೆಂದು       "+
+                            "ಅಂದಾಜು     ಮಾಡಲಾಗಿದೆ .\n\n"+
+                    "ಈ    ಬೆಳೆಯನ್ನು       ಹುಳುವಿನ      ಅವಧಿಯಲ್ಲಿ       1/2/3/4/5/ಎಲ್ಲಾ     ಹಂತಗಳಲ್ಲಿ      ಹುಳುವಿನ  ಪರೀಕ್ಷೆ ಯನ್ನು     " +
+                    " ಮಾಡಲಾಗಿದೆ .    ಈ    ಬೆಳೆಯು      ಹಾಲು/ ಸಪ್ಪೆ  /ಸುಣ್ಣ ಕಟ್ಟು  /ಗಂಟುರೋಗ     ಮತ್ತು      ಉಪ       " +
+                            "ಹಾವಳಿಯಿಂದ       ಮುಕ್ತ ವಾಗಿದೆ/ಪೀಡಿತವಾಗಿದೆ .      ಆದುದರಿಂದ     ಈ      ಬೆಳೆಯ      ರೇಷ್ಮೆ     "+
+                            "ಗೂಡುಗಳು      ಬಿತ್ತ ನೆಗೆ      ಯೋಗ್ಯ ವಾಗಿಲ್ಲ /ಯೋಗ್ಯ ವಾಗಿದೆ .\n\n" +
+                            "ಈ     ಬೆಳೆಗಾರರು ,    ಇದರ       ಹಿಂದೆ     ಬೆಳೆ     ರೇಷ್ಮೆ     ಗೂಡುಗಳು     ಕಾನೂನಿನ     ರೀತ್ಯಾ      ವಿಲೇವಾರಿಯಾಗಿದೆ     ಮತ್ತು        "+
+                            "ಸಂಬಂಧಿಸಿದ      ರೆಜಿಸ್ಟ ರ್ನಲ್ಲಿ      ಈ    ಬಗ್ಗೆ      ಷರಾ     ಬರೆಯಲಾಗಿದೆ     ಎಂದು     ಪ್ರ ಮಾಣೀಕರಿಸುತ್ತೇ ನೆ.");
+
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+//            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+//                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
+
+                        response.setHeader1("ವಲಯಾಧಿಕಾರಿಗಳ     ಸಹಿ    \n"+
+                                apiResponse.getContent().get(0).getTscName()+"   ವಲಯ");
+
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+        }
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
