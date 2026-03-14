@@ -6138,6 +6138,18 @@ public class ReportsController {
             if (apiResponse.content.getFarmerAddress() == null) {
                 apiResponse.content.setFarmerAddress("");
             }
+            if (apiResponse.content.getFruitsId() == null) {
+                apiResponse.content.setFruitsId("");
+            }
+            if (apiResponse.content.getFarmerMobileNumber() == null) {
+                apiResponse.content.setFarmerMobileNumber("");
+            }
+            if (apiResponse.content.getAccountNumber() == null) {
+                apiResponse.content.setAccountNumber("");
+            }
+            if (apiResponse.content.getIfscCode() == null) {
+                apiResponse.content.setIfscCode("");
+            }
             if (apiResponse.content.getReelerLicense() == null) {
                 apiResponse.content.setReelerLicense("");
             }
