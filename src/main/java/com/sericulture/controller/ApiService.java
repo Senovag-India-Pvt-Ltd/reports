@@ -73,6 +73,27 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public AcknowledgementResponse fetchDataFromFitnessCertificate(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = apiUrl + "lotGroupage/getFitnessCertificateDetails";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getFitnessCertificateDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<ApplicationFormPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AcknowledgementResponse response = objectMapper.readValue(responseBody, AcknowledgementResponse.class);
+
+        return response;
+    }
+
 
 
 
