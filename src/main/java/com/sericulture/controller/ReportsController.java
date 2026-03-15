@@ -10147,16 +10147,16 @@ public class ReportsController {
         } catch (Exception e) {
             formattedMarketAuctionDate = "";
         }
-        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
-                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
-                apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "ತಾರೀಖು     " + formattedMarketAuctionDate);
+        response.setHeader2("ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೆಶಕರ   ಕಛೇರಿ,\n" +
+                "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,\n"+
+                apiResponse.getContent().get(0).getMarketName());
 
-        response.setHeader1("ಗೆ,                \n" +
-                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "__________________________");
-        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader1("ಇವರಿಗೆ:                                                                                                  \n" +
+                "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
+                "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
+                + apiResponse.getContent().get(0).getBuyerName());
+        response.setHeader3("ರುಜು :___________________________                                              ರುಜು :___________________________ \n" +
+                "ಹುದ್ದೆಯ ಹೆಸರು :______________________________                         ಹುದ್ದೆಯ ಹೆಸರು :______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -10254,16 +10254,16 @@ public class ReportsController {
         } catch (Exception e) {
             formattedMarketAuctionDate = "";
         }
-        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
-                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
-                apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "ತಾರೀಖು     " + formattedMarketAuctionDate);
+        response.setHeader2("ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೆಶಕರ   ಕಛೇರಿ,\n" +
+                "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,\n"+
+                apiResponse.getContent().get(0).getMarketName());
 
-        response.setHeader1("ಗೆ,                \n" +
-                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "__________________________");
-        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader1("ಇವರಿಗೆ:                                                                                                  \n" +
+                "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
+                "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
+                + apiResponse.getContent().get(0).getBuyerName());
+        response.setHeader3("ರುಜು :___________________________                                              ರುಜು :___________________________ \n" +
+                "ಹುದ್ದೆಯ ಹೆಸರು :______________________________                         ಹುದ್ದೆಯ ಹೆಸರು :______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -10361,16 +10361,16 @@ public class ReportsController {
         } catch (Exception e) {
             formattedMarketAuctionDate = "";
         }
-        response.setHeader2("ರವರ    ಕಛೆರಿ\n" +
-                "ಸರ್ಕಾರಿ     ರೇಷ್ಮೆ     ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ \n"+
-                apiResponse.getContent().get(0).getMarketName() + "\n"+
-                "ತಾರೀಖು     " + formattedMarketAuctionDate);
+        response.setHeader2("ರೇಷ್ಮೆ   ಸಹಾಯಕ   ನಿರ್ದೆಶಕರ   ಕಛೇರಿ,\n" +
+                "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,\n"+
+                apiResponse.getContent().get(0).getMarketName());
 
-        response.setHeader1("ಗೆ,                \n" +
-                "ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"\n"+
-                "__________________________");
-        response.setHeader3("ರುಜು ___________________________                                              ರುಜು ___________________________ \n" +
-                "ಹುದ್ದೆಯ ಹೆಸರು ______________________________                         ಹುದ್ದೆಯ ಹೆಸರು ______________________________ ");
+        response.setHeader1("ಇವರಿಗೆ:                                                                                                  \n" +
+                "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
+                "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
+                + apiResponse.getContent().get(0).getBuyerName());
+        response.setHeader3("ರುಜು :___________________________                                              ರುಜು :___________________________ \n" +
+                "ಹುದ್ದೆಯ ಹೆಸರು :______________________________                         ಹುದ್ದೆಯ ಹೆಸರು :______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
                 "ದಿನಾಂಕ  : ______________________________________");
         response.setHeader4("ಪೀಠಿಕೆ: ");
@@ -10471,10 +10471,17 @@ public class ReportsController {
 
         // ✅ HEADER TEXT
         try {
-            headerRow.setHeader("ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"   ಖಾಸಗಿ    ಬಿತ್ತ ನೆದಾರರು    ಈ   ದಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ    " +
-                            formattedFromDate + " - " + formattedToDate + "    ದಿನಾಂಕದಲ್ಲಿ      ಗೂಡು     ಕಟ್ಟಿದ     " + +  Math.round(totalLotWeightSum) +   "    ಕೆ.ಜಿ     ಒಟ್ಟು     ಸಂಖ್ಯೆ      "+Math.round(totalNumberSum)+
-                            "    ಮೈ ಸೂರು    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು     ಖರೀದಿಸಿರುತ್ತಾರೆ.    ಮೇಲ್ಕಂಡ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು      " + apiResponse.getContent().get(0).getMarketName() +
-                            "    ಇಂದ    " + apiResponse.getContent().get(0).getRspAddress() + "    ಇಲ್ಲಿಗೆ    ಸಾಗಿಸಲು    ಅನುಮತಿ    ನೀಡಲಾಗಿದೆ.    ಈ    ಪರ್ಮಿಟ್ಟಿನ    ಅವಧಿ    " + formattedMarketAuctionDate);
+//            headerRow.setHeader("ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"   ಖಾಸಗಿ    ಬಿತ್ತ ನೆದಾರರು    ಈ   ದಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ    " +
+//                            formattedFromDate + " - " + formattedToDate + "    ದಿನಾಂಕದಲ್ಲಿ      ಗೂಡು     ಕಟ್ಟಿದ     " + Math.round(totalLotWeightSum) +   "    ಕೆ.ಜಿ     ಒಟ್ಟು     ಸಂಖ್ಯೆ      "+Math.round(totalNumberSum)+
+//                            "    ಮೈ ಸೂರು    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು     ಖರೀದಿಸಿರುತ್ತಾರೆ.    ಮೇಲ್ಕಂಡ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು      " + apiResponse.getContent().get(0).getMarketName() +
+//                            "    ಇಂದ    " + apiResponse.getContent().get(0).getRspAddress() + "    ಇಲ್ಲಿಗೆ    ಸಾಗಿಸಲು    ಅನುಮತಿ    ನೀಡಲಾಗಿದೆ.    ಈ    ಪರ್ಮಿಟ್ಟಿನ    ಅವಧಿ    " + formattedMarketAuctionDate);
+
+            headerRow.setHeader(" ಶ್ರೀ   " + apiResponse.getContent().get(0).getBuyerName() +"   ನೋಂದಣಿ     ಖಾಸಗಿ     ಬಿತ್ತನೆದಾರರು     ಈ       " +
+                    "ದಿನ     ಮಾರುಕಟ್ಟೆ ಯಿಂದ    ದಿನಾಂಕ :  "+formattedFromDate + " - " + formattedToDate +"   ರಲ್ಲಿ     ಗೂಡು   ಕಟ್ಟಿ ದ    " +
+                    " ಮೈ ಸೂರು    ಶುದ್ಧ     ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
+                    "ಇರುವ     ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     "+ apiResponse.getContent().get(0).getMarketName() +"   ಮಾರುಕಟ್ಟೆ ಯಿಂದ     " +
+                    "ಖರೀದಿಸಿರುತ್ತಾರೆ.     ಸದರಿ   ಗೂಡುಗಳು    "+ apiResponse.getContent().get(0).getRspAddress() +"   ಗ್ರಾ ಮ/ಪಟ್ಟ ಣಕ್ಕೆ    ಸಾಗಿಸಲು    "+
+                    "ಅನುಮತಿ    ನೀಡಿದೆ.    ಈ    ಪರ್ಮಿಟಿನ    ಅವಧಿ    "+ formattedMarketAuctionDate+"   ವರೆಗೆ.");
 
             headerRow.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 
@@ -10484,8 +10491,7 @@ public class ReportsController {
                             apiResponse.getContent().get(0).getMarketName()
             );
 
-            headerRow.setHeader3("ರಹದಾರಿ   ಸಂಖ್ಯೆ   :  " +
-                    apiResponse.getContent().get(0).getLicenseNo());
+            headerRow.setHeader3("ನೋಂದಣಿ   ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getLicenseNo());
 
         } catch (Exception ignored) {}
 
@@ -10573,10 +10579,12 @@ public class ReportsController {
 
         // ✅ HEADER TEXT
         try {
-            headerRow.setHeader("ಶ್ರೀ    " + apiResponse.getContent().get(0).getBuyerName() +"   ಖಾಸಗಿ    ಬಿತ್ತ ನೆದಾರರು    ಈ   ದಿನ    ಮಾರುಕಟ್ಟೆಯಿಂದ    " +
-                    formattedFromDate + " - " + formattedToDate + "    ದಿನಾಂಕದಲ್ಲಿ      ಗೂಡು     ಕಟ್ಟಿದ     " +  Math.round(totalLotWeightSum) +   "    ಕೆ.ಜಿ     ಒಟ್ಟು     ಸಂಖ್ಯೆ      "+Math.round(totalNumberSum)+
-                    "    ಮೈ ಸೂರು    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು     ಖರೀದಿಸಿರುತ್ತಾರೆ.    ಮೇಲ್ಕಂಡ    ಬಿತ್ತ ನೆ    ಗೂಡುಗಳನ್ನು      " + apiResponse.getContent().get(0).getMarketName() +
-                    "    ಇಂದ    " + apiResponse.getContent().get(0).getRspAddress() + "    ಇಲ್ಲಿಗೆ    ಸಾಗಿಸಲು    ಅನುಮತಿ    ನೀಡಲಾಗಿದೆ.    ಈ    ಪರ್ಮಿಟ್ಟಿನ   ಅವಧಿ    " + formattedMarketAuctionDate);
+            headerRow.setHeader(" ಶ್ರೀ   " + apiResponse.getContent().get(0).getBuyerName() +"   ನೋಂದಣಿ     ಖಾಸಗಿ     ಬಿತ್ತನೆದಾರರು     ಈ       " +
+                    "ದಿನ     ಮಾರುಕಟ್ಟೆ ಯಿಂದ    ದಿನಾಂಕ :  "+formattedFromDate + " - " + formattedToDate +"   ರಲ್ಲಿ     ಗೂಡು   ಕಟ್ಟಿ ದ    " +
+                    " ಮೈ ಸೂರು    ಶುದ್ಧ     ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
+                    "ಇರುವ     ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     "+ apiResponse.getContent().get(0).getMarketName() +"   ಮಾರುಕಟ್ಟೆ ಯಿಂದ     " +
+                    "ಖರೀದಿಸಿರುತ್ತಾರೆ.     ಸದರಿ   ಗೂಡುಗಳು    "+ apiResponse.getContent().get(0).getRspAddress() +"   ಗ್ರಾ ಮ/ಪಟ್ಟ ಣಕ್ಕೆ    ಸಾಗಿಸಲು    "+
+                    "ಅನುಮತಿ    ನೀಡಿದೆ.    ಈ    ಪರ್ಮಿಟಿನ    ಅವಧಿ    "+ formattedMarketAuctionDate+"   ವರೆಗೆ.");
 
             headerRow.setHeader1("ದಿನಾಂಕ : " + formattedMarketAuctionDate);
 
@@ -10586,8 +10594,7 @@ public class ReportsController {
                             apiResponse.getContent().get(0).getMarketName()
             );
 
-            headerRow.setHeader3("ರಹದಾರಿ   ಸಂಖ್ಯೆ   :  " +
-                    apiResponse.getContent().get(0).getLicenseNo());
+            headerRow.setHeader3("ನೋಂದಣಿ   ಸಂಖ್ಯೆ  :  " + apiResponse.getContent().get(0).getLicenseNo());
 
         } catch (Exception ignored) {}
 

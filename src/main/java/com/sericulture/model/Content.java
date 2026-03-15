@@ -97,7 +97,7 @@ public class Content {
     private String farmerMobileNumber;
     private String reelerMobileNumber;
     private String reelerNameKannada;
-    private double farmerAmount;
+    private Double farmerAmount;
     private double reelerAmount;
     private List<Integer> smallBinList;
     private List<Integer> bigBinList;
@@ -198,6 +198,8 @@ public class Content {
     private String silkTypes;
     private Float approximateEstimatedWeight;
     private Float approximateWeight;
+    private Long noOfCocoonPerKg;
+    private String remainingCocoon;
 
 
 
