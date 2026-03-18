@@ -93,6 +93,8 @@ public class AcknowledgementReceiptResponse {
     private Long fitnessCertificateId;
     private String sno;
     private String marketAuctionDate;
+    private String categoryShortName;
+
 
 
 }
