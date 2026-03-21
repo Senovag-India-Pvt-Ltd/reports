@@ -769,6 +769,70 @@ public class ApiService {
         }
     }
 
+    public SanctionOrder fetchDataFromSanctionSolarSilent(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
+
+
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, SanctionOrder.class);
+
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            // Get the response body from the exception
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling sanction API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch sanction data: " + responseBody, httpEx);
+
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
+    public SanctionOrder fetchDataFromSanctionSolarSilentSelection(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+
+
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, SanctionOrder.class);
+
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            // Get the response body from the exception
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling sanction API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch sanction data: " + responseBody, httpEx);
+
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
 
 
 
