@@ -94,6 +94,7 @@ public class AcknowledgementReceiptResponse {
     private String sno;
     private String marketAuctionDate;
     private String categoryShortName;
+    private String reelingUnit;
 
 
 
