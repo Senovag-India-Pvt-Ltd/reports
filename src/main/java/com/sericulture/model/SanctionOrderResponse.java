@@ -395,6 +395,9 @@ private String totalIncentiveAmountInWords;
     private String createdByAdDesignationName;
     private String createdByAdDesignationNameForSanctionOrder;
     private String reelingUnit;
+    private Double beneficiaryAmount;
+    private String l1Rate;
+
 
 
 }
