@@ -397,6 +397,47 @@ private String totalIncentiveAmountInWords;
     private String reelingUnit;
     private Double beneficiaryAmount;
     private String l1Rate;
+    private String farmerFatherName;
+    private String farmerName;
+    private String establishmentOfMulberryDistrict;
+    private String establishmentOfMulberryTaluk;
+    private String establishmentOfMulberryVillage;
+    private String establishmentOfMulberryTsc;
+    private String establishmentOfMulberryTrainingFromDate;
+    private String establishmentOfMulberryTrainingToDate;
+    private String establishmentOfMulberryRegisterDate;
+    private String establishmentOfMulberryRegisterNo;
+    private String establishmentOfMulberrySurveyNo;
+    private String establishmentOfMulberryAcre;
+    private String establishmentOfMulberryVibhaga;
+    private String chawkiRearingBuildingDistrict;
+    private String chawkiRearingBuildingTaluk;
+    private String chawkiRearingBuildingVillage;
+    private String chawkiRearingBuildingTsc;
+    private String chawkiRearingBuildingSurveyNo;
+    private String chawkiRearingBuildingAcre;
+    private String chawkiRearingBuildingSqft;
+    private String chawkiRearingBuildingLength;
+    private String chawkiRearingBuildingBreadth;
+
+    private String purchaseOfEquipmentDistrict;
+    private String purchaseOfEquipmentTaluk;
+    private String purchaseOfEquipmentVillage;
+    private String purchaseOfEquipmentTsc;
+    private String purchaseOfEquipmentPlace;
+
+    private String subsidyName;
+
+    private String eligibleEquipmentInNos;
+    private Float eligibleTotalValueInRs;
+    private Float ratePerEligibleEquipment;
+    private Float maxAmountOfSubsidyEligible;
+    private String purchasedEquipmentInNos;
+    private Float purchasedTotalValueInRs;
+    private Float percentageOfSubsidyAmount;
+
+
+
 
 
 
