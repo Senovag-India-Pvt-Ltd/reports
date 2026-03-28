@@ -603,6 +603,28 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public SeedMarket fetchDataMarketReciept(LotStatusSeedMarketRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+
+        String finalapiurl = apiUrl + "lotGroupage/getDetailsForMarketReceipt";
+//        String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getDetailsForMarketReceipt";
+
+
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<LotStatusSeedMarketRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        SeedMarket response = restTemplate.postForObject(finalapiurl,requestEntity, SeedMarket.class);
+
+        return response;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
 
     public SanctionOrder fetchDataFromSilkIncentive(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
         // Make a GET request to the API endpoint
