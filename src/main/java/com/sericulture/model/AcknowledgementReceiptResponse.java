@@ -95,6 +95,7 @@ public class AcknowledgementReceiptResponse {
     private String marketAuctionDate;
     private String categoryShortName;
     private String reelingUnit;
+    private String imcbTable;
 
 
 

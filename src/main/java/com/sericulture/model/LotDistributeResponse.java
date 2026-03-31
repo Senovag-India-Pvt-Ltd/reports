@@ -83,7 +83,7 @@ public class LotDistributeResponse extends ResponseBody{
 
     @Temporal(TemporalType.DATE)
     @Column(name = "AUCTION_DATE")
-    private LocalDate auctionDate;
+    private String auctionDate;
     private String netWeight;
     private String price;
     private String fixationDate;
@@ -136,6 +136,21 @@ public class LotDistributeResponse extends ResponseBody{
     private Boolean totalRow;
     private Long totalNoOfCocoonPerKg;
     private Integer sL;
+    private String districtNameKan;
+    private String talukNameKan;
+
+
+    private String totalRspNssoGrainageLotWeight;
+    private String totalReelingLotWeight;
+    private String totalRspNssoGrainageAmount;
+    private String totalReelingAmount;
+    private String totalRspNssoGrainageSoldAmount;
+    private String totalReelingSOldAmount;
+    private String totalRspNssoGrainageMarketFee;
+    private String totalReelingMarketFee;
+    private String totalAmount;
+    private String totalSoldAmount;
+    private String totalMarketFee;
 
 
 
