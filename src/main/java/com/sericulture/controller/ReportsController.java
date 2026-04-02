@@ -2479,43 +2479,43 @@ public class ReportsController {
     }
 
 
-        @PostMapping("/get-market-reciept")
-    public ResponseEntity<?> getMarketReciept(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
-
-        try {
-            System.out.println("enter to Cash Reciept");
-            logger.info("enter to Cash Reciept");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Marketfee.jrxml");
-
-            // 2. parameters "empty"
-            Map<String, Object> parameters = getParameters();
-
-            // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceMarketReciept(requestDto);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
-
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-        }
-    }
+//        @PostMapping("/get-market-reciept")
+//    public ResponseEntity<?> getMarketReciept(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+//
+//        try {
+//            System.out.println("enter to Cash Reciept");
+//            logger.info("enter to Cash Reciept");
+//            String destFileName = "report_kannada.pdf";
+//            JasperReport jasperReport = getJasperReport("Marketfee.jrxml");
+//
+//            // 2. parameters "empty"
+//            Map<String, Object> parameters = getParameters();
+//
+//            // 3. datasource "java object"
+//            JRDataSource dataSource = getDataSourceMarketReciept(requestDto);
+//
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+//
+//            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData("attachment", "report.pdf");
+//
+//
+//            JRPdfExporter pdfExporter = new JRPdfExporter();
+//            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+//            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
+//            pdfExporter.exportReport();
+//            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+//
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//            logger.info(ex.getMessage() + ex.getStackTrace());
+//            HttpHeaders headers = new HttpHeaders();
+//            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+//        }
+//    }
 
     @PostMapping("/get-Invoice")
     public ResponseEntity<?> getInvoice(@RequestBody LotStatusSeedMarketRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
