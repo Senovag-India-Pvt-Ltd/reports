@@ -14173,8 +14173,8 @@ public class ReportsController {
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
             for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
-                if (sanctionOrderResponse.getFarmerFirstName() == null) {
-                    sanctionOrderResponse.setFarmerFirstName("");
+                if (sanctionOrderResponse.getNameKan() == null) {
+                    sanctionOrderResponse.setNameKan("");
                 }
                 if (sanctionOrderResponse.getVillageNameInKannada() == null) {
                     sanctionOrderResponse.setVillageNameInKannada("");
@@ -14261,34 +14261,6 @@ public class ReportsController {
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
         }
-        SanctionOrderResponse totalRow = new SanctionOrderResponse();
-
-// first 3 columns empty
-        totalRow.setSerialNumber(null);
-        totalRow.setReelerName("");
-        totalRow.setFatherNameKan("");
-        totalRow.setVillageNameInKannada("");
-        totalRow.setFruitsId("");
-        totalRow.setArn("");
-
-// empty columns
-        totalRow.setSilkTable("");
-        totalRow.setMonth("");
-        totalRow.setNoOfCocoonsNeedToProduce("");
-        totalRow.setNoOfRawSilkProduced("");
-        totalRow.setSilkExchangeName("");
-
-// show TOTAL text
-        totalRow.setForm17jNo("ಒಟ್ಟು");
-
-// totals
-        totalRow.setMachineQuantity(Float.parseFloat(df3.format(totalMachineQuantity)));
-        totalRow.setSchemeAmount(Float.parseFloat(df2.format(totalSchemeAmount)));
-
-        sanctionOrderResponseList.add(totalRow);
-
-
-
 
         String totalRawSilkProducedFormatted =
                 df3.format(totalMachineQuantity);
@@ -14324,7 +14296,7 @@ public class ReportsController {
                 apiResponse.getContent().get(0).getCategoryNameInKannada() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
                 "ನೀಡುವ       ಕಾರ್ಯಕ್ರ ಮವನ್ನು       ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು     ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ      ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ .    ಅದರಂತೆ ,    " + apiResponse.getContent().get(0).getCategoryNameInKannada() + "    ಯಡಿ       " +
                 apiResponse.getContent().get(0).getMachineTypeName() + "    ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      ಉತ್ಪಾದಿಸಿದ     "+apiResponse.getContent().get(0).getRenditta() +"    ರೆಂಡಿಟ್ಟಾ     ಒಳಪಟ್ಟ      "+apiResponse.getContent().get(0).getRaceName()+"      " +
-                "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ. " + apiResponse.getContent().get(0).getAmountPerKg() + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
+                "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ. " + Math.round(apiResponse.getContent().get(0).getAmountPerKg()) + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
                 "  ಮಿತಿಗೊಳಿಸಿ     ಮಾಹೆಯ     ಗರಿಷ್ಟ     ಮಿತಿ    "+apiResponse.getContent().get(0).getDailyLimit()+"    ಕೆ.ಜಿ.ಗಳಿಗೆ    ಪ್ರೋ ತ್ಸಾ ಹಧನ     ನೀಡಲು    ಅವಕಾಶವಿರುತ್ತದೆ.  \n" +
                 "              ಉಲ್ಲೇಖ (2) ರಂತೆ    ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲು     ಅನುದಾನವನ್ನು      ಬಿಡುಗಡೆ    ಮಾಡಿರುತ್ತಾರೆ.       " +
                 "ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ      "+ apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +
@@ -14336,7 +14308,7 @@ public class ReportsController {
 
         response.setHeader8("              ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ      "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"     ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ರುವ     ರೇಷ್ಮೆ     " +
                 "ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು      " + apiResponse.getContent().get(0).getMachineTypeName() + "    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     ಉತ್ಪಾ ದಿಸಿ    ವಹಿವಾಟು     ಮಾಡಿದ     " + totalRawSilkProducedFormatted + "    " +
-                "ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"     ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ,    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ.    " + apiResponse.getContent().get(0).getAmountPerKg() + "/-   ರಂತೆ,    ಒಟ್ಟು      ರೂ.   " + totalSchemeAmountFormatted + "/-   "
+                "ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"     ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ,    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ.    " + Math.round(apiResponse.getContent().get(0).getAmountPerKg()) + "/-   ರಂತೆ,    ಒಟ್ಟು      ರೂ.   " + totalSchemeAmountFormatted + "/-   "
                 + "(ರೂ.  " + schemeAmountWords + "  ) ಗಳಿಗೆ    ಪ್ರೋ ತ್ಸಾ ಹಧನವನ್ನು      " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )" +
                 "   ಲೆಕ್ಕ      ಶೀರ್ಷಿಕೆ :   " + apiResponse.getContent().get(0).getScHeadAccountName() + "(" + apiResponse.getContent().get(0).getDescription() + ")   ಅಡಿ    ಮಂಜೂರು    ಮಾಡಿದೆ .    ಈ    ಮೊತ್ತ ವನ್ನು      ಖಜಾನೆ–2 / DBT     " +
                 "ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್    ಖಾತೆಗೆ    ನೇರವಾಗಿ     ಜಮಾ    ಮಾಡುವುದು.");
@@ -14376,7 +14348,7 @@ public class ReportsController {
                 apiResponse.getContent().get(0).getCategoryNameInKannada() + "     ಅಡಿ     ರಾಜ್ಯ ದ     ರೇಷ್ಮೆ    ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು       ಉತ್ಪಾ ದಿಸಿದ      ಗುಣಮಟ್ಟ ದ      ಕಚ್ಚಾ     ರೇಷ್ಮೆ ಗೆ     ಪ್ರೋ ತ್ಸಾ ಹಧನ       " +
                 "ನೀಡುವ       ಕಾರ್ಯಕ್ರ ಮವನ್ನು       ಅನುಷ್ಟಾನ ಗೊಳಿಸಲು     ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು    ನೀಡಲಾಗಿರುತ್ತ ದೆ .    ಅದರಂತೆ ,    " + apiResponse.getContent().get(0).getCategoryNameInKannada() + "    ಯಡಿ       " +
                 apiResponse.getContent().get(0).getMachineTypeName() + "   ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ       ಉತ್ಪಾದಿಸಿದ     "+apiResponse.getContent().get(0).getRenditta() +"    ರೆಂಡಿಟ್ಟಾ     ಒಳಪಟ್ಟ      "+apiResponse.getContent().get(0).getRaceName()+"      " +
-                "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ." + apiResponse.getContent().get(0).getAmountPerKg() + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
+                "ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ   ಪ್ರ ತಿ    ಕೆ.ಜಿ.ಗೆ     ರೂ." + Math.round(apiResponse.getContent().get(0).getAmountPerKg()) + "   ರಂತೆ ,    ಪ್ರ ತಿ    ಬೇಸಿನ್ ನ      ದಿನದ     ಉತ್ಪಾ ದನೆಯನ್ನು      ಗರಿಷ್ಟ     "+apiResponse.getContent().get(0).getMonthlyLimit()+"    ಕೆ.ಜಿ.ಗೆ    " +
                 "  ಮಿತಿಗೊಳಿಸಿ     ಮಾಹೆಯ     ಗರಿಷ್ಟ     ಮಿತಿ    "+apiResponse.getContent().get(0).getDailyLimit()+"    ಕೆ.ಜಿ.ಗಳಿಗೆ    ಪ್ರೋ ತ್ಸಾ ಹಧನ     ನೀಡಲು    ಅವಕಾಶವಿರುತ್ತದೆ.  \n" +
                 "              ಉಲ್ಲೇಖ (2) ರಂತೆ    ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ  ನಗೊಳಿಸಲು     ಅನುದಾನವನ್ನು      ಬಿಡುಗಡೆ    ಮಾಡಿರುತ್ತಾರೆ.       " +
                 "ಉಲ್ಲೇಖ (3) ರಲ್ಲಿ      "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"   " +
@@ -14388,7 +14360,7 @@ public class ReportsController {
 
         response.setHeader8("              ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರಿಸಿರುವಂತೆ       " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "     ವ್ಯಾ ಪ್ತಿ ಯಲ್ಲಿ ರುವ     ರೇಷ್ಮೆ     " +
                 "ನೂಲು    ಬಿಚ್ಚಾ ಣಿಕೆದಾರರು      " + apiResponse.getContent().get(0).getMachineTypeName() + "   ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ      ಉತ್ಪಾ ದಿಸಿ    ವಹಿವಾಟು     ಮಾಡಿದ      " + totalRawSilkProducedFormatted + "    " +
-                "ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"     ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ,    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ.    " + apiResponse.getContent().get(0).getAmountPerKg() + "/-   ರಂತೆ,    ಒಟ್ಟು      ರೂ.   " + totalSchemeAmountFormatted + "/-   "
+                "ಕೆ.ಜಿ    "+apiResponse.getContent().get(0).getRaceName()+"     ಕಚ್ಚಾ     ರೇಷ್ಮೆಗೆ,    ಪ್ರ ತಿ     ಕೆ.ಜಿ.ಗೆ     ರೂ.    " + Math.round(apiResponse.getContent().get(0).getAmountPerKg()) + "/-   ರಂತೆ,    ಒಟ್ಟು      ರೂ.   " + totalSchemeAmountFormatted + "/-   "
                 + "(ರೂ.  " + schemeAmountWords + "  ) ಗಳ    ಪ್ರೋ ತ್ಸಾ ಹಧನವನ್ನು      " + apiResponse.getContent().get(0).getSchemeNameInKannada() + "  (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )" +
                 "   ಲೆಕ್ಕ      ಶೀರ್ಷಿಕೆ :   " + apiResponse.getContent().get(0).getScHeadAccountName() + "(" + apiResponse.getContent().get(0).getDescription() + ")   ಅಡಿ    ಮಂಜೂರು    ಮಾಡಿದೆ .    ಈ    ಮೊತ್ತ ವನ್ನು      ಖಜಾನೆ–2 / DBT     " +
                 "ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್    ಖಾತೆಗೆ    ನೇರವಾಗಿ     ಜಮಾ    ಮಾಡುವುದು.");
