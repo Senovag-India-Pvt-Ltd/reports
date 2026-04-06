@@ -438,6 +438,32 @@ private String totalIncentiveAmountInWords;
 
 
 
+    private String parentalLevel;
+    private Integer fcIssued;
+
+    private Float estimatedWeight;
+
+    private Integer cocoonsPerKg;
+    private Float meltPercentage;
+    private Float totalQuantity;
+
+    private Float rspQty;
+    private Float nssoQty;
+    private Float govtGrainageQty;
+    private Float reelingQty;
+    private Float remainingCocoon;
+
+
+    private String rspName;
+    private String nssoName;
+    private String govtGrainageName;
+    private String reelingName;
+    private String lotParentLevel;
+    private Integer allottedLotId;
+    private String auctionDate;
+    private String farmerFullName;
+    private String farmerVillage;
+    private String farmerFruitsId;
 
 
 
