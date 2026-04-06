@@ -453,6 +453,26 @@ public class ApiService {
         return response;
     }
 
+
+    public SanctionOrder fetchDataFromSeedCocoonDTRReport(CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException {
+
+       String finalapiurl = apiUrl + "lotGroupage/getSeedCocoonDTRReport";
+
+//       String finalapiurl = "http://localhost:8002/market-auction/v1/" + "lotGroupage/getSeedCocoonDTRReport";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<CheckInspectionStatusRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        String responseBody = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(responseBody, SanctionOrder.class);
+    }
+
     public SanctionOrder fetchSanctionSeedMarketDetails(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {
 
