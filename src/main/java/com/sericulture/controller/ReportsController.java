@@ -6543,26 +6543,47 @@ public class ReportsController {
 
         List<Map<String, Object>> tableList = new ArrayList<>();
 
-        Map<String, Object> tableRow = new HashMap<>();
-        tableRow.put("lgBuyerType", apiResponse.content.getLgBuyerType());
-        tableRow.put("lgBuyerName", apiResponse.content.getLgBuyerName());
-        tableRow.put("lgLotWeight", apiResponse.content.getLgLotWeight());
-        tableRow.put("lgAmount", apiResponse.content.getLgAmount());
-        tableRow.put("noOfCocoonPerKg", apiResponse.content.getNoOfCocoonPerKg());
-        tableRow.put("lgSoldOutAmount", apiResponse.content.getLgSoldOutAmount());
-        tableRow.put("farmerAmount", apiResponse.content.getFarmerAmount());
-        tableRow.put("remainingCocoon", apiResponse.content.getRemainingCocoon());
+        List<Buyer> buyerList = apiResponse.content.getBuyerList();
 
-        tableList.add(tableRow);
+        if (buyerList == null) {
+            buyerList = new ArrayList<>(); // safety only
+        }
 
-        JRBeanCollectionDataSource tableDS1 =
-                new JRBeanCollectionDataSource(tableList);
+        for (Buyer item : buyerList) {
 
-        JRBeanCollectionDataSource tableDS2 =
-                new JRBeanCollectionDataSource(tableList);
+            Map<String, Object> row = new HashMap<>();
 
-        JRBeanCollectionDataSource tableDS3 =
-                new JRBeanCollectionDataSource(tableList);
+            row.put("lgBuyerType", item.getLgBuyerType());
+            row.put("lgBuyerName", item.getLgBuyerName());
+            row.put("lgLotWeight", item.getLgLotWeight());
+            row.put("lgAmount", item.getLgAmount());
+            row.put("noOfCocoonPerKg", item.getNoOfCocoonPerKg());
+            row.put("lgSoldOutAmount", item.getLgSoldOutAmount());
+            row.put("farmerAmount", item.getFarmerAmount());
+            row.put("remainingCocoon", item.getRemainingCocoon());
+
+            double totalCocoon = 0;
+
+            try {
+                double weight = item.getLgLotWeight() != null ? Double.parseDouble(item.getLgLotWeight()) : 0;
+                long cocoonPerKg = item.getNoOfCocoonPerKg() != null ? item.getNoOfCocoonPerKg() : 0;
+
+                totalCocoon = weight * cocoonPerKg;
+
+            } catch (Exception e) {
+                totalCocoon = 0;
+            }
+
+            row.put("totalCocoon", totalCocoon);
+
+            tableList.add(row);
+        }
+
+        System.out.println("TABLE SIZE: " + tableList.size());
+
+        JRBeanCollectionDataSource tableDS1 = new JRBeanCollectionDataSource(tableList);
+        JRBeanCollectionDataSource tableDS2 = new JRBeanCollectionDataSource(tableList);
+        JRBeanCollectionDataSource tableDS3 = new JRBeanCollectionDataSource(tableList);
 
         parameters.put("collectionBeanParam1", tableDS1);
         parameters.put("collectionBeanParam2", tableDS2);

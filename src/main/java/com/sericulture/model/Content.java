@@ -200,6 +200,7 @@ public class Content {
     private Float approximateWeight;
     private Long noOfCocoonPerKg;
     private String remainingCocoon;
+    private List<Buyer> buyerList;
 
 
 
