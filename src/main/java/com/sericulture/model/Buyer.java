@@ -11,5 +11,7 @@ public class Buyer {
     private String lgSoldOutAmount;
     private Double farmerAmount;
     private String remainingCocoon;
-    private String lgMarketFee;
+    private Double lgSoldOutAmountTotal;
+    private Integer lgMarketFee;
+
 }

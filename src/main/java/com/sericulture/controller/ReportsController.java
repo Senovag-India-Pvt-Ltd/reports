@@ -6539,16 +6539,14 @@ public class ReportsController {
             apiResponse.content.setReelerbalance("Lot value: 0+0=0");
         }
 
-        countries.add(apiResponse.content);
-
         List<Map<String, Object>> tableList = new ArrayList<>();
-
         List<Buyer> buyerList = apiResponse.content.getBuyerList();
 
         if (buyerList == null) {
-            buyerList = new ArrayList<>(); // safety only
+            buyerList = new ArrayList<>();
         }
-        double lgSoldOutAmountTotal = 0;
+
+        double lgSoldOutAmountTotal = 0; // total variable
 
         for (Buyer item : buyerList) {
 
@@ -6560,16 +6558,20 @@ public class ReportsController {
             row.put("lgAmount", item.getLgAmount());
             row.put("noOfCocoonPerKg", item.getNoOfCocoonPerKg());
             row.put("lgSoldOutAmount", item.getLgSoldOutAmount());
-
             row.put("remainingCocoon", item.getRemainingCocoon());
 
-            // ✅ FIXED KEY
+            // ✅ FIX: correct key name (IMPORTANT)
             row.put("lgMarketFee", item.getLgMarketFee());
 
+            // total cocoon calculation
             double totalCocoon = 0;
             try {
-                double weight = item.getLgLotWeight() != null ? Double.parseDouble(item.getLgLotWeight()) : 0;
-                long cocoonPerKg = item.getNoOfCocoonPerKg() != null ? item.getNoOfCocoonPerKg() : 0;
+                double weight = item.getLgLotWeight() != null
+                        ? Double.parseDouble(item.getLgLotWeight()) : 0;
+
+                long cocoonPerKg = item.getNoOfCocoonPerKg() != null
+                        ? item.getNoOfCocoonPerKg() : 0;
+
                 totalCocoon = weight * cocoonPerKg;
             } catch (Exception e) {
                 totalCocoon = 0;
@@ -6577,17 +6579,25 @@ public class ReportsController {
 
             row.put("totalCocoon", totalCocoon);
 
+            // ✅ FIX: total calculation
             try {
                 double val = item.getLgSoldOutAmount() != null
-                        ? Double.parseDouble(item.getLgSoldOutAmount()) : 0;
+                        ? Double.parseDouble(item.getLgSoldOutAmount())
+                        : 0;
+
                 lgSoldOutAmountTotal += val;
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // ignore
+            }
 
             tableList.add(row);
         }
 
-        System.out.println("TABLE SIZE: " + tableList.size());
+        apiResponse.content.setLgSoldOutAmountTotal(lgSoldOutAmountTotal);
 
+        System.out.println("TOTAL lgSoldOutAmountTotal: " + lgSoldOutAmountTotal);
+
+        // ---------------- DATASOURCE ----------------
         JRBeanCollectionDataSource tableDS1 = new JRBeanCollectionDataSource(tableList);
         JRBeanCollectionDataSource tableDS2 = new JRBeanCollectionDataSource(tableList);
         JRBeanCollectionDataSource tableDS3 = new JRBeanCollectionDataSource(tableList);
@@ -6595,6 +6605,8 @@ public class ReportsController {
         parameters.put("collectionBeanParam1", tableDS1);
         parameters.put("collectionBeanParam2", tableDS2);
         parameters.put("collectionBeanParam3", tableDS3);
+
+        countries.add(apiResponse.content);
 
         return new JRBeanCollectionDataSource(countries);
     }
