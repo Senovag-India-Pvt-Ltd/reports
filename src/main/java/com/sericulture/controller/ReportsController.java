@@ -9907,7 +9907,7 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ        "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ    ಶ್ರೀಮತಿ/ಶ್ರೀ     " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")     "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ    ಶ್ರೀಮತಿ/ಶ್ರೀ     " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+") ,    "+
                     "ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮ ,     "+
                     apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ      ಇವರು     "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
                     "   ವರ್ಗಕ್ಕೆ     ಸೇರಿದ್ದು  ,   ಸದರಿಯವರು    ರೀಲಿಂಗ್     ರಹದಾರಿ     ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"    ರಂತೆ    ರೀಲಿಂಗ್     ರಹದಾರಿಯನ್ನು     ಹೊಂದಿದ್ದು  ,   ರೀಲಿಂಗ್     "+
@@ -15783,7 +15783,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -15955,7 +15955,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -16135,7 +16135,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -16306,7 +16306,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -16484,7 +16484,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -16664,7 +16664,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -16843,7 +16843,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -17020,7 +17020,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -17199,7 +17199,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -17373,7 +17373,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -17546,7 +17546,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -17720,7 +17720,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
         String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
 
 
 
@@ -18117,7 +18117,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "("+apiResponse.getContent().get(0).getFruitsId()+")     ಇವರು    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ     " +surveyText+
                     "    ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.  \n\n" +
                                 "               ಮೇಲ್ಕಾ ಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ:" +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+"ಯಾದ     ಗ್ರಾ ಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ /ಶ್ರೀ ಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ     ಗ್ರಾ ಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ /ಶ್ರೀ ಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
                     "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
                      apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರ  ದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪು ನೇರಳೆ " +
                     "     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
@@ -18973,7 +18973,29 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
+    private String formatDates(Object dateObj, SimpleDateFormat sdf) {
 
+        if (dateObj == null) return "";
+
+        try {
+            // If already Date
+            if (dateObj instanceof Date) {
+                return sdf.format((Date) dateObj);
+            }
+
+            // If String like "2026-03-30"
+            if (dateObj instanceof String) {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = inputFormat.parse((String) dateObj);
+                return sdf.format(date);
+            }
+
+        } catch (Exception e) {
+            return dateObj.toString();
+        }
+
+        return dateObj.toString();
+    }
 
 
     private String formatDate(Object dateObj, SimpleDateFormat sdf) {
@@ -19383,7 +19405,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -19651,7 +19674,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -19919,7 +19943,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -20188,7 +20213,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -20455,7 +20481,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -20727,7 +20754,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -21001,7 +21029,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -21091,9 +21120,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "    ಜಿಲ್ಲೆ     ಇವರು    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     ಸೋಲಾರ್    ವಾಟರ್   ಹೀಟರ್   ಅಳವಡಿಸಿರುವುದಕ್ಕಾ ಗಿ     ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ     ನೀಡುವ   ಕುರಿತು.");
 
 
-            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ    ಸುತ್ತೋಲೆ     ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
+            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ    ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " +schemeCircularDate  + ".\n" +
-                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
+                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ನಿರ್ದೇಶಕರು ,   ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
                     "       " +apiResponse.getContent().get(0).getAllotReleaseNo() + " ,   ದಿನಾಂಕ :  " +allotReleaseDate  + " \n" +
                     "3.    ಫಲಾನುಭವಿ     ಆಯ್ಕೆ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ  :   "+ apiResponse.getContent().get(0).getWorkOrderNumber() +" ,   ದಿನಾಂಕ :  "+  selectionLetterDate+".\n"+
                     "4.    "+apiResponse.getContent().get(0).getEmpanelledVendorApprovedBy() +"    ರವರ   ಪತ್ರ ದ     ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLetterNo() + " ,\n"+
@@ -21116,9 +21145,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಉಲ್ಲೇಖ (4) ರನ್ವ ಯ    "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿಗೆ     ರೇಷ್ಮೆ    ಇಲಾಖೆಯಿಂದ    ಗುರುತಿಸಿರುವ    ಸಂಸ್ಥೆ ಯಾದ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ಇವರಿಂದ     ಟ್ಯಾ ಕ್ಸ್     ಇನ್ ವಾಯ್ಸ್       " +
                     "ಸಂಖ್ಯೆ    :  "+apiResponse.getContent().get(0).getTaxInvoiceNo()+"    ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getTaxInvoiceDate()+"   ರಂತೆ     ಹೊಸದಾಗಿ    ಅಳವಡಿಸಿಕೊಂಡಿರುವ    "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್    ಸಾಮರ್ಥ್ಯದ      "+
                             ""+apiResponse.getContent().get(0).getReelingUnit()+"    ಮಾದರಿಯ     ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್     ದರ    ರೂ. "+apiResponse.getContent().get(0).getUnitCost()+"  ಗಳಾಗಿದ್ದು     ಶೇ    "+apiResponse.getContent().get(0).getShareInPercentage()+"   ರಂತೆ     ರೂ.    " +
-                    apiResponse.getContent().get(0).getSchemeAmount()+"  ಗಳ   ಸಹಾಯಧನಕ್ಕೆ     ಅರ್ಹರಿರುತ್ತಾ ರೆ.   ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ     ಮಂಜೂರಾತಿ     "+
-                    "ನೀಡುವ    ಸಹಾಯಧನವನ್ನು     ತಯಾರಕ / ಸರಬರಾಜು    ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಲು     ಫಲಾನುಭವಿಯ    ಒಪ್ಪಿಗೆ     ಪತ್ರದೊಂದಿಗೆ     ಸಲ್ಲಿಕೆಯಾಗಿರುವ      "+
-                    "ಸಹಾಯಧನ     ಮಂಜೂರಾತಿ    ಪ್ರಸ್ತಾವನೆಯು    ಕ್ಷೇತ್ರಮಟ್ಟದ    ಅಧಿಕಾರಿಗಳಿಂದ    ಸಮುಚಿತ    ಮಾರ್ಗದಲ್ಲಿ   ಶಿಫಾರಸ್ಸು      ಮಾಡಲ್ಪಟ್ಟಿರುತ್ತದೆ. \n\n" +
+                    apiResponse.getContent().get(0).getSchemeAmount()+"  ಗಳ   ಸಹಾಯಧನಕ್ಕೆ     ಅರ್ಹರಿರುತ್ತಾ ರೆ.  ಉಲ್ಲೇಖ (5) ರನ್ವ ಯ,     ಸಂಬಂಧಿತ     ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆಗಳನ್ನು      ಸರಬರಾಜು    ಮಾಡಿದ     "+
+                    "ಸಂಸ್ಥೆ ಗೆ     ಫಲಾನುಭವಿಯ    ಪಾಲಿನ    ಮೊತ್ತ ವನ್ನು     ಈಗಾಗಲೇ    ಪಾವತಿಸಿ ,   ಅಳವಡಿಸಿಕೊಂಡಿರುವುದರಿಂದ ,    ಫಲಾನುಭವಿಯು    ನೀಡಿರುವ    ಒಪ್ಪಿ ಗೆ     ಪತ್ರ ದ     ಮೇರೆಗೆ ,    ಸಹಾಯಧನದ    ಮೊತ್ತವನ್ನು      "+
+                    "ಸರಬರಾಜು     ಮಾಡಿದ    ಸಂಸ್ಥೆಗೆ    ನೇರವಾಗಿ    ಪಾವತಿಸಲು    ಮಂಜೂರು    ಮಾಡುವಂತೆ    ಪ್ರ ಸ್ತಾ ವನೆ     ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.\n\n" +
                     "           ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ      ಫಲಾನುಭವಿ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರ ಮಗಳಡಿ      ಸಹಾಯಧನ      ಮಂಜೂರು   ಮಾಡಲು    ನೀಡಿರುವ    ಆರ್ಥಿಕ    ಅಧಿಕಾರ   ಪ್ರ  ತ್ಯಾ ಯೋಜನೆಯನ್ವ ಯ     "+apiResponse.getContent().get(0).getDesignationNameInKannada()+"      "+
                     "ರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿರುತ್ತದೆ.   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ    ಆದೇಶ  ಹೊರಡಿಸಿದೆ.");
 
@@ -21160,9 +21189,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "    ಜಿಲ್ಲೆ     ಇವರು    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     ಸೋಲಾರ್    ವಾಟರ್   ಹೀಟರ್   ಅಳವಡಿಸಿರುವುದಕ್ಕಾ ಗಿ     ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ     ನೀಡುವ   ಕುರಿತು.");
 
 
-            response.setHeader3("1.    ರೇಷ್ಮೆ    ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ     ಸುತ್ತೋಲೆ      ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
+            response.setHeader3("1.    ರೇಷ್ಮೆ    ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ     ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " +schemeCircularDate  + ".\n" +
-                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
+                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
                     "       " +apiResponse.getContent().get(0).getAllotReleaseNo() + " ,   ದಿನಾಂಕ :  " +allotReleaseDate  + " \n" +
                     "3.    ಫಲಾನುಭವಿ     ಆಯ್ಕೆ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ  :   "+ apiResponse.getContent().get(0).getWorkOrderNumber() +" ,   ದಿನಾಂಕ :  "+  selectionLetterDate+".\n"+
                     "4.    "+apiResponse.getContent().get(0).getEmpanelledVendorApprovedBy() +"    ರವರ   ಪತ್ರ ದ     ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLetterNo() + " ,\n"+
@@ -21185,9 +21214,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಉಲ್ಲೇಖ (4) ರನ್ವ ಯ    "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿಗೆ     ರೇಷ್ಮೆ    ಇಲಾಖೆಯಿಂದ    ಗುರುತಿಸಿರುವ    ಸಂಸ್ಥೆ ಯಾದ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ಇವರಿಂದ     ಟ್ಯಾ ಕ್ಸ್     ಇನ್ ವಾಯ್ಸ್       " +
                     "ಸಂಖ್ಯೆ    :  "+apiResponse.getContent().get(0).getTaxInvoiceNo()+"    ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getTaxInvoiceDate()+"   ರಂತೆ     ಹೊಸದಾಗಿ    ಅಳವಡಿಸಿಕೊಂಡಿರುವ    "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್    ಸಾಮರ್ಥ್ಯದ      "+
                     ""+apiResponse.getContent().get(0).getReelingUnit()+"    ಮಾದರಿಯ     ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್     ದರ    ರೂ. "+apiResponse.getContent().get(0).getUnitCost()+"  ಗಳಾಗಿದ್ದು     ಶೇ    "+apiResponse.getContent().get(0).getShareInPercentage()+"   ರಂತೆ     ರೂ.    " +
-                    apiResponse.getContent().get(0).getSchemeAmount()+"  ಗಳ   ಸಹಾಯಧನಕ್ಕೆ     ಅರ್ಹರಿರುತ್ತಾ ರೆ.   ಉಲ್ಲೇಖ(5)ರಲ್ಲಿ     ಮಂಜೂರಾತಿ     "+
-                    "ನೀಡುವ    ಸಹಾಯಧನವನ್ನು     ತಯಾರಕ / ಸರಬರಾಜು    ಸಂಸ್ಥೆ ಗೆ     ಪಾವತಿಸಲು     ಫಲಾನುಭವಿಯ    ಒಪ್ಪಿಗೆ     ಪತ್ರದೊಂದಿಗೆ     ಸಲ್ಲಿಕೆಯಾಗಿರುವ      "+
-                    "ಸಹಾಯಧನ     ಮಂಜೂರಾತಿ    ಪ್ರಸ್ತಾವನೆಯು    ಕ್ಷೇತ್ರಮಟ್ಟದ    ಅಧಿಕಾರಿಗಳಿಂದ    ಸಮುಚಿತ    ಮಾರ್ಗದಲ್ಲಿ   ಶಿಫಾರಸ್ಸು      ಮಾಡಲ್ಪಟ್ಟಿರುತ್ತದೆ. \n\n" +
+                    apiResponse.getContent().get(0).getSchemeAmount()+"  ಗಳ   ಸಹಾಯಧನಕ್ಕೆ     ಅರ್ಹರಿರುತ್ತಾ ರೆ.  ಉಲ್ಲೇಖ (5) ರನ್ವ ಯ,     ಸಂಬಂಧಿತ     ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆಗಳನ್ನು      ಸರಬರಾಜು    ಮಾಡಿದ     "+
+                    "ಸಂಸ್ಥೆ ಗೆ     ಫಲಾನುಭವಿಯ    ಪಾಲಿನ    ಮೊತ್ತ ವನ್ನು     ಈಗಾಗಲೇ    ಪಾವತಿಸಿ ,   ಅಳವಡಿಸಿಕೊಂಡಿರುವುದರಿಂದ ,    ಫಲಾನುಭವಿಯು    ನೀಡಿರುವ    ಒಪ್ಪಿ ಗೆ     ಪತ್ರ ದ     ಮೇರೆಗೆ ,    ಸಹಾಯಧನದ    ಮೊತ್ತವನ್ನು      "+
+                    "ಸರಬರಾಜು     ಮಾಡಿದ    ಸಂಸ್ಥೆಗೆ    ನೇರವಾಗಿ    ಪಾವತಿಸಲು    ಮಂಜೂರು    ಮಾಡುವಂತೆ    ಪ್ರ ಸ್ತಾ ವನೆ     ಸಲ್ಲಿ ಸಿರುತ್ತಾರೆ.\n\n" +
                     "           ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ      ಫಲಾನುಭವಿ    ಆಧಾರಿತ    ಕಾರ್ಯಕ್ರ ಮಗಳಡಿ      ಸಹಾಯಧನ      ಮಂಜೂರು   ಮಾಡಲು    ನೀಡಿರುವ    ಆರ್ಥಿಕ    ಅಧಿಕಾರ   ಪ್ರ  ತ್ಯಾ ಯೋಜನೆಯನ್ವ ಯ     "+apiResponse.getContent().get(0).getDesignationNameInKannada()+"      "+
                     "ರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿರುತ್ತದೆ.   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ    ಆದೇಶ  ಹೊರಡಿಸಿದೆ.");
 
@@ -21280,7 +21309,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -21363,15 +21393,15 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
             response.setHeader( apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    "+ apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() +"    ರವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
             response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ    ಸಾಲಿನಲ್ಲಿ      ಇಲಾಖೆಯು    “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”     ಯೋಜನೆ    " +
-                    "     (" +apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )    ಯಡಿ     ಶ್ರೀ   "+ apiResponse.getContent().get(0).getReelerName() +"  " +
+                    "     (" +apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )    ಯಡಿ     ಶ್ರೀ /ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getReelerName() +"  " +
                     "  ಬಿನ್/ಕೋಂ     "+ apiResponse.getContent().get(0).getReelerFatherName() +"  ,      "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ , " +
                     "   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +
                     "    ಜಿಲ್ಲೆ     ಇವರು    ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     ಸೋಲಾರ್    ವಾಟರ್   ಹೀಟರ್   ಅಳವಡಿಸಿರುವುದಕ್ಕಾ ಗಿ     ಸಹಾಯಧನ    ಮಂಜೂರಾತಿ     ನೀಡುವ   ಕುರಿತು.");
 
 
-            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ    ಸುತ್ತೋಲೆ     ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
+            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ     ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " +schemeCircularDate  + ".\n" +
-                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
+                    "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
                     "       " +apiResponse.getContent().get(0).getAllotReleaseNo() + " ,   ದಿನಾಂಕ :  " +allotReleaseDate  + " \n" +
                     "3.    ಫಲಾನುಭವಿ     ಆಯ್ಕೆ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ  :   "+ apiResponse.getContent().get(0).getWorkOrderNumber() +" ,   ದಿನಾಂಕ :  "+  selectionLetterDate+".\n"+
                     "4.    "+apiResponse.getContent().get(0).getEmpanelledVendorApprovedBy() +"    ರವರ   ಪತ್ರ ದ     ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLetterNo() + " ,\n"+
@@ -21383,13 +21413,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆ    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"  )  ಯಡಿ    ರೇಷ್ಮೆ    ನೂಲು      "+
                     "ಬಿಚ್ಚಾ  ಣಿಕೆದಾರರು     ರೀಲಿಂಗ್      ಘಟಕದಲ್ಲಿ      ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್    ಅಳವಡಿಕೊಳ್ಳ ಲು     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n\n" +
 
-                    "           ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3)   ರನ್ವ ಯ    ಶ್ರೀ   " +
+                    "           ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3)   ರನ್ವ ಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ.   " +
                     "   "+apiResponse.getContent().get(0).getReelerName()+" ,     ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,      " +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +
                     "    ಜಿಲ್ಲೆ      ಇವರು    ರೀಲಿಂಗ್     ರಹದಾರಿ    ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"    ರಂತೆ      ರೀಲಿಂಗ್      ರಹದಾರಿಯನ್ನು      ಹೊಂದಿದ್ದು  ,    FRUITS ID     ನೋಂದಣಿ    ಸಂಖ್ಯೆ   :  "+apiResponse.getContent().get(0).getFruitsId()+"    ಆಗಿರುತ್ತ ದೆ  ,     "+
                     "  ಇವರನ್ನು      ಸದರಿ      ಯೋಜನೆಯಡಿ      ಫಲಾನುಭವಿಯಾಗಿ      ಆಯ್ಕೆ ಯಾಗಿದ್ದು  ,    ಆಯ್ಕೆ     ಪತ್ರ ವನ್ನು    ನೀಡಲಾಗಿರುತ್ತ ದೆ.\n\n" +
 
-                    "           ಶ್ರೀ  "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ     "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     " +
+                    "           ಶ್ರೀ/ಶ್ರೀಮತಿ.  "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ     "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     " +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ  ,   ಇವರು    " +
                     "ಉಲ್ಲೇಖ (4) ರನ್ವ ಯ    "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿಗೆ     ರೇಷ್ಮೆ    ಇಲಾಖೆಯಿಂದ    ಗುರುತಿಸಿರುವ    ಸಂಸ್ಥೆ ಯಾದ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ಇವರಿಂದ     ಟ್ಯಾ ಕ್ಸ್     ಇನ್ ವಾಯ್ಸ್       " +
                     "ಸಂಖ್ಯೆ    :  "+apiResponse.getContent().get(0).getTaxInvoiceNo()+"    ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getTaxInvoiceDate()+"   ರಂತೆ     ಹೊಸದಾಗಿ    ಅಳವಡಿಸಿಕೊಂಡಿರುವ    "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್    ಸಾಮರ್ಥ್ಯದ      "+
@@ -21401,7 +21431,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿರುತ್ತದೆ.   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ    ಆದೇಶ  ಹೊರಡಿಸಿದೆ.");
 
             response.setHeader6("           ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿದಂತೆ ,     "+apiResponse.getContent().get(0).getFinancialYear()+"    ನೇ    ಸಾಲಿನ     "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"    ಯೋಜನೆ    ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  ) ಯಡಿ      "+
-                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ವ್ಯಾ ಪ್ತಿ ಯ    ಶ್ರೀ   "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getReelerFatherName()+" ,      "+apiResponse.getContent().get(0).getVillageNameInKannada() + " " +
+                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ವ್ಯಾ ಪ್ತಿ ಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ.   "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getReelerFatherName()+" ,      "+apiResponse.getContent().get(0).getVillageNameInKannada() + " " +
                     "   ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ       ಇವರು     ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ರವರಿಂದ    "+
                     "ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ    "+apiResponse.getContent().get(0).getReelingUnit()+"   ಮಾದರಿಯ   ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್     ಅಳವಡಿಸಿಕೊಂಡಿರುವುದಕ್ಕಾ ಗಿ  ,    ಇಲಾಖೆಯಿಂದ     ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ   ರೂ.   "+apiResponse.getContent().get(0).getUnitCost()+"   ಗಳಿಗೆ     " +
                     " ಶೇ  "+apiResponse.getContent().get(0).getShareInPercentage()+"   ರಂತೆ     ಸಹಾಯಧನ   ರೂ."+apiResponse.getContent().get(0).getSchemeAmount()+"  (ರೂ."+schemeAmountWords+"  )  ಗಳಿಗೆ     ಮುಚ್ಚ ಳಿಕೆಯಲ್ಲಿ ನ      ಷರತ್ತು     ಮತ್ತು      " +
@@ -21425,14 +21455,14 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
                     +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
+                    +"   3. ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
         }
         else {
             response.setHeader( apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    "+ apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder() +"    ರವರ    ಕಛೇರಿ    ನಡವಳಿಗಳು");
 
             response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "     ನೇ    ಸಾಲಿನಲ್ಲಿ      ಇಲಾಖೆಯು    “"+ apiResponse.getContent().get(0).getSchemeNameInKannada() +"”     ಯೋಜನೆ    " +
-                    "     (" +apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )    ಯಡಿ     ಶ್ರೀ   "+ apiResponse.getContent().get(0).getReelerName() +"  " +
+                    "     (" +apiResponse.getContent().get(0).getCategoryNameInKannada() + "  )    ಯಡಿ     ಶ್ರೀ/ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getReelerName() +"  " +
                     "  ಬಿನ್/ಕೋಂ     "+ apiResponse.getContent().get(0).getReelerFatherName() +"  ,      "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ , " +
                     "   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +
                     "   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +
@@ -21453,13 +21483,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ಯೋಜನೆ    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"  )  ಯಡಿ    ರೇಷ್ಮೆ    ನೂಲು      "+
                     "ಬಿಚ್ಚಾ  ಣಿಕೆದಾರರು     ರೀಲಿಂಗ್      ಘಟಕದಲ್ಲಿ      ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್    ಅಳವಡಿಕೊಳ್ಳ ಲು     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ಮಾರ್ಗಸೂಚಿಯನ್ನು     ನೀಡಲಾಗಿರುತ್ತ ದೆ. \n\n" +
 
-                    "           ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3)   ರನ್ವ ಯ    ಶ್ರೀ   " +
+                    "           ಉಲ್ಲೇಖ (2) ರಲ್ಲಿ     ಸದರಿ     ಕಾರ್ಯಕ್ರ ಮವನ್ನು     ಅನುಷ್ಟಾ ನಗೊಳಿಸಲು    ಅನುದಾನ    ಬಿಡುಗಡೆಗೊಂಡಿರುತ್ತ ದೆ.   ಉಲ್ಲೇಖ (3)   ರನ್ವ ಯ    ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +
                     "   "+apiResponse.getContent().get(0).getReelerName()+" ,     ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,      " +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +
                     "    ಜಿಲ್ಲೆ      ಇವರು    ರೀಲಿಂಗ್     ರಹದಾರಿ    ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"    ರಂತೆ      ರೀಲಿಂಗ್      ರಹದಾರಿಯನ್ನು      ಹೊಂದಿದ್ದು  ,    FRUITS ID     ನೋಂದಣಿ    ಸಂಖ್ಯೆ   :  "+apiResponse.getContent().get(0).getFruitsId()+"    ಆಗಿರುತ್ತ ದೆ  ,     "+
                     "  ಇವರನ್ನು      ಸದರಿ      ಯೋಜನೆಯಡಿ      ಫಲಾನುಭವಿಯಾಗಿ      ಆಯ್ಕೆ ಯಾಗಿದ್ದು  ,    ಆಯ್ಕೆ     ಪತ್ರ ವನ್ನು    ನೀಡಲಾಗಿರುತ್ತ ದೆ.\n\n" +
 
-                    "           ಶ್ರೀ  "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ     "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     " +
+                    "           ಶ್ರೀ/ಶ್ರೀಮತಿ. "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ     "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     " +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ  ,   ಇವರು    " +
                     "ಉಲ್ಲೇಖ (4) ರನ್ವ ಯ    "+apiResponse.getContent().get(0).getFinancialYear()+"   ನೇ    ಸಾಲಿಗೆ     ರೇಷ್ಮೆ    ಇಲಾಖೆಯಿಂದ    ಗುರುತಿಸಿರುವ    ಸಂಸ್ಥೆ ಯಾದ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ಇವರಿಂದ     ಟ್ಯಾ ಕ್ಸ್     ಇನ್ ವಾಯ್ಸ್       " +
                     "ಸಂಖ್ಯೆ    :  "+apiResponse.getContent().get(0).getTaxInvoiceNo()+"    ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getTaxInvoiceDate()+"   ರಂತೆ     ಹೊಸದಾಗಿ    ಅಳವಡಿಸಿಕೊಂಡಿರುವ    "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್    ಸಾಮರ್ಥ್ಯದ      "+
@@ -21471,7 +21501,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ರವರಿಗೆ    ಸಂಪೂರ್ಣ    ಅಧಿಕಾರವಿರುತ್ತದೆ.   ಅದರಂತೆ    ಈ   ಕೆಳಕಂಡ    ಆದೇಶ  ಹೊರಡಿಸಿದೆ.");
 
             response.setHeader6("           ಪೀಠಿಕೆಯಲ್ಲಿ      ವಿವರಿಸಿದಂತೆ ,     "+apiResponse.getContent().get(0).getFinancialYear()+"    ನೇ    ಸಾಲಿನ     "+apiResponse.getContent().get(0).getSchemeNameInKannada()+"    ಯೋಜನೆ    ("+apiResponse.getContent().get(0).getCategoryNameInKannada()+"  ) ಯಡಿ      "+
-                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ವ್ಯಾ ಪ್ತಿ ಯ    ಶ್ರೀ   "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getReelerFatherName()+" ,      "+apiResponse.getContent().get(0).getVillageNameInKannada() + " " +
+                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ವ್ಯಾ ಪ್ತಿ ಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ.  "+apiResponse.getContent().get(0).getReelerName()+"    ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getReelerFatherName()+" ,      "+apiResponse.getContent().get(0).getVillageNameInKannada() + " " +
                     "   ಗ್ರಾ  ಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ ಕು ,    "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ       ಇವರು     ರೀಲಿಂಗ್    ಘಟಕದಲ್ಲಿ     "+apiResponse.getContent().get(0).getVendorName()+"  ,    ರವರಿಂದ    "+
                     "ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ    "+apiResponse.getContent().get(0).getReelingUnit()+"   ಮಾದರಿಯ   ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್     ಅಳವಡಿಸಿಕೊಂಡಿರುವುದಕ್ಕಾ ಗಿ  ,    ಇಲಾಖೆಯಿಂದ     ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ   ರೂ.   "+apiResponse.getContent().get(0).getUnitCost()+"   ಗಳಿಗೆ     " +
                     " ಶೇ  "+apiResponse.getContent().get(0).getShareInPercentage()+"   ರಂತೆ     ಸಹಾಯಧನ   ರೂ."+apiResponse.getContent().get(0).getSchemeAmount()+"  (ರೂ."+schemeAmountWords+"  )  ಗಳಿಗೆ     ಮುಚ್ಚ ಳಿಕೆಯಲ್ಲಿ ನ      ಷರತ್ತು     ಮತ್ತು      " +
@@ -21496,13 +21526,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
+                    +"   4. ಶ್ರೀ/ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   5. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
         }
 
         response.setHeader19("");
         response.setDate(apiResponse.getContent().get(0).getDate());
-        response.setFarmerFirstName(  " ಶ್ರೀ /.ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getReelerName() );
+        response.setFarmerFirstName(  " ಶ್ರೀ /ಶ್ರೀಮತಿ.  "+ apiResponse.getContent().get(0).getReelerName() );
         response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
         response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
         response.setDistrictName(apiResponse.getContent().get(0).getDistrictName() + "ಜಿಲ್ಲೆ, ");
@@ -21556,7 +21586,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
         String createdDate = formatDate(apiResponse.getContent().get(0).getCreatedDate());
@@ -21784,7 +21815,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -22060,7 +22092,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -22149,7 +22182,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "    ಜಿಲ್ಲೆ     ಇವರು      ರೀಲಿಂಗ್     ಘಟಕದಲ್ಲಿ     ಹೊಸದಾಗಿ     ಶಬ್ದ   ರಹಿತ    ಜನರೇಟರ್   ಅಳವಡಿಸಿರುವುದಕ್ಕಾ ಗಿ     ಸಹಾಯಧನ     ಮಂಜೂರಾತಿ    ನೀಡುವ   ಕುರಿತು. ");
 
 
-            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ    ಸುತ್ತೋಲೆ     ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
+            response.setHeader3("1.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃ ದ್ಧಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ    ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,    ಬೆಂಗಳೂರು    ರವರ    ಪತ್ರ ದ    ಸಂಖ್ಯೆ  : \n" +
                     "      "+apiResponse.getContent().get(0).getSchemeCircularNo() + " ,   ದಿನಾಂಕ :  " +schemeCircularDate  + ".\n" +
                     "2.    ರೇಷ್ಮೆ  ಕೃ ಷಿ    ಅಭಿವೃದ್ದಿ    ಆಯುಕ್ತ ರು     ಹಾಗೂ     ರೇಷ್ಮೆ    ನಿರ್ದೇಶಕರು ,     ಬೆಂಗಳೂರು      ರವರ     ಪತ್ರ  ದ     ಸಂಖ್ಯೆ   :\n" +
                     "       " +apiResponse.getContent().get(0).getAllotReleaseNo() + " ,   ದಿನಾಂಕ :  " +allotReleaseDate  + " \n" +
@@ -22334,7 +22367,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -22532,7 +22566,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -22732,7 +22767,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
@@ -22931,7 +22967,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String allotReleaseDate = formatDate(apiResponse.getContent().get(0).getAllotReleaseDate(), sdf);
         String releaseDate = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String selectionLetterDate = formatDate(apiResponse.getContent().get(0).getSelectionLetterDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
         String empanelledVendorDate = formatDate(apiResponse.getContent().get(0).getEmpanelledVendorDate());
         String assignedByUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
