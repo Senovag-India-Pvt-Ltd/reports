@@ -2440,7 +2440,7 @@ public class ReportsController {
             System.out.println("enter to Seed DTR Report");
             logger.info("enter to Seed DTR Report");
             String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("Rasheedi.jrxml");
+            JasperReport jasperReport = getJasperReport("DTRSeedReport.jrxml");
 
             // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
@@ -6548,6 +6548,7 @@ public class ReportsController {
         if (buyerList == null) {
             buyerList = new ArrayList<>(); // safety only
         }
+        double lgSoldOutAmountTotal = 0;
 
         for (Buyer item : buyerList) {
 
@@ -6559,22 +6560,28 @@ public class ReportsController {
             row.put("lgAmount", item.getLgAmount());
             row.put("noOfCocoonPerKg", item.getNoOfCocoonPerKg());
             row.put("lgSoldOutAmount", item.getLgSoldOutAmount());
-            row.put("farmerAmount", item.getFarmerAmount());
+
             row.put("remainingCocoon", item.getRemainingCocoon());
 
-            double totalCocoon = 0;
+            // ✅ FIXED KEY
+            row.put("lgMarketFee", item.getLgMarketFee());
 
+            double totalCocoon = 0;
             try {
                 double weight = item.getLgLotWeight() != null ? Double.parseDouble(item.getLgLotWeight()) : 0;
                 long cocoonPerKg = item.getNoOfCocoonPerKg() != null ? item.getNoOfCocoonPerKg() : 0;
-
                 totalCocoon = weight * cocoonPerKg;
-
             } catch (Exception e) {
                 totalCocoon = 0;
             }
 
             row.put("totalCocoon", totalCocoon);
+
+            try {
+                double val = item.getLgSoldOutAmount() != null
+                        ? Double.parseDouble(item.getLgSoldOutAmount()) : 0;
+                lgSoldOutAmountTotal += val;
+            } catch (Exception e) {}
 
             tableList.add(row);
         }
