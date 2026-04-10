@@ -464,6 +464,10 @@ private String totalIncentiveAmountInWords;
     private String farmerFullName;
     private String farmerVillage;
     private String farmerFruitsId;
+    private Float rspNos;
+    private Float nssoNos;
+    private Float govtGrainageNos;
+    private Float reelingNos;
 
 
 

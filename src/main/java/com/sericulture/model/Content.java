@@ -201,6 +201,7 @@ public class Content {
     private Long noOfCocoonPerKg;
     private String remainingCocoon;
     private List<Buyer> buyerList;
+    private Double lgSoldOutAmountTotal;
 
 
 

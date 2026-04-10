@@ -2434,21 +2434,27 @@ public class ReportsController {
     }
 
     @PostMapping("/get-seed-DTR")
-    public ResponseEntity<?> getSeedDTRReport(@RequestBody CheckInspectionStatusRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+    public ResponseEntity<?> getSeedDTRReport(@RequestBody CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
             System.out.println("enter to Seed DTR Report");
             logger.info("enter to Seed DTR Report");
-            String destFileName = "report_kannada.pdf";
+
             JasperReport jasperReport = getJasperReport("DTRSeedReport.jrxml");
 
-            // 2. parameters "empty"
             Map<String, Object> parameters = getParameters();
 
-            // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceSeedCocoonDTRReport(requestDto);
+            JRBeanCollectionDataSource dataSource =
+                    getDataSourceSeedCocoonDTRReport(requestDto);
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            parameters.put("CollectionBeanParam", dataSource);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    jasperReport,
+                    parameters,
+                    dataSource
+            );
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
 
@@ -2456,18 +2462,18 @@ public class ReportsController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "report.pdf");
 
-
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
             pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+
+            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             logger.info(ex.getMessage() + ex.getStackTrace());
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
+            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
         }
     }
 
@@ -6539,16 +6545,14 @@ public class ReportsController {
             apiResponse.content.setReelerbalance("Lot value: 0+0=0");
         }
 
-        countries.add(apiResponse.content);
-
         List<Map<String, Object>> tableList = new ArrayList<>();
-
         List<Buyer> buyerList = apiResponse.content.getBuyerList();
 
         if (buyerList == null) {
-            buyerList = new ArrayList<>(); // safety only
+            buyerList = new ArrayList<>();
         }
-        double lgSoldOutAmountTotal = 0;
+
+        double lgSoldOutAmountTotal = 0; // total variable
 
         for (Buyer item : buyerList) {
 
@@ -6560,16 +6564,20 @@ public class ReportsController {
             row.put("lgAmount", item.getLgAmount());
             row.put("noOfCocoonPerKg", item.getNoOfCocoonPerKg());
             row.put("lgSoldOutAmount", item.getLgSoldOutAmount());
-
             row.put("remainingCocoon", item.getRemainingCocoon());
 
-            // ✅ FIXED KEY
+            // ✅ FIX: correct key name (IMPORTANT)
             row.put("lgMarketFee", item.getLgMarketFee());
 
+            // total cocoon calculation
             double totalCocoon = 0;
             try {
-                double weight = item.getLgLotWeight() != null ? Double.parseDouble(item.getLgLotWeight()) : 0;
-                long cocoonPerKg = item.getNoOfCocoonPerKg() != null ? item.getNoOfCocoonPerKg() : 0;
+                double weight = item.getLgLotWeight() != null
+                        ? Double.parseDouble(item.getLgLotWeight()) : 0;
+
+                long cocoonPerKg = item.getNoOfCocoonPerKg() != null
+                        ? item.getNoOfCocoonPerKg() : 0;
+
                 totalCocoon = weight * cocoonPerKg;
             } catch (Exception e) {
                 totalCocoon = 0;
@@ -6577,17 +6585,25 @@ public class ReportsController {
 
             row.put("totalCocoon", totalCocoon);
 
+            // ✅ FIX: total calculation
             try {
                 double val = item.getLgSoldOutAmount() != null
-                        ? Double.parseDouble(item.getLgSoldOutAmount()) : 0;
+                        ? Double.parseDouble(item.getLgSoldOutAmount())
+                        : 0;
+
                 lgSoldOutAmountTotal += val;
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // ignore
+            }
 
             tableList.add(row);
         }
 
-        System.out.println("TABLE SIZE: " + tableList.size());
+        apiResponse.content.setLgSoldOutAmountTotal(lgSoldOutAmountTotal);
 
+        System.out.println("TOTAL lgSoldOutAmountTotal: " + lgSoldOutAmountTotal);
+
+        // ---------------- DATASOURCE ----------------
         JRBeanCollectionDataSource tableDS1 = new JRBeanCollectionDataSource(tableList);
         JRBeanCollectionDataSource tableDS2 = new JRBeanCollectionDataSource(tableList);
         JRBeanCollectionDataSource tableDS3 = new JRBeanCollectionDataSource(tableList);
@@ -6595,6 +6611,8 @@ public class ReportsController {
         parameters.put("collectionBeanParam1", tableDS1);
         parameters.put("collectionBeanParam2", tableDS2);
         parameters.put("collectionBeanParam3", tableDS3);
+
+        countries.add(apiResponse.content);
 
         return new JRBeanCollectionDataSource(countries);
     }
@@ -9551,13 +9569,13 @@ public class ReportsController {
 
             response.setHeader3("ಕೋಡ್    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLotNumber());
 
-            response.setHeader2("ವಹಿವಾಟು  ಮಾಡುವ   ದಿನಾಂಕ  : " +apiResponse.getContent().get(0).getMarketAuctionDate());
+            response.setHeader2(" ದಿನಾಂಕ  : " +apiResponse.getContent().get(0).getMarketAuctionDate());
 
 
             response.setHeader(apiResponse.getContent().get(0).getTscName() +"    ವಲಯದ     "+apiResponse.getContent().get(0).getVillageName() +"      ಗ್ರಾ ಮದ       ಶ್ರೀ /ಶ್ರೀ ಮತಿ   " +
                     "   "+apiResponse.getContent().get(0).getFarmerNameKan() +" ,    ಬಿನ್/ಕೋಂ      "+apiResponse.getContent().get(0).getFatherNameKan() +
                     "     ರವರು      ಬೆಳೆದ        ತಂಡದ       ಸಂಖ್ಯೆ      "+apiResponse.getContent().get(0).getLotNumber() +"    ಗುಂಪಿನ     "+apiResponse.getContent().get(0).getNumberOfDflsDisposed() +"      ಮೊಟ್ಟೆ ಗಳ       " +
-                    "  ರೇಷ್ಮೆ       ಬೆಳೆಯನ್ನು       1/2/3/4/5      ನೇ    ಹಂತಗಳಲ್ಲಿ       ಪರಿಶೀಲಿಸಿರುತ್ತೇ ನೆ .      ಈ      ಬೆಳೆಯು     ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getSpunDate() +"    " +
+                    "  ರೇಷ್ಮೆ       ಬೆಳೆಯನ್ನು       1/2/3/4/5      ನೇ    ಹಂತಗಳಲ್ಲಿ       ಪರಿಶೀಲಿಸಿರುತ್ತೇ ನೆ .      ಈ      ಬೆಳೆಯು     ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getSpunFromDate() +" - " +apiResponse.getContent().get(0).getSpunToDate() +
                     "  ರಂದು       "+apiResponse.getContent().get(0).getNoOfChandies() +"      ಚಂದ್ರಿ ಕೆಗಳಲ್ಲಿ       ಗೂಡು     ಕಟ್ಟಿ ರುತ್ತ ದೆ.    ಈ     ಬೆಳೆಯಲ್ಲಿ       "+
                     "    ಸುಮಾರು      "+apiResponse.getContent().get(0).getExpectedCocoon() +"     ರೇಷ್ಮೆ      ಗೂಡುಗಳು        ದೊರೆಯಬಹುದೆಂದು       "+
                             "ಅಂದಾಜು     ಮಾಡಲಾಗಿದೆ .\n\n"+
@@ -9568,7 +9586,7 @@ public class ReportsController {
                             "ಈ     ಬೆಳೆಗಾರರು ,    ಇದರ       ಹಿಂದೆ     ಬೆಳೆ     ರೇಷ್ಮೆ     ಗೂಡುಗಳು     ಕಾನೂನಿನ     ರೀತ್ಯಾ      ವಿಲೇವಾರಿಯಾಗಿದೆ     ಮತ್ತು        "+
                             "ಸಂಬಂಧಿಸಿದ      ರೆಜಿಸ್ಟ ರ್ನಲ್ಲಿ      ಈ    ಬಗ್ಗೆ      ಷರಾ     ಬರೆಯಲಾಗಿದೆ     ಎಂದು     ಪ್ರ ಮಾಣೀಕರಿಸುತ್ತೇ ನೆ.");
 
-            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +apiResponse.getContent().get(0).getMarketAuctionDate());
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
             response.setAddressText( apiResponse.getContent().get(0).getAddressText());
@@ -11211,16 +11229,39 @@ public class ReportsController {
 
             LotDistributeResponse data = apiResponse.getContent().get(0);
 
-            // ✅ TABLE VALUES
-            response.setTotalRspNssoGrainageAmount(String.valueOf(data.getTotalRspNssoGrainageAmount()));
-            response.setTotalReelingLotWeight(String.valueOf(data.getTotalReelingLotWeight()));
-            response.setPrice(String.valueOf(data.getPrice()));
-            response.setTotalRspNssoGrainageSoldAmount(String.valueOf(data.getTotalRspNssoGrainageSoldAmount()));
-            response.setTotalReelingSOldAmount(String.valueOf(data.getTotalReelingSOldAmount()));
-            response.setTotalRspNssoGrainageMarketFee(String.valueOf(data.getTotalRspNssoGrainageMarketFee()));
-            response.setTotalReelingMarketFee(String.valueOf(data.getTotalReelingMarketFee()));
+            Float price = data.getPrice() != null ? data.getPrice() : 0f;
 
-            // ✅ HEADER VALUES
+            Float qty1 = data.getTotalRspNssoGrainageAmount() != null
+                    ? data.getTotalRspNssoGrainageAmount() : 0f;
+
+            Float qty2 = data.getTotalReelingLotWeight() != null
+                    ? data.getTotalReelingLotWeight() : 0f;
+
+            Float sold1 = data.getTotalRspNssoGrainageSoldAmount() != null
+                    ? data.getTotalRspNssoGrainageSoldAmount() : 0f;
+
+            Float sold2 = data.getTotalReelingSOldAmount() != null
+                    ? data.getTotalReelingSOldAmount() : 0f;
+
+            Float fee1 = data.getTotalRspNssoGrainageMarketFee() != null
+                    ? data.getTotalRspNssoGrainageMarketFee() : 0f;
+
+            Float fee2 = data.getTotalReelingMarketFee() != null
+                    ? data.getTotalReelingMarketFee() : 0f;
+
+            response.setPrice(price);
+            response.setTotalRspNssoGrainageAmount(qty1);
+            response.setTotalReelingLotWeight(qty2);
+            response.setTotalRspNssoGrainageSoldAmount(sold1);
+            response.setTotalReelingSOldAmount(sold2);
+            response.setTotalRspNssoGrainageMarketFee(fee1);
+            response.setTotalReelingMarketFee(fee2);
+
+            response.setTotalPrice(price + price);
+            response.setTotalQty(qty1 + qty2);
+            response.setTotalSoldAmounts(sold1 + sold2);
+            response.setTotalMarketFees(fee1 + fee2);
+
             String formattedDate = formatDate(data.getAuctionDate(), "yyyy-MM-dd");
 
             response.setHeader("          ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getFarmerFullName() +" ,   ಬಿನ್/ಕೋಂ   " +
@@ -12611,102 +12652,80 @@ public class ReportsController {
 
     private JRBeanCollectionDataSource getDataSourceSeedCocoonDTRReport(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
 
-        SanctionOrder apiResponse =
-                apiService.fetchDataFromSeedCocoonDTRReport(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoonDTRReport(requestDto);
 
         List<SanctionOrderResponse> list = new ArrayList<>();
 
-        if (apiResponse.getContent() != null) {
+        if (apiResponse != null && apiResponse.getContent() != null) {
 
             int serialNo = 1;
 
             for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
 
-                // ===== STRING FIELDS =====
-                if (sanctionOrderResponse.getFarmerFullName() == null)
-                    sanctionOrderResponse.setFarmerFullName("");
 
-                if (sanctionOrderResponse.getFatherNameKan() == null)
-                    sanctionOrderResponse.setFatherNameKan("");
+                sanctionOrderResponse.setFarmerFullName(
+                        sanctionOrderResponse.getFarmerFullName() != null ? sanctionOrderResponse.getFarmerFullName() : "");
 
-                if (sanctionOrderResponse.getFarmerFruitsId() == null)
-                    sanctionOrderResponse.setFarmerFruitsId("");
+                sanctionOrderResponse.setFatherNameKan(
+                        sanctionOrderResponse.getFatherNameKan() != null ? sanctionOrderResponse.getFatherNameKan() : "");
 
-                if (sanctionOrderResponse.getFarmerVillage() == null)
-                    sanctionOrderResponse.setFarmerVillage("");
+                sanctionOrderResponse.setFarmerFruitsId(
+                        sanctionOrderResponse.getFarmerFruitsId() != null ? sanctionOrderResponse.getFarmerFruitsId() : "");
 
-                if (sanctionOrderResponse.getParentalLevel() == null)
-                    sanctionOrderResponse.setParentalLevel("");
+                sanctionOrderResponse.setFarmerVillage(
+                        sanctionOrderResponse.getFarmerVillage() != null ? sanctionOrderResponse.getFarmerVillage() : "");
 
-                if (sanctionOrderResponse.getMarketName() == null)
-                    sanctionOrderResponse.setMarketName("");
+                sanctionOrderResponse.setParentalLevel(
+                        sanctionOrderResponse.getParentalLevel() != null ? sanctionOrderResponse.getParentalLevel() : "");
 
-                if (sanctionOrderResponse.getRspName() == null)
-                    sanctionOrderResponse.setRspName("");
+                sanctionOrderResponse.setNoOfDfls(
+                        sanctionOrderResponse.getNoOfDfls() != null ? sanctionOrderResponse.getNoOfDfls() : "0");
 
-                if (sanctionOrderResponse.getNssoName() == null)
-                    sanctionOrderResponse.setNssoName("");
+                sanctionOrderResponse.setAllottedLotId(
+                        sanctionOrderResponse.getAllottedLotId() != null ? sanctionOrderResponse.getAllottedLotId() : 0);
 
-                if (sanctionOrderResponse.getGovtGrainageName() == null)
-                    sanctionOrderResponse.setGovtGrainageName("");
+                sanctionOrderResponse.setFcIssued(
+                        sanctionOrderResponse.getFcIssued() != null ? sanctionOrderResponse.getFcIssued() : 0);
 
-                if (sanctionOrderResponse.getReelingName() == null)
-                    sanctionOrderResponse.setReelingName("");
+                sanctionOrderResponse.setEstimatedWeight(
+                        sanctionOrderResponse.getEstimatedWeight() != null ? sanctionOrderResponse.getEstimatedWeight() : 0f);
 
-                if (sanctionOrderResponse.getAuctionDate() == null)
-                    sanctionOrderResponse.setAuctionDate("");
+                sanctionOrderResponse.setLotWeight(
+                        sanctionOrderResponse.getLotWeight() != null ? sanctionOrderResponse.getLotWeight() : 0f
+                );
 
+                sanctionOrderResponse.setTotalQuantity(
+                        sanctionOrderResponse.getTotalQuantity() != null ? sanctionOrderResponse.getTotalQuantity() : 0f);
 
-                if (sanctionOrderResponse.getAllottedLotId() == null)
-                    sanctionOrderResponse.setAllottedLotId(0);
+                sanctionOrderResponse.setRspQty(
+                        sanctionOrderResponse.getRspQty() != null ? sanctionOrderResponse.getRspQty() : 0f);
 
-                if (sanctionOrderResponse.getNoOfDfls() == null)
-                    sanctionOrderResponse.setNoOfDfls("");
+                sanctionOrderResponse.setNssoQty(
+                        sanctionOrderResponse.getNssoQty() != null ? sanctionOrderResponse.getNssoQty() : 0f);
 
-                if (sanctionOrderResponse.getFcIssued() == null)
-                    sanctionOrderResponse.setFcIssued(0);
+                sanctionOrderResponse.setGovtGrainageQty(
+                        sanctionOrderResponse.getGovtGrainageQty() != null ? sanctionOrderResponse.getGovtGrainageQty() : 0f);
 
-                if (sanctionOrderResponse.getCocoonsPerKg() == null)
-                    sanctionOrderResponse.setCocoonsPerKg(0);
+                sanctionOrderResponse.setReelingQty(
+                        sanctionOrderResponse.getReelingQty() != null ? sanctionOrderResponse.getReelingQty() : 0f);
 
+                sanctionOrderResponse.setRemainingCocoon(
+                        sanctionOrderResponse.getRemainingCocoon() != null ? sanctionOrderResponse.getRemainingCocoon() : 0f);
 
-                // ===== FLOAT FIELDS =====
-                if (sanctionOrderResponse.getLotWeight() == null)
-                    sanctionOrderResponse.setLotWeight(0f);
+                Float cocoonsPerKg = sanctionOrderResponse.getCocoonsPerKg() != null
+                        ? sanctionOrderResponse.getCocoonsPerKg().floatValue()
+                        : 0f;
 
-                if (sanctionOrderResponse.getEstimatedWeight() == null)
-                    sanctionOrderResponse.setEstimatedWeight(0f);
+                sanctionOrderResponse.setRspNos(cocoonsPerKg * sanctionOrderResponse.getRspQty());
+                sanctionOrderResponse.setNssoNos(cocoonsPerKg * sanctionOrderResponse.getNssoQty());
+                sanctionOrderResponse.setGovtGrainageNos(cocoonsPerKg * sanctionOrderResponse.getGovtGrainageQty());
+                sanctionOrderResponse.setReelingNos(cocoonsPerKg * sanctionOrderResponse.getReelingQty());
 
-                if (sanctionOrderResponse.getMeltPercentage() == null)
-                    sanctionOrderResponse.setMeltPercentage(0f);
-
-                if (sanctionOrderResponse.getTotalQuantity() == null)
-                    sanctionOrderResponse.setTotalQuantity(0f);
-
-                if (sanctionOrderResponse.getRspQty() == null)
-                    sanctionOrderResponse.setRspQty(0f);
-
-                if (sanctionOrderResponse.getNssoQty() == null)
-                    sanctionOrderResponse.setNssoQty(0f);
-
-                if (sanctionOrderResponse.getGovtGrainageQty() == null)
-                    sanctionOrderResponse.setGovtGrainageQty(0f);
-
-                if (sanctionOrderResponse.getReelingQty() == null)
-                    sanctionOrderResponse.setReelingQty(0f);
-
-                if (sanctionOrderResponse.getRemainingCocoon() == null)
-                    sanctionOrderResponse.setRemainingCocoon(0f);
-
-
-                // ===== SERIAL NUMBER =====
                 sanctionOrderResponse.setSerialNumber(serialNo++);
 
-                // ✅ ADD TO LIST
                 list.add(sanctionOrderResponse);
             }
         }
-
         return new JRBeanCollectionDataSource(list);
     }
 

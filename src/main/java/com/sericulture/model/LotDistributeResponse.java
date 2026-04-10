@@ -85,7 +85,6 @@ public class LotDistributeResponse extends ResponseBody{
     @Column(name = "AUCTION_DATE")
     private String auctionDate;
     private String netWeight;
-    private String price;
     private String fixationDate;
     private String testDate;
     private Long noOfCocoonTakenForExamination;
@@ -141,17 +140,23 @@ public class LotDistributeResponse extends ResponseBody{
 
 
     private String totalRspNssoGrainageLotWeight;
-    private String totalReelingLotWeight;
-    private String totalRspNssoGrainageAmount;
     private String totalReelingAmount;
-    private String totalRspNssoGrainageSoldAmount;
-    private String totalReelingSOldAmount;
-    private String totalRspNssoGrainageMarketFee;
-    private String totalReelingMarketFee;
     private String totalAmount;
     private String totalSoldAmount;
     private String totalMarketFee;
 
+    private Float totalPrice;
+    private Float totalQty;
+    private Float totalSoldAmounts;
+    private Float totalMarketFees;
+
+    private Float totalRspNssoGrainageAmount;
+    private Float totalReelingLotWeight;
+    private Float totalRspNssoGrainageSoldAmount;
+    private Float totalReelingSOldAmount;
+    private Float totalRspNssoGrainageMarketFee;
+    private Float totalReelingMarketFee;
+    private Float price;
 
 
 }
