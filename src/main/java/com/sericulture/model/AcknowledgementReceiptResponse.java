@@ -96,6 +96,8 @@ public class AcknowledgementReceiptResponse {
     private String categoryShortName;
     private String reelingUnit;
     private String imcbTable;
+    private String spunFromDate;
+    private String spunToDate;
 
 
 
