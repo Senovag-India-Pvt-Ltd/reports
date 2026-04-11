@@ -2453,7 +2453,7 @@ public class ReportsController {
             JasperPrint jasperPrint = JasperFillManager.fillReport(
                     jasperReport,
                     parameters,
-                    dataSource
+                    new JREmptyDataSource()
             );
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
