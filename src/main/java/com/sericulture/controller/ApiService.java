@@ -434,9 +434,9 @@ public class ApiService {
 
     public AcknowledgementResponse fetchDataFromSeedMarket(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
-//        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
 
-        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/sanctionOrderWorkOrderAcknowledgement/farmerReelerAcknowledgement";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -791,10 +791,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanctionBoiler(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
 
 
-//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -856,10 +856,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanctionBoilerSelection(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerWorkOrderDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerWorkOrderDetails";
 
 
-//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerWorkOrderDetails";
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerWorkOrderDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -888,10 +888,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanctionSolarSilent(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
 
 
-//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -920,10 +920,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanctionSolarSilentSelection(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
 
 
-//        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+     String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
