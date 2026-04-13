@@ -2438,29 +2438,31 @@ public class ReportsController {
             throws JsonProcessingException, FileNotFoundException, JRException {
 
         try {
-            System.out.println("enter to Seed DTR Report");
-            logger.info("enter to Seed DTR Report");
+            System.out.println("enter to seed cocoon");
+            logger.info("enter to seed cocoon");
+
+            String destFileName = "report_kannada.pdf";
 
             JasperReport jasperReport = getJasperReport("DTRSeedReport.jrxml");
 
-            Map<String, Object> parameters = getParameters();
+            JRBeanCollectionDataSource dataSource = getDataSourceSeedCocoonDTRReport(requestDto);
 
-            JRBeanCollectionDataSource dataSource =
-                    getDataSourceSeedCocoonDTRReport(requestDto);
+            Map<String, Object> parameters = new HashMap<>();
 
-            parameters.put("CollectionBeanParam", dataSource);
+            parameters.put("CollectionBeanParam",
+                    new JRBeanCollectionDataSource(dataSource.getData()));
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(
                     jasperReport,
                     parameters,
-                    new JREmptyDataSource()
+                    dataSource   // ✅ IMPORTANT CHANGE
             );
 
             ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            headers.setContentDispositionFormData("attachment", destFileName);
 
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
@@ -2470,10 +2472,15 @@ public class ReportsController {
             return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
+            ex.printStackTrace(); // ✅ better debugging
+            logger.error("Error in getSeedDTRReport", ex);
+
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            return new ResponseEntity<>(
+                    ex.getMessage().getBytes(StandardCharsets.UTF_8),
+                    headers,
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
     }
 
@@ -12650,18 +12657,32 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 
-    private JRBeanCollectionDataSource getDataSourceSeedCocoonDTRReport(CheckInspectionStatusRequest requestDto) throws JsonProcessingException {
+    private JRBeanCollectionDataSource getDataSourceSeedCocoonDTRReport(CheckInspectionStatusRequest requestDto)
+            throws JsonProcessingException {
 
         SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoonDTRReport(requestDto);
 
         List<SanctionOrderResponse> list = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String auctionDate       = formatDates(apiResponse.getContent().get(0).getAuctionDate(), sdf);
 
-        if (apiResponse != null && apiResponse.getContent() != null) {
 
-            int serialNo = 1;
+        // ✅ SAFETY CHECK (VERY IMPORTANT)
+        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            return new JRBeanCollectionDataSource(list);
+        }
 
-            for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
+        int serialNo = 1;
 
+        SanctionOrderResponse first = apiResponse.getContent().get(0);
+
+        String headerText =
+                "ದಿನಾಂಕ : " + auctionDate + "   ರಂದು   " + first.getMarketName() + "  ಸರ್ಕಾರಿ   ಗೂಡು    ಮಾರುಕಟ್ಟೆ ಯಲ್ಲಿ     ನಡೆದ   ದಿನ   ವಹಿವಾಟಿನ    ರಿಜಿಸ್ಟ ರು  (ವಹಿ )";
+
+        for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
+
+            sanctionOrderResponse.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            sanctionOrderResponse.setHeader(headerText);
 
                 sanctionOrderResponse.setFarmerFullName(
                         sanctionOrderResponse.getFarmerFullName() != null ? sanctionOrderResponse.getFarmerFullName() : "");
@@ -12681,6 +12702,17 @@ public class ReportsController {
                 sanctionOrderResponse.setNoOfDfls(
                         sanctionOrderResponse.getNoOfDfls() != null ? sanctionOrderResponse.getNoOfDfls() : "0");
 
+            sanctionOrderResponse.setSpunFromDate(
+                    sanctionOrderResponse.getSpunFromDate() != null ? sanctionOrderResponse.getSpunFromDate() : " ");
+
+            sanctionOrderResponse.setRatePerKg(
+                    sanctionOrderResponse.getRatePerKg() != null ? sanctionOrderResponse.getRatePerKg() : 0f);
+
+            sanctionOrderResponse.setMarketFee(
+                    sanctionOrderResponse.getMarketFee() != null ? sanctionOrderResponse.getMarketFee() : 0f);
+
+            sanctionOrderResponse.setSpunToDate(sanctionOrderResponse.getSpunToDate() != null ? sanctionOrderResponse.getSpunToDate() : " ");
+
                 sanctionOrderResponse.setAllottedLotId(
                         sanctionOrderResponse.getAllottedLotId() != null ? sanctionOrderResponse.getAllottedLotId() : 0);
 
@@ -12691,8 +12723,7 @@ public class ReportsController {
                         sanctionOrderResponse.getEstimatedWeight() != null ? sanctionOrderResponse.getEstimatedWeight() : 0f);
 
                 sanctionOrderResponse.setLotWeight(
-                        sanctionOrderResponse.getLotWeight() != null ? sanctionOrderResponse.getLotWeight() : 0f
-                );
+                        sanctionOrderResponse.getLotWeight() != null ? sanctionOrderResponse.getLotWeight() : 0f);
 
                 sanctionOrderResponse.setTotalQuantity(
                         sanctionOrderResponse.getTotalQuantity() != null ? sanctionOrderResponse.getTotalQuantity() : 0f);
@@ -12724,10 +12755,89 @@ public class ReportsController {
                 sanctionOrderResponse.setSerialNumber(serialNo++);
 
                 list.add(sanctionOrderResponse);
-            }
+
         }
+
         return new JRBeanCollectionDataSource(list);
     }
+
+//    private JRBeanCollectionDataSource getDataSourceSeedCocoonDTRReport(CheckInspectionStatusRequest requestDto)
+//            throws JsonProcessingException {
+//
+//        SanctionOrder apiResponse = apiService.fetchDataFromSeedCocoonDTRReport(requestDto);
+//
+//        List<SanctionOrderResponse> list = new ArrayList<>();
+//
+//        if (apiResponse != null && apiResponse.getContent() != null) {
+//
+//            int serialNo = 1;
+//
+//            for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
+//
+//                sanctionOrderResponse.setFarmerFullName(
+//                        sanctionOrderResponse.getFarmerFullName() != null ? sanctionOrderResponse.getFarmerFullName() : "");
+//
+//                sanctionOrderResponse.setFatherNameKan(
+//                        sanctionOrderResponse.getFatherNameKan() != null ? sanctionOrderResponse.getFatherNameKan() : "");
+//
+//                sanctionOrderResponse.setFarmerFruitsId(
+//                        sanctionOrderResponse.getFarmerFruitsId() != null ? sanctionOrderResponse.getFarmerFruitsId() : "");
+//
+//                sanctionOrderResponse.setFarmerVillage(
+//                        sanctionOrderResponse.getFarmerVillage() != null ? sanctionOrderResponse.getFarmerVillage() : "");
+//
+//                sanctionOrderResponse.setParentalLevel(
+//                        sanctionOrderResponse.getParentalLevel() != null ? sanctionOrderResponse.getParentalLevel() : "");
+//
+//                sanctionOrderResponse.setNoOfDfls(
+//                        sanctionOrderResponse.getNoOfDfls() != null ? sanctionOrderResponse.getNoOfDfls() : "0");
+//
+//                sanctionOrderResponse.setAllottedLotId(
+//                        sanctionOrderResponse.getAllottedLotId() != null ? sanctionOrderResponse.getAllottedLotId() : 0);
+//
+//                sanctionOrderResponse.setFcIssued(
+//                        sanctionOrderResponse.getFcIssued() != null ? sanctionOrderResponse.getFcIssued() : 0);
+//
+//                sanctionOrderResponse.setEstimatedWeight(
+//                        sanctionOrderResponse.getEstimatedWeight() != null ? sanctionOrderResponse.getEstimatedWeight() : 0f);
+//
+//                sanctionOrderResponse.setLotWeight(
+//                        sanctionOrderResponse.getLotWeight() != null ? sanctionOrderResponse.getLotWeight() : 0f);
+//
+//                sanctionOrderResponse.setTotalQuantity(
+//                        sanctionOrderResponse.getTotalQuantity() != null ? sanctionOrderResponse.getTotalQuantity() : 0f);
+//
+//                sanctionOrderResponse.setRspQty(
+//                        sanctionOrderResponse.getRspQty() != null ? sanctionOrderResponse.getRspQty() : 0f);
+//
+//                sanctionOrderResponse.setNssoQty(
+//                        sanctionOrderResponse.getNssoQty() != null ? sanctionOrderResponse.getNssoQty() : 0f);
+//
+//                sanctionOrderResponse.setGovtGrainageQty(
+//                        sanctionOrderResponse.getGovtGrainageQty() != null ? sanctionOrderResponse.getGovtGrainageQty() : 0f);
+//
+//                sanctionOrderResponse.setReelingQty(
+//                        sanctionOrderResponse.getReelingQty() != null ? sanctionOrderResponse.getReelingQty() : 0f);
+//
+//                sanctionOrderResponse.setRemainingCocoon(
+//                        sanctionOrderResponse.getRemainingCocoon() != null ? sanctionOrderResponse.getRemainingCocoon() : 0f);
+//
+//                Float cocoonsPerKg = sanctionOrderResponse.getCocoonsPerKg() != null
+//                        ? sanctionOrderResponse.getCocoonsPerKg().floatValue()
+//                        : 0f;
+//
+//                sanctionOrderResponse.setRspNos(cocoonsPerKg * sanctionOrderResponse.getRspQty());
+//                sanctionOrderResponse.setNssoNos(cocoonsPerKg * sanctionOrderResponse.getNssoQty());
+//                sanctionOrderResponse.setGovtGrainageNos(cocoonsPerKg * sanctionOrderResponse.getGovtGrainageQty());
+//                sanctionOrderResponse.setReelingNos(cocoonsPerKg * sanctionOrderResponse.getReelingQty());
+//
+//                sanctionOrderResponse.setSerialNumber(serialNo++);
+//
+//                list.add(sanctionOrderResponse);
+//            }
+//        }
+//        return new JRBeanCollectionDataSource(list);
+//    }
 
     private JRBeanCollectionDataSource getDataSourceForIncentive120(CheckInspectionStatusRequest requestDto)
             throws JsonProcessingException {

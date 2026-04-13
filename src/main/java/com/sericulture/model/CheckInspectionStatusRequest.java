@@ -2,6 +2,7 @@ package com.sericulture.model;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,4 +27,5 @@ public class CheckInspectionStatusRequest extends LotStatusRequest {
     private Float unitPrice;
     private String reelingShedDetails;
     private String reelingShedSqft;
+    private LocalDate auctionDate;
 }
