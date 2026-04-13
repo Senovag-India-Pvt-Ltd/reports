@@ -923,7 +923,7 @@ public class ApiService {
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
 
 
-        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+     String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
