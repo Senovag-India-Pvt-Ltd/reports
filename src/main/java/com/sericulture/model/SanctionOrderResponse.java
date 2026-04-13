@@ -469,6 +469,11 @@ private String totalIncentiveAmountInWords;
     private Float govtGrainageNos;
     private Float reelingNos;
 
+    private String spunFromDate;
+    private String spunToDate;
+    private Float ratePerKg;
+    private Float marketFee;
+    private String lgAuctionDate;
 
 
 }
