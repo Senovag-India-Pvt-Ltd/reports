@@ -11,5 +11,5 @@ import lombok.*;
 public class LotStatusRequest extends RequestBody {
 
     @Schema(name = "allottedLotId", example = "1", required = true)
-    private int allottedLotId;
+    private Integer allottedLotId;
 }
