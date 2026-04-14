@@ -139,8 +139,8 @@ public class LotDistributeResponse extends ResponseBody{
     private String talukNameKan;
 
 
-    private String totalRspNssoGrainageLotWeight;
-    private String totalReelingAmount;
+    private Float totalRspNssoGrainageLotWeight;
+    private Float totalReelingAmount;
     private String totalAmount;
     private String totalSoldAmount;
     private String totalMarketFee;
@@ -157,6 +157,13 @@ public class LotDistributeResponse extends ResponseBody{
     private Float totalRspNssoGrainageMarketFee;
     private Float totalReelingMarketFee;
     private Float price;
+
+    private String reelerName;
+    private String reelerFatherName;
+    private String reelerDistrict;
+    private String reelerTaluk;
+    private String reelerHobli;
+    private String reelerVillage;
 
 
 }

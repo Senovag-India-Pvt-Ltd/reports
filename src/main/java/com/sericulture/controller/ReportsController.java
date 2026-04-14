@@ -11236,10 +11236,16 @@ public class ReportsController {
 
             LotDistributeResponse data = apiResponse.getContent().get(0);
 
-            Float price = data.getPrice() != null ? data.getPrice() : 0f;
 
-            Float qty1 = data.getTotalRspNssoGrainageAmount() != null
+
+            Float amt1 = data.getTotalRspNssoGrainageAmount() != null
                     ? data.getTotalRspNssoGrainageAmount() : 0f;
+
+            Float amt2 = data.getTotalReelingAmount() != null
+                    ? data.getTotalReelingAmount() : 0f;
+
+            Float qty1 = data.getTotalRspNssoGrainageLotWeight() != null
+                    ? data.getTotalRspNssoGrainageLotWeight() : 0f;
 
             Float qty2 = data.getTotalReelingLotWeight() != null
                     ? data.getTotalReelingLotWeight() : 0f;
@@ -11256,15 +11262,17 @@ public class ReportsController {
             Float fee2 = data.getTotalReelingMarketFee() != null
                     ? data.getTotalReelingMarketFee() : 0f;
 
-            response.setPrice(price);
-            response.setTotalRspNssoGrainageAmount(qty1);
+            response.setTotalRspNssoGrainageAmount(amt1);
+            response.setTotalReelingAmount(amt2);
+
+            response.setTotalRspNssoGrainageLotWeight(qty1);
             response.setTotalReelingLotWeight(qty2);
             response.setTotalRspNssoGrainageSoldAmount(sold1);
             response.setTotalReelingSOldAmount(sold2);
             response.setTotalRspNssoGrainageMarketFee(fee1);
             response.setTotalReelingMarketFee(fee2);
 
-            response.setTotalPrice(price + price);
+            response.setTotalPrice(amt1 + amt2);
             response.setTotalQty(qty1 + qty2);
             response.setTotalSoldAmounts(sold1 + sold2);
             response.setTotalMarketFees(fee1 + fee2);
@@ -11277,6 +11285,13 @@ public class ReportsController {
                     "ಮೈ ಸೂರು/ದ್ವಿ ತಳಿ    ಶುದ್ಧ    ತಳಿ      ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಾಗಿದ್ದು    ಸದರಿ   ರೈ ತರು   ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getAuctionDate() +"   "+
                     "  ರಂದು   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ      "+apiResponse.getContent().get(0).getMarketName()+"    ರಲ್ಲಿ     "+apiResponse.getContent().get(0).getTotalLotWeight() +"  ಕೆಳಕಂಡಂತೆ       "+
                     "  ಗೂಡುಗಳನ್ನು      ಬಿತ್ತ ನೆ/ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ      ಮಾರಾಟ     ಮಾಡಿರುತ್ತಾ ರೆ.");
+
+            response.setHeader1("          ಶ್ರೀ  /ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ   " +
+                    "  "+apiResponse.getContent().get(0).getReelerFatherName()+"   ರವರು     "+apiResponse.getContent().get(0).getReelerVillage() +"     "+
+                    "ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getReelerTaluk() +"   ತಾಲ್ಲೂ ಕು    "+apiResponse.getContent().get(0).getReelerDistrict() + "   ಜಿಲ್ಲೆ     ಯವರಾಗಿದ್ದು      "+
+                    "ಮೈ ಸೂರು/ದ್ವಿ ತಳಿ    ಶುದ್ಧ    ತಳಿ      ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಾಗಿದ್ದು    ಸದರಿ   ರೈ ತರು   ದಿನಾಂಕ  :  "+apiResponse.getContent().get(0).getAuctionDate() +"   "+
+                    "  ರಂದು   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ      "+apiResponse.getContent().get(0).getMarketName()+"    ರಲ್ಲಿ     "+apiResponse.getContent().get(0).getTotalLotWeight() +"  ಕೆಳಕಂಡಂತೆ       "+
+                    "  ಗೂಡುಗಳನ್ನು      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ      ಮಾರಾಟ     ಮಾಡಿರುತ್ತಾ ರೆ.");
 
             response.setHeader3("ಬಿತ್ತ ನೆ   ಪ್ರಚಾರ   ಶಾಖೆ / ಕೃಷಿ    ಕ್ಷೇತ್ರ    " +
                     "ಕೋಠಿಯ   ಅಧಿಕಾರಿಯ    ಸಹಿ");
