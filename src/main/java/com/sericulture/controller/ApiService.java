@@ -920,10 +920,10 @@ public class ApiService {
 
     public SanctionOrder fetchDataFromSanctionSolarSilentSelection(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
-//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getRearingEquipmentWorkOrderDetails";
 
 
-     String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getSolarWaterHeaterWorkOrderDetails";
+     String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getRearingEquipmentWorkOrderDetails";
 
 
         HttpHeaders headers = new HttpHeaders();
