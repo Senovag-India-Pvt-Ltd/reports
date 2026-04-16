@@ -474,6 +474,7 @@ private String totalIncentiveAmountInWords;
     private Float ratePerKg;
     private Float marketFee;
     private String lgAuctionDate;
+    private String hissa;
 
     private String rearingEquipmentDetailsNameInKannada;
 
