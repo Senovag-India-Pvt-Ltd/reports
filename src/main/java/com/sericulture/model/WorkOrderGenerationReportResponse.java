@@ -108,6 +108,7 @@ public class WorkOrderGenerationReportResponse {
 
     private String previousStepDesignationForSanctionOrder;
     private String selectionLetterDate;
+    private String hissa;
 
 
 
