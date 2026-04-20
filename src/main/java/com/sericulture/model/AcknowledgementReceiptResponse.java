@@ -98,6 +98,8 @@ public class AcknowledgementReceiptResponse {
     private String imcbTable;
     private String spunFromDate;
     private String spunToDate;
+    private Long cropStatusId;
+    private String cropStatusName;
 
 
 
