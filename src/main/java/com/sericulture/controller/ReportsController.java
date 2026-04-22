@@ -324,7 +324,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getIncentive 30");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -335,26 +341,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Transportation Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Transportation Acknowledgement");
         }
 
 
@@ -367,7 +373,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -378,26 +390,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Incentive30 Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Incentive30 Acknowledgement");
         }
 
 
@@ -410,7 +422,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKSolarPowerGenerator");
             logger.info("enter to getACKSolarPowerGenerator");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -421,26 +439,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK Solar Power Generator", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK Solar Power Generator");
         }
 
 
@@ -453,7 +471,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKRearingEquipmentSS");
             logger.info("enter to getACKRearingEquipmentSS");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -464,26 +488,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK Rearing Equipment SS", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK Rearing Equipment SS");
         }
 
 
@@ -496,7 +520,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKRearingEquipmentSS");
             logger.info("enter to getACKRearingEquipmentSS");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -507,26 +537,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK Rearing Equipment SDP", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK Rearing Equipment SDP");
         }
 
 
@@ -539,7 +569,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKCRC");
             logger.info("enter to getACKCRC");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -550,26 +586,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK CRC", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK CRC");
         }
 
 
@@ -583,7 +619,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKSilentGenerator");
             logger.info("enter to getACKSilentGenerator");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -594,26 +636,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK Silent Generator", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK Silent Generator");
         }
 
 
@@ -626,7 +668,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKSolarWaterHeater");
             logger.info("enter to getACKSolarWaterHeater");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -637,26 +685,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK Solar Water Heater", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK Solar Water Heater");
         }
 
 
@@ -669,7 +717,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getACKMERM");
             logger.info("enter to getACKMERM");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -680,26 +734,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ACK MERM", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ACK MERM");
         }
 
 
@@ -712,7 +766,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getRHAck");
             logger.info("enter to getRHAck");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -723,26 +783,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating RH Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate RH Acknowledgement");
         }
 
 
@@ -755,7 +815,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getBoilerAck");
             logger.info("enter to getBoilerAck");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -766,26 +832,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Boiler Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Boiler Acknowledgement");
         }
 
 
@@ -798,7 +864,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getIcbACK");
             logger.info("enter to getIcbACK");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -809,26 +881,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating ICB Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ICB Acknowledgement");
         }
 
 
@@ -841,7 +913,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getIMCBACK");
             logger.info("enter to getIMCBACK");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -852,26 +930,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating IMCB Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate IMCB Acknowledgement");
         }
 
 
@@ -885,7 +963,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getHRUACK");
             logger.info("enter to getHRUACK");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -896,26 +980,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating HRU Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate HRU Acknowledgement");
         }
 
 
@@ -928,7 +1012,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawki1000Ack");
             logger.info("enter to getChawki1000Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -939,26 +1029,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Chawki 1000 Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Chawki 1000 Acknowledgement");
         }
 
 
@@ -1015,7 +1105,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1026,26 +1122,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Chawki 1500 Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Chawki 1500 Acknowledgement");
         }
 
 
@@ -1058,7 +1154,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1069,26 +1171,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Bonus 225 ACK PM", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Bonus 225 ACK PM");
         }
 
 
@@ -1102,7 +1204,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1113,26 +1221,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Bonus 225 ACK BV", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Bonus 225 ACK BV");
         }
 
 
@@ -1146,7 +1254,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1157,26 +1271,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Incentive 120 ACK PM", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Incentive 120 ACK PM");
         }
 
 
@@ -1191,7 +1305,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getChawkiAck1500");
             logger.info("enter to getChawki1500Ack");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1202,26 +1322,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Incentive 120 ACK BV", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Incentive 120 ACK BV");
         }
 
 
@@ -1235,7 +1355,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getReelerAcknowledgement");
             logger.info("enter to getReelerAcknowledgement");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataReelerAcknowledgement(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("ReelerAcknowledgement.jrxml");
 
             // 2. parameters "empty"
@@ -1246,26 +1372,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Reeler Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Reeler Acknowledgement");
         }
 
 
@@ -1278,7 +1404,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getSilkIncentive");
             logger.info("enter to getSilkIncentive");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1289,26 +1421,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Silk Incentive Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Silk Incentive Acknowledgement");
         }
 
 
@@ -1321,7 +1453,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getSilkIncentive");
             logger.info("enter to getSilkIncentive");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
 
             // 2. parameters "empty"
@@ -1332,26 +1470,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Reeling Shed Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Reeling Shed Acknowledgement");
         }
 
 
@@ -1932,6 +2070,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -1954,20 +2097,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Boiler Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Boiler Selection");
         }
     }
 
@@ -1985,6 +2134,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2007,20 +2161,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Solar Generator Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Solar Generator Selection");
         }
     }
 
@@ -2036,6 +2196,11 @@ public class ReportsController {
 
             @SuppressWarnings("unchecked")
             List<SanctionOrderResponse> fullList = (List<SanctionOrderResponse>) fullDs.getData();
+
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
 
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
@@ -2057,20 +2222,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating CRC Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate CRC Selection");
         }
     }
 
@@ -2087,6 +2258,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2109,20 +2285,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Rearing Equipment SS Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Rearing Equipment SS Selection");
         }
     }
 
@@ -2139,6 +2321,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2161,20 +2348,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Rearing Equipment SDP Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Rearing Equipment SDP Selection");
         }
     }
 
@@ -2191,6 +2384,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2213,20 +2411,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Solar Water Heater Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Solar Water Heater Selection");
         }
     }
 
@@ -2243,6 +2447,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2265,20 +2474,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating MERM Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate MERM Selection");
         }
     }
 
@@ -2295,6 +2510,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -2317,20 +2537,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Silent Generator Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Silent Generator Selection");
         }
     }
 
@@ -2991,7 +3217,13 @@ public class ReportsController {
         try {
             System.out.println("enter to getSanctionOrder");
             logger.info("enter to getSanctionOrder");
-            String destFileName = "report_kannada.pdf";
+
+            AcknowledgementResponse apiResponse = apiService.fetchAcknowledgementPmksy(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
             JasperReport jasperReport = getJasperReport("pmksyAcknowledgement.jrxml");
 
             // 2. parameters "empty"
@@ -3002,26 +3234,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = arn + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Acknowledgement PMKSY", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Acknowledgement PMKSY");
         }
 
 
@@ -3988,6 +4220,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -4010,20 +4247,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating ICB Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate ICB Selection");
         }
     }
 
@@ -4041,6 +4284,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -4063,20 +4311,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating Heat Recovery Unit Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Heat Recovery Unit Selection");
         }
     }
 
@@ -4094,6 +4348,11 @@ public class ReportsController {
             List<SanctionOrderResponse> fullList =
                     (List<SanctionOrderResponse>) fullDs.getData();
 
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
             List<SanctionOrderResponse> headerList = new ArrayList<>();
             if (!fullList.isEmpty()) {
                 headerList.add(fullList.get(0));      // use first row as header bean
@@ -4116,20 +4375,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "psfa_reeling_shed_sanction.pdf");
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
+            String fileName = workOrderNumber + ".pdf";
 
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
+            logger.error("Error generating IMCB Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate IMCB Selection");
         }
     }
 
@@ -4297,7 +4562,10 @@ public class ReportsController {
         try {
             System.out.println("enter to Work Order");
             logger.info("enter to Work Order");
-            String destFileName = "report_kannada.pdf";
+
+            SanctionOrder apiResponse = apiService.fetchPDMCWorkOrder(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
             JasperReport jasperReport = getJasperReport("pdmc_work_order.jrxml");
 
             // 2. parameters "empty"
@@ -4308,26 +4576,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = workOrderNumber + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating PDMC Work Order", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate PDMC Work Order");
         }
 
     }
@@ -4506,7 +4774,10 @@ public class ReportsController {
         try {
             System.out.println("enter to getWorkOrder");
             logger.info("enter to getWorkOrder");
-            String destFileName = "report_kannada.pdf";
+
+            WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrder(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
             JasperReport jasperReport = getJasperReport("workorder.jrxml");
 
             // 2. parameters "empty"
@@ -4517,26 +4788,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = workOrderNumber + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Work Order", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Work Order");
         }
     }
 
@@ -4547,7 +4818,10 @@ public class ReportsController {
         try {
             System.out.println("enter to getWorkOrder");
             logger.info("enter to getWorkOrder");
-            String destFileName = "report_kannada.pdf";
+
+            SanctionOrder apiResponse = apiService.fetchDataFromSanctionEquipment(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
             JasperReport jasperReport = getJasperReport("workorderEquipment.jrxml");
 
             // 2. parameters "empty"
@@ -4558,26 +4832,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = workOrderNumber + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Work Order RH Equipment", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Work Order RH Equipment");
         }
     }
 
@@ -4590,7 +4864,10 @@ public class ReportsController {
         try {
             System.out.println("enter to getWorkOrder");
             logger.info("enter to getWorkOrder");
-            String destFileName = "report_kannada.pdf";
+
+            SanctionOrder apiResponse = apiService.fetchDataFromPsfaReelingShed(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
             JasperReport jasperReport = getJasperReport("workOrderReelingShed.jrxml");
 
             // 2. parameters "empty"
@@ -4601,26 +4878,26 @@ public class ReportsController {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
+            String fileName = workOrderNumber + ".pdf";
 
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
 
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            logger.error("Error generating Work Order Reeling Shed", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Work Order Reeling Shed");
         }
 
 
@@ -16319,7 +16596,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
     private JRBeanCollectionDataSource getDataSourceForSelectionRearingEquipmentSS(SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromSanctionSolarSilentSelection(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromRearingEquipmentSelection(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -16502,7 +16779,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
     private JRBeanCollectionDataSource getDataSourceForSelectionRearingEquipmentSDP(SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromSanctionSolarSilentSelection(requestDto);
+        SanctionOrder apiResponse = apiService.fetchDataFromRearingEquipmentSelection(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
@@ -19428,7 +19705,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                                 "" + apiResponse.getContent().get(0).getLength() + "x"+ apiResponse.getContent().get(0).getBreadth() +"x"+ apiResponse.getContent().get(0).getHeight() + "    ಅಡಿ    ಅಳತೆಯ   " + apiResponse.getContent().get(0).getCalculatedSqft() + "   ಚದರಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ    "+
                                 "     "+ apiResponse.getContent().get(0).getRoofTypeNameInKannada() +"    ಮೇಲ್ಚಾ ವಣಿಯ    ಪ್ರ ತ್ಯೇ ಕ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಿರುವುದರಿಂದ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ    “"
                                 + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    ಯೋಜನೆ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"  ) ಯಡಿ    " + apiResponse.getContent().get(0).getRhSqft() + "    " +
-                        "ಚದರ  ಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಿಸಲು    ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ    ದರ   ರೂ.  " + (centralShareAmount + stateShareAmount) + "/- ಗಳಿಗೆ     ಶೇಕಡ   "+(centralSharePercentage + stateSharePercentage)+" /-    ರಷ್ಟು     ಸಹಾಯಧನ    ರೂ."+ (centralShareAmount + stateShareAmount) +
+                        "ಚದರ  ಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಿಸಲು    ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ    ದರ   ರೂ.  " + actualAmounts + "/- ಗಳಿಗೆ     ಶೇಕಡ   "+(centralSharePercentage + stateSharePercentage)+" /-    ರಷ್ಟು     ಸಹಾಯಧನ    ರೂ."+ (centralShareAmount + stateShareAmount) +
                                 "(ರೂ. "+ totalSubsidyWords + ")     ಗಳಿಗೆ     ಮುಚ್ಚ ಳಿಕೆಯಲ್ಲಿ ನ    ಷರತ್ತು     ಮತ್ತು     ತಗಾದೆಗಳಿಗೆ     ಸಂಬಂಧಿಸಿದ     ಫಲಾನುಭವಿ    ಹಾಗೂ     ಶಿಫಾರಸ್ಸು     ಮಾಡಿದ    ಕ್ಷೇತ್ರ  ಮಟ್ಟ ದ     ಅಧಿಕಾರಿಗಳನ್ನು        "+
                         "ಜವಾಬ್ದಾ ರಿ     ಮಾಡಿ     ಮಂಜೂರಾತಿ    ನೀಡಿದೆ.   ಈ  ಸಹಾಯಧನದ    ಪೈಕಿ   ರೂ." + centralShareAmount+ "/-   (ರೂ.  "+centralShareWords+  "   )   ಗಳು    ಕೇಂದ್ರ ದ     ಪಾಲಾಗಿ     ಕೇಂದ್ರ     ರೇಷ್ಮೆ    ಮಂಡಳಿ    ನೀಡಿರುವ    ಮೊತ್ತ ದಲ್ಲಿ    ಮತ್ತು    ರಾಜ್ಯ ದ    ಪಾಲಾಗಿ     ರೂ."+
                         stateShareAmount + "/-    (ರೂ. " + stateShareWords + "   )    ಗಳನ್ನು      " + apiResponse.getContent().get(0).getSchemeNameInKannada()
@@ -19445,7 +19722,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಪ್ರತಿಯನ್ನು   ;\n"+
                       "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                       "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
-                      "    3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
+                      "    3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+ apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                       "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
             response.setHeader19("");
             response.setDate(apiResponse.getContent().get(0).getDate());
