@@ -847,48 +847,6 @@ public class ReportsController {
     }
 
 
-
-    @PostMapping("/getRHSSConstructionLowCostShedPermanentAck")
-    public ResponseEntity<?> getRHSSConstructionLowCostShedAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
-
-        try {
-            System.out.println("enter to getRHSSConstructionLowCostShedAck");
-            logger.info("enter to getRHSSConstructionLowCostShedAck");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
-
-            // 2. parameters "empty"
-            Map<String, Object> parameters = getParameters();
-
-            // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceRHSSConstructionLowCostShedPermanentAck(requestDto);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
-
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
-        }
-    }
-
-
     @PostMapping("/getRHSDP225Ack")
     public ResponseEntity<?> getRHSDP225Ack(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -930,46 +888,6 @@ public class ReportsController {
     }
 
 
-
-    @PostMapping("/RHSDPConstructionLowCostShedPermanentAck")
-    public ResponseEntity<?> RHSDPConstructionLowCostShedPermanentAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
-
-        try {
-            System.out.println("enter to RHSDPConstructionLowCostShedPermanentAck");
-            logger.info("enter to RHSDPConstructionLowCostShedPermanentAck");
-            String destFileName = "report_kannada.pdf";
-            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
-
-            // 2. parameters "empty"
-            Map<String, Object> parameters = getParameters();
-
-            // 3. datasource "java object"
-            JRDataSource dataSource = getDataSourceRHSDPConstructionLowCostShedPermanentAck(requestDto);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-            ByteArrayOutputStream pdfStream = new ByteArrayOutputStream();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "report.pdf");
-
-
-            JRPdfExporter pdfExporter = new JRPdfExporter();
-            pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-            pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
-            pdfExporter.exportReport();
-            return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
-            HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
-        }
-    }
 
     @PostMapping("/getBoilerACK")
     public ResponseEntity<?> getBoilerAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
@@ -3644,6 +3562,57 @@ public class ReportsController {
     }
 
 
+    @PostMapping("/getSanctionOrderRHSSConstruction")
+    public ResponseEntity<?> getSanctionOrderRHSSConstruction(
+            @RequestBody SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+
+            logger.info("enter to getSanctionOrderRHSSConstruction");
+            SanctionOrder apiResponse = apiService.fetchDataFromSanctionLowCostShedToPermanentRearingHouseSS(requestDto);
+
+            if (apiResponse == null ||
+                    apiResponse.getContent() == null ||
+                    apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String securityKey = apiResponse.getContent().get(0).getSecurityKey();
+
+            if (securityKey == null || securityKey.isEmpty()) {
+                securityKey = "sanction-" + UUID.randomUUID();
+            }
+            JasperReport jasperReport = getJasperReport("SanctionRH.jrxml");
+
+            Map<String, Object> parameters = getParameters();
+
+            JRDataSource dataSource = getDataSourceForSanctionOrderConstructionOfLowCostShedToPermanentRHSS(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes =JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = securityKey + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("RH Sanction uploaded successfully");
+            } catch (Exception uploadEx) {
+                logger.error("RH Upload failed, but continuing PDF response", uploadEx);
+            }
+
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                    "inline; filename=" + fileName).contentType(MediaType.APPLICATION_PDF).body(pdfBytes);
+        } catch (Exception ex) {
+
+            logger.error("Error generating RH sanction order", ex);
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate RH sanction order");
+        }
+    }
+
+
 
     @PostMapping("/getIMCBBeneficiary")
     public ResponseEntity<?> getIMCBBeneficiary(@RequestBody SanctionOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
@@ -4947,6 +4916,50 @@ public class ReportsController {
 
             // 3. datasource "java object"
             JRDataSource dataSource = getDataSourceForWorkOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = workOrderNumber + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating Work Order", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Work Order");
+        }
+    }
+
+
+    @PostMapping("/getWorkOrderRHSSconstruction")
+    public ResponseEntity<?> getWorkOrderRHSSconstruction(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getWorkOrderRHSSconstruction");
+            logger.info("enter to getWorkOrderRHSSconstruction");
+
+            WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrderLowCostShedConstructionRearingHouse(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
+            JasperReport jasperReport = getJasperReport("workorder.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForRHSSConstructionPermanentLowCostShedWorkOrder(requestDto);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -10727,129 +10740,6 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
-
-
-
-    private JRDataSource getDataSourceRHSSConstructionLowCostShedPermanentAck(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
-
-        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
-
-        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        if (apiResponse.getContent()!= null) {
-            String formattedDate = "";
-            try {
-                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
-
-                // Parse input format
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-                // Define output format
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                // Convert and format
-                Date date = inputFormat.parse(inputDate);
-                formattedDate = outputFormat.format(date);
-
-            } catch (Exception e) {
-                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
-            }
-            String raceName = apiResponse.getContent().get(0).getRaceName();
-            String raceNameWithoutFirstWord = removeFirstWord(raceName);
-
-            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ      ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ    "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಯಡಿ    ತಾಂತ್ರಿ  ಕ     ಸೇವಾ     ಕೇಂದ್ರ    " + apiResponse.getContent().get(0).getTscName()+
-                    "    ವ್ಯಾ ಪ್ತಿ ಯ     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮದ    "+ apiResponse.getContent().get(0).getCategoryShortName()+
-                    "      ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀ ಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +
-                    apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರು     ಹೊಸದಾಗಿ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ   ನಿರ್ಮಾಣಕ್ಕಾ ಗಿ     ಸಲ್ಲಿ ಸಿದ     ಅರ್ಜಿಯನ್ನು    ಸ್ವೀ ಕರಿಸಿದೆ.     "+
-                    "ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ     ಸ್ಥಿ ತಿಯನ್ನು    ಇ-ರೇಷ್ಮೆ    ವೆಬ್  ಸೈಟ್ https://e-reshme.karnataka.gov.in/ seriui ನಲ್ಲಿ     ARN/FID/Mob.No.   ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.  ");
-            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
-            response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-
-            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
-                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
-
-            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
-            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-            response.setArn( apiResponse.getContent().get(0).getArn());
-            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            acknowledgementReceiptResponseList.add(response);
-
-        }
-        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
-    }
-
-
-    private JRDataSource getDataSourceRHSDPConstructionLowCostShedPermanentAck(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
-
-        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
-
-        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
-        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
-        if (apiResponse.getContent()!= null) {
-            String formattedDate = "";
-            try {
-                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
-
-                // Parse input format
-                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-                // Define output format
-                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                // Convert and format
-                Date date = inputFormat.parse(inputDate);
-                formattedDate = outputFormat.format(date);
-
-            } catch (Exception e) {
-                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
-            }
-            String raceName = apiResponse.getContent().get(0).getRaceName();
-            String raceNameWithoutFirstWord = removeFirstWord(raceName);
-
-            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಯಡಿ    ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ    ತಾಂತ್ರಿಕ     "+
-                            "ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+ "  ವ್ಯಾ ಪ್ತಿ ಯ    "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮದ    "+ apiResponse.getContent().get(0).getCategoryShortName()+
-                    "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ     ಶ್ರೀ ಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +
-                    apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರ    ಅರ್ಜಿಯನ್ನು    ಸ್ವೀ ಕರಿಸಿದೆ .    ಅರ್ಜಿಯ    ಪ್ರಸ್ತುತ    ಸ್ಥಿ ತಿಯನ್ನು    ಇ-ರೇಷ್ಮೆ   ವೆಬ್  ಸೈಟ್   https://e-reshme.karnataka.gov.in/ seriui ನಲ್ಲಿ     "+
-                            "ARN/FID/Mob.No. ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
-            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
-            response.setDate(apiResponse.getContent().get(0).getDate());
-            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
-            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
-            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
-            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
-            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
-            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
-            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
-
-            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
-                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
-
-            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
-            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
-            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
-            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
-            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
-            response.setArn( apiResponse.getContent().get(0).getArn());
-            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
-            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
-            acknowledgementReceiptResponseList.add(response);
-
-        }
-        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
-    }
 
 
     private JRDataSource getDataSourceRHSDP225Ack(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
