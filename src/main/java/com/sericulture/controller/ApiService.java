@@ -789,6 +789,39 @@ public class ApiService {
     }
 
 
+    public SanctionOrder fetchDataFromSanctionLowCostShedToPermanentRearingHouseSS(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getFarmerSanctionForRHConstructionSSDetails";
+
+
+        String finalapiurl = dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getFarmerSanctionForRHConstructionSSDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, SanctionOrder.class);
+
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            // Get the response body from the exception
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling sanction API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch sanction data: " + responseBody, httpEx);
+
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
+
     public SanctionOrder fetchDataFromSanctionBoiler(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
@@ -1309,6 +1342,30 @@ public class ApiService {
         String finalapiurl =dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getWorkOrderSanctionRHDetails";
 
 //        String finalapiurl ="http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getWorkOrderSanctionRHDetails";
+
+        // Define the request headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<WorkOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+        WorkOrderGenerationReportResponse response = new WorkOrderGenerationReportResponse();
+        String response1=        restTemplate.postForObject(finalapiurl,requestEntity, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        WorkOrderReportResponse response2 = objectMapper.readValue(response1, WorkOrderReportResponse.class);
+
+        return response2;
+        // Process the API response as needed
+        //return apiResponse;
+    }
+
+    public WorkOrderReportResponse fetchDataApiWorkOrderLowCostShedConstructionRearingHouse(WorkOrderPrintRequest requestDto) throws JsonProcessingException {
+        // Make a GET request to the API endpoint
+        String finalapiurl =dbtApiUrl +"sanctionOrderWorkOrderAcknowledgement/getWorkOrderRHConstructionSSDetails";
+
+//        String finalapiurl ="http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getWorkOrderRHConstructionSSDetails";
 
         // Define the request headers
         HttpHeaders headers = new HttpHeaders();
