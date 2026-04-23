@@ -478,5 +478,8 @@ private String totalIncentiveAmountInWords;
 
     private String rearingEquipmentDetailsNameInKannada;
 
+    private String newFinancialYear;
+    private Float alreadyPaidAmount;
+
 
 }

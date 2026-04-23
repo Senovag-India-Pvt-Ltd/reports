@@ -806,6 +806,52 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/getSDPConstructionLowCostShedAck")
+    public ResponseEntity<?> getSDPConstructionLowCostShedAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getSDPConstructionLowCostShedAck");
+            logger.info("enter to getSDPConstructionLowCostShedAck");
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
+            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceSDPConstructionLowCostShedAck(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = arn + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating RH Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate RH Acknowledgement");
+        }
+    }
+
     @PostMapping("/getRHSSLowCostShedAck")
     public ResponseEntity<?> getRHSSLowCostShedAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -4916,6 +4962,49 @@ public class ReportsController {
 
             // 3. datasource "java object"
             JRDataSource dataSource = getDataSourceForWorkOrder(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = workOrderNumber + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating Work Order", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Work Order");
+        }
+    }
+
+    @PostMapping("/getWorkOrderSDPConstruction")
+    public ResponseEntity<?> getWorkOrderSDPConstruction(@RequestBody WorkOrderPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getWorkOrderSDPConstruction");
+            logger.info("enter to getWorkOrderSDPConstruction");
+
+            WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrderLowCostShedConstructionRearingHouse(requestDto);
+            String workOrderNumber = apiResponse.getContent().get(0).getWorkOrderNumber();
+
+            JasperReport jasperReport = getJasperReport("workorder.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForRHSDPLowCostShedWorkOrder(requestDto);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -10678,6 +10767,65 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
+    private JRDataSource getDataSourceSDPConstructionLowCostShedAck(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+            try {
+                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+                // Parse input format
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                // Define output format
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                // Convert and format
+                Date date = inputFormat.parse(inputDate);
+                formattedDate = outputFormat.format(date);
+
+            } catch (Exception e) {
+                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ     "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಯಡಿ    ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ     ಮನೆ    ನಿರ್ಮಾಣಕ್ಕೆ    ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ     ತಾಂತ್ರಿಕ    ಸೇವಾ    ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+
+                    "    ವ್ಯಾ ಪ್ತಿ ಯ     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮದ    "+ apiResponse.getContent().get(0).getCategoryShortName()+
+                    "      ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀ ಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +
+                    ""+apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರ    ಅರ್ಜಿಯನ್ನು     ಸ್ವೀಕರಿಸಿದೆ .   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು    ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್    https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ     "+
+                    "ARN/FID/Mob.No.   ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
+
+            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+        }
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
 
     private JRDataSource getDataSourceLowCostShedRHSSAck(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
@@ -11824,7 +11972,7 @@ public class ReportsController {
                     "  "+apiResponse.getContent().get(0).getReelerFatherName()+"   ರವರು     "+apiResponse.getContent().get(0).getReelerVillage() +"     "+
                     "ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getReelerTaluk() +"   ತಾಲ್ಲೂ ಕು    "+apiResponse.getContent().get(0).getReelerDistrict() + "   ಜಿಲ್ಲೆ     ಯವರಾಗಿದ್ದು      "+
                     "ಮೈ ಸೂರು/ದ್ವಿ ತಳಿ    ಶುದ್ಧ    ತಳಿ      ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಾಗಿದ್ದು    ಸದರಿ   ರೈ ತರು   ದಿನಾಂಕ  :  "+formattedDate +"   "+
-                    "  ರಂದು   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ      "+apiResponse.getContent().get(0).getMarketName()+"    ರಲ್ಲಿ     "+ new DecimalFormat("0.00").format(apiResponse.getContent().get(0).getTotalReelingAmount()) +"  ಕೆಳಕಂಡಂತೆ       "+
+                    "  ರಂದು   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ      "+apiResponse.getContent().get(0).getMarketName()+"    ರಲ್ಲಿ     "+ new DecimalFormat("0.00").format(apiResponse.getContent().get(0).getTotalReelingLotWeight()) +"  ಕೆಳಕಂಡಂತೆ       "+
                     "  ಗೂಡುಗಳನ್ನು      ನೂಲು     ಬಿಚ್ಚಾ ಣಿಕೆಗೆ      ಮಾರಾಟ     ಮಾಡಿರುತ್ತಾ ರೆ.");
 
             response.setHeader3("ಬಿತ್ತ ನೆ   ಪ್ರಚಾರ   ಶಾಖೆ / ಕೃಷಿ    ಕ್ಷೇತ್ರ    " +
@@ -18816,7 +18964,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
     private JRDataSource getDataSourceForRHSDPLowCostShedWorkOrder(WorkOrderPrintRequest requestDto) throws JsonProcessingException , JAXBException {
 
-        WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrder(requestDto);
+        WorkOrderReportResponse apiResponse = apiService.fetchDataApiWorkOrderLowCostShedConstructionRearingHouse(requestDto);
         List<WorkOrderGenerationReportResponse> workOrderGenerationReportResponseList = new LinkedList<>();
 
         WorkOrderGenerationReportResponse apiData = apiResponse.getContent().get(0);
@@ -20610,6 +20758,17 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String totalAmountDisplay = String.valueOf(totalAmount);
 
 
+        int alreadyPaidAmount = Math.round(
+                apiResponse.getContent().get(0).getAlreadyPaidAmount() == null
+                        ? 0f
+                        : apiResponse.getContent().get(0).getAlreadyPaidAmount()
+        );
+
+        int remainingAmount = totalAmount - alreadyPaidAmount;
+
+        String remainingAmountDisplay = String.valueOf(remainingAmount);
+
+
         if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
             throw new RuntimeException("No data returned from sanction API for applicationFormId: " + requestDto.getApplicationFormId());
         }
@@ -20652,7 +20811,10 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                         + apiResponse.getContent().get(0).getEstimatedCost() + "    ಲಕ್ಷ ಗಳ    ವೆಚ್ಚದಲ್ಲಿ    (ಸ್ವಂತ ವೆಚ್ಚ  /ಬ್ಯಾಂಕಿನಿಂದ  ಸಾಲ  ಪಡೆದು)    ನಿರ್ಮಿಸಿರುವುದನ್ನು    "+ apiResponse.getContent().get(0).getCreatedByDesignation() +" ,      " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "    ಹಾಗೂ    ರೇಷ್ಮೆ    ಸಹಾಯಕ    ನಿರ್ದೇಶಕರು    "
                         + apiResponse.getContent().get(0).getTalukNameInKannada() + "    ವಿಭಾಗ    ರವರು    ಪರಿಶೀಲಿಸಿ    ದೃ  ಢೀಕರಿಸಿ    ಸಲ್ಲಿ ಸಿರುವ     ಎಲ್ಲಾ    ಅಗತ್ಯ    ದಾಖಲಾತಿಗಳನ್ನು    ಒಳಗೊಂಡ    ಪ್ರ ಸ್ತಾ ವನೆಯನ್ನು      " +
                         apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"    ಜಿಲ್ಲೆ     ಇವರು    ಪರಿಶೀಲಿಸಿ      ದೃಢಿಕರಿಸಿ    ಉಲ್ಲೇಖ(5) ರನ್ವ ಯ    ಈ    ಕಛೇರಿಗೆ    ಶಿಫಾರಸ್ಸು     ಮಾಡಿ    ಸಲ್ಲಿ ಸಿದ್ದು ,   "+
-                        "  ಸದರಿ    ಫಲಾನುಭವಿಯು 2020-21 ನೇ ಸಾಲಿನಲ್ಲಿ ಕಡಿಮೆ ವೆಚ್ಚದ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಶೆಡ್\u200Cಗೆ ರೂ.1,00,000.00 ಗಳ ಸಹಾಯಧನ ಪಡೆದುಕೊಂಡಿದ್ದು ಸದರಿ ಸಹಾಯಧನವನ್ನು ಈಗ ನೀಡುತ್ತಿರುವ ಸಹಾಯಧನದಲ್ಲಿ ಕಟಾಯಿಸಿ ರೂ,2,37,500.00ಗಳ ಸಹಾಯಧನವನ್ನು ಮಂಜೂರು ಮಾಡುವಂತೆ ಕೋರಿರುತ್ತಾರೆ.  ಉಲ್ಲೇಖ (2) ರ  ಸುತ್ತೋಲೆ ಪತ್ರದಲ್ಲಿ ಕಡಿಮೆ ವೆಚ್ಚದ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆ ಶೆಡ್ ನಿರ್ಮಾಣಕ್ಕಾಗಿ ಪಡೆದ ಸಹಾಯಧನವನ್ನು ಸರ್ಕಾರದ ಲೆಕ್ಕ ಶೀರ್ಷಿಕೆ 2851-00-911-0-02 ಗೆ ಹಿಂಬರಿಸಿ ಅಥವಾ ಪಡೆದಿರುವ ಸಹಾಯಧನವನ್ನು ಹಿಂಬರಿಸಲು ಶಕ್ತರಿಲ್ಲದಿದ್ದಲ್ಲಿ ಅಂತಹ ಸಂದರ್ಭಗಳಲ್ಲಿ ಮಂಜೂರು ಮಾಡುವ ರಾಜ್ಯ ಪಾಲಿನ ಸಹಾಯಧನದಲ್ಲಿ ಕಟಾವು ಮಾಡಲು ಸೂಚಿಸಿರುತ್ತಾರೆ.  "+
+                        "  ಸದರಿ    ಫಲಾನುಭವಿಯು     "+apiResponse.getContent().get(0).getNewFinancialYear() +" ನೇ   ಸಾಲಿನಲ್ಲಿ    ಕಡಿಮೆ     ವೆಚ್ಚದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ    ಶೆಡ್ ಗೆ ರೂ. "+ apiResponse.getContent().get(0).getAlreadyPaidAmount() +" ಗಳ    "+
+                        "ಸಹಾಯಧನ   ಪಡೆದುಕೊಂಡಿದ್ದು    ಸದರಿ    ಸಹಾಯಧನವನ್ನು     ಈಗ   ನೀಡುತ್ತಿರುವ    ಸಹಾಯಧನದಲ್ಲಿ    ಕಟಾಯಿಸಿ     ರೂ. "+remainingAmountDisplay +"  ಗಳ ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು    ಮಾಡುವಂತೆ    ಕೋರಿರುತ್ತಾರೆ.  ಉಲ್ಲೇಖ (2) ರ    ಸುತ್ತೋಲೆ     "+
+                        "ಪತ್ರದಲ್ಲಿ   ಕಡಿಮೆ     ವೆಚ್ಚದ     ರೇಷ್ಮೆ    ಹುಳು   ಸಾಕಾಣಿಕೆ    ಶೆಡ್    ನಿರ್ಮಾಣಕ್ಕಾಗಿ    ಪಡೆದ   ಸಹಾಯಧನವನ್ನು   ಸರ್ಕಾರದ    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    "+ apiResponse.getContent().get(0).getScHeadAccountName() + " (" + apiResponse.getContent().get(0).getDescription() +") ಗೆ  ಹಿಂಬರಿಸಿ    ಅಥವಾ     ಪಡೆದಿರುವ   "+
+                        "ಸಹಾಯಧನವನ್ನು    ಹಿಂಬರಿಸಲು    ಶಕ್ತರಿಲ್ಲದಿದ್ದಲ್ಲಿ    ಅಂತಹ    ಸಂದರ್ಭಗಳಲ್ಲಿ    ಮಂಜೂರು    ಮಾಡುವ    ರಾಜ್ಯ    ಪಾಲಿನ    ಸಹಾಯಧನದಲ್ಲಿ   ಕಟಾವು    ಮಾಡಲು   ಸೂಚಿಸಿರುತ್ತಾರೆ.\n"+
                         ",  ಸದರಿ    ಫಲಾನುಭವಿಗೆ    ರೂ.    " + (centralShareAmount + stateShareAmount) + " /-ಗಳ    ಸಹಾಯಧನವನ್ನು    ಮಂಜೂರು    ಮಾಡುವಂತೆ    ಕೋರಿರುತ್ತಾರೆ.    "+
                         "         ಉಲ್ಲೇಖ (4) ರಲ್ಲಿ      ಸದರಿ    ಕಾರ್ಯಕ್ರ ಮದ     ಅನುಷ್ಠಾ ನಕ್ಕಾ ಗಿ     ನೀಡಿರುವ     ಮಾರ್ಗ ಸೂಚಿಯನ್ವ ಯ     ಸಹಾಯಧನ     ಮಂಜೂರು    ಮಾಡಲು     ಅನುದಾನ      "+
                         "ಬಿಡುಗಡೆ      ಮಾಡಲಾಗಿದೆ .    ಅದರಂತೆ    ಅಂತಿಮ    ಹಂತದ /ಮೂರು    ಹಂತದ    ಜಿ.ಪಿ.ಎಸ್     ಪೋಟೊಗಳನ್ನು     ಸಲ್ಲಿ ಸಿದ್ದು ,     ಉಲ್ಲೇಖ (6) ರಲ್ಲಿ     ಫಲಾನುಭವಿ    ಆಧಾರಿತ     ಕಾರ್ಯಕ್ರ  ಮಗಳಡಿ     "+
