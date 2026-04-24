@@ -481,5 +481,8 @@ private String totalIncentiveAmountInWords;
     private String newFinancialYear;
     private Float alreadyPaidAmount;
 
+    private String minSqft;
+    private String maxsqft;
+
 
 }
