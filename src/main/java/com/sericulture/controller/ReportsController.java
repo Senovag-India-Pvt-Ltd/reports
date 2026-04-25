@@ -2865,8 +2865,13 @@ public class ReportsController {
 
             JRBeanCollectionDataSource dsTable2 = new JRBeanCollectionDataSource(dsMain.getData());
 
+            JRBeanCollectionDataSource dsTable3 = new JRBeanCollectionDataSource(dsMain.getData());
+
+
             parameters.put("CollectionBeanParam", dsTable1);
             parameters.put("CollectionBeanParam1", dsTable2);
+            parameters.put("CollectionBeanParam2", dsTable3);
+
 
             JRDataSource dataSource = dsMain;
 
