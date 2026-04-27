@@ -482,7 +482,7 @@ private String totalIncentiveAmountInWords;
     private Float alreadyPaidAmount;
 
     private String minSqft;
-    private String maxsqft; 
+    private String maxsqft;  
 
 
 }
