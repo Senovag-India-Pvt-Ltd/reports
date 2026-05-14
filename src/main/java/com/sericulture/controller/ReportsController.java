@@ -7094,6 +7094,7 @@ public class ReportsController {
             return new JRBeanCollectionDataSource(Collections.emptyList());
         }
 
+
         // --- existing code (kept mostly as you had it) ---
         // set sadodLot safely
         if (apiResponse.content.getSadodLotNumber() != null) {
@@ -7117,7 +7118,16 @@ public class ReportsController {
         String formatFees = df.format(farmerMarketFee) + "+" + df.format(reelerMarketFee) + "=" + df.format(totalMarketFee);
         apiResponse.content.setFeespaid(formatFees);
         apiResponse.content.setAmountPaid(df.format(reelerMarketFee));
-        apiResponse.content.setAuctionDate(apiResponse.content.getAuctionDate());
+        if (apiResponse.content.getAuctionDate() != null) {
+            try {
+                SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date parsedAuctionDate = inputDateFormat.parse(apiResponse.content.getAuctionDate());
+                apiResponse.content.setAuctionDate(outputDateFormat.format(parsedAuctionDate));
+            } catch (ParseException e) {
+                // keep original value if parsing fails
+            }
+        }
 
         long total = 0;
         try {
@@ -7143,7 +7153,7 @@ public class ReportsController {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
                 Date parsedDate = inputFormat.parse(inputDateTime);
                 SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
-                SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 apiResponse.content.setAuctionDate_time(outputFormat.format(parsedDate));
                 apiResponse.content.setAuctionDate(outputFormat1.format(parsedDate));
             } catch (ParseException e) {
@@ -7381,6 +7391,7 @@ public class ReportsController {
         }
 
         double lgSoldOutAmountTotal = 0; // total variable
+        double lgMarketFeeTotal = 0;    // sum of lgMarketFee to subtract
 
         for (Buyer item : buyerList) {
 
@@ -7413,13 +7424,17 @@ public class ReportsController {
 
             row.put("totalCocoon", totalCocoon);
 
-            // ✅ FIX: total calculation
             try {
                 double val = item.getLgSoldOutAmount() != null
-                        ? Double.parseDouble(item.getLgSoldOutAmount())
-                        : 0;
-
+                        ? Double.parseDouble(item.getLgSoldOutAmount()) : 0;
                 lgSoldOutAmountTotal += val;
+            } catch (Exception e) {
+                // ignore
+            }
+
+            try {
+                double fee = item.getLgMarketFee() != null ? item.getLgMarketFee() : 0;
+                lgMarketFeeTotal += fee;
             } catch (Exception e) {
                 // ignore
             }
@@ -7427,7 +7442,8 @@ public class ReportsController {
             tableList.add(row);
         }
 
-        apiResponse.content.setLgSoldOutAmountTotal(lgSoldOutAmountTotal);
+        apiResponse.content.setLgSoldOutAmountTotal(lgSoldOutAmountTotal - lgMarketFeeTotal);
+        apiResponse.content.setLgMarketFeeTotal(lgMarketFeeTotal);
 
         System.out.println("TOTAL lgSoldOutAmountTotal: " + lgSoldOutAmountTotal);
 
@@ -10402,7 +10418,7 @@ public class ReportsController {
 
             response.setHeader3("ಕೋಡ್    ಸಂಖ್ಯೆ  : " +apiResponse.getContent().get(0).getLotNumber());
 
-            response.setHeader2(" ದಿನಾಂಕ  : " +apiResponse.getContent().get(0).getMarketAuctionDate());
+            response.setHeader2(" ದಿನಾಂಕ  : " + formatDate(apiResponse.getContent().get(0).getMarketAuctionDate(), "yyyy-MM-dd"));
 
             String eligibilityText;
 
@@ -10435,7 +10451,7 @@ public class ReportsController {
             String formattedFromDate =
                     formatDate(apiResponse.getContent().get(0).getSpunFromDate(), "yyyy-MM-dd");
 
-            String formattedMarketAuctionDate = formatDate(apiResponse.getContent().get(0).getMarketAuctionDate(),sdf);
+            String formattedMarketAuctionDate = formatDate(apiResponse.getContent().get(0).getMarketAuctionDate(), "yyyy-MM-dd");
 
             response.setHeader(apiResponse.getContent().get(0).getTscName() +"    ವಲಯದ     "+apiResponse.getContent().get(0).getVillageName() +"      ಗ್ರಾ ಮದ       ಶ್ರೀ /ಶ್ರೀ ಮತಿ   " +
                     "   "+apiResponse.getContent().get(0).getFarmerNameKan() +" ,    ಬಿನ್/ಕೋಂ      "+apiResponse.getContent().get(0).getFatherNameKan() +
@@ -10450,6 +10466,12 @@ public class ReportsController {
                             "ಗೂಡುಗಳು      ಬಿತ್ತ ನೆಗೆ     "+eligibilityText+".\n\n" +
                             "ಈ     ಬೆಳೆಗಾರರು ,    ಇದರ       ಹಿಂದೆ     ಬೆಳೆ     ರೇಷ್ಮೆ     ಗೂಡುಗಳು     ಕಾನೂನಿನ     ರೀತ್ಯಾ      ವಿಲೇವಾರಿಯಾಗಿದೆ     ಮತ್ತು        "+
                             "ಸಂಬಂಧಿಸಿದ      ರೆಜಿಸ್ಟ ರ್ನಲ್ಲಿ      ಈ    ಬಗ್ಗೆ      ಷರಾ     ಬರೆಯಲಾಗಿದೆ     ಎಂದು     ಪ್ರ ಮಾಣೀಕರಿಸುತ್ತೇ ನೆ.");
+
+
+            response.setHeader4("ಕರ್ನಾಟಕ   ಸರ್ಕಾರ \n"+
+                            raceNameWithoutFirstWord +"    ಬಿತ್ತನೆ  ಪ್ರ  ದೇಶ \n"+
+                    "ದ್ವಿ  ಪ್ರ ತಿ ");
+
 
             response.setAcceptedDate("ವಹಿವಾಟು   ಮಾಡುವ    ದಿನಾಂಕ :  " +formattedMarketAuctionDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -12147,7 +12169,7 @@ public class ReportsController {
             response.setHeader(formattedFromDate  + "  -  " +  formattedToDate  +"   ರಲ್ಲಿ     ಹಣ್ಣಾ ದ     " + apiResponse.getContent().get(0).getNoOfCocoonPerKg()  +  "   ಸಾವಿರ   ಬೈ ವೋಲ್ಟಿನ್/" +
                     "  ಮೈ ಸೂರು    ತಳಿ    ಬಿತ್ತ ನೆ     ಗೂಡುಗಳನ್ನು       "+ apiResponse.getContent().get(0).getFarmerVillage()  +      "     ಗ್ರಾ ಮದ     ಬಿತ್ತ ನೆ    " +
                     "  ಗೂಡು    ಸಾಕಣೆಗೆ    ಅನುಜ್ಞಾ     ಪತ್ರ     ಪಡೆದಿರುವ    ಶ್ರೀ     "+ apiResponse.getContent().get(0).getFatherNameKan()  + "   ರವರ    ಮಗ    ಶ್ರೀ  " +
-                    apiResponse.getContent().get(0).getFarmerFullName() + "   ರವರಿಂದ    ಒಂದು   ಸಾವಿರ   ಗೂಡುಗಳಿಗೆ   ರೂ. "+ apiResponse.getContent().get(0).getAmount()  +
+                    apiResponse.getContent().get(0).getFarmerFullName() + "   ರವರಿಂದ    "+ apiResponse.getContent().get(0).getLotWeight()  +"   ಒಂದು   ಸಾವಿರ   ಗೂಡುಗಳಿಗೆ   ರೂ. "+ apiResponse.getContent().get(0).getAmount()  +
                             "   ದರದ    ಪ್ರಕಾರ   "+ formattedMarketAuctionDate  + "  ರಂದು     ಕೊಂಡು   ______________________ ಲಾಟಿಗೆ    ಉಪಯೋಗಿಸಲು    ಸಂಬಂಧಿಸಿದ   ದಾಸ್ತಾನು    ಪುಸ್ತಕದ    ಪುಟ  "+
                     "_____________________________   ರಲ್ಲಿ    "+formattedMarketAuctionDate+" ರಂದು    ದಾಖಲು     ಮಾಡಿಕೊಂಡು ________________  ದ   ಬಿತ್ತನೆ    ಕೋಠಿಗೆ    ಸರಕು    ರಾವಾನೆ    ಮೂಲಕ     " +
                             "ರವಾನಿಸಲಾಗಿದೆ    ಎಂದು     ಪ್ರಮಾಣಿಕರಿಸುತ್ತೇ ನೆ. \n\n"+
@@ -12158,7 +12180,7 @@ public class ReportsController {
                     "  ರಲ್ಲಿ       ಹಣ್ಣಾಗಿದ್ದು   ,  ಒಂದು     ಕಿಲೋಗೆ     "+  apiResponse.getContent().get(0).getNoOfCocoonPerKg()  + "    ಸಂಖ್ಯೆ ಯಲ್ಲಿ ದ್ದ    " +
                     "  ಬೈವೋಲ್ಟಿನ್ / ಮೈ ಸೂರು     ತಳಿ     ಬಿತ್ತ ನೆ     ಗೂಡನ್ನು       ದರ   "+  apiResponse.getContent().get(0).getAmount()  + " ಕ್ಕೆ      ಸರಬರಾಜು   ಮಾಡಿದಕ್ಕಾಗಿ   " +apiResponse.getContent().get(0).getMarketName()  +
                     "   ರಿಂದ   ________________________________  ರವರೆಗೆ    ಒಟ್ಟು     ಕಿ.ಮೀ.   ____________________________ ಸಾಗಣೆ    ವೆಚ್ಚ  _____________________________  ಸೇರಿದಂತೆ   " +
-                    "ಒಟ್ಟು       ಮೊಬಲಗು    " +amountInKannada + "    ಸ್ವೀ ಕರಿಸಿದ್ದೇ ನೆ.\n\n\n" +
+                    "ಒಟ್ಟು       ಮೊಬಲಗು    " +amountInKannada + "    ಸ್ವೀ ಕರಿಸಿದ್ದೇ ನೆ.\n\n\n\n\n" +
                     "      ಪಾವತಿ     ಮಾಡಿರುವ    ದರ    ಚಾಲ್ತಿ ಯಲ್ಲಿ ರುವ    ಕೊಳ್ಳುವ    ದರಕ್ಕಿಂತ     ಹೆಚ್ಚಿ ಲ್ಲ ವೆಂದೂ     ಮೇಲಾಧಿಕಾರಿಯ     ಮಂಜೂರಾತಿಯನ್ನು     ದಿನಾಂಕ_________________ ರಂದು   " +
                     "  ______________ ರ     ಸಂಖ್ಯೆ ಯಲ್ಲಿ      ಪಡೆದಿದ್ದೇ ನೆಂದು    ಹಣ    ಪಾವತಿ    ಪ್ರಮಾಣೀಕರಿಸುತ್ತೇನೆ.");
 
@@ -12169,7 +12191,8 @@ public class ReportsController {
             response.setHeader5("1. ಈ    ಬಿಲ್ಲಿ ನಲ್ಲಿ     ಖರೀದಿಸಿದ   ಸರಕನ್ನು     ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ    ಗೂಡು   ಖರೀದಿ \n" +
                                 "   ದಾಸ್ತಾ ನು   ಪುಟ    ಸಂಖ್ಯೆ   _________________   ರಲ್ಲಿ    ದಾಸ್ತಾನು    ಪಡೆಯಲಾಗಿದೆ.\n"+
                                 "2. ಈ    ಬಿಲ್ಲಿ  ನಲ್ಲಿ    ಭರಿಸಲಾದ    ವೆಚ್ಚ    ಈ    ಕಚೇರಿಯ    ಮಂಜೂರಾತಿ  ಆದೇಶದ  \n"+
-                                "   ಸಂಖ್ಯೆ  _______________   ದಿನಾಂಕ _______________ ರಲ್ಲಿ     ಮಂಜೂರಾತಿ    ನೀಡಲಾಗಿದೆ.");
+                                "   ಸಂಖ್ಯೆ  _________________________________________________   ದಿನಾಂಕ ____________________ ರಲ್ಲಿ     ಮಂಜೂರಾತಿ\n"+
+                                "   ನೀಡಲಾಗಿದೆ.");
 
 
             response.setLogurl("/reports/Seal_of_Karnataka.PNG");
@@ -12380,6 +12403,8 @@ public class ReportsController {
                 "ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ      ಗೂಡಿನ    ಮಾರುಕಟ್ಟೆ ,\n"+
                 apiResponse.getContent().get(0).getMarketName());
 
+        response.setHeader5("ದಿನಾಂಕ :  "+ formatDate(apiResponse.getContent().get(0).getAuctionDate(), "yyyy-MM-dd").replace("-", "/"));
+
         response.setHeader1("ಇವರಿಗೆ:                                                                                                  \n" +
                 "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
                 "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
@@ -12491,6 +12516,8 @@ public class ReportsController {
                 "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
                 "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
                 + apiResponse.getContent().get(0).getBuyerName());
+        response.setHeader5("ದಿನಾಂಕ :  "+ formatDate(apiResponse.getContent().get(0).getAuctionDate(), "yyyy-MM-dd").replace("-", "/"));
+
         response.setHeader3("ರುಜು :___________________________                                              ರುಜು :___________________________ \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು :______________________________                         ಹುದ್ದೆಯ ಹೆಸರು :______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
@@ -12598,6 +12625,7 @@ public class ReportsController {
                 "ರೇಷ್ಮೆ   ಉಪ ನಿರ್ದೇಶಕರು/ ಸಹಾಯಕ   ನಿರ್ದೇಶಕರು/ರೇಷ್ಮೆ   ನಿರೀಕ್ಷ ಕರು \n" +
                 "ರೇಷ್ಮೆ   ಬಿತ್ತ ನೆ   ಕೋಠಿ\n"
                 + apiResponse.getContent().get(0).getBuyerName());
+        response.setHeader5("ದಿನಾಂಕ :  "+ formatDate(apiResponse.getContent().get(0).getAuctionDate(), "yyyy-MM-dd").replace("-", "/"));
         response.setHeader3("ರುಜು :___________________________                                              ರುಜು :___________________________ \n" +
                 "ಹುದ್ದೆಯ ಹೆಸರು :______________________________                         ಹುದ್ದೆಯ ಹೆಸರು :______________________________ ");
         response.setHeader("ಸ್ಥಳ         : ______________________________________\n"+
@@ -12707,7 +12735,7 @@ public class ReportsController {
 
             headerRow.setHeader(" ಶ್ರೀ   " + apiResponse.getContent().get(0).getBuyerName() +"   ನೋಂದಣಿ     ಖಾಸಗಿ     ಬಿತ್ತನೆದಾರರು     ಈ       " +
                     "ದಿನ     ಮಾರುಕಟ್ಟೆ ಯಿಂದ    ದಿನಾಂಕ :  "+formattedFromDate + " - " + formattedToDate +"   ರಲ್ಲಿ     ಗೂಡು   ಕಟ್ಟಿ ದ    " +
-                    " ಮೈ ಸೂರು    ಶುದ್ಧ     ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
+                    " "+ apiResponse.getContent().get(0).getRace() +"    ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
                     "ಇರುವ     ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     "+ apiResponse.getContent().get(0).getMarketName() +"   ಮಾರುಕಟ್ಟೆ ಯಿಂದ     " +
                     "ಖರೀದಿಸಿರುತ್ತಾರೆ.     ಸದರಿ   ಗೂಡುಗಳು    "+ apiResponse.getContent().get(0).getRspAddress() +"   ಗ್ರಾ ಮ/ಪಟ್ಟ ಣಕ್ಕೆ    ಸಾಗಿಸಲು    "+
                     "ಅನುಮತಿ    ನೀಡಿದೆ.    ಈ    ಪರ್ಮಿಟಿನ    ಅವಧಿ    "+ formattedMarketAuctionDate+"   ವರೆಗೆ.");
@@ -12810,7 +12838,7 @@ public class ReportsController {
         try {
             headerRow.setHeader(" ಶ್ರೀ   " + apiResponse.getContent().get(0).getBuyerName() +"   ನೋಂದಣಿ     ಖಾಸಗಿ     ಬಿತ್ತನೆದಾರರು     ಈ       " +
                     "ದಿನ     ಮಾರುಕಟ್ಟೆ ಯಿಂದ    ದಿನಾಂಕ :  "+formattedFromDate + " - " + formattedToDate +"   ರಲ್ಲಿ     ಗೂಡು   ಕಟ್ಟಿ ದ    " +
-                    " ಮೈ ಸೂರು    ಶುದ್ಧ     ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
+                    " "+ apiResponse.getContent().get(0).getRace() +"    ತಳಿಯ    "+ Math.round(totalLotWeightSum) +"    ಕೆಜಿ    ಗೂಡುಗಳನ್ನು    ಸಂಖ್ಯೆ  : "+Math.round(totalNumberSum)+"    " +
                     "ಇರುವ     ಬಿತ್ತನೆ    ಗೂಡುಗಳನ್ನು     "+ apiResponse.getContent().get(0).getMarketName() +"   ಮಾರುಕಟ್ಟೆ ಯಿಂದ     " +
                     "ಖರೀದಿಸಿರುತ್ತಾರೆ.     ಸದರಿ   ಗೂಡುಗಳು    "+ apiResponse.getContent().get(0).getRspAddress() +"   ಗ್ರಾ ಮ/ಪಟ್ಟ ಣಕ್ಕೆ    ಸಾಗಿಸಲು    "+
                     "ಅನುಮತಿ    ನೀಡಿದೆ.    ಈ    ಪರ್ಮಿಟಿನ    ಅವಧಿ    "+ formattedMarketAuctionDate+"   ವರೆಗೆ.");
@@ -12876,9 +12904,9 @@ public class ReportsController {
 
         String[] words = text.trim().split("\\s+");
 
-        // If only one word exists, return empty
-        if (words.length <= 1) {
-            return "";
+        // If only one word, return it as-is
+        if (words.length == 1) {
+            return words[0];
         }
 
         // Join from 2nd word onwards
@@ -16254,23 +16282,27 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         }
 
 
-        float centralShareF = apiResponse.getContent().get(0).getCentralSharePercentage();
-        float stateShareF   = apiResponse.getContent().get(0).getStateSharePercentage();
+        int centralShare = 0;
+        int stateShare = 0;
+        int centralShareAmount = 0;
+        int stateShareAmount = 0;
 
-        int centralShare = Math.round(centralShareF);
-        int stateShare   = Math.round(stateShareF);
-        int beneficiaryShare = Math.round(100 - (centralShareF + stateShareF));
+        for (SanctionOrderResponse row : apiResponse.getContent()) {
+            if (row.getCentralSharePercentage() != null)
+                centralShare += Math.round(row.getCentralSharePercentage());
+            if (row.getStateSharePercentage() != null)
+                stateShare += Math.round(row.getStateSharePercentage());
+            if (row.getCentralSanctionAmount() != null)
+                centralShareAmount += Math.round(row.getCentralSanctionAmount());
+            if (row.getStateSanctionAmount() != null)
+                stateShareAmount += Math.round(row.getStateSanctionAmount());
+        }
 
-        float centralAmtF = apiResponse.getContent().get(0).getCentralSanctionAmount();
-        float stateAmtF   = apiResponse.getContent().get(0).getStateSanctionAmount();
-
-        int centralShareAmount = Math.round(centralAmtF);
-        int stateShareAmount   = Math.round(stateAmtF);
-
-        float schemeAmtF = apiResponse.getContent().get(0).getSchemeAmount();
+        int beneficiaryShare = 100 - (centralShare + stateShare);
+        if (beneficiaryShare < 0) beneficiaryShare = 0;
 
         int beneficiaryAmount = Math.round(
-                schemeAmtF - (centralAmtF + stateAmtF)
+                apiResponse.getContent().get(0).getUnitCost() - (centralShareAmount + stateShareAmount)
         );
 
         String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
@@ -16411,7 +16443,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     +"   1. "+apiResponse.getContent().get(0).getDrawingOfficerDesignation() +" ,    "+apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                     +"   3. ತಾಲ್ಲೂ ಕು     ಖಜಾನೆ ,    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ " ಜಿಲ್ಲೆ  \n"
-                    +"   4. ರೇಷ್ಮೆ    ಜಂಟಿ    ನಿರ್ದೇಶಕರು ,    ಯೋಜನಾ    ವಿಭಾಗ ,    ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯ ,   ಬೆಂಗಳೂರು \n"
+                    +"   4. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    ಯೋಜನಾ    ವಿಭಾಗ ,    ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯ ,   ಬೆಂಗಳೂರು \n"
                     +"   5. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getFarmerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getFarmerFatherName() +" ,   " + apiResponse.getContent().get(0).getVillageNameInKannada()+" ,   "+apiResponse.getContent().get(0).getTalukNameInKannada()+" , "+apiResponse.getContent().get(0).getDistrictNameInKannada()+"  ಜಿಲ್ಲೆ   \n"+
                     "       ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
 

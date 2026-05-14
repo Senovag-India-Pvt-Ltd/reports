@@ -164,6 +164,8 @@ public class LotDistributeResponse extends ResponseBody{
     private String reelerTaluk;
     private String reelerHobli;
     private String reelerVillage;
+    private String transactionDate;
+
 
 
 }

@@ -202,6 +202,7 @@ public class Content {
     private String remainingCocoon;
     private List<Buyer> buyerList;
     private Double lgSoldOutAmountTotal;
+    private Double lgMarketFeeTotal;
 
 
 
