@@ -16031,8 +16031,16 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         }
 
 
-        float centralShareF = apiResponse.getContent().get(0).getCentralSharePercentage();
-        float stateShareF   = apiResponse.getContent().get(0).getStateSharePercentage();
+        float centralShareF = 0f;
+        float stateShareF   = 0f;
+        float centralAmtF   = 0f;
+        float stateAmtF     = 0f;
+        for (SanctionOrderResponse r : apiResponse.getContent()) {
+            centralShareF += r.getCentralSharePercentage() == null ? 0f : r.getCentralSharePercentage();
+            stateShareF   += r.getStateSharePercentage()   == null ? 0f : r.getStateSharePercentage();
+            centralAmtF   += r.getCentralSanctionAmount()  == null ? 0f : r.getCentralSanctionAmount();
+            stateAmtF     += r.getStateSanctionAmount()    == null ? 0f : r.getStateSanctionAmount();
+        }
 
         int centralShare = Math.round(centralShareF);
         int stateShare   = Math.round(stateShareF);
@@ -16041,10 +16049,6 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         float shareInPercentage = apiResponse.getContent().get(0).getShareInPercentage() == null
                 ? 0f
                 : Float.parseFloat(apiResponse.getContent().get(0).getShareInPercentage());
-
-
-        float centralAmtF = apiResponse.getContent().get(0).getCentralSanctionAmount();
-        float stateAmtF   = apiResponse.getContent().get(0).getStateSanctionAmount();
 
         int centralShareAmount = Math.round(centralAmtF);
         int stateShareAmount   = Math.round(stateAmtF);
@@ -16649,8 +16653,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         }
 
 
-        float centralShareF = apiResponse.getContent().get(0).getCentralSharePercentage();
-        float stateShareF   = apiResponse.getContent().get(0).getStateSharePercentage();
+        float centralShareF = 0f;
+        float stateShareF   = 0f;
+        float centralAmtF   = 0f;
+        float stateAmtF     = 0f;
+        for (SanctionOrderResponse r : apiResponse.getContent()) {
+            centralShareF += r.getCentralSharePercentage() == null ? 0f : r.getCentralSharePercentage();
+            stateShareF   += r.getStateSharePercentage()   == null ? 0f : r.getStateSharePercentage();
+            centralAmtF   += r.getCentralSanctionAmount()  == null ? 0f : r.getCentralSanctionAmount();
+            stateAmtF     += r.getStateSanctionAmount()    == null ? 0f : r.getStateSanctionAmount();
+        }
 
         int centralShare = Math.round(centralShareF);
         int stateShare   = Math.round(stateShareF);
@@ -16659,9 +16671,6 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         float shareInPercentage = apiResponse.getContent().get(0).getShareInPercentage() == null
                 ? 0f
                 : Float.parseFloat(apiResponse.getContent().get(0).getShareInPercentage());
-
-        float centralAmtF = apiResponse.getContent().get(0).getCentralSanctionAmount();
-        float stateAmtF   = apiResponse.getContent().get(0).getStateSanctionAmount();
 
         int centralShareAmount = Math.round(centralAmtF);
         int stateShareAmount   = Math.round(stateAmtF);
