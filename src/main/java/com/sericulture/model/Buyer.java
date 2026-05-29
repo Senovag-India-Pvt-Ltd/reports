@@ -12,6 +12,14 @@ public class Buyer {
     private Double farmerAmount;
     private String remainingCocoon;
     private Double lgSoldOutAmountTotal;
-    private Integer lgMarketFee;
+    private Double lgMarketFee;
+    private Float lgMarketFeeForReeling;
+    private String lgSoldOutAmountReeling;
+    private Float lgMarketFeeForSeed;
+    private String lgSoldOutAmountSeed;
+    private String lgLotWeightForReeling;
+    private String lgLotWeightForSeed;
+    private String lgReelingAmount;
+    private String lgSeedAmount;
 
 }

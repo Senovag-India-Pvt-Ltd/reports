@@ -203,6 +203,14 @@ public class Content {
     private List<Buyer> buyerList;
     private Double lgSoldOutAmountTotal;
     private Double lgMarketFeeTotal;
+    private Float lgMarketFeeForReeling;
+    private String lgSoldOutAmountReeling;
+    private Float lgMarketFeeForSeed;
+    private String lgSoldOutAmountSeed;
+    private Double lgLotWeightForReeling;
+    private Double lgLotWeightForSeed;
+    private Double lgReelingAmount;
+    private Double lgSeedAmount;
 
 
 

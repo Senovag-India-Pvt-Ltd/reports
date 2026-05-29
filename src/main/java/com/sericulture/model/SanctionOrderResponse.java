@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 //@AllArgsConstructor
 @Getter
@@ -482,7 +483,8 @@ private String totalIncentiveAmountInWords;
     private Float alreadyPaidAmount;
 
     private String minSqft;
-    private String maxsqft;  
+    private String maxsqft;
 
+    private List<EquipmentItemResponse> equipmentList;
 
 }

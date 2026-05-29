@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.xml.bind.JAXBException;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
@@ -1845,14 +1846,41 @@ public class ReportsController {
 
             JRBeanCollectionDataSource mainDataSource = new JRBeanCollectionDataSource(headerList);
 
-            List<SanctionOrderResponse> reelingShedList = new ArrayList<>();
-            if (fullList.size() > 1) {
-                reelingShedList.add(fullList.get(1));
-            } else if (!fullList.isEmpty()) {
-                reelingShedList.add(fullList.get(0));
+            // Aggregate central and state share amounts across all content items
+            float totalCentral = 0f;
+            float totalState = 0f;
+            for (SanctionOrderResponse resp : apiResponse.getContent()) {
+                totalCentral += safeFloat(resp.getCentralSanctionAmount());
+                totalState += safeFloat(resp.getStateSanctionAmount());
             }
 
-            JRBeanCollectionDataSource reelingShedDs = new JRBeanCollectionDataSource(reelingShedList);
+            // Use equipment from first content item only (duplicated across share-split rows)
+            List<Map<String, ?>> equipmentRows = new ArrayList<>();
+            int equipSn = 1;
+            SanctionOrderResponse firstResp = apiResponse.getContent().get(0);
+            List<EquipmentItemResponse> firstItems = firstResp.getEquipmentList();
+            if (firstItems != null) {
+                for (EquipmentItemResponse item : firstItems) {
+                    Map<String, Object> row = new HashMap<>();
+                    row.put("serialNumber", equipSn++);
+                    row.put("eDescription", item.getDescription());
+                    row.put("rearingEquipmentDetailsNameInKannada", item.getDescription());
+                    row.put("eL1Rate", item.getL1Rate());
+                    row.put("eMachineQuantity", item.getMachineQuantity());
+                    row.put("eTaxInvoiceNo", item.getTaxInvoiceNo());
+                    row.put("eTaxInvoiceDate", item.getTaxInvoiceDate());
+                    row.put("vendorName", firstResp.getVendorName());
+                    row.put("machineTypeName", firstResp.getMachineTypeName());
+                    row.put("unitCost", firstResp.getUnitCost());
+                    row.put("centralSanctionAmount", totalCentral);
+                    row.put("stateSanctionAmount", totalState);
+                    row.put("beneficiaryAmount", (double) safeFloat(firstResp.getUnitCost())
+                            - (totalCentral + totalState));
+                    equipmentRows.add(row);
+                }
+            }
+
+            JRMapCollectionDataSource reelingShedDs = new JRMapCollectionDataSource(equipmentRows);
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", reelingShedDs);
@@ -2022,14 +2050,41 @@ public class ReportsController {
 
             JRBeanCollectionDataSource mainDataSource = new JRBeanCollectionDataSource(headerList);
 
-            List<SanctionOrderResponse> reelingShedList = new ArrayList<>();
-            if (fullList.size() > 1) {
-                reelingShedList.add(fullList.get(1));
-            } else if (!fullList.isEmpty()) {
-                reelingShedList.add(fullList.get(0));
+            // Aggregate central and state share amounts across all content items
+            float totalCentral2 = 0f;
+            float totalState2 = 0f;
+            for (SanctionOrderResponse resp : apiResponse.getContent()) {
+                totalCentral2 += safeFloat(resp.getCentralSanctionAmount());
+                totalState2 += safeFloat(resp.getStateSanctionAmount());
             }
 
-            JRBeanCollectionDataSource reelingShedDs = new JRBeanCollectionDataSource(reelingShedList);
+            // Use equipment from first content item only (duplicated across share-split rows)
+            List<Map<String, ?>> equipmentRows = new ArrayList<>();
+            int equipSn = 1;
+            SanctionOrderResponse firstResp2 = apiResponse.getContent().get(0);
+            List<EquipmentItemResponse> firstItems2 = firstResp2.getEquipmentList();
+            if (firstItems2 != null) {
+                for (EquipmentItemResponse item : firstItems2) {
+                    Map<String, Object> row = new HashMap<>();
+                    row.put("serialNumber", equipSn++);
+                    row.put("eDescription", item.getDescription());
+                    row.put("rearingEquipmentDetailsNameInKannada", item.getDescription());
+                    row.put("eL1Rate", item.getL1Rate());
+                    row.put("eMachineQuantity", item.getMachineQuantity());
+                    row.put("eTaxInvoiceNo", item.getTaxInvoiceNo());
+                    row.put("eTaxInvoiceDate", item.getTaxInvoiceDate());
+                    row.put("vendorName", firstResp2.getVendorName());
+                    row.put("machineTypeName", firstResp2.getMachineTypeName());
+                    row.put("unitCost", firstResp2.getUnitCost());
+                    row.put("centralSanctionAmount", totalCentral2);
+                    row.put("stateSanctionAmount", totalState2);
+                    row.put("beneficiaryAmount", (double) safeFloat(firstResp2.getUnitCost())
+                            - (totalCentral2 + totalState2));
+                    equipmentRows.add(row);
+                }
+            }
+
+            JRMapCollectionDataSource reelingShedDs = new JRMapCollectionDataSource(equipmentRows);
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", reelingShedDs);
@@ -7405,8 +7460,65 @@ public class ReportsController {
             row.put("lgSoldOutAmount", item.getLgSoldOutAmount());
             row.put("remainingCocoon", item.getRemainingCocoon());
 
+            double remainingCocoonDouble = 0;
+            try {
+                if (item.getRemainingCocoon() != null && !item.getRemainingCocoon().isEmpty())
+                    remainingCocoonDouble = Double.parseDouble(item.getRemainingCocoon());
+            } catch (Exception e) { remainingCocoonDouble = 0; }
+            row.put("remainingCocoonDouble", remainingCocoonDouble);
+
+            double lgLotWeightDouble = 0;
+            try {
+                if (item.getLgLotWeight() != null && !item.getLgLotWeight().isEmpty())
+                    lgLotWeightDouble = Double.parseDouble(item.getLgLotWeight());
+            } catch (Exception e) { lgLotWeightDouble = 0; }
+            row.put("lgLotWeightDouble", lgLotWeightDouble);
+
+            double lgAmountDouble = 0;
+            try {
+                if (item.getLgAmount() != null && !item.getLgAmount().isEmpty())
+                    lgAmountDouble = Double.parseDouble(item.getLgAmount());
+            } catch (Exception e) { lgAmountDouble = 0; }
+            row.put("lgAmountDouble", lgAmountDouble);
+
+            double lgSoldOutAmountDouble = 0;
+            try {
+                if (item.getLgSoldOutAmount() != null && !item.getLgSoldOutAmount().isEmpty())
+                    lgSoldOutAmountDouble = Double.parseDouble(item.getLgSoldOutAmount());
+            } catch (Exception e) { lgSoldOutAmountDouble = 0; }
+            row.put("lgSoldOutAmountDouble", lgSoldOutAmountDouble);
+
             // ✅ FIX: correct key name (IMPORTANT)
-            row.put("lgMarketFee", item.getLgMarketFee());
+            row.put("lgMarketFee", item.getLgMarketFee() != null ? item.getLgMarketFee().doubleValue() : 0.0);
+
+            String buyerType = Util.objectToString(item.getLgBuyerType());
+            if ("Reeling".equals(buyerType)) {
+                item.setLgMarketFeeForReeling(Util.objectToFloat(item.getLgMarketFee()));
+                item.setLgSoldOutAmountReeling(Util.objectToString(item.getLgSoldOutAmount()));
+                item.setLgLotWeightForReeling(Util.objectToString(item.getLgLotWeight()));
+                item.setLgReelingAmount(Util.objectToString(item.getLgAmount()));
+            } else if ("RSP".equals(buyerType) || "NSSO".equals(buyerType) || "Govt Grainage".equals(buyerType)) {
+                item.setLgMarketFeeForSeed(Util.objectToFloat(item.getLgMarketFee()));
+                item.setLgSoldOutAmountSeed(Util.objectToString(item.getLgSoldOutAmount()));
+                item.setLgLotWeightForSeed(Util.objectToString(item.getLgLotWeight()));
+                item.setLgSeedAmount(Util.objectToString(item.getLgAmount()));
+            }
+            row.put("lgMarketFeeForReeling", item.getLgMarketFeeForReeling());
+            row.put("lgSoldOutAmountReeling", item.getLgSoldOutAmountReeling());
+            double lgLotWeightForReelingVal = 0;
+            try { if (item.getLgLotWeightForReeling() != null && !item.getLgLotWeightForReeling().isEmpty()) lgLotWeightForReelingVal = Double.parseDouble(item.getLgLotWeightForReeling()); } catch (Exception ignored) {}
+            row.put("lgLotWeightForReeling", lgLotWeightForReelingVal);
+            double lgReelingAmountVal = 0;
+            try { if (item.getLgReelingAmount() != null && !item.getLgReelingAmount().isEmpty()) lgReelingAmountVal = Double.parseDouble(item.getLgReelingAmount()); } catch (Exception ignored) {}
+            row.put("lgReelingAmount", lgReelingAmountVal);
+            row.put("lgMarketFeeForSeed", item.getLgMarketFeeForSeed());
+            row.put("lgSoldOutAmountSeed", item.getLgSoldOutAmountSeed());
+            double lgLotWeightForSeedVal = 0;
+            try { if (item.getLgLotWeightForSeed() != null && !item.getLgLotWeightForSeed().isEmpty()) lgLotWeightForSeedVal = Double.parseDouble(item.getLgLotWeightForSeed()); } catch (Exception ignored) {}
+            row.put("lgLotWeightForSeed", lgLotWeightForSeedVal);
+            double lgSeedAmountVal = 0;
+            try { if (item.getLgSeedAmount() != null && !item.getLgSeedAmount().isEmpty()) lgSeedAmountVal = Double.parseDouble(item.getLgSeedAmount()); } catch (Exception ignored) {}
+            row.put("lgSeedAmount", lgSeedAmountVal);
 
             // total cocoon calculation
             double totalCocoon = 0;
@@ -7444,6 +7556,34 @@ public class ReportsController {
 
         apiResponse.content.setLgSoldOutAmountTotal(lgSoldOutAmountTotal - lgMarketFeeTotal);
         apiResponse.content.setLgMarketFeeTotal(lgMarketFeeTotal);
+
+        // Accumulate sums for lgMarketFeeForReeling/Seed and lgSoldOutAmountReeling/Seed on Content
+        double sumSoldOutReeling = 0, sumSoldOutSeed = 0;
+        float sumMarketFeeReeling = 0, sumMarketFeeSeed = 0;
+        double sumLotWeightReeling = 0, sumLotWeightSeed = 0;
+        double maxReelingAmount = 0, maxSeedAmount = 0;
+        for (Buyer b : buyerList) {
+            String bType = Util.objectToString(b.getLgBuyerType());
+            if ("Reeling".equals(bType)) {
+                sumMarketFeeReeling += b.getLgMarketFeeForReeling() != null ? b.getLgMarketFeeForReeling() : 0f;
+                try { sumSoldOutReeling += b.getLgSoldOutAmountReeling() != null && !b.getLgSoldOutAmountReeling().isEmpty() ? Double.parseDouble(b.getLgSoldOutAmountReeling()) : 0; } catch (Exception ignored) {}
+                try { sumLotWeightReeling += b.getLgLotWeightForReeling() != null && !b.getLgLotWeightForReeling().isEmpty() ? Double.parseDouble(b.getLgLotWeightForReeling()) : 0; } catch (Exception ignored) {}
+                try { double v = b.getLgReelingAmount() != null && !b.getLgReelingAmount().isEmpty() ? Double.parseDouble(b.getLgReelingAmount()) : 0; if (v > maxReelingAmount) maxReelingAmount = v; } catch (Exception ignored) {}
+            } else if ("RSP".equals(bType) || "NSSO".equals(bType) || "Govt Grainage".equals(bType)) {
+                sumMarketFeeSeed += b.getLgMarketFeeForSeed() != null ? b.getLgMarketFeeForSeed() : 0f;
+                try { sumSoldOutSeed += b.getLgSoldOutAmountSeed() != null && !b.getLgSoldOutAmountSeed().isEmpty() ? Double.parseDouble(b.getLgSoldOutAmountSeed()) : 0; } catch (Exception ignored) {}
+                try { sumLotWeightSeed += b.getLgLotWeightForSeed() != null && !b.getLgLotWeightForSeed().isEmpty() ? Double.parseDouble(b.getLgLotWeightForSeed()) : 0; } catch (Exception ignored) {}
+                try { double v = b.getLgSeedAmount() != null && !b.getLgSeedAmount().isEmpty() ? Double.parseDouble(b.getLgSeedAmount()) : 0; if (v > maxSeedAmount) maxSeedAmount = v; } catch (Exception ignored) {}
+            }
+        }
+        apiResponse.content.setLgMarketFeeForReeling(sumMarketFeeReeling);
+        apiResponse.content.setLgSoldOutAmountReeling(String.valueOf(sumSoldOutReeling));
+        apiResponse.content.setLgMarketFeeForSeed(sumMarketFeeSeed);
+        apiResponse.content.setLgSoldOutAmountSeed(String.valueOf(sumSoldOutSeed));
+        apiResponse.content.setLgLotWeightForReeling(sumLotWeightReeling);
+        apiResponse.content.setLgLotWeightForSeed(sumLotWeightSeed);
+        apiResponse.content.setLgReelingAmount(maxReelingAmount);
+        apiResponse.content.setLgSeedAmount(maxSeedAmount);
 
         System.out.println("TOTAL lgSoldOutAmountTotal: " + lgSoldOutAmountTotal);
 
@@ -10458,13 +10598,13 @@ public class ReportsController {
                     "     ರವರು      ಬೆಳೆದ        ತಂಡದ       ಸಂಖ್ಯೆ    "+apiResponse.getContent().get(0).getLotNumber() +"    ಗುಂಪಿನ     "+apiResponse.getContent().get(0).getNumberOfDflsDisposed() +"      ಮೊಟ್ಟೆ ಗಳ       " +
                     "  ರೇಷ್ಮೆ       ಬೆಳೆಯನ್ನು       1/2/3/4/5      ನೇ    ಹಂತಗಳಲ್ಲಿ       ಪರಿಶೀಲಿಸಿರುತ್ತೇ ನೆ .      ಈ      ಬೆಳೆಯು     ದಿನಾಂಕ  :  "+formattedFromDate +"   ರಿಂದ   " +formattedToDate +
                     "  ರಂದು       "+apiResponse.getContent().get(0).getNoOfChandies() +"      ಚಂದ್ರಿ ಕೆಗಳಲ್ಲಿ       ಗೂಡು     ಕಟ್ಟಿ ರುತ್ತ ದೆ.    ಈ     ಬೆಳೆಯಲ್ಲಿ       "+
-                    "    ಸುಮಾರು      "+apiResponse.getContent().get(0).getExpectedCocoon() +"     ರೇಷ್ಮೆ      ಗೂಡುಗಳು        ದೊರೆಯಬಹುದೆಂದು       "+
+                    "    ಸುಮಾರು      "+apiResponse.getContent().get(0).getExpectedCocoon() +"   ಕೆ.ಜಿ    ರೇಷ್ಮೆ      ಗೂಡುಗಳು        ದೊರೆಯಬಹುದೆಂದು       "+
                             "ಅಂದಾಜು     ಮಾಡಲಾಗಿದೆ .\n\n"+
                     "ಈ    ಬೆಳೆಯನ್ನು       ಹುಳುವಿನ      ಅವಧಿಯಲ್ಲಿ       1/2/3/4/5/ಎಲ್ಲಾ     ಹಂತಗಳಲ್ಲಿ      ಹುಳುವಿನ  ಪರೀಕ್ಷೆ ಯನ್ನು     " +
-                    " ಮಾಡಲಾಗಿದೆ .    ಈ    ಬೆಳೆಯು      ಹಾಲು/ ಸಪ್ಪೆ  /ಸುಣ್ಣ ಕಟ್ಟು  /ಗಂಟುರೋಗ     ಮತ್ತು      ಉಪ       " +
+                    " ಮಾಡಲಾಗಿದೆ .    ಈ    ಬೆಳೆಯು      ಹಾಲು/ ಸಪ್ಪೆ  /ಸುಣ್ಣ ಕಟ್ಟು  /ಗಂಟುರೋಗ     ಮತ್ತು      ಉಜಿ        " +
                             "ಹಾವಳಿಯಿಂದ   "+eligibilityText1 +".      ಆದುದರಿಂದ     ಈ      ಬೆಳೆಯ      ರೇಷ್ಮೆ     "+
                             "ಗೂಡುಗಳು      ಬಿತ್ತ ನೆಗೆ     "+eligibilityText+".\n\n" +
-                            "ಈ     ಬೆಳೆಗಾರರು ,    ಇದರ       ಹಿಂದೆ     ಬೆಳೆ     ರೇಷ್ಮೆ     ಗೂಡುಗಳು     ಕಾನೂನಿನ     ರೀತ್ಯಾ      ವಿಲೇವಾರಿಯಾಗಿದೆ     ಮತ್ತು        "+
+                            "ಈ     ಬೆಳೆಗಾರರು ,    ಇದರ       ಹಿಂದೆ     ಬೆಳೆದ     ರೇಷ್ಮೆ     ಗೂಡುಗಳು     ಕಾನೂನಿನ     ರೀತ್ಯಾ      ವಿಲೇವಾರಿಯಾಗಿದೆ     ಮತ್ತು        "+
                             "ಸಂಬಂಧಿಸಿದ      ರೆಜಿಸ್ಟ ರ್ನಲ್ಲಿ      ಈ    ಬಗ್ಗೆ      ಷರಾ     ಬರೆಯಲಾಗಿದೆ     ಎಂದು     ಪ್ರ ಮಾಣೀಕರಿಸುತ್ತೇ ನೆ.");
 
 
@@ -16282,21 +16422,15 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         }
 
 
-        int centralShare = 0;
-        int stateShare = 0;
-        int centralShareAmount = 0;
-        int stateShareAmount = 0;
-
-        for (SanctionOrderResponse row : apiResponse.getContent()) {
-            if (row.getCentralSharePercentage() != null)
-                centralShare += Math.round(row.getCentralSharePercentage());
-            if (row.getStateSharePercentage() != null)
-                stateShare += Math.round(row.getStateSharePercentage());
-            if (row.getCentralSanctionAmount() != null)
-                centralShareAmount += Math.round(row.getCentralSanctionAmount());
-            if (row.getStateSanctionAmount() != null)
-                stateShareAmount += Math.round(row.getStateSanctionAmount());
-        }
+        SanctionOrderResponse firstRow = apiResponse.getContent().get(0);
+        int centralShare = firstRow.getCentralSharePercentage() != null
+                ? Math.round(firstRow.getCentralSharePercentage()) : 0;
+        int stateShare = firstRow.getStateSharePercentage() != null
+                ? Math.round(firstRow.getStateSharePercentage()) : 0;
+        int centralShareAmount = firstRow.getCentralSanctionAmount() != null
+                ? Math.round(firstRow.getCentralSanctionAmount()) : 0;
+        int stateShareAmount = firstRow.getStateSanctionAmount() != null
+                ? Math.round(firstRow.getStateSanctionAmount()) : 0;
 
         int beneficiaryShare = 100 - (centralShare + stateShare);
         if (beneficiaryShare < 0) beneficiaryShare = 0;
@@ -16441,7 +16575,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n\n" +
                     "ಪ್ರತಿಯನ್ನು   ಮಾಹಿತಿ/ಸೂಕ್ತ   ಕ್ರ ಮಕ್ಕಾ ಗಿ\n"
                     +"   1. "+apiResponse.getContent().get(0).getDrawingOfficerDesignation() +" ,    "+apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n"
-                    +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
+                    +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ತಾಲ್ಲೂ ಕು     ಖಜಾನೆ ,    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ " ಜಿಲ್ಲೆ  \n"
                     +"   4. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    ಯೋಜನಾ    ವಿಭಾಗ ,    ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯ ,   ಬೆಂಗಳೂರು \n"
                     +"   5. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getFarmerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getFarmerFatherName() +" ,   " + apiResponse.getContent().get(0).getVillageNameInKannada()+" ,   "+apiResponse.getContent().get(0).getTalukNameInKannada()+" , "+apiResponse.getContent().get(0).getDistrictNameInKannada()+"  ಜಿಲ್ಲೆ   \n"+
