@@ -21086,32 +21086,19 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
             surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
         }
 
-        double centralShareAmount = 0;
-        double stateShareAmount = 0;
-        double centralSharePercentage = 0;
-        double stateSharePercentage = 0;
-
-        for (SanctionOrderResponse item : apiResponse.getContent()) {
-
-            if (item.getCentralSanctionAmount() != null && item.getCentralSanctionAmount() > 0) {
-                centralShareAmount = item.getCentralSanctionAmount();
-                centralSharePercentage = item.getCentralSharePercentage();
-            }
-
-            if (item.getStateSanctionAmount() != null && item.getStateSanctionAmount() > 0) {
-                stateShareAmount = item.getStateSanctionAmount();
-                stateSharePercentage = item.getStateSharePercentage();
-            }
-        }
-
         double unitCost = apiResponse.getContent().get(0).getUnitPrice() == null ? 0 : apiResponse.getContent().get(0).getUnitPrice();
         double alreadyPaidAmount = apiResponse.getContent().get(0).getAlreadyPaidAmount() == null ? 0 : apiResponse.getContent().get(0).getAlreadyPaidAmount();
+
+        double centralSharePercentage = apiResponse.getContent().get(0).getCentralSharePercentage() == null ? 0 : apiResponse.getContent().get(0).getCentralSharePercentage();
+        double stateSharePercentage = apiResponse.getContent().get(0).getStateSharePercentage() == null ? 0 : apiResponse.getContent().get(0).getStateSharePercentage();
+
+        double centralShareAmount = (centralSharePercentage / 100.0) * unitCost;
+        double stateShareAmount = (stateSharePercentage / 100.0) * unitCost;
 
         String unitCostFormatted = String.format("%.2f", unitCost);
         String centralAmountFormatted = String.format("%.2f", centralShareAmount);
         String stateAmountFormatted = String.format("%.2f", stateShareAmount);
         String alreadyPaidFormatted = String.format("%.2f", alreadyPaidAmount);
-
 
         if (stateShareAmount == 0 && alreadyPaidAmount > 0) {
             stateShareAmount = alreadyPaidAmount;
@@ -21213,7 +21200,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                         "ಚದರ  ಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಿಸಲು    ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ    ದರ   ರೂ.  " +  unitCostFormatted  + "/- ಗಳಿಗೆ     ಶೇಕಡ   "+(centralSharePercentage + stateSharePercentage)+" /-    ರಷ್ಟು     ಸಹಾಯಧನ    ರೂ."+ totalCentralStateFormatted +
                                 "(ರೂ. "+ totalCentralStateWords + ")     ಗಳಿಗೆ     ಮುಚ್ಚ ಳಿಕೆಯಲ್ಲಿ ನ    ಷರತ್ತು     ಮತ್ತು     ತಗಾದೆಗಳಿಗೆ     ಸಂಬಂಧಿಸಿದ     ಫಲಾನುಭವಿ    ಹಾಗೂ     ಶಿಫಾರಸ್ಸು     ಮಾಡಿದ    ಕ್ಷೇತ್ರ  ಮಟ್ಟ ದ     ಅಧಿಕಾರಿಗಳನ್ನು        "+
                         "ಜವಾಬ್ದಾ ರಿ     ಮಾಡಿ     ಮಂಜೂರಾತಿ    ನೀಡಿದೆ.   ಈ  ಸಹಾಯಧನದ    ಪೈಕಿ   ರೂ." + centralAmountFormatted+ "/-   (ರೂ.  "+centralShareWords+  "   )   ಗಳು    ಕೇಂದ್ರ ದ     ಪಾಲಾಗಿ     ಕೇಂದ್ರ     ರೇಷ್ಮೆ    ಮಂಡಳಿ    ನೀಡಿರುವ    ಮೊತ್ತ ದಲ್ಲಿ    ಮತ್ತು    ರಾಜ್ಯ ದ    ಪಾಲಾಗಿ     ರೂ."+
-                        stateAmountFormatted + "/-    (ರೂ. " + stateAmountWords + "   )    ಗಳಲ್ಲಿ    ಕಡಿಮೆ    ವೆಚ್ಚದ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಶೆಡ್ ಗೆ     ಪಡೆದ     ಸಹಾಯಧನ    ಮೊತ್ತ    ರೂ."+ apiResponse.getContent().get(0).getAlreadyPaidAmount() +"  ಗಳನ್ನು     ಕಡಿತಗೊಳಿಸಿ    ಉಳಿಕೆ ರೂ."+totalStateAmountFormatted +" (ರೂ."+totalStateAmountWords +") ಗಳನ್ನು      " + apiResponse.getContent().get(0).getSchemeNameInKannada()
+                        stateAmountFormatted + "/-    (ರೂ. " + stateAmountWords + "   )    ಗಳಲ್ಲಿ    ಕಡಿಮೆ    ವೆಚ್ಚದ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಶೆಡ್ ಗೆ     ಪಡೆದ     ಸಹಾಯಧನ    ಮೊತ್ತ    ರೂ."+ alreadyPaidFormatted +"  ಗಳನ್ನು     ಕಡಿತಗೊಳಿಸಿ    ಉಳಿಕೆ ರೂ."+totalStateAmountFormatted +" (ರೂ."+totalStateAmountWords +") ಗಳನ್ನು      " + apiResponse.getContent().get(0).getSchemeNameInKannada()
                                 + "    ಯೋಜನೆಯ    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    " + apiResponse.getContent().get(0).getScHeadAccountName() + " (" + apiResponse.getContent().get(0).getDescription() + " )    ರಡಿ   ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ   ಸಹಾಯಕ    ನಿರ್ದೇಶಕರುಗಳು    ಖಜಾನೆ-2 /ಡಿಬಿಟಿ     ಮುಖಾಂತರ     ಹಾಗೂ    "+
                         "ಕೇಂದ್ರ ದ     ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಸಂಬಂಧಿಸಿದ     ಜಿಲ್ಲಾ    ಪಂಚಾಯತ್    ರೇಷ್ಮೆ    ಉಪ      ನಿರ್ದೇಶಕರುಗಳು    ಫಲಾನುಭವಿ    ಖಾತೆಗೆ    ನೇರವಾಗಿ     ಡಿಬಿಟಿ    ಮೂಲಕ    ಜಮಾ    ಮಾಡಲು    ಸೂಚಿಸಿದೆ. \n"
                                 + "                      ಈ    ವೆಚ್ಚ    ವನ್ನು      "+ apiResponse.getContent().get(0).getSchemeNameInKannada() + "   ಯೋಜನೆ  ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"  )    ಲೆಕ್ಕ    ಶೀರ್ಷಿಕೆ    " +
@@ -21382,18 +21369,11 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String totalSubsidyWords = KannadaNumberUtil.convertNumberToKannadaWords(totalAmountRounded);
 
 
-//        int centralShareAmount = 0;
-        int stateShareAmount1 = 0;
+
         int centralSharePercentage = 0;
         int stateSharePercentage = 0;
 
         for (SanctionOrderResponse row : apiResponse.getContent()) {
-
-            if (row.getCentralSanctionAmount() != null)
-                centralShareAmount += Math.round(row.getCentralSanctionAmount());
-
-            if (row.getStateSanctionAmount() != null)
-                stateShareAmount += Math.round(row.getStateSanctionAmount());
 
             if (row.getCentralSharePercentage() != null)
                 centralSharePercentage += Math.round(row.getCentralSharePercentage());
@@ -21434,7 +21414,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 KannadaNumberUtil.convertNumberToKannadaWords(remainingStateRounded);
 
 
-        double remainingUnitCost = unitCost - alreadyPaidAmount;
+        double remainingUnitCost = stateShareAmount - alreadyPaidAmount;
 
 // safety
         if (remainingUnitCost < 0) {
@@ -21499,7 +21479,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 + apiResponse.getContent().get(0).getFatherNameKan() + " ,  ರವರು   " + stripDecimal(apiResponse.getContent().get(0).getLength()) + "x"+ stripDecimal(apiResponse.getContent().get(0).getBreadth()) +"x"+ stripDecimal(apiResponse.getContent().get(0).getHeight()) + "    ಅಡಿ    ಅಳತೆಯ   " + apiResponse.getContent().get(0).getCalculatedSqft() + "   ಚದರಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ    "+
                 "     "+ apiResponse.getContent().get(0).getRoofTypeNameInKannada() +"    ಮೇಲ್ಚಾ ವಣಿಯ    ಪ್ರ ತ್ಯೇ ಕ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಾಣ    ಮಾಡಿರುತ್ತಾರೆ.    ಸದರಿಯವರಿಗೆ     "+ apiResponse.getContent().get(0).getRhSqft() +"   "+ apiResponse.getContent().get(0).getRoofTypeNameInKannada() +" " +
                 "   ಮೇಲ್ಚಾವಣಿಯ    ಪ್ರತ್ಯೇಕ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ     ನಿರ್ಮಿಸಿರುವುದರಿಂದ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”    ಯೋಜನೆ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"  ) ಯಡಿ    " + apiResponse.getContent().get(0).getRhSqft() + "    " +
-                "ಚದರ  ಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಿಸಲು    ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ    ದರ   ರೂ.  " + actualAmounts + "/- ಗಳಿಗೆ     ಶೇಕಡ   "+ stateSharePercentage+" /-    ರಷ್ಟು     ಸಹಾಯಧನ    ರೂ."+  stateAmountFormatted +
+                "ಚದರ  ಅಡಿ    ವಿಸ್ತೀ ರ್ಣದ     ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಿಸಲು    ನಿಗದಿಪಡಿಸಿದ     ಘಟಕ    ದರ   ರೂ.  " + actualAmounts + "/- ಗಳಿಗೆ     ಶೇಕಡ   "+ stateSharePercentage+"    ರಷ್ಟು     ಸಹಾಯಧನ    ರೂ."+  stateAmountFormatted +
                 "(ರೂ. "+ totalSubsidyWords + ")     ಗಳಿಗೆ     ಮುಚ್ಚ ಳಿಕೆಯಲ್ಲಿ ನ    ಷರತ್ತು     ಮತ್ತು     ತಗಾದೆಗಳಿಗೆ     ಸಂಬಂಧಿಸಿದ     ಫಲಾನುಭವಿ    ಹಾಗೂ     ಶಿಫಾರಸ್ಸು     ಮಾಡಿದ    ಕ್ಷೇತ್ರ  ಮಟ್ಟ ದ     ಅಧಿಕಾರಿಗಳನ್ನು        "+
                 "ಜವಾಬ್ದಾ ರಿ     ಮಾಡಿ     ಮಂಜೂರಾತಿ    ನೀಡಿದೆ.   ಈ  ಸಹಾಯಧನದ    ಪೈಕಿ      ಕಡಿಮೆ    ವೆಚ್ಚದ    ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಶೆಡ್ ಗೆ     ಪಡೆದ     ಸಹಾಯಧನ    ಮೊತ್ತ    ರೂ."+ apiResponse.getContent().get(0).getAlreadyPaidAmount() +"  ಗಳನ್ನು     ಕಡಿತಗೊಳಿಸಿ    ಉಳಿಕೆ   " +
                 "ರೂ."+remainingUnitCostFormatted +" (ರೂ."+remainingUnitCostWords +") ಗಳ   ಸಹಾಯಧನದ     ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2 / ಡಿಬಿಟಿ    ಮುಖಾಂತರ     ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್    ಖಾತೆಗೆ    ನೇರವಾಗಿ     ಜಮಾ    ಮಾಡುವುದು.\n"
