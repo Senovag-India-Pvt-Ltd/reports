@@ -8057,6 +8057,9 @@ public class ReportsController {
     private JRDataSource getDataSourceBidSlipForSeedCocoon(MarketAuctionForPrintRequest requestDto) throws JsonProcessingException {
 
         ContentRoot apiResponse = apiService.fetchDataFromApiSeedCocoon(requestDto);
+        if (apiResponse == null || apiResponse.content == null) {
+            throw new RuntimeException("No data found for the selected criteria");
+        }
         List<Content> countries = new LinkedList<>();
         if (apiResponse.content != null) {
 
