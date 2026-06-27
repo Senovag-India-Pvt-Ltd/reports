@@ -4747,6 +4747,69 @@ public class ReportsController {
         }
     }
 
+    @PostMapping("/selection-arm")
+    public ResponseEntity<?> getSelectionARM(@RequestBody SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            JasperReport jasperReport = getJasperReport("SelectionBoiler.jrxml");
+
+            JRBeanCollectionDataSource fullDs = getDataSourceForARMSelection(requestDto);
+
+            @SuppressWarnings("unchecked")
+            List<SanctionOrderResponse> fullList =
+                    (List<SanctionOrderResponse>) fullDs.getData();
+
+            if (fullList == null || fullList.isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String workOrderNumber = fullList.get(0).getWorkOrderNumber();
+
+            List<SanctionOrderResponse> headerList = new ArrayList<>();
+            if (!fullList.isEmpty()) {
+                headerList.add(fullList.get(0));      // use first row as header bean
+            }
+            JRBeanCollectionDataSource mainDataSource = new JRBeanCollectionDataSource(headerList);
+
+            List<SanctionOrderResponse> reelingShedList = new ArrayList<>();
+            if (fullList.size() > 1) {
+                reelingShedList.add(fullList.get(1));
+            } else if (!fullList.isEmpty()) {
+                reelingShedList.add(fullList.get(0));
+            }
+
+            JRBeanCollectionDataSource reelingShedDs =
+                    new JRBeanCollectionDataSource(reelingShedList);
+
+            Map<String, Object> parameters = new HashMap<>();
+            // This must match the parameter name in JRXML: CollectionBeanParam1
+            parameters.put("CollectionBeanParam1", reelingShedDs);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, mainDataSource);
+
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = workOrderNumber + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating Heat Recovery Unit Selection", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Heat Recovery Unit Selection");
+        }
+    }
+
 
     @PostMapping("/selection-imcb")
     public ResponseEntity<?> getSelectionIMCB(@RequestBody SanctionOrderPrintRequest requestDto)
@@ -11702,6 +11765,68 @@ public class ReportsController {
         return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
     }
 
+
+    private JRDataSource getDataSourceAckARM(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+
+        AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+
+        List<AcknowledgementReceiptResponse> acknowledgementReceiptResponseList = new LinkedList<>();
+        AcknowledgementReceiptResponse response = new AcknowledgementReceiptResponse();
+        if (apiResponse.getContent()!= null) {
+            String formattedDate = "";
+            try {
+                String inputDate = apiResponse.getContent().get(0).getDate().toString(); // e.g. "2025-10-29 14:35:22.123"
+
+                // Parse input format
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                // Define output format
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                // Convert and format
+                Date date = inputFormat.parse(inputDate);
+                formattedDate = outputFormat.format(date);
+
+            } catch (Exception e) {
+                formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
+            }
+            String raceName = apiResponse.getContent().get(0).getRaceName();
+            String raceNameWithoutFirstWord = removeFirstWord(raceName);
+
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ       ಕೇಂದ್ರ   ವಲಯ    "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ    120   ಕೊನೆಗಳ    ಸ್ವಯಂಚಾಲಿತ    ರೀಲಿಂಗ್     " +
+                    "ಘಟಕ    ಸ್ಥಾ ಪನೆಗಾಗಿ     ಯಂತ್ರೋಪಕರಣಗಳ   ಖರೀದಿಗೆ    ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ      ಶ್ರೀಮತಿ/ಶ್ರೀ     " + apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   " +
+                    "ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,     "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾ ಮ ,     "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"    ಜಿಲ್ಲೆ         " +
+                    "   ಇವರ    ಅರ್ಜಿಯನ್ನು      ಸ್ವೀಕರಿಸಿದೆ.    ಅರ್ಜಿಯ     ಪ್ರ  ಸ್ತು ತ     ಸ್ಥಿ ತಿಯನ್ನು      ಇ-ರೇಷ್ಮೆ     " +
+                    "ವೆಬ್  ಸೈಟ್       https://e-reshme.karnataka.gov.in/seriui    ನಲ್ಲಿ      ARN/FID/Mob No.    ಸಂಖ್ಯೆ ಯನ್ನು      ನಮೂದಿಸಿ    ಪರಿಶೀಲಿಸಬಹುದು.");
+            response.setAcceptedDate("ದಿನಾಂಕ  :  " +formattedDate);
+            response.setDate(apiResponse.getContent().get(0).getDate());
+            response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setAddressText( apiResponse.getContent().get(0).getAddressText());
+            response.setDistrictName( apiResponse.getContent().get(0).getDistrictName());
+            response.setTalukName( apiResponse.getContent().get(0).getTalukName());
+            response.setHobliName( apiResponse.getContent().get(0).getHobliName());
+            response.setVillageName( apiResponse.getContent().get(0).getVillageName());
+            response.setFruitsId( apiResponse.getContent().get(0).getFruitsId());
+
+            response.setHeader1(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
+                    apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
+
+            response.setHeader2("ARN No: " + apiResponse.getContent().get(0).getArn());
+            response.setFinancialYear( apiResponse.getContent().get(0).getFinancialYear());
+            response.setSchemeNameInKannada( apiResponse.getContent().get(0).getSchemeNameInKannada());
+            response.setSubSchemeNameInKannada( apiResponse.getContent().get(0).getSubSchemeNameInKannada());
+            response.setFatherNameKan( apiResponse.getContent().get(0).getFatherNameKan());
+            response.setArn( apiResponse.getContent().get(0).getArn());
+            response.setMobileNumber( apiResponse.getContent().get(0).getMobileNumber());
+            response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+            acknowledgementReceiptResponseList.add(response);
+
+        }
+        return new JRBeanCollectionDataSource(acknowledgementReceiptResponseList);
+    }
+
     private JRDataSource getDataSourceAckChawki1500(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
         AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
@@ -12347,6 +12472,19 @@ public class ReportsController {
             throws JsonProcessingException {
 
         SeedMarket apiResponse = apiService.fetchDataMarketReciept(requestDto);
+
+        if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            throw new RuntimeException("No data found for the selected criteria");
+        }
+
+        // Content exists but key lot_groupage fields may be null (lot exists but buyer distribution not done)
+        LotDistributeResponse firstItem = apiResponse.getContent().get(0);
+        boolean noAuctionDate = firstItem.getAuctionDate() == null || firstItem.getAuctionDate().trim().isEmpty();
+        boolean noFarmer = firstItem.getFarmerFullName() == null || firstItem.getFarmerFullName().trim().isEmpty();
+        boolean noMarket = firstItem.getMarketName() == null || firstItem.getMarketName().trim().isEmpty();
+        if (noAuctionDate || (noFarmer && noMarket)) {
+            throw new RuntimeException("No data found for the selected criteria");
+        }
 
         LotDistributeResponse response = new LotDistributeResponse();
 
@@ -18811,6 +18949,183 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
                 "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀ ಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರ ಮವಹಿಸದಿದ್ದ ಲ್ಲಿ     ಆಯ್ಕೆ ಯು\n" +
                 "               ತನ್ನ ಷ್ಟ  ಕ್ಕೆ    ತಾನೇ ರದ್ದಾ ಗುತ್ತ ದೆ.\n\n"+
+
+                "          ಕಾರ್ಯಕ್ರ  ಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥ ಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+
+
+        response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+
+        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+
+        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+
+
+
+        response.setHeader10( apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n " +
+                apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
+
+        response.setHeader9("ಇವರಿಗೆ,\n"+
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂ ಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                +"ಪ್ರ ತಿಯನ್ನು   ;\n"
+                +"   1. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"    ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ.\n"
+                +"   2.  ಸಂಬಂಧಿಸಿದ     ಯಂತ್ರೋ ಪಕರಣ/ ಸಲಕರಣೆ    ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ.");
+
+        response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
+
+        response.setMachineTypeName(apiResponse.getContent().get(0).getMachineTypeName());
+        response.setScCategoryName(apiResponse.getContent().get(0).getScCategoryName());
+
+        response.setRenditta(apiResponse.getContent().get(0).getRenditta());
+        response.setDailyLimit(apiResponse.getContent().get(0).getDailyLimit());
+        response.setNumberOfBasins(apiResponse.getContent().get(0).getNumberOfBasins());
+        response.setMax(apiResponse.getContent().get(0).getMax());
+
+        response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
+        response.setArn(apiResponse.getContent().get(0).getArn());
+        response.setMobileNumber(apiResponse.getContent().get(0).getMobileNumber());
+        response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        response.setSerialNumber(1);
+
+        sanctionOrderResponseList.add(response);
+
+        float totalNoOfCocoonsNeedToProduce = 0f;
+        float totalNoOfRawSilkProduced      = 0f;
+        float totalMachineQuantity          = 0f;
+        float totalMax                      = 0f;
+        float totalSchemeAmount             = 0f;
+
+        if (apiResponse.getContent() != null) {
+            int serialNo = 1;
+            for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
+
+                if (sanctionOrderResponse.getFarmerFirstName() == null) {
+                    sanctionOrderResponse.setFarmerFirstName("");
+                }
+
+                if (sanctionOrderResponse.getReelerName() == null) {
+                    sanctionOrderResponse.setReelerName("");
+                }
+
+                if (sanctionOrderResponse.getSchemeAmount() == null) {
+                    sanctionOrderResponse.setSchemeAmount(0f);
+                }
+                if (sanctionOrderResponse.getUnitPrice() == null) {
+                    sanctionOrderResponse.setUnitPrice(0f);
+                }
+                if (sanctionOrderResponse.getScComponentName() == null) {
+                    sanctionOrderResponse.setScComponentName("");
+                }
+
+                String reelerDetails =
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                                + sanctionOrderResponse.getReelerFatherName()
+                                + "    "
+                                + sanctionOrderResponse.getVillageName()
+                                + "    ,    "
+                                + sanctionOrderResponse.getHobliName()
+                                + "    ,    ಹೋಬಳಿ,    "
+                                + sanctionOrderResponse.getTalukName()
+                                + "    ತಾ.    "
+                                + sanctionOrderResponse.getDistrictName()
+                                + "   ಜಿಲ್ಲೆ   ";
+
+                sanctionOrderResponse.setReelerDetails(reelerDetails);
+
+
+                sanctionOrderResponse.setSerialNumber(serialNo++);
+
+                totalNoOfCocoonsNeedToProduce += safeParseFloat(sanctionOrderResponse.getNoOfCocoonsNeedToProduce());
+                totalNoOfRawSilkProduced      += safeParseFloat(sanctionOrderResponse.getNoOfRawSilkProduced());
+                totalMachineQuantity          += (sanctionOrderResponse.getMachineQuantity() == null ? 0f : sanctionOrderResponse.getMachineQuantity());
+                totalMax                      += (sanctionOrderResponse.getMax() == null ? 0f : sanctionOrderResponse.getMax());
+                totalSchemeAmount             += (sanctionOrderResponse.getSchemeAmount() == null ? 0f : sanctionOrderResponse.getSchemeAmount());
+
+                sanctionOrderResponseList.add(sanctionOrderResponse);
+            }
+        }
+
+        SanctionOrderResponse totalRow = new SanctionOrderResponse();
+
+        totalRow.setReelerName("ಒಟ್ಟು");
+        totalRow.setSerialNumber(null);
+
+        totalRow.setNoOfCocoonsNeedToProduce(formatFloat(totalNoOfCocoonsNeedToProduce));
+        totalRow.setNoOfRawSilkProduced(formatFloat(totalNoOfRawSilkProduced));
+        totalRow.setMachineQuantity(totalMachineQuantity);
+        totalRow.setMax(totalMax);
+        totalRow.setSchemeAmount(totalSchemeAmount);
+
+        totalRow.setMonth("");
+        totalRow.setNumberOfBasins("");
+        totalRow.setRenditta("");
+        totalRow.setSilkExchangeName("");
+        totalRow.setForm17jNo("");
+
+        sanctionOrderResponseList.add(totalRow);
+
+        return new JRBeanCollectionDataSource(sanctionOrderResponseList);
+    }
+
+    private JRBeanCollectionDataSource getDataSourceForARMSelection(SanctionOrderPrintRequest requestDto)
+            throws JsonProcessingException {
+
+        SanctionOrder apiResponse = apiService.fetchDataFromSanctionBoilerSelection(requestDto);
+
+        List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
+        SanctionOrderResponse response = new SanctionOrderResponse();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        SanctionOrderResponse first = apiResponse.getContent().get(0);
+
+        String admGovtDate        = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
+        String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
+        String deptDeleDate       = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
+        String releaseDate        = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
+        String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
+        String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
+        String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
+        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+
+
+
+        String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
+
+        int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
+        String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
+
+        float unitCost = apiResponse.getContent().get(0).getUnitCost() == null
+                ? 0f
+                : apiResponse.getContent().get(0).getUnitCost();
+
+        float shareInPercentage = apiResponse.getContent().get(0).getShareInPercentage() == null
+                ? 0f
+                : Float.parseFloat(apiResponse.getContent().get(0).getShareInPercentage());
+        float beneficiarySharePercentage = 100f - shareInPercentage;
+        float beneficiaryShare = unitCost * (beneficiarySharePercentage / 100f);
+
+        String beneficiaryShareFormatted = String.format("%.2f", beneficiaryShare);
+
+
+
+        response.setHeader2("ಕೇಂದ್ರ ವಲಯ     “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಕೇಂದ್ರ ವಲಯ   ಯೋಜನೆಯಡಿ    ಸ್ವಯಂಚಾಲಿತ    ರೇಷ್ಮೆ    "+
+                "ನೂಲು     ಬಿಚ್ಚಾಣಿಕೆ (ARM) ಘಟಕ     ಸ್ಥಾಪನೆಗೆ    ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ /ಶ್ರೀ ಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾ  ಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ  ಕು     "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ      "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ಹೀಟ್    ರಿಕವರಿ    ಯೂನಿಟ್    ಅಳವಡಿಕೆಗಾಗಿ     ಘಟಕ   ದರ   ರೂ.  "+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage +
+                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+
+                "ಕೇಂದ್ರ ವಲಯ ʼಸಿಲ್ಕ್\u200C ಸಮಗ್ರ-2ʼ ಯೋಜನೆಯ ಸಾಮಾನ್ಯ ವರ್ಗದಡಿ 120 ಕೊನೆಗಳ ಸ್ವಯಂಚಾಲಿತ ರೇಷ್ಮೆ ನೂಲು ಬಿಚ್ಚಾಣಿಕೆ (ARM) ಘಟಕ ಸ್ಥಾಪನೆ ಇಚ್ಚಿಸಿ ನೀವು ಅರ್ಜಿ ಸಲ್ಲಿಸಿರುತ್ತೀರಿ. ಸದರಿ ಯೋಜನೆಯಡಿ ARM ಘಟಕಗಳ ಸ್ಥಾಪನೆಗಾಗಿ ಫಲಾನುಭವಿಗಳ ಆಯ್ಕೆ ಕುರಿತಂತೆ ದಿನಾಂಕ : 03.12.2025 ರ ಸಭಾ ನಡಾವಳಿಗಳನ್ವಯ ನಿಮ್ಮನ್ನು ಪ್ರಸಕ್ತ ಸಾಲಿನ 120 ಕೊನೆಗಳ ಒಂದು ARM ಘಟಕ ಸ್ಥಾಪನೆಗೆ ಫಲಾನುಭವಿಯಾಗಿ ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ (ಉಲ್ಲೇಖ 2). \n" +
+                "ಕೇಂದ್ರ ವಲಯ ʼಸಿಲ್ಕ್\u200C ಸಮಗ್ರ-2ʼ ಯೋಜನೆಯಡಿ 120 ಕೊನೆಗಳ ARM ಯಂತ್ರೋಪಕರಣದ ಸೂಚಿತ ದರ ರೂ.39.150 ಲಕ್ಷಗಳು (ರೂ. ಮುವತ್ತೊಂಭತ್ತು ಲಕ್ಷ ಹದಿನೈದು ಸಾವಿರ ಮಾತ್ರ) ಎಂದು ನಿಗದಿಪಡಿಸಲಾಗಿದೆ. ಈ ವೆಚ್ಚವನ್ನು ಕೇಂದ್ರ ಸರ್ಕಾರ, ರಾಜ್ಯ ಸರ್ಕಾರ ಮತ್ತು ಫಲಾನುಭವಿ ನಡುವೆ 50:25:25 ಅನುಪಾತದಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ. ಅದರ ಪ್ರಕಾರ;\n" +
+                "•\tಯಂತ್ರೋಪಕರಣಗಳ ಒಟ್ಟು ಸೂಚಿತ ದರ: ರೂ.39,15,000.00 \n" +
+                "•\tಸರ್ಕಾರದಿಂದ ದೊರೆಯುವ ಸಹಾಯಧನ (75%): ರೂ.29,36,250.00\n" +
+                "•\tಫಲಾನುಭವಿಯ ಪಾಲು (25%): ರೂ.9,78,750.00 \n" +
+                "ಇದಲ್ಲದೆ, ಭೂಮಿ, ಕಟ್ಟಡ ನಿರ್ಮಾಣ, ಮೂಲಸೌಕರ್ಯ, ದುಡಿಮೆ ಬಂಡವಾಳ (Working Capital) ಇತ್ಯಾದಿಗಳನ್ನು ಒಳಗೊಂಡ ಯೋಜನೆಯ ಒಟ್ಟು ವೆಚ್ಚ ಸುಮಾರು ರೂ.100.00 ರಿಂದ 125.00 ಲಕ್ಷಗಳು ಆಗುವ ಸಾಧ್ಯತೆ ಇದೆ.\n" +
+                "ARM ಘಟಕಕ್ಕೆ ಅಗತ್ಯವಿರುವ ಯಂತ್ರೋಪಕರಣಗಳ ಪಟ್ಟಿ ಅನುಬಂಧ–1ರಲ್ಲಿ (Annexure–1) ನೀಡಲಾಗಿದೆ. ಯಂತ್ರೋಪಕರಣಗಳ ಮೂಲ ದರ ಸೂಚಿತ ದರಕ್ಕಿಂತ ಕಡಿಮೆ ಇದ್ದಲ್ಲಿ ಸಹಾಯಧನವನ್ನು ಅನುಪಾತವಾಗಿ ಕಡಿಮೆ ಮಾಡಲಾಗುತ್ತದೆ. ಸೂಚಿತ ದರಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ವೆಚ್ಚವಾದಲ್ಲಿ ಸಹಾಯಧನವನ್ನು ಸೂಚಿತ ದರದ ಮಿತಿಯೊಳಗೆ ಮಾತ್ರ ನೀಡಲಾಗುತ್ತದೆ ಮತ್ತು ಹೆಚ್ಚುವರಿ ವೆಚ್ಚವನ್ನು ಫಲಾನುಭವಿಯೇ ಭರಿಸಬೇಕಾಗುತ್ತದೆ.\n\n\n"+
 
                 "          ಕಾರ್ಯಕ್ರ  ಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥ ಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
 
