@@ -487,4 +487,30 @@ private String totalIncentiveAmountInWords;
 
     private List<EquipmentItemResponse> equipmentList;
 
+
+    // ── ARM Sanction dedicated fields ─────────────────────────────────────────
+    // ESCROW Bank details (from arm_escrow_bank_details table)
+    private String escrowBankManagerName;
+    private String escrowBankName;
+    private String escrowBankAddress;
+    private String escrowBankIfsc;
+    private String escrowBankMicr;
+    private String escrowAccountNumber;
+    private String escrowBankLetterNo;
+    private String escrowBankLetterDate;
+    // ARM Land details (from arm_land_details table)
+    private String armLandType;
+    private String armSurveyNo;
+    private String armAssessmentNo;
+    private String armLandDistrictKan;
+    private String armLandTalukKan;
+    private String armLandHobliKan;
+    private String armLandVillageKan;
+    private String armLandPropertyNo;
+    private String armLandAddress;
+    // ARM unit info (from sc_application_form_service)
+    private String armEndsCount;
+    private String armUnitName;
+    private String reelerAadhaar;
+    // Share amounts (calculated)
 }

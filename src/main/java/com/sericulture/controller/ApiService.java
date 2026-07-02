@@ -887,6 +887,31 @@ public class ApiService {
     }
 
 
+    public com.sericulture.model.ARMSanctionOrder fetchDataFromSanctionARM(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+        String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/getARMSanctionDetails";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, com.sericulture.model.ARMSanctionOrder.class);
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling ARM sanction API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch ARM sanction data: " + responseBody, httpEx);
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling ARM sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
     public SanctionOrder fetchDataFromSanctionBoiler(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
 
 //        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getAdoptingBoilerSanctionDetails";
