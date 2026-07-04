@@ -513,4 +513,7 @@ private String totalIncentiveAmountInWords;
     private String armUnitName;
     private String reelerAadhaar;
     // Share amounts (calculated)
+
+    private String year;
+    private String equipmentDate;
 }

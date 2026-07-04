@@ -165,7 +165,6 @@ public class ReportsController {
         try {
             System.out.println("enter to gettripletpdf");
             logger.info("enter to gettripletpdf");
-            String destFileName = "report_kannada.pdf";
             JasperReport jasperReport = getJasperReport("seed_cocoon_triplet.jrxml");
 
             Map<String, Object> parameters = getParameters();
@@ -179,20 +178,27 @@ public class ReportsController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", "report.pdf");
 
-
             JRPdfExporter pdfExporter = new JRPdfExporter();
             pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
             pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfStream));
             pdfExporter.exportReport();
             return new ResponseEntity<>(pdfStream.toByteArray(), headers, org.springframework.http.HttpStatus.OK);
 
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            logger.info(ex.getMessage() + ex.getStackTrace());
+        } catch (RuntimeException ex) {
+            logger.error("gettripletpdf-kannada-seed: {}", ex.getMessage());
+            if (ex.getMessage() != null && ex.getMessage().contains("NO DATA FOUND")) {
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                return new ResponseEntity<>("{\"error\":\"No Data Found for the given Bidding Slip Lot No / Auction Date.\"}".getBytes(StandardCharsets.UTF_8), headers, org.springframework.http.HttpStatus.NOT_FOUND);
+            }
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(ex.getMessage().getBytes(StandardCharsets.UTF_8), org.springframework.http.HttpStatus.OK);
-            //return  ex.getMessage();
-            //throw new RuntimeException("fail export file: " + ex.getMessage());
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>("{\"error\":\"Internal server error.\"}".getBytes(StandardCharsets.UTF_8), headers, org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception ex) {
+            logger.error("gettripletpdf-kannada-seed unexpected: {}", ex.getMessage(), ex);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>("{\"error\":\"Failed to generate report.\"}".getBytes(StandardCharsets.UTF_8), headers, org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -1145,6 +1151,55 @@ public class ReportsController {
 
     }
 
+    @PostMapping("/getAckARM")
+    public ResponseEntity<?> getARMAck(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
+
+        try {
+            System.out.println("enter to getARMAck");
+            logger.info("enter to getARMAck");
+
+            AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
+            if (apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+                throw new RuntimeException("No Data Found");
+            }
+            String arn = apiResponse.getContent().get(0).getArn();
+
+            JasperReport jasperReport = getJasperReport("AckChawki1500.jrxml");
+
+            // 2. parameters "empty"
+            Map<String, Object> parameters = getParameters();
+
+            // 3. datasource "java object"
+            JRDataSource dataSource = getDataSourceForAckARM(requestDto);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            String fileName = arn + ".pdf";
+
+            try {
+                apiService.uploadSanctionToDbt(pdfBytes, fileName);
+                logger.info("Uploaded to S3 successfully");
+            } catch (Exception uploadEx) {
+                logger.error("S3 Upload Failed, continuing download", uploadEx);
+            }
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfBytes);
+
+        } catch (Exception ex) {
+            logger.error("Error generating Chawki 1000 Acknowledgement", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to generate Chawki 1000 Acknowledgement");
+        }
+
+
+
+    }
+
     @PostMapping("/getChawki1000Ack")
     public ResponseEntity<?> getChawki1000Ack(@RequestBody ApplicationFormPrintRequest requestDto) throws JsonProcessingException, FileNotFoundException, JRException {
 
@@ -1645,6 +1700,39 @@ public class ReportsController {
         } catch (Exception e) {
             return val;
         }
+    }
+
+    // equipment_date is a free-text NVARCHAR column (frontend sends whatever format its date
+    // picker produces), so this tries a wider set of shapes than formatDate() before giving up.
+    private String formatEquipmentDate(Object dateObj) {
+        if (dateObj == null) return "";
+        if (dateObj instanceof Date) {
+            return new SimpleDateFormat("dd/MM/yyyy").format((Date) dateObj);
+        }
+        String raw = dateObj.toString().trim();
+        if (raw.isEmpty()) return "";
+        String[] patterns = {
+            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            "yyyy-MM-dd'T'HH:mm:ss'Z'",
+            "yyyy-MM-dd'T'HH:mm:ss.SSS",
+            "yyyy-MM-dd'T'HH:mm:ss",
+            "yyyy-MM-dd HH:mm:ss.SSS",
+            "yyyy-MM-dd HH:mm:ss.S",
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd",
+            "dd-MM-yyyy",
+            "dd/MM/yyyy",
+            "MM/dd/yyyy"
+        };
+        for (String pattern : patterns) {
+            try {
+                SimpleDateFormat fmt = new SimpleDateFormat(pattern);
+                fmt.setLenient(false);
+                Date date = fmt.parse(raw);
+                return new SimpleDateFormat("dd/MM/yyyy").format(date);
+            } catch (Exception ignored) {}
+        }
+        return raw;
     }
 
     private String formatDate(Object dateObj) {
@@ -7296,8 +7384,7 @@ public class ReportsController {
         List<Content> countries = new LinkedList<>();
 
         if (apiResponse == null || apiResponse.content == null) {
-            // No content -> return empty datasource so Jasper doesn't NPE
-            return new JRBeanCollectionDataSource(Collections.emptyList());
+            throw new RuntimeException("NO DATA FOUND");
         }
 
 
@@ -11857,7 +11944,7 @@ public class ReportsController {
     }
 
 
-    private JRDataSource getDataSourceAckARM(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
+    private JRDataSource getDataSourceForAckARM(ApplicationFormPrintRequest requestDto) throws JsonProcessingException {
 
         AcknowledgementResponse apiResponse = apiService.fetchDataFromSeedMarket(requestDto);
 
@@ -11881,8 +11968,6 @@ public class ReportsController {
             } catch (Exception e) {
                 formattedDate = apiResponse.getContent().get(0).getDate().toString(); // fallback if parsing fails
             }
-            String raceName = apiResponse.getContent().get(0).getRaceName();
-            String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ       ಕೇಂದ್ರ   ವಲಯ    "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
                     "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+"  )  ಅಡಿ    120   ಕೊನೆಗಳ    ಸ್ವಯಂಚಾಲಿತ    ರೀಲಿಂಗ್     " +
@@ -15039,6 +15124,8 @@ public class ReportsController {
                     sanctionOrderResponse.setReceiptDate(null); // or leave it as is
                 }
 
+                sanctionOrderResponse.setDateOfBrushing(formatDate(sanctionOrderResponse.getDateOfBrushing()));
+
                 if (sanctionOrderResponse.getAverageYield() == null) {
                     sanctionOrderResponse.setAverageYield(0f);
                 }
@@ -15078,9 +15165,8 @@ public class ReportsController {
                 if (sanctionOrderResponse.getCdcmBiddingSlipNo() == null) {
                     sanctionOrderResponse.setCdcmBiddingSlipNo("");
                 }
-                if (sanctionOrderResponse.getCdcmTransactionDate() == null) {
-                    sanctionOrderResponse.setCdcmTransactionDate("");
-                }
+                sanctionOrderResponse.setCdcmTransactionDate(
+                        formatEquipmentDate(sanctionOrderResponse.getCdcmTransactionDate()));
                 if (sanctionOrderResponse.getArn() == null) {
                     sanctionOrderResponse.setArn("");
                 }
@@ -15644,6 +15730,11 @@ public class ReportsController {
         String proposalDate = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
         String assignedUserProposalDate = formatDate(apiResponse.getContent().get(0).getAssignedByUserProposalDate());
 
+        // year/equipmentDate come from sc_application_form_service as free-text strings;
+        // formatEquipmentDate() reformats real dates to dd/MM/yyyy and safely falls back to "" / raw text otherwise
+        String year = formatDate(apiResponse.getContent().get(0).getYear());
+        String equipmentDate = formatEquipmentDate(apiResponse.getContent().get(0).getEquipmentDate());
+
 
 
         // 🔹 Created date split
@@ -15693,6 +15784,8 @@ public class ReportsController {
         response.setMobileNumber(apiResponse.getContent().get(0).getMobileNumber());
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         response.setSerialNumber(1);  // <-- UPDATED LINE
+        response.setYear(year);
+        response.setEquipmentDate(equipmentDate);
 
         sanctionOrderResponseList.add(response);
 
@@ -15763,6 +15856,9 @@ public class ReportsController {
                 if (sanctionOrderResponse.getTotalCocoonsWeight() == null) {
                     sanctionOrderResponse.setTotalCocoonsWeight(0f);
                 }
+
+                sanctionOrderResponse.setYear(formatDate(sanctionOrderResponse.getYear()));
+                sanctionOrderResponse.setEquipmentDate(formatEquipmentDate(sanctionOrderResponse.getEquipmentDate()));
 
                 if (sanctionOrderResponse.getNoOfCocoonsNeedToProduce() == null) {
                     sanctionOrderResponse.setNoOfCocoonsNeedToProduce(df3.format(0));
@@ -19175,57 +19271,74 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
     private JRBeanCollectionDataSource getDataSourceForARMSelection(SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException {
 
-        SanctionOrder apiResponse = apiService.fetchDataFromSanctionBoilerSelection(requestDto);
+        com.sericulture.model.ARMSanctionOrder apiResponse = apiService.fetchDataFromARMSelectionDetails(requestDto);
 
         List<SanctionOrderResponse> sanctionOrderResponseList = new LinkedList<>();
         SanctionOrderResponse response = new SanctionOrderResponse();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        com.sericulture.model.ARMSanctionResponse first = apiResponse.getContent().get(0);
 
-        SanctionOrderResponse first = apiResponse.getContent().get(0);
+        // Safely extract string fields
+        String createdDate         = first.getCreatedDate()         != null ? first.getCreatedDate()         : "";
+        String selectionLetterDate = first.getSelectionLetterDate() != null ? first.getSelectionLetterDate() : "";
+        String financialYear       = first.getFinancialYear()       != null ? first.getFinancialYear()       : "";
+        String schemeNameKan       = first.getSchemeNameInKannada() != null ? first.getSchemeNameInKannada() : "";
+        String categoryNameKan     = first.getCategoryNameInKannada() != null ? first.getCategoryNameInKannada() : "";
+        String reelerName          = first.getReelerName()          != null ? first.getReelerName()          : "";
+        String reelerFatherName    = first.getReelerFatherName()    != null ? first.getReelerFatherName()    : "";
+        String villageNameKan      = first.getVillageNameInKannada() != null ? first.getVillageNameInKannada() : "";
+        String talukNameKan        = first.getTalukNameInKannada()  != null ? first.getTalukNameInKannada()  : "";
+        String districtNameKan     = first.getDistrictNameInKannada() != null ? first.getDistrictNameInKannada() : "";
+        String arn                 = first.getArn()                 != null ? first.getArn()                 : "";
+        String mobileNumber        = first.getMobileNumber()        != null ? first.getMobileNumber()        : "";
+        String workOrderNumber     = first.getWorkOrderNumber()     != null ? first.getWorkOrderNumber()     : "";
+        String designationKan      = first.getDesignationNameInKannada() != null ? first.getDesignationNameInKannada() : "";
+        String designationKanSanct = first.getDesignationNameInKannadaForSanctionOrder() != null ? first.getDesignationNameInKannadaForSanctionOrder() : "";
+        String createdByDesignation = first.getCreatedByDesignationForSanctionOrder() != null ? first.getCreatedByDesignationForSanctionOrder() : "";
+        String loggedinUserDistrict = first.getLoggedinUserDistrictName() != null ? first.getLoggedinUserDistrictName() : "";
+        String armEnds             = first.getArmEndsCount()        != null ? first.getArmEndsCount()        : "120";
+        String armUnitName         = first.getArmUnitName()         != null ? first.getArmUnitName()         : "";
 
-        String admGovtDate        = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
-        String schemeCircularDate = formatDate(apiResponse.getContent().get(0).getSchemeCircularDate(), sdf);
-        String deptDeleDate       = formatDate(apiResponse.getContent().get(0).getDeptDeleDate(), sdf);
-        String releaseDate        = formatDate(apiResponse.getContent().get(0).getReleaseDate(), sdf);
-        String proposalDate       = formatDate(apiResponse.getContent().get(0).getProposalDate(), sdf);
-        String sReleaseDate       = formatDate(apiResponse.getContent().get(0).getSReleaseDate(), sdf);
-        String createdDate       = formatDate(apiResponse.getContent().get(0).getCreatedDate());
-        String selectionLetterDate       = formatDates(apiResponse.getContent().get(0).getSelectionLetterDate(),sdf);
+        // ARM Land fields (new fields from arm_land_details)
+        String armLandDistrict = first.getArmLandDistrictKan() != null ? first.getArmLandDistrictKan() : "";
+        String armLandTaluk    = first.getArmLandTalukKan()    != null ? first.getArmLandTalukKan()    : "";
+        String armLandHobli    = first.getArmLandHobliKan()    != null ? first.getArmLandHobliKan()    : "";
+        String armLandVillage  = first.getArmLandVillageKan()  != null ? first.getArmLandVillageKan()  : "";
+        String armLandAddress  = first.getArmLandAddress()     != null ? first.getArmLandAddress()     : "";
+        String armSurveyNo     = first.getArmSurveyNo()        != null ? first.getArmSurveyNo()        : "";
+        String armPropertyNo   = first.getArmLandPropertyNo()  != null ? first.getArmLandPropertyNo()  : "";
+        String armAssessmentNo = first.getArmAssessmentNo()    != null ? first.getArmAssessmentNo()    : "";
+        String armLandType     = first.getArmLandType()        != null ? first.getArmLandType()        : "";
 
-
-
-        String shortDistrictKannada = getKannadaShortForm(apiResponse.getContent().get(0).getLoggedinUserDistrictName());
-
-        int schemeAmount = Math.round(Float.parseFloat(formatAmount(apiResponse.getContent().get(0).getSchemeAmount())));
-        String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmount);
-
-        float unitCost = apiResponse.getContent().get(0).getUnitCost() == null
-                ? 0f
-                : apiResponse.getContent().get(0).getUnitCost();
-
-        float shareInPercentage = apiResponse.getContent().get(0).getShareInPercentage() == null
-                ? 0f
-                : Float.parseFloat(apiResponse.getContent().get(0).getShareInPercentage());
-        float beneficiarySharePercentage = 100f - shareInPercentage;
-        float beneficiaryShare = unitCost * (beneficiarySharePercentage / 100f);
-
+        // Amounts from arm_calculation
+        float unitCost           = first.getUnitCost()              == null ? 0f : first.getUnitCost();
+        float schemeAmountVal    = first.getSchemeAmount()           == null ? 0f : first.getSchemeAmount();
+        float centralAmt         = first.getCentralSanctionAmount()  == null ? 0f : first.getCentralSanctionAmount();
+        float stateAmt           = first.getStateSanctionAmount()    == null ? 0f : first.getStateSanctionAmount();
+        float totalSubsidy       = centralAmt + stateAmt;
+        float shareInPercentage  = unitCost > 0 ? (totalSubsidy / unitCost) * 100f : 75f;
+        float benefSharePct      = 100f - shareInPercentage;
+        float beneficiaryShare   = unitCost * (benefSharePct / 100f);
         String beneficiaryShareFormatted = String.format("%.2f", beneficiaryShare);
 
+        int schemeAmountInt = Math.round(schemeAmountVal);
+        String schemeAmountWords = KannadaNumberUtil.convertNumberToKannadaWords(schemeAmountInt);
 
+        response.setHeader2("ಕೇಂದ್ರ ವಲಯ  '" + schemeNameKan + "'  ಯೋಜನೆಯಡಿ  ಸ್ವಯಂಚಾಲಿತ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆ (ARM)  ಘಟಕ  ಸ್ಥಾಪನೆಗೆ  ಫಲಾನುಭವಿಯಾಗಿ  ಆಯ್ಕೆ  –  ಕುರಿತು.");
 
-        response.setHeader2("ಕೇಂದ್ರ ವಲಯ  ” "+ apiResponse.getContent().get(0).getSchemeNameInKannada() + "'  ಯೋಜನೆಯಡಿ  ಸ್ವಯಂಚಾಲಿತ  ರೇಷ್ಮೆ  ನೂಲು  ಬಿಚ್ಚಾಣಿಕೆ (ARM)  ಘಟಕ  ಸ್ಥಾಪನೆಗೆ  ಫಲಾನುಭವಿಯಾಗಿ  ಆಯ್ಕೆ  –  ಕುರಿತು.");
-
-        // ARM Selection - prepend ಉಲ್ಲೇಖ (references) section before body text
-        String armUllekha = "ಉಲ್ಲೇಖ :  1.  ನಿಮ್ಮ  ಅರ್ಜಿ  ದಿನಾಂಕ  ;  "+createdDate+"\n" +
-                "           2.  "+apiResponse.getContent().get(0).getFinancialYear()+"  ನೇ  ಸಾಲಿನ  ಕೇಂದ್ರ  ವಲಯ  'ಸಿಲ್ಕ್  ಸಮಗ್ರ'  ಯೋಜನೆಯಡಿ  ARM  ಘಟಕಗಳ  ಸ್ಥಾಪನೆಗಾಗಿ  ಫಲಾನುಭವಿಗಳ  ಆಯ್ಕೆ  ಕುರಿತಂತೆ  ದಿನಾಂಕ: 03.12.2025  ರಂದು  ರೇಷ್ಮೆ  ನಿರ್ದೇಶನಾಲಯದಲ್ಲಿ  ನಡೆದ  ಸಭಾ  ನಡಾವಳಿಗಳು  (ಸರ್ಕಾರದ  ಅನುಮೋದನೆ,  ದಿನಾಂಕ:17/02/2026)\n" +
+        String armUllekha = "ಉಲ್ಲೇಖ :  1.  ನಿಮ್ಮ  ಅರ್ಜಿ  ದಿನಾಂಕ  ;  " + createdDate + "\n" +
+                "           2.  " + financialYear + "  ನೇ  ಸಾಲಿನ  ಕೇಂದ್ರ  ವಲಯ  'ಸಿಲ್ಕ್  ಸಮಗ್ರ'  ಯೋಜನೆಯಡಿ  ARM  ಘಟಕಗಳ  ಸ್ಥಾಪನೆಗಾಗಿ  ಫಲಾನುಭವಿಗಳ  ಆಯ್ಕೆ  ಕುರಿತಂತೆ  ದಿನಾಂಕ: 03.12.2025  ರಂದು  ರೇಷ್ಮೆ  ನಿರ್ದೇಶನಾಲಯದಲ್ಲಿ  ನಡೆದ  ಸಭಾ  ನಡಾವಳಿಗಳು  (ಸರ್ಕಾರದ  ಅನುಮೋದನೆ,  ದಿನಾಂಕ:17/02/2026)\n" +
                 "           3.  'ಸ್ವಯಂಚಾಲಿತ  ರೀಲಿಂಗ್  ಯಂತ್ರೋಪಕರಣ (ಎಆರ್ಎಂ)  ಘಟಕಗಳ  ಸ್ಥಾಪನೆಗೆ  ಸಹಾಯಧನ'  ಕಾರ್ಯಕ್ರಮದ  ಅನುಮೋದಿತ  ಇಲಾಖಾ  ಮಾರ್ಗಸೂಚಿ (ಕಡತ  E-1717661)\n\n~*~*~*~*~\n\n";
 
-        response.setHeader3(armUllekha + "          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ /ಶ್ರೀ ಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾ  ಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂ  ಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ      ಸ್ವಯಂಚಾಲಿತ    ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆ (ARM)    ಘಟಕ    ಸ್ಥಾಪನೆಗಾಗಿ     ಘಟಕ   ದರ   ರೂ.  "+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage +
-                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
-
+        response.setHeader3(armUllekha + "          " + createdByDesignation + "   ಶ್ರೀ /ಶ್ರೀ ಮತಿ " + reelerName
+                + "    ಬಿನ್/ಕೋಂ.  " + reelerFatherName + "     " + villageNameKan + "    ಗ್ರಾ  ಮ     "
+                + talukNameKan + "     ತಾಲ್ಲೂ  ಕು     " + districtNameKan + "     ಜಿಲ್ಲೆ     ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."
+                + arn + "     ದಿನಾಂಕ  : " + createdDate + "     ಅನ್ನು     ಕಾರ್ಯಕ್ರ ಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವ ಯ     "
+                + financialYear + "   ನೇ    ಸಾಲಿನ      " + schemeNameKan + "  ( " + categoryNameKan
+                + ")    ಅಡಿ      ಸ್ವಯಂಚಾಲಿತ    ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆ (ARM)    ಘಟಕ    ಸ್ಥಾಪನೆಗಾಗಿ     ಘಟಕ   ದರ   ರೂ.  "
+                + unitCost + " ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage + " ರಂತೆ  ಸಹಾಯಧನ   ರೂ." + totalSubsidy
+                + "  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int) benefSharePct + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "
+                + beneficiaryShareFormatted + "  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
                 "ಕೇಂದ್ರ ವಲಯ ʼಸಿಲ್ಕ್‌ ಸಮಗ್ರ-2ʼ ಯೋಜನೆಯ ಸಾಮಾನ್ಯ ವರ್ಗದಡಿ 120 ಕೊನೆಗಳ ಸ್ವಯಂಚಾಲಿತ ರೇಷ್ಮೆ ನೂಲು ಬಿಚ್ಚಾಣಿಕೆ (ARM) ಘಟಕ ಸ್ಥಾಪನೆ ಇಚ್ಛಿಸಿ ನೀವು ಅರ್ಜಿ ಸಲ್ಲಿಸಿರುತ್ತೀರಿ. ಸದರಿ ಯೋಜನೆಯಡಿ ARM ಘಟಕಗಳ ಸ್ಥಾಪನೆಗಾಗಿ ಫಲಾನುಭವಿಗಳ ಆಯ್ಕೆ ಕುರಿತಂತೆ ದಿನಾಂಕ : 03.12.2025 ರ ಸಭಾ ನಡಾವಳಿಗಳನ್ವಯ ನಿಮ್ಮನ್ನು ಪ್ರಸಕ್ತ ಸಾಲಿನ 120 ಕೊನೆಗಳ ಒಂದು ARM ಘಟಕ ಸ್ಥಾಪನೆಗೆ ಫಲಾನುಭವಿಯಾಗಿ ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ (ಉಲ್ಲೇಖ 2).\n" +
                 "ಕೇಂದ್ರ ವಲಯ ʼಸಿಲ್ಕ್‌ ಸಮಗ್ರ-2ʼ ಯೋಜನೆಯಡಿ 120 ಕೊನೆಗಳ ARM ಯಂತ್ರೋಪಕರಣದ ಸೂಚಿತ ದರ ರೂ.39,15,000.00 (ರೂ. ಮುವತ್ತೊಂಭತ್ತು ಲಕ್ಷ ಹದಿನೈದು ಸಾವಿರ ಮಾತ್ರ) ಎಂದು ನಿಗದಿಪಡಿಸಲಾಗಿದೆ. ಈ ವೆಚ್ಚವನ್ನು ಕೇಂದ್ರ ಸರ್ಕಾರ, ರಾಜ್ಯ ಸರ್ಕಾರ ಮತ್ತು ಫಲಾನುಭವಿ ನಡುವೆ 50:25:25 ಅನುಪಾತದಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ. ಅದರ ಪ್ರಕಾರ;\n" +
                 "•\tಯಂತ್ರೋಪಕರಣಗಳ ಒಟ್ಟು ಸೂಚಿತ ದರ: ರೂ.39,15,000.00\n" +
@@ -19247,125 +19360,101 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "          11. ಪರಿಸರ ಮಂಡಳಿ ಅನುಮತಿ, ತೆರಿಗೆ ನೋಂದಣಿ, ಕಾರ್ಮಿಕ ಕಾಯ್ದೆಗಳು ಸೇರಿದಂತೆ ಎಲ್ಲಾ ಕಾನೂನುಬದ್ಧ ನಿಯಮಗಳನ್ನು ಪಾಲಿಸಬೇಕು.\n\n" +
                 "ಮೇಲ್ಕಂಡ ಷರತ್ತುಗಳು ನಿಮಗೆ ಒಪ್ಪಿಗೆಯಾದಲ್ಲಿ ಈ ಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸಿದ 05 ದಿನಗಳೊಳಗೆ ಲಿಖಿತವಾಗಿ ಒಪ್ಪಿಗೆ ಸಲ್ಲಿಸಲು ಕೋರಲಾಗಿದೆ.");
 
+        response.setStatus(first.getSanctionOrderDownloadUrl() != null ? first.getSanctionOrderDownloadUrl() : "");
+        response.setHeader7("ಸಂಖ್ಯೆ  :  " + workOrderNumber);
+        response.setHeader11("ದಿನಾಂಕ  : " + selectionLetterDate);
+        response.setHeader10(designationKan + "\n " + designationKanSanct);
 
-        response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
+        response.setHeader9("ಇವರಿಗೆ;\n" + reelerName + "\n"
+                + "ಬಿನ್/ಕೋಂ  " + reelerFatherName + "\n"
+                + villageNameKan + "  ಗ್ರಾ ಮ  " + talukNameKan + "  ತಾಲ್ಲೂ ಕು\n"
+                + districtNameKan + "  ಜಿಲ್ಲೆ\n"
+                + "ಮ: " + mobileNumber + "\n\n"
+                + "ಪ್ರ ತಿಯನ್ನು;\n"
+                + "   1. ಸದಸ್ಯ ಕಾರ್ಯದರ್ಶಿಗಳು,  ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ,  ಬೆಂಗಳೂರು\n"
+                + "   2. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು,  ಮೈಸೂರು ವಿಭಾಗ,  ಮೈಸೂರು\n"
+                + "   3. ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು,  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  " + loggedinUserDistrict + "\n"
+                + "   4. ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ ನಂತರದ ಚಟುವಟಿಕೆ,  " + loggedinUserDistrict);
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
-
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
-
-
-
-        response.setHeader10( apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n " +
-                apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
-
-        response.setHeader9("ಇವರಿಗೆ;\n"+
-                apiResponse.getContent().get(0).getReelerName() + "\n" +
-                "ಬಿನ್/ಕೋಂ  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ ಮ  "+apiResponse.getContent().get(0).getTalukNameInKannada() +"  ತಾಲ್ಲೂ ಕು\n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"  ಜಿಲ್ಲೆ\n" +
-                "ಮ: "+ (apiResponse.getContent().get(0).getMobileNumber() != null ? apiResponse.getContent().get(0).getMobileNumber() : "") + "\n\n" +
-                "ಪ್ರ ತಿಯನ್ನು;\n" +
-                "   1. ಸದಸ್ಯ ಕಾರ್ಯದರ್ಶಿಗಳು,  ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ,  ಬೆಂಗಳೂರು\n" +
-                "   2. ರೇಷ್ಮೆ ಜಂಟಿ ನಿರ್ದೇಶಕರು,  ಮೈಸೂರು ವಿಭಾಗ,  ಮೈಸೂರು\n" +
-                "   3. ರೇಷ್ಮೆ ಉಪ ನಿರ್ದೇಶಕರು,  ಸರ್ಕಾರಿ ರೇಷ್ಮೆ ಗೂಡಿನ ಮಾರುಕಟ್ಟೆ,  "+apiResponse.getContent().get(0).getLoggedinUserDistrictName()+"\n" +
-                "   4. ರೇಷ್ಮೆ ಸಹಾಯಕ ನಿರ್ದೇಶಕರು,  ಗೂಡಿನ ನಂತರದ ಚಟುವಟಿಕೆ,  "+apiResponse.getContent().get(0).getLoggedinUserDistrictName());
-        response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
-
-        response.setMachineTypeName(apiResponse.getContent().get(0).getMachineTypeName());
-        response.setScCategoryName(apiResponse.getContent().get(0).getScCategoryName());
-
-        response.setRenditta(apiResponse.getContent().get(0).getRenditta());
-        response.setDailyLimit(apiResponse.getContent().get(0).getDailyLimit());
-        response.setNumberOfBasins(apiResponse.getContent().get(0).getNumberOfBasins());
-        response.setMax(apiResponse.getContent().get(0).getMax());
-
-        response.setFatherNameKan(apiResponse.getContent().get(0).getFatherNameKan());
-        response.setArn(apiResponse.getContent().get(0).getArn());
-        response.setMobileNumber(apiResponse.getContent().get(0).getMobileNumber());
+        response.setSchemeNameInKannada(schemeNameKan);
+        response.setScCategoryName(categoryNameKan);
+        response.setArn(arn);
+        response.setMobileNumber(mobileNumber);
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
         response.setSerialNumber(1);
 
+        // ARM land details (new fields)
+        response.setArmLandDistrictKan(armLandDistrict);
+        response.setArmLandTalukKan(armLandTaluk);
+        response.setArmLandHobliKan(armLandHobli);
+        response.setArmLandVillageKan(armLandVillage);
+        response.setArmLandAddress(armLandAddress);
+        response.setArmSurveyNo(armSurveyNo);
+        response.setArmLandPropertyNo(armPropertyNo);
+        response.setArmAssessmentNo(armAssessmentNo);
+        response.setArmLandType(armLandType);
+        response.setArmEndsCount(armEnds);
+        response.setArmUnitName(armUnitName);
+        response.setCentralSanctionAmount(centralAmt);
+        response.setStateSanctionAmount(stateAmt);
+        response.setUnitCost(unitCost);
+
         sanctionOrderResponseList.add(response);
 
-        float totalNoOfCocoonsNeedToProduce = 0f;
-        float totalNoOfRawSilkProduced      = 0f;
-        float totalMachineQuantity          = 0f;
-        float totalMax                      = 0f;
-        float totalSchemeAmount             = 0f;
+        float totalSchemeAmount = 0f;
 
         if (apiResponse.getContent() != null) {
             int serialNo = 1;
-            for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
+            for (com.sericulture.model.ARMSanctionResponse ar : apiResponse.getContent()) {
+                SanctionOrderResponse sanctionOrderResponse = new SanctionOrderResponse();
 
-                if (sanctionOrderResponse.getFarmerFirstName() == null) {
-                    sanctionOrderResponse.setFarmerFirstName("");
-                }
+                sanctionOrderResponse.setReelerName(ar.getReelerName()       != null ? ar.getReelerName()       : "");
+                sanctionOrderResponse.setFruitsId(ar.getFruitsId()           != null ? ar.getFruitsId()         : "");
+                sanctionOrderResponse.setReelerFatherName(ar.getReelerFatherName() != null ? ar.getReelerFatherName() : "");
+                sanctionOrderResponse.setVillageName(ar.getVillageName()     != null ? ar.getVillageName()      : "");
+                sanctionOrderResponse.setTalukName(ar.getTalukName()         != null ? ar.getTalukName()        : "");
+                sanctionOrderResponse.setDistrictName(ar.getDistrictName()   != null ? ar.getDistrictName()     : "");
+                sanctionOrderResponse.setHobliName("");
+                sanctionOrderResponse.setSchemeAmount(ar.getSchemeAmount()   != null ? ar.getSchemeAmount()     : 0f);
+                sanctionOrderResponse.setUnitPrice(ar.getUnitCost()          != null ? ar.getUnitCost()         : 0f);
+                sanctionOrderResponse.setFarmerFirstName("");
+                sanctionOrderResponse.setScComponentName("");
+                sanctionOrderResponse.setNoOfCocoonsNeedToProduce("0");
+                sanctionOrderResponse.setNoOfRawSilkProduced("0");
+                sanctionOrderResponse.setMachineQuantity(0f);
+                sanctionOrderResponse.setMax(0f);
 
-                if (sanctionOrderResponse.getReelerName() == null) {
-                    sanctionOrderResponse.setReelerName("");
-                }
+                String vName = sanctionOrderResponse.getVillageName();
+                String tName = sanctionOrderResponse.getTalukName();
+                String dName = sanctionOrderResponse.getDistrictName();
+                boolean hasAdivattu = (vName != null && vName.toLowerCase().contains("adivattu"))
+                        || (tName != null && tName.toLowerCase().contains("adivattu"))
+                        || (dName != null && dName.toLowerCase().contains("adivattu"));
+                String sep = hasAdivattu ? "    " : "   ";
 
-                if (sanctionOrderResponse.getSchemeAmount() == null) {
-                    sanctionOrderResponse.setSchemeAmount(0f);
-                }
-                if (sanctionOrderResponse.getUnitPrice() == null) {
-                    sanctionOrderResponse.setUnitPrice(0f);
-                }
-                if (sanctionOrderResponse.getScComponentName() == null) {
-                    sanctionOrderResponse.setScComponentName("");
-                }
-
-                String armVillageName   = sanctionOrderResponse.getVillageName()   != null ? sanctionOrderResponse.getVillageName()   : "";
-                String armHobliName     = sanctionOrderResponse.getHobliName()     != null ? sanctionOrderResponse.getHobliName()     : "";
-                String armTalukName     = sanctionOrderResponse.getTalukName()     != null ? sanctionOrderResponse.getTalukName()     : "";
-                String armDistrictName  = sanctionOrderResponse.getDistrictName()  != null ? sanctionOrderResponse.getDistrictName()  : "";
-                boolean armHasAdivattu  = armVillageName.toLowerCase().contains("adivattu")
-                        || armHobliName.toLowerCase().contains("adivattu")
-                        || armTalukName.toLowerCase().contains("adivattu")
-                        || armDistrictName.toLowerCase().contains("adivattu");
-                String armSep = armHasAdivattu ? "    " : "   ";
-
-                String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ." + armSep + sanctionOrderResponse.getReelerName()
-                                + armSep + "(" + sanctionOrderResponse.getFruitsId() + ")" + armSep + "ಬಿನ್/ಕೋಂ" + armSep
-                                + sanctionOrderResponse.getReelerFatherName()
-                                + armSep
-                                + armVillageName
-                                + armSep + "," + armSep
-                                + armHobliName
-                                + armSep + "," + armSep + "ಹೋಬಳಿ," + armSep
-                                + armTalukName
-                                + armSep + "ತಾ." + armSep
-                                + armDistrictName
-                                + armSep + "ಜಿಲ್ಲೆ" + armSep;
-
+                String reelerDetails = "ಶ್ರೀ./ಶ್ರೀಮತಿ." + sep + (ar.getReelerName() != null ? ar.getReelerName() : "")
+                        + sep + "(" + (ar.getFruitsId() != null ? ar.getFruitsId() : "") + ")" + sep + "ಬಿನ್/ಕೋಂ" + sep
+                        + (ar.getReelerFatherName() != null ? ar.getReelerFatherName() : "")
+                        + sep + (vName != null ? vName : "") + sep + "," + sep + sep + "," + sep + "ಹೋಬಳಿ," + sep
+                        + (tName != null ? tName : "") + sep + "ತಾ." + sep
+                        + (dName != null ? dName : "") + sep + "ಜಿಲ್ಲೆ" + sep;
                 sanctionOrderResponse.setReelerDetails(reelerDetails);
 
-
                 sanctionOrderResponse.setSerialNumber(serialNo++);
-
-                totalNoOfCocoonsNeedToProduce += safeParseFloat(sanctionOrderResponse.getNoOfCocoonsNeedToProduce());
-                totalNoOfRawSilkProduced      += safeParseFloat(sanctionOrderResponse.getNoOfRawSilkProduced());
-                totalMachineQuantity          += (sanctionOrderResponse.getMachineQuantity() == null ? 0f : sanctionOrderResponse.getMachineQuantity());
-                totalMax                      += (sanctionOrderResponse.getMax() == null ? 0f : sanctionOrderResponse.getMax());
-                totalSchemeAmount             += (sanctionOrderResponse.getSchemeAmount() == null ? 0f : sanctionOrderResponse.getSchemeAmount());
+                totalSchemeAmount += (sanctionOrderResponse.getSchemeAmount() != null ? sanctionOrderResponse.getSchemeAmount() : 0f);
 
                 sanctionOrderResponseList.add(sanctionOrderResponse);
             }
         }
 
         SanctionOrderResponse totalRow = new SanctionOrderResponse();
-
         totalRow.setReelerName("ಒಟ್ಟು");
         totalRow.setSerialNumber(null);
-
-        totalRow.setNoOfCocoonsNeedToProduce(formatFloat(totalNoOfCocoonsNeedToProduce));
-        totalRow.setNoOfRawSilkProduced(formatFloat(totalNoOfRawSilkProduced));
-        totalRow.setMachineQuantity(totalMachineQuantity);
-        totalRow.setMax(totalMax);
         totalRow.setSchemeAmount(totalSchemeAmount);
-
+        totalRow.setNoOfCocoonsNeedToProduce("0");
+        totalRow.setNoOfRawSilkProduced("0");
+        totalRow.setMachineQuantity(0f);
+        totalRow.setMax(0f);
         totalRow.setMonth("");
         totalRow.setNumberOfBasins("");
         totalRow.setRenditta("");
