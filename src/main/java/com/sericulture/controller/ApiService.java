@@ -891,6 +891,8 @@ public class ApiService {
 
         String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/getARMSanctionDetails";
 
+//                String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getARMSanctionDetails";
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -908,6 +910,90 @@ public class ApiService {
             throw new RuntimeException("Failed to fetch ARM sanction data: " + responseBody, httpEx);
         } catch (Exception ex) {
             logger.error("Unexpected error calling ARM sanction API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
+    public com.sericulture.model.ARMSanctionOrder fetchDataFromARMFirstRelease(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getARMFirstReleaseDetails";
+
+                String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/getARMFirstReleaseDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, com.sericulture.model.ARMSanctionOrder.class);
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling ARM first release API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch ARM first release data: " + responseBody, httpEx);
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling ARM first release API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
+    public com.sericulture.model.ARMSanctionOrder fetchDataFromARMFinalRelease(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/getARMFinalReleaseDetails";
+
+                String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/getARMFinalReleaseDetails";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, com.sericulture.model.ARMSanctionOrder.class);
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling ARM final release API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch ARM final release data: " + responseBody, httpEx);
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling ARM final release API: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
+        }
+    }
+
+    public com.sericulture.model.ARMSanctionOrder fetchDataFromARMAdavncePayment(SanctionOrderPrintRequest requestDto) throws JsonProcessingException {
+
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/arm-advance-payment";
+
+                String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/arm-advance-payment";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setBearerAuth(Util.getTokenData());
+
+        HttpEntity<SanctionOrderPrintRequest> requestEntity = new HttpEntity<>(requestDto, headers);
+
+        try {
+            String response = restTemplate.postForObject(finalapiurl, requestEntity, String.class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response, com.sericulture.model.ARMSanctionOrder.class);
+        } catch (HttpClientErrorException | HttpServerErrorException httpEx) {
+            String responseBody = httpEx.getResponseBodyAsString();
+            logger.error("Error calling ARM final release API: {}", responseBody, httpEx);
+            throw new RuntimeException("Failed to fetch ARM final release data: " + responseBody, httpEx);
+        } catch (Exception ex) {
+            logger.error("Unexpected error calling ARM final release API: {}", ex.getMessage(), ex);
             throw new RuntimeException("Unexpected error: " + ex.getMessage(), ex);
         }
     }
@@ -1013,7 +1099,7 @@ public class ApiService {
 
         String finalapiurl = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/selection-arm";
 
-//                String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/selection-arm";
+//        String finalapiurl = "http://localhost:8013/dbt/v1/" + "sanctionOrderWorkOrderAcknowledgement/selection-arm";
 
 
         HttpHeaders headers = new HttpHeaders();

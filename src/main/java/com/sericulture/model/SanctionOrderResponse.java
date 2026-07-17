@@ -512,8 +512,13 @@ private String totalIncentiveAmountInWords;
     private String armEndsCount;
     private String armUnitName;
     private String reelerAadhaar;
-    // Share amounts (calculated)
 
+    // ARM Selection Letter admin fields
+    private String dateOfGovtApproval;
+    private String eOfficeFileNo;
+    private String dateOfArmSelectionProceedings;
+
+    // Share amounts (calculated)
     private String year;
     private String equipmentDate;
 }
