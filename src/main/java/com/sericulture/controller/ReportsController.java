@@ -4942,7 +4942,6 @@ public class ReportsController {
         }
     }
 
-
     @PostMapping("/arm-advance-payment")
     public ResponseEntity<?> getARMAdvancePayment(@RequestBody SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException, FileNotFoundException, JRException {
@@ -4951,7 +4950,7 @@ public class ReportsController {
             logger.info("enter to getARMAdvancePayment");
             com.sericulture.model.ARMSanctionOrder apiResponse = apiService.fetchDataFromARMAdavncePayment(requestDto);
 
-            if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
+            if (apiResponse == null|| apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
                 throw new RuntimeException("No Data Found");
             }
             String securityKey = apiResponse.getContent().get(0).getSecurityKey();
@@ -4973,6 +4972,7 @@ public class ReportsController {
             } catch (Exception uploadEx) {
                 logger.error("ARM Advance Payment S3 upload failed", uploadEx);
             }
+            apiService.updateARMLetterDate(requestDto.getScApplicationFormServiceId(), "advance");
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
@@ -5016,6 +5016,7 @@ public class ReportsController {
             } catch (Exception uploadEx) {
                 logger.error("ARM First Release S3 upload failed", uploadEx);
             }
+            apiService.updateARMLetterDate(requestDto.getScApplicationFormServiceId(), "first");
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
@@ -5059,6 +5060,7 @@ public class ReportsController {
             } catch (Exception uploadEx) {
                 logger.error("ARM Final Release S3 upload failed", uploadEx);
             }
+            apiService.updateARMLetterDate(requestDto.getScApplicationFormServiceId(), "final");
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
@@ -16623,11 +16625,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
             response.setHeader9("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ     ಶಾಖೆಗೆ\n"+
                                 "ಪ್ರ ತಿಯನ್ನು  ;\n"
-                                 +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"\n"
-                                  +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                                  +"   3. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
-                                  +"   4. "+apiResponse.getContent().get(0).getVendorName() +"\n"
-                                  +"   5. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                                 +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                                 +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"\n"
+                                  +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
+                                  +"   4. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
+                                  +"   5. "+apiResponse.getContent().get(0).getVendorName() +"\n"
+                                  +"   6. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
         }
         else
         {
@@ -16702,10 +16705,11 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n\n" +
                     "ಪ್ರ ತಿಯನ್ನು  ;\n"
-                    +"   1. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   2. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
-                    +"   3. "+apiResponse.getContent().get(0).getVendorName() +"\n"
-                    +"   4. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                    +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
+                    +"   3. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
+                    +"   4. "+apiResponse.getContent().get(0).getVendorName() +"\n"
+                    +"   5. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
 
         }
 
@@ -19566,7 +19570,8 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "ಮೇಲ್ಕಂ ಡ   ಷರತ್ತು ಗಳು    ನಿಮಗೆ    ಒಪ್ಪಿಗೆಯಾದಲ್ಲಿ    ಈ    ಪತ್ರವನ್ನು   ಸ್ವೀ ಕರಿಸಿದ   05  ದಿನಗಳೊಳಗೆ   ಲಿಖಿತವಾಗಿ   ಒಪ್ಪಿ ಗೆ   ಸಲ್ಲಿ ಸಲು   ಕೋರಲಾಗಿದೆ.\n");
 
         response.setStatus(first.getSanctionOrderDownloadUrl() != null ? first.getSanctionOrderDownloadUrl() : "");
-        response.setHeader7("ಸಂಖ್ಯೆ  :  " + workOrderNumber+"("+eOfficeFileNo+")");
+        response.setHeader7("ಸಂಖ್ಯೆ  :  " + workOrderNumber+"\n"+
+                "("+eOfficeFileNo+")");
         response.setHeader11(designationKan +", ದಿನಾಂಕ  : " + selectionLetterDate);
         response.setHeader10(designationKan + "\n " + designationKanSanct);
 
@@ -19706,25 +19711,56 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         com.sericulture.model.ARMSanctionResponse d = apiResponse.getContent().get(0);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String escrowBankLetterDate  = d.getEscrowBankLetterDate() != null ? d.getEscrowBankLetterDate() : "";
-        String sanctionOrderDate     = formatDate(d.getProposalDate(), sdf);
-        String empanelledVendorDate2 = d.getEmpanelledVendorDate() != null ? d.getEmpanelledVendorDate() : "";
+        String sanctionOrderDate = formatDate(d.getProposalDate(), sdf);
+
+        // Helper: parse any SQL date/timestamp string → dd/MM/yyyy
+        java.time.format.DateTimeFormatter slashFmt = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        java.util.function.Function<String, String> toSlash = raw -> {
+            if (raw == null || raw.isEmpty()) return "";
+            try {
+                return java.time.LocalDate.parse(raw.length() >= 10 ? raw.substring(0, 10) : raw).format(slashFmt);
+            } catch (Exception e) { return raw; }
+        };
+
+        // modified_date → generatedDate for header and Ref #2
+        String generatedDate = toSlash.apply(d.getSanctionOrderGeneratedDate());
+        if (generatedDate.isEmpty()) generatedDate = sanctionOrderDate;
+
+        String escrowBankLetterDate = toSlash.apply(d.getEscrowBankLetterDate());
+        String empanelledVendorDate2 = toSlash.apply(d.getEmpanelledVendorDate());
 
         float unitCostVal = d.getUnitCost() == null ? 0f : d.getUnitCost();
-        float shareIn     = d.getShareInPercentage() == null ? 75f : Float.parseFloat(d.getShareInPercentage());
-        float benefShare  = 100f - shareIn;
-        float advanceAmt  = unitCostVal * (benefShare / 100f);
-        String advanceAmtStr = String.format("%.2f", advanceAmt);
-        String advanceAmtWords = KannadaNumberUtil.convertNumberToKannadaWords(Math.round(advanceAmt));
+        float advancePct  = d.getAdvancePercentage() == null ? 0f : d.getAdvancePercentage();
+        float advanceAmt  = unitCostVal * (advancePct / 100f);
+        String advanceAmtStr   = String.format("%.2f", advanceAmt);
+        String advanceAmtWordsEn = EnglishNumberUtil.convertToWords(Math.round(advanceAmt));
         String armEnds = d.getArmEndsCount() != null ? d.getArmEndsCount() : "120";
+
+        String vendor1Name    = d.getVendor1Name()    != null ? d.getVendor1Name()    : "";
+        String vendor1Address = d.getVendor1Address() != null ? d.getVendor1Address() : "";
+
+        // cc copy-to: designation.name (English) + designation_name_in_english_for_sanction_order
+        String cc2Name  = d.getCc2DesignationEn()     != null ? d.getCc2DesignationEn()     : "";
+        String cc3Name  = d.getCc3DesignationEn()     != null ? d.getCc3DesignationEn()     : "";
+        String cc4Name  = d.getCc4DesignationEn()     != null ? d.getCc4DesignationEn()     : "";
+        String cc2Sanct = d.getCc2DesignationEnSanct() != null ? d.getCc2DesignationEnSanct() : "";
+        String cc3Sanct = d.getCc3DesignationEnSanct() != null ? d.getCc3DesignationEnSanct() : "";
+        String cc4Sanct = d.getCc4DesignationEnSanct() != null ? d.getCc4DesignationEnSanct() : "";
+        String cc2 = cc2Name + (!cc2Sanct.isEmpty() ? (cc2Name.isEmpty() ? "" : ", ") + cc2Sanct : "");
+        String cc3 = cc3Name + (!cc3Sanct.isEmpty() ? (cc3Name.isEmpty() ? "" : ", ") + cc3Sanct : "");
+        String cc4 = cc4Name + (!cc4Sanct.isEmpty() ? (cc4Name.isEmpty() ? "" : ", ") + cc4Sanct : "");
 
         resp.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
-        // header = No. + date block
+        String armUnitAddress = d.getArmUnitAddress() != null ? d.getArmUnitAddress() : d.getDistrictName();
+
+        // header = No. + E-number block (left side)
         resp.setHeader("No: " + d.getSanctionOrderNumber() + "\n" +
-                "(E-" + (d.getApplicationFormId() != null ? d.getApplicationFormId() : "") + ")" +
-                "                                   Bengaluru, dated: " + sanctionOrderDate + "\n" +
-                "e-mail: " + (d.getUsername() != null ? d.getUsername() : ""));
+                "(E-" + (d.getEOfficeFileNo() != null ? d.getEOfficeFileNo() : "") + ")");
+
+        // header1 = right side: modified_by English designation name + modified_date
+        String modifiedByDesig = d.getModifiedByDesignationNameEn() != null ? d.getModifiedByDesignationNameEn() : "";
+        resp.setHeader1(modifiedByDesig + "\nBengaluru, dated: " + generatedDate);
 
         // header2 = To: addressee (ESCROW bank)
         resp.setHeader2("To,\n" +
@@ -19737,53 +19773,54 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
         // header4 = Ref:
         resp.setHeader4("1.  Your office letter, Date: " + escrowBankLetterDate + "\n" +
-                "2.  This office even number sanction order, Date: " + sanctionOrderDate + "\n" +
-                "3.  Quotation of " + d.getVendorName() + ", Date: " + empanelledVendorDate2);
+                "2.  This office even number sanction order, Date: " + generatedDate + "\n" +
+                "3.  Quotation of " + vendor1Name + (!vendor1Address.isEmpty() ? ", " + vendor1Address : "") + ", Date: " + empanelledVendorDate2);
 
         // header5 = Body para 1
-        resp.setHeader5("With reference to the subject and the letter of your office dated: " + escrowBankLetterDate + " cited above, " +
-                d.getReelerName() + ", Proprietor " + d.getArmUnitName() + " " + d.getDistrictNameInKannada() +
-                " a beneficiary of the establishment of " + armEnds + " ends Indigenous Automatic Reeling Machine (IARM) " +
-                "and holding an ESCROW A/c No. " + d.getEscrowAccountNumber() + " in your esteemed Bank " +
-                "intends to make an advance payment as per the Quotation dated: " + empanelledVendorDate2 + " of " + d.getVendorName() +
-                ", an empanelled IARM manufacturer " +
-                (d.getVendorAddress() != null ? "having its office at " + d.getVendorAddress() : "") +
-                " for the supply of IARM package of " + armEnds + " ends.");
+        resp.setHeader5("            With   reference   to   the   subject   and   the   letter   of   your   office   dated: " + escrowBankLetterDate + "  cited   above ,  " +
+                d.getReelerName() + ",  Proprietor   " + d.getArmUnitName() + "   " + armUnitAddress +
+                "  a   beneficiary   of   the   establishment   of   " + armEnds + "  ends   Indigenous  Automatic   Reeling  Machine   (IARM) " +
+                "  and   holding   an   ESCROW A/c No.  " + d.getEscrowAccountNumber() + "   in   your   esteemed   Bank   " +
+                "intends   to   make   an    advance   payment   as   per   the   Quotation   dated : " + empanelledVendorDate2 + "  of  " + vendor1Name +
+                ",  an   empanelled   IARM    manufacturer  " +
+                (!vendor1Address.isEmpty() ? "  having   its    office    at   " + vendor1Address : "") +
+                "  for    the   supply   of   IARM   package   of " + armEnds + " ends.");
 
-        // header6 = Permission paragraph
-        resp.setHeader6("As per the agreement conditions and guidelines of the scheme implementation, " +
-                "the Department of Sericulture, Government of Karnataka is here with permitting to make an advance payment of " +
-                (int) benefShare + "% of the approved unit cost Rs." + String.format("%.2f", unitCostVal) +
-                " of the machinery (Annexure) i.e. Rs." + advanceAmtStr + " (Rupees. " + advanceAmtWords + " only) " +
-                "to " + d.getVendorName() + " an empanelled IARM manufacturer for the supply of Indigenous Automatic " +
-                "Reeling Machinery package of specified quality standards. The Bank account details as in the Quotation of the manufacturer is as below;");
+        // header6 = Permission paragraph (English words for amount)
+        resp.setHeader6("            As   per   the   agreement   conditions   and  guidelines   of   the   scheme   implementation ,   " +
+                "the   Department   of   Sericulture ,   Government  of   Karnataka   is   here   with   permitting   to   make   an   advance   payment   of   " +
+                (int) advancePct + " %   of   the    approved   unit   cost   Rs." + String.format("%.2f", unitCostVal) +
+                "    of    the   machinery   (Annexure) i.e.   Rs." + advanceAmtStr + "   (Rupees " + advanceAmtWordsEn + " Only)    " +
+                "  to " + vendor1Name + "   an   empanelled   IARM   manufacturer   for   the   supply   of   Indigenous   Automatic   " +
+                "  Reeling    Machinery   package   of   specified   quality   standards.   The   Bank   account   details   as   in   the    "+
+                "Quotation   of   the   manufacturer   is   as   below;");
 
-        // Table columns — show VENDOR bank details (where advance payment is sent)
-        String v1Name    = d.getVendor1Name()    != null ? d.getVendor1Name()    : d.getVendorName();
+        // Table columns — VENDOR bank details
+        String v1Name    = d.getVendor1Name()        != null ? d.getVendor1Name()        : d.getVendorName();
         String v1Bank    = d.getVendor1BankName()    != null ? d.getVendor1BankName()    : "";
         String v1Branch  = d.getVendor1BankAddress() != null ? d.getVendor1BankAddress() : "";
         String v1Account = d.getVendor1AccountNo()   != null ? d.getVendor1AccountNo()   : "";
         String v1Micr    = d.getVendor1MicrCode()    != null ? "MICR " + d.getVendor1MicrCode() : "";
-        resp.setHeader7(v1Name);                                     // col 2: Manufacturer
-        resp.setHeader8(v1Bank + "\n" + v1Branch);                   // col 3: Bank & Branch
-        resp.setHeader9(v1Account);                                  // col 4: Account Number
-        resp.setHeader10(v1Micr);                                    // col 5: MICR
-        resp.setHeader11(advanceAmtStr);                             // col 6: Amount
+        resp.setHeader7(v1Name);
+        resp.setHeader8(v1Bank + "\n" + v1Branch);
+        resp.setHeader9(v1Account);
+        resp.setHeader10(v1Micr);
+        resp.setHeader11(advanceAmtStr);
 
-        // header12 = post-table text
+        // header12 = post-table closing text
         resp.setHeader12("Once an advance payment is made, it is requested to send the statement of said ESCROW account to the undersigned for record purpose.\n\nThanking you,");
 
-        // farmerFirstName = signature designation
-        resp.setFarmerFirstName("Commissioner for Sericulture Development\n& Director of Sericulture");
+        // farmerFirstName = "Yours faithfully," + English designation name of modified_by user
+        resp.setFarmerFirstName("Yours faithfully,\n\n" + modifiedByDesig);
 
-        // header13 = Copy to list
+        // header13 = Copy to (cc2/cc3/cc4 = designation + division name)
         resp.setHeader13("Copy to:\n" +
                 "1. The Member Secretary, CSB, Bengaluru\n" +
                 "2. The Director, CSTRI, CSB, Bengaluru\n" +
-                "3. The Joint Director of Sericulture, Mysore Division, Mysore\n" +
-                "4. The Deputy Director of Sericulture, Govt. Cocoon Market, " + d.getLoggedinUserDistrictName() + "\n" +
-                "5. The Assistant Director of Sericulture, PCT, " + d.getLoggedinUserDistrictName() + "\n" +
-                "6. " + d.getReelerName() + ", Proprietor M/s. /" + d.getArmUnitName() + " " + d.getDistrictName() + " for necessary action.");
+                "3. " + cc2 + "\n" +
+                "4. " + cc3 + "\n" +
+                "5. " + cc4 + "\n" +
+                "6. " + d.getReelerName() + ", Proprietor M/s." + d.getArmUnitName() + " " + armUnitAddress + " for necessary action.");
 
         list.add(resp);
         return new JRBeanCollectionDataSource(list);
@@ -19797,10 +19834,174 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         if (apiResponse == null || apiResponse.getContent() == null || apiResponse.getContent().isEmpty()) {
             throw new RuntimeException("No data found for ARM First Release");
         }
+
+        List<SanctionOrderResponse> list = new LinkedList<>();
+        SanctionOrderResponse resp = new SanctionOrderResponse();
+
         com.sericulture.model.ARMSanctionResponse d = apiResponse.getContent().get(0);
-        return buildArmReleaseDataSource(d, 65, "1 st installment", "IARM supplied to the Benefiaries site");
+
+        // Date formatting
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String sanctionOrderDate = formatDate(d.getProposalDate(), sdf);
+        java.time.format.DateTimeFormatter slashFmt = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        java.util.function.Function<String, String> toSlash = raw -> {
+            if (raw == null || raw.isEmpty()) return "";
+            try {
+                return java.time.LocalDate.parse(raw.length() >= 10 ? raw.substring(0, 10) : raw).format(slashFmt);
+            } catch (Exception e) { return raw; }
+        };
+
+        String generatedDate      = toSlash.apply(d.getSanctionOrderGeneratedDate());
+        if (generatedDate.isEmpty()) generatedDate = sanctionOrderDate;
+        String escrowBankLetterDate = toSlash.apply(d.getEscrowBankLetterDate());
+        String cstriLetterDate      = toSlash.apply(d.getCstriLetterDate());
+        String cstriLetterNo        = d.getCstriLetterNo() != null ? d.getCstriLetterNo() : "";
+
+        // Amount calculations from master percentages
+        float unitCostVal    = d.getUnitCost() == null ? 0f : d.getUnitCost();
+        float advancePct     = d.getAdvancePercentage() == null ? 25f : d.getAdvancePercentage();
+        float releasePct     = d.getReleasePercentage() == null ? 65f : d.getReleasePercentage();
+        float releaseAmount  = d.getReleaseAmount() == null ? (unitCostVal * releasePct / 100f) : d.getReleaseAmount();
+        float previousAmount = d.getCumulativeReleasedAmount() == null
+                ? (unitCostVal * advancePct / 100f)
+                : Math.max(0f, d.getCumulativeReleasedAmount() - releaseAmount);
+        float cumulativeAmt  = previousAmount + releaseAmount;
+
+        String releaseAmtStr        = String.format("%.2f", releaseAmount);
+        String releaseAmtWordsEn    = EnglishNumberUtil.convertToWords(Math.round(releaseAmount));
+        String previousAmtStr       = String.format("%.2f", previousAmount);
+        String previousAmtWordsEn   = EnglishNumberUtil.convertToWords(Math.round(previousAmount));
+        String cumulativeAmtStr     = String.format("%.2f", cumulativeAmt);
+        String cumulativeAmtWordsEn = EnglishNumberUtil.convertToWords(Math.round(cumulativeAmt));
+
+        String armEnds = d.getArmEndsCount() != null ? d.getArmEndsCount() : "120";
+        String armUnitAddress = d.getArmUnitAddress() != null ? d.getArmUnitAddress()
+                : (d.getDistrictName() != null ? d.getDistrictName() : "");
+
+        boolean hasVendor2 = d.getVendor2Name() != null && !d.getVendor2Name().isEmpty();
+        String vendor1Name    = d.getVendor1Name()    != null ? d.getVendor1Name()    : "";
+        String vendor1Address = d.getVendor1Address() != null ? d.getVendor1Address() : "";
+        String vendorNamesJoined = hasVendor2 ? vendor1Name + " and " + d.getVendor2Name() : vendor1Name;
+
+        // cc copy-to: designation.name (English) + designation_name_in_english_for_sanction_order
+        String cc2Name  = d.getCc2DesignationEn()      != null ? d.getCc2DesignationEn()      : "";
+        String cc3Name  = d.getCc3DesignationEn()      != null ? d.getCc3DesignationEn()      : "";
+        String cc4Name  = d.getCc4DesignationEn()      != null ? d.getCc4DesignationEn()      : "";
+        String cc2Sanct = d.getCc2DesignationEnSanct() != null ? d.getCc2DesignationEnSanct() : "";
+        String cc3Sanct = d.getCc3DesignationEnSanct() != null ? d.getCc3DesignationEnSanct() : "";
+        String cc4Sanct = d.getCc4DesignationEnSanct() != null ? d.getCc4DesignationEnSanct() : "";
+        String cc2 = cc2Name + (!cc2Sanct.isEmpty() ? (cc2Name.isEmpty() ? "" : ", ") + cc2Sanct : "");
+        String cc3 = cc3Name + (!cc3Sanct.isEmpty() ? (cc3Name.isEmpty() ? "" : ", ") + cc3Sanct : "");
+        String cc4 = cc4Name + (!cc4Sanct.isEmpty() ? (cc4Name.isEmpty() ? "" : ", ") + cc4Sanct : "");
+
+        String modifiedByDesig = d.getModifiedByDesignationNameEn() != null ? d.getModifiedByDesignationNameEn() : "";
+
+        resp.setLogurl("/reports/Seal_of_Karnataka.PNG");
+
+        // header = No. + E-number (left side)
+        resp.setHeader("No: " + d.getSanctionOrderNumber() + "\n" +
+                "(E-" + (d.getEOfficeFileNo() != null ? d.getEOfficeFileNo() : "") + ")");
+
+        // header1 = modified_by designation + Bengaluru date (right side)
+        resp.setHeader1(modifiedByDesig + "\nBengaluru, dated: " + generatedDate);
+
+        // header2 = To: ESCROW bank
+        resp.setHeader2("To,\n" +
+                (d.getEscrowBankManagerName() != null ? d.getEscrowBankManagerName() : "") + "\n" +
+                (d.getEscrowBankName()        != null ? d.getEscrowBankName()        : "") + "\n" +
+                (d.getEscrowBankAddress()     != null ? d.getEscrowBankAddress()     : ""));
+
+        // header3 = Sub:
+        resp.setHeader3("Permission for payment of Rs. " + releaseAmtStr +
+                " in favour of " + vendor1Name + (!vendor1Address.isEmpty() ? ", " + vendor1Address : "") +
+                " – manufacturer of Automatic Reeling Machinery (ARM) – from ESCROW A/c No." +
+                d.getEscrowAccountNumber() + " reg.");
+
+        // header4 = Ref: (Ref 1 = advance payment date = escrow bank letter date, Ref 2 = CSTRI letter)
+        resp.setHeader4("1.  This office letter dated " + escrowBankLetterDate + "\n" +
+                "2.  Letter of CSTRI, CSB No. " + cstriLetterNo + ", dated: " + cstriLetterDate);
+
+        // header5 = Body para 1 (previous advance release)
+        resp.setHeader5("            With   reference   to   the   above   subject   and   this   office   letter   dated   " + escrowBankLetterDate +
+                "   out   of   Rs." + String.format("%.2f", unitCostVal) +
+                "   frozen   in   ESCROW A/c No." + d.getEscrowAccountNumber() +
+                "   of   the   beneficiary   " + d.getReelerName() +
+                ",   Proprietor   M/s. /" + d.getArmUnitName() + "   " + armUnitAddress +
+                ",   a   sum   of   Rs." + previousAmtStr +
+                "   (Rupees   " + previousAmtWordsEn +
+                "   only)   had   earlier   been   approved   for   release   (Ref. 1)   towards   procurement   of" +
+                "   Indigenous   Automatic   Reeling   Machinery   (IARM)   package.");
+
+        // header6 = Body para 2 (CSTRI certification + current release sanction)
+        resp.setHeader6("            The   Director,   CSTRI,   CSB,   Bengaluru   in   his   letter   dated:   " + cstriLetterDate +
+                "   (Ref. 2)   has   certified   the   physical   verification   of   the   IARM   supplied   by   " + vendorNamesJoined +
+                ".   Accordingly,   and   in   line   with   the   scheme   guidelines,   sanction   is   hereby   accorded" +
+                "   for   release   of   Rs.   " + releaseAmtStr +
+                "   (Rupees   " + releaseAmtWordsEn +
+                "   only),   being   " + (int) releasePct +
+                "%   of   the   approved   unit   cost   /   invoice   value   (whichever   is   less),   directly   to   " +
+                vendor1Name + (!vendor1Address.isEmpty() ? ",   " + vendor1Address : "") +
+                "   towards   supply   of   Indigenous   Automatic   Reeling   Machinery   items   (Annexure   enclosed).");
+
+        // Vendor 1 table row
+        resp.setHeader7(vendor1Name);
+        resp.setHeader8((d.getVendor1BankName()    != null ? d.getVendor1BankName()    : "") + "\n" +
+                        (d.getVendor1BankAddress() != null ? d.getVendor1BankAddress() : ""));
+        resp.setHeader9(d.getVendor1AccountNo() != null ? d.getVendor1AccountNo() : "");
+        resp.setHeader10(d.getVendor1MicrCode() != null ? "MICR " + d.getVendor1MicrCode() : "");
+        resp.setHeader11(d.getVendor1ReleaseAmount() != null
+                ? String.format("%.2f", d.getVendor1ReleaseAmount()) : releaseAmtStr);
+
+        // Vendor 2 table row (conditional)
+        if (hasVendor2) {
+            resp.setHeader14(d.getVendor2Name());
+            resp.setHeader15((d.getVendor2BankName()    != null ? d.getVendor2BankName()    : "") + "\n" +
+                             (d.getVendor2BankAddress() != null ? d.getVendor2BankAddress() : ""));
+            resp.setHeader16(d.getVendor2AccountNo() != null ? d.getVendor2AccountNo() : "");
+            resp.setHeader17(d.getVendor2MicrCode() != null ? "MICR " + d.getVendor2MicrCode() : "");
+            resp.setHeader18(d.getVendor2ReleaseAmount() != null
+                    ? String.format("%.2f", d.getVendor2ReleaseAmount()) : "");
+        }
+
+        // Total row + amount in English words
+        resp.setHeader19(releaseAmtStr);
+        resp.setHeader21("Rupees " + releaseAmtWordsEn + " only");
+
+        // header20 = Post-table text with cumulative amounts in English words
+        resp.setHeader20("With the earlier release of Rs." + previousAmtStr +
+                " (vide Ref. 1), the cumulative release now totals Rs." + cumulativeAmtStr +
+                " (Rupees " + cumulativeAmtWordsEn + " only) from the said ESCROW account.\n\n" +
+                "After making the present payment of Rs. " + releaseAmtStr +
+                ", you are requested to kindly furnish a detailed statement of the said ESCROW" +
+                " account to this office for record purposes.\n\nThanking you,");
+
+        // farmerFirstName = Signature (modified_by English designation name)
+        resp.setFarmerFirstName(modifiedByDesig);
+
+        // header22 = Office copy To: (farmer's bank)
+        resp.setHeader22("To,\nTo,\n" +
+                "The Senior Manager\n" +
+                (d.getFarmerBankName() != null ? d.getFarmerBankName() : "") + "\n" +
+                (d.getDistrictName()   != null ? d.getDistrictName() + " Branch" : "") + "\n" +
+                (d.getDistrictName()   != null ? d.getDistrictName() : ""));
+
+        // header13 = Copy to (cc2/cc3/cc4 from workflow step designations, vendor, reeler)
+        resp.setHeader13("Copy to:\n" +
+                "1. The Member Secretary, CSB, Bengaluru\n" +
+                "2. The Director, CSTRI, CSB, Bengaluru\n" +
+                "3. " + cc2 + "\n" +
+                "4. " + cc3 + "\n" +
+                "5. " + cc4 + "\n" +
+                "6. " + vendor1Name + (!vendor1Address.isEmpty() ? ", " + vendor1Address : "") + "\n" +
+                "7. " + d.getReelerName() + ", Proprietor M/s. /" + d.getArmUnitName() + " " + armUnitAddress + " for necessary action.");
+
+        list.add(resp);
+        return new JRBeanCollectionDataSource(list);
     }
 
+    // Manual body for the Final Release letter — same layout as
+    // getDataSourceForARMFirstRelease / getDataSourceForARMAdvancePayment, extended with
+    // a 2-vendor payment table and the CSTRI Post Installation Inspection reference.
     private JRDataSource getDataSourceForARMFinalRelease(SanctionOrderPrintRequest requestDto)
             throws JsonProcessingException {
 
@@ -19809,17 +20010,6 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
             throw new RuntimeException("No data found for ARM Final Release");
         }
         com.sericulture.model.ARMSanctionResponse d = apiResponse.getContent().get(0);
-        return buildArmReleaseDataSource(d, 10, "Final Payment", "After complete installation of the machinery/equipment");
-    }
-
-    // Shared body for First Release / Final Release letters — same layout as
-    // getDataSourceForARMAdvancePayment, extended with a 2-vendor payment table
-    // and the CSTRI Post Installation Inspection reference.
-    private JRDataSource buildArmReleaseDataSource(
-            com.sericulture.model.ARMSanctionResponse d,
-            int releasePercentageFallback,
-            String installmentLabel,
-            String installmentTrigger) {
 
         List<SanctionOrderResponse> list = new LinkedList<>();
         SanctionOrderResponse resp = new SanctionOrderResponse();
@@ -19832,7 +20022,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String armEnds              = d.getArmEndsCount() != null ? d.getArmEndsCount() : "120";
 
         float unitCostVal   = d.getUnitCost() == null ? 0f : d.getUnitCost();
-        float releasePct    = d.getReleasePercentage() == null ? releasePercentageFallback : d.getReleasePercentage();
+        float releasePct    = d.getReleasePercentage() == null ? 10 : d.getReleasePercentage();
         float releaseAmount = d.getReleaseAmount() == null ? (unitCostVal * releasePct / 100f) : d.getReleaseAmount();
         float cumulativeAmt = d.getCumulativeReleasedAmount() == null ? releaseAmount : d.getCumulativeReleasedAmount();
 
@@ -19849,9 +20039,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String previousAmtWords  = KannadaNumberUtil.convertNumberToKannadaWords(Math.round(previousAmount));
 
         boolean hasVendor2 = d.getVendor2Name() != null && !d.getVendor2Name().isEmpty();
-        String vendorNamesJoined = hasVendor2
-                ? d.getVendor1Name() + " and " + d.getVendor2Name()
-                : (d.getVendor1Name() != null ? d.getVendor1Name() : "");
+
+        String vendor1FullName = (d.getVendor1Name() != null ? d.getVendor1Name() : "") +
+                (d.getVendor1Address() != null && !d.getVendor1Address().isEmpty() ? ", " + d.getVendor1Address() : "");
+        String vendor2FullName = hasVendor2
+                ? ((d.getVendor2Name() != null ? d.getVendor2Name() : "") +
+                   (d.getVendor2Address() != null && !d.getVendor2Address().isEmpty() ? ", " + d.getVendor2Address() : ""))
+                : "";
 
         resp.setLogurl("/reports/Seal_of_Karnataka.PNG");
 
@@ -19865,65 +20059,99 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
         resp.setHeader2("To,\n" +
                 "The Senior Manager\n" +
-                d.getEscrowBankName() + "\n" +
-                d.getEscrowBankAddress());
+                (d.getEscrowBankName() != null ? d.getEscrowBankName() : "") + "\n" +
+                (d.getEscrowBankAddress() != null ? d.getEscrowBankAddress() : ""));
 
-        resp.setHeader3("Permission for payment of Rs. " + releaseAmtStr + " in favour of " + vendorNamesJoined +
-                " – manufacturer of Automatic Reeling Machinery (ARM) – from ESCROW A/c No." + d.getEscrowAccountNumber() + " reg.");
+        // Sub: generic "manufacturers" per reference — no vendor names listed here
+        resp.setHeader3("Permission for payment of Rs. " + releaseAmtStr +
+                " in favour of Automatic Reeling Machinery (ARM) manufacturers from the ESCROW A/c No." +
+                d.getEscrowAccountNumber() + " reg.");
 
-        resp.setHeader4("1. This office letter dated " + escrowBankLetterDate + "\n" +
-                "2. Letter of CSTRI, CSB No. " + cstriLetterNo + ", dated:" + cstriLetterDate);
+        // Ref: 3 items per reference — previous office letters, vendor invoice letter, CSTRI letter
+        String vendor1InvDate = d.getVendor1InvoiceDate() != null ? d.getVendor1InvoiceDate() : "";
+        resp.setHeader4("1. This office letter dated: " + escrowBankLetterDate + "\n" +
+                "2. Letter of " + vendor1FullName + " Dated: " + vendor1InvDate + "\n" +
+                "3. Letter of CSTRI, CSB No. " + cstriLetterNo + ", Date:" + cstriLetterDate);
 
-        resp.setHeader5("With reference to the above subject and this office letter dated " + escrowBankLetterDate +
-                ", out of Rs. " + String.format("%.2f", unitCostVal) + " frozen in ESCROW A/c No." + d.getEscrowAccountNumber() +
-                " of the beneficiary " + d.getReelerName() + ", Proprietor M/s. /" + d.getArmUnitName() + " " + d.getDistrictName() +
-                ", a sum of Rs." + previousAmtStr + " (Rupees " + previousAmtWords +
-                " only) had earlier been approved for release (Ref. 1) towards procurement of Indigenous Automatic Reeling Machinery (IARM) package.");
+        // Para 1: total approved amount = unit cost; wording per reference
+        String unitCostWords = KannadaNumberUtil.convertNumberToKannadaWords(Math.round(unitCostVal));
+        resp.setHeader5("With   reference   to   the   subject   and   the   permission   given   from   this   office   in   the   letters   dated:   " +
+                escrowBankLetterDate + ",   out   of   Rs." + String.format("%.2f", unitCostVal) +
+                "   frozen   in   ESCROW A/c No.   " + d.getEscrowAccountNumber() +
+                "   of   the   beneficiary   " + d.getReelerName() + ",   Proprietor   M/s. /" + d.getArmUnitName() + "   " + d.getDistrictName() +
+                ",   a   total   of   Rs.   " + String.format("%.2f", unitCostVal) + "   (Rupees   " + unitCostWords +
+                "   only )   had   been   approved   to   be   released   (Ref.1)   towards   the   procurement   of" +
+                "   Indigenous   Automatic   Reeling   Machinery   (IARM)   package   by   the   beneficiary.");
 
-        resp.setHeader6("The Director, CSTRI, CSB, Bengaluru in his letter dated: " + cstriLetterDate + " (Ref. 2) has certified the " +
-                "physical verification of the IARM supplied by " + vendorNamesJoined + ". Accordingly, and in line with the scheme " +
-                "guidelines, sanction is hereby accorded for release of Rs. " + releaseAmtStr + " (Rupees " + releaseAmtWords +
-                " only), being " + (int) releasePct + "% of the approved unit cost / invoice value (whichever is less), directly to " +
-                vendorNamesJoined + " towards supply of Indigenous Automatic Reeling Machinery items (Annexure enclosed).");
+        // Para 2: full CSTRI name, Ref.3, PII report wording, final payment language per reference
+        String vendorTaxInvoiceNames = hasVendor2 ? vendor1FullName + " and " + vendor2FullName : vendor1FullName;
+        String toVendorsForMachinery = hasVendor2
+                ? vendor1FullName + ". and " + vendor2FullName
+                : vendor1FullName;
+        resp.setHeader6("The   Director,   Central   Silk   Technological   Research   Institute   (CSTRI),   Central   Silk   Board   (CSB)," +
+                "   Bengaluru   in   the   letter   dated:   " + cstriLetterDate + "   (Ref.3)   has   submitted   the   Post   Installation" +
+                "   Inspection   (PII)   report   of   IARM   as   per   the   Tax   Invoices   of   " + vendorTaxInvoiceNames +
+                ".   Accordingly,   and   as   per   the   guidelines   of   scheme   implementation,   the   Department   of   Sericulture" +
+                "   Government   of   Karnataka   is   here   with   giving   permission   to   make   a   final   payment   of   Rs." + releaseAmtStr +
+                "   (Rupees   " + releaseAmtWords + "   only)   which   is,   " + (int) releasePct +
+                "%   of   the   approved   unit   cost/Invoice   Price   (whichever   is   less)   of   the   machinery   to   " +
+                toVendorsForMachinery + "   for   the   supply   of   Indigenous   Automatic   Reeling   Machinery   items   (Annexure).");
 
         // Vendor 1 payment row
         resp.setHeader7(d.getVendor1Name());
-        resp.setHeader8(d.getVendor1BankName() + "\n" + d.getVendor1BankAddress());
-        resp.setHeader9(d.getVendor1AccountNo());
-        resp.setHeader10(d.getVendor1MicrCode() != null ? "MICR " + d.getVendor1MicrCode() : "");
+        resp.setHeader8((d.getVendor1BankName() != null ? d.getVendor1BankName() : "") + "\n" +
+                        (d.getVendor1BankAddress() != null ? d.getVendor1BankAddress() : ""));
+        resp.setHeader9(d.getVendor1AccountNo() != null ? d.getVendor1AccountNo() : "");
+        resp.setHeader10(d.getVendor1MicrCode() != null ? d.getVendor1MicrCode() : "");
         resp.setHeader11(d.getVendor1ReleaseAmount() != null ? String.format("%.2f", d.getVendor1ReleaseAmount()) : releaseAmtStr);
 
         // Vendor 2 payment row (only present when a second manufacturer supplied part of the package)
         if (hasVendor2) {
             resp.setHeader14(d.getVendor2Name());
-            resp.setHeader15(d.getVendor2BankName() + "\n" + d.getVendor2BankAddress());
-            resp.setHeader16(d.getVendor2AccountNo());
-            resp.setHeader17(d.getVendor2MicrCode() != null ? "MICR " + d.getVendor2MicrCode() : "");
+            resp.setHeader15((d.getVendor2BankName() != null ? d.getVendor2BankName() : "") + "\n" +
+                             (d.getVendor2BankAddress() != null ? d.getVendor2BankAddress() : ""));
+            resp.setHeader16(d.getVendor2AccountNo() != null ? d.getVendor2AccountNo() : "");
+            resp.setHeader17(d.getVendor2MicrCode() != null ? d.getVendor2MicrCode() : "");
             resp.setHeader18(d.getVendor2ReleaseAmount() != null ? String.format("%.2f", d.getVendor2ReleaseAmount()) : "");
         }
 
         resp.setHeader19(releaseAmtStr);
-        resp.setHeader21("Rupees " + releaseAmtWords + " only");
+        resp.setHeader21("Rupees " + releaseAmtWords + " only.");
         resp.setHeader22("To,\n" +
                 "The Senior Manager\n" +
                 (d.getFarmerBankName() != null ? d.getFarmerBankName() : "") + "\n" +
                 (d.getDistrictName() != null ? d.getDistrictName() : "") + " Branch\n" +
                 (d.getDistrictName() != null ? d.getDistrictName() : ""));
-        resp.setHeader20("With the earlier release of Rs." + previousAmtStr + " (vide Ref. 1), the cumulative release now totals Rs." +
-                cumulativeAmtStr + " (Rupees " + cumulativeAmtWords + " only) from the said ESCROW account.\n\n" +
-                "After making the present payment of Rs. " + releaseAmtStr +
-                ", you are requested to kindly furnish a detailed statement of the said ESCROW account to this office for record purposes.\n\nThanking you,");
+
+        // Post-table paragraph per reference: earlier permission amount, cumulative total, ESCROW details
+        resp.setHeader20("With the earlier permission of Rs. " + previousAmtStr +
+                " in the letters dated: " + escrowBankLetterDate +
+                ", a total of Rs." + cumulativeAmtStr + " (Rupees " + cumulativeAmtWords +
+                " only) has been approved to be released from the ESCROW A/c No. " + d.getEscrowAccountNumber() +
+                " of the beneficiary " + d.getReelerName() + ", Proprietor M/s. /" + d.getArmUnitName() + " " + d.getDistrictName() +
+                ". Once the payment of Rs. " + releaseAmtStr +
+                " is made, it is requested to send a statement of said ESCROW account to the undersigned for record purpose." +
+                "\n\nThanking you,");
 
         resp.setFarmerFirstName("Commissioner for Sericulture Development\n& Director of Sericulture");
 
-        resp.setHeader13("Copy to:\n" +
+        // Copy to: vendors listed separately (not joined); reeler gets item 7 or 8
+        StringBuilder copyTo = new StringBuilder("Copy to:\n" +
                 "1. The Member Secretary, CSB, Bengaluru\n" +
                 "2. The Director, CSTRI, CSB, Bengaluru\n" +
                 "3. The Joint Director of Sericulture, Mysore Division, Mysore\n" +
                 "4. The Deputy Director of Sericulture, Govt. Cocoon Market, " + d.getLoggedinUserDistrictName() + "\n" +
                 "5. The Assistant Director of Sericulture, PCT, " + d.getLoggedinUserDistrictName() + "\n" +
-                "6. " + vendorNamesJoined + "\n" +
-                "7. " + d.getReelerName() + ", Proprietor M/s. /" + d.getArmUnitName() + " " + d.getDistrictName() + " for necessary action.");
+                "6. " + vendor1FullName + "\n");
+        if (hasVendor2) {
+            copyTo.append("7. ").append(vendor2FullName).append("\n");
+            copyTo.append("8. ").append(d.getReelerName()).append(", Proprietor M/s. /")
+                  .append(d.getArmUnitName()).append(" ").append(d.getDistrictName()).append(" for necessary action.");
+        } else {
+            copyTo.append("7. ").append(d.getReelerName()).append(", Proprietor M/s. /")
+                  .append(d.getArmUnitName()).append(" ").append(d.getDistrictName()).append(" for necessary action.");
+        }
+        resp.setHeader13(copyTo.toString());
 
         list.add(resp);
         return new JRBeanCollectionDataSource(list);
@@ -21924,7 +22152,32 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         }
     }
 
+    public static class EnglishNumberUtil {
+        private static final String[] ones = {
+            "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+            "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+            "Seventeen", "Eighteen", "Nineteen"
+        };
+        private static final String[] tens = {
+            "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+        };
 
+        public static String convertToWords(long n) {
+            if (n == 0) return "Zero";
+            if (n < 0) return "Minus " + convertToWords(-n);
+            StringBuilder sb = new StringBuilder();
+            boolean hasHigher = false;
+            if (n >= 10000000) { sb.append(convertToWords(n / 10000000)).append(" Crore "); n %= 10000000; hasHigher = true; }
+            if (n >= 100000)   { sb.append(convertToWords(n / 100000)).append(" Lakhs ");   n %= 100000;   hasHigher = true; }
+            if (n >= 1000)     { sb.append(convertToWords(n / 1000)).append(" Thousand "); n %= 1000;     hasHigher = true; }
+            if (n > 0 && hasHigher) sb.append("& ");
+            if (n >= 100)      { sb.append(ones[(int)(n / 100)]).append(" Hundred ");      n %= 100;      }
+            if (n >= 20)       { sb.append(tens[(int)(n / 10)]);
+                                 if (n % 10 != 0) sb.append(" ").append(ones[(int)(n % 10)]); }
+            else if (n > 0)    { sb.append(ones[(int)n]); }
+            return sb.toString().trim().replaceAll("\\s+", " ");
+        }
+    }
 
 
 
@@ -23498,7 +23751,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -23563,7 +23816,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24051,7 +24304,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                 apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                 "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                 +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                 +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                 +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24116,7 +24369,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24599,7 +24852,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24664,7 +24917,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -25160,7 +25413,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -25230,7 +25483,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -25963,7 +26216,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    "+apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder()+",\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -26031,7 +26284,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -26519,7 +26772,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                         apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂ ಕು \n" +
                         apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
                     +"ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                 +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                 +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -26938,7 +27191,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                 apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                 "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                 +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                 +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                 +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
