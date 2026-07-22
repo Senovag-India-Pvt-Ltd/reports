@@ -500,6 +500,7 @@ private String totalIncentiveAmountInWords;
     private String escrowBankLetterDate;
     // ARM Land details (from arm_land_details table)
     private String armLandType;
+    private String armLandTypeTag;
     private String armSurveyNo;
     private String armAssessmentNo;
     private String armLandDistrictKan;

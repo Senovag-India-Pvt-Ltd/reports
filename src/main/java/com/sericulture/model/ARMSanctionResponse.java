@@ -90,6 +90,8 @@ public class ARMSanctionResponse {
     private String loggedinUserTscName;
     private Float  centralSanctionAmount;
     private Float  stateSanctionAmount;
+    private Float  centralSharePercentage;
+    private Float  stateSharePercentage;
 
     // ESCROW Bank details
     private String escrowBankManagerName;
@@ -115,7 +117,11 @@ public class ARMSanctionResponse {
     // ARM unit info
     private String armEndsCount;
     private String armUnitName;
+    private String armUnitAddress;
     private String reelerAadhaar;
+    private Float  advancePercentage;
+    private String sanctionOrderGeneratedDate;
+    private String modifiedByDesignationNameEn; // designation.name (English) of modified_by user
 
     // ARM Selection Letter admin fields
     private String dateOfGovtApproval;
@@ -136,6 +142,12 @@ public class ARMSanctionResponse {
     private String cc2DesignationKanSanct;  // designation_name_in_kannada_for_sanction_order for rn=2
     private String cc3DesignationKanSanct;  // designation_name_in_kannada_for_sanction_order for rn=3
     private String cc4DesignationKanSanct;  // designation_name_in_kannada_for_sanction_order for rn=4
+    private String cc2DesignationEnSanct;   // designation_name_in_english_for_sanction_order for JD step user
+    private String cc3DesignationEnSanct;   // designation_name_in_english_for_sanction_order for DD step user
+    private String cc4DesignationEnSanct;   // designation_name_in_english_for_sanction_order for ADS step user
+    private String cc2DesignationEn;        // designation.name (English) for JD step user
+    private String cc3DesignationEn;        // designation.name (English) for DD step user
+    private String cc4DesignationEn;        // designation.name (English) for ADS step user
 
     // Vendor 1 (from arm_proforma_invoice_vendor, vendor_no = 1)
     private String vendor1Name;

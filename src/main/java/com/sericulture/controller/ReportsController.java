@@ -13586,7 +13586,9 @@ public class ReportsController {
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು ,     "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
             apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -13642,7 +13644,9 @@ public class ReportsController {
             response.setHeader9("ಇವರಿಗೆ,\n"+
                             apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"\n"+
-                    "ಪ್ರ ತಿಯನ್ನು     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
+                    "ಪ್ರ ತಿಯನ್ನು ;\n"+
+                    "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                    "   2. ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -13927,7 +13931,9 @@ public class ReportsController {
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು ,     "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -13982,7 +13988,9 @@ public class ReportsController {
             response.setHeader9("ಇವರಿಗೆ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"\n"+
-                    "ಪ್ರ ತಿಯನ್ನು     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
+                    "ಪ್ರ ತಿಯನ್ನು ;\n"+
+                    "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                    "   2. ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -14366,7 +14374,9 @@ public class ReportsController {
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು ,     "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -14419,7 +14429,9 @@ public class ReportsController {
             response.setHeader9("ಇವರಿಗೆ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"\n"+
-                    "ಪ್ರ ತಿಯನ್ನು     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
+                    "ಪ್ರ ತಿಯನ್ನು ;\n"+
+                    "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                    "   2. ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -14719,8 +14731,9 @@ public class ReportsController {
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
                             + "ಪ್ರ ತಿಯನ್ನು    \n"+
-                            "     1.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
-                            "     2.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +",   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            "     1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                            "     2.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
+                            "     3.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +",   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
                     apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder());
@@ -14775,8 +14788,9 @@ public class ReportsController {
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +",\n" +
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,  \n" +
                     "ಪ್ರ ತಿಯನ್ನು  ; \n" +
-                    "   1.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
-                    "   2.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
+                    "   1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n" +
+                    "   2.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
+                    "   3.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
 
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
@@ -15100,8 +15114,9 @@ public class ReportsController {
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
                             + "ಪ್ರ ತಿಯನ್ನು    \n"+
-                            "     1.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
-                            "     2.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +",   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder());
+                            "     1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                            "     2.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ರವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ .\n"+
+                            "     3.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +",   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder());
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
                     apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder());
@@ -15155,8 +15170,9 @@ public class ReportsController {
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +",\n" +
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,  \n" +
                     "ಪ್ರ ತಿಯನ್ನು  ; \n" +
-                    "   1.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
-                    "   2.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
+                    "   1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n" +
+                    "   2.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
+                    "   3.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
                     apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder());
@@ -15474,7 +15490,9 @@ public class ReportsController {
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು ,     "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+apiResponse.getContent().get(0).getHierarchyDesignation() +",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -15524,7 +15542,9 @@ public class ReportsController {
             response.setHeader9("ಇವರಿಗೆ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,\n"+
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"\n"+
-                    "ಪ್ರ ತಿಯನ್ನು     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
+                    "ಪ್ರ ತಿಯನ್ನು ;\n"+
+                    "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                    "   2. ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationNameInKannada() + "\n  " +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
@@ -16091,7 +16111,8 @@ public class ReportsController {
 
         response.setHeader9("ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ಮುಂದಿನ    ಕ್ರ ಮಕ್ಕಾ ಗಿ\n" +
                 "ಪ್ರತಿಯನ್ನು   \n" +
-                "      "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"    ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
+                "     1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n" +
+                "     2.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+ apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"    ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
     }
     else
     {
@@ -16145,7 +16166,8 @@ public class ReportsController {
                         apiResponse.getContent().get(0).getDrawingOfficerDesignation()+",\n"+
                 apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n"+
                 "ಪ್ರ ತಿಯನ್ನು \n" +
-                "     ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ     ಶಾಖೆಗೆ    ಮುಂದಿನ  ಕ್ರ ಮಕ್ಕಾ ಗಿ ");
+                "     1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n" +
+                "     2.  ಈ    ಕಚೇರಿಯ    ಲೆಕ್ಕ     ಶಾಖೆಗೆ    ಮುಂದಿನ  ಕ್ರ ಮಕ್ಕಾ ಗಿ ");
     }
 
 
@@ -16279,7 +16301,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                         apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n" +
                 apiResponse.getContent().get(0).getDistrictNameInKannada()+"    ಜಿಲ್ಲೆ .\n\n"
                 +"ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಉಪ  ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳು,\n"
+                +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
                 +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                 +"   3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
                 +"   4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -16352,7 +16374,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n" +
                     apiResponse.getContent().get(0).getDistrictNameInKannada()+"    ಜಿಲ್ಲೆ .\n\n"
                     +"ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಉಪ  ಖಜಾನೆ     ಅಧಿಕಾರಿಗಳು,\n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"     ಇವರಿಗೆ    ಎಲ್ಲಾ    ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ    ಮುಂದಿನ    ಅಗತ್ಯ ಕ್ರ  ಮಕ್ಕಾ ಗಿ     ಕಳುಹಿಸಿದೆ \n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
 
@@ -17052,11 +17074,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                             apiResponse.getContent().get(0).getDrawingOfficerDesignation()+",\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n\n" +
                     "ಪ್ರತಿಯನ್ನು   ಮಾಹಿತಿ/ಸೂಕ್ತ   ಕ್ರ ಮಕ್ಕಾ ಗಿ\n"
-                    +"   1. "+apiResponse.getContent().get(0).getDrawingOfficerDesignation() +" ,    "+apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n"
-                    +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   3. ತಾಲ್ಲೂ ಕು     ಖಜಾನೆ ,    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ " ಜಿಲ್ಲೆ  \n"
-                    +"   4. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    ಯೋಜನಾ    ವಿಭಾಗ ,    ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯ ,   ಬೆಂಗಳೂರು \n"
-                    +"   5. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getFarmerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getFarmerFatherName() +" ,   " + apiResponse.getContent().get(0).getVillageNameInKannada()+" ,   "+apiResponse.getContent().get(0).getTalukNameInKannada()+" , "+apiResponse.getContent().get(0).getDistrictNameInKannada()+"  ಜಿಲ್ಲೆ   \n"+
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                    +"   2. "+apiResponse.getContent().get(0).getDrawingOfficerDesignation() +" ,    "+apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder()+"\n"
+                    +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
+                    +"   4. ತಾಲ್ಲೂ ಕು     ಖಜಾನೆ ,    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು ,   "+apiResponse.getContent().get(0).getDistrictNameInKannada()+ " ಜಿಲ್ಲೆ  \n"
+                    +"   5. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    ಯೋಜನಾ    ವಿಭಾಗ ,    ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯ ,   ಬೆಂಗಳೂರು \n"
+                    +"   6. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getFarmerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getFarmerFatherName() +" ,   " + apiResponse.getContent().get(0).getVillageNameInKannada()+" ,   "+apiResponse.getContent().get(0).getTalukNameInKannada()+" , "+apiResponse.getContent().get(0).getDistrictNameInKannada()+"  ಜಿಲ್ಲೆ   \n"+
                     "       ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
 
 
@@ -17248,10 +17271,11 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
             response.setHeader9("ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ     ಶಾಖೆಗೆ\n"+
                     "ಪ್ರ ತಿಯನ್ನು  ;\n"
-                    +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"\n"
-                    +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   3. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
-                    +"   4. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                    +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"\n"
+                    +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
+                    +"   4. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
+                    +"   5. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
         }
         else
         {
@@ -17324,9 +17348,10 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n\n" +
                     "ಪ್ರ ತಿಯನ್ನು  ;\n"
-                    +"   1. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
-                    +"   2. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
-                    +"   3. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                    +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
+                    +"   3. ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +" ,   ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"   " + apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada()+"    ತಾಲ್ಲೂ ಕು \n"
+                    +"   4. ಈ    ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ    ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
 
         }
 
@@ -19731,7 +19756,10 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
         float unitCostVal = d.getUnitCost() == null ? 0f : d.getUnitCost();
         float advancePct  = d.getAdvancePercentage() == null ? 0f : d.getAdvancePercentage();
-        float advanceAmt  = unitCostVal * (advancePct / 100f);
+        // Use releaseBaseAmount = min(guidelineTotal, invoiceTotal); fall back to unitCost if not yet available
+        float releaseBase = (d.getReleaseBaseAmount() != null && d.getReleaseBaseAmount() > 0)
+                ? d.getReleaseBaseAmount() : unitCostVal;
+        float advanceAmt  = releaseBase * (advancePct / 100f);
         String advanceAmtStr   = String.format("%.2f", advanceAmt);
         String advanceAmtWordsEn = EnglishNumberUtil.convertToWords(Math.round(advanceAmt));
         String armEnds = d.getArmEndsCount() != null ? d.getArmEndsCount() : "120";
@@ -19787,9 +19815,15 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "  for    the   supply   of   IARM   package   of " + armEnds + " ends.");
 
         // header6 = Permission paragraph (English words for amount)
+        // Use "whichever is less" phrasing only when invoice total is the binding cap
+        boolean invoiceIsLess = d.getTotalInvoiceTotal() != null && d.getTotalInvoiceTotal() > 0
+                && d.getTotalInvoiceTotal() < unitCostVal;
+        String baseLabel = invoiceIsLess
+                ? "approved   unit   cost   /   invoice   value   (whichever   is   less)"
+                : "approved   unit   cost";
         resp.setHeader6("            As   per   the   agreement   conditions   and  guidelines   of   the   scheme   implementation ,   " +
                 "the   Department   of   Sericulture ,   Government  of   Karnataka   is   here   with   permitting   to   make   an   advance   payment   of   " +
-                (int) advancePct + " %   of   the    approved   unit   cost   Rs." + String.format("%.2f", unitCostVal) +
+                (int) advancePct + " %   of   the   " + baseLabel + "   Rs." + String.format("%.2f", releaseBase) +
                 "    of    the   machinery   (Annexure) i.e.   Rs." + advanceAmtStr + "   (Rupees " + advanceAmtWordsEn + " Only)    " +
                 "  to " + vendor1Name + "   an   empanelled   IARM   manufacturer   for   the   supply   of   Indigenous   Automatic   " +
                 "  Reeling    Machinery   package   of   specified   quality   standards.   The   Bank   account   details   as   in   the    "+
@@ -19857,13 +19891,15 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String cstriLetterDate      = toSlash.apply(d.getCstriLetterDate());
         String cstriLetterNo        = d.getCstriLetterNo() != null ? d.getCstriLetterNo() : "";
 
-        // Amount calculations from master percentages
+        // Amount calculations — use min(guidelineTotal, invoiceTotal) as the base
         float unitCostVal    = d.getUnitCost() == null ? 0f : d.getUnitCost();
         float advancePct     = d.getAdvancePercentage() == null ? 25f : d.getAdvancePercentage();
         float releasePct     = d.getReleasePercentage() == null ? 65f : d.getReleasePercentage();
-        float releaseAmount  = d.getReleaseAmount() == null ? (unitCostVal * releasePct / 100f) : d.getReleaseAmount();
+        float firstReleaseBase = (d.getReleaseBaseAmount() != null && d.getReleaseBaseAmount() > 0)
+                ? d.getReleaseBaseAmount() : unitCostVal;
+        float releaseAmount  = d.getReleaseAmount() == null ? (firstReleaseBase * releasePct / 100f) : d.getReleaseAmount();
         float previousAmount = d.getCumulativeReleasedAmount() == null
-                ? (unitCostVal * advancePct / 100f)
+                ? (firstReleaseBase * advancePct / 100f)
                 : Math.max(0f, d.getCumulativeReleasedAmount() - releaseAmount);
         float cumulativeAmt  = previousAmount + releaseAmount;
 
@@ -20023,7 +20059,10 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
         float unitCostVal   = d.getUnitCost() == null ? 0f : d.getUnitCost();
         float releasePct    = d.getReleasePercentage() == null ? 10 : d.getReleasePercentage();
-        float releaseAmount = d.getReleaseAmount() == null ? (unitCostVal * releasePct / 100f) : d.getReleaseAmount();
+        // Use min(guidelineTotal, invoiceTotal) as the base for final release amount
+        float finalReleaseBase = (d.getReleaseBaseAmount() != null && d.getReleaseBaseAmount() > 0)
+                ? d.getReleaseBaseAmount() : unitCostVal;
+        float releaseAmount = d.getReleaseAmount() == null ? (finalReleaseBase * releasePct / 100f) : d.getReleaseAmount();
         float cumulativeAmt = d.getCumulativeReleasedAmount() == null ? releaseAmount : d.getCumulativeReleasedAmount();
 
         String releaseAmtStr      = String.format("%.2f", releaseAmount);
@@ -20064,7 +20103,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
         // Sub: generic "manufacturers" per reference — no vendor names listed here
         resp.setHeader3("Permission for payment of Rs. " + releaseAmtStr +
-                " in favour of Automatic Reeling Machinery (ARM) manufacturers from the ESCROW A/c No." +
+                " in favour of Automatic Reeling Machinery (ARM) manufacturers from the ESCROW A/c No. " +
                 d.getEscrowAccountNumber() + " reg.");
 
         // Ref: 3 items per reference — previous office letters, vendor invoice letter, CSTRI letter
@@ -20184,14 +20223,21 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         float unitCostValue = apiResponse.getContent().get(0).getUnitCost() == null ? 0f : apiResponse.getContent().get(0).getUnitCost();
         float centralAmt    = apiResponse.getContent().get(0).getCentralSanctionAmount() == null ? 0f : apiResponse.getContent().get(0).getCentralSanctionAmount();
         float stateAmt      = apiResponse.getContent().get(0).getStateSanctionAmount()   == null ? 0f : apiResponse.getContent().get(0).getStateSanctionAmount();
-        float shareInPercentage      = unitCostValue > 0 ? ((centralAmt + stateAmt) / unitCostValue) * 100f : 75f;
+        // Use actual share_in_percentage from sc_application_form split records; fall back to unit-cost derivation if null
+        float centralPctRaw = apiResponse.getContent().get(0).getCentralSharePercentage() != null
+                ? apiResponse.getContent().get(0).getCentralSharePercentage()
+                : (unitCostValue > 0 ? (centralAmt / unitCostValue) * 100f : 50f);
+        float statePctRaw   = apiResponse.getContent().get(0).getStateSharePercentage() != null
+                ? apiResponse.getContent().get(0).getStateSharePercentage()
+                : (unitCostValue > 0 ? (stateAmt   / unitCostValue) * 100f : 25f);
+        float shareInPercentage      = centralPctRaw + statePctRaw;
         float beneficiarySharePercentage = 100f - shareInPercentage;
         float beneficiaryShare  = unitCostValue * (beneficiarySharePercentage / 100f);
         String beneficiaryShareFormatted = String.format("%.2f", beneficiaryShare);
         int beneficiaryShareInt = Math.round(beneficiaryShare);
         String beneficiaryShareWords = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareInt);
-        int centralPctInt = unitCostValue > 0 ? Math.round((centralAmt / unitCostValue) * 100f) : 50;
-        int statePctInt   = unitCostValue > 0 ? Math.round((stateAmt   / unitCostValue) * 100f) : 25;
+        int centralPctInt = Math.round(centralPctRaw);
+        int statePctInt   = Math.round(statePctRaw);
         // arm_calculation stores in rupees; convert to lakhs for display with "ಲಕ್ಷಗಳ" suffix
         String unitCostLakhsDisplay   = String.format("%.2f", unitCostValue / 100000f);
         String centralAmtLakhsDisplay = String.format("%.2f", centralAmt   / 100000f);
@@ -20232,9 +20278,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     + "   ರ   ಅಸೆಸ್ಮೆಂಟ್   " + assessmentNo
                     + "   ರಲ್ಲಿ   ಸ್ವಯಂ   ಚಾಲಿತ   ರೀಲಿಂಗ್   ಘಟಕ   ಸ್ಥಾಪನೆ   ಮಾಡಲು   ಉದ್ದೇಶಿಸಿರುತ್ತಾರೆ.";
         }
+        // Top-right corner tag near the QR code, matching department reference template
+        String armLandTypeTag = isLease ? "ಬಾಡಿಗೆ   ಆಧಾರದ   ಮೇಲೆ" : "ಸ್ವಂತ   ಜಮೀನು";
 
         // ARM Sanction Order fields
         response.setLogurl("/reports/Seal_of_Karnataka.PNG");
+        response.setArmLandTypeTag(armLandTypeTag);
 
         String admGovtDate2 = formatDate(apiResponse.getContent().get(0).getAdmGovtDate(), sdf);
         String createdDate2 = formatDate(apiResponse.getContent().get(0).getCreatedDate());
@@ -20299,9 +20348,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         response.setHeader6("           ಪೀಠಿಕೆಯಲ್ಲಿ   ವಿವರಿಸಿದಂತೆ,   ಕೇಂದ್ರ   ವಲಯ   '" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "'-2 (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   ಯೋಜನೆಯಡಿ   " +
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getReelerName() + "   ,   " + apiResponse.getContent().get(0).getVillageNameInKannada() + "   ,   " + apiResponse.getContent().get(0).getDistrictNameInKannada() + "   ಜಿಲ್ಲೆ   " +
                 "ಇವರಿಗೆ   ದೇಶೀಯ   " + armEnds + "   ಕೊನೆಗಳ   ಸ್ವಯಂಚಾಲಿತ   ರೀಲಿಂಗ್   ಘಟಕ   ಸ್ಥಾಪಿಸಲು   ರೀಲಿಂಗ್   ಯಂತ್ರೋಪಕರಣಗಳ   ಖರೀದಿಗಾಗಿ   ಒಟ್ಟಾರೆ   ಯಂತ್ರೋಪಕರಣದ   ಘಟಕ   ದರ   ರೂ." + unitCostLakhsDisplay + "   ಲಕ್ಷಗಳ   ಶೇ." + (int)shareInPercentage + "   ರ   " +
-                "ರೂ." + schemeAmtLakhsDisplay + "   (ರೂ." + schemeAmountWords + ")   ಲಕ್ಷಗಳ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗಿದೆ.   ಮಂಜೂರು   ಮಾಡಿರುವ   ಸಹಾಯಧನದಲ್ಲಿ   ಕೇಂದ್ರದ   ಪಾಲು   ಶೇ." + centralPctInt + "   ರ   ರೂ." + centralAmtLakhsDisplay + "   (ರೂ." + centralShareWords + ")   ಲಕ್ಷಗಳನ್ನು   ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದ   ಯೋಜನೆ   ವಿಭಾಗದಿಂದ   RTGS   ಮೂಖಾಂತರ   ಮತ್ತು   ರಾಜ್ಯ   ಪಾಲು   ಶೇ." + statePctInt + "   ರ   " +
+                "ರೂ." + schemeAmtLakhsDisplay + "   (ರೂ." + schemeAmountWords + ")   ಲಕ್ಷಗಳ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗಿದೆ.   ಮಂಜೂರು   ಮಾಡಿರುವ   ಸಹಾಯಧನದಲ್ಲಿ   ಕೇಂದ್ರದ   ಪಾಲು   ಶೇ." + centralPctInt + "   ರ   ರೂ." + centralAmtLakhsDisplay + "   (ರೂ." + centralShareWords + ")   ಲಕ್ಷಗಳನ್ನು   ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದ   ಯೋಜನೆ   ವಿಭಾಗದಿಂದ   RTGS   ಮುಖಾಂತರ   ಮತ್ತು   ರಾಜ್ಯ   ಪಾಲು   ಶೇ." + statePctInt + "   ರ   " +
                 "ರೂ." + stateAmtLakhsDisplay + "   (ರೂ." + stateShareWords + ")   ಲಕ್ಷಗಳನ್ನು   ಸಂಬಂಧಪಟ್ಟ   ಕ್ಷೇತ್ರ   ಮಟ್ಟದ   ಹಣ   ಸೆಳೆಯುವ   ಅಧಿಕಾರಿಗಳು   ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆ:   " + apiResponse.getContent().get(0).getScHeadAccountName() + "   (" + apiResponse.getContent().get(0).getDescription() + ")   " +
-                "ಯೋಜನೆ   ಅಡಿಯಲ್ಲಿ   ಖಜಾನೆ-2   ರ   ಮೂಖಾಂತರ   ಪ್ರತ್ಯೇಕವಾಗಿ   ಭರಿಸುವುದು.   ಭರಿಸಿದ   ಸಹಾಯಧನವನ್ನು   ಫಲಾನುಭವಿ   ಹೆಸರಲ್ಲಿನ   ಬ್ಯಾಂಕ್   ESCROW   ಖಾತೆಗೆ   ಜಮೆ   ಮಾಡುವುದು.   ESCROW   ಖಾತೆಯ   ವಿವರ   ಇಂತಿದೆ;");
+                "ಯೋಜನೆ   ಅಡಿಯಲ್ಲಿ   ಖಜಾನೆ-2   ರ   ಮುಖಾಂತರ   ಪ್ರತ್ಯೇಕವಾಗಿ   ಭರಿಸುವುದು.   ಭರಿಸಿದ   ಸಹಾಯಧನವನ್ನು   ಫಲಾನುಭವಿ   ಹೆಸರಲ್ಲಿನ   ಬ್ಯಾಂಕ್   ESCROW   ಖಾತೆಗೆ   ಜಮೆ   ಮಾಡುವುದು.   ESCROW   ಖಾತೆಯ   ವಿವರ   ಇಂತಿದೆ;");
 
         // TABLE FIELDS
         // farmerFirstName = beneficiary name + address for table column 1
@@ -22426,7 +22475,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    " +apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು.\n" +
                     "ಪ್ರತಿಯನ್ನು   ;\n"+
-                      "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                      "    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                       "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
                       "    3. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                       "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -22657,7 +22706,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
                     apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    " +apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು.\n" +
                     "ಪ್ರತಿಯನ್ನು   ;\n"+
-                      "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                      "    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                       "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
                       "    3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+ apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                       "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -22937,7 +22986,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    " +apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು.\n" +
                 "ಪ್ರತಿಯನ್ನು   ;\n"+
-                "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                "    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                 "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
                 "    3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+ apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                 "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -23246,7 +23295,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    " +apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು.\n" +
                 "ಪ್ರತಿಯನ್ನು   ;\n"+
-                "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                "    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                 "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
                 "    3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+ apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                 "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -23545,7 +23594,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ    " +apiResponse.getContent().get(0).getNameKan() + "   ಬಿನ್/ಕೋಂ.   " +apiResponse.getContent().get(0).getFatherNameKan() + " \n" +
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    " +apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು.\n" +
                 "ಪ್ರತಿಯನ್ನು   ;\n"+
-                "    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                "    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
                 "    2. "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,    "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() + "  ಜಿಲ್ಲೆ .\n"+
                 "    3. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+ apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() + "  ಇವರಿಗೆ  ಎಲ್ಲಾ   ಮೂಲ   ದಾಖಲಾತಿಗಳೊಂದಿಗೆ   ಮುಂದಿನ   ಅಗತ್ಯಕ್ರಮಕ್ಕಾಗಿ   ಕಳುಹಿಸಿದೆ. \n" +
                 "    4. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    " +apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + "   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -24025,7 +24074,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() + "\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() + "\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     + "   2. " + apiResponse.getContent().get(0).getCreatedByDesignation() + " ,    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + ",\n"
                     + "   3. ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName() + " ,   ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + "  ,     " + apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   " + apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು ,  " + apiResponse.getContent().get(0).getDistrictNameInKannada() + "    ಜಿಲ್ಲೆ .\n"
                     + "   4. " + apiResponse.getContent().get(0).getVendorName() + " ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24092,7 +24141,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() + "\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() + "\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     + "   2. " + apiResponse.getContent().get(0).getCreatedByDesignation() + " ,    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + ",\n"
                     + "   3. ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName() + " ,   ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + "  ,     " + apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   " + apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು ,  " + apiResponse.getContent().get(0).getDistrictNameInKannada() + "    ಜಿಲ್ಲೆ .\n"
                     + "   4. " + apiResponse.getContent().get(0).getVendorName() + " ,      ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24576,7 +24625,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() + "\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() + "\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     + "   2. " + apiResponse.getContent().get(0).getCreatedByDesignation() + " ,    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + ",\n"
                     + "   3. ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName() + " ,   ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + "  ,     " + apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   " + apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು ,  " + apiResponse.getContent().get(0).getDistrictNameInKannada() + "    ಜಿಲ್ಲೆ .\n"
                     + "   4. " + apiResponse.getContent().get(0).getVendorName() + " ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -24641,7 +24690,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDrawingOfficerDesignation() + "\n" +
                 apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() + "\n" +
                 "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"    1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                +"    1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                 + "   2. " + apiResponse.getContent().get(0).getCreatedByDesignation() + " ,    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + ",\n"
                 + "   3. ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName() + " ,   ಬಿನ್/ಕೋಂ    " + apiResponse.getContent().get(0).getReelerFatherName() + "  ,     " + apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   " + apiResponse.getContent().get(0).getTalukNameInKannada() + "   ತಾಲ್ಲೂ ಕು ,  " + apiResponse.getContent().get(0).getDistrictNameInKannada() + "    ಜಿಲ್ಲೆ .\n"
                 + "   4. " + apiResponse.getContent().get(0).getVendorName() + " ,      ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -25130,7 +25179,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   :\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -25198,7 +25247,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -25697,7 +25746,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. ಶ್ರೀ /ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                     +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -25767,7 +25816,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ/ಶ್ರೀಮತಿ.  " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -26005,7 +26054,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ತಾಲ್ಲೂಕು   ಖಜಾನೆ    ಅಧಿಕಾರಿಗಳು,     "+apiResponse.getContent().get(0).getTalukNameInKannada() +" \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
                     +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   3. "+apiResponse.getContent().get(0).getHierarchyDesignation()+",    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+"\n"
                     +"   4. "+apiResponse.getContent().get(0).getPreviousStepDesignation()+" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+"\n"
@@ -26498,7 +26547,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getDesignationNameInKannada() +" ,    "+apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder()+",\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -26567,7 +26616,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                     apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                     "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                    +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
+                    +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ \n"
                     +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,     " +apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n"
                     +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                     +"   4. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
@@ -26985,7 +27034,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾ ಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂ ಕು \n" +
                 apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
                 +"ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                 +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                 +"   3. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+",\n"
                 +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -27397,7 +27446,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDrawingOfficerDesignation() +"\n" +
                 apiResponse.getContent().get(0).getDrawingOfficerDesignationForSanctionOrder() +"\n" +
                 "ಪ್ರ ತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
+                +"   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ ,\n"
                 +"   2. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
                 +"   3. ಶ್ರೀ   " +apiResponse.getContent().get(0).getReelerName()+" ,   ಬಿನ್/ಕೋಂ    "+apiResponse.getContent().get(0).getReelerFatherName()+"  ,     "+ apiResponse.getContent().get(0).getVillageNameInKannada() + "  ಗ್ರಾ  ಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂ ಕು ,  "+ apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ .\n"
                 +"   4. "+apiResponse.getContent().get(0).getVendorName() +" ,     ರವರುಗಳ    ಮಾಹಿತಿಗಾಗಿ.");
@@ -28351,7 +28400,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು     "+ apiResponse.getContent().get(0).getCreatedByDesignation() +"   ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+ apiResponse.getContent().get(0).getCreatedByDesignation() +"   ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"   ಇವರಿಗೆ    ಮಾಹಿತಿಗಾಗಿ");
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
                     apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
@@ -28400,7 +28451,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"
-                            + "ಪ್ರ ತಿಯನ್ನು      "+ apiResponse.getContent().get(0).getCreatedByAdDesignationName() +",   " + apiResponse.getContent().get(0).getCreatedByAdDesignationNameForSanctionOrder());
+                            + "ಪ್ರ ತಿಯನ್ನು ;\n"
+                            + "   1. ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"
+                            + "   2. "+ apiResponse.getContent().get(0).getCreatedByAdDesignationName() +",   " + apiResponse.getContent().get(0).getCreatedByAdDesignationNameForSanctionOrder());
 
             response.setHeader10(apiResponse.getContent().get(0).getDesignationName() + ",\n"+
                      apiResponse.getContent().get(0).getDesignationNameForSanctionOrder());
@@ -28673,8 +28726,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
             response.setHeader9(
                     "ಈ     ಕಚೇರಿಯ     ಲೆಕ್ಕ     ಶಾಖೆಗೆ     ಮುಂದಿನ     ಕ್ರಮಕ್ಕಾಗಿ. \n"+
-                            "     1.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +".\n"+
-                            "     2.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ     ಮಾಹಿತಿಗಾಗಿ.");
+                            "     1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n"+
+                            "     2.  "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder() +".\n"+
+                            "     3.  "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ     ಮಾಹಿತಿಗಾಗಿ.");
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
                     apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder());
@@ -28730,8 +28784,9 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                     apiResponse.getContent().get(0).getAssignedByUserDesignation() +",\n" +
                     apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +" ,  \n" +
                     "ಪ್ರ ತಿಯನ್ನು  ; \n" +
-                    "   1.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
-                    "   2.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
+                    "   1.  ಸಂಬಂಧಪಟ್ಟ    ಖಜಾನಾಧಿಕಾರಿಗಳಿಗೆ\n" +
+                    "   2.  "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" \n" +
+                    "   3.  ಈ   ಕಚೇರಿಯ   ಲೆಕ್ಕ    ಶಾಖೆಗೆ   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ .");
 
             response.setHeader10(apiResponse.getContent().get(0).getAdsDesignationName() + "\n" +
                     apiResponse.getContent().get(0).getAdsDivisionNameForSanctionOrder());
