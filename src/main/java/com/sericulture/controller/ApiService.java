@@ -240,6 +240,23 @@ public class ApiService {
         //return apiResponse;
     }
 
+    public void updateARMLetterDate(int scApplicationFormServiceId, String letterType) {
+        try {
+            String url = dbtApiUrl + "sanctionOrderWorkOrderAcknowledgement/update-arm-letter-date";
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(Util.getTokenData());
+            Map<String, Object> body = new HashMap<>();
+            body.put("scApplicationFormServiceId", scApplicationFormServiceId);
+            body.put("letterType", letterType);
+            HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+            restTemplate.postForObject(url, requestEntity, String.class);
+            logger.info("ARM letter date updated: type={}, id={}", letterType, scApplicationFormServiceId);
+        } catch (Exception e) {
+            logger.error("Failed to update ARM letter date: type={}, id={}, error={}", letterType, scApplicationFormServiceId, e.getMessage());
+        }
+    }
+
     public void uploadSanctionToDbt(byte[] pdfBytes, String fileName) {
 
         try {
