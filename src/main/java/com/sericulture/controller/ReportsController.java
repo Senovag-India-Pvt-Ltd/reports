@@ -14036,6 +14036,12 @@ public class ReportsController {
                 if (sanctionOrderResponse.getNameKan() == null) {
                     sanctionOrderResponse.setNameKan("");
                 }
+                // Templates render $F{farmerFirstName} for the grower's own name; the API only
+                // populates nameKan for these records, so fall back to it when farmerFirstName is blank.
+                if (sanctionOrderResponse.getFarmerFirstName() == null
+                        || sanctionOrderResponse.getFarmerFirstName().trim().isEmpty()) {
+                    sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getNameKan());
+                }
                 if (sanctionOrderResponse.getFatherNameKan() == null) {
                     sanctionOrderResponse.setFatherNameKan("");
                 }
@@ -15981,8 +15987,11 @@ public class ReportsController {
                     sanctionOrderResponse.setVillageNameInKannada("");
                 }
 
-                if (sanctionOrderResponse.getReelerName() == null) {
-                    sanctionOrderResponse.setReelerName("");
+                // Templates render $F{reelerName} for the grower's own name; the API only
+                // populates nameKan for these records, so fall back to it when reelerName is blank.
+                if (sanctionOrderResponse.getReelerName() == null
+                        || sanctionOrderResponse.getReelerName().trim().isEmpty()) {
+                    sanctionOrderResponse.setReelerName(sanctionOrderResponse.getNameKan());
                 }
                 if (sanctionOrderResponse.getMonth() == null) {
                     sanctionOrderResponse.setMonth("");
