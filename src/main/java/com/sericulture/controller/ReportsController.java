@@ -13475,6 +13475,7 @@ public class ReportsController {
 
         float totalSchemeAmount = 0f;
         float totalCocoonsWeight = 0f;
+        float totalCocoonTransactedForReeling = 0f;
 
         if (apiResponse.getContent() != null) {
             for (SanctionOrderResponse r : apiResponse.getContent()) {
@@ -13492,18 +13493,20 @@ public class ReportsController {
                     cocoonsWeight = 0f;
                 }
                 totalCocoonsWeight += cocoonsWeight;
+
+                // ✅ Reeling-transacted cocoon weight sum, matching the report's
+                //    "ನೂಲು ಬಿಚ್ಚಾಣಿಕೆಗೆ ವಹಿವಾಟಾದ" column total across all rows
+                Float cocoonTransactedForReeling = r.getCocoonTransactedForReelingInKg();
+                if (cocoonTransactedForReeling == null) {
+                    cocoonTransactedForReeling = 0f;
+                }
+                totalCocoonTransactedForReeling += cocoonTransactedForReeling;
             }
         }
         DecimalFormat weightFormat = new DecimalFormat("0.000");
         DecimalFormat amountFormat = new DecimalFormat("0.00");
 
-        // ✅ CHANGED: show this record's reeling-transacted cocoon weight (kg), matching the report's
-        //             "ನೂಲು ಬಿಚ್ಚಾಣಿಕೆಗೆ ವಹಿವಾಟಾದ" column (cocoonTransactedForReelingInKg), not the accumulated total
-        Float thisCocoonsWeight = apiResponse.getContent().get(0).getCocoonTransactedForReelingInKg();
-        if (thisCocoonsWeight == null) {
-            thisCocoonsWeight = 0f;
-        }
-        String formattedWeight = weightFormat.format(thisCocoonsWeight);
+        String formattedWeight = weightFormat.format(totalCocoonTransactedForReeling);
         String formattedAmount = amountFormat.format(totalSchemeAmount);
 
 //        response.setTotalSchemeAmount(totalSchemeAmount);          // CHANGED: use computed sum
@@ -13680,6 +13683,12 @@ public class ReportsController {
                 if (sanctionOrderResponse.getNameKan() == null) {
                     sanctionOrderResponse.setNameKan("");
                 }
+                // Templates render $F{farmerFirstName} for the grower's own name; the API only
+                // populates nameKan for these records, so fall back to it when farmerFirstName is blank.
+                if (sanctionOrderResponse.getFarmerFirstName() == null
+                        || sanctionOrderResponse.getFarmerFirstName().trim().isEmpty()) {
+                    sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getNameKan());
+                }
                 if (sanctionOrderResponse.getFatherNameKan() == null) {
                     sanctionOrderResponse.setFatherNameKan("");
                 }
@@ -13820,6 +13829,7 @@ public class ReportsController {
 
         float totalSchemeAmount = 0f;
         float totalCocoonsWeight = 0f;
+        float totalCocoonTransactedForReeling = 0f;
 
         if (apiResponse.getContent() != null) {
             for (SanctionOrderResponse r : apiResponse.getContent()) {
@@ -13837,18 +13847,20 @@ public class ReportsController {
                     cocoonsWeight = 0f;
                 }
                 totalCocoonsWeight += cocoonsWeight;
+
+                // ✅ Reeling-transacted cocoon weight sum, matching the report's
+                //    "ನೂಲು ಬಿಚ್ಚಾಣಿಕೆಗೆ ವಹಿವಾಟಾದ" column total across all rows
+                Float cocoonTransactedForReeling = r.getCocoonTransactedForReelingInKg();
+                if (cocoonTransactedForReeling == null) {
+                    cocoonTransactedForReeling = 0f;
+                }
+                totalCocoonTransactedForReeling += cocoonTransactedForReeling;
             }
         }
         DecimalFormat weightFormat = new DecimalFormat("0.000");
         DecimalFormat amountFormat = new DecimalFormat("0.00");
 
-        // ✅ CHANGED: show this record's reeling-transacted cocoon weight (kg), matching the report's
-        //             "ನೂಲು ಬಿಚ್ಚಾಣಿಕೆಗೆ ವಹಿವಾಟಾದ" column (cocoonTransactedForReelingInKg), not the accumulated total
-        Float thisCocoonsWeight = apiResponse.getContent().get(0).getCocoonTransactedForReelingInKg();
-        if (thisCocoonsWeight == null) {
-            thisCocoonsWeight = 0f;
-        }
-        String formattedWeight = weightFormat.format(thisCocoonsWeight);
+        String formattedWeight = weightFormat.format(totalCocoonTransactedForReeling);
         String formattedAmount = amountFormat.format(totalSchemeAmount);
 
 //        response.setTotalSchemeAmount(totalSchemeAmount);          // CHANGED: use computed sum
@@ -15958,6 +15970,12 @@ public class ReportsController {
             for (SanctionOrderResponse sanctionOrderResponse : apiResponse.getContent()) {
                 if (sanctionOrderResponse.getNameKan() == null) {
                     sanctionOrderResponse.setNameKan("");
+                }
+                // Templates render $F{farmerFirstName} for the grower's own name; the API only
+                // populates nameKan for these records, so fall back to it when farmerFirstName is blank.
+                if (sanctionOrderResponse.getFarmerFirstName() == null
+                        || sanctionOrderResponse.getFarmerFirstName().trim().isEmpty()) {
+                    sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getNameKan());
                 }
                 if (sanctionOrderResponse.getVillageNameInKannada() == null) {
                     sanctionOrderResponse.setVillageNameInKannada("");
@@ -28819,6 +28837,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
                 if (sanctionOrderResponse.getNameKan() == null) {
                     sanctionOrderResponse.setNameKan("");
+                }
+                // Templates render $F{farmerFirstName} for the grower's own name; the API only
+                // populates nameKan for these records, so fall back to it when farmerFirstName is blank.
+                if (sanctionOrderResponse.getFarmerFirstName() == null
+                        || sanctionOrderResponse.getFarmerFirstName().trim().isEmpty()) {
+                    sanctionOrderResponse.setFarmerFirstName(sanctionOrderResponse.getNameKan());
                 }
                 if (sanctionOrderResponse.getFatherNameKan() == null) {
                     sanctionOrderResponse.setFatherNameKan("");
