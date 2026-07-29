@@ -1816,6 +1816,9 @@ public class ReportsController {
 
             String securityKey = apiResponse.getContent().get(0).getSecurityKey();
 
+            Float amountPerKg = apiResponse.getContent().get(0).getAmountPerKg();
+            String amountPerKgFormatted = amountPerKg == null ? "0" : String.valueOf(Math.round(amountPerKg));
+
             JasperReport jasperReport = getJasperReport("SilkIncentiveSanction.jrxml");
 
             JRBeanCollectionDataSource dataSource =
@@ -1823,6 +1826,7 @@ public class ReportsController {
 
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("CollectionBeanParam", dataSource);
+            parameters.put("AmountPerKgParam", amountPerKgFormatted);
 
             JasperPrint jasperPrint =
                     JasperFillManager.fillReport(jasperReport, parameters, dataSource);
