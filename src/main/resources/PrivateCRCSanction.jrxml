@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MscSeedChawki" pageWidth="842" pageHeight="1200" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c4f92fa-d7fd-449c-b326-d2d6b75bdf9b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="MscSeedChawki" uuid="ce226af0-7375-473e-93e1-e2efe25f9d46">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="nameKan" class="java.lang.String"/>
+		<field name="crcName" class="java.lang.String"/>
+		<field name="lotNo" class="java.lang.String"/>
+		<field name="noOfDfls" class="java.lang.String"/>
+		<field name="serialNumber" class="java.lang.Integer"/>
+		<field name="subsidyAmount" class="java.lang.Float"/>
+		<field name="totalNoOfDfls" class="java.lang.Float"/>
+		<field name="schemeAmount" class="java.lang.Float"/>
+		<field name="subsidyAmountCa" class="java.lang.Float"/>
+		<field name="totalSubsidyAmountCa" class="java.lang.Float"/>
+		<field name="status" class="java.lang.String"/>
+		<field name="fatherNameKan" class="java.lang.String"/>
+		<field name="fruitsId" class="java.lang.String"/>
+		<field name="villageNameInKannada" class="java.lang.String"/>
+		<field name="externalUserAddress" class="java.lang.String"/>
+		<field name="externalUserLicenseNumber" class="java.lang.String"/>
+		<field name="externalUserOrganisationName" class="java.lang.String"/>
+		<field name="chawkiReceiptNo" class="java.lang.String"/>
+		<field name="crcBillNo" class="java.lang.String"/>
+		<field name="marketName" class="java.lang.String"/>
+		<field name="sanctionAmount" class="java.lang.Float"/>
+		<field name="lotWeight" class="java.lang.Float"/>
+		<field name="cdcmBiddingSlipNo" class="java.lang.String"/>
+		<field name="cdcmTransactionDate" class="java.lang.String"/>
+		<field name="arn" class="java.lang.String"/>
+		<field name="incentiveReceiptNo" class="java.lang.String"/>
+		<field name="transactionDate" class="java.lang.String"/>
+		<field name="cocoonTransactedForSeedInKg" class="java.lang.Float"/>
+		<field name="cocoonTransactedForReelingInKg" class="java.lang.Float"/>
+		<field name="averageYield" class="java.lang.Float"/>
+		<field name="cocoonsWeight" class="java.lang.Float"/>
+		<field name="noOfCocoonsPerKg" class="java.lang.Float"/>
+		<field name="dateOfBrushing" class="java.lang.String"/>
+		<field name="quantityOfCocoonsProduced" class="java.lang.Float"/>
+		<variable name="sanctionAmount1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{sanctionAmount}]]></variableExpression>
+		</variable>
+		<variable name="schemeAmount1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{schemeAmount}]]></variableExpression>
+		</variable>
+		<variable name="cocoonTransactedForSeedInKg1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonTransactedForSeedInKg}]]></variableExpression>
+		</variable>
+		<variable name="cocoonTransactedForReelingInKg1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonTransactedForReelingInKg}]]></variableExpression>
+		</variable>
+		<variable name="cocoonsWeight1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonsWeight}]]></variableExpression>
+		</variable>
+		<variable name="quantityOfCocoonsProduced1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{quantityOfCocoonsProduced}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Dataset1" uuid="4e6b8a4e-27f7-4da3-a578-c8a6fce03a57">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="centralSanctionAmount" class="java.lang.Float"/>
+		<field name="stateSanctionAmount" class="java.lang.Float"/>
+		<field name="unitCost" class="java.lang.Float"/>
+		<field name="machineTypeName" class="java.lang.String"/>
+		<field name="vendorName" class="java.lang.String"/>
+		<field name="l1Rate" class="java.lang.String"/>
+		<field name="machineQuantity" class="java.lang.Float"/>
+		<field name="taxInvoiceNo" class="java.lang.String"/>
+		<field name="taxInvoiceDate" class="java.lang.String"/>
+		<field name="beneficiaryAmount" class="java.lang.Double"/>
+		<field name="subsidyName" class="java.lang.String"/>
+		<field name="eligibleEquipmentInNos" class="java.lang.String"/>
+		<field name="eligibleTotalValueInRs" class="java.lang.Float"/>
+		<field name="purchasedEquipmentInNos" class="java.lang.String"/>
+		<field name="ratePerEligibleEquipment" class="java.lang.Float"/>
+		<field name="percentageOfSubsidyAmount" class="java.lang.Float"/>
+		<field name="purchasedTotalValueInRs" class="java.lang.Float"/>
+		<field name="maxAmountOfSubsidyEligible" class="java.lang.Float"/>
+		<field name="serialNumber" class="java.lang.Integer"/>
+		<variable name="eligibleTotalValueInRs1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{eligibleTotalValueInRs}]]></variableExpression>
+		</variable>
+		<variable name="percentageOfSubsidyAmount1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{percentageOfSubsidyAmount}]]></variableExpression>
+		</variable>
+		<variable name="maxAmountOfSubsidyEligible1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{maxAmountOfSubsidyEligible}]]></variableExpression>
+		</variable>
+		<variable name="purchasedTotalValueInRs1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{purchasedTotalValueInRs}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="90be2a15-9b9d-40d7-856a-e8d7f457fba4">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="establishmentOfMulberryGardenClaimedAmount" class="java.lang.Float"/>
+		<field name="establishmentOfMulberryGardenEligibleAmount" class="java.lang.Float"/>
+		<field name="establishmentOfMulberryGardenPercentageOfSubsidyAmount" class="java.lang.Float"/>
+		<field name="installationOfDripIrrigationEligibleAmount" class="java.lang.Float"/>
+		<field name="installationOfDripIrrigationClaimedAmount" class="java.lang.Float"/>
+		<field name="installationOfDripIrrigationPercentageOfSubsidyAmount" class="java.lang.Float"/>
+		<field name="chawkiRearingBuildingEligibleAmount" class="java.lang.Float"/>
+		<field name="chawkiRearingBuildingClaimedAmount" class="java.lang.Float"/>
+		<field name="chawkiRearingBuildingPercentageOfSubsidyAmount" class="java.lang.Float"/>
+		<field name="equipmentEligibleTotal" class="java.lang.Float"/>
+		<field name="equipmentPurchasedTotal" class="java.lang.Float"/>
+		<field name="equipmentPercentageTotal" class="java.lang.Float"/>
+		<field name="equipmentMaxSubsidyTotal" class="java.lang.Float"/>
+		<field name="totalClaimed" class="java.lang.Float"/>
+		<field name="totalEligible" class="java.lang.Float"/>
+		<field name="totalSubsidy" class="java.lang.Float"/>
+	</subDataset>
+	<parameter name="CollectionBeanParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="CollectionBeanParam1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="header3" class="java.lang.String"/>
+	<field name="header4" class="java.lang.String"/>
+	<field name="header5" class="java.lang.String"/>
+	<field name="header6" class="java.lang.String"/>
+	<field name="header7" class="java.lang.String"/>
+	<field name="header8" class="java.lang.String"/>
+	<field name="header10" class="java.lang.String"/>
+	<field name="header9" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="header11" class="java.lang.String"/>
+	<field name="header12" class="java.lang.String"/>
+	<field name="header13" class="java.lang.String"/>
+	<field name="header15" class="java.lang.String"/>
+	<field name="totalClaimed" class="java.lang.Float"/>
+	<field name="totalEligible" class="java.lang.Float"/>
+	<field name="totalSubsidy" class="java.lang.Float"/>
+	<background>
+		<band height="1160">
+			<line>
+				<reportElement x="0" y="1159" width="802" height="1" uuid="e966bf02-c13b-4f4c-b207-a2299de363a4"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="1160" uuid="724acbfe-44c0-45fe-b016-93e1e4c6bcb4"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="1160" uuid="9b9395f6-f33a-4caf-915b-a0ff54030c24"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="7fb841ca-5707-4409-8e72-d50415432be8"/>
+			</line>
+		</band>
+	</background>
+	<detail>
+		<band height="1127" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement positionType="Float" x="0" y="323" width="782" height="26" uuid="ba97f7e0-a946-4aa6-a8c1-08e4da8401fe"/>
+				<staticText>
+					<reportElement x="3" y="-19" width="70" height="20" uuid="d7d96834-00b1-4266-b1e2-1b531c559ce6"/>
+					<textElement textAlignment="Center">
+						<font fontName="Nirmala UI" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ಪೀಠಿಕೆ :]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="73" y="-20" width="696" height="36" uuid="d848aa8f-8fda-494d-a6c7-c293bef10ca5"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="22" y="250" width="760" height="40" uuid="1907978b-a3e9-4cab-a41b-410c04b4557d"/>
+				<staticText>
+					<reportElement x="-13" y="-1" width="80" height="20" uuid="dca80ff9-2803-4e09-857f-186dda0cbda8"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Nirmala UI" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ಉಲ್ಲೇಖ  :]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="67" y="-1" width="680" height="20" uuid="1ed78154-8efc-4929-8790-92cac41c7d37"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="90" y="150" width="670" height="82" uuid="f205d018-8b51-4c18-863e-4b617e944e03"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="11" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="148" width="80" height="30" uuid="0d4173cc-2d51-400f-9b71-1877424fa5c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ವಿಷಯ  : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="110" width="781" height="40" uuid="4159115a-37b8-4525-b98c-02f9c735adfe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="70" width="110" height="50" uuid="e95b93cb-8516-4f29-9536-b2db76fd6294"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
+ರೇಷ್ಮೆ    ಇಲಾಖೆ
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="359" y="1" width="96" height="65" uuid="ff7c80d3-17c4-465e-9049-dfc09eaa572a"/>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="20" y="10" width="300" height="30" uuid="d4e48aee-2c2a-4f88-861c-5ecd19fc6b1c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header11}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="650" y="0" width="146" height="100" uuid="28f4c37a-adcc-4276-a484-0f9d92c1ee31"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{status} == null ? "" : $F{status}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="43" y="951" width="750" height="24" uuid="1ac5b0fd-ef18-4c2d-9d06-0c849e282ce2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="79" y="983" width="689" height="32" uuid="afdf18e9-cef0-4c90-b3b3-3dc0c1105211"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Nirmala UI" size="11"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header8}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="466" y="1043" width="335" height="15" uuid="66590aeb-ebd2-4d09-988b-9b2e35503366"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="9"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header10}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="79" y="1087" width="690" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="9"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header9}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="28" y="380" width="760" height="10" uuid="ff25333e-ce09-40e4-aa58-0ace0b51569b"/>
+				<staticText>
+					<reportElement x="42" y="-21" width="290" height="20" uuid="bc0ba352-ba8f-4777-a0ac-16a2c6cb7619"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Nirmala UI" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ಹಿಪ್ಪುನೇರಳೆ ತೋಟ ಸ್ಥಾಪನೆ/ನಿರ್ವಹಣೆ  : ]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="45" y="-21" width="695" height="20" uuid="ba5dfa96-4aa5-4a5f-9b58-ef484caca4e7"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header5}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<componentElement>
+				<reportElement positionType="Float" x="70" y="469" width="689" height="127" uuid="52424f9e-a9a2-40a7-a059-c7ffafb14187">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="8820c24f-f422-4e4d-a10e-a2a4ec6ef189">
+						<dataSourceExpression><![CDATA[$P{CollectionBeanParam}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="bab56452-b491-4b1e-8246-78e9b27c1a25">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="70" uuid="8b1fe7b4-6f76-4be2-8f42-d75ecf655691"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಕ್ರ.ಸಂ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="30" uuid="4e2bb52b-e9a4-41c2-a116-63d02395563f"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{serialNumber}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="8bed6d27-e927-476c-9322-f1a11b9d31e0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="dbe9f9e8-cd5b-4d1c-a9c1-f8babf980cf9"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಹುಳುಸಾಕಾಣಿಕೆ ಸಲಕರಣೆಗಳ ವಿವರ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="9a7beb43-1d29-49cf-827e-c6689a0c6332"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="220019e6-e809-41ed-a067-2ee2757635d2"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{subsidyName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="370800ac-dbef-441a-aa9c-bbd7913880b4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="a2bed514-f627-4c50-9751-658c5efdedfd"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಮಾರ್ಗಸೂಚಿಯಪ್ರಕಾರ ಅರ್ಹವಿರುವ ಸಲಕರಣೆಗಳ ಸಂಖ್ಯೆ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="66fc0efd-627e-4ed0-b2b5-4e9d5a5f1b0f"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{eligibleEquipmentInNos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="cbb0bc17-8697-427b-8c3f-4881f779852e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="63a6f834-daa5-4af7-9b0d-d30393d5c310"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಮಾರ್ಗಸೂಚಿಯಪ್ರಕಾರ ಅರ್ಹವಿರುವ ಸಲಕರಣೆಗಳ  ಮೌಲ್ಯ
+(ರೂ.ಗಳಲ್ಲಿ) ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="7bfb3d0c-6c49-4756-986b-30fafdabafaf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{eligibleTotalValueInRs1}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="f3d14abd-4f9f-4636-967e-425e8a185312"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{eligibleTotalValueInRs}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="176821f1-561c-4484-b23a-d385a4f72136">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="125c4f36-1edb-4535-95ff-1ddb19828048"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರಕ್ಕೆ ಖರೀದಿ ಮಾಡಿರುವ ಸಲಕರಣಗೆಳ ಸಂಖ್ಯೆ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="d00ee567-23c7-45c1-926f-d0312c4cf256"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{purchasedEquipmentInNos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="d2de7d69-0be4-41dc-9611-92deb6618423">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="c3720ea6-0f14-4a27-9369-2ef1ceda98f4"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರಕ್ಕೆ ಖರೀದಿ ಮಾಡಿರುವ ಸಲಕರಣಗೆಳ   ದರ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="709afeaf-0940-46f2-ac39-8dab34bc7765"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ratePerEligibleEquipment}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="fd4504f2-a02f-4504-ada1-62a109dc01b7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="70" uuid="834cc35f-d625-43be-a87e-92b2fa7bc419"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕೇಂದ್ರಕ್ಕೆ ಖರೀದಿ ಮಾಡಿರುವ ಸಲಕರಣಗೆಳ    ಮೌಲ್ಯ
+(ರೂ.ಗಳಲ್ಲಿ) 
+]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="d73a0db0-e884-4534-94b6-d89f31a0c1cb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{purchasedTotalValueInRs1}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="1340cec3-3f2f-409b-949b-8a7a477679bf"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{purchasedTotalValueInRs}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="7b4bc40a-68a7-43af-9399-e53bdc79372a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="70" uuid="7514e5b7-65b9-4b30-a994-43f89d593b79"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಸಹಾಯಧನಕ್ಕೆ ಅರ್ಹರಿರುವ ಗರಿಷ್ಠ ಮೊತ್ತ  (ರೂ.ಗಳಲ್ಲಿ) ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="c76e761c-2779-4add-a6b4-65f1b5f84657"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{maxAmountOfSubsidyEligible1}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="80" height="30" uuid="115937f6-cb1e-4073-b1c6-b45e86625df9"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{maxAmountOfSubsidyEligible}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="c86f89e4-96bb-43c3-8b43-8cc9e2c7ae45">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:columnHeader height="70" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="70" uuid="c509e67c-2d51-47c4-babe-0045b31258ee"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<text><![CDATA[ಶೇ.90 ರಷ್ಟು ಸಹಾಯ
+ಧನದ ಮೊತ್ತ (ರೂ.ಗಳಲ್ಲಿ)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="70" height="30" uuid="bcc0eb31-220f-49fd-ab05-b6b3e136357d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{percentageOfSubsidyAmount1}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="70" height="30" uuid="548dac9b-188e-4fb5-8538-29427d03aee7"/>
+								<box>
+									<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{percentageOfSubsidyAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<frame>
+				<reportElement positionType="Float" x="33" y="418" width="760" height="10" uuid="275e8010-d301-4f91-8858-905ea53af90a"/>
+				<staticText>
+					<reportElement x="42" y="-24" width="290" height="20" uuid="2790d5a7-5043-407a-ac21-c9a4d5672458"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Nirmala UI" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಕಟ್ಟಡ ನಿರ್ಮಾಣ  : ]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="45" y="-23" width="695" height="20" uuid="54686821-ee4f-488a-b25d-f4e357792aaa"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header6}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="33" y="452" width="760" height="10" uuid="0e1fe5b2-a084-476b-84c9-9a99313edfd4"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="46" y="-20" width="695" height="20" uuid="a582ad68-a016-47af-98c3-960d3117a1c9"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header12}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="45" y="-20" width="290" height="20" uuid="32424a01-d9dc-48d1-afaa-ee68c7162842"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Nirmala UI" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ಚಾಕಿ ಸಾಕಾಣಿಕಾ ಸಲಕರಣೆಗಳ ಖರೀದಿ :]]></text>
+				</staticText>
+			</frame>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="79" y="610" width="689" height="23" uuid="7c7db878-584e-45c7-8634-18556f1eec7d"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header13}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="80" y="897" width="689" height="24" uuid="dd0bf253-1a20-4639-9959-8e500e18ffad"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header15}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" x="187" y="645" width="446" height="182" uuid="8a5ce00d-d5b5-47d6-9d3e-3960c808f3e1">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset2" uuid="24a5fd23-6340-4a0c-9884-7c4006b7511b">
+						<dataSourceExpression><![CDATA[$P{CollectionBeanParam1}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="7c794f4b-ea58-425e-9e8c-32de06b15736">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="60" uuid="2d0fe4ae-19bf-46e4-9c9c-4d044ac3b902"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ಕ್ರ.ಸಂ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="72e15d3e-6f0d-4b26-8c51-25accf145a53"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[4.]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="5ae9c712-206d-48e2-b0b8-1ef05af61f47"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[1.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="d3e08e0e-848b-4a1b-bd72-8a042106383f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[3.]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="2286aa3c-fa2d-4242-8efe-a6e742a5171d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[2.]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="efedef3b-62ab-40a4-a32a-5694fe0d7ed7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="60" uuid="dc88b584-01ba-4a88-852b-a9e36e51cec0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ವಿವರ]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="ce2fbd62-5a28-4913-b98e-9387d5da799a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[ಸಲಕರಣೆ    ಖರೀದಿ]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="ba6329b9-a363-40db-966e-b800f8a031ba"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[ಹಿಪ್ಪು ನೇರಳೆ   ತೋಟ  ಸ್ಥಾ ಪನೆ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="c4f6b8b9-9917-44ce-ba38-6ebcf5b8f82e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[ಚಾಕಿ    ಸಾಕಾಣಿಕಾ  ಕಟ್ಟ ಡ]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="22bf0de9-db87-43e4-b22b-f36c3a026863"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[ಹನಿ ನೀರಾವರಿ ಅಳವಡಿಕೆ]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="270c68b4-bd6d-4b53-9896-2a5dfbd4bac5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="60" uuid="f91a87c1-08d6-4634-bf6e-2788c48cc1ce"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ಕ್ಲೇಮಿನ ಮೊತ್ತ (ರೂ.ಗಳಲ್ಲಿ)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="60" height="30" uuid="aebb03fd-a457-439a-814e-877f4b071154"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{equipmentPurchasedTotal}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="60" height="30" uuid="fe1a2efa-a149-422d-84ac-42d398c9b0b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{establishmentOfMulberryGardenClaimedAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="60" height="30" uuid="65cf6f64-907a-4f92-9e7c-2294cea72287"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{chawkiRearingBuildingClaimedAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="60" height="30" uuid="8eb5c37b-c60d-499c-afc7-1d9dad05baee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{installationOfDripIrrigationClaimedAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="0a883e2e-4698-416d-9008-c8718e6c59d9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="60" uuid="d6ddb91c-fb85-480c-a8f2-5c894753ce29"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ಸಹಾಯಧನಕ್ಕೆ ಅರ್ಹವಾದ ಮೊತ್ತ (ರೂ.ಗಳಲ್ಲಿ)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="79e608ef-6b7f-4a61-8bde-3fbf5121b20d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{equipmentMaxSubsidyTotal}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="59ad6cb2-7693-4785-8fc9-37e57d764527"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{establishmentOfMulberryGardenEligibleAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="cdd3e19d-5b39-41b5-9780-a3f88f0a445e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{chawkiRearingBuildingEligibleAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="90" height="30" uuid="38b54482-0cac-48cc-b012-c4d00294e4f0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{installationOfDripIrrigationEligibleAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="7327e513-e9ef-430d-8286-d5849e978c7e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="60" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="60" uuid="74e8438d-6e2f-4716-9fd2-92d4a16e1161"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ಶೇ.75/90 ರಂತೆ ಸಹಾಯಧನ (ರೂ.ಗಳಲ್ಲಿ)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="110" height="30" uuid="e4f85317-251e-47c3-a99f-256b65ec6e88"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{equipmentPercentageTotal}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="110" height="30" uuid="a7b2a88c-4141-4cb9-add7-601dec37f610"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{establishmentOfMulberryGardenPercentageOfSubsidyAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="110" height="30" uuid="bd0d9cc0-2a4a-4676-881c-bd35ea640288"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{chawkiRearingBuildingPercentageOfSubsidyAmount}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField pattern="#,##0.00">
+								<reportElement x="0" y="0" width="110" height="30" uuid="208a3b83-8ac2-4679-b41a-153bfa3e0c5a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Nirmala UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{installationOfDripIrrigationPercentageOfSubsidyAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" x="187" y="825" width="50" height="30" uuid="2ca03aa0-c39c-4f90-976b-d796e4570fb8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" x="367" y="825" width="60" height="30" uuid="9719bad1-afb9-4dfb-8841-296ab3439755"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalClaimed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" x="427" y="825" width="90" height="30" uuid="ebd8a7e2-1ba6-4aba-9512-ae5d7b0cce02">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalEligible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement positionType="Float" x="517" y="825" width="110" height="30" uuid="fbe515da-2d5e-463c-9d81-ab91d113378b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalSubsidy}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="237" y="825" width="130" height="30" uuid="a850bb22-8de7-4325-92cc-cb5c1fef38d4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="33">
+			<staticText>
+				<reportElement positionType="Float" x="338" y="0" width="40" height="20" uuid="90453128-e7f7-4d2d-aea4-2a39d513c6bd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Nirmala UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Page:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="378" y="0" width="30" height="20" uuid="c930da66-9a14-4cab-a077-a35c68495ab0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Nirmala UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="408" y="0" width="25" height="20" uuid="cb5ac4ac-9fd6-4d17-b1f6-c55e7a447b91"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="10"/>
+				</textElement>
+				<text><![CDATA[ of ]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="433" y="0" width="30" height="20" uuid="73824e4b-c78a-41ee-88a5-eebefd1d3fdc"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Authorisation Letter to the Bank _Landscape" pageWidth="842" pageHeight="842" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="474e230e-987d-4e63-b051-ff4132478bcb">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="date" class="java.lang.String"/>
+	<field name="farmerNumber" class="java.lang.String"/>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<field name="fruitsId" class="java.lang.String"/>
+	<field name="farmerAddressText" class="java.lang.String"/>
+	<field name="talukName" class="java.lang.String"/>
+	<field name="farmerAccountNumber" class="java.lang.String"/>
+	<field name="farmerBranchName" class="java.lang.String"/>
+	<field name="farmerBankName" class="java.lang.String"/>
+	<field name="farmerBankIfsc" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="cost" class="java.lang.Float"/>
+	<field name="vendorName" class="java.lang.String"/>
+	<field name="vendorBankName" class="java.lang.String"/>
+	<field name="districtName" class="java.lang.String"/>
+	<field name="vendorBankIfsc" class="java.lang.String"/>
+	<field name="vendorBranchName" class="java.lang.String"/>
+	<field name="vendorAccountNumber" class="java.lang.String"/>
+	<field name="vendorUpi" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="623" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-8" y="-7" width="820" height="30" backcolor="#009933" uuid="f49559b5-4646-4f17-9944-ecc3c1953f3a">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19"/>
+					<paragraph firstLineIndent="3" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Authorisation Letter to the Bank ]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="319" y="37" width="160" height="63" uuid="3f41898a-18f6-460a-b3ac-937db72965e4"/>
+				<imageExpression><![CDATA["C:/Users/Admin/Downloads/Seal_of_Karnataka.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="181" y="150" width="440" height="30" uuid="60894a1d-0f48-405a-88d0-955ecf6fb9b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Authorisation Letter to the Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="176" width="40" height="20" uuid="2995aa29-d0de-476d-9de4-36282af51460">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ To,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="196" width="181" height="20" uuid="4dc6920e-7361-490b-8449-44bd063a96b1">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ The Branch Manager]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="276" width="80" height="19" uuid="349ad40d-afec-437c-b291-76e085ff30b3">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ Dear Sir,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="298" width="236" height="21" uuid="1eb7e623-8e0c-4c03-889d-956a1f4a220b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Ref:Debit authorisation Of my Account Number
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="385" width="180" height="30" uuid="1c6d4ffa-30a9-47f7-a692-5cd795be3199"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Account Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="415" width="381" height="20" uuid="ca47aa4b-6ff2-49fc-a48e-c3c841d9ed3d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmer Bank Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="435" width="181" height="20" uuid="b1df4b36-c43a-4b52-9e0f-fd5f2043b8c6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="455" width="181" height="20" uuid="94494e77-ff02-4208-bc33-d822babc2145"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="475" width="181" height="20" uuid="b4ae918a-300b-4d72-806e-02bafac366ba"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="495" width="181" height="20" uuid="a1729061-cdd1-4748-bcf5-ada4333a95c4"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="515" width="181" height="20" uuid="1c7ece8d-50a0-45b6-a88f-aa91365fc6bb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IFSC Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="415" width="410" height="20" uuid="f2dee68b-6e14-4e87-abcf-6d08fa3c374c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manufacturer/Suppliers/RC Bank Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="434" width="150" height="20" uuid="962164e2-397c-451d-ba80-fa5fd6364bb1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="454" width="150" height="20" uuid="7004dfbd-2466-48f4-8628-7fa371d85a6c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="474" width="150" height="20" uuid="1885bee8-01f2-45ac-9cdd-62816db05a06"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="494" width="150" height="20" uuid="1d347d97-09b6-48c9-831c-035554a05874"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="514" width="150" height="20" uuid="b6a9e884-e7d2-4a81-934f-d1f16b9ad3d9"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IFSC Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="544" width="291" height="27" uuid="6e0a7279-927c-4aa2-af56-768eff9bd690">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ Plz debit the above saving Bank Account and do the Needful]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="571" width="61" height="20" uuid="ad5f1d57-a456-4a75-803e-8c41a03870f9">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="542" width="174" height="21" uuid="16d7e0c9-bc2c-476a-b2ea-6032371778de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[ರೈತರ ಹೆಸರು ಮತ್ತು ಸಹಿ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="181" y="436" width="199" height="19" uuid="d69734b8-2446-4421-9df8-7c4a71a270a1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{farmerFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="456" width="199" height="19" uuid="32ccaf03-9cee-4173-bfe1-0be2c9eac012"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{farmerAccountNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="496" width="199" height="19" uuid="1e2fc31d-1992-4b28-85dc-7b60d0c7261b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{farmerBranchName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="516" width="199" height="19" uuid="3e213051-581c-4161-8555-4c9348b4b49a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{farmerBankIfsc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="476" width="199" height="19" uuid="7ce0f71d-9a69-4718-8556-1743443ad516"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{farmerBankName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="435" width="260" height="19" uuid="bc8a11ad-4d8f-4fdf-8e52-483807bf987e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="541" y="455" width="259" height="19" uuid="3e6da549-1e62-4cc2-b8a8-dccd48ed990f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorAccountNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="475" width="260" height="19" uuid="0d27a326-669d-497a-bb25-b9277da39d05"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorBankName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="495" width="260" height="19" uuid="4f841b54-25df-4f23-beb9-471b6516979f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorBranchName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="515" width="260" height="19" uuid="1e02877f-6668-4508-8ec8-1cc7b1c7c6c6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorBankIfsc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="573" width="210" height="18" uuid="f5e8c4f8-2fb9-43f8-9522-faa34bf004fd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="321" width="100" height="20" uuid="3828eebb-a612-4fef-9836-9a0c280f42c8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="341" width="100" height="20" uuid="e1224fe6-ecf9-4b1f-b952-6244b84d8ef9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="259" width="201" height="20" uuid="41b345fd-d4d3-43e2-a7d0-f997e1a7ed24">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{districtName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="216" width="200" height="20" uuid="00a1bd85-442a-4d20-aa02-6fde513246a6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorBankName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="237" width="200" height="20" uuid="77dbdccd-af91-42d5-a655-ca63f4a20bda"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{vendorBranchName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="120" width="441" height="30" uuid="040fe519-d63a-4732-bb15-7d0ea4d124c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="319" width="420" height="22" uuid="5c74dae6-ea96-40fe-9432-bdca48a8b246"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[ is credited to my above Saving Bank Account. Please debit my  Account Number : Of  Rs.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="342" width="456" height="20" uuid="4d9c872e-0b2e-4a6f-9ad6-60a5b963a7b4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[and   make NEFT/RTGS/TRF to the below mentioned Manufacturer/Supplier/RC Holder Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="320" width="186" height="20" uuid="d8517ba7-7256-483c-8988-64745c885914">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[ Farmer Share amount Rs .]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="625" y="564" width="160" height="23" uuid="28276392-6b0e-4646-81bc-e3d741a30ba7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{farmerFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="100" width="160" height="20" uuid="8e7d5084-d57f-4133-927f-0e7e00ac1031">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

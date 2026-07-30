@@ -1,0 +1,2052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bid Slip Triplicate_Landscape_1" pageWidth="803" pageHeight="605" orientation="Landscape" columnWidth="763" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63d8b897-f32c-42e3-a839-f672771cb30c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="50 Format.jrdax"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+		
+	<detail>
+		<band height="555" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="30" width="200" height="20" uuid="50851c04-3a44-474b-a9bd-bfd8fa9e64f8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ಹರಾಜು ಚೀಟಿ (ಕಛೇರಿ ಪ್ರತಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="50" width="200" height="20" uuid="645138ec-17b8-495d-99a0-54463d23d8db"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="70" width="200" height="20" uuid="43e36f58-5308-4373-bea2-16a18239e7cc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="90" width="200" height="40" uuid="29016901-5d2b-4f83-9bee-c40c4dedb9c4">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸೀಲ್ಕ್ ವರ್ಮ್ ಸೀಡ್, ಕಕೊನ್ ಅಂಡ್ ಸಿಲ್ಕ್ ಯಾನ್೯	
+(ರೆಗ್ಯುಲೇಷನ್  ಆಫ್ಪ್ರೊಡಕ್ಷನ್, ಸಪ್ಲೈಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್ ಅಂಡ್ಸೇಲ್ಸ್)
+ರೂಲ್ಸ್ ೧೯೬೦ - ಫಾರಂ ೭ಬಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="30" width="213" height="20" uuid="7a5423b9-a745-4493-98ee-47e7a473820e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ಹರಾಜು ಚೀಟಿ (ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರರ ಪ್ರತಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="50" width="213" height="20" uuid="5f07c7bd-6527-45fb-8e96-67f14f577e8f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="70" width="213" height="20" uuid="7a8b1a31-b11c-49aa-94a7-2f83bf14aa89">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="130" width="113" height="20" uuid="a20daa98-b2d5-4d57-a246-43ed498ccce1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight&#xD;&#xA;" size="8.5"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="150" width="113" height="20" uuid="d214241a-c399-4c56-9ab0-52821e240d78">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight&#xD;&#xA;" size="8.5"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ಲಾಟ್ ನಂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="170" width="113" height="20" uuid="71840b7c-906b-4a68-8639-95010b9b2ccb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight&#xD;&#xA;" size="8.5"/>
+					<paragraph leftIndent="3" spacingBefore="0"/>
+				</textElement>
+				<text><![CDATA[ದಿನಾಂಕ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="190" width="113" height="20" uuid="9b3c3e42-2041-4594-8865-b8c0183fbf7f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight&#xD;&#xA;" size="6.5"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ಸರ್ಕಾರಿ ರೇಷ್ಮ ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="210" width="113" height="20" uuid="a50d10f2-be6a-4872-94a0-976b1baf0352">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight&#xD;&#xA;" size="8.5"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ತಳಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="130" width="87" height="20" uuid="a2d8e85c-a12b-44cc-8a23-469794b72d72"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   KLR-39241
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="150" width="87" height="20" uuid="38b1f00a-10ec-4d58-9da6-9d452fc93102"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    201
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="170" width="87" height="20" uuid="713c7eb3-7a80-4206-912c-f82f94cde00d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5.5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  07-11-2023
+    (07:38:30)
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="190" width="87" height="20" uuid="4203a6bb-7af3-4fda-973c-0557aa8ded8b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕೋಲಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="210" width="87" height="20" uuid="a1cd8d47-0ba4-4173-9c2d-8a3a9ae5c679"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[CB Gold
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="230" width="113" height="30" uuid="c611f216-b832-4b1d-a247-066819632390">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು ಸ್ಥಳ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="260" width="113" height="30" uuid="829747d5-6bd3-416b-9b51-23ed56af40fd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಹತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="290" width="113" height="30" uuid="4091403d-d868-43a7-b8a5-0ae2662b9670">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7" isBold="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="320" width="113" height="20" uuid="55891c54-d8d3-44ab-b0f0-5dbefba46bbe">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ
+(ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="340" width="113" height="20" uuid="6c30935d-dd3b-4326-bc43-09fb2cffb0dd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="360" width="113" height="30" uuid="4ef13b5f-ea5a-40f2-b599-87f102e44a3d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೬.. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="390" width="113" height="30" uuid="854ad1fa-2ced-4641-ab79-4395340b4fd1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="420" width="113" height="25" uuid="6898cd24-e8a1-40b3-872a-7ea84eec170e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="445" width="200" height="50" uuid="ee7f6982-b4ab-4e7a-a9e2-8cd863dfbdc5">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ಈ ಮೇಲೇ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು 00-00-0000 ದಿನ ------------------ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="495" width="200" height="20" uuid="018b29b5-b0ee-43e2-9317-ede931386e46">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="515" width="200" height="20" uuid="a5c130a1-11c4-4bc1-ae0e-448e1ae97ae8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[   (Login Name) // Bank106900004207             (PKGB0010692)	         
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="535" width="200" height="18" uuid="a8637138-b49b-400d-9dc8-356e96fad9b6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ (G(19) 21559.3+217.7+217.7=21994.7	
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="50" width="31" height="20" uuid="3209c8d9-3d81-4cb8-86dd-f96c8e4c5644">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[13.86
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="70" width="31" height="19" uuid="35595bae-3654-4ab8-8578-b18da287497a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[12.82
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="90" width="31" height="20" uuid="086f4378-bfd2-4da8-9651-8956cdc2f921">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[11.92
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="117" width="31" height="18" uuid="c1f05cfb-0df3-447c-acc9-5abd10e7c24f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[12.1
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="151" width="31" height="20" uuid="58b02474-91a3-4c4b-992a-827261a5e6af">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[12.79
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="171" width="31" height="20" uuid="948d1d6a-14d0-4dd1-b606-3f0c9568991d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.49
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="190" width="31" height="19" uuid="79657412-2e58-481a-8da4-9e7f83275d59">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="207" width="31" height="20" uuid="fab77ec3-d78e-4aa6-8f69-518a6e40bd11">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="230" width="31" height="20" uuid="24de35d5-716a-43f2-bf87-08c0f250c51c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="250" width="31" height="30" uuid="35806b4c-3fc1-40c5-94d8-0952427fd52c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="280" width="31" height="30" uuid="b8cb0079-5f2d-4d29-acb0-78ad87498bf1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="310" width="31" height="30" uuid="cfe1ec9a-c227-4631-bc0b-6071ea6ba0b7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="340" width="31" height="20" uuid="c3a91f4a-6091-42c5-8f2d-983faf39c8c7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="360" width="29" height="20" uuid="ed5d0adb-eecd-4fd1-afe4-9c5aafb994c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[........]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="380" width="31" height="20" uuid="203ae8eb-8f2c-4f0c-ba00-18e8233dca82">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="400" width="33" height="20" uuid="224777dd-9877-4879-9b54-03fb01ef0ea0">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[21777.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="230" width="87" height="30" uuid="eed59c66-a0eb-466e-9cc6-9e5bf6c0f9ed"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[(27686) ನಾರಾಯಣಗೌಡ ಬಿನ್ 
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="290" width="87" height="30" uuid="cd7d2995-fe43-4e08-a244-802e5c33f5dd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[KKR 3212
+ASLAM ULLA KHAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="260" width="87" height="30" uuid="762c42ca-0c64-4878-b1ed-266513f76df4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[343.000
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="320" width="87" height="20" uuid="f4abc1a7-06fd-4da4-9d30-2e03d397155a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.490 (14:02:25)                                                                            
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="340" width="87" height="20" uuid="4c5ad26e-e982-46fe-97b9-f35fb6c70039">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 217+217=434
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="360" width="87" height="30" uuid="bdc6e114-ff1c-4588-9c1f-a20ef434d107">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  21559.30
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="390" width="87" height="30" uuid="cc2d6aed-e4f9-4b52-a7d6-365552bea78f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="420" width="87" height="25" uuid="d6ff197e-ff5d-43fc-946e-ee7b6b0316e4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="90" width="213" height="40" uuid="4de80155-4b10-4ce9-a51e-79f49410ba23">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="6"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸೀಲ್ಕ್ ವರ್ಮ್ ಸೀಡ್, ಕಕೊನ್ ಅಂಡ್ ಸಿಲ್ಕ್ ಯಾನ್೯(ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಷನ್, ಸಪ್ಲೈ ಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್ ಅಂಡ್ ಸೇಲ್ಸ್)
+ರೂಲ್ಸ್ ೧೯೬೦ - ಫಾರಂ ೭ಬಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="130" width="110" height="20" uuid="9d940ffe-6f79-4fdf-b297-41df56b9b188">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="150" width="110" height="20" uuid="cdf78701-2a99-4a85-b209-7f89d9c912c2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಲಾಟ್ ನಂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="170" width="110" height="20" uuid="a749f6a4-2d34-4a90-8ab7-70edea663134">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ದಿನಾಂಕ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="190" width="110" height="20" uuid="8d9f456a-d0fc-459b-b09c-793aac8ce75a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="6.5"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಸರ್ಕಾರಿ ರೇಷ್ಮ ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="210" width="110" height="20" uuid="9ff1675a-17a2-42b7-b75f-1cabb3dd2e2a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph firstLineIndent="3" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ತಳಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="230" width="110" height="30" uuid="9970847d-f136-405a-abd1-18686f731dcf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು ಸ್ಥಳ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="260" width="110" height="30" uuid="872f75b8-b0e7-4f33-87ce-43fbdcda48d2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಹತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="290" width="110" height="30" uuid="9992be8e-c486-4304-98a5-215bdd358144">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="320" width="110" height="20" uuid="d68ab3f9-384b-4bae-a182-79f416b57d70">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ
+(ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="130" width="103" height="20" uuid="89ceef6b-f3bd-4b33-8bae-b056a3726342">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   KLR-39241
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="170" width="103" height="20" uuid="62be0daa-d0c2-4eb9-9fc8-d251de18bb50">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5.5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  07-11-2023
+    (07:38:30)
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="150" width="103" height="20" uuid="c055038c-3feb-4bad-9cab-9043f051a0a2">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="260" width="103" height="30" uuid="6a80f3df-186d-46df-be2c-2e666cb7005e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   343.000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="290" width="103" height="30" uuid="e8d225c5-c387-4e05-a3fc-74bc5653cf78">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[       KKR 3212
+   ASLAM ULLA KHAN
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="320" width="103" height="20" uuid="fb87ddd5-6628-4db3-bb83-9bbf46ed71ba">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.490 (14:02:25)                                                                            
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="340" width="110" height="20" uuid="d0f99f19-56a4-4b0f-90ff-a7a9691d2975">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="360" width="110" height="30" uuid="8881088f-2e85-4814-8245-6f40a2dd8b44">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೬.. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="390" width="110" height="30" uuid="97b44403-6d4e-4958-9fc6-5ecf3f9ebf65">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="420" width="110" height="24" uuid="0b6cd1d7-f5fe-4072-8d6c-bfcc98045fb6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="444" width="213" height="50" uuid="fe49f389-eea4-4dc3-ade0-5df5f1b45bb6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[ಈ ಮೇಲೇ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು 00-00-0000 ದಿನ ------------------ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="360" width="103" height="30" uuid="296505e8-6ff6-440a-a23d-675e6eef3884">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  21559.30
+ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="340" width="103" height="20" uuid="20815060-8864-463f-8b1c-00e937ae8768">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   217+217=434
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="390" width="103" height="30" uuid="68fb743c-60cb-4afb-a291-7887c3f7c884">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="420" width="103" height="24" uuid="02300f1a-fbc0-4c80-a2a8-dfa69c8b0888">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="494" width="213" height="20" uuid="d8273125-dda6-4cc8-a84c-a44adc85735d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="514" width="213" height="20" uuid="0c57d084-875d-471b-8934-b1b9f4a5226b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ Bank – 10692100004207(PKGB0010692)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="534" width="213" height="20" uuid="ac701fd3-fcb8-4303-a7b7-86281a8bfe05">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[                                     0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="39" width="30" height="20" uuid="01b001f5-5b02-41f2-b343-4b4f6d4d93ab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 13.86
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="59" width="31" height="19" uuid="0b551c6a-79ad-468d-bda7-349a89356aa9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 12.82
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="78" width="30" height="20" uuid="a199abf6-1bf0-43d9-abf4-355ce3c4141d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 11.92
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="108" width="30" height="18" uuid="e8ac0a39-efae-4563-a272-c40038b15ca1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   12.1
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="140" width="30" height="20" uuid="58540be0-9896-41d6-9c36-106ea08f8de1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 12.79
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="160" width="30" height="20" uuid="c3832a25-8b72-4f0b-a508-8b68bd5673c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.49
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="180" width="30" height="19" uuid="d0640bb8-4874-474b-abc9-f73ae2588656"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="199" width="31" height="20" uuid="88f24b39-7a6b-44df-a88b-f59f949e9cfa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="220" width="27" height="20" uuid="f9a5aa7b-f1bd-401e-b31c-d70ad42762de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="240" width="26" height="30" uuid="f176c372-4331-4ffe-ad31-a9ad16cd10f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="270" width="27" height="30" uuid="9fe9bd94-e1fb-483f-8453-08449ecd937e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="300" width="26" height="30" uuid="b4d517f7-0943-4526-8ad0-a03c102bb6c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="330" width="26" height="20" uuid="5659036b-aee6-406c-a866-aa40188dd04a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="350" width="30" height="20" uuid="bb7ddeba-3234-41e8-95b7-647cdc8a5fe6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[........]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="370" width="28" height="20" uuid="5ef412a2-3d89-40a2-a2ed-5f3ef81e16a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="390" width="40" height="20" uuid="0e4408eb-dd2b-443e-80d5-284dbac7cf89">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[21777.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="30" width="213" height="20" uuid="f56867ae-c41a-4457-98f1-30e5bbea550a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ಹರಾಜು ಚೀಟಿ (ರೇಷ್ಮೆ ಗೂಡು ಖರೀದಿದಾರರ ಪ್ರತಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="50" width="213" height="20" uuid="96a75731-3474-4b54-9b20-c162e67d1b71">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="70" width="213" height="20" uuid="47c75113-6d33-4c91-8026-d2404965e900">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="90" width="213" height="40" uuid="3c95745e-71f5-4f7c-b988-f8f0553f44b3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="6"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸೀಲ್ಕ್ ವರ್ಮ್ ಸೀಡ್, ಕಕೊನ್ ಅಂಡ್ ಸಿಲ್ಕ್ ಯಾನ್೯(ರೆಗ್ಯುಲೇಷನ್ ಆಫ್ ಪ್ರೊಡಕ್ಷನ್, ಸಪ್ಲೈ ಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್ ಅಂಡ್ ಸೇಲ್ಸ್)
+ರೂಲ್ಸ್ ೧೯೬೦ - ಫಾರಂ ೭ಬಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="130" width="115" height="20" uuid="d9a05d80-b9a0-42f4-b54e-98b49ec15d10">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="150" width="115" height="20" uuid="9341c90a-3118-4968-b820-89be461ec1c9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಲಾಟ್ ನಂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="170" width="115" height="20" uuid="667f1855-1250-4aa3-9b1c-26fc1493e4ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8" isItalic="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ದಿನಾಂಕ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="190" width="115" height="20" uuid="782fd8cf-818a-45d6-964d-fcdd9787f0a1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="6.5"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ಸರ್ಕಾರಿ ರೇಷ್ಮ ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="210" width="115" height="20" uuid="471af4cf-81e7-4f74-9ff4-b74594c8036a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ತಳಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="230" width="115" height="30" uuid="781662a9-2d19-4afe-bf0c-8ec2f1ec1d41">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು ಸ್ಥಳ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="260" width="115" height="30" uuid="7b469763-c6c1-4316-a6f8-034842652389">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಹತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="290" width="115" height="30" uuid="943eb4f3-468e-40d2-91e3-40a17698157b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="320" width="115" height="20" uuid="523fda53-12da-484e-ba55-aa6a18e089fc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ
+(ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="340" width="115" height="20" uuid="eec03681-5be5-434b-b69d-8593a36c4462">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="360" width="115" height="30" uuid="e7517b2a-d73e-4d3e-8193-e24aa8988096">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೬.. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="390" width="115" height="29" uuid="8ac4da90-8d10-4e08-a756-c6e8ac9c31ca">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="419" width="115" height="23" uuid="b8411151-1713-4808-b8d5-e5a55916a334">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+					<paragraph firstLineIndent="2" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="130" width="98" height="20" uuid="f9568078-e7db-4cf8-b88f-ceca6c75d358">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ KLR-39241
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="150" width="98" height="20" uuid="5d9263be-759a-48ea-98eb-82b177cddee0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="170" width="98" height="20" uuid="dfa9ce3e-a021-48c0-a523-3cd1fe02de25">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5.5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  07-11-2023
+    (07:38:30)
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="190" width="98" height="20" uuid="0ddf606f-4e83-492e-9235-de4adc541167">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕೋಲಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="210" width="98" height="20" uuid="c0357a08-753b-4b05-9172-49fe31040a6f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[  CB Gold]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="290" width="98" height="30" uuid="92891fe9-289e-4f98-8313-d362291b1a6a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[        KKR 3212
+   ASLAM ULLA KHAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="320" width="98" height="20" uuid="112481e5-00b1-4460-b3ac-a940d80b232f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.49 (14:02:25)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="340" width="98" height="20" uuid="37fded84-f31c-4399-ae93-ebe04afccf78">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  217+217=434]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="360" width="98" height="30" uuid="9fa331bc-4d6d-4a28-ab2e-499e70dce095">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  21559.30]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="390" width="98" height="29" uuid="679c21a7-99c1-47a1-aef9-bbc6df770cae">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="noto sans" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="419" width="98" height="23" uuid="ba02b32c-de15-4ad6-9171-f8562b9aa097">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="443" width="213" height="50" uuid="961be19a-b905-4f9f-a6cc-9e3755ab4787">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[ಈ ಮೇಲೇ ನಮೂದಿಸಿದ ವಿಷಯಗಳು ಸರಿಯಾಗಿವೆಯೆಂದು ದೃಢೀಕರಿಸುತ್ತೇನೆ ಹಾಗು ಲೈಸೆನ್ಸ್ ಪಡೆದವರಿಗೆ /ಪ್ರತಿನಿಧಿಗೆ ಕೆ.ಜಿ. ಗೂಡುಗಳನ್ನು 00-00-0000 ದಿನ ------------------ಘಂಟೆಯೊಳಗಾಗಿ    ಸಾಗಿಸಲು ಅನುಮತಿ ನೀಡಿದ್ದೇನೆ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="493" width="213" height="19" uuid="3df1c2f8-015c-428f-99cf-5f4f76f9ed11"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="513" width="213" height="20" uuid="570fd73b-951e-4fb8-a549-ba1968350f8f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Balance: xxxxx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="533" width="113" height="20" uuid="66bbcccb-9cdc-469c-b02d-538157a18894">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="8"/>
+				</textElement>
+				<text><![CDATA[ರೀಲರ್‌ ಮೊತ್ತ ರೂ.21995/-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="533" width="100" height="20" uuid="27feba0c-96b6-4ec7-bd18-5c14a84a2571">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[                            0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="44" width="32" height="20" uuid="4e9f8fb3-3e25-4532-b7f6-12e4be88b8da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 13.86
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="64" width="32" height="16" uuid="bdc7e043-c074-4e31-ac97-33f3132b615c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 12.82
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="79" width="32" height="21" uuid="dac13484-67ee-4f0d-8fd4-3bb0f451bfe7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 11.92
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="100" width="32" height="40" uuid="c935a06f-19c7-44b0-b420-fddace793a5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   12.1
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="140" width="32" height="20" uuid="9d623045-d426-4bee-9e8e-2d676789fdf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 12.79
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="160" width="32" height="20" uuid="264e121e-0776-4760-a38b-28c53e464cdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 63.49
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="180" width="32" height="19" uuid="895be5ad-30f1-4f37-be1f-ba8cc58725c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="741" y="200" width="31" height="20" uuid="1f13a369-b4f3-4991-8ad5-4ad5f942f6f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+				</textElement>
+				<text><![CDATA[21777.07
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="220" width="27" height="20" uuid="9c0aab67-870b-48fa-b7c1-c9f07865a9c6"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="240" width="28" height="30" uuid="c0c76a80-0ff3-43fb-a02a-a0b59e852d4b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="300" width="27" height="30" uuid="8182c0b7-054a-421f-bd96-264a2c9bfdae"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="330" width="27" height="20" uuid="44fbee1b-6644-48e6-9806-e5c5c4e43b4f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="350" width="32" height="20" uuid="3071bfe6-5443-445a-b2b6-68ff29fc6fc2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[........]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="370" width="28" height="20" uuid="e9138c51-af46-4d9b-b0e3-cece8265fc56"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="390" width="32" height="20" uuid="02a77c0d-653b-47a5-8c6e-7c9e0b40a235">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[21777.07]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="190" width="103" height="20" uuid="47b6b2c5-259e-4627-842e-1ce1e2587338"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI Semilight" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕೋಲಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="210" width="103" height="20" uuid="e4e4f1a5-6d88-4640-8c32-71b39cd14f1d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[CB Gold
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="230" width="103" height="30" uuid="c2516375-68d7-4a6b-a8f5-5ba281b94384"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[(27686) ನಾರಾಯಣಗೌಡ ಬಿನ್ 
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="230" width="98" height="30" uuid="dae53222-d578-4917-b82b-c847ab6e1d2a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Nirmala UI Semilight" size="7"/>
+				</textElement>
+				<text><![CDATA[(27686) ನಾರಾಯಣಗೌಡ ಬಿನ್ 
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="260" width="98" height="30" uuid="5b2fa58a-ae77-4ea4-8b35-4e25cb1d048a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   343.000]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

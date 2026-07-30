@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bid Slip Triplicate_Landscape_1" pageWidth="803" pageHeight="605" orientation="Landscape" columnWidth="763" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63d8b897-f32c-42e3-a839-f672771cb30c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="50 Format.jrdax"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="30" width="200" height="20" uuid="50851c04-3a44-474b-a9bd-bfd8fa9e64f8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ಹರಾಜು ಚೀಟಿ (ಕಛೇರಿ ಪ್ರತಿ)]]></text>
+			</staticText>			
+		</band>
+	</detail>
+</jasperReport>

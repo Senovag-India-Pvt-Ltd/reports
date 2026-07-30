@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Marketfee" pageWidth="600" pageHeight="1000" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f3e9ddfc-85ba-4053-a190-dd6216c19656">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header4" class="java.lang.String"/>
+	<field name="header" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="960" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="0" width="560" height="1" uuid="a0eaa3a0-455f-4972-a974-0c2a16fc209f"/>
+			</line>
+			<staticText>
+				<reportElement x="359" y="33" width="109" height="38" uuid="387cf222-da4d-4a95-a9af-2f557429e798"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ   ಇಲಖೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="65" width="107" height="36" uuid="6fcf2cbf-49e7-4a2b-a255-0518fa51f045"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮೂಲಪ್ರತಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="32" width="130" height="31" uuid="b899967e-3461-45be-b20d-a772a577d3a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="64" width="130" height="33" uuid="fd9213fc-3d26-4587-bdc2-6c8cab21c908"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ    ರಶೀದಿ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="99" width="130" height="28" uuid="24aee256-5df6-4704-b8c2-93979afca25b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[( ನಿಯಮ ೧೭ (೯)) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="156" width="536" height="62" uuid="541e9f11-379a-4eb2-8a07-25e356cc72b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ  ಸಿಲ್ಕ್    ವರ್ಮ್   ಸೀಡ್ಸ್   ,   ಕಕೂನ್ ಅಂಡ್ ಸಿಲ್ಕ್     ಯಾರ್ನ್  ರೇಗುಲೇಷನ್  ಆಫ್ ಪ್ರೊಡಕ್ಷನ್ ಸಪ್ಲೈ   ,     ಡಿಸ್ಟ್ರಿಬ್ಯುಷನ್    ಅಂಡ್    ಸೇಲ್ಸ್     ರೂಲ್ಸ್     ೧೯೬೦]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="226" width="187" height="44" uuid="bd1c4590-0873-41a3-b897-14936363a229"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ    ಶುಲ್ಕದ ರಶೀದಿ           ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="235" width="157" height="35" uuid="7c3b6738-b182-4e7c-9c15-f41e0c772d6b"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="561" y="0" width="1" height="796" uuid="db2333f4-26d0-4701-a670-281073b55f89"/>
+			</line>
+			<line>
+				<reportElement x="2" y="796" width="558" height="1" uuid="777adc1a-a1c3-4547-970b-69a2c5c50318"/>
+			</line>
+			<line>
+				<reportElement x="2" y="0" width="1" height="795" uuid="ad2c38b5-de1d-461f-85ca-999963099c60"/>
+			</line>
+			<textField>
+				<reportElement x="27" y="309" width="508" height="339" uuid="646b8063-3bcb-4cbd-8828-59f5595ceced"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="801" width="523" height="34" uuid="e4ead7b0-5556-4ce0-9abc-5b3a14c838da"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<text><![CDATA[ಸರ್ಕಾರಿ ಮುದ್ರಣಾಲಯ, ಬೆಂಗಳೂರು]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="751" width="523" height="33" uuid="554072ef-2d98-4100-aaf2-301cce041e97"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<text><![CDATA[(ಮಾರುಕಟ್ಟೆ      ಮೊಹರು)                                                            ಮಾರುಕಟ್ಟೆ    ಅಧಿಕಾರಿ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="278" y="835" width="255" height="95" uuid="d0a80014-c2be-4e55-a4db-810f6d7760fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="960">
+			<staticText>
+				<reportElement x="4" y="159" width="536" height="62" uuid="2261abf9-ea06-4fe9-98b5-d87b2631fde2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ  ಸಿಲ್ಕ್    ವರ್ಮ್   ಸೀಡ್ಸ್   ,   ಕಕೂನ್ ಅಂಡ್ ಸಿಲ್ಕ್     ಯಾರ್ನ್  ರೇಗುಲೇಷನ್  ಆಫ್ ಪ್ರೊಡಕ್ಷನ್ ಸಪ್ಲೈ   ,     ಡಿಸ್ಟ್ರಿಬ್ಯುಷನ್    ಅಂಡ್    ಸೇಲ್ಸ್     ರೂಲ್ಸ್     ೧೯೬೦]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="232" width="187" height="44" uuid="f2175f61-acc5-4ecf-8f37-3dfe4e385b44"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ    ಶುಲ್ಕದ ರಶೀದಿ           ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="236" width="157" height="34" uuid="22b38c60-9215-4ab4-b3f5-efc16778a8e5"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="309" width="508" height="339" uuid="2f3c21e0-03a4-4e0c-bc12-e283119cfeea"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="751" width="523" height="33" uuid="5a6b4863-0f70-471d-b15e-51200d20e5d1"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<text><![CDATA[(ಮಾರುಕಟ್ಟೆ      ಮೊಹರು)                                                            ಮಾರುಕಟ್ಟೆ    ಅಧಿಕಾರಿ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="801" width="523" height="34" uuid="058fca33-7191-406c-8ee4-1d3ae9e57a38"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="13"/>
+				</textElement>
+				<text><![CDATA[ಸರ್ಕಾರಿ ಮುದ್ರಣಾಲಯ, ಬೆಂಗಳೂರು]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="796" width="558" height="1" uuid="e6774a51-d52d-4480-8ff6-9c9f0a179dd1"/>
+			</line>
+			<textField>
+				<reportElement x="278" y="835" width="255" height="95" uuid="13e90381-278b-4a36-84e5-61a510451ba0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="1" width="558" height="1" uuid="0da4764e-e4f4-411f-83f2-5522f3286f2a"/>
+			</line>
+			<line>
+				<reportElement x="560" y="3" width="1" height="793" uuid="8faef64e-d4d3-4106-a834-092d9a6ca2c1"/>
+			</line>
+			<line>
+				<reportElement x="2" y="1" width="1" height="796" uuid="6bf6b264-5a40-4a46-a4f1-0228f0c7fb0f"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="32" width="130" height="31" uuid="1a72bacf-4dba-42f1-82e7-471b1c2aa736"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="64" width="130" height="33" uuid="9e135d29-143a-47eb-84ba-662bc6113c84"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮಾರುಕಟ್ಟೆ    ರಶೀದಿ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="99" width="130" height="28" uuid="e33f6881-d049-4e1e-b24e-baf7dcf2061c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[( ನಿಯಮ ೧೭ (೯)) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="33" width="109" height="38" uuid="1d3c0814-152e-41f8-8a95-a0b594d0907a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ   ಇಲಖೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="65" width="107" height="36" uuid="5b703a79-4012-4f1f-8e86-411304def83c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ಮೂಲಪ್ರತಿ]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

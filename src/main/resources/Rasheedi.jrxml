@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice2" pageWidth="1000" pageHeight="700" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b3fbc12-20ba-4067-8656-b260afc1f58d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="CollectionBeanParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="CollectionBeanParam2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="CollectionBeanParam3" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header1" class="java.lang.String"/>
+	<field name="header" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="header3" class="java.lang.String"/>
+	<field name="header4" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<field name="header5" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="660" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="100" width="450" height="330" uuid="d7f48abc-53ba-42c0-8b82-0ceeb88094a1"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="528" y="100" width="432" height="357" uuid="59c2029c-cdf5-4e74-818c-d6fae85bd6eb"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="560" width="180" height="70" uuid="8356c7b5-b881-43eb-bf04-0c2f669cad55"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="10"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="152" y="27" width="150" height="29" uuid="7963b117-252c-4ad4-bcc8-e5125fc2f558"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ   ಇಲಾಖೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="7" width="150" height="22" uuid="310b1564-964a-41ee-90c8-0d8a003f3f5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="65" width="95" height="29" uuid="34475182-87b6-4e25-8db8-390defc59457"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ರಶೀದಿ ಸಂಖ್ಯೆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="528" y="611" width="445" height="31" uuid="b525eece-561e-4291-bbca-2d8c3b88947a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<text><![CDATA[ಬಿತ್ತನೆ  ಪ್ರಚಾರ  ಶಾಖೆ / ಕೃಷಿ  ಕ್ಷೇತ್ರ   ಕೋಠಿಯ ಅಧಿಕಾರಿಯ ಸಹಿ ರುಜು ಮತ್ತು ಹುದ್ದೆ.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="497" y="-20" width="1" height="680" uuid="06afe0ae-3f92-4ab5-8ab7-b3f4f0891b30"/>
+			</line>
+			<staticText>
+				<reportElement x="790" y="65" width="95" height="29" uuid="fffe5236-a3c8-43eb-8899-b620300488dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ರಶೀದಿ ಸಂಖ್ಯೆ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="77" y="466" width="319" height="70" uuid="12813a06-7633-4eb0-8304-e6c6c648e6ec"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="8"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header5}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="125" y="429" width="200" height="31" uuid="c6c6eeaf-4c01-4004-b2ef-ca5ce6c2b8f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ದೃಢೀಕರಣ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="601" y="494" width="319" height="70" uuid="301731c1-1c45-4a67-b1c5-633707a76adb"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="8"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header5}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="649" y="457" width="200" height="31" uuid="341552fd-e431-484b-8d61-acf81037b4dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ದೃಢೀಕರಣ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="289" width="360" height="21" uuid="c9b6f8e1-baae-418f-a3fb-e63b4cf63c4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<text><![CDATA[ಅನುಜ್ಞಾ   ಪತ್ರ    ಪಡೆದಿರುವ   ಸಾಕಣೆದಾರನ   ಸಹಿ  ಅಥವಾ ಹೆಬ್ಬೆ ಟ್ಟಿ ನ     ಗುರುತು]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="810" y="4" width="139" height="29" uuid="224eb599-6242-4e1f-8145-bcb234ec8aa2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಹಣ ಸಂದಾಯ ರಶೀದಿ]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

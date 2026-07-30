@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Acknowledgement Receipt" pageWidth="842" pageHeight="842" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3db67f87-2591-4898-8783-b4aba79eba56">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="date" class="java.lang.String"/>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<field name="addressText" class="java.lang.String"/>
+	<field name="districtName" class="java.lang.String"/>
+	<field name="talukName" class="java.lang.String"/>
+	<field name="villageName" class="java.lang.String"/>
+	<field name="hobliName" class="java.lang.String"/>
+	<field name="fruitsId" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="acceptedDate" class="java.lang.String"/>
+	<field name="header" class="java.lang.String"/>
+	<field name="financialYear" class="java.lang.String"/>
+	<field name="schemeName" class="java.lang.String"/>
+	<field name="subSchemeName" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="419" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-22" y="183" width="844" height="30" backcolor="#339900" uuid="7fcc5ac1-c4fd-4900-b305-b330b9db4184"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Acknowledgement  Receipt]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="158" y="222" width="148" height="30" uuid="ef3c04d4-1efd-4b39-bd2e-340535c0865e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="308" width="170" height="25" uuid="a87a38b1-2994-40f5-838c-0070cc309d12">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{farmerFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="277" width="130" height="25" uuid="a4b613dd-e0b7-432c-8570-b62fbdbfde97">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{addressText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="277" width="90" height="25" uuid="5015972f-ca39-4de5-b18a-9a99e10c416e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{districtName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="277" width="120" height="25" uuid="55caa5eb-ee6a-4453-ab14-39798df003c6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{talukName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="277" width="140" height="25" uuid="ebb0e82e-7fa5-47c9-b3ba-828ccf7c5bf5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hobliName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="307" width="117" height="25" uuid="6bf4d55c-f48d-4200-a34f-f7e0abb91dc5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{villageName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="340" width="280" height="25" uuid="8541647a-cab4-40d0-a6d1-48827c396d22">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fruitsId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="340" width="417" height="25" uuid="ef14d6ff-29d2-4ab3-9aa9-96880ad3b7fa">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="222" width="141" height="30" uuid="a1886e74-0f38-4f61-b669-72bec0f6a90e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acceptedDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-22" y="-1" width="844" height="60" uuid="53f9fb95-3a6e-449e-8404-908d3e087550"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="265" y="63" width="160" height="86" uuid="6490d613-ab05-4d1f-a6b6-f5ef385e2e14"/>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="265" y="158" width="160" height="20" uuid="db2f7224-9323-4fe0-b2dc-41f077feed9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[(ರೇಷ್ಮೆ ಇಲಾಖೆ)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="33" y="277" width="77" height="25" uuid="eddb7faa-4bba-4c1f-b3c0-5347b3b50001">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financialYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="277" width="200" height="25" uuid="adef1850-a5d4-4631-afd9-d3ef31d9110c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{schemeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="307" width="470" height="25" uuid="c34b5f2f-d140-404c-bee3-4a6e707ae6f2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subSchemeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="374" width="318" height="25" uuid="1de0e5e4-d366-4d7f-9707-7cb4c028502c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

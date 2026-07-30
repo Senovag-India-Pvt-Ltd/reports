@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Acknowledgement" pageWidth="640" pageHeight="1000" columnWidth="600" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f860de0-2c2f-45a0-a8ec-919e34039bc0">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header" class="java.lang.String"/>
+	<field name="acceptedDate" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="header3" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="960" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="227" width="600" height="30" backcolor="#FFFFFF" uuid="ac60cbc9-a65c-437a-a647-4c1781e866d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ ನೂಲು ಬಿಚ್ಚಾಣಿಕೆದಾರರ ಅರ್ಜಿಯ ಸ್ವೀಕೃತಿ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="274" width="170" height="30" uuid="3214bb79-3cf4-4e27-873b-75cf8eb5147e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acceptedDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="322" width="530" height="298" uuid="b2f92b0d-55f4-4255-b6f1-b78853a1c295"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="11"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="602" y="7" width="1" height="953" uuid="a7c1460c-37fb-4745-a924-8a44103fb843"/>
+			</line>
+			<line>
+				<reportElement x="1" y="7" width="1" height="953" uuid="36ecdb4a-52c3-4496-a2d9-4008adf7a160"/>
+			</line>
+			<image hAlign="Center">
+				<reportElement x="226" y="15" width="130" height="84" uuid="4af83870-9133-44e8-9e93-e8cad73d9938">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-1" y="7" width="602" height="1" uuid="2b3ec39d-0807-4fc9-aee9-dc5f98316d9e"/>
+			</line>
+			<textField>
+				<reportElement x="356" y="620" width="224" height="160" uuid="f6d087a7-bd80-447e-a0cb-37e279d6f7c0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="99" width="130" height="40" uuid="a1094cae-8fac-45e0-be4b-2bd8736bd13f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
+ರೇಷ್ಮೆ    ಇಲಾಖೆ
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="279" width="231" height="30" uuid="960cc9c8-5a60-4496-bbc8-c26cb0829191"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="139" width="599" height="71" uuid="2f5429d1-d14e-4305-a9bc-625b5896c13e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="959" width="601" height="1" uuid="f8a2de99-4dfa-4465-8df7-3dd78221d5b4"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dtr_online_report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a0d193a-d48d-4df5-aa4a-8bb171e52af7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="540592af-4ae6-45a4-918e-d3ae6325196c">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="totalLots" class="java.lang.String"/>
+		<field name="totalLotsBid" class="java.lang.String"/>
+		<field name="totalLotsNotBid" class="java.lang.String"/>
+		<field name="totalBids" class="java.lang.String"/>
+		<field name="totalReelers" class="java.lang.String"/>
+		<field name="currentAuctionMaxBid" class="java.lang.String"/>
+		<field name="accecptedLots" class="java.lang.String"/>
+		<field name="accecptedLotsMaxBid" class="java.lang.String"/>
+		<field name="accectedLotsMinBid" class="java.lang.String"/>
+		<field name="averagRate" class="java.lang.String"/>
+		<field name="weighedLots" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="CollectionBeanParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="headerText" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="260" splitType="Stretch">
+			<componentElement>
+				<reportElement x="40" y="110" width="761" height="150" uuid="c86bf3f5-2733-436a-a505-6d2946561f0f">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="a96fcf07-88f1-44a5-beef-82ad7c232472">
+						<dataSourceExpression><![CDATA[$P{CollectionBeanParam}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="e4c2a6ea-f2d9-45e0-9c81-b0c85a59cbf7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="40" uuid="3fc35e11-6ffd-4de3-af68-55458a57c8e7"/>
+								<box padding="0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<text><![CDATA[Total Lots]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="1558a4c2-92f7-40aa-9cc6-7afa5de2786b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalLots}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="ac27bb51-232e-450b-a42b-8a4ed609a0f4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="40" uuid="b2b9f4af-a32a-40d9-86b0-a67d3723aba6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Lots Bid]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="30" uuid="cb31eee0-1555-429d-9aa7-e59a746f53ca"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalLotsBid}
+]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="e69465da-b741-460d-8120-e255574f9ea3">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="40" uuid="443624aa-ea44-4aa7-93f0-6fd3e44bcd9e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Lots Not Bid]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="cc8096e3-cdcb-4e2f-ab45-72ac2fe6f878"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalLotsNotBid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="3a4e11ae-370d-499e-8d38-24d486356dd3">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="40" uuid="2e055932-a630-4729-8375-ab773d92ee17"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Bids]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="ContainerHeight" x="0" y="0" width="70" height="30" uuid="c3556978-d881-4a48-870d-8a2bba121072"/>
+								<box padding="5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalBids}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="d3508176-09ce-4085-b964-96d0c14bb721">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="40" uuid="aaad70d2-bc55-4d65-aebe-2c1e96ccc3f8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Reelers]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="e73b9a29-5893-4b6c-bae6-256e5b8da172"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalReelers}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="71ebfc84-fff5-413c-9707-ca334a82c63d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="40" uuid="7a6cad2c-f1f3-47c0-a886-1d843b00facf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Accecpted Lots]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="30" uuid="90bee6a9-045e-4d1a-b20c-dfbbf2117e02"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{accecptedLots}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="906c158d-62d5-41d0-9304-992dfd7ff35a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="40" uuid="2b83db00-d96c-47f6-aea4-9d0544e07891"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Accecpted Lots-Max Bid]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="90" height="30" uuid="2974a40a-f1ca-4577-a320-9c76742ee7e8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{accecptedLotsMaxBid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="b3d2c655-dfd1-4131-980d-192c22b5a6f5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="40" uuid="e0176d32-3f3d-49d7-9f7e-b1afdb99898b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Accecpted Lots-Min Bid]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="b5e29fde-76ee-47f6-9344-bbc0457b8240"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{accectedLotsMinBid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="8aa78d75-5b68-498c-a115-99b7ad1c9d55">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="40" uuid="2b299f27-2f1d-403d-99d4-78b72badec19"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Average Rate]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="90" height="30" uuid="99c45535-640a-41c5-94a7-d56309a232fa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{averagRate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="30b4b9a7-439d-4062-a777-41277e21c41c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<jr:tableHeader style="Table_TH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="40" uuid="eef790e3-faed-44da-9cd4-934c6760d17d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Weighed Lots]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="077fb472-9352-49e5-a417-87d613f67ed1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{weighedLots}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="-10" y="7" width="842" height="83" uuid="ded01219-1564-44bd-8878-3ee642affca6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{headerText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

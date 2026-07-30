@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Acknowledgement" pageWidth="640" pageHeight="842" columnWidth="600" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f860de0-2c2f-45a0-a8ec-919e34039bc0">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header" class="java.lang.String"/>
+	<field name="acceptedDate" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="698" splitType="Stretch">
+			<staticText>
+				<reportElement x="196" y="186" width="160" height="20" uuid="38a9a822-2365-4e40-97a8-ee945b37036c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[(ರೇಷ್ಮೆ ಇಲಾಖೆ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="214" width="600" height="30" backcolor="#339900" uuid="ac60cbc9-a65c-437a-a647-4c1781e866d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Acknowledgement  Receipt]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="282" width="270" height="30" uuid="3214bb79-3cf4-4e27-873b-75cf8eb5147e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acceptedDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="330" width="564" height="223" uuid="b2f92b0d-55f4-4255-b6f1-b78853a1c295"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="600" y="7" width="1" height="669" uuid="a7c1460c-37fb-4745-a924-8a44103fb843"/>
+			</line>
+			<line>
+				<reportElement x="0" y="676" width="601" height="1" uuid="4e2a3ca3-e329-4418-8b00-5fe3922d3ef7"/>
+			</line>
+			<line>
+				<reportElement x="-1" y="7" width="1" height="669" uuid="36ecdb4a-52c3-4496-a2d9-4008adf7a160"/>
+			</line>
+			<image hAlign="Center">
+				<reportElement x="196" y="88" width="160" height="98" uuid="4af83870-9133-44e8-9e93-e8cad73d9938">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="28" width="580" height="50" uuid="00ce6927-dada-4889-9103-16f34b38107f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="7" width="602" height="1" uuid="2b3ec39d-0807-4fc9-aee9-dc5f98316d9e"/>
+			</line>
+			<break>
+				<reportElement x="0" y="680" width="641" height="1" uuid="283c4918-ffaa-4b95-8993-24822005fb92"/>
+			</break>
+		</band>
+	</detail>
+</jasperReport>

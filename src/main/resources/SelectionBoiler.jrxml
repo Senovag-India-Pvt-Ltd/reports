@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MscSeedChawki" pageWidth="842" pageHeight="1200" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c4f92fa-d7fd-449c-b326-d2d6b75bdf9b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="MscSeedChawki" uuid="ce226af0-7375-473e-93e1-e2efe25f9d46">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="nameKan" class="java.lang.String"/>
+		<field name="crcName" class="java.lang.String"/>
+		<field name="lotNo" class="java.lang.String"/>
+		<field name="noOfDfls" class="java.lang.String"/>
+		<field name="serialNumber" class="java.lang.Integer"/>
+		<field name="subsidyAmount" class="java.lang.Float"/>
+		<field name="totalNoOfDfls" class="java.lang.Float"/>
+		<field name="schemeAmount" class="java.lang.Float"/>
+		<field name="subsidyAmountCa" class="java.lang.Float"/>
+		<field name="totalSubsidyAmountCa" class="java.lang.Float"/>
+		<field name="status" class="java.lang.String"/>
+		<field name="fatherNameKan" class="java.lang.String"/>
+		<field name="fruitsId" class="java.lang.String"/>
+		<field name="villageNameInKannada" class="java.lang.String"/>
+		<field name="externalUserAddress" class="java.lang.String"/>
+		<field name="externalUserLicenseNumber" class="java.lang.String"/>
+		<field name="externalUserOrganisationName" class="java.lang.String"/>
+		<field name="chawkiReceiptNo" class="java.lang.String"/>
+		<field name="crcBillNo" class="java.lang.String"/>
+		<field name="marketName" class="java.lang.String"/>
+		<field name="sanctionAmount" class="java.lang.Float"/>
+		<field name="lotWeight" class="java.lang.Float"/>
+		<field name="cdcmBiddingSlipNo" class="java.lang.String"/>
+		<field name="cdcmTransactionDate" class="java.lang.String"/>
+		<field name="arn" class="java.lang.String"/>
+		<field name="incentiveReceiptNo" class="java.lang.String"/>
+		<field name="transactionDate" class="java.lang.String"/>
+		<field name="cocoonTransactedForSeedInKg" class="java.lang.Float"/>
+		<field name="cocoonTransactedForReelingInKg" class="java.lang.Float"/>
+		<field name="averageYield" class="java.lang.Float"/>
+		<field name="cocoonsWeight" class="java.lang.Float"/>
+		<field name="noOfCocoonsPerKg" class="java.lang.Float"/>
+		<field name="dateOfBrushing" class="java.lang.String"/>
+		<field name="quantityOfCocoonsProduced" class="java.lang.Float"/>
+		<variable name="sanctionAmount1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{sanctionAmount}]]></variableExpression>
+		</variable>
+		<variable name="schemeAmount1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{schemeAmount}]]></variableExpression>
+		</variable>
+		<variable name="cocoonTransactedForSeedInKg1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonTransactedForSeedInKg}]]></variableExpression>
+		</variable>
+		<variable name="cocoonTransactedForReelingInKg1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonTransactedForReelingInKg}]]></variableExpression>
+		</variable>
+		<variable name="cocoonsWeight1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{cocoonsWeight}]]></variableExpression>
+		</variable>
+		<variable name="quantityOfCocoonsProduced1" class="java.lang.Float" resetType="Column" calculation="Sum">
+			<variableExpression><![CDATA[$F{quantityOfCocoonsProduced}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="CollectionBeanParam" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="header3" class="java.lang.String"/>
+	<field name="header4" class="java.lang.String"/>
+	<field name="header5" class="java.lang.String"/>
+	<field name="header6" class="java.lang.String"/>
+	<field name="header7" class="java.lang.String"/>
+	<field name="header8" class="java.lang.String"/>
+	<field name="header10" class="java.lang.String"/>
+	<field name="header9" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="header11" class="java.lang.String"/>
+	<background>
+		<band height="1160">
+			<line>
+				<reportElement x="0" y="1159" width="802" height="1" uuid="e966bf02-c13b-4f4c-b207-a2299de363a4"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="1160" uuid="724acbfe-44c0-45fe-b016-93e1e4c6bcb4"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="1160" uuid="9b9395f6-f33a-4caf-915b-a0ff54030c24"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="7fb841ca-5707-4409-8e72-d50415432be8"/>
+			</line>
+		</band>
+	</background>
+	<detail>
+		<band height="435" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement positionType="Float" x="0" y="256" width="780" height="40" uuid="1907978b-a3e9-4cab-a41b-410c04b4557d"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="80" y="-23" width="700" height="20" uuid="1ed78154-8efc-4929-8790-92cac41c7d37"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="90" y="187" width="670" height="20" uuid="f205d018-8b51-4c18-863e-4b617e944e03"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="11" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="185" width="80" height="30" uuid="0d4173cc-2d51-400f-9b71-1877424fa5c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ವಿಷಯ  : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="70" width="110" height="50" uuid="e95b93cb-8516-4f29-9536-b2db76fd6294"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
+ರೇಷ್ಮೆ    ಇಲಾಖೆ
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="359" y="1" width="96" height="65" uuid="ff7c80d3-17c4-465e-9049-dfc09eaa572a"/>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="390" y="329" width="411" height="25" uuid="66590aeb-ebd2-4d09-988b-9b2e35503366"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header10}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="73" y="383" width="696" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="12"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header9}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="573" y="90" width="187" height="30" uuid="2c55c8a7-85cb-43c3-a174-5952dab3a87c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕಛೇರಿ   ಪ್ರ ತಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="155" width="100" height="30" uuid="c62c7ec4-4741-4684-8637-baa032c312ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಆಯ್ಕೆ    ಪತ್ರ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="573" y="125" width="181" height="20" uuid="8d2fb28f-4a22-4ee7-83aa-9b051a93e498"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="125" width="211" height="20" uuid="036e8499-dd3d-4ba9-b03d-55f4f65fa0d9"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="442">
+			<image>
+				<reportElement x="359" y="1" width="96" height="65" uuid="eda59a5f-9a8d-442c-96da-b60be8ef30e9"/>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="340" y="70" width="110" height="50" uuid="edbb3769-330a-4ad1-955c-72a9a4cc8f4f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
+ರೇಷ್ಮೆ    ಇಲಾಖೆ
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="151" width="100" height="30" uuid="ef187e87-3968-472b-830c-962ce09819f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಆಯ್ಕೆ    ಪತ್ರ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="540" y="90" width="240" height="30" uuid="f2a38b5c-f2f9-4656-9bae-656817d4265a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ರೇಷ್ಮೆ ನೂಲು ಬಿಚ್ಚಾಣಿಕೆದಾರರ  ಪ್ರತಿ]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="90" y="183" width="670" height="20" uuid="bfea8969-5297-4cc4-b29f-fe780c0a8df0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="11" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="181" width="80" height="30" uuid="4c900cfc-0c5b-41cf-9408-f71abbd6ef30"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ವಿಷಯ  : ]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="Float" x="0" y="252" width="780" height="40" uuid="49f146b1-e5f3-45e8-88f8-b051ddceaed2"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" x="80" y="-22" width="700" height="20" uuid="039dfcea-7aa3-47f0-a901-8e4ca1a8d3cd"/>
+					<textElement textAlignment="Left">
+						<font fontName="Nirmala UI" size="11"/>
+						<paragraph lineSpacing="Double"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="390" y="325" width="411" height="25" uuid="b51da631-c703-4a19-be67-dfae38427a8e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="12"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header10}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="73" y="379" width="696" height="30" uuid="9cac2844-335c-43b2-b0d7-0be5ee04d5fe"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="12"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="125" width="211" height="20" uuid="a494501d-ef94-4844-8fe8-205b07c862e0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="573" y="125" width="181" height="20" uuid="494db3dc-bc29-46e3-94aa-760a34c396f1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header11}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="33"/>
+	</pageFooter>
+</jasperReport>

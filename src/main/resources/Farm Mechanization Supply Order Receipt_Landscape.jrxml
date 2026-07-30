@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Farm Mechanization Supply Order Receipt_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="25e22311-2298-433f-9bab-a6ba5aa4a477">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="date" class="java.lang.String"/>
+	<field name="farmerFirstName" class="java.lang.String"/>
+	<field name="addressText" class="java.lang.String"/>
+	<field name="districtName" class="java.lang.String"/>
+	<field name="talukName" class="java.lang.String"/>
+	<field name="hobliName" class="java.lang.String"/>
+	<field name="villageName" class="java.lang.String"/>
+	<field name="fruitsId" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="financialYear" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="header3" class="java.lang.String"/>
+	<field name="cost" class="java.lang.Float"/>
+	<field name="header4" class="java.lang.String"/>
+	<field name="header5" class="java.lang.String"/>
+	<field name="header7" class="java.lang.String"/>
+	<field name="header8" class="java.lang.String"/>
+	<field name="header6" class="java.lang.String"/>
+	<field name="vendorName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="600" height="30" uuid="e52a40db-53dc-4079-983c-5aff2c2d3512"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FARM MECHANIZATION SUPPLY ORDER RECEIPT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="30" width="841" height="30" backcolor="#009900" uuid="adf395cb-058b-43b4-bca4-8fc533d9752c">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="19"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[Supply Order]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="309" y="60" width="160" height="50" uuid="64b9e6ff-d17d-46e9-b7bb-c4da5df58aee"/>
+				<imageExpression><![CDATA["C:/Users/Admin/Downloads/Seal_of_Karnataka.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="309" y="110" width="160" height="20" uuid="daa75b0e-db56-4484-bfc0-dd730643e8b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[(ರೇಷ್ಮೆ   ಇಲಾಖೆ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="130" width="440" height="30" uuid="1afbd2ea-8ed3-400b-85d4-6f354f8669f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="20"/>
+				</textElement>
+				<text><![CDATA[ಸಹಾಯಕ ರೇಷ್ಮೆ  ನಿರ್ದೇಶಕರ ಕಛೇರಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="160" width="440" height="30" uuid="d314c106-1f42-4e59-aa18-d459a568fa68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="20"/>
+				</textElement>
+				<text><![CDATA[ಪೂರೈಕೆ ಆದೇಶ (SUPPLY ORDER)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="180" width="100" height="21" uuid="a608f209-cc65-48d3-8539-e5c952e4f05b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[ಪತ್ರ ಸಂಖ್ಯೆ : ಸ.ಕು.ನೀ/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="200" width="68" height="20" uuid="5c0bdff9-ade6-4dff-aeb3-598a38a64032"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[ಗೆ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="479" width="50" height="20" uuid="fabccae7-789f-460d-bfef-8d18c89b0eb0">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ದಿನಾಂಕ :  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="561" y="443" width="262" height="30" uuid="594c70e0-66fb-43e8-a1b3-0259912ae7d7">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+					<paragraph firstLineIndent="3"/>
+				</textElement>
+				<text><![CDATA[ಸಹಾಯಕ ರೇಷ್ಮೆ ನಿರ್ದೇಶಕರ ಹೊಸಪೇಟೆ ತಾಲ್ಲೂಕು]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="480" width="120" height="20" uuid="aaf1165c-e7fc-47aa-9eb3-83366cfe11ae"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="561" y="473" width="259" height="20" uuid="620c6b6d-4d15-47eb-b3f1-b0d3fae73e3a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{farmerFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="39" y="252" width="771" height="178" uuid="e367d187-928f-4235-826f-c433016a9354">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{financialYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="222" width="252" height="30" uuid="d6cec09e-ba07-4375-9a69-4ad25ad71d12">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendorName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="500" width="809" height="20" uuid="3af45a3f-6c57-4b79-8631-83ec822bea50"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

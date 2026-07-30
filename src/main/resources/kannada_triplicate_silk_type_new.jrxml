@@ -1,0 +1,1953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bidding TripilateLandscape" pageWidth="842" pageHeight="605" orientation="Landscape" columnWidth="810" leftMargin="16" rightMargin="16" topMargin="15" bottomMargin="15" isIgnorePagination="true" uuid="fd48d664-8b3c-4c21-a275-1433a5655f03">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="serialNumber" class="java.lang.String"/>
+	<field name="farmerNameKannadaWithSerialNumber" class="java.lang.String"/>
+	<field name="farmerMiddleName" class="java.lang.String"/>
+	<field name="farmerLastName" class="java.lang.String"/>
+	<field name="farmerTaluk" class="java.lang.String"/>
+	<field name="reelerLicense" class="java.lang.String"/>
+	<field name="reelerNameKannada" class="java.lang.String"/>
+	<field name="reelerAddress" class="java.lang.String"/>
+	<field name="allottedLotId" class="java.lang.String"/>
+	<field name="auctionDate_time" class="java.lang.String"/>
+	<field name="lotWeight" class="java.lang.String"/>
+	<field name="farmerMarketFee" class="java.lang.String"/>
+	<field name="reelerMarketFee" class="java.lang.String"/>
+	<field name="lotSoldOutAmount" class="java.lang.String"/>
+	<field name="bidAmount" class="java.lang.String"/>
+	<field name="reelerbalance" class="java.lang.String"/>
+	<field name="farmerEstimatedWeight" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<field name="marketNameKannada" class="java.lang.String"/>
+	<field name="race" class="java.lang.String"/>
+	<field name="source" class="java.lang.String"/>
+	<field name="feespaid" class="java.lang.String"/>
+	<field name="amountfarmer" class="java.lang.String"/>
+	<field name="amountrealar" class="java.lang.String"/>
+	<field name="weight" class="java.lang.String"/>
+	<field name="totalcrates" class="java.lang.String"/>
+	<field name="totalamount" class="java.lang.String"/>
+	<field name="farmeramount_farmermf_reelermf" class="java.lang.String"/>
+	<field name="reeleramount" class="java.lang.String"/>
+	<field name="accountNumber" class="java.lang.String"/>
+	<field name="ifscCode" class="java.lang.String"/>
+	<field name="loginname_accountnumber_ifsccode" class="java.lang.String"/>
+	<field name="accountnumber_ifsccode" class="java.lang.String"/>
+	<field name="lotDetail0" class="java.lang.String"/>
+	<field name="lotDetail1" class="java.lang.String"/>
+	<field name="lotDetail2" class="java.lang.String"/>
+	<field name="lotDetail3" class="java.lang.String"/>
+	<field name="lotDetail4" class="java.lang.String"/>
+	<field name="lotDetail5" class="java.lang.String"/>
+	<field name="lotDetail6" class="java.lang.String"/>
+	<field name="lotDetail7" class="java.lang.String"/>
+	<field name="lotDetail8" class="java.lang.String"/>
+	<field name="lotDetail9" class="java.lang.String"/>
+	<field name="lotDetail10" class="java.lang.String"/>
+	<field name="lotDetail11" class="java.lang.String"/>
+	<field name="lotDetail12" class="java.lang.String"/>
+	<field name="lotDetail13" class="java.lang.String"/>
+	<field name="lotDetail14" class="java.lang.String"/>
+	<field name="reelerDetails" class="java.lang.String"/>
+	<field name="acknowledgmentString" class="java.lang.String"/>
+	<field name="paidAmount" class="java.lang.String"/>
+	<field name="amountPaid" class="java.lang.String"/>
+	<field name="ifsc" class="java.lang.String"/>
+	<field name="binno" class="java.lang.String"/>
+	<field name="description1" class="java.lang.String"/>
+	<field name="reelerFees" class="java.lang.String"/>
+	<field name="barCode" class="java.lang.String"/>
+	<field name="auctionDate" class="java.lang.String"/>
+	<field name="traderDetails" class="java.lang.String"/>
+	<field name="traderLicense" class="java.lang.String"/>
+	<field name="reelerLicens" class="java.lang.String"/>
+	<field name="bags" class="java.lang.String"/>
+	<field name="silkQualities" class="java.lang.String"/>
+	<field name="silkTypes" class="java.lang.String"/>
+	<field name="form" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="569">
+			<staticText>
+				<reportElement x="245" y="35" width="246" height="20" uuid="6e33682b-2d4f-4aee-9803-dd0d5295c0a3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Form No. 17 - J/ ನಮೂನೆ ೧೭ -ಜೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="56" width="302" height="20" uuid="febe4e63-ceee-4c84-8fed-03a5cdac43f2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[[ See Rule 17G(4) &  (7)/ನಿಯಮ  ೧೭ ಜೆ (೪) ಮತ್ತು  (೭) ನ್ನು  ನೋಡಿ ]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="75" width="570" height="20" uuid="ed4f94cf-b8c2-4928-a4eb-07c2863c479e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNMENT OF KARNATAKA / ಕರ್ನಾಟಕ  ಸರ್ಕಾರ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="95" width="345" height="20" uuid="8e6cefd6-7dfe-41c9-a794-bb8977853579">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department Of Sericulture/ರೇಷ್ಮೆ ಇಲಾಖೆ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="88" width="130" height="20" uuid="49dc06e1-c473-4e46-8fad-78128707fdb4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="116" width="254" height="20" uuid="f081a5b0-4b2a-4239-834c-43c1726a7997">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SILK EXCHANGE /ರೇಷ್ಮೆ ವಿನಿಮಯ ಕೇಂದ್ರ  -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="188" width="27" height="20" uuid="bafbdfe6-d640-4406-8bbc-b9545fe0c445">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="137" width="71" height="39" uuid="2b6317c2-f890-452f-8a4f-1c89d014d0a2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card /ಕಾರ್ಡು  (ತ್ರಿಪ್ರತಿಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="141" width="118" height="17" uuid="a250cfe2-c6ad-4711-818f-5d951fd06b1a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lot No./ರಾಶಿಯ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="159" width="148" height="17" uuid="0637ef74-df12-44bf-b37d-16de259a52d7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No. Of Bags/ ಚೀಲಗಳ ಸಂಖ್ಯೆ    : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="742" y="143" width="28" height="17" uuid="ae38f6b0-cc9d-4852-a9c1-3ba121fc5ae3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="44" y="188" width="215" height="50" uuid="18e75d06-ef8d-42e1-b1b1-58bce7144c57"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Reeler or reeler who is also the Twister and his  license No.     ರೀಲರ್  ಅಥವಾ ರೀಲರ್   ಕಂ  ಹುರಿ  ಮಾಡುವವರ  ಹೆಸರು  ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ  ಪತ್ರದ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="143" width="40" height="30" uuid="11928a5e-642a-4993-b209-8b4bd28151ec">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card ಚೀಟಿ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="191" width="489" height="31" uuid="b8273647-0da3-42b0-9c69-7f4b12513a71">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="248" width="27" height="20" uuid="a22470b7-ddb1-4ed9-947a-6bc590fc67bc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="248" width="81" height="40" uuid="21a46dbe-55eb-4623-bafe-0846338d52ee"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Quality of Silk Yarn  ರೇಷ್ಮೆ  ನೂಲಿನ ಗುಣಮಟ್ಟ ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-7" y="246" width="822" height="1" uuid="09a4c864-bd20-4c1f-9db2-c1a2b2775cd8"/>
+			</line>
+			<line>
+				<reportElement x="-6" y="326" width="822" height="1" uuid="5411b890-11c0-4dd2-8fbf-2248c0186c34"/>
+			</line>
+			<line>
+				<reportElement x="149" y="247" width="1" height="80" uuid="be462a22-746a-46e0-9457-578a2bb3aa89"/>
+			</line>
+			<staticText>
+				<reportElement x="153" y="248" width="81" height="40" uuid="24552a93-0a1c-449d-a899-452766a18f98"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Approximate Weight of Silk Yarn  ಅಂದಾಜು ತೂಕ  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="337" width="81" height="20" uuid="f53ffe5a-667a-463e-a9fb-e4b0985ca037"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="367" width="215" height="50" uuid="23ee4034-7774-4d26-bf09-00259aee62ce"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Licensed Trader , Who is the highest bidder & License No.                          ಹರಾಜಿನಲ್ಲಿ ಅತಿ  ಹೆಚ್ಚು ಸವಾಲು ಕೂಗಿದ ವರ್ತಕದ ಹೆಸರು , ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ ಪತ್ರ ಸಂಖ್ಯೆ  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="243" y="367" width="499" height="25" uuid="7209acff-3f7f-49ac-977d-6b31f8bc5a80">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderDetails}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="392" width="213" height="25" uuid="f31bccc7-98b0-4ce1-aa08-595d4c4353e5"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderLicense}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-7" y="419" width="822" height="1" uuid="1a359da0-b121-4858-baeb-dcd8cd0c6278"/>
+			</line>
+			<staticText>
+				<reportElement x="615" y="328" width="166" height="39" uuid="71a9ade0-04fb-47a8-83cb-dbc1be80a6e2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of the Silk Market Officer/Officer authorised by him                          ರೇಷ್ಮೆ  ಒಳದಾಖಲಾತಿ  ಅಧಿಕಾರಿಯ ಸಹಿ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="420" width="126" height="28" uuid="5d8b86c2-4632-4277-bc58-a3fd2a88692c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Weighment  Particulars   ತೂಕದ  ವಿವರಗಳು                          ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="420" width="69" height="28" uuid="116ad607-44cc-4e46-92fe-9bfc5aef15f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rate Per K.g.   (ದರ ೧ ಕೆಜಿಗೆ)                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="420" width="37" height="28" uuid="5260195f-bb83-470f-8225-7b4982447040"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Value  ಮೌಲ್ಯ                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="420" width="114" height="28" uuid="a8b3c53c-8878-48b9-9e99-3447c7246048"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Market Fee @ 0.5 % *   ಮಾರುಕಟ್ಟೆ  ಶುಲ್ಕ  ೦. ೫%*                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="448" width="25" height="28" uuid="bc6e85f2-db8c-4a12-8640-b1736bd086bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Kgs. ಕೆ .ಜಿ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="448" width="25" height="28" uuid="1e6ca6b5-0be5-4519-b013-96ff239cc40b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gms. ಗ್ರಾಂ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="449" width="25" height="28" uuid="f7c65c7a-71c6-46b2-bb4c-411c5d20e7ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="449" width="25" height="28" uuid="3da2bcb4-ca92-47a4-becf-5f0aff11c20e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="448" width="25" height="28" uuid="43bc3d26-182e-4bd8-99e9-84f7b884a8ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="448" width="25" height="28" uuid="7e9ba840-6358-4d1b-8b2c-676f4f068951"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="478" width="61" height="28" uuid="e440e5f8-e12a-4ef5-bdfa-1ebe627981dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gross  Weight ಒಟ್ಟು ತೂಕ                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="506" width="80" height="28" uuid="b46cab9c-0016-4a81-a8bc-f7c4f6aa010c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Tare Weight     ಖಾಲಿ ಚೀಲದ  ತೂಕ       ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="534" width="80" height="28" uuid="a00ab2fc-47d9-477b-8ca9-473e06b805ff"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Net Weight     ನಿವ್ವಳ   ತೂಕ         ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="483" width="49" height="28" uuid="04d1e6ca-d8a3-4ea7-86f8-18e057199d41"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Trader                ವರ್ತಕರು                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="511" width="79" height="28" uuid="4be59739-f8bb-4fda-8371-601ad4b1a983"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[K.S.M.B.                 ಕ. ರೇ . ಮಾ. ಮಂ .                              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="483" width="25" height="15" uuid="7b32699b-1f98-442b-a19b-d24db8b16545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="511" width="25" height="15" uuid="a7600289-2ad7-4e20-9fa6-395b1d654bd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[b)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-7" y="568" width="822" height="1" uuid="79bdbad6-8097-4c9e-9e0e-9c62770715c9"/>
+			</line>
+			<textField>
+				<reportElement x="108" y="338" width="113" height="20" uuid="7f13460e-78b4-429c-a198-0be83537a2a2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="115" width="195" height="20" uuid="380c7530-7cee-4374-ace5-a1d9371e4c22">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="660" y="144" width="82" height="22" uuid="48d522f7-5a40-43c7-80ad-ef8cd9a2194a"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{allottedLotId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="261" y="221" width="221" height="25" uuid="6743d700-7f7e-433e-be61-57617cbb7f67"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerLicens}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="679" y="159" width="58" height="17" uuid="0dca96e2-9861-478f-9ec1-17b2f272da07">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bags}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-6" y="186" width="822" height="1" uuid="aa7f4618-40a1-4ee3-a290-5a452b67a6a2"/>
+			</line>
+			<line>
+				<reportElement x="243" y="327" width="1" height="90" uuid="228bd67a-6c26-4c97-813a-5da81713521d"/>
+			</line>
+			<line>
+				<reportElement x="258" y="187" width="1" height="60" uuid="110c57eb-7332-4307-993b-05cb188d642b"/>
+			</line>
+			<staticText>
+				<reportElement x="669" y="30" width="86" height="19" uuid="e19899ef-55f4-457d-a82a-a5de4a117236">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="672" y="49" width="81" height="1" uuid="c673c122-b66f-4ec3-b45a-f87bf404c16a"/>
+			</line>
+			<staticText>
+				<reportElement x="671" y="50" width="86" height="19" uuid="314000d1-de86-47a1-baa5-35c6dbd11435">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ಮೂಲ ಪ್ರತಿ  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="179" y="478" width="69" height="20" uuid="c7f9a894-c793-4a41-8a63-37eeb16231f7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="479" width="49" height="20" uuid="6288bd27-ca17-45e1-9892-78fff53a94c6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="290" width="81" height="20" uuid="caf7511e-d4c5-4fe6-ae90-1cc1cc3e9727">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{silkQualities}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="549" y="483" width="73" height="28" uuid="6be2baa8-e702-4038-8d2d-a23b96e946c8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paidAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="575">
+			<staticText>
+				<reportElement x="30" y="47" width="130" height="28" uuid="f923817b-38ec-401a-9439-a8ef9aeb6acb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Licensed Trader    ರೇಷ್ಮೆ ಕೊಂಡವರ  ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="83" width="81" height="20" uuid="a594dca0-47ae-4507-bd8e-e71f137e4271"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="108" y="83" width="92" height="20" uuid="8b22bdf5-e412-4572-954f-ebeb120d4cbd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="569" y="48" width="111" height="28" uuid="59649644-2806-4d3b-95dd-8bf451bdc87c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of The Seller   ಮಾರಾಟ ಮಾಡಿದವರ ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="145" width="162" height="28" uuid="c264137b-bc3b-4a13-9205-8d11153bc643"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Recieved  The Amount In Full Statement ಪೂರ್ತಿ  ಹಣವನ್ನು  ಸ್ವೀಕರಿಸಲಾಗಿದೆ .      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="529" y="106" width="162" height="43" uuid="b4c81812-97fb-4d95-98ff-e2330c22f12b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Officer  Conducting  the auction                                              ಹರಾಜು ನಡೆಸುವ ಅಧಿಕಾರಿಯ ಸಹಿ   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="174" width="331" height="20" uuid="5bd97507-8428-44f6-9988-66167ba7510b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<text><![CDATA[   CI 58  SLK 2006, Bangalore, dated 25.7.07  MF  0.5%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="216" width="246" height="20" uuid="34f7192a-89ba-4aff-902a-6de42a8ed68f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Form No. 17 - J/ ನಮೂನೆ ೧೭ -ಜೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="237" width="302" height="20" uuid="89cc6327-c6ee-4d18-8975-0492687dccc3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[[ See Rule 17G(4) &  (7)/ನಿಯಮ  ೧೭ ಜೆ (೪) ಮತ್ತು  (೭) ನ್ನು  ನೋಡಿ ]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="256" width="570" height="20" uuid="002639c2-3905-4f47-ba15-0c0077e03e54">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNMENT OF KARNATAKA / ಕರ್ನಾಟಕ  ಸರ್ಕಾರ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="276" width="345" height="20" uuid="453c0046-1620-4627-bb3d-cbd2cc74d0ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department Of Sericulture/ರೇಷ್ಮೆ ಇಲಾಖೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="297" width="254" height="20" uuid="b13aecdf-4fc6-4210-b45f-42dde6cee987">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SILK EXCHANGE /ರೇಷ್ಮೆ ವಿನಿಮಯ ಕೇಂದ್ರ  - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="318" width="71" height="39" uuid="7bd3cc4f-6fbd-4a43-a1de-2130e6e30493">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card /ಕಾರ್ಡು  (ತ್ರಿಪ್ರತಿಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="297" width="193" height="20" uuid="4bd67af3-3829-4b1d-9c04-89f25b4eb06e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="322" width="148" height="17" uuid="ac19f257-44d4-4dfe-9c49-d3c4f30ed56f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lot No./ರಾಶಿಯ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="762" y="323" width="28" height="17" uuid="e27f2c27-ae68-4c6b-a6a3-80258a13f512">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="340" width="148" height="17" uuid="23c4db7d-27f6-4c23-bc94-619330002b34"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No. Of Bags/ ಚೀಲಗಳ ಸಂಖ್ಯೆ   :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="324" width="40" height="30" uuid="23d5efe9-a7a6-4c9f-b667-2da40307d3d6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card ಚೀಟಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="362" width="27" height="20" uuid="902c9fd5-115e-425a-ba39-f86535286c1b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="362" width="215" height="50" uuid="47486786-8dd5-4ac5-aef0-afa6b7abed70"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Reeler or reeler who is also the Twister and his  license No.     ರೀಲರ್  ಅಥವಾ ರೀಲರ್   ಕಂ  ಹುರಿ  ಮಾಡುವವರ  ಹೆಸರು  ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ  ಪತ್ರದ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="363" width="472" height="23" uuid="343f3556-c476-4db1-a48c-eafec18711dd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="158" y="412" width="81" height="40" uuid="777dd663-1096-4985-9b3b-1e1e411732af"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Approximate Weight of Silk Yarn  ಅಂದಾಜು ತೂಕ  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="412" width="81" height="40" uuid="4e67b2b8-3d75-4d4c-a177-626306ffb3fc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Quality of Silk Yarn  ರೇಷ್ಮೆ  ನೂಲಿನ ಗುಣಮಟ್ಟ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="412" width="27" height="20" uuid="ef0a2ccb-4085-471b-bb6a-d0117de7eb70">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="143" y="412" width="1" height="80" uuid="4ac7d441-3982-4f6c-a103-c8ef27467498"/>
+			</line>
+			<line>
+				<reportElement x="-7" y="415" width="822" height="1" uuid="c938b6e9-67c7-4705-94ba-ac8bd787bce4"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="495" width="81" height="20" uuid="e17bb102-7756-4508-84f6-29a0440c0a82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="496" width="113" height="20" uuid="c8e2d058-e340-4544-bf2f-e0fecce14d90">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="525" width="215" height="50" uuid="62939f91-8ce7-441a-b4d1-efb85675981f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Licensed Trader , Who is the highest bidder & License No.                          ಹರಾಜಿನಲ್ಲಿ ಅತಿ  ಹೆಚ್ಚು ಸವಾಲು ಕೂಗಿದ ವರ್ತಕದ ಹೆಸರು , ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ ಪತ್ರ ಸಂಖ್ಯೆ  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="238" y="525" width="462" height="25" uuid="1f9d5cd5-5fcf-41d8-b5a9-f9190ce4e113">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderDetails}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="550" width="192" height="25" uuid="8ca351a7-1972-4ac4-b890-016bd6f037f5"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderLicense}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="615" y="494" width="166" height="39" uuid="500b63f0-f09e-4dbc-8412-0e1c75ac6963"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of the Silk Market Officer/Officer authorised by him                          ರೇಷ್ಮೆ  ಒಳದಾಖಲಾತಿ  ಅಧಿಕಾರಿಯ ಸಹಿ ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-7" y="492" width="822" height="1" uuid="0b6f07c6-f6fa-4ab8-adc6-805b832e3fe9"/>
+			</line>
+			<break>
+				<reportElement x="0" y="199" width="814" height="1" uuid="36f06815-0163-4cda-908e-adba20d32a52"/>
+			</break>
+			<line>
+				<reportElement x="-22" y="206" width="847" height="1" uuid="e591fe24-27d6-4747-81b6-1d48642e6691"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<componentElement>
+				<reportElement x="679" y="325" width="82" height="22" uuid="ee310abd-1a9b-4d9a-8afd-03fb06e70c92"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{allottedLotId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="255" y="388" width="220" height="25" uuid="10dfbae2-ff21-4cf3-9b36-182a32cf699c"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerLicens}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="236" y="493" width="1" height="80" uuid="3b4e5d55-7917-4464-8c5c-91887a96d1a0"/>
+			</line>
+			<line>
+				<reportElement x="255" y="363" width="1" height="51" uuid="937c78e2-352d-4187-bc40-dedfce77e777"/>
+			</line>
+			<line>
+				<reportElement x="-8" y="363" width="822" height="1" uuid="5de19f0c-a04c-4344-8d11-253c9a0cc8b9"/>
+			</line>
+			<line>
+				<reportElement x="672" y="236" width="81" height="1" uuid="2a590c26-7fe9-4967-8bfd-e559598e1307"/>
+			</line>
+			<staticText>
+				<reportElement x="670" y="237" width="86" height="19" uuid="1570e7cf-28de-446f-b1cc-017ede81c08d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ದ್ವಿಪ್ರತಿ   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="217" width="86" height="19" uuid="1209b59d-4917-4694-a27d-7f60b74eebf6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUPLICATE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="679" y="341" width="61" height="17" uuid="97e30059-c88c-42d1-bbfa-444311d21afb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bags}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="452" width="81" height="28" uuid="78ccb270-5105-4a3f-800d-cf3482bc4f4f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{silkQualities}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="379">
+			<staticText>
+				<reportElement x="22" y="9" width="126" height="28" uuid="99770c87-4c89-402d-b660-4a5f7a600d10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Weighment  Particulars   ತೂಕದ  ವಿವರಗಳು                          ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="9" width="69" height="28" uuid="62dc3f55-41a4-4043-8b89-d713ec99c856"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rate Per K.g.   (ದರ ೧ ಕೆಜಿಗೆ)                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="9" width="37" height="28" uuid="abc24a64-5ed6-4341-bbd4-880d8421f8a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Value  ಮೌಲ್ಯ                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="9" width="114" height="28" uuid="18ef64c2-a5cf-4f15-9a32-f027eef60910"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Market Fee @ 0.5 % *   ಮಾರುಕಟ್ಟೆ  ಶುಲ್ಕ  ೦. ೫%*                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="37" width="25" height="28" uuid="60b3c2c2-37e9-4377-8e3a-aab577d4953d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="37" width="25" height="28" uuid="71961e0b-d908-4d52-8da4-d61cf62cb722"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="38" width="25" height="28" uuid="277ed171-a0e0-4078-810c-ea0b0d70590f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="38" width="25" height="28" uuid="96a3593e-ece8-4d98-a6d6-76f46addb4c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="37" width="25" height="28" uuid="64250a0c-2db5-4262-bc47-324fcb5116e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gms. ಗ್ರಾಂ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="37" width="25" height="28" uuid="c734fbbb-e581-4402-ace1-bf741dbdce97"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Kgs. ಕೆ .ಜಿ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="67" width="61" height="28" uuid="1d257420-5279-4f51-b2f9-a3ef16f51be2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gross  Weight ಒಟ್ಟು ತೂಕ                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="95" width="80" height="28" uuid="d565f349-f3c2-4535-b404-7eee7eb82690"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Tare Weight     ಖಾಲಿ ಚೀಲದ  ತೂಕ       ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="123" width="80" height="28" uuid="b768a2c7-54e2-407d-92b4-de72c63d21be"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Net Weight     ನಿವ್ವಳ   ತೂಕ         ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="72" width="49" height="28" uuid="e5119cb3-cb1c-415c-b328-f27ee2617b88"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Trader                ವರ್ತಕರು                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="72" width="25" height="15" uuid="f3e62ed0-150d-4eef-a885-e5838cec593b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="100" width="25" height="15" uuid="4e42a4df-0310-401b-b886-fd7b019a21be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[b)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="100" width="79" height="28" uuid="623d33c9-9128-4a7e-84cc-36fd0e6c0581"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[K.S.M.B.                 ಕ. ರೇ . ಮಾ. ಮಂ .                              ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-7" y="157" width="822" height="1" uuid="b5c68b72-f1fc-42f9-b04c-c043e112143d"/>
+			</line>
+			<line>
+				<reportElement x="-6" y="0" width="822" height="1" uuid="a3055b27-5da5-4b36-b086-84cc48b802ff"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="214" width="130" height="28" uuid="e61e217c-5b0d-461a-8327-c4d448c8108e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Licensed Trader    ರೇಷ್ಮೆ ಕೊಂಡವರ  ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="569" y="215" width="111" height="28" uuid="2f2c9935-44d9-4e3f-8326-51936698b6d4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of The Seller   ಮಾರಾಟ ಮಾಡಿದವರ ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="250" width="81" height="20" uuid="06bb9ac3-4eaa-4d2c-9c0d-8a746651c8c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="108" y="250" width="92" height="20" uuid="1204c6e4-619c-41a9-9ea4-69864261d88c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="324" y="327" width="162" height="28" uuid="3d806a3e-3e33-4720-896f-8d36733dad2d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Recieved  The Amount In Full Statement ಪೂರ್ತಿ  ಹಣವನ್ನು  ಸ್ವೀಕರಿಸಲಾಗಿದೆ .      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="529" y="293" width="162" height="43" uuid="6a29ad45-abc4-411c-818a-643337f7ff51"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Officer  Conducting  the auction                                              ಹರಾಜು ನಡೆಸುವ ಅಧಿಕಾರಿಯ ಸಹಿ   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="356" width="331" height="20" uuid="aaa85e48-9bc2-469f-a72e-447f0d577de8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<text><![CDATA[   CI 58  SLK 2006, Bangalore, dated 25.7.07  MF  0.5%]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="161" width="699" height="39" uuid="f2d6f94b-7718-4ed5-944f-7acb7b317404">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="-578" width="768" height="39" uuid="7e34d6aa-4466-4560-827b-7043b8f5cd6c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="-666" width="73" height="20" uuid="128223f3-0640-4232-85df-cb5eace558c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="71" width="69" height="20" uuid="4a8bd389-9a56-42fc-aeff-44e9fbbbc416">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="71" width="66" height="20" uuid="17973b4c-9ac8-4d73-8797-d34aecdde120">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="71" width="49" height="20" uuid="43ed39a7-a291-4cef-ba4b-1c4098688e4c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="570" y="72" width="80" height="28" uuid="b1cd7f35-6cfb-4c47-903d-4cd33d779fdb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paidAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="404">
+			<staticText>
+				<reportElement x="245" y="21" width="246" height="20" uuid="62c3bc14-8e2d-447e-a343-a59ebb25dc0b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Form No. 17 - J/ ನಮೂನೆ ೧೭ -ಜೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="42" width="302" height="20" uuid="ba7e5f92-a688-4371-9265-5afccf9c5e3f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[[ See Rule 17G(4) &  (7)/ನಿಯಮ  ೧೭ ಜೆ (೪) ಮತ್ತು  (೭) ನ್ನು  ನೋಡಿ ]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="61" width="570" height="20" uuid="90736ea3-f66a-4056-91f5-84bbf0e750dc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOVERNMENT OF KARNATAKA / ಕರ್ನಾಟಕ  ಸರ್ಕಾರ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="81" width="345" height="20" uuid="459cc057-13eb-4709-9b12-514258f18e99">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department Of Sericulture/ರೇಷ್ಮೆ ಇಲಾಖೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="102" width="254" height="20" uuid="3f8df105-41af-4c5c-9320-3714a4795e6d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SILK EXCHANGE /ರೇಷ್ಮೆ ವಿನಿಮಯ ಕೇಂದ್ರ  - ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="446" y="102" width="191" height="20" uuid="94be5ce5-5ff9-4430-8355-243a54dbfb39">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="127" width="128" height="17" uuid="427268e5-fc6e-4493-9b53-1cb1ae9c4e73"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lot No./ರಾಶಿಯ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="145" width="148" height="17" uuid="333f40e5-88bd-4e27-92b4-6bc36537713f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No. Of Bags/ ಚೀಲಗಳ ಸಂಖ್ಯೆ   :  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="752" y="127" width="28" height="17" uuid="13f51552-4c18-42ea-82b3-d85ec74e0d19">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="123" width="71" height="39" uuid="000428bf-2473-445c-a7cb-50685aabe778">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card /ಕಾರ್ಡು  (ತ್ರಿಪ್ರತಿಗಳಲ್ಲಿ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="129" width="40" height="30" uuid="6fcf0ae4-6118-462f-91c9-1e5f88fef6f6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Card ಚೀಟಿ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="167" width="27" height="20" uuid="94b5f7d7-3722-4780-9f0a-b75f91f066cc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="167" width="215" height="50" uuid="042bb95e-fe08-4599-a61b-a60f68f2aa83"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Reeler or reeler who is also the Twister and his  license No.     ರೀಲರ್  ಅಥವಾ ರೀಲರ್   ಕಂ  ಹುರಿ  ಮಾಡುವವರ  ಹೆಸರು  ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ  ಪತ್ರದ ಸಂಖ್ಯೆ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="259" y="166" width="498" height="31" uuid="b1f7509b-c18c-4812-9a0c-04320b3e4f6f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="222" width="81" height="40" uuid="ca74a28e-a570-4409-adbc-32e9ad15e09c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Quality of Silk Yarn  ರೇಷ್ಮೆ  ನೂಲಿನ ಗುಣಮಟ್ಟ ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-7" y="220" width="822" height="1" uuid="efcb59c2-ddb0-4d5c-a023-2abdf4168bbf"/>
+			</line>
+			<staticText>
+				<reportElement x="155" y="222" width="88" height="40" uuid="19413ae7-06aa-4d31-a074-1c20f55b8817"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Approximate Weight of Silk Yarn  ಅಂದಾಜು ತೂಕ  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="222" width="27" height="20" uuid="7367621c-8cc0-469b-8825-e0a5dffe574c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="305" width="81" height="20" uuid="bb9d0d62-fe98-45ab-859d-a46fe9a7f169"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="306" width="113" height="20" uuid="ff1ead54-f06f-4cda-a1ce-a70be37749a0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-7" y="302" width="822" height="1" uuid="cc5fad26-bfff-448c-ab86-f9ba589bbf81"/>
+			</line>
+			<staticText>
+				<reportElement x="35" y="335" width="215" height="50" uuid="8fba2a6f-62be-42c9-90be-5de4257d54db"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Name &  Address of the Licensed Trader , Who is the highest bidder & License No.                          ಹರಾಜಿನಲ್ಲಿ ಅತಿ  ಹೆಚ್ಚು ಸವಾಲು ಕೂಗಿದ ವರ್ತಕದ ಹೆಸರು , ವಿಳಾಸ ಮತ್ತು ಅನುಜ್ಞಾ ಪತ್ರ ಸಂಖ್ಯೆ  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="251" y="335" width="434" height="25" uuid="36d1434e-9ea7-478a-9cfa-80a8f827d04f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderDetails}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="360" width="217" height="25" uuid="847faf77-64a9-41d3-a948-cee17297f5bc"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traderLicense}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="615" y="304" width="166" height="39" uuid="300e7a49-cb82-4da2-8a69-2dc4e824cdd0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of the Silk Market Officer/Officer authorised by him                          ರೇಷ್ಮೆ  ಒಳದಾಖಲಾತಿ  ಅಧಿಕಾರಿಯ ಸಹಿ ]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="3" width="880" height="1" uuid="1b2cc63c-fd02-40d6-9e80-4398648f02ec"/>
+			</break>
+			<line>
+				<reportElement x="-19" y="3" width="844" height="2" uuid="5ff01089-16ed-4656-92f0-f485230b19b6"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="143" y="222" width="1" height="80" uuid="86326a54-1102-4304-a178-e39c86e98f84"/>
+			</line>
+			<componentElement>
+				<reportElement x="670" y="130" width="82" height="14" uuid="218c2e30-3511-4c90-84a3-1b15ac7330c4"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{allottedLotId}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="257" y="195" width="192" height="25" uuid="34c7b71e-65c8-4789-b02a-bf55025f27dc"/>
+				<textElement>
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reelerLicens}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-6" y="163" width="822" height="1" uuid="62b57495-3fd3-43f7-83d0-68af724a6402"/>
+			</line>
+			<line>
+				<reportElement x="244" y="304" width="1" height="99" uuid="e0e7f999-d472-4cb9-a30e-9fa624cef6ca">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="254" y="165" width="1" height="56" uuid="997ef844-288b-4628-a648-6b0337f597fa"/>
+			</line>
+			<line>
+				<reportElement x="672" y="35" width="81" height="1" uuid="2d6c79b1-fa37-4cdb-81ba-01201f5301a6"/>
+			</line>
+			<staticText>
+				<reportElement x="671" y="36" width="86" height="19" uuid="4fbd045c-b1f5-4702-834d-70ba03770849">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ತ್ರಿಪ್ರತಿ  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="16" width="86" height="19" uuid="bceee06f-965f-4964-b2a4-7f03cb1c5518">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRIPLICATE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="679" y="145" width="61" height="17" uuid="99d6f014-f08a-4f7d-a9b2-2820e0cae771">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bags}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="263" width="81" height="28" uuid="c450d368-05eb-4990-8a24-62abe7f3b5bc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{silkQualities}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="389">
+			<line>
+				<reportElement x="-1" y="2" width="822" height="1" uuid="5fb7d5e7-22eb-4340-837f-d2d8a45ede1c"/>
+			</line>
+			<staticText>
+				<reportElement x="44" y="14" width="126" height="28" uuid="4cf6336a-a755-4c8d-94e9-82a7a4a49a81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Weighment  Particulars   ತೂಕದ  ವಿವರಗಳು                          ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="42" width="25" height="28" uuid="1038718a-5f71-46d5-af04-a52d33d22782"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Kgs. ಕೆ .ಜಿ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="42" width="25" height="28" uuid="65d21a05-825c-4fb9-b2c7-edbc2657dcc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gms. ಗ್ರಾಂ .                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="14" width="69" height="28" uuid="d209ca74-cd56-4624-8605-07c6fb30a001"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rate Per K.g.   (ದರ ೧ ಕೆಜಿಗೆ)                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="43" width="25" height="28" uuid="cbe61e29-03f7-4803-af8b-421b8f473546"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="43" width="25" height="28" uuid="561811b8-4d3e-4a5d-9783-2abb61c4fea4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="14" width="37" height="28" uuid="bc941598-67ab-48ed-8d06-7b0ca449d0dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Value  ಮೌಲ್ಯ                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="42" width="25" height="28" uuid="cbc582b0-2cde-48d0-ae48-c7f02e1a71d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Rs. ರೂ .                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="42" width="25" height="28" uuid="48032f66-2f2f-43dc-8d24-8750bf1874d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Ps. ಪೈ.                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="14" width="114" height="28" uuid="4dabd476-9a4d-489b-a9f1-4501bcdf8adf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Market Fee @ 0.5 % *   ಮಾರುಕಟ್ಟೆ  ಶುಲ್ಕ  ೦. ೫%*                           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="525" y="77" width="49" height="28" uuid="6869bbfe-ae79-4ca1-9ad6-5a992f4aead5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Trader                ವರ್ತಕರು                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="77" width="25" height="15" uuid="ae29d419-f1d1-476b-b2c5-ab978618985c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="105" width="25" height="15" uuid="422f4e31-ce31-4e36-951c-187ea4ca9909"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[b)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="525" y="105" width="79" height="28" uuid="89eb8775-c735-492f-aef4-4264acd5b9fe"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[K.S.M.B.                 ಕ. ರೇ . ಮಾ. ಮಂ .                              ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="72" width="61" height="28" uuid="be7a3c9e-cf92-4017-96cb-4e2c65e57a2b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Gross  Weight ಒಟ್ಟು ತೂಕ                            ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="100" width="80" height="28" uuid="bd5e228e-8c05-417f-bee5-74354608931c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Tare Weight     ಖಾಲಿ ಚೀಲದ  ತೂಕ       ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="128" width="80" height="28" uuid="f212d6a2-e2ff-43fe-b355-42286f0ee5f6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Net Weight     ನಿವ್ವಳ   ತೂಕ         ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-2" y="162" width="822" height="1" uuid="ce48e544-7ff6-4751-ae0f-53feb965e0e8"/>
+			</line>
+			<textField>
+				<reportElement x="33" y="166" width="699" height="39" uuid="75161773-43ed-441b-b2a7-9104e3b4b827">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="219" width="130" height="28" uuid="4ef92ae0-cbbe-4a3c-8c00-f254e0b13568"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Licensed Trader    ರೇಷ್ಮೆ ಕೊಂಡವರ  ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="220" width="111" height="28" uuid="2a6bbc6c-c3f5-4827-aa1a-3213f776a113"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of The Seller   ಮಾರಾಟ ಮಾಡಿದವರ ಸಹಿ        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="255" width="81" height="20" uuid="f76f03ff-70d4-479f-aa77-f41a0ddfe7b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date / ದಿನಾಂಕ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="113" y="255" width="92" height="20" uuid="a0700d9e-d430-4966-9694-ce806d8126e0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="360" width="331" height="20" uuid="422331d3-9ebb-451f-a328-02e2d018b453"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="11"/>
+				</textElement>
+				<text><![CDATA[   CI 58  SLK 2006, Bangalore, dated 25.7.07  MF  0.5%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="332" width="162" height="28" uuid="27f46cdd-9b34-4899-a498-54621fae81d3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Recieved  The Amount In Full Statement ಪೂರ್ತಿ  ಹಣವನ್ನು  ಸ್ವೀಕರಿಸಲಾಗಿದೆ .      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="298" width="162" height="43" uuid="96fec25b-4252-4f3a-9285-1d0b4544df4f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<text><![CDATA[Signature Of Officer  Conducting  the auction                                              ಹರಾಜು ನಡೆಸುವ ಅಧಿಕಾರಿಯ ಸಹಿ   ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="71" width="66" height="20" uuid="cc2ba8ca-dc43-4010-951f-636fed7405f6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="71" width="69" height="20" uuid="e18613e6-c2f9-45c1-b190-9590599e9443">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="72" width="49" height="20" uuid="c5711019-33c5-49ba-a67b-ecbe07dbfffc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="574" y="77" width="86" height="28" uuid="6cf7afa6-e48e-425a-a4d9-d08a1be416d0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paidAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

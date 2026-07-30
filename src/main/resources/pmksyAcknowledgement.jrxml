@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Acknowledgement" pageWidth="640" pageHeight="842" columnWidth="600" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f860de0-2c2f-45a0-a8ec-919e34039bc0">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="header" class="java.lang.String"/>
+	<field name="acceptedDate" class="java.lang.String"/>
+	<field name="lineItemComment" class="java.lang.String"/>
+	<field name="header1" class="java.lang.String"/>
+	<field name="header2" class="java.lang.String"/>
+	<field name="logurl" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="1" width="590" height="50" uuid="00ce6927-dada-4889-9103-16f34b38107f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-11" y="-10" width="611" height="1" uuid="65ca4455-339d-40f4-be17-8a81a1efb485"/>
+			</line>
+			<line>
+				<reportElement x="600" y="-10" width="1" height="61" uuid="e612663a-facc-40c3-8184-b3a4d7952905"/>
+			</line>
+			<line>
+				<reportElement x="-10" y="-10" width="1" height="61" uuid="38fd7191-fdda-4f29-a188-d843a0a9c913"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="631" splitType="Stretch">
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="196" y="6" width="160" height="86" uuid="39c99465-9e7c-4973-9829-a2b588ef1914"/>
+				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="196" y="94" width="160" height="20" uuid="38a9a822-2365-4e40-97a8-ee945b37036c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nirmala UI"/>
+				</textElement>
+				<text><![CDATA[(ರೇಷ್ಮೆ ಇಲಾಖೆ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-8" y="120" width="608" height="30" backcolor="#339900" uuid="ac60cbc9-a65c-437a-a647-4c1781e866d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Acknowledgement  Letter]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="236" width="581" height="174" uuid="b2f92b0d-55f4-4255-b6f1-b78853a1c295"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="600" y="1" width="1" height="558" uuid="a7c1460c-37fb-4745-a924-8a44103fb843"/>
+			</line>
+			<line>
+				<reportElement x="-8" y="559" width="609" height="1" uuid="4e2a3ca3-e329-4418-8b00-5fe3922d3ef7"/>
+			</line>
+			<line>
+				<reportElement x="-9" y="1" width="1" height="558" uuid="36ecdb4a-52c3-4496-a2d9-4008adf7a160"/>
+			</line>
+			<textField>
+				<reportElement x="18" y="180" width="583" height="56" uuid="b6dbe6fc-df5b-43d2-9a3d-2428ecbcde5b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Nirmala UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="400" width="200" height="120" uuid="42d5149a-3903-4c80-b019-b224a1899937"/>
+				<textElement textAlignment="Center">
+					<font fontName="Nirmala UI" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
