@@ -15383,6 +15383,18 @@ public class ReportsController {
         response.setTotalSubsidyAmountCa(totalSubsidyAmountCa);
         response.setTotalEligible(totalEligibleQuantity);
 
+        // Synthetic "ಒಟ್ಟು" grand-total row, appended once as the last entry so
+        // Incentive30BV.jrxml can render it via an ordinary jr:table detail row
+        // (printed exactly once, wherever it naturally falls) instead of the
+        // table's columnFooter, which JasperReports reprints on every page the
+        // table spans -- that was producing a page-wise subtotal instead of one
+        // grand total after the final row.
+        SanctionOrderResponse totalRow = new SanctionOrderResponse();
+        totalRow.setTotalRow(true);
+        totalRow.setEligibleQuantityOfCocoonsProduced(weightFormat.format(totalEligibleQuantity));
+        totalRow.setSchemeAmount(totalSchemeAmount);
+        sanctionOrderResponseList.add(totalRow);
+
         return new JRBeanCollectionDataSource(sanctionOrderResponseList);
     }
 

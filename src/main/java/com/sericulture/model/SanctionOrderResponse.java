@@ -288,6 +288,12 @@ private String totalIncentiveAmountInWords;
     private Float totalEligible;
     private Float totalSubsidy;
 
+    // Marks the synthetic grand-total row appended after all real data rows in
+    // Incentive30BV.jrxml, so the jr:table detail cells can render the "ಒಟ್ಟು"
+    // summary line once (as an ordinary last row) instead of via columnFooter,
+    // which JasperReports reprints on every page a table spans.
+    private Boolean totalRow;
+
     private Float establishmentOfMulberryGardenEligibleAmount;
     private Float establishmentOfMulberryGardenClaimedAmount;
     private Float establishmentOfMulberryGardenPercentageOfSubsidyAmount;
