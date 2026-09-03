@@ -113,6 +113,7 @@ public class ARMSanctionResponse {
     private String armLandVillageKan;
     private String armLandPropertyNo;
     private String armLandAddress;
+    private String armLandOwnerName;
 
     // ARM unit info
     private String armEndsCount;

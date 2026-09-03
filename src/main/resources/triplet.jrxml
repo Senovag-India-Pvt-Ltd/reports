@@ -134,7 +134,10 @@
 				<box padding="0">
 					<pen lineWidth="1.25"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{farmerNumber}]]></textFieldExpression>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="17" y="170" width="113" height="20" uuid="25412001-2230-42a0-858e-e3b49cbc5d1e">
@@ -154,7 +157,7 @@
 				</textElement>
 				<text><![CDATA[ Date]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="130" y="170" width="100" height="20" uuid="166b1d5a-3567-4d63-ab53-416a4cd975fb"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -165,8 +168,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{auctionDate}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="17" y="190" width="113" height="20" uuid="77c3b1ad-209e-4654-84ad-d7cffdc9df2f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -199,7 +202,7 @@
 				<text><![CDATA[  Race
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="130" y="210" width="100" height="20" uuid="2368f2da-bee8-46e8-8bc9-aa1bf7146d77"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -210,8 +213,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[$F{race}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="17" y="230" width="113" height="30" uuid="e89b9525-193f-4b75-9bfc-6c624a4ef8cb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -232,7 +235,7 @@
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="130" y="230" width="100" height="30" uuid="b399a860-b775-44fc-bb2e-a5479cfe2a37"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -243,8 +246,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{farmerNumber} $F{farmerFirstName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{farmerNumber} + $F{farmerFirstName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="17" y="260" width="113" height="30" uuid="b57c5ad9-5fb7-4613-82d0-cf068e40239f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -263,7 +266,7 @@
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="130" y="260" width="100" height="30" uuid="96e15a00-32ba-41fd-952e-130a1e779b1a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -274,8 +277,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{bidAmount}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="17" y="290" width="113" height="30" uuid="6ae02e4a-8a55-46b3-be58-fc7c5bcc9706">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -290,10 +293,10 @@
 					<font fontName="SansSerif" size="8.5" isBold="false"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[ 3.Details of the Licensed Reeler/Representative
+				<text><![CDATA[ 3.Details of the Licensed Reeler/Representative               
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="130" y="290" width="100" height="30" uuid="49f0d778-6509-4a61-a322-6d3631e415c1"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -304,9 +307,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{reelerLicense} $F{reelerName}]]></text>
-			</staticText>
-			<staticText>
+				<textFieldExpression><![CDATA[$F{reelerLicense} + $F{reelerName}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="130" y="320" width="100" height="20" uuid="f49f7abf-f871-43e9-9fff-ff82f9fd8b95"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -317,9 +320,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{lotWeight}]]></text>
-			</staticText>
-			<staticText>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="130" y="340" width="100" height="20" uuid="9e6f1156-69f3-4437-b052-4e2f3432aa07"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -328,11 +331,11 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{feespaid}]]></text>
-			</staticText>
-			<staticText>
+				<textFieldExpression><![CDATA[$F{feespaid}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="130" y="360" width="100" height="30" uuid="0ed4f2dc-667f-43d8-ba7a-44a3274645a3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -345,8 +348,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{lotSoldOutAmount}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{lotSoldOutAmount}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="30" width="213" height="20" uuid="97afae0c-857d-42fb-9fae-4d98df749dc1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -431,7 +434,7 @@
 				</textElement>
 				<text><![CDATA[ Lot Number:]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="150" width="100" height="20" uuid="f0d09a4e-d339-45db-8bc2-25e30dde57f6">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -442,9 +445,11 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[$F{allottedLotId}]]></text>
-			</staticText>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="170" width="113" height="20" uuid="118cc768-eb70-445c-ad3e-befdc795915c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -462,7 +467,7 @@
 				</textElement>
 				<text><![CDATA[ Date]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="170" width="100" height="20" uuid="21af4a05-9eef-4b87-b1b3-44fb87a5355d">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -476,8 +481,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{auctionDate}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="190" width="113" height="20" uuid="de07e65e-aeea-4610-b733-c343738d79c1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -496,7 +501,7 @@
 				<text><![CDATA[ Government Cocoon Market
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="190" width="100" height="20" uuid="cefc81a7-1ae4-43c4-8c3b-0a636bfda79c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -510,8 +515,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13"/>
 				</textElement>
-				<text><![CDATA[$F{marketName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{marketName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="210" width="113" height="20" uuid="2c526c41-f62e-4637-b751-cd0ef8973e57">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -529,7 +534,7 @@
 				</textElement>
 				<text><![CDATA[ Race]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="210" width="100" height="20" uuid="728041fe-fb31-46e1-8de1-1834f4316182">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -543,8 +548,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[$F{race}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="230" width="113" height="30" uuid="a6e6d9ac-5046-42f0-9af8-5cca767c1deb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -566,7 +571,7 @@
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="230" width="100" height="30" uuid="125bc51d-3ecd-4626-8709-8fd4f317b283">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -580,8 +585,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{farmerNumber} $F{farmerFirstName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{farmerNumber} + $F{farmerFirstName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="260" width="113" height="30" uuid="b8a17131-b335-4410-8aae-e83a58906fe6">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -601,7 +606,7 @@
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="260" width="100" height="30" uuid="c670d007-9c97-43e1-99b6-e1f2f18cf357">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -615,8 +620,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{bidAmount}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="290" width="113" height="30" uuid="3dae25fa-a702-43ad-afbc-b223edce461f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -632,11 +637,11 @@
 					<font size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[ 3.Details of the Licensed  Reeler/Representative
+				<text><![CDATA[ 3.Details of the Licensed  Reeler/Representative               
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="290" width="100" height="30" uuid="b8b20e01-b433-4e15-8065-66a64139bf44">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -650,8 +655,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{reelerLicense} $F{reelerName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{reelerLicense} + $F{reelerName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="320" width="113" height="20" uuid="294efe62-89e3-4dd7-b6cf-775a90fb0265">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -668,11 +673,11 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[ 4.TotalWeight Cocoons (Kg)
+				<text><![CDATA[ 4.TotalWeight Cocoons (Kg)            
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="320" width="100" height="20" uuid="d93bec83-1252-4438-8a4c-676b60a67a70">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -686,8 +691,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{lotWeight}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="340" width="113" height="20" uuid="33aa6cb0-c1d7-4461-b7ae-8cac79805932">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -705,7 +710,7 @@
 				</textElement>
 				<text><![CDATA[ 5.Fees to be paid to the market]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="340" width="100" height="20" uuid="95d5958d-3a9b-4196-a472-e529797304aa">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -717,10 +722,10 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{feespaid}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{feespaid}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="277" y="360" width="113" height="30" uuid="85e15806-a8cd-40e4-9319-1b1f34085622">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -739,7 +744,7 @@
 				<text><![CDATA[ 6.Amount to be paid  by the Silkworm Cocoon Producer /Representative (in INR):
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="390" y="360" width="100" height="30" uuid="f6d3c20d-7e86-47b2-9818-c1673425bf12">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -753,8 +758,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{amountfarmer}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{amountfarmer}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="30" width="213" height="20" uuid="78fc0183-474e-4d2e-a7a5-89451d0e2f2f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -841,7 +846,7 @@
 				</textElement>
 				<text><![CDATA[  Lot Number:]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="150" width="100" height="20" uuid="8c6e9ae7-3955-4f2d-b16e-b0016e9f2560">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -855,8 +860,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{allottedLotId}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{allottedLotId}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="170" width="113" height="20" uuid="050c5427-9c07-410e-8a86-fad1de4a513c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -874,7 +879,7 @@
 				</textElement>
 				<text><![CDATA[  Date]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="170" width="100" height="20" uuid="afa75712-3a8c-40ef-a93e-dd750b5ae867">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -888,8 +893,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{auctionDate}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{auctionDate}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="190" width="113" height="20" uuid="d2d1f45c-33cc-4369-8bb8-cf0ce1bb20fe">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -907,7 +912,7 @@
 				</textElement>
 				<text><![CDATA[ Government Cocoon  Market]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="190" width="100" height="20" uuid="5ecfbd5b-2002-4efc-b924-bb1285802327">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -921,8 +926,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13"/>
 				</textElement>
-				<text><![CDATA[$F{marketName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{marketName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="210" width="113" height="20" uuid="401c4b8c-ad97-4bbe-a9fb-c7f8f6aef27f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -940,7 +945,7 @@
 				</textElement>
 				<text><![CDATA[  Race]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="210" width="100" height="20" uuid="bcec7c5d-474c-48ec-999f-80995a1f102e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -954,8 +959,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[$F{race}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="230" width="113" height="30" uuid="abd8cc03-3cb8-40ab-973b-3781222bbee9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -977,7 +982,7 @@
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="230" width="100" height="30" uuid="7aeb2c64-7c15-40b6-88ec-ca1f0744f690">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -991,8 +996,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{farmerNumber} $F{farmerFirstName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{farmerNumber} + $F{farmerFirstName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="260" width="113" height="30" uuid="0f7a0ed7-f531-4207-a042-b8837a801342">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1010,7 +1015,7 @@
 				</textElement>
 				<text><![CDATA[  2.e-Auction Maximum   Rate of Cocoon per Kg]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="260" width="100" height="30" uuid="fdb06428-1973-4439-8455-c05d7a519ff8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1024,8 +1029,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{bidAmount}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="290" width="113" height="30" uuid="a88e337e-4c75-43b6-ae4a-c3a019d1be8e">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1041,11 +1046,11 @@
 					<font size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[  3.Details of the   Licensed   Reeler/Representative
+				<text><![CDATA[  3.Details of the   Licensed   Reeler/Representative         
 
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="290" width="100" height="30" uuid="fcb77513-f112-4785-9050-91edad180a14">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1059,8 +1064,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[$F{reelerLicense} $F{reelerName}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{reelerLicense}+ $F{reelerName}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="320" width="113" height="20" uuid="be331071-e3aa-47a3-9916-d65e952f5ddf">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1095,7 +1100,7 @@
 				</textElement>
 				<text><![CDATA[ 5.Fees to be paid to the market]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="340" width="100" height="20" uuid="ef626c6d-ed1b-4203-80e1-8eb66cf63558">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1107,10 +1112,10 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{feespaid}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{feespaid}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="546" y="360" width="113" height="30" uuid="032637c4-63a1-477f-8f78-eb7c52f8394e">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1129,7 +1134,7 @@
 				<text><![CDATA[ 6.Amount to be paid  by the  Silkworm Cocoon Producer /Representative (in INR):
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="360" width="100" height="30" uuid="bea097fe-f4b4-4b8d-acd4-02167682331a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1143,8 +1148,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{amountrealar}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{amountrealar}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="659" y="390" width="100" height="29" uuid="63680349-e42f-4610-aac5-4707ddcf8a0a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -1211,15 +1216,15 @@
 				<text><![CDATA[12.79
 ]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="230" y="161" width="31" height="20" uuid="1b49511a-a39b-4a61-a2ba-7a46271e8705">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{lotWeight}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="228" y="180" width="31" height="19" uuid="1fc6e32e-21e1-4289-8ad3-3bb25618bf64">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1385,7 +1390,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[   (Login Name) // Bank106900004207             (PKGB0010692)
+				<text><![CDATA[   (Login Name) // Bank106900004207             (PKGB0010692)	         
 ]]></text>
 			</staticText>
 			<staticText>
@@ -1401,7 +1406,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[ (G(19) 21559.3+217.7+217.7=21994.7
+				<text><![CDATA[ (G(19) 21559.3+217.7+217.7=21994.7	
 ]]></text>
 			</staticText>
 			<staticText>
@@ -1647,7 +1652,7 @@
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="659" y="320" width="100" height="20" uuid="a9ca9b22-5a75-4b93-a40f-d5f8c504b147">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1661,8 +1666,8 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[$F{lotWeight}]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="17" y="320" width="113" height="20" uuid="3de82d3c-028f-4f7f-a1bd-c34db0b04ddc">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1677,7 +1682,7 @@
 					<font size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[ 4.Total Weight Cocoons (kg)
+				<text><![CDATA[ 4.Total Weight Cocoons (kg)         
 
 ]]></text>
 			</staticText>
@@ -2101,13 +2106,16 @@
 				</box>
 				<text><![CDATA[]]></text>
 			</staticText>
-			<textField>
+			<staticText>
 				<reportElement x="131" y="130" width="100" height="20" uuid="a0d0dbf1-734f-4673-8304-793033eb5b96"/>
 				<box padding="0">
 					<pen lineWidth="1.25"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{farmerNumber}]]></textFieldExpression>
-			</textField>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KLR-39241]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>
