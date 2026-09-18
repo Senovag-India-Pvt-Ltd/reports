@@ -66,14 +66,14 @@
 			<textField>
 				<reportElement x="-8" y="-4" width="748" height="49" uuid="ded01219-1564-44bd-8878-3ee642affca6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="16"/>
+					<font fontName="Noto Sans Kannada" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{headerText}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="-8" y="75" width="310" height="23" uuid="2a6a5d32-5b38-40b5-ad42-1ec55324f46b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="16"/>
+					<font fontName="Noto Sans Kannada" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
 			</textField>
@@ -313,14 +313,14 @@
 			<textField>
 				<reportElement x="-8" y="46" width="310" height="24" uuid="ded01219-1564-44bd-8878-3ee642affca6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="16"/>
+					<font fontName="Noto Sans Kannada" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{deposit}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="-8" y="105" width="310" height="25" uuid="9ce05c7f-6f73-431c-8c91-fd13ef8b9304"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="16"/>
+					<font fontName="Noto Sans Kannada" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
 			</textField>

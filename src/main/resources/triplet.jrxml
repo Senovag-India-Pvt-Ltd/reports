@@ -94,7 +94,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ Serial Number:]]></text>
@@ -123,7 +123,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ Lot Number:
@@ -152,7 +152,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 					<paragraph leftIndent="2" spacingBefore="0"/>
 				</textElement>
 				<text><![CDATA[ Date]]></text>
@@ -181,7 +181,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 				</textElement>
 				<text><![CDATA[  Government Cocoon Market
 ]]></text>
@@ -197,7 +197,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 				</textElement>
 				<text><![CDATA[  Race
 ]]></text>
@@ -227,7 +227,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ 1.Silkworm Cocoon   Producer/Representative  Name and Location
@@ -259,7 +259,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5"/>
+					<font fontName="Noto Sans Kannada" size="8.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ 2.eAuction Maximum Rate of Cocoon per Kg
@@ -290,7 +290,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8.5" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="8.5" isBold="false"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ 3.Details of the Licensed Reeler/Representative               
@@ -1161,7 +1161,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="noto sans" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1171,7 +1171,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[13.86
 ]]></text>
@@ -1181,7 +1181,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[12.82
 ]]></text>
@@ -1191,7 +1191,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[11.92
 ]]></text>
@@ -1201,7 +1201,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[12.1
 ]]></text>
@@ -1211,7 +1211,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[12.79
 ]]></text>
@@ -1221,7 +1221,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
 			</textField>
@@ -1230,7 +1230,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
@@ -1239,7 +1239,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true" pdfEncoding=""/>
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
@@ -1593,7 +1593,7 @@
 			<staticText>
 				<reportElement x="490" y="39" width="30" height="20" uuid="b9d1b298-42a6-42e1-b67d-e9da6d2c1d83"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 13.86
 ]]></text>
@@ -1601,7 +1601,7 @@
 			<staticText>
 				<reportElement x="489" y="59" width="31" height="19" uuid="776cd451-3e52-4343-a325-25c5a9ad5404"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 12.82
 ]]></text>
@@ -1609,7 +1609,7 @@
 			<staticText>
 				<reportElement x="490" y="78" width="30" height="20" uuid="6f38b152-43bf-4d49-8602-710d74c00c23"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 11.92
 ]]></text>
@@ -1617,7 +1617,7 @@
 			<staticText>
 				<reportElement x="490" y="108" width="30" height="18" uuid="1b6e34df-280b-4502-9085-085696200c7b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[   12.1
 ]]></text>
@@ -1625,7 +1625,7 @@
 			<staticText>
 				<reportElement x="490" y="140" width="30" height="20" uuid="3747f3fa-3461-4f58-9640-9aa310ccb0f6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 12.79
 ]]></text>
@@ -1633,7 +1633,7 @@
 			<staticText>
 				<reportElement x="490" y="160" width="30" height="20" uuid="f5628d97-f675-48fd-90e0-7f82538fce15"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 63.49
 ]]></text>
@@ -1641,14 +1641,14 @@
 			<staticText>
 				<reportElement x="490" y="180" width="30" height="19" uuid="baacb5af-f8be-421c-8d95-f9152a353cc5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="489" y="199" width="31" height="20" uuid="6314e79f-2903-4b3e-89aa-1372cd1f2ae1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true" pdfEncoding=""/>
 				</textElement>
 				<text><![CDATA[0]]></text>
 			</staticText>
@@ -1949,7 +1949,7 @@
 			<staticText>
 				<reportElement x="759" y="44" width="32" height="20" uuid="32ae356a-d2ac-4638-8d27-c658bfc2c75e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 13.86
 ]]></text>
@@ -1957,7 +1957,7 @@
 			<staticText>
 				<reportElement x="759" y="64" width="32" height="16" uuid="f3642fc6-090c-4e89-8e39-2d04b0a39e2b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 12.82
 ]]></text>
@@ -1965,7 +1965,7 @@
 			<staticText>
 				<reportElement x="759" y="79" width="32" height="21" uuid="21df58d9-8ffc-4337-a2f8-3f9817bf968e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 11.92
 ]]></text>
@@ -1973,7 +1973,7 @@
 			<staticText>
 				<reportElement x="759" y="100" width="32" height="40" uuid="b831f397-f371-49be-9c4c-e7a3f0fca496"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[   12.1
 ]]></text>
@@ -1981,7 +1981,7 @@
 			<staticText>
 				<reportElement x="759" y="160" width="32" height="20" uuid="03aad103-41f4-4738-835a-3f2df6acecae"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 63.49
 ]]></text>
@@ -1989,7 +1989,7 @@
 			<staticText>
 				<reportElement x="759" y="140" width="32" height="20" uuid="17b38f4c-ced5-4210-827b-4d1999b1e7dc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ 12.79
 ]]></text>
@@ -1997,7 +1997,7 @@
 			<staticText>
 				<reportElement x="759" y="180" width="32" height="19" uuid="7106b813-3202-4917-bd63-a939164ff019"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[5
 ]]></text>
@@ -2005,7 +2005,7 @@
 			<staticText>
 				<reportElement x="760" y="200" width="31" height="20" uuid="74771dee-b037-411d-b918-4ddc4ed3e7d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true" pdfEncoding=""/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true" pdfEncoding=""/>
 				</textElement>
 				<text><![CDATA[21777.07
 ]]></text>

@@ -264,7 +264,7 @@
 			<textField>
 				<reportElement x="-10" y="7" width="842" height="83" uuid="ded01219-1564-44bd-8878-3ee642affca6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="16"/>
+					<font fontName="Noto Sans Kannada" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{headerText}]]></textFieldExpression>
 			</textField>

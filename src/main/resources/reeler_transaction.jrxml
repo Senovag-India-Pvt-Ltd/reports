@@ -64,14 +64,14 @@
 			<textField>
 				<reportElement x="20" y="-17" width="672" height="40" uuid="ded01219-1564-44bd-8878-3ee642affca6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{headerText}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="19" y="28" width="672" height="40" uuid="97ec50a2-fec7-413b-a18b-ff0f60b11051"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reeler_amount_balance}]]></textFieldExpression>
 			</textField>

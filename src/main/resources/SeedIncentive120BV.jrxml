@@ -136,7 +136,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="20" height="40" uuid="4d893d02-e024-48d5-9eda-e2fa52cf9ad3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಕ್ರ.        ಸಂ.]]></text>
 							</staticText>
@@ -153,7 +153,7 @@
 							<textField>
 								<reportElement positionType="Float" x="0" y="0" width="20" height="30" uuid="0152f108-5dc8-48fc-b41b-6659484aca38"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{serialNumber}]]></textFieldExpression>
 							</textField>
@@ -165,7 +165,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="140" height="40" uuid="241ccd2c-1a33-4ea0-9b3b-5af0067a7252"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7.5"/>
+									<font fontName="Noto Sans Kannada" size="7.5"/>
 								</textElement>
 								<text><![CDATA[ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರ  ಹೆಸರು
 ಮತ್ತು   ವಿಳಾಸ
@@ -190,7 +190,7 @@
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[($F{nameKan} == null ? "" : $F{nameKan}) + " ಬಿನ್/ಕೋಂ " +($F{fatherNameKan} == null ? "" : $F{fatherNameKan}) 
 + ",   " +($F{villageNameInKannada} == null ? "" : $F{villageNameInKannada}) + "\n" +($F{fruitsId} == null ? "" : $F{fruitsId}) + " (" + ($F{arn} == null ? "" : $F{arn}) + ")"]]></textFieldExpression>
@@ -203,7 +203,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="70" height="40" uuid="7c499687-2c4a-4d0f-a99a-ede821e8a82f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಮುಂಗಡ ಹಣ ಸಂದಾಯ ರಸೀ ದಿ ಸಂಖ್ಯೆ ಮತ್ತು ದಿನಾಂಕ]]></text>
 							</staticText>
@@ -220,14 +220,14 @@
 							<textField>
 								<reportElement x="0" y="0" width="70" height="15" uuid="7f6f4d1c-f1fd-4635-8112-c6d1c1475937"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{incentiveReceiptNo}]]></textFieldExpression>
 							</textField>
 							<textField>
 								<reportElement positionType="Float" x="0" y="15" width="70" height="15" uuid="da043a8b-9dba-43eb-aaad-8c938117e6b5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{transactionDate}]]></textFieldExpression>
 							</textField>
@@ -239,7 +239,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="40" height="40" uuid="23927fa5-b3f5-46c2-ab3c-11b9485b81f3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ತಂಡದ
 ಸಂಖ್ಯೆ]]></text>
@@ -257,7 +257,7 @@
 							<textField>
 								<reportElement positionType="Float" x="0" y="0" width="40" height="30" uuid="9e33a294-f73d-4bb4-9c29-af775451edd9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{lotNo}]]></textFieldExpression>
 							</textField>
@@ -269,7 +269,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="40" height="40" uuid="f65638c1-827b-4e11-8973-ffebab72e49a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಮೊಟ್ಟೆ ಗಳ ಸಂಖ್ಯೆ]]></text>
 							</staticText>
@@ -286,7 +286,7 @@
 							<textField>
 								<reportElement positionType="Float" x="0" y="0" width="40" height="30" uuid="c2f97fbe-35ab-4888-a9b1-5c7ec7fcc8db"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{noOfDfls}]]></textFieldExpression>
 							</textField>
@@ -298,7 +298,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="60" height="40" uuid="581f2ce8-5d56-47ba-9314-a3cdfe88c187"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಬಿತ್ತನೆ ಗೂಡಿನ ಸಂಖ್ಯೆ    (ಪ್ರತಿ  
 ಕೆ.ಜಿ ಗೆ)]]></text>
@@ -314,7 +314,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="20" uuid="6423d429-85a9-4d94-a96a-14b048f11e4a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI"/>
+									<font fontName="Noto Sans Kannada"/>
 								</textElement>
 								<text><![CDATA[ಒಟ್ಟು ]]></text>
 							</staticText>
@@ -323,7 +323,7 @@
 							<textField>
 								<reportElement positionType="Float" x="0" y="0" width="60" height="30" uuid="39568506-2b2b-4e42-b792-ae1028e5ae63"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[Math.round($F{noOfCocoonsPerKg})]]></textFieldExpression>
 							</textField>
@@ -335,7 +335,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="70" height="40" uuid="1edc250b-66b6-44c6-a390-9455303fa529"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಬಿತ್ತನೆಗೆ ವಹಿವಾಟಾದ  ರೇಷ್ಮೆ  ಗೂಡಿನ ಪರಿಮಾಣ   (ಕೆ.ಜಿ ಗಳಲ್ಲಿ)]]></text>
 							</staticText>
@@ -344,7 +344,7 @@
 							<textField pattern="###0.000">
 								<reportElement x="0" y="0" width="70" height="20" uuid="ddf8b4b1-9d0a-43dc-bb2e-ff2e4f06ec34"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{cocoonTransactedForSeedInKg1}]]></textFieldExpression>
 							</textField>
@@ -353,7 +353,7 @@
 							<textField pattern="###0.000">
 								<reportElement positionType="Float" x="0" y="0" width="70" height="30" uuid="e1328c9a-c9ee-40ce-b426-2ee7788150e4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{cocoonTransactedForSeedInKg}]]></textFieldExpression>
 							</textField>
@@ -365,7 +365,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="80" height="40" uuid="a1498edd-c376-4339-82f4-b7364fd3fa5a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ನೂಲು ಬಿಚ್ಚಾಣಿಕೆಗೆ ವಹಿವಾಟಾದ  ಗೂಡಿನ ಪರಿಮಾಣ
 ( ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
@@ -375,7 +375,7 @@
 							<textField pattern="###0.000">
 								<reportElement x="0" y="0" width="80" height="20" uuid="f0599110-6184-42e9-ae29-350ff2c2b869"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{cocoonTransactedForReelingInKg1}]]></textFieldExpression>
 							</textField>
@@ -384,7 +384,7 @@
 							<textField pattern="###0.000">
 								<reportElement positionType="Float" x="0" y="0" width="80" height="30" uuid="72de76fe-1780-41a3-b1c8-9eabe8639cbf"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{cocoonTransactedForReelingInKg}]]></textFieldExpression>
 							</textField>
@@ -396,7 +396,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="70" height="40" uuid="7dde551e-42f4-42fd-b87c-26716715a308"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಒಟ್ಟು ವಹಿವಾಟಾದ  ಬಿತ್ತನೆ ಗೂಡಿನ ಪರಿಮಾಣ
 ( ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
@@ -406,7 +406,7 @@
 							<textField pattern="###0.000">
 								<reportElement x="0" y="0" width="70" height="20" uuid="53adb4f3-464e-4e8d-9687-739189225a0e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{cocoonsWeight1}]]></textFieldExpression>
 							</textField>
@@ -415,7 +415,7 @@
 							<textField pattern="###0.000">
 								<reportElement positionType="Float" x="0" y="0" width="70" height="30" uuid="dd2c829b-10de-449d-89b1-614b21b5cb06"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{cocoonsWeight}]]></textFieldExpression>
 							</textField>
@@ -427,7 +427,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="60" height="40" uuid="e7737e2f-0fb3-4bd2-b632-7dc00b48fef1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[100 ಮೊಟ್ಟೆ
 ಗಳಿಗೆ  ಸರಾಸರಿ ಇಳುವರಿ
@@ -445,7 +445,7 @@
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[String.format("%.2f", $F{averageYield})]]></textFieldExpression>
 							</textField>
@@ -457,7 +457,7 @@
 							<staticText>
 								<reportElement positionType="Float" x="0" y="0" width="68" height="40" uuid="8db63cf5-464b-410f-b67d-ef50620468cf"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="7"/>
+									<font fontName="Noto Sans Kannada" size="7"/>
 								</textElement>
 								<text><![CDATA[ಪ್ರೋತ್ಸಾಹಧನ
 (ಪ್ರತಿ ಕೆ .ಜಿ. ರೇಷ್ಮೆ ಗೂಡಿಗೆ  ರೂ.120/- ರಂತೆ)]]></text>
@@ -467,7 +467,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="68" height="20" uuid="ecb211d0-88f5-482e-b1d3-a58303c64899"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[String.format("%.2f", $V{schemeAmount1})]]></textFieldExpression>
 							</textField>
@@ -476,7 +476,7 @@
 							<textField>
 								<reportElement positionType="Float" x="0" y="0" width="68" height="30" uuid="2d884cdd-0f77-42a9-832c-20a2a4c15b9b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Nirmala UI" size="8"/>
+									<font fontName="Noto Sans Kannada" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[String.format("%.2f", $F{schemeAmount})]]></textFieldExpression>
 							</textField>
@@ -489,14 +489,14 @@
 				<staticText>
 					<reportElement x="3" y="-17" width="70" height="20" uuid="d7d96834-00b1-4266-b1e2-1b531c559ce6"/>
 					<textElement textAlignment="Left">
-						<font fontName="Nirmala UI" size="12" isBold="true"/>
+						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಪೀಠಿಕೆ :]]></text>
 				</staticText>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" x="73" y="-17" width="690" height="20" uuid="d848aa8f-8fda-494d-a6c7-c293bef10ca5"/>
 					<textElement textAlignment="Justified">
-						<font fontName="Nirmala UI" size="11"/>
+						<font fontName="Noto Sans Kannada" size="11"/>
 						<paragraph lineSpacing="Double"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
@@ -505,7 +505,7 @@
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="80" y="242" width="701" height="89" uuid="6f2401c2-a2ae-42fc-8667-65fafb791a64"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
@@ -513,14 +513,14 @@
 			<staticText>
 				<reportElement positionType="Float" x="0" y="242" width="80" height="30" uuid="0e3fe3bc-1c3d-481d-8b13-163243ddf175"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಉಲ್ಲೇಖ  :]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="90" y="150" width="670" height="82" uuid="f205d018-8b51-4c18-863e-4b617e944e03"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="11" isBold="false" isItalic="false"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
@@ -528,21 +528,21 @@
 			<staticText>
 				<reportElement positionType="Float" x="10" y="148" width="80" height="30" uuid="0d4173cc-2d51-400f-9b71-1877424fa5c2"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ವಿಷಯ  : ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="11" y="110" width="781" height="40" uuid="4159115a-37b8-4525-b98c-02f9c735adfe"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="340" y="70" width="110" height="50" uuid="e95b93cb-8516-4f29-9536-b2db76fd6294"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
 ರೇಷ್ಮೆ    ಇಲಾಖೆ
@@ -555,7 +555,7 @@
 			<textField>
 				<reportElement x="20" y="10" width="300" height="30" uuid="d4e48aee-2c2a-4f88-861c-5ecd19fc6b1c"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header11}]]></textFieldExpression>
 			</textField>
@@ -568,7 +568,7 @@
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="50" y="510" width="729" height="21" uuid="5563c013-1199-4b9e-b909-6fad969125fc"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Nirmala UI" size="11" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header6}]]></textFieldExpression>
@@ -576,14 +576,14 @@
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="44" y="562" width="750" height="38" uuid="1ac5b0fd-ef18-4c2d-9d06-0c849e282ce2"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="11" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="74" y="608" width="695" height="32" uuid="afdf18e9-cef0-4c90-b3b3-3dc0c1105211"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Nirmala UI" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header8}]]></textFieldExpression>
@@ -591,7 +591,7 @@
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="466" y="659" width="335" height="41" uuid="66590aeb-ebd2-4d09-988b-9b2e35503366"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header10}]]></textFieldExpression>
@@ -599,7 +599,7 @@
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="50" y="716" width="741" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
 				<textElement>
-					<font fontName="Nirmala UI" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header9}]]></textFieldExpression>
@@ -611,28 +611,28 @@
 			<staticText>
 				<reportElement positionType="Float" x="290" y="0" width="40" height="20" uuid="90453128-e7f7-4d2d-aea4-2a39d513c6bd"/>
 				<textElement textAlignment="Right">
-					<font fontName="Nirmala UI" size="10"/>
+					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<text><![CDATA[Page:]]></text>
 			</staticText>
 			<textField>
 				<reportElement positionType="Float" x="330" y="0" width="30" height="20" uuid="c930da66-9a14-4cab-a077-a35c68495ab0"/>
 				<textElement textAlignment="Right">
-					<font fontName="Nirmala UI" size="10"/>
+					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="360" y="0" width="25" height="20" uuid="cb5ac4ac-9fd6-4d17-b1f6-c55e7a447b91"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="10"/>
+					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<text><![CDATA[ of ]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
 				<reportElement positionType="Float" x="385" y="0" width="30" height="20" uuid="73824e4b-c78a-41ee-88a5-eebefd1d3fdc"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="10"/>
+					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

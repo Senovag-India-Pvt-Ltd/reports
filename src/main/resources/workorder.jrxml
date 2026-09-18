@@ -24,7 +24,7 @@
 			<textField>
 				<reportElement x="20" y="165" width="400" height="20" uuid="7c3b6738-b182-4e7c-9c15-f41e0c772d6b"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
 			</textField>
@@ -40,7 +40,7 @@
 			<textField>
 				<reportElement x="40" y="190" width="608" height="507" uuid="646b8063-3bcb-4cbd-8828-59f5595ceced"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
-					<font fontName="Nirmala UI" isBold="false"/>
+					<font fontName="Noto Sans Kannada" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lineItemComment}]]></textFieldExpression>
@@ -52,14 +52,14 @@
 			<textField>
 				<reportElement x="476" y="165" width="181" height="20" uuid="67897d7b-8a30-40ea-9cb8-6adc5850cb20"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="11"/>
+					<font fontName="Noto Sans Kannada" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="380" y="697" width="260" height="102" uuid="addda217-bd6b-451a-8dce-93b08107fd20"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="12" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header5}]]></textFieldExpression>
@@ -67,7 +67,7 @@
 			<textField>
 				<reportElement x="10" y="807" width="440" height="148" uuid="a332ca10-ba45-4092-badb-366752eefb24"/>
 				<textElement textAlignment="Left">
-					<font fontName="Nirmala UI" size="10" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header6}]]></textFieldExpression>
@@ -75,7 +75,7 @@
 			<staticText>
 				<reportElement x="278" y="73" width="110" height="40" uuid="f13e49ed-b9e5-4561-adc4-24b656aacfa5"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="11" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ
 ರೇಷ್ಮೆ    ಇಲಾಖೆ
@@ -84,7 +84,7 @@
 			<staticText>
 				<reportElement x="278" y="124" width="110" height="20" uuid="3fb687b4-89b8-4691-8c72-5e6de6d6dadd"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="11" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕಾರ್ಯಾದೇಶ]]></text>
 			</staticText>

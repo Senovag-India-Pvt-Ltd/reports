@@ -128,6 +128,8 @@ public class ARMSanctionResponse {
     private String dateOfGovtApproval;
     private String eOfficeFileNo;
     private String dateOfArmSelectionProceedings;
+    private Float projectCostMin;
+    private Float projectCostMax;
 
     // Farmer bank details
     private String farmerBankName;

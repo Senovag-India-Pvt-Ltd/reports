@@ -18,7 +18,7 @@
 			<staticText>
 				<reportElement x="323" y="110" width="160" height="52" uuid="38a9a822-2365-4e40-97a8-ee945b37036c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="13" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="13" isBold="true"/>
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ           ರೇಷ್ಮೆ   ಇಲಾಖೆ]]></text>
@@ -26,14 +26,14 @@
 			<staticText>
 				<reportElement mode="Opaque" x="10" y="180" width="780" height="30" backcolor="#FFFFFF" uuid="ac60cbc9-a65c-437a-a647-4c1781e866d6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="14" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಸ್ವೀಕೃತಿ ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="579" y="219" width="198" height="30" uuid="3214bb79-3cf4-4e27-873b-75cf8eb5147e"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="13" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="13" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{acceptedDate}]]></textFieldExpression>
 			</textField>
@@ -65,14 +65,14 @@
 			<textField>
 				<reportElement x="15" y="219" width="195" height="30" uuid="92919e8f-ae15-4bd1-b9ce-4abab637ae37"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="13" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="13" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="460" y="599" width="317" height="119" uuid="c0179355-e3e5-464f-9cfb-e835e46a146d"/>
 				<textElement textAlignment="Center">
-					<font fontName="Nirmala UI" size="13"/>
+					<font fontName="Noto Sans Kannada" size="13"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header1}]]></textFieldExpression>
@@ -80,7 +80,7 @@
 			<textField>
 				<reportElement x="70" y="273" width="680" height="317" uuid="afb80f98-33a2-44a9-848f-1076a8d53a09"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Nirmala UI" size="13"/>
+					<font fontName="Noto Sans Kannada" size="13"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>

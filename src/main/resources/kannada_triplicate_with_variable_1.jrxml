@@ -92,7 +92,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12" isBold="true" isUnderline="false"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[ಹರಾಜು ಚೀಟಿ ( ಕಛೇರಿ ಪ್ರತಿ)]]></text>
 			</staticText>
@@ -108,7 +108,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6"/>
+					<font fontName="Noto Sans Kannada" size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ (ರೆಗ್ಯುಲೇಷನ್‌  ಆಫ್ ಪ್ರೊಡಕ್ಷನ್ , ಸಪ್ಲೈ  ,  ಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್‌   ಅಂಡ್ ಸೇಲ್ಸ್‌  )
@@ -127,7 +127,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
@@ -143,7 +143,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
 			</textField>
@@ -159,7 +159,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಲಾಟ್ ನಂ]]></text>
@@ -178,7 +178,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2" spacingBefore="0"/>
 				</textElement>
 				<text><![CDATA[ ದಿನಾಂಕ]]></text>
@@ -194,7 +194,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{auctionDate_time}]]></textFieldExpression>
 			</textField>
@@ -210,7 +210,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 				</textElement>
 				<text><![CDATA[  ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ  ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
 			</staticText>
@@ -225,7 +225,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="10"/>
+					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<text><![CDATA[  ತಳಿ]]></text>
 			</staticText>
@@ -238,7 +238,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
 			</textField>
@@ -255,7 +255,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು   ಸ್ಥಳ
@@ -274,7 +274,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{farmerNameKannadaWithSerialNumber}]]></textFieldExpression>
 			</textField>
@@ -290,7 +290,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಅತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
@@ -307,7 +307,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6.5" isBold="false"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ]]></text>
@@ -323,7 +323,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="5" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="5" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
 			</textField>
@@ -338,7 +338,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
 			</textField>
@@ -351,7 +351,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{feespaid}]]></textFieldExpression>
 			</textField>
@@ -366,7 +366,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotSoldOutAmount}]]></textFieldExpression>
 			</textField>
@@ -382,7 +382,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="8.5" isBold="true" isUnderline="false"/>
+					<font fontName="Noto Sans Kannada" size="8.5" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[ಹರಾಜು ಚೀಟಿ ( ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರರ ಪ್ರತಿ)
 ]]></text>
@@ -398,7 +398,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6"/>
+					<font fontName="Noto Sans Kannada" size="6"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ (ರೆಗ್ಯುಲೇಷನ್‌  ಆಫ್ ಪ್ರೊಡಕ್ಷನ್ , ಸಪ್ಲೈ  ,  ಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್‌   ಅಂಡ್ ಸೇಲ್ಸ್‌  )
 ರೂಲ್ಸ್‌  ೧೯೬೦ - ಫಾರಂ ೭ಬಿ]]></text>
@@ -417,7 +417,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
@@ -435,7 +435,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಲಾಟ್ ನಂ]]></text>
@@ -453,7 +453,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ದಿನಾಂಕ]]></text>
@@ -471,7 +471,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{auctionDate_time}]]></textFieldExpression>
 			</textField>
@@ -488,7 +488,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಸರ್ಕಾರಿ ರೇಷ್ಮೆ   ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
@@ -505,7 +505,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI"/>
+					<font fontName="Noto Sans Kannada"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ತಳಿ]]></text>
@@ -523,7 +523,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
 			</textField>
@@ -540,7 +540,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು   ಸ್ಥಳ]]></text>
@@ -558,7 +558,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{farmerNameKannadaWithSerialNumber}]]></textFieldExpression>
 			</textField>
@@ -574,7 +574,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಅತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
@@ -591,7 +591,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
 			</textField>
@@ -608,7 +608,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ             ]]></text>
@@ -625,7 +625,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="5" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="5" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
 			</textField>
@@ -642,7 +642,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ
@@ -660,7 +660,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
 			</textField>
@@ -676,7 +676,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
@@ -694,7 +694,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{paidAmount}]]></textFieldExpression>
 			</textField>
@@ -710,7 +710,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೬. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ]]></text>
@@ -727,7 +727,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotSoldOutAmount}]]></textFieldExpression>
 			</textField>
@@ -743,7 +743,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="9" isBold="true" isUnderline="false"/>
+					<font fontName="Noto Sans Kannada" size="9" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[ಹರಾಜು ಚೀಟಿ (ರೇಷ್ಮೆ ಗೂಡು ಖರೀದಿದಾರರ ಪ್ರತಿ)]]></text>
 			</staticText>
@@ -759,7 +759,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6"/>
+					<font fontName="Noto Sans Kannada" size="6"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸಿಲ್ಕ್  ವರ್ಮ್ ಸೀಡ್, ಕಕೂನ್  ಅಂಡ್ ಸಿಲ್ಕ್  ಯಾರ್ನ್ (ರೆಗ್ಯುಲೇಷನ್‌  ಆಫ್ ಪ್ರೊಡಕ್ಷನ್ , ಸಪ್ಲೈ  ,  ಡಿಸ್ಟ್ರಿಬ್ಯೂಷನ್‌   ಅಂಡ್ ಸೇಲ್ಸ್‌  )
 ರೂಲ್ಸ್‌  ೧೯೬೦ - ಫಾರಂ ೭ಬಿ                             ]]></text>
@@ -778,7 +778,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[   ಕ್ರಮ ಸಂಖ್ಯೆ]]></text>
@@ -796,7 +796,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ಲಾಟ್ ನಂ]]></text>
@@ -814,7 +814,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5" isItalic="false"/>
+					<font fontName="Noto Sans Kannada" size="6.5" isItalic="false"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[   ದಿನಾಂಕ]]></text>
@@ -832,7 +832,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="8" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{auctionDate_time}]]></textFieldExpression>
 			</textField>
@@ -849,7 +849,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[   ಸರ್ಕಾರಿ  ರೇಷ್ಮೆ  ಗೂಡು ಮಾರುಕಟ್ಟೆ]]></text>
@@ -867,7 +867,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
 			</textField>
@@ -883,7 +883,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI"/>
+					<font fontName="Noto Sans Kannada"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ತಳಿ]]></text>
@@ -900,7 +900,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12"/>
+					<font fontName="Noto Sans Kannada" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{race}]]></textFieldExpression>
 			</textField>
@@ -918,7 +918,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೧.ರೇಷ್ಮೆಹುಳು ಸಾಕಾಣಿಕೆದಾರ/ ಪ್ರತಿ ನಿಧಿಯ ಹೆಸರು ಮತ್ತು  ಸ್ಥಳ
@@ -938,7 +938,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[   ೨. ಪ್ರತಿ ಕೆ.ಜಿ. ಗೂಡಿನ ಅತಿ ಹೆಚ್ಚಿನ ದರ  ರೂ]]></text>
@@ -955,7 +955,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
 			</textField>
@@ -972,7 +972,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[   ೩. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ / ಪ್ರತಿನಿಧಿಯ ಹೆಸರು ಮತ್ತು ವಿವರ]]></text>
@@ -989,7 +989,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="5" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="5" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reelerDetails}]]></textFieldExpression>
 			</textField>
@@ -1005,7 +1005,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ (ಕೆ.ಜಿ. ಗಳಲ್ಲಿ)]]></text>
@@ -1022,7 +1022,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
@@ -1039,7 +1039,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amountPaid}]]></textFieldExpression>
 			</textField>
@@ -1056,7 +1056,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6"/>
+					<font fontName="Noto Sans Kannada" size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ.]]></text>
@@ -1074,7 +1074,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotSoldOutAmount}]]></textFieldExpression>
 			</textField>
@@ -1090,7 +1090,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="noto sans" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1105,7 +1105,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="Noto Sans Kannada"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1118,7 +1118,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="Noto Sans Kannada"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1133,7 +1133,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
@@ -1149,7 +1149,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="Noto Sans Kannada"/>
 				</textElement>
 				<text><![CDATA[ ]]></text>
 			</staticText>
@@ -1165,7 +1165,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ
@@ -1182,7 +1182,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="Noto Sans Kannada"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -1198,7 +1198,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
@@ -1216,7 +1216,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ
@@ -1250,7 +1250,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ - ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
 			</staticText>
@@ -1266,7 +1266,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ - ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
 			</staticText>
@@ -1281,7 +1281,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ಕರ್ನಾಟಕ ಸರ್ಕಾರ - ರೇಷ್ಮೆ ಇಲಾಖೆ]]></text>
 			</staticText>
@@ -1313,7 +1313,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lotWeight}]]></textFieldExpression>
 			</textField>
@@ -1329,7 +1329,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[೪. ಗೂಡುಗಳು ಒಟ್ಟು ತೂಕ
@@ -1348,7 +1348,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೫. ಮಾರುಕಟ್ಟೆಗೆ ಪಾವತಿಸಬೇಕಾದ ಶುಲ್ಕ ರೂ]]></text>
@@ -1364,7 +1364,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[  ೬.. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ / ಪ್ರತಿನಿಧಿಗೆ ಪಾವತಿಸಬೇಕಾದ ಹಣ ರೂ]]></text>
@@ -1381,7 +1381,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೭. ರೇಷ್ಮೆ ಹುಳು ಸಾಕಾಣಿಕೆದಾರ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ]]></text>
@@ -1398,7 +1398,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6.5"/>
+					<font fontName="Noto Sans Kannada" size="6.5"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ೮. ಲೈಸೆನ್ಸ್ ಹೊಂದಿರುವ ಖರೀದಿಸುವ /ಪ್ರತಿನಿಧಿಯ ಸಹಿ
@@ -1416,7 +1416,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<text><![CDATA[  ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
 			</staticText>
@@ -1445,7 +1445,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<text><![CDATA[ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
 			</staticText>
@@ -1461,7 +1461,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="8"/>
+					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<text><![CDATA[ ಮಾರುಕಟ್ಟೆ ಅಧಿಕಾರಿ ಸಹಿ]]></text>
 			</staticText>
@@ -1478,7 +1478,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{farmerNameKannadaWithSerialNumber}]]></textFieldExpression>
 			</textField>
@@ -1493,7 +1493,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="10" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marketNameKannada}]]></textFieldExpression>
 			</textField>
@@ -1510,7 +1510,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{serialNumber}]]></textFieldExpression>
@@ -1528,7 +1528,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{serialNumber}]]></textFieldExpression>
@@ -1546,7 +1546,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{serialNumber}]]></textFieldExpression>
@@ -1564,7 +1564,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
+					<font fontName="Noto Sans Kannada"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{farmeramount_farmermf_reelermf}]]></textFieldExpression>
@@ -1582,7 +1582,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reeleramount}]]></textFieldExpression>
@@ -1600,7 +1600,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bidAmount}]]></textFieldExpression>
 			</textField>
@@ -1628,7 +1628,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{accountnumber_ifsccode}]]></textFieldExpression>
 			</textField>
@@ -2036,7 +2036,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{acknowledgmentString}]]></textFieldExpression>
 			</textField>
@@ -2052,7 +2052,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{acknowledgmentString}]]></textFieldExpression>
 			</textField>
@@ -2070,7 +2070,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="6" isBold="false"/>
+					<font fontName="Noto Sans Kannada" size="6" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{acknowledgmentString}]]></textFieldExpression>
 			</textField>
@@ -2086,7 +2086,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" isBold="true"/>
+					<font fontName="Noto Sans Kannada" isBold="true"/>
 					<paragraph firstLineIndent="2" leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reelerbalance}]]></textFieldExpression>
@@ -2182,7 +2182,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" isBold="false"/>
+					<font fontName="Noto Sans Kannada" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{binno}]]></textFieldExpression>
 			</textField>
@@ -2197,7 +2197,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="7" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{description1}]]></textFieldExpression>
 			</textField>
@@ -2662,7 +2662,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="7" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="7" isBold="true"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಒಟ್ಟು  ಮೊತ್ತ  ರೂ.]]></text>
@@ -2679,7 +2679,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="7" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="7" isBold="true"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಒಟ್ಟು  ಮೊತ್ತ ರೂ.]]></text>
@@ -2695,7 +2695,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Nirmala UI" size="7" isBold="true"/>
+					<font fontName="Noto Sans Kannada" size="7" isBold="true"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[ ಒಟ್ಟು  ಮೊತ್ತ ರೂ.]]></text>
