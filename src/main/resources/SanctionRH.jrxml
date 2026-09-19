@@ -191,7 +191,7 @@
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="44" y="363" width="750" height="29" uuid="1ac5b0fd-ef18-4c2d-9d06-0c849e282ce2"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
