@@ -16166,7 +16166,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
         "ಶೇ."+ (int)shareInPercentage+"  ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  "+ apiResponse.getContent().get(0).getSchemeAmount()+" (ರೂ. "+schemeAmountWords+") ಗಳಿಗೆ     ಮುಚ್ಚಳಿಕೆಯಲ್ಲಿನ     ಷರತ್ತು     ಮತ್ತು    ತಗಾದೆಗಳಿಗೆ    ಸಂಬಂಧಿಸಿದ     ಫಲಾನುಭವಿ      "+
                 "ಹಾಗೂ    ಶಿಫಾರಸ್ಸು     ಮಾಡಿದ     ಕ್ಷೇತ್ರಮಟ್ಟದ     ಅಧಿಕಾರಿಗಳನ್ನು     ಜವಾಬ್ದಾರಿ    ಮಾಡಿ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ ,   ಸಹಾಯಧನದ    ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2 / ಡಿಬಿಟಿ     "+
                 "ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ      ನೇರವಾಗಿ    ಜಮಾ    ಮಾಡುವುದು.\n\n" +
-                   "        ಸದರಿ   ವೆಚ್ಚ  ವನ್ನು     “"+ apiResponse.getContent().get(0).getSchemeNameInKannada()+ "”  ಗಳು      "+
+                   "        ಸದರಿ   ವೆಚ್ಚವನ್ನು     “"+ apiResponse.getContent().get(0).getSchemeNameInKannada()+ "”  ಗಳು      "+
         "(" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ : "+ apiResponse.getContent().get(0).getScHeadAccountName()+"("+ apiResponse.getContent().get(0).getDescription()+")  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
@@ -16239,7 +16239,7 @@ response.setHeader8("       ಪೀಠಿಕೆಯಲ್ಲಿ     ವಿವರ�
                     "ಶೇ."+ apiResponse.getContent().get(0).getShareInPercentage()+"  ರಷ್ಟು     ಸಹಾಯಧನ   ರೂ.  "+ apiResponse.getContent().get(0).getSchemeAmount()+" (ರೂ. "+schemeAmountWords+") ಗಳಿಗೆ     ಮುಚ್ಚಳಿಕೆಯಲ್ಲಿನ     ಷರತ್ತು     ಮತ್ತು    ತಗಾದೆಗಳಿಗೆ    ಸಂಬಂಧಿಸಿದ     ಫಲಾನುಭವಿ      "+
                     "ಹಾಗೂ    ಶಿಫಾರಸ್ಸು     ಮಾಡಿದ     ಕ್ಷೇತ್ರಮಟ್ಟದ     ಅಧಿಕಾರಿಗಳನ್ನು     ಜವಾಬ್ದಾರಿ    ಮಾಡಿ    ಮಂಜೂರಾತಿ    ನೀಡಿದೆ ,   ಸಹಾಯಧನದ    ಮೊತ್ತವನ್ನು     ಖಜಾನೆ-2 / ಡಿಬಿಟಿ     "+
                     "ಮುಖಾಂತರ    ಫಲಾನುಭವಿ    ಬ್ಯಾಂಕ್     ಖಾತೆಗೆ      ನೇರವಾಗಿ    ಜಮಾ    ಮಾಡುವುದು.\n\n" +
-                    "        ಸದರಿ   ವೆಚ್ಚ  ವನ್ನು     “"+ apiResponse.getContent().get(0).getSchemeNameInKannada()+ "”  ಗಳು      "+
+                    "        ಸದರಿ   ವೆಚ್ಚವನ್ನು     “"+ apiResponse.getContent().get(0).getSchemeNameInKannada()+ "”  ಗಳು      "+
                     "(" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  ಲೆಕ್ಕ     ಶೀರ್ಷಿಕೆ : "+ apiResponse.getContent().get(0).getScHeadAccountName()+"("+ apiResponse.getContent().get(0).getDescription()+")  ಅಡಿ    ಭರಿಸುವುದು.");
 
 
