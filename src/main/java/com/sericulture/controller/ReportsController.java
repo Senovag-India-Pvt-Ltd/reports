@@ -10727,9 +10727,9 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ದ್ಧಿ ತಳಿ   ಸಂಕರಣ   ಮೊಟ್ಟೆಗಳಿಗೆ   ಚಾಕಿ   ಸಾಕಾಣಿಕೆ   ವೆಚ್ಚದ   ಸಹಾಯಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ದ್ಧಿ ತಳಿ   ಸಂಕರಣ   ಮೊಟ್ಟೆಗಳಿಗೆ   ಚಾಕಿ   ಸಾಕಾಣಿಕೆ   ವೆಚ್ಚದ   ಸಹಾಯಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -10904,10 +10904,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ   " +
                             "ಮಾರುಕಟ್ಟೆಗಳ   ಮೂಲಕ   ವಹಿವಾಟಾಗುವ   ದ್ವಿತಳಿ   ಸಂಕರಣ   ರೇಷ್ಮೆ   ಗೂಡುಗಳ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದ್ದು.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -10967,10 +10967,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
                             "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದವರಾಗಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"   ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   ರೀಲಿಂಗ್   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದವರಾಗಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"    ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   ರೀಲಿಂಗ್   "+
                     "ಘಟಕದಲ್ಲಿ   ಸೋಲಾರ್   ಪವರ್   ಜನರೇಟರ್   ಘಟಕ   ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು.   "+
                     "ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು. ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11031,8 +11031,8 @@ public class ReportsController {
                             "ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ   ಕೇಂದ್ರ   ಪುರಸ್ಕೃತ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "   ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+") " +
                     " ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
                     "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಸಲಕರಣೆ   ಖರೀದಿಸಲು   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   "+apiResponse.getContent().get(0).getMachineTypeName()+"    ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಸಲಕರಣೆ   ಖರೀದಿಸಲು   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   "+
                     "ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No. ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11089,13 +11089,13 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿಯ   ಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ   "+
-                            "ಕೇಂದ್ರ   ವಲಯ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "   ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   " +
-                    "   ಹೊಸದಾಗಿ   ಸ್ಥಾಪಿಸುವ   ನೊಂದಾಯಿತ   ಖಾಸಗಿ   ದ್ವಿತಳಿ   ಚಾಕಿ   ಸಾಕಾಣಿಕಾ   ಕೇಂದ್ರಗಳಿಗೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   "+
-                            apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder()+"   ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+" " +
-                            "   ಗ್ರಾಮದ   "+apiResponse.getContent().get(0).getCategoryShortName()+"   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   "+
+                            "ಕೇಂದ್ರ   ವಲಯ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() + "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   " +
+                    "  ಹೊಸದಾಗಿ   ಸ್ಥಾಪಿಸುವ   ನೊಂದಾಯಿತ   ಖಾಸಗಿ   ದ್ವಿತಳಿ   ಚಾಕಿ   ಸಾಕಾಣಿಕಾ   ಕೇಂದ್ರಗಳಿಗೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   "+
+                            apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder()+"    ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+" " +
+                            "   ಗ್ರಾಮದ   "+apiResponse.getContent().get(0).getCategoryShortName()+"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   "+
                     " ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
                     "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   ಇವರ   ಅರ್ಜಿಯನ್ನು   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   ಇವರ   ಅರ್ಜಿಯನ್ನು   "+
                     " ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು. ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11153,11 +11153,11 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+") ,   "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+") ,   "+
                     "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"   ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   ರೀಲಿಂಗ್   "+
-                    "ಘಟಕದಲ್ಲಿ   ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getReelingShedSqft() +"   ಸಾಮರ್ಥ್ಯದ   ಶಬ್ದ   ರಹಿತ   ಜನರೇಟರ್   ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"    ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   ರೀಲಿಂಗ್   "+
+                    "ಘಟಕದಲ್ಲಿ   ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getReelingShedSqft() +"      ಸಾಮರ್ಥ್ಯದ   ಶಬ್ದ   ರಹಿತ   ಜನರೇಟರ್   ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   "+
                     "ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.   ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11215,11 +11215,11 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
+                    "      ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "("+apiResponse.getContent().get(0).getFruitsId()+")   "+
                     "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದವರಾಗಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"   ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   "+
-                    " ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "+apiResponse.getContent().get(0).getReelingShedSqft() +"   ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ   "+apiResponse.getContent().get(0).getReelingUnit() +"   ಮಾದರಿಯ   ಸೋಲಾರ್   ವಾಟರ್   ಹೀಟರ್   ಘಟಕ   ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   ಇವರು   "+apiResponse.getContent().get(0).getCategoryShortName()+" " +
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದವರಾಗಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"    ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   "+
+                    " ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   "+apiResponse.getContent().get(0).getReelingShedSqft() +"    ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ   "+apiResponse.getContent().get(0).getReelingUnit() +"   ಮಾದರಿಯ   ಸೋಲಾರ್   ವಾಟರ್   ಹೀಟರ್   ಘಟಕ   ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   "+
                     "ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು. ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11277,12 +11277,12 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
 
-            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"   "+
-                    "   ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ (ರೀಲೀಂಗ್)   "+apiResponse.getContent().get(0).getTscName() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
+            response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +"  "+
+                    "     ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ (ರೀಲೀಂಗ್)   "+apiResponse.getContent().get(0).getTscName() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+  ",   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " , " +
-                    "   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUIS ID :   "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"   "+
+                    "     "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUIS ID :   "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"     "+
                     "ಅನ್ನು   ಹೊಂದಿದ್ದು   ,   ಹೊಸದಾಗಿ   "+ apiResponse.getContent().get(0).getImcbTable()+"   "+ apiResponse.getContent().get(0).getMachineTypeName()+"   ಯಂತ್ರೋಪಕರಣ   ಘಟಕ   ಅಳವಡಿಕೆಗೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   "+
                     "ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.   ");
 
@@ -11341,10 +11341,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ಪುರಸ್ಕೃತ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   " +
-                    "   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+  "   ವ್ಯಾಪ್ತಿಯ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   " +
+                    "   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾಪ್ತಿಯ   " +
                     " "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+  "" +
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
+                    "      ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " " +
                     "   ಇವರು   ಹೊಸದಾಗಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕಾಗಿ   ಸಲ್ಲಿಸಿದ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   " +
                     "ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು. ");
@@ -11403,9 +11403,9 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+
-                    "   ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
+                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+
+                    "    ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+
+                    "      ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   "+
                     "ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11463,9 +11463,9 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+
-                    "   ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+
-                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
+                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+
+                    "    ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+
+                    "      ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರು   ಹೊಸದಾಗಿ   ಕಡಿಮೆ   ವೆಚ್ಚದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕಾಗಿ   "+
                     "ಸಲ್ಲಿಸಿದ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   "+
                             "ARN/FID/Mob.No. ನಮೂದಿಸಿ ಪರಿಶೀಲಿಸಬಹುದು.   ");
@@ -11526,11 +11526,11 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+ "   " +
+                    "    ಯೋಜನೆ ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   " + apiResponse.getContent().get(0).getTscName()+ "   " +
                     "ವ್ಯಾಪ್ತಿಯ   "+apiResponse.getContent().get(0).getVillageName()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryShortName()+
                     "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +
                     apiResponse.getContent().get(0).getFatherNameKan()+  "   ಇವರು   ಹೊಸದಾಗಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕಾಗಿ   ಸಲ್ಲಿಸಿದ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   "+
-                    "   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No. ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
+                    "  ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No. ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
             response.setFarmerFirstName(apiResponse.getContent().get(0).getFarmerFirstName());
@@ -11587,12 +11587,12 @@ public class ReportsController {
 
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "   ವ್ಯಾಪ್ತಿಯ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾಪ್ತಿಯ   " +
                     "ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "   +apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   " +
-                    "ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+"   ಅನ್ನು   ಹೊಂದಿದ್ದು ,   ಹೊಸದಾಗಿ   ಪ್ರತಿ   ಗಂಟೆಗೆ   "+ apiResponse.getContent().get(0).getBoilerInKg()+"   ಕೆ.ಜಿ   ಹಬೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   " +
+                    "ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+"    ಅನ್ನು   ಹೊಂದಿದ್ದು ,   ಹೊಸದಾಗಿ   ಪ್ರತಿ   ಗಂಟೆಗೆ   "+ apiResponse.getContent().get(0).getBoilerInKg()+"    ಕೆ.ಜಿ   ಹಬೆ   " +
                     "ಉತ್ಪಾದನಾ   ಸಾಮರ್ಥ್ಯದ   ಬಾಯ್ಲರ್   ಅಳವಡಿಕೆಗೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   " +
                     "ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11651,11 +11651,11 @@ public class ReportsController {
 
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "   ವ್ಯಾಪ್ತಿಯ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾಪ್ತಿಯ   " +
                     "ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "   +apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ಜಾತಿಗೆ   ಸೇರಿದವರಾಗಿದ್ದು , ಸದರಿಯವರು   ಹೊಸದಾಗಿ   " +apiResponse.getContent().get(0).getMachineTypeName()+"   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ಜಾತಿಗೆ   ಸೇರಿದವರಾಗಿದ್ದು , ಸದರಿಯವರು   ಹೊಸದಾಗಿ   " +apiResponse.getContent().get(0).getMachineTypeName()+"   " +
                     " ಯಂತ್ರೋಪಕರಣ   ಅಳವಡಿಕೆಗೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್ https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11714,11 +11714,11 @@ public class ReportsController {
 
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "   ವ್ಯಾಪ್ತಿಯ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾಪ್ತಿಯ   " +
                     "ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "   +apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ಜಾತಿಗೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"   ಅನ್ನು ಹೊಂದಿದ್ದು   ,   ಹೊಸದಾಗಿ   " +apiResponse.getContent().get(0).getImcbTable()+"   " +apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ಜಾತಿಗೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber() +"  ಅನ್ನು ಹೊಂದಿದ್ದು   ,   ಹೊಸದಾಗಿ   " +apiResponse.getContent().get(0).getImcbTable()+"  " +apiResponse.getContent().get(0).getMachineTypeName()+"    ರೀಲಿಂಗ್   " +
                     " ಯಂತ್ರೋಪಕರಣ   ಘಟಕ   ಅಳವಡಿಕೆಗೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್ https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -11776,13 +11776,13 @@ public class ReportsController {
 
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "   ವ್ಯಾಪ್ತಿಯ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ   (ರೀಲೀಂಗ್)   " + apiResponse.getContent().get(0).getTscName()+  "    ವ್ಯಾಪ್ತಿಯ   " +
                     "ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+  "   ಬಿನ್/ಕೋಂ   " +
                     ""+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "   +apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   " +
-                    "ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+"   ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   " +
-                    "ಹೊಂದಿದ್ದು   ,   "+ apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   ಹೊಸದಾಗಿ   ಹೀಟ್   ರಿಕವರಿ   ಯೂನಿಟ್   ಘಟಕ   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUITS ID : "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು ,   ಸದರಿಯವರು   " +
+                    "ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+ apiResponse.getContent().get(0).getReelingLicenseNumber()+"    ರಂತೆ   ರೀಲಿಂಗ್   ರಹದಾರಿಯನ್ನು   " +
+                    "ಹೊಂದಿದ್ದು   ,   "+ apiResponse.getContent().get(0).getMachineTypeName()+"    ರೀಲಿಂಗ್   ಘಟಕದಲ್ಲಿ   ಹೊಸದಾಗಿ   ಹೀಟ್   ರಿಕವರಿ   ಯೂನಿಟ್   ಘಟಕ   "+
                     "ಖರೀದಿಸಿ   ಅಳವಡಿಸುವುದಕ್ಕಾಗಿ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   " +
                     "https://e-reshme.karnataka.gov.in/seriui ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ ಪರಿಶೀಲಿಸಬಹುದು. ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11841,11 +11841,11 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಉತ್ತರ   "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಉತ್ತರ   "+
                     "ಕರ್ನಾಟಕ   ಜಿಲ್ಲೆಗಳಲ್ಲಿ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ಉತ್ಪಾದಿಸಿದ   ದ್ವಿತಳಿ   ರೇಷ್ಮೆ   ಗೂಡನ್ನು   ರಾಜ್ಯದ   " +
                     "ಯಾವುದೇ   ಸರ್ಕಾರಿ   ರೇಷ್ಮೆ   ಗೂಡಿನ   ಮಾರುಕಟ್ಟೆಗಳಲ್ಲಿ   ಮಾರಾಟ   ಮಾಡಲು   ಸಾಗಾಣಿಕೆ   ವೆಚ್ಚಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11902,10 +11902,10 @@ public class ReportsController {
             }
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ವಲಯ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   "+ apiResponse.getContent().get(0).getArmEnds()+"   ಕೊನೆಗಳ   ಸ್ವಯಂಚಾಲಿತ   ರೀಲಿಂಗ್   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   "+ apiResponse.getContent().get(0).getArmEnds()+"   ಕೊನೆಗಳ   ಸ್ವಯಂಚಾಲಿತ   ರೀಲಿಂಗ್   " +
                     "ಘಟಕ   ಸ್ಥಾಪನೆಗಾಗಿ   ಯಂತ್ರೋಪಕರಣಗಳ   ಖರೀದಿಗೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   " +
                     "ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -11963,9 +11963,9 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   "+apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"   ಸಹಾಯಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಯಡಿ   "+apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"     ಸಹಾಯಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -12025,10 +12025,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ಮೈಸೂರು " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ಮೈಸೂರು " +
                     "   ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡುಗಳಿಗೆ   ಉತ್ಪಾದಕತೆ   ಮತ್ತು   ಗುಣಮಟ್ಟ   ಆಧಾರಿತ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -12089,9 +12089,9 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ದ್ವಿತಳಿ   ಬಿತ್ತನೆ   ಗೂಡುಗಳಿಗೆ   ಉತ್ಪಾದಕತೆ   ಮತ್ತು   ಗುಣಮಟ್ಟದ   ಆಧಾರಿತ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ದ್ವಿತಳಿ   ಬಿತ್ತನೆ   ಗೂಡುಗಳಿಗೆ   ಉತ್ಪಾದಕತೆ   ಮತ್ತು   ಗುಣಮಟ್ಟದ   ಆಧಾರಿತ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -12152,10 +12152,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ಮೈಸೂರು   ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡು   ಬಿತ್ತನೆಗೆ   ಯೋಗ್ಯವಾಗಿದ್ದು   ,   ಬೇಡಿಕೆ   ಇಲ್ಲದೆ   "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ಶುದ್ದ   ಮೈಸೂರು   ತಳಿ   ಬಿತ್ತನೆ   ಗೂಡು   ಬಿತ್ತನೆಗೆ   ಯೋಗ್ಯವಾಗಿದ್ದು   ,   ಬೇಡಿಕೆ   ಇಲ್ಲದೆ   "+
                     "ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆಗೆ   ವಿಲೇವಾರಿಯಾದ   ಬಿತ್ತನೆ   ಗೂಡಿಗೆ   ಬೋನಸ್   ಮೊತ್ತಕ್ಕಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -12216,10 +12216,10 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ದ್ವಿತಳಿ   ಬಿತ್ತನೆ   ವಲಯದಲ್ಲಿ   ಉತ್ಪಾದನೆಯಾಗುವ   "+
+                    "      ಯೋಜನೆ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ದ್ವಿತಳಿ   ಬಿತ್ತನೆ   ವಲಯದಲ್ಲಿ   ಉತ್ಪಾದನೆಯಾಗುವ   "+
                     "   ಶುದ್ದ   ದ್ವಿತಳಿ   ಬಿತ್ತನೆ   ಗೂಡು   ಬಿತ್ತನೆಗೆ   ಯೋಗ್ಯವಾಗಿದ್ದು ,   ಬೇಡಿಕೆ   ಇಲ್ಲದೆ   ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆಗೆ   ವಿಲೇವಾರಿಯಾದ   ಬಿತ್ತನೆ   ಗೂಡಿಗೆ   ಬೋನಸ್ಗಾಗಿ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+ "("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " ,   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಇವರ   ಅರ್ಜಿಯನ್ನು   ಸ್ವೀಕರಿಸಲಾಗಿದೆ.   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್‌ ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob No.  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
@@ -12326,13 +12326,13 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +
-                    "   ,   "+ apiResponse.getContent().get(0).getScCategoryName()+"   ಅಡಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ   " +
-                    apiResponse.getContent().get(0).getReelerName()+   "   ("+apiResponse.getContent().get(0).getFruitsId()+") ,   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  "   ," +
-                    "   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   " +
+                    "  ,   "+ apiResponse.getContent().get(0).getScCategoryName()+"    ಅಡಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ   " +
+                    apiResponse.getContent().get(0).getReelerName()+   "  ("+apiResponse.getContent().get(0).getFruitsId()+") ,   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  "  ," +
+                    "     "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   " +
                     "   ಆಗಿರುತ್ತದೆ.   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ಪರವಾನಗಿ   ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"   ರಂತೆ   " +
-                            apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಘಟಕದ   ಪರವಾನಗಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   "+apiResponse.getContent().get(0).getMonth()+" ರ   ಮಾಹೆಯಲ್ಲಿ   "+
-                            "ಉತ್ಪಾದಿಸಿದ   "+apiResponse.getContent().get(0).getRaceName()+"   ಕಚ್ಚಾ   ರೇಷ್ಮೆಗೆ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
+                            apiResponse.getContent().get(0).getMachineTypeName()+"    ರೀಲಿಂಗ್   ಘಟಕದ   ಪರವಾನಗಿಯನ್ನು   ಹೊಂದಿದ್ದು   ,   "+apiResponse.getContent().get(0).getMonth()+" ರ   ಮಾಹೆಯಲ್ಲಿ   "+
+                            "ಉತ್ಪಾದಿಸಿದ   "+apiResponse.getContent().get(0).getRaceName()+"    ಕಚ್ಚಾ   ರೇಷ್ಮೆಗೆ   ಪ್ರೋತ್ಸಾಹಧನಕ್ಕಾಗಿ   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   " +
                     "ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No  ಸಂಖ್ಯೆಯನ್ನು  ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು.");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -12389,12 +12389,12 @@ public class ReportsController {
             String raceNameWithoutFirstWord = removeFirstWord(raceName);
 
             response.setHeader("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   "+apiResponse.getContent().get(0).getSchemeNameInKannada() +",   "+
-                    "   ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ (ರೀಲೀಂಗ್)   "+apiResponse.getContent().get(0).getTscName() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
+                    "     ("+ apiResponse.getContent().get(0).getScCategoryName()+")   ಅಡಿ   ತಾಂತ್ರಿಕ   ಸೇವಾ   ಕೇಂದ್ರ (ರೀಲೀಂಗ್)   "+apiResponse.getContent().get(0).getTscName() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " +
                     apiResponse.getContent().get(0).getReelerName()+  ",   ಬಿನ್/ಕೋಂ   "+apiResponse.getContent().get(0).getFatherNameKan()+  " , " +
-                    "   "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
-                    apiResponse.getContent().get(0).getTalukName()+ "   ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"   ಜಿಲ್ಲೆ   (FRUIS ID :   "+apiResponse.getContent().get(0).getFruitsId()+") " +
-                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"   "+
-                    "ಅನ್ನು   ಹೊಂದಿದ್ದು   ,   "+apiResponse.getContent().get(0).getReelingShedSqft()+"   ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು   ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   "+
+                    "     "+apiResponse.getContent().get(0).getVillageName()+" ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getHobliName()+ "   ಹೋಬಳಿ ,   "+
+                    apiResponse.getContent().get(0).getTalukName()+ "    ತಾಲ್ಲೂಕು ,   "+apiResponse.getContent().get(0).getDistrictName()+"  ಜಿಲ್ಲೆ   (FRUIS ID :   "+apiResponse.getContent().get(0).getFruitsId()+") " +
+                    "   ಇವರು   "+ apiResponse.getContent().get(0).getCategoryShortName()+"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ್ದು   ,   ಸದರಿಯವರು   ರೀಲಿಂಗ್   ರಹದಾರಿ   ಸಂಖ್ಯೆ : "+apiResponse.getContent().get(0).getReelingLicenseNumber()+"     "+
+                    "ಅನ್ನು   ಹೊಂದಿದ್ದು   ,   "+apiResponse.getContent().get(0).getReelingShedSqft()+"    ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಅರ್ಜಿಯನ್ನು   ಸಲ್ಲಿಸಿದ್ದು   ,   ಅರ್ಜಿಯ   ಪ್ರಸ್ತುತ   "+
                     "ಸ್ಥಿತಿಯನ್ನು   ಇ-ರೇಷ್ಮೆ   ವೆಬ್   ಸೈಟ್   https://e-reshme.karnataka.gov.in/seriui   ನಲ್ಲಿ   ARN/FID/Mob.No.   ನಮೂದಿಸಿ   ಪರಿಶೀಲಿಸಬಹುದು. ");
             response.setAcceptedDate("ದಿನಾಂಕ   :   " +formattedDate);
             response.setDate(apiResponse.getContent().get(0).getDate());
@@ -17383,30 +17383,30 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   –   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಯಡಿ     ಹೊಸದಾಗಿ    ಪ್ರತಿ    ಗಂಟೆಗೆ     "+ apiResponse.getContent().get(0).getBoilerInKg() +" ಕೆ.ಜಿ    ಹಬೆ      "+
-                        "ಉತ್ಪಾದನಾ    ಸಾಮರ್ಥ್ಯದ    ಬಾಯ್ಲರ್     ಅಳವಡಿಸಲು    ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ .     ಸದರಿ    ಯೋಜನೆಯಡಿ    ಯಂತ್ರೋಪಕರಣದ      ಘಟಕ    ದರ    ರೂ.   "
-                + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  " + (int) shareInPercentage +"   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" ಗಳಾಗಿರುತ್ತದೆ.    ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ "+ (int)beneficiarySharePercentage +"   ರಂತೆ    ರೂ. "+beneficiaryShareFormatted +" ಗಳಾಗಿರುತ್ತದೆ\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು   ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಯಡಿ   ಹೊಸದಾಗಿ   ಪ್ರತಿ   ಗಂಟೆಗೆ   "+ apiResponse.getContent().get(0).getBoilerInKg() +" ಕೆ.ಜಿ   ಹಬೆ   "+
+                        "ಉತ್ಪಾದನಾ   ಸಾಮರ್ಥ್ಯದ   ಬಾಯ್ಲರ್   ಅಳವಡಿಸಲು   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ .   ಸದರಿ   ಯೋಜನೆಯಡಿ   ಯಂತ್ರೋಪಕರಣದ   ಘಟಕ   ದರ   ರೂ.   "
+                + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು   ,   ಶೇ   " + (int) shareInPercentage +"   ರಂತೆ   ಸಹಾಯಧನ   ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ   ಪಾಲು   ಶೇ "+ (int)beneficiarySharePercentage +"   ರಂತೆ   ರೂ. "+beneficiaryShareFormatted +" ಗಳಾಗಿರುತ್ತದೆ\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ    ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಯಂತ್ರೋಪಕರಣ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                           "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                           "          ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -17414,12 +17414,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ.");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -17468,16 +17468,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -17564,33 +17564,33 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”     (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    "+apiResponse.getContent().get(0).getReelingShedSqft() +"   ಸೋಲಾರ್    ಪವರ್    ಜನರೇಟರ್    ಅಳವಡಿಸಲು     ಫಲಾನುಭವಿ   ಆಯ್ಕೆ    ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   "+apiResponse.getContent().get(0).getReelingShedSqft() +"   ಸೋಲಾರ್   ಪವರ್   ಜನರೇಟರ್   ಅಳವಡಿಸಲು   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  " +
-                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು       " +
-                "ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ       ಪರಿಶೀಲನೆಯ    ಆಧಾರದ    ಮೇಲೆ ,     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿಗೆ     "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   " +
-                " "+apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ    ಸೋಲಾರ್    ಪವರ್    ಜನರೇಟರ್     ಘಟಕದ     ಅಳವಡಿಕೆಗಾಗಿ     ನಿಮ್ಮನ್ನು     ಫಲಾನುಭವಿ    ಎಂದು    ಆಯ್ಕೆ    ಮಾಡಲಾಗಿದೆ.   ಸದರಿ    ಸಲಕರಣೆಗೆ    ನಿಗದಿಪಡಿಸಿದ   ಘಟಕ    ದರ  ರೂ. "
-                + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ  "+ (int) shareInPercentage +"   ರಂತೆ   "+
-                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.  "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   " +
+                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   " +
+                "ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಪರಿಶೀಲನೆಯ   ಆಧಾರದ   ಮೇಲೆ ,   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿಗೆ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +"    ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   " +
+                " "+apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ   ಸೋಲಾರ್   ಪವರ್   ಜನರೇಟರ್   ಘಟಕದ   ಅಳವಡಿಕೆಗಾಗಿ   ನಿಮ್ಮನ್ನು   ಫಲಾನುಭವಿ   ಎಂದು   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ.   ಸದರಿ   ಸಲಕರಣೆಗೆ   ನಿಗದಿಪಡಿಸಿದ   ಘಟಕ   ದರ   ರೂ. "
+                + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು   ,   ಶೇ   "+ (int) shareInPercentage +"   ರಂತೆ   "+
+                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ   ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.   "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಸಲಕರಣೆಗಳಿಗೆ     ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಸಲಕರಣೆ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    02 ತಿಂಗಳುಗಳಲ್ಲಿ     ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ     ತಾನೇ    ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಸಲಕರಣೆಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಸಲಕರಣೆ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   02 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ   ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "           ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "           ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -17598,13 +17598,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
-                +"   3. ಸಂಬಂಧಿಸಿದ    ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ     ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
+                +"   3. ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -17653,16 +17653,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -17748,26 +17748,26 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader3("             " +apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      ಕೇಂದ್ರ    ರೇಷ್ಮೆ    ಮಂಡಳಿಯ     ಸಹಯೋಗದೊಂದಿಗೆ    ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ      ಕೇಂದ್ರ    ವಲಯ    " +
-                "“" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ    (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "ಅಡಿ     ಹೊಸದಾಗಿ     ಸ್ಥಾಪಿಸುವ    ನೊಂದಾಯಿತ     ಖಾಸಗಿ    ದ್ವಿತಳಿ     ಚಾಕಿ    ಸಾಕಾಣಿಕಾ    ಕೇಂದ್ರಗಳಿಗೆ    ಸಹಾಯಧನ     ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   "+
-                        "  ವ್ಯಾಪ್ತಿಯ     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"    ವರ್ಗಕ್ಕೆ      ಸೇರಿದ     "+
-                "  ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getFarmerName() +"("+ apiResponse.getContent().get(0).getFruitsId() +") ,    ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getFarmerFatherName() +"  ಇವರು    "+
-                        apiResponse.getContent().get(0).getLandVillageNameInKannada() +"   ಗ್ರಾಮದ     ಸರ್ವೆ/ಖಾತೆ ನಂ      "+ apiResponse.getContent().get(0).getSurveyNumber() +"  ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳುಸಾಕಾಣಿಕೆ     ಮನೆ     "+
-                        "ನಿರ್ಮಿಸಲು     ನೋಂದಣಿ     ಅರ್ಜಿ     ಸಂಖ್ಯೆ    "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n" +
-                            "              ಮೇಲ್ಕಾಣಿಸಿದ     ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ "+createdDate+" ರಂದು     "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"  ಕ್ಕೆ    ಸೇರಿದ    "+ apiResponse.getContent().get(0).getCreatedByDesignation() +"   ಗ್ರಾಮಕ್ಕೆ      "+
-                "ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getFarmerName() +" ("+ apiResponse.getContent().get(0).getFruitsId() + ") ,  ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getFarmerFatherName() +"    ಇವರು    "+ apiResponse.getContent().get(0).getEstablishmentOfMulberryVibhaga() + "    " +
-                "ಗ್ರಾಮದ   ಸರ್ವೆ ನಂ.  "+ apiResponse.getContent().get(0).getEstablishmentOfMulberrySurveyNo() +"   ರಲ್ಲಿ    "+ apiResponse.getContent().get(0).getEstablishmentOfMulberryAcre() +".  ಎಕರೆ   00   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ     ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ     ತೋಟವನ್ನು    ಪರಿಶೀಲಿಸಲಾಯಿತು.  \n" +
-                            "              "+ apiResponse.getContent().get(0).getChawkiRearingBuildingVillage() +"   ಗ್ರಾಮದ     ಸರ್ವೆ ನಂ.   "+ apiResponse.getContent().get(0).getChawkiRearingBuildingSurveyNo() +"  ರಲ್ಲಿ     "+ apiResponse.getContent().get(0).getChawkiRearingBuildingAcre() +".  ಎಕರೆ   00    ಗುಂಟೆಗಳ    "+
-                        "ರೈತರು     ಜಮೀನು    ಹೊಂದಿದ್ದು , "+ apiResponse.getContent().get(0).getChawkiRearingBuildingLength() +" X "+apiResponse.getContent().get(0).getChawkiRearingBuildingBreadth()+"    ಅಡಿ    ಅಳತೆಯ   "+apiResponse.getContent().get(0).getChawkiRearingBuildingSqft()+"   ಚದರಡಿ     "+
-                        "ವಿಸ್ತೀರ್ಣದ    ಚಾಕಿ     ಸಾಕಾಣಿಕಾ    ಕಟ್ಟಡವನ್ನು     ಇಲಾಖೆಯ      ಮಾರ್ಗಸೂಚಿಯಂತೆ    ನಿರ್ಮಾಣ     ಮಾಡಲು ,   ಹಿಪ್ಪುನೇರಳೆ    ತೋಟದಲ್ಲಿ   ಹನಿ    ನೀರಾವರಿ    ಅಳವಡಿಸಿಕೊಳ್ಳಲು     ಮತ್ತು      ಚಾಕಿಸಾಕಾಣಿಕೆ     ಸಲಕರಣೆಗಳನ್ನು     ಖರೀದಿಸಲು     ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+        response.setHeader3("             " +apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿಯ   ಸಹಯೋಗದೊಂದಿಗೆ   ಅನುಷ್ಟಾನಗೊಳಿಸುತ್ತಿರುವ   ಕೇಂದ್ರ   ವಲಯ   " +
+                "“" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "ಅಡಿ   ಹೊಸದಾಗಿ   ಸ್ಥಾಪಿಸುವ   ನೊಂದಾಯಿತ   ಖಾಸಗಿ   ದ್ವಿತಳಿ   ಚಾಕಿ   ಸಾಕಾಣಿಕಾ   ಕೇಂದ್ರಗಳಿಗೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   "+
+                        "  ವ್ಯಾಪ್ತಿಯ   "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +"    ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   "+
+                "  ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getFarmerName() +"("+ apiResponse.getContent().get(0).getFruitsId() +") ,   ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getFarmerFatherName() +"  ಇವರು   "+
+                        apiResponse.getContent().get(0).getLandVillageNameInKannada() +"   ಗ್ರಾಮದ   ಸರ್ವೆ/ಖಾತೆ ನಂ   "+ apiResponse.getContent().get(0).getSurveyNumber() +"  ರಲ್ಲಿ   ರೇಷ್ಮೆ   ಹುಳುಸಾಕಾಣಿಕೆ   ಮನೆ   "+
+                        "ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n" +
+                            "              ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ "+createdDate+" ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+"  ಕ್ಕೆ   ಸೇರಿದ   "+ apiResponse.getContent().get(0).getCreatedByDesignation() +"   ಗ್ರಾಮಕ್ಕೆ   "+
+                "ಭೇಟಿ   ನೀಡಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getFarmerName() +" ("+ apiResponse.getContent().get(0).getFruitsId() + ") ,   ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getFarmerFatherName() +"    ಇವರು   "+ apiResponse.getContent().get(0).getEstablishmentOfMulberryVibhaga() + "    " +
+                "ಗ್ರಾಮದ   ಸರ್ವೆ ನಂ.   "+ apiResponse.getContent().get(0).getEstablishmentOfMulberrySurveyNo() +"   ರಲ್ಲಿ   "+ apiResponse.getContent().get(0).getEstablishmentOfMulberryAcre() +".   ಎಕರೆ   00   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ   ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು.   \n" +
+                            "              "+ apiResponse.getContent().get(0).getChawkiRearingBuildingVillage() +"   ಗ್ರಾಮದ   ಸರ್ವೆ ನಂ.   "+ apiResponse.getContent().get(0).getChawkiRearingBuildingSurveyNo() +"  ರಲ್ಲಿ   "+ apiResponse.getContent().get(0).getChawkiRearingBuildingAcre() +".   ಎಕರೆ   00   ಗುಂಟೆಗಳ   "+
+                        "ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು , "+ apiResponse.getContent().get(0).getChawkiRearingBuildingLength() +" X "+apiResponse.getContent().get(0).getChawkiRearingBuildingBreadth()+"    ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getChawkiRearingBuildingSqft()+"   ಚದರಡಿ   "+
+                        "ವಿಸ್ತೀರ್ಣದ   ಚಾಕಿ   ಸಾಕಾಣಿಕಾ   ಕಟ್ಟಡವನ್ನು   ಇಲಾಖೆಯ   ಮಾರ್ಗಸೂಚಿಯಂತೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು ,   ಹಿಪ್ಪುನೇರಳೆ   ತೋಟದಲ್ಲಿ   ಹನಿ   ನೀರಾವರಿ   ಅಳವಡಿಸಿಕೊಳ್ಳಲು   ಮತ್ತು   ಚಾಕಿಸಾಕಾಣಿಕೆ   ಸಲಕರಣೆಗಳನ್ನು   ಖರೀದಿಸಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -17775,10 +17775,10 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+" ,\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" ,\n"
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+" ,\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +" ,\n"
                 +"   3. ವಲಯಾಧಿಕಾರಿಗಳು ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + ", \n"
-                +"   4. ಸಂಬಂಧಿಸಿದ     ರೇಷ್ಮೆ    ಬೆಳೆಗಾರರಿಗೆ ");
+                +"   4. ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -17827,16 +17827,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -17923,33 +17923,33 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ    (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಯಡಿ     ಫಲಾನುಭವಿ   ಆಯ್ಕೆ    ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಯಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  " +
-                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ    ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು       " +
-                "ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ      "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ    ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ    “"+apiResponse.getContent().get(0).getSchemeNameInKannada() +"” ಯೋಜನೆ  " +
-                "  ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಯಡಿ    ಹಿಪ್ಪುನೇರಳೇ    ತೋಟ/ ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ     ಸಲಕರಣೆಯಾದ     "+ apiResponse.getContent().get(0).getRearingEquipmentDetailsNameInKannada() +"    ಖರೀದಿಸಲು     "+
-                        "ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆ     ಮಾಡಲಾಗಿದೆ.    ಸದರಿ    ಸಲಕರಣೆ     ಖರೀದಿಸಲು     ನಿಗದಿಪಡಿಸಿದ    L1     ದರ ರೂ. "+ apiResponse.getContent().get(0).getL1Rate() +" ರಂತೆ    ಒಟ್ಟು      ಮೊತ್ತ     ರೂ." +
-                + apiResponse.getContent().get(0).getUnitCost() +"  ಗಳಿಗೆ     ಶೇ  " + (int) shareInPercentage +
-                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   " +
+                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   " +
+                "ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   ಕೇಂದ್ರ   ಪುರಸ್ಕೃತ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada() +"” ಯೋಜನೆ   " +
+                "  ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಯಡಿ   ಹಿಪ್ಪುನೇರಳೇ   ತೋಟ/ ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಸಲಕರಣೆಯಾದ   "+ apiResponse.getContent().get(0).getRearingEquipmentDetailsNameInKannada() +"    ಖರೀದಿಸಲು   "+
+                        "ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ.   ಸದರಿ   ಸಲಕರಣೆ   ಖರೀದಿಸಲು   ನಿಗದಿಪಡಿಸಿದ   L1   ದರ ರೂ. "+ apiResponse.getContent().get(0).getL1Rate() +" ರಂತೆ   ಒಟ್ಟು   ಮೊತ್ತ   ರೂ." +
+                + apiResponse.getContent().get(0).getUnitCost() +"  ಗಳಿಗೆ   ಶೇ   " + (int) shareInPercentage +
+                " ರಂತೆ   ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು   ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ  ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಸಲಕರಣೆ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ     ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ     ತಾನೇ    ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಸಲಕರಣೆ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ   ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "           ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "           ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -17957,12 +17957,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. ಸಂಬಂಧಿಸಿದ    ಸಲಕರಣೆ     ಸರಬರಾಜುದಾರರಿಗೆ, \n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಇವರಿಗೆ     ಮಾಹಿತಿಗಾಗಿ");
+                +"   1. ಸಂಬಂಧಿಸಿದ   ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ, \n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಇವರಿಗೆ   ಮಾಹಿತಿಗಾಗಿ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -18011,16 +18011,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -18293,32 +18293,32 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ    (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಶಬ್ದ    ರಹಿತ     ಜನರೇಟರ್     ಅಳವಡಿಸಲು     ಫಲಾನುಭವಿ   ಆಯ್ಕೆ    ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಶಬ್ದ   ರಹಿತ   ಜನರೇಟರ್   ಅಳವಡಿಸಲು   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  " +
-                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"  ಗ್ರಾಮ,  "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು,    "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು       " +
-                "ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿಗೆ     "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   " +
-                apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ    ಶಬ್ದ    ರಹಿತ    ಜನರೇಟರ್     ಅಳವಡಿಕೆಗಾಗಿ     ನಿಮ್ಮನ್ನು     ಫಲಾನುಭವಿ    ಎಂದು    ಆಯ್ಕೆ    ಮಾಡಲಾಗಿದೆ.  "+apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ    ಶಬ್ದ     ರಹಿತ     "+
-                "ಜನರೇಟರ್     ಸಲಕರಣೆಯ    ಘಟಕ    ದರ    ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,   ಘಟಕ    ದರದ   ಶೇ "+ (int) shareInPercentage +"   ರಂತೆ   "+
-                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.  "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   " +
+                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"  ಗ್ರಾಮ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು,   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   " +
+                "ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿಗೆ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   " +
+                apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ   ಶಬ್ದ   ರಹಿತ   ಜನರೇಟರ್   ಅಳವಡಿಕೆಗಾಗಿ   ನಿಮ್ಮನ್ನು   ಫಲಾನುಭವಿ   ಎಂದು   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ.   "+apiResponse.getContent().get(0).getReelingShedSqft() +"    ಸಾಮರ್ಥ್ಯದ   ಶಬ್ದ   ರಹಿತ   "+
+                "ಜನರೇಟರ್   ಸಲಕರಣೆಯ   ಘಟಕ   ದರ   ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು   ,   ಘಟಕ   ದರದ   ಶೇ "+ (int) shareInPercentage +"   ರಂತೆ   "+
+                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ   ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.   "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಸಲಕರಣೆಗಳಿಗೆ     ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಇಲಾಖೆಯು\n" +
-                "              ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ    ಸಲಕರಣೆ    ಸರಬರಾಜನ್ನು    ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    02 ತಿಂಗಳುಗಳಲ್ಲಿ     ಘಟಕ    ಸ್ಥಾಪನೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   \n" +
-                "              ಆಯ್ಕೆಯು    ತನ್ನಷ್ಟಕ್ಕೆ     ತಾನೇ    ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಸಲಕರಣೆಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   ಇಲಾಖೆಯು\n" +
+                "              ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಸಲಕರಣೆ   ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   02 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಸ್ಥಾಪನೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   \n" +
+                "              ಆಯ್ಕೆಯು   ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ   ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "           ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "           ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -18326,13 +18326,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ,   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು, \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,    "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
-                +"   3. ಸಂಬಂಧಿಸಿದ    ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ     ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ");
+                +"   1. "+apiResponse.getContent().get(0).getHierarchyDesignation() +" ,   "+apiResponse.getContent().get(0).getHierarchyDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
+                +"   3. ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -18381,16 +18381,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -18480,31 +18480,31 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ    (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ    ಆಯ್ಕೆ    ಕುರಿತು.");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   ಕುರಿತು.");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  " +
-                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"  ದಿನಾಂಕ  : "+createdDate+"   ಅನ್ನು    " +
-                "ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿಗೆ     "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   " +
-                "    ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getImcbTable() +"  "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ಯಂತ್ರೋಪಕರಣ    ಘಟಕ   ಅಳವಡಿಕೆಗೆ    ನಿಗದಿ    ಪಡಿಸಿರುವ   ಘಟಕ   ದರ    ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,  ಶೇ  " + (int) shareInPercentage +"   ರಂತೆ    ಸಹಾಯಧನ    ರೂ.  " +
-                apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "  ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು   ರೂ. "+beneficiaryShareFormatted +"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   " +
+                ""+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"  ದಿನಾಂಕ   : "+createdDate+"   ಅನ್ನು   " +
+                "ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿಗೆ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   " +
+                "    ಹೊಸದಾಗಿ   "+apiResponse.getContent().get(0).getImcbTable() +"  "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ಯಂತ್ರೋಪಕರಣ   ಘಟಕ   ಅಳವಡಿಕೆಗೆ   ನಿಗದಿ   ಪಡಿಸಿರುವ   ಘಟಕ   ದರ   ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು   ,   ಶೇ   " + (int) shareInPercentage +"   ರಂತೆ   ಸಹಾಯಧನ   ರೂ.   " +
+                apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು   ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "  ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು   ರೂ. "+beneficiaryShareFormatted +"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಸಲಕರಣೆಗಳಿಗೆ     ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಇಲಾಖೆಯು\n" +
-                "              ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ    ಸಲಕರಣೆ    ಸರಬರಾಜನ್ನು    ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ    ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ     ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ    ಆಯ್ಕೆಯು\n" +
-                "              ತನ್ನಷ್ಟಕ್ಕೆ     ತಾನೇ    ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಸಲಕರಣೆಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   ಇಲಾಖೆಯು\n" +
+                "              ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಸಲಕರಣೆ   ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "              ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ   ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "           ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "           ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -18512,12 +18512,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
                 +"   1. ಸಂಬಂಧಿಸಿದ   ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ.\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"    ಇವರಿಗೆ      ಮಾಹಿತಿಗಾಗಿ");
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"    ಇವರಿಗೆ   ಮಾಹಿತಿಗಾಗಿ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -18566,16 +18566,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -18663,31 +18663,31 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ    (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ    ಆಯ್ಕೆ   ಕುರಿತು.");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   ಯೋಜನೆ   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   ಕುರಿತು.");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ    ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  " +
-                ""+ apiResponse.getContent().get(0).getReelerFatherName() +" ,    "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ ,    "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"  ತಾಲ್ಲೂಕು ,  "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ  ,    ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು       " +
-                "ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿಗೆ     "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   " +
-                " "+apiResponse.getContent().get(0).getReelingShedSqft() +"  ಲೀಟರ್     ಸಾಮರ್ಥ್ಯದ   "+apiResponse.getContent().get(0).getReelingUnit()+"   ಮಾದರಿ     ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್     ಘಟಕದ     ಅಳವಡಿಕೆಗಾಗಿ     ನಿಮ್ಮನ್ನು     ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆ     ಮಾಡಲಾಗಿದೆ.     "+
-                ""+apiResponse.getContent().get(0).getReelingShedSqft() +"  ಲೀಟರ್    ಸಾಮರ್ಥ್ಯದ    "+apiResponse.getContent().get(0).getReelingUnit()+"  ಮಾದರಿಯ    ಸೋಲಾರ್    ವಾಟರ್    ಹೀಟರ್    ಘಟಕ ದರ ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage +
-                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ವ್ಯಾಪ್ತಿಯ   ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   " +
+                ""+ apiResponse.getContent().get(0).getReelerFatherName() +" ,   "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ ,   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"  ತಾಲ್ಲೂಕು ,   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"     ಜಿಲ್ಲೆ   ,   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   " +
+                "ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿಗೆ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +"  ಯೋಜನೆ   ("+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   " +
+                " "+apiResponse.getContent().get(0).getReelingShedSqft() +"  ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ   "+apiResponse.getContent().get(0).getReelingUnit()+"   ಮಾದರಿ   ಸೋಲಾರ್   ವಾಟರ್   ಹೀಟರ್   ಘಟಕದ   ಅಳವಡಿಕೆಗಾಗಿ   ನಿಮ್ಮನ್ನು   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ.   "+
+                ""+apiResponse.getContent().get(0).getReelingShedSqft() +"  ಲೀಟರ್   ಸಾಮರ್ಥ್ಯದ   "+apiResponse.getContent().get(0).getReelingUnit()+"  ಮಾದರಿಯ   ಸೋಲಾರ್   ವಾಟರ್   ಹೀಟರ್   ಘಟಕ ದರ ರೂ. " + apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ   ಶೇ   " + (int) shareInPercentage +
+                " ರಂತೆ   ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು   ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಸಲಕರಣೆಗಳಿಗೆ     ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು     ಇಲಾಖೆಯು\n" +
-                "              ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ    ಸಲಕರಣೆ    ಸರಬರಾಜನ್ನು    ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ    ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ     ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ    ಆಯ್ಕೆಯು\n" +
-                "              ತನ್ನಷ್ಟಕ್ಕೆ     ತಾನೇ    ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಸಲಕರಣೆಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   ಇಲಾಖೆಯು\n" +
+                "              ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಸಲಕರಣೆ   ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "              ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ   ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "           ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "           ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -18695,13 +18695,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
-                +"   3. ಸಂಬಂಧಿಸಿದ    ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ     ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
+                +"   3. ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -18750,16 +18750,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -18843,30 +18843,30 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String beneficiaryShareWords = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareInt);
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   –   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ      "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ಅಳವಡಿಕೆಗಾಗಿ    ನಿಮ್ಮನ್ನು    " +
-                "  ಫಲಾನುಭವಿಯಾಗಿ     ಆಯ್ಕೆ      ಮಾಡಲಾಗಿದೆ.   "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ರೀಲಿಂಗ್    ಯಂತ್ರೋಪಕರಣ    ಅಳವಡಿಕೆಗೆ    ನಿಗದಿಪಡಿಸಿದ  ಘಟಕ   ದರ   ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage +
-                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು   ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   "+ apiResponse.getContent().get(0).getSubSchemeNameInKannada() +"    ಅಳವಡಿಕೆಗಾಗಿ   ನಿಮ್ಮನ್ನು   " +
+                "  ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ.   "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ರೀಲಿಂಗ್   ಯಂತ್ರೋಪಕರಣ   ಅಳವಡಿಕೆಗೆ   ನಿಗದಿಪಡಿಸಿದ   ಘಟಕ   ದರ   ರೂ."+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ   ಶೇ   " + (int) shareInPercentage +
+                " ರಂತೆ   ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು   ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ    ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಯಂತ್ರೋಪಕರಣ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "          ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -18874,13 +18874,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
-                +"   3.  ಸಂಬಂಧಿಸಿದ     ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ    ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ.");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
+                +"   3.   ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -18929,16 +18929,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -19024,30 +19024,30 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   –   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಯಡಿ    ಹೊಸದಾಗಿ   "+ apiResponse.getContent().get(0).getImcbTable() +"   "+ apiResponse.getContent().get(0).getMachineTypeName() +"   ರೀಲಿಂಗ್     ಯಂತ್ರೋಪಕರಣ     ಅಳವಡಿಸಲು     " +
-                "ಫಲಾನುಭವಿಯಾಗಿ    ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ.    ಸದರಿ    ಯೋಜನೆಯಡಿ    ಯಂತ್ರೋಪಕರಣದ     ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +" ಆಗಿದ್ದು ,    ಶೇ " + (int) shareInPercentage +"  ರಂತೆ    "+
-                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ    ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.  "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು   ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಯಡಿ   ಹೊಸದಾಗಿ   "+ apiResponse.getContent().get(0).getImcbTable() +"   "+ apiResponse.getContent().get(0).getMachineTypeName() +"   ರೀಲಿಂಗ್   ಯಂತ್ರೋಪಕರಣ   ಅಳವಡಿಸಲು   " +
+                "ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ.   ಸದರಿ   ಯೋಜನೆಯಡಿ   ಯಂತ್ರೋಪಕರಣದ   ಘಟಕ   ದರ   ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +" ಆಗಿದ್ದು ,   ಶೇ " + (int) shareInPercentage +"  ರಂತೆ   "+
+                "ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"    ಗಳಾಗಿರುತ್ತದೆ.   ಫಲಾನುಭವಿಯ   ಪಾಲು   ಶೇ " + (int)beneficiarySharePercentage +"  ರಂತೆ   ರೂ.   "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ    ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಯಂತ್ರೋಪಕರಣ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "          ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -19055,13 +19055,13 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
-                +"   3.  ಸಂಬಂಧಿಸಿದ     ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ    ಸರಬರಾಜುದಾರರಿಗೆ     ರವರುಗಳ     ಮಾಹಿತಿಗಾಗಿ.");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+".\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"\n"
+                +"   3.   ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -19110,16 +19110,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -19204,29 +19204,29 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
 
 
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   –   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ      "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ಹೀಟ್    ರಿಕವರಿ    ಯೂನಿಟ್    ಅಳವಡಿಕೆಗಾಗಿ     ಘಟಕ   ದರ   ರೂ.  "+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ    ಶೇ  " + (int) shareInPercentage +
-                " ರಂತೆ  ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು    ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ    ಫಲಾನುಭವಿ    ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು   ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   "+ apiResponse.getContent().get(0).getMachineTypeName() +"    ಹೀಟ್   ರಿಕವರಿ   ಯೂನಿಟ್   ಅಳವಡಿಕೆಗಾಗಿ   ಘಟಕ   ದರ   ರೂ.   "+ apiResponse.getContent().get(0).getUnitCost() +" ಗಳಿಗೆ   ಶೇ   " + (int) shareInPercentage +
+                " ರಂತೆ   ಸಹಾಯಧನ   ರೂ."+ apiResponse.getContent().get(0).getSubsidyAmount() +"  ಗಳಾಗಿದ್ದು   ಹಾಗೂ   ಶೇ " + (int)beneficiarySharePercentage + "    ರಂತೆ   ಫಲಾನುಭವಿ   ಪಾಲು : ರೂ. "+beneficiaryShareFormatted+"  ಗಳಾಗಿರುತ್ತದೆ.\n\n" +
 
                 "ಷರತ್ತುಗಳು : \n"+
-                "           1. ಫಲಾನುಭವಿಯು    ಸದರಿ    ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ    ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ    ಪಾಲಿನ     ಮೊತ್ತವನ್ನು  \n" +
-                "              ಇಲಾಖೆಯು    ಗುರುತಿಸಿರುವ    ಯಾವುದಾದರೂ    ಒಂದು      ಸಂಸ್ಥೆಗೆ     ಪಾವತಿಸಿ     ಯಂತ್ರೋಪಕರಣ \n"+
-                "              ಸರಬರಾಜನ್ನು     ದೃಢಪಡಿಸುವುದು.\n"+
-                "           2. ಆಯ್ಕೆ    ಪತ್ರ     ಸ್ವೀಕರಿಸಿದ    03 ತಿಂಗಳುಗಳಲ್ಲಿ    ಘಟಕ    ಅಳವಡಿಕೆಗಾಗಿ    ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ     ಆಯ್ಕೆಯು\n" +
-                "               ತನ್ನಷ್ಟಕ್ಕೆ    ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
+                "           1. ಫಲಾನುಭವಿಯು   ಸದರಿ   ಯಂತ್ರೋಪಕರಣಗಳಿಗೆ   ನಿಗದಿ   ಪಡಿಸಿದ   ತನ್ನ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   \n" +
+                "              ಇಲಾಖೆಯು   ಗುರುತಿಸಿರುವ   ಯಾವುದಾದರೂ   ಒಂದು   ಸಂಸ್ಥೆಗೆ   ಪಾವತಿಸಿ   ಯಂತ್ರೋಪಕರಣ \n"+
+                "              ಸರಬರಾಜನ್ನು   ದೃಢಪಡಿಸುವುದು.\n"+
+                "           2. ಆಯ್ಕೆ   ಪತ್ರ   ಸ್ವೀಕರಿಸಿದ   03 ತಿಂಗಳುಗಳಲ್ಲಿ   ಘಟಕ   ಅಳವಡಿಕೆಗಾಗಿ   ಕ್ರಮವಹಿಸದಿದ್ದಲ್ಲಿ   ಆಯ್ಕೆಯು\n" +
+                "               ತನ್ನಷ್ಟಕ್ಕೆ   ತಾನೇ ರದ್ದಾಗುತ್ತದೆ.\n\n"+
 
-                "          ಕಾರ್ಯಕ್ರಮವನ್ನು    ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ    ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ    ದಾಖಲೆಗಳೊಂದಿಗೆ    ಪ್ರಸ್ತಾವನೆಯನ್ನು    ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ    ಹಾಗೂ    ಸ್ಥಳ     ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು      ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+                "          ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅನುಷ್ಠಾನಗೊಳಿಸಿ,   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -19236,7 +19236,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         response.setHeader9("ಇವರಿಗೆ,\n"+
                 "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"   ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
                 apiResponse.getContent().get(0).getVillageNameInKannada() + "   ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"   ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ  .\n\n"
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
                 +"   1. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಇವರಿಗೆ   ಮಾಹಿತಿಗಾಗಿ.\n"
                 +"   2.   ಸಂಬಂಧಿಸಿದ   ಯಂತ್ರೋಪಕರಣ/ಸಲಕರಣೆ   ಸರಬರಾಜುದಾರರಿಗೆ   ರವರುಗಳ   ಮಾಹಿತಿಗಾಗಿ.");
@@ -19288,16 +19288,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -19432,70 +19432,70 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         String projectCostMaxDisplay = first.getProjectCostMax() != null
                 ? String.format("%.2f", first.getProjectCostMax()) : "125.00";
 
-        response.setHeader2("ಕೇಂದ್ರ  ವಲಯ   '" + schemeNameKan + "'   ಯೋಜನೆಯಡಿ    ಸ್ವಯಂಚಾಲಿತ    ರೇಷ್ಮೆ    ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆ (ARM)  ಘಟಕ    "+
-                "ಸ್ಥಾಪನೆಗೆ    ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ  –  ಕುರಿತು.");
+        response.setHeader2("ಕೇಂದ್ರ   ವಲಯ   '" + schemeNameKan + "'   ಯೋಜನೆಯಡಿ   ಸ್ವಯಂಚಾಲಿತ   ರೇಷ್ಮೆ   ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆ (ARM)   ಘಟಕ   "+
+                "ಸ್ಥಾಪನೆಗೆ   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   –   ಕುರಿತು.");
 
-        String armUllekha = "1.  ನಿಮ್ಮ    ಅರ್ಜಿ   ದಿನಾಂಕ ; " + createdDate + "\n" +
-                "2.  " + financialYear + "  ನೇ    ಸಾಲಿನ   ಕೇಂದ್ರ   ವಲಯ   '"+schemeNameKan+"'   ಯೋಜನೆಯಡಿ    ARM    ಘಟಕಗಳ     ಸ್ಥಾಪನೆಗಾಗಿ \n" +
-                "     ಫಲಾನುಭವಿಗಳ    ಆಯ್ಕೆ     ಕುರಿತಂತೆ   ದಿನಾಂಕ : "+dateOfArmProceedings+"  ರಂದು   ರೇಷ್ಮೆ    ನಿರ್ದೇಶನಾಲಯದಲ್ಲಿ     ನಡೆದ   ಸಭಾ \n"+
-                "     ನಡಾವಳಿಗಳು   (ಸರ್ಕಾರದ   ಅನುಮೋದನೆ,  ದಿನಾಂಕ : "+dateOfGovtApprovalBeneficiary+")\n" +
-                "3.  "+ financialYear +"'  ನೇ   ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ   ವಲಯ   "+schemeNameKan+"   ಯೋಜನೆಯಡಿ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರಮಗಳ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ\n"+
-                "     ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿ    ಪತ್ರದ   ಸಂಖ್ಯೆ  : " + (first.getSchemeCircularNo() != null ? first.getSchemeCircularNo() : "") +
+        String armUllekha = "1.   ನಿಮ್ಮ   ಅರ್ಜಿ   ದಿನಾಂಕ ; " + createdDate + "\n" +
+                "2.   " + financialYear + "  ನೇ   ಸಾಲಿನ   ಕೇಂದ್ರ   ವಲಯ   '"+schemeNameKan+"'   ಯೋಜನೆಯಡಿ   ARM   ಘಟಕಗಳ   ಸ್ಥಾಪನೆಗಾಗಿ \n" +
+                "     ಫಲಾನುಭವಿಗಳ   ಆಯ್ಕೆ   ಕುರಿತಂತೆ   ದಿನಾಂಕ : "+dateOfArmProceedings+"  ರಂದು   ರೇಷ್ಮೆ   ನಿರ್ದೇಶನಾಲಯದಲ್ಲಿ   ನಡೆದ   ಸಭಾ \n"+
+                "     ನಡಾವಳಿಗಳು   (ಸರ್ಕಾರದ   ಅನುಮೋದನೆ,   ದಿನಾಂಕ : "+dateOfGovtApprovalBeneficiary+")\n" +
+                "3.   "+ financialYear +"'   ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ವಲಯ   "+schemeNameKan+"   ಯೋಜನೆಯಡಿ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರಮಗಳ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ\n"+
+                "     ನೀಡಿರುವ   ಮಾರ್ಗಸೂಚಿ   ಪತ್ರದ   ಸಂಖ್ಯೆ   : " + (first.getSchemeCircularNo() != null ? first.getSchemeCircularNo() : "") +
                 "   ,   ದಿನಾಂಕ : " + schemeCircularDate + "\n\n";
 
-        response.setHeader3(armUllekha + "          "+financialYear+" ನೇ   ಸಾಲಿನಲ್ಲಿ    ಕೇಂದ್ರ   ವಲಯ   ʼ"+schemeNameKan+"ʼ    " +
-                "ಯೋಜನೆಯ  "+categoryNameKan+"   ವರ್ಗದಡಿ   "+armEnds+" ಕೊನೆಗಳ    ಸ್ವಯಂಚಾಲಿತ     ರೇಷ್ಮೆ   ನೂಲು    ಬಿಚ್ಚಾಣಿಕೆ (ARM)   ಘಟಕ    ಸ್ಥಾಪನೆ    "+
-                "ಇಚ್ಚಿಸಿ    ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ    ನೀವು    ಅರ್ಜಿ    ಸಲ್ಲಿಸಿರುತ್ತೀರಿ.   ಸದರಿ   ಯೋಜನೆಯಡಿ   ARM    ಘಟಕಗಳ    ಸ್ಥಾಪನೆಗಾಗಿ    ಫಲಾನುಭವಿಗಳ    ಆಯ್ಕೆ    ಕುರಿತಂತೆ    "+
-                "ದಿನಾಂಕ : "+dateOfArmProceedings+" ರ   ಸಭಾ    ನಡಾವಳಿಗಳನ್ವಯ   ನಿಮ್ಮನ್ನು    ಪ್ರಸಕ್ತ     ಸಾಲಿನ    "+armEnds+"   ಕೊನೆಗಳ   ಒಂದು   ARM   ಘಟಕ    "+
-                        "ಸ್ಥಾಪನೆಗೆ   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ    ಮಾಡಲಾಗಿದೆ (ಉಲ್ಲೇಖ 2). \n" +
-                "            ಉಲ್ಲೇಖ (3) ರಂತೆ   ಕೇಂದ್ರ   ವಲಯ ʼ"+ schemeNameKan+ "ʼ   ಯೋಜನೆಯಡಿ   "+armEnds+" ಕೊನೆಗಳ    ARM    ಯಂತ್ರೋಪಕರಣದ    ಸೂಚಿತ    "+
+        response.setHeader3(armUllekha + "          "+financialYear+" ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ವಲಯ   ʼ"+schemeNameKan+"ʼ   " +
+                "ಯೋಜನೆಯ   "+categoryNameKan+"   ವರ್ಗದಡಿ   "+armEnds+" ಕೊನೆಗಳ   ಸ್ವಯಂಚಾಲಿತ   ರೇಷ್ಮೆ   ನೂಲು   ಬಿಚ್ಚಾಣಿಕೆ (ARM)   ಘಟಕ   ಸ್ಥಾಪನೆ   "+
+                "ಇಚ್ಚಿಸಿ   ಉಲ್ಲೇಖ (1) ರಲ್ಲಿ   ನೀವು   ಅರ್ಜಿ   ಸಲ್ಲಿಸಿರುತ್ತೀರಿ.   ಸದರಿ   ಯೋಜನೆಯಡಿ   ARM   ಘಟಕಗಳ   ಸ್ಥಾಪನೆಗಾಗಿ   ಫಲಾನುಭವಿಗಳ   ಆಯ್ಕೆ   ಕುರಿತಂತೆ   "+
+                "ದಿನಾಂಕ : "+dateOfArmProceedings+" ರ   ಸಭಾ   ನಡಾವಳಿಗಳನ್ವಯ   ನಿಮ್ಮನ್ನು   ಪ್ರಸಕ್ತ   ಸಾಲಿನ   "+armEnds+"   ಕೊನೆಗಳ   ಒಂದು   ARM   ಘಟಕ   "+
+                        "ಸ್ಥಾಪನೆಗೆ   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆ   ಮಾಡಲಾಗಿದೆ (ಉಲ್ಲೇಖ 2). \n" +
+                "            ಉಲ್ಲೇಖ (3) ರಂತೆ   ಕೇಂದ್ರ   ವಲಯ ʼ"+ schemeNameKan+ "ʼ   ಯೋಜನೆಯಡಿ   "+armEnds+" ಕೊನೆಗಳ   ARM   ಯಂತ್ರೋಪಕರಣದ   ಸೂಚಿತ   "+
                 "  ದರ   ರೂ. "+ unitCostLakhsDisplay + " ಲಕ್ಷಗಳು   (ರೂ. " + unitCostWords + ")   ಎಂದು   ನಿಗದಿಪಡಿಸಲಾಗಿದೆ.   ಈ   ವೆಚ್ಚವನ್ನು   ಕೇಂದ್ರ   ಸರ್ಕಾರ,   ರಾಜ್ಯ   "+
-                "ಸರ್ಕಾರ    ಮತ್ತು     ಫಲಾನುಭವಿ    ನಡುವೆ   " + centralPctInt + ":" + statePctInt + ":" + benefPctInt + " ಅನುಪಾತದಲ್ಲಿ    ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ. ಅದರ ಪ್ರಕಾರ;\n\n" +
+                "ಸರ್ಕಾರ   ಮತ್ತು   ಫಲಾನುಭವಿ   ನಡುವೆ   " + centralPctInt + ":" + statePctInt + ":" + benefPctInt + " ಅನುಪಾತದಲ್ಲಿ   ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ. ಅದರ ಪ್ರಕಾರ;\n\n" +
 
-                "       •  ಯಂತ್ರೋಪಕರಣಗಳ   ಒಟ್ಟು   ಸೂಚಿತ   ದರ : ರೂ."+unitCostFullDisplay+"\n" +
-                "       •  ಸರ್ಕಾರದಿಂದ ದೊರೆಯುವ ಸಹಾಯಧನ (" + totalSubsidyPctInt + "%): ರೂ." + totalSubsidyFullDisplay + "\n" +
-                "       •  ಫಲಾನುಭವಿಯ ಪಾಲು (" + benefPctInt + "%): ರೂ." + beneficiaryShareFullDisplay + "\n" +
-                "       ಇದಲ್ಲದೆ, ಭೂಮಿ,  ಕಟ್ಟಡ   ನಿರ್ಮಾಣ ,  ಮೂಲಸೌಕರ್ಯ , ದುಡಿಮೆ   ಬಂಡವಾಳ (Working Capital)   ಇತ್ಯಾದಿಗಳನ್ನು     ಒಳಗೊಂಡ    "+
-                "ಯೋಜನೆಯ  ಒಟ್ಟು   ವೆಚ್ಚ   ಸುಮಾರು   ರೂ."+projectCostMinDisplay+"   ರಿಂದ   "+projectCostMaxDisplay+" ಲಕ್ಷಗಳು   ಆಗುವ   ಸಾಧ್ಯತೆ   ಇದೆ.\n" +
-                "       ARM ಘಟಕಕ್ಕೆ    ಅಗತ್ಯವಿರುವ    ಯಂತ್ರೋಪಕರಣಗಳ    ಪಟ್ಟಿ    ಅನುಬಂಧ–1ರಲ್ಲಿ    (Annexure–1)    ನೀಡಲಾಗಿದೆ.   ಯಂತ್ರೋಪಕರಣಗಳ    ಮೂಲ    "+
-                "ದರ   ಸೂಚಿತ    ದರಕ್ಕಿಂತ    ಕಡಿಮೆ    ಇದ್ದಲ್ಲಿ    ಸಹಾಯಧನವನ್ನು    ಅನುಪಾತವಾಗಿ    ಕಡಿಮೆ    ಮಾಡಲಾಗುತ್ತದೆ.   ಸೂಚಿತ   ದರಕ್ಕಿಂತ    ಹೆಚ್ಚಿನ    ವೆಚ್ಚವಾದಲ್ಲಿ    " +
-                        "ಸಹಾಯಧನವನ್ನು    ಸೂಚಿತ    ದರದ    ಮಿತಿಯೊಳಗೆ   ಮಾತ್ರ    ನೀಡಲಾಗುತ್ತದೆ    ಮತ್ತು    ಹೆಚ್ಚುವರಿ    ವೆಚ್ಚವನ್ನು   ಫಲಾನುಭವಿಯೇ   ಭರಿಸಬೇಕಾಗುತ್ತದೆ.\n\n" +
+                "       •   ಯಂತ್ರೋಪಕರಣಗಳ   ಒಟ್ಟು   ಸೂಚಿತ   ದರ : ರೂ."+unitCostFullDisplay+"\n" +
+                "       •   ಸರ್ಕಾರದಿಂದ ದೊರೆಯುವ ಸಹಾಯಧನ (" + totalSubsidyPctInt + "%): ರೂ." + totalSubsidyFullDisplay + "\n" +
+                "       •   ಫಲಾನುಭವಿಯ ಪಾಲು (" + benefPctInt + "%): ರೂ." + beneficiaryShareFullDisplay + "\n" +
+                "       ಇದಲ್ಲದೆ, ಭೂಮಿ,   ಕಟ್ಟಡ   ನಿರ್ಮಾಣ ,   ಮೂಲಸೌಕರ್ಯ , ದುಡಿಮೆ   ಬಂಡವಾಳ (Working Capital)   ಇತ್ಯಾದಿಗಳನ್ನು   ಒಳಗೊಂಡ   "+
+                "ಯೋಜನೆಯ   ಒಟ್ಟು   ವೆಚ್ಚ   ಸುಮಾರು   ರೂ."+projectCostMinDisplay+"   ರಿಂದ   "+projectCostMaxDisplay+" ಲಕ್ಷಗಳು   ಆಗುವ   ಸಾಧ್ಯತೆ   ಇದೆ.\n" +
+                "       ARM ಘಟಕಕ್ಕೆ   ಅಗತ್ಯವಿರುವ   ಯಂತ್ರೋಪಕರಣಗಳ   ಪಟ್ಟಿ   ಅನುಬಂಧ–1ರಲ್ಲಿ   (Annexure–1)   ನೀಡಲಾಗಿದೆ.   ಯಂತ್ರೋಪಕರಣಗಳ   ಮೂಲ   "+
+                "ದರ   ಸೂಚಿತ   ದರಕ್ಕಿಂತ   ಕಡಿಮೆ   ಇದ್ದಲ್ಲಿ   ಸಹಾಯಧನವನ್ನು   ಅನುಪಾತವಾಗಿ   ಕಡಿಮೆ   ಮಾಡಲಾಗುತ್ತದೆ.   ಸೂಚಿತ   ದರಕ್ಕಿಂತ   ಹೆಚ್ಚಿನ   ವೆಚ್ಚವಾದಲ್ಲಿ   " +
+                        "ಸಹಾಯಧನವನ್ನು   ಸೂಚಿತ   ದರದ   ಮಿತಿಯೊಳಗೆ   ಮಾತ್ರ   ನೀಡಲಾಗುತ್ತದೆ   ಮತ್ತು   ಹೆಚ್ಚುವರಿ   ವೆಚ್ಚವನ್ನು   ಫಲಾನುಭವಿಯೇ   ಭರಿಸಬೇಕಾಗುತ್ತದೆ.\n\n" +
                 "ಷರತ್ತುಗಳು :\n" +
-                "           1.   ಈ     ಆಯ್ಕೆ    ಪತ್ರವನ್ನು    ಸ್ವೀಕರಿಸಿದ    ನಂತರ  07    ದಿನಗಳ   ಒಳಗೆ    ಯಾವುದೇ    ರಾಷ್ಟ್ರೀಕೃತ   ಬ್ಯಾಂಕ್ ನಲ್ಲಿ  \n"+
-                "                ESCROW    ಖಾತೆ    ತೆರೆಯಬೇಕು    ಹಾಗೂ    ಫಲಾನುಭವಿಯ    ಪಾಲಿನ    ಮೊತ್ತವನ್ನು    ಆ     ಖಾತೆಯಲ್ಲಿ    ಜಮಾ \n" +
+                "           1.   ಈ   ಆಯ್ಕೆ   ಪತ್ರವನ್ನು   ಸ್ವೀಕರಿಸಿದ   ನಂತರ   07   ದಿನಗಳ   ಒಳಗೆ   ಯಾವುದೇ   ರಾಷ್ಟ್ರೀಕೃತ   ಬ್ಯಾಂಕ್ ನಲ್ಲಿ   \n"+
+                "                ESCROW   ಖಾತೆ   ತೆರೆಯಬೇಕು   ಹಾಗೂ   ಫಲಾನುಭವಿಯ   ಪಾಲಿನ   ಮೊತ್ತವನ್ನು   ಆ   ಖಾತೆಯಲ್ಲಿ   ಜಮಾ \n" +
                 "                 ಮಾಡಬೇಕು.\n" +
-                "          2.   ಸಂಬಂಧಿಸಿದ   ಬ್ಯಾಂಕ್    ವ್ಯವಸ್ಥಾಪಕರು    ಮಂಜೂರು   ಮಾಡುವ   ಸರ್ಕಾರದ   ಸಹಾಯಧನ    ಹಾಗೂ    ಫಲಾನುಭವಿಯ\n" +
-                "               ಪಾಲು   ESCROW    ಖಾತೆಯಲ್ಲಿ    ಸ್ಥಗಿತವಾಗಿರುತ್ತದೆಂದು    ಮತ್ತು    ರೇಷ್ಮೆ   ಇಲಾಖೆಯ    ಸೂಚನೆಯ    ಮೇರೆಗೆ \n"+
-                "               ಮಾತ್ರ    ಬಿಡುಗಡೆ    ಮಾಡಲಾಗುತ್ತದೆ    ಎಂಬ   ದೃಢೀಕರಣ   ಪತ್ರ    ನೀಡಬೇಕು.\n" +
-                "          3.   ಘಟಕ   ಸ್ಥಾಪನೆಗೆ     ಸಂಬಂಧಿಸಿದಂತೆ   ರಾಜ್ಯ    ರೇಷ್ಮೆ   ಇಲಾಖೆ (DoSK),   ಕೇಂದ್ರ    ರೇಷ್ಮೆ   ಮಂಡಳಿ (CSB)\n" +
-                "               ಮತ್ತು    ಫಲಾನುಭವಿ   ಇವರ    ನಡುವೆ    ತ್ರಿಪಕ್ಷೀಯ    ಒಪ್ಪಂದ  (Tripartite Agreement)  ಮಾಡಿಕೊಳ್ಳಬೇಕು.\n"+
-                "               ತ್ರಿಪಕ್ಷೀಯ     ಒಪ್ಪಂದ     ಮಾಡಿಕೊಂಡ   12 ತಿಂಗಳೊಳಗೆ    ಘಟಕ     ಸ್ಥಾಪನೆಗೆ   ಬದ್ದರಾಗಿರಬೇಕು.  ಒಂದು  ವೇಳೆ\n"+
-                "               ನಿಗದಿತ   ಅವಧಿಯಲ್ಲಿ    ಘಟಕ    ಸ್ಥಾಪನೆ     ಮಾಡದಿದ್ದಲ್ಲಿ    ಸರ್ಕಾರದ   ಸಹಾಯಧನವನ್ನು     ಸಾಮಾನ್ಯ    ಹಣಕಾಸು\n"+
-                "               ನಿಯಮಗಳನ್ವಯ    ಹಿಂಪಡೆಯಲಾಗುವುದು. \n" +
-                "          4.   ಘಟಕ   ಸ್ಥಾಪನೆಗೆ     ಗುರುತಿಸಿರುವ    ಜಮೀನಿಗೆ    ಸಂಬಂಧಿಸಿದಂತೆ    ವಾಣಿಜ್ಯ     ಉದ್ದೇಶಕ್ಕಾಗಿ    ಭೂಪರಿವರ್ತನೆ\n"+
-                "               ಅನುಮತಿ   ಪಡೆದು   ಸಲ್ಲಿಸಬೇಕು.   ಜಮೀನು    ಕೈಗಾರಿಕಾ    ಪ್ರದೇಶದ    ಪ್ಲಾಟ್     ಆಗಿದ್ದರೆ     ಘಟಕ   \n"+
-                "               ಸ್ಥಾಪನೆಗೆ    ಅನುಮೋದನೆ   ನೀಡಲಾಗಿದೆ   ಎಂಬ    ದಾಖಲಾತಿ     ಒದಗಿಸಬೇಕು.\n" +
-                "          5.   ಫಲಾನುಭವಿಯು    ಯಂತ್ರೋಪಕರಣಗಳನ್ನು ಯಾರಿಗೂ    ಪರಭಾರೆಗೆ    ನೀಡುವುದಿಲ್ಲ    ಎಂಬುದಾಗಿ   ರೂ.500/- \n"+
+                "          2.   ಸಂಬಂಧಿಸಿದ   ಬ್ಯಾಂಕ್   ವ್ಯವಸ್ಥಾಪಕರು   ಮಂಜೂರು   ಮಾಡುವ   ಸರ್ಕಾರದ   ಸಹಾಯಧನ   ಹಾಗೂ   ಫಲಾನುಭವಿಯ\n" +
+                "               ಪಾಲು   ESCROW   ಖಾತೆಯಲ್ಲಿ   ಸ್ಥಗಿತವಾಗಿರುತ್ತದೆಂದು   ಮತ್ತು   ರೇಷ್ಮೆ   ಇಲಾಖೆಯ   ಸೂಚನೆಯ   ಮೇರೆಗೆ \n"+
+                "               ಮಾತ್ರ   ಬಿಡುಗಡೆ   ಮಾಡಲಾಗುತ್ತದೆ   ಎಂಬ   ದೃಢೀಕರಣ   ಪತ್ರ   ನೀಡಬೇಕು.\n" +
+                "          3.   ಘಟಕ   ಸ್ಥಾಪನೆಗೆ   ಸಂಬಂಧಿಸಿದಂತೆ   ರಾಜ್ಯ   ರೇಷ್ಮೆ   ಇಲಾಖೆ (DoSK),   ಕೇಂದ್ರ   ರೇಷ್ಮೆ   ಮಂಡಳಿ (CSB)\n" +
+                "               ಮತ್ತು   ಫಲಾನುಭವಿ   ಇವರ   ನಡುವೆ   ತ್ರಿಪಕ್ಷೀಯ   ಒಪ್ಪಂದ   (Tripartite Agreement)   ಮಾಡಿಕೊಳ್ಳಬೇಕು.\n"+
+                "               ತ್ರಿಪಕ್ಷೀಯ   ಒಪ್ಪಂದ   ಮಾಡಿಕೊಂಡ   12 ತಿಂಗಳೊಳಗೆ   ಘಟಕ   ಸ್ಥಾಪನೆಗೆ   ಬದ್ದರಾಗಿರಬೇಕು.   ಒಂದು   ವೇಳೆ\n"+
+                "               ನಿಗದಿತ   ಅವಧಿಯಲ್ಲಿ   ಘಟಕ   ಸ್ಥಾಪನೆ   ಮಾಡದಿದ್ದಲ್ಲಿ   ಸರ್ಕಾರದ   ಸಹಾಯಧನವನ್ನು   ಸಾಮಾನ್ಯ   ಹಣಕಾಸು\n"+
+                "               ನಿಯಮಗಳನ್ವಯ   ಹಿಂಪಡೆಯಲಾಗುವುದು. \n" +
+                "          4.   ಘಟಕ   ಸ್ಥಾಪನೆಗೆ   ಗುರುತಿಸಿರುವ   ಜಮೀನಿಗೆ   ಸಂಬಂಧಿಸಿದಂತೆ   ವಾಣಿಜ್ಯ   ಉದ್ದೇಶಕ್ಕಾಗಿ   ಭೂಪರಿವರ್ತನೆ\n"+
+                "               ಅನುಮತಿ   ಪಡೆದು   ಸಲ್ಲಿಸಬೇಕು.   ಜಮೀನು   ಕೈಗಾರಿಕಾ   ಪ್ರದೇಶದ   ಪ್ಲಾಟ್   ಆಗಿದ್ದರೆ   ಘಟಕ   \n"+
+                "               ಸ್ಥಾಪನೆಗೆ   ಅನುಮೋದನೆ   ನೀಡಲಾಗಿದೆ   ಎಂಬ   ದಾಖಲಾತಿ   ಒದಗಿಸಬೇಕು.\n" +
+                "          5.   ಫಲಾನುಭವಿಯು   ಯಂತ್ರೋಪಕರಣಗಳನ್ನು ಯಾರಿಗೂ   ಪರಭಾರೆಗೆ   ನೀಡುವುದಿಲ್ಲ   ಎಂಬುದಾಗಿ   ರೂ.500/- \n"+
                 "               ಮೌಲ್ಯದ   ನ್ಯಾಯಾಲಯೀಕ   ಸ್ಟಾಂಪ್   ಪೇಪರ್   ಮೇಲೆ   ನೋಟರಿ   ಅಫಿಡೆವಿಟ್   ಸಲ್ಲಿಸಬೇಕು.\n" +
-                "          6.   ಘಟಕಕ್ಕೆ    ಅಗತ್ಯವಾದ    ವಿದ್ಯುತ್   (ಸುಮಾರು 25 HP),   ನೀರು (ಪ್ರತಿ  ದಿನ   ಸುಮಾರು 20,000 ಲೀಟರ್)\n"+
-                "               ಸೇರಿದಂತೆ   ಅಗತ್ಯ   ಮೂಲಸೌಕರ್ಯಗಳನ್ನು     ಒದಗಿಸಿಕೊಳ್ಳಬೇಕು.\n" +
-                "          7.   ಆಯ್ಕೆ   ಪತ್ರ    ಪಡೆದ    ನಂತರ 3   ತಿಂಗಳೊಳಗೆ   ಕಟ್ಟಡ    ನಿರ್ಮಾಣ   ಹಾಗೂ   ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ   ಸಮರ್ಪಕ\n" +
-                "               ಪ್ರಗತಿ    ಸಾಧಿಸಬೇಕು.\n"+
-                "          8.   ಅನುಬಂಧ–1(Annexure–1) ರಲ್ಲಿ    ನೀಡಿರುವ    ಎಲ್ಲಾ   ಯಂತ್ರೋಪಕರಣಗಳನ್ನು    ಖರೀದಿಸಿ   ಸ್ಥಾಪಿಸಬೇಕು.\n" +
-                "          9.   ಘಟಕದ  ಯಶಸ್ವಿ    ಕಾರ್ಯಾಚರಣೆಗೆ    ಉನ್ನತ    ಗುಣಮಟ್ಟದ   ಬೈವೊಲ್ಟೈನ್    ರೇಷ್ಮೆ   ಗೂಡುಗಳ   ನಿರಂತರ \n"+
-                "               ಪೂರೈಕೆ    ಅತ್ಯಗತ್ಯವಾಗಿದ್ದು ,  ಫಲಾನುಭವಿಯು   ಕನಿಷ್ಠ    60-70   ರೈತರನ್ನು    ಪ್ರೇರೇಪಿಸಿ    ವರ್ಷಕ್ಕೆ  \n"+
-                "               ಸುಮಾರು   40–50   ಮೆಟ್ರಿಕ್  ಟನ್   ಗೂಡುಗಳ    ಪೂರೈಸಿಕೊಳ್ಳುವಲ್ಲಿ    ರೈತರೊಂದಿಗೆ   ಒಪ್ಪಂದ  ಕೃಷಿ\n"+
+                "          6.   ಘಟಕಕ್ಕೆ   ಅಗತ್ಯವಾದ   ವಿದ್ಯುತ್   (ಸುಮಾರು 25 HP),   ನೀರು (ಪ್ರತಿ   ದಿನ   ಸುಮಾರು 20,000 ಲೀಟರ್)\n"+
+                "               ಸೇರಿದಂತೆ   ಅಗತ್ಯ   ಮೂಲಸೌಕರ್ಯಗಳನ್ನು   ಒದಗಿಸಿಕೊಳ್ಳಬೇಕು.\n" +
+                "          7.   ಆಯ್ಕೆ   ಪತ್ರ   ಪಡೆದ   ನಂತರ 3   ತಿಂಗಳೊಳಗೆ   ಕಟ್ಟಡ   ನಿರ್ಮಾಣ   ಹಾಗೂ   ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ   ಸಮರ್ಪಕ\n" +
+                "               ಪ್ರಗತಿ   ಸಾಧಿಸಬೇಕು.\n"+
+                "          8.   ಅನುಬಂಧ–1(Annexure–1) ರಲ್ಲಿ   ನೀಡಿರುವ   ಎಲ್ಲಾ   ಯಂತ್ರೋಪಕರಣಗಳನ್ನು   ಖರೀದಿಸಿ   ಸ್ಥಾಪಿಸಬೇಕು.\n" +
+                "          9.   ಘಟಕದ   ಯಶಸ್ವಿ   ಕಾರ್ಯಾಚರಣೆಗೆ   ಉನ್ನತ   ಗುಣಮಟ್ಟದ   ಬೈವೊಲ್ಟೈನ್   ರೇಷ್ಮೆ   ಗೂಡುಗಳ   ನಿರಂತರ \n"+
+                "               ಪೂರೈಕೆ   ಅತ್ಯಗತ್ಯವಾಗಿದ್ದು ,   ಫಲಾನುಭವಿಯು   ಕನಿಷ್ಠ   60-70   ರೈತರನ್ನು   ಪ್ರೇರೇಪಿಸಿ   ವರ್ಷಕ್ಕೆ   \n"+
+                "               ಸುಮಾರು   40–50   ಮೆಟ್ರಿಕ್   ಟನ್   ಗೂಡುಗಳ   ಪೂರೈಸಿಕೊಳ್ಳುವಲ್ಲಿ   ರೈತರೊಂದಿಗೆ   ಒಪ್ಪಂದ   ಕೃಷಿ\n"+
                 "               ವ್ಯವಸ್ಥೆ   ಕಲ್ಪಿಸಿಕೊಳ್ಳಬೇಕು.\n"+
-                "          10.  ಯೋಜನೆಯ   ಉಳಿದ   ವೆಚ್ಚಕ್ಕಾಗಿ   ಬ್ಯಾಂಕ್/ಹಣಕಾಸು   ಸಂಸ್ಥೆಗಳಿಂದ    ಸಾಲ   ಪಡೆಯಲು   ಅಗತ್ಯ   ಕ್ರಮಗಳನ್ನು \n"+
+                "          10.   ಯೋಜನೆಯ   ಉಳಿದ   ವೆಚ್ಚಕ್ಕಾಗಿ   ಬ್ಯಾಂಕ್/ಹಣಕಾಸು   ಸಂಸ್ಥೆಗಳಿಂದ   ಸಾಲ   ಪಡೆಯಲು   ಅಗತ್ಯ   ಕ್ರಮಗಳನ್ನು \n"+
                 "               ಕೈಗೊಳ್ಳಬೇಕು.\n" +
-                "          11.  ಪರಿಸರ   ಮಂಡಳಿ   ಅನುಮತಿ , ತೆರಿಗೆ   ನೋಂದಣಿ ,  ಕಾರ್ಮಿಕ  ಕಾಯ್ದೆಗಳು   ಸೇರಿದಂತೆ   ಎಲ್ಲಾ    ಕಾನೂನುಬದ್ಧ  \n"+
+                "          11.   ಪರಿಸರ   ಮಂಡಳಿ   ಅನುಮತಿ , ತೆರಿಗೆ   ನೋಂದಣಿ ,   ಕಾರ್ಮಿಕ   ಕಾಯ್ದೆಗಳು   ಸೇರಿದಂತೆ   ಎಲ್ಲಾ   ಕಾನೂನುಬದ್ಧ   \n"+
                 "               ನಿಯಮಗಳನ್ನು   ಪಾಲಿಸಬೇಕು.\n\n" +
-                "ಮೇಲ್ಕಂಡ   ಷರತ್ತುಗಳು    ನಿಮಗೆ    ಒಪ್ಪಿಗೆಯಾದಲ್ಲಿ    ಈ    ಪತ್ರವನ್ನು   ಸ್ವೀಕರಿಸಿದ   05  ದಿನಗಳೊಳಗೆ   ಲಿಖಿತವಾಗಿ   ಒಪ್ಪಿಗೆ   ಸಲ್ಲಿಸಲು   ಕೋರಲಾಗಿದೆ.\n");
+                "ಮೇಲ್ಕಂಡ   ಷರತ್ತುಗಳು   ನಿಮಗೆ   ಒಪ್ಪಿಗೆಯಾದಲ್ಲಿ   ಈ   ಪತ್ರವನ್ನು   ಸ್ವೀಕರಿಸಿದ   05   ದಿನಗಳೊಳಗೆ   ಲಿಖಿತವಾಗಿ   ಒಪ್ಪಿಗೆ   ಸಲ್ಲಿಸಲು   ಕೋರಲಾಗಿದೆ.\n");
 
         response.setStatus(first.getSanctionOrderDownloadUrl() != null ? first.getSanctionOrderDownloadUrl() : "");
-        response.setHeader7("ಸಂಖ್ಯೆ  :  " + workOrderNumber+"\n"+
+        response.setHeader7("ಸಂಖ್ಯೆ   :   " + workOrderNumber+"\n"+
                 "("+eOfficeFileNo+")");
-        response.setHeader11(designationKan +", ದಿನಾಂಕ  : " + selectionLetterDate);
+        response.setHeader11(designationKan +", ದಿನಾಂಕ   : " + selectionLetterDate);
         response.setHeader10(designationKan + "\n " + designationKanSanct);
 
         // Build cc designation strings: designation + " , " + designationForSanctionOrder (like sanction-arm pattern)
@@ -19514,15 +19514,15 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 ? first.getCc4DesignationKanSanct() : "";
 
         response.setHeader9("ಇವರಿಗೆ;\n" + reelerName + "\n"
-                + "ಬಿನ್/ಕೋಂ  " + reelerFatherName + "\n"
-                + villageNameKan + "  ಗ್ರಾಮ  " + talukNameKan + "  ತಾಲ್ಲೂಕು\n"
+                + "ಬಿನ್/ಕೋಂ   " + reelerFatherName + "\n"
+                + villageNameKan + "  ಗ್ರಾಮ   " + talukNameKan + "  ತಾಲ್ಲೂಕು\n"
                 + districtNameKan + "  ಜಿಲ್ಲೆ\n"
                 + "ಮ: " + mobileNumber + "\n\n"
                 + "ಪ್ರತಿಯನ್ನು;\n"
-                + "   1. ಸದಸ್ಯ ಕಾರ್ಯದರ್ಶಿಗಳು,  ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ,  ಬೆಂಗಳೂರು\n"
-                + "   2. " + cc2Kan + (cc2KanSanct.isEmpty() ? "" : " ,  " + cc2KanSanct) + "\n"
-                + "   3. " + cc3Kan + (cc3KanSanct.isEmpty() ? "" : " ,  " + cc3KanSanct) + "\n"
-                + "   4. " + cc4Kan + (cc4KanSanct.isEmpty() ? "" : " ,  " + cc4KanSanct));
+                + "   1. ಸದಸ್ಯ ಕಾರ್ಯದರ್ಶಿಗಳು,   ಕೇಂದ್ರ ರೇಷ್ಮೆ ಮಂಡಳಿ,   ಬೆಂಗಳೂರು\n"
+                + "   2. " + cc2Kan + (cc2KanSanct.isEmpty() ? "" : " ,   " + cc2KanSanct) + "\n"
+                + "   3. " + cc3Kan + (cc3KanSanct.isEmpty() ? "" : " ,   " + cc3KanSanct) + "\n"
+                + "   4. " + cc4Kan + (cc4KanSanct.isEmpty() ? "" : " ,   " + cc4KanSanct));
 
         response.setSchemeNameInKannada(schemeNameKan);
         response.setScCategoryName(categoryNameKan);
@@ -20368,21 +20368,21 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
         int beneficiaryShareInt = Math.round(beneficiaryShare);
         String beneficiaryShareWords = KannadaNumberUtil.convertNumberToKannadaWords(beneficiaryShareInt);
 
-        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ    ಸಾಲಿನಲ್ಲಿ      “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")  " +
-                "   ಅಡಿ    ಫಲಾನುಭವಿ   ಆಯ್ಕೆ  –  ಕುರಿತು .");
+        response.setHeader2(apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   “" + apiResponse.getContent().get(0).getSchemeNameInKannada() + "”   (" + apiResponse.getContent().get(0).getCategoryNameInKannada() + ")   " +
+                "   ಅಡಿ   ಫಲಾನುಭವಿ   ಆಯ್ಕೆ   –   ಕುರಿತು .");
 
-        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ     "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು     "+
-                 apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ    ನಿಮ್ಮ    ಅರ್ಜಿ     ಸಂಖ್ಯೆ    ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ  : "+createdDate+"     ಅನ್ನು     ಕಾರ್ಯಕ್ರಮದ     ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ     "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನ      "+
-                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು  ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")    ಅಡಿ   "+ apiResponse.getContent().get(0).getReelingShedSqft() +"  ಚದರ    ಅಡಿ    "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್      ಶೆಡ್     ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ      ಪಡೆಯಲು    ಫಲಾನುಭವಿಯಾಗಿ     ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ.    "+
-                "ಸದರಿ    ಯೋಜನೆಯಡಿ    ಇಲಾಖೆಯಿಂದ    ನಿಗದಿಪಡಿಸಿದ    ಘಟಕ    ದರ    ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು  ,    ಶೇ   " + (int) shareInPercentage +
-                "   ರಂತೆ     ಸಹಾಯಧನ    ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" ಗಳಾಗಿರುತ್ತದೆ.   \n\n" +
-                "ಕಾರ್ಯಕ್ರಮವನ್ನು      ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ      ಅಗತ್ಯ       ದಾಖಲೆಗಳೊಂದಿಗೆ      ಪ್ರಸ್ತಾವನೆಯನ್ನು      ಸಲ್ಲಿಸಬೇಕು.    ದಾಖಲೆಗಳ     ಹಾಗೂ    ಸ್ಥಳ    ಪರಿಶೀಲನೆಯ     ನಂತರ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು     ಮಾಡಲಾಗುವುದು.");
+        response.setHeader3("          "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ಶ್ರೀ/ಶ್ರೀಮತಿ "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ. "+ apiResponse.getContent().get(0).getReelerFatherName() +"     "+ apiResponse.getContent().get(0).getVillageNameInKannada() +"    ಗ್ರಾಮ   "+ apiResponse.getContent().get(0).getTalukNameInKannada() +"     ತಾಲ್ಲೂಕು   "+
+                 apiResponse.getContent().get(0).getDistrictNameInKannada() +"   ಜಿಲ್ಲೆ   ಆದ   ನಿಮ್ಮ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   ARN No."+ apiResponse.getContent().get(0).getArn() +"     ದಿನಾಂಕ   : "+createdDate+"     ಅನ್ನು   ಕಾರ್ಯಕ್ರಮದ   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನ   "+
+                apiResponse.getContent().get(0).getSchemeNameInKannada() +" ಗಳು   ( "+ apiResponse.getContent().get(0).getCategoryNameInKannada() +")   ಅಡಿ   "+ apiResponse.getContent().get(0).getReelingShedSqft() +"  ಚದರ   ಅಡಿ   "+apiResponse.getContent().get(0).getMachineTypeName()+"   ರೀಲಿಂಗ್   ಶೆಡ್   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಪಡೆಯಲು   ಫಲಾನುಭವಿಯಾಗಿ   ಆಯ್ಕೆಯಾಗಿರುತ್ತೀರಿ.   "+
+                "ಸದರಿ   ಯೋಜನೆಯಡಿ   ಇಲಾಖೆಯಿಂದ   ನಿಗದಿಪಡಿಸಿದ   ಘಟಕ   ದರ   ರೂ. "+ apiResponse.getContent().get(0).getUnitCost() +"  ಆಗಿದ್ದು   ,   ಶೇ   " + (int) shareInPercentage +
+                "   ರಂತೆ   ಸಹಾಯಧನ   ರೂ. "+ apiResponse.getContent().get(0).getSubsidyAmount() +" ಗಳಾಗಿರುತ್ತದೆ.   \n\n" +
+                "ಕಾರ್ಯಕ್ರಮವನ್ನು   ಮಾರ್ಗಸೂಚಿಗಳನ್ವಯ   ಅಗತ್ಯ   ದಾಖಲೆಗಳೊಂದಿಗೆ   ಪ್ರಸ್ತಾವನೆಯನ್ನು   ಸಲ್ಲಿಸಬೇಕು.   ದಾಖಲೆಗಳ   ಹಾಗೂ   ಸ್ಥಳ   ಪರಿಶೀಲನೆಯ   ನಂತರ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಲಾಗುವುದು.");
 
         response.setStatus(apiResponse.getContent().get(0).getSanctionOrderDownloadUrl());
 
-        response.setHeader7("ಸಂಖ್ಯೆ  :  "+apiResponse.getContent().get(0).getWorkOrderNumber());
+        response.setHeader7("ಸಂಖ್ಯೆ   :   "+apiResponse.getContent().get(0).getWorkOrderNumber());
 
-        response.setHeader11("ದಿನಾಂಕ  : "+selectionLetterDate);
+        response.setHeader11("ದಿನಾಂಕ   : "+selectionLetterDate);
 
 
 
@@ -20390,12 +20390,12 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 apiResponse.getContent().get(0).getModifiedByDesignationForSanctionOrder());
 
         response.setHeader9("ಇವರಿಗೆ,\n"+
-                "ಶ್ರೀ/ಶ್ರೀಮತಿ    "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.  "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
-                        apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ    "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
-                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ  .\n\n"
+                "ಶ್ರೀ/ಶ್ರೀಮತಿ   "+ apiResponse.getContent().get(0).getReelerName() +"    ಬಿನ್/ಕೋಂ.   "+ apiResponse.getContent().get(0).getReelerFatherName() +"\n" +
+                        apiResponse.getContent().get(0).getVillageNameInKannada() + "    ಗ್ರಾಮ   "+apiResponse.getContent().get(0).getTalukNameInKannada() +"    ತಾಲ್ಲೂಕು \n" +
+                apiResponse.getContent().get(0).getDistrictNameInKannada() +"    ಜಿಲ್ಲೆ   .\n\n"
                 +"ಪ್ರತಿಯನ್ನು   ;\n"
-                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,    "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
-                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ.");
+                +"   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation() +" ,   "+apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder()+",\n"
+                +"   2. "+apiResponse.getContent().get(0).getCreatedByDesignation() +" ,   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() +"   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ.");
 
         response.setSchemeNameInKannada(apiResponse.getContent().get(0).getSchemeNameInKannada());
 
@@ -20444,16 +20444,16 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 }
 
                 String reelerDetails =
-                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.    " + sanctionOrderResponse.getReelerName()
-                                + "    (" + sanctionOrderResponse.getFruitsId() + ")    ಬಿನ್/ಕೋಂ    "
+                        "ಶ್ರೀ./ಶ್ರೀಮತಿ.   " + sanctionOrderResponse.getReelerName()
+                                + "    (" + sanctionOrderResponse.getFruitsId() + ")   ಬಿನ್/ಕೋಂ   "
                                 + sanctionOrderResponse.getReelerFatherName()
                                 + "    "
                                 + sanctionOrderResponse.getVillageName()
-                                + "    ,    "
+                                + "    ,   "
                                 + sanctionOrderResponse.getHobliName()
-                                + "    ,    ಹೋಬಳಿ,    "
+                                + "    ,   ಹೋಬಳಿ,   "
                                 + sanctionOrderResponse.getTalukName()
-                                + "    ತಾ.    "
+                                + "    ತಾ.   "
                                 + sanctionOrderResponse.getDistrictName()
                                 + "   ಜಿಲ್ಲೆ   ";
 
@@ -20757,31 +20757,31 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ   : ಕೇಂದ್ರ   ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ      ಕೇಂದ್ರ      " +
-                    "ಪುರಸ್ಕೃತ     “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“    ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ      " +
-                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ     " +
-                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
-                    "ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
-                    "     ಇವರು    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ     " +surveyText+
-                    "    ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n\n" +
-                                "               ಮೇಲ್ಕಾಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ:" +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ     ಗ್ರಾಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
-                    "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ    ಸರ್ವೆ    ನಂಬರು     "+ buildPairedSurveyText(apiResponse.getContent().get(0).getSurveyNumber(), apiResponse.getContent().get(0).getHissa())  +"  ರಲ್ಲಿ      " +
-                     apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ " +
-                    "     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
-                                "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ     " + buildPairedSurveyText(apiResponse.getContent().get(0).getSurveyNumber(), apiResponse.getContent().get(0).getHissa())+  "    " +
-                    "ಸರ್ವೆ ನಂಬರಿನಲ್ಲಿ     ರೈತರು    ಜಮೀನು     ಹೊಂದಿದ್ದು,    "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ     ಅಳತೆಯ    "+apiResponse.getContent().get(0).getCalculatedSqft()+"    ಚದರ     ಅಡಿ    ವಿಸ್ತೀರ್ಣದ     ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮಾನೆ    ನಿರ್ಮಾಣ    ಮಾಡಲು    ಕಾರ್ಯಾದೇಶ ನೀಡಲಾಗಿದೆ.");
+            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   " +
+                    "ಪುರಸ್ಕೃತ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ   " +
+                    apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ   " +
+                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
+                    "ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan()+
+                    "     ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ   " +surveyText+
+                    "    ರಲ್ಲಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n\n" +
+                                "               ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ:" +createdDate+ "  ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ   "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ   ಗ್ರಾಮಕ್ಕೆ   ಭೇಟಿ   ನೀಡಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "    ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   ಸರ್ವೆ   ನಂಬರು   "+ buildPairedSurveyText(apiResponse.getContent().get(0).getSurveyNumber(), apiResponse.getContent().get(0).getHissa())  +"  ರಲ್ಲಿ   " +
+                     apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ   " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ " +
+                    "     ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
+                                "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   " + buildPairedSurveyText(apiResponse.getContent().get(0).getSurveyNumber(), apiResponse.getContent().get(0).getHissa())+  "    " +
+                    "ಸರ್ವೆ ನಂಬರಿನಲ್ಲಿ   ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು,   "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getCalculatedSqft()+"    ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮಾನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ ನೀಡಲಾಗಿದೆ.");
 
             response.setHeader5(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
             response.setHeader6("ಇವರಿಗೆ,\n" +
                             apiResponse.getContent().get(0).getPreviousStepDesignation()+"   "+ apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n" +
-                            apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,  " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
-                    "ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ,");
+                            apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
+                    "ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ,");
             response.setDate(createdDateFormatted);
-            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
@@ -20862,30 +20862,30 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ   : ಕೇಂದ್ರ   ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ    “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
-                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ     " +
-                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
-                    "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
-                    "     ಇವರು      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n\n" +
-                    "               ಮೇಲ್ಕಾಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ : " +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
-                    "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
-                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ " +
-                    "     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
-                    "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ     " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ರಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   " +
-                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ     ಅಳತೆಯ    "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
-                    "ಚದರ     ಅಡಿ    ವಿಸ್ತೀರ್ಣದ     ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮಾನೆ    ನಿರ್ಮಾಣ    ಮಾಡಲು    ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
+                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ   " +
+                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan()+
+                    "     ಇವರು   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n\n" +
+                    "               ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ : " +createdDate+ "  ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ   "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ   ಭೇಟಿ   ನೀಡಿ   ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "    ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   ಸರ್ವೆ   ನಂಬರು   "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ   " +
+                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ   " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ " +
+                    "     ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
+                    "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ರಲ್ಲಿ   ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   " +
+                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
+                    "ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮಾನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
 
             response.setHeader5(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
             response.setHeader6("ಇವರಿಗೆ,\n" +
                     "   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation()+"   "+ apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n" +
-                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,  " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
-                    "   3. ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ,");
+                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
+                    "   3. ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ,");
             response.setDate(createdDateFormatted);
-            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
@@ -20965,31 +20965,31 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ   : ಕೇಂದ್ರ   ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +datePart );
-            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ    “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
-                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ     " +
-                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
-                    "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
-                    "     ಇವರು      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n\n" +
-                    "               ಮೇಲ್ಕಾಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ : " +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ   " +
-                    " ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
-                    "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
-                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ " +
-                    "     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
-                    "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ     " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ರಲ್ಲಿ     ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   " +
-                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ     ಅಳತೆಯ    "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
-                    "ಚದರ     ಅಡಿ    ವಿಸ್ತೀರ್ಣದ     ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮಾನೆ    ನಿರ್ಮಾಣ    ಮಾಡಲು    ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
+                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ   " +
+                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+")   ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan()+
+                    "     ಇವರು   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n\n" +
+                    "               ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ : " +createdDate+ "  ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ   "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ಯಾದ   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ   ಭೇಟಿ   ನೀಡಿ   " +
+                    " ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "    ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   ಸರ್ವೆ   ನಂಬರು   "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ   " +
+                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ   " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ " +
+                    "     ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು.\n\n" +
+                    "               "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ರಲ್ಲಿ   ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು ,   " +
+                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
+                    "ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮಾನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
 
             response.setHeader5(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
             response.setHeader6("ಇವರಿಗೆ,\n" +
                     "   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation()+"   "+ apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n" +
-                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,  " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
-                    "   3. ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ, ರವರುಗಳಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
+                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
+                    "   3. ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ, ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ ");
             response.setDate(createdDateFormatted);
-            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
@@ -21051,32 +21051,32 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ   : ಕೇಂದ್ರ   ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +formattedToDate );
-            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ      ಕೇಂದ್ರ    ಪುರಸ್ಕೃತ     “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
-                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ    " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ     " +
-                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
-                    "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+") ,  ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
-                           "   ಇವರು    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ     " +surveyText+
-                    "    ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n\n" +
-                    "               ಮೇಲ್ಕಾಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ : " +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    " +
-                    "ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
-                    "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
-                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು. " +
-                    "ಸದರಿ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ಈ    ಹಿಂದೆ     "+apiResponse.getContent().get(0).getNewFinancialYear() +"  ನೇ    ಸಾಲಿನಲ್ಲಿ     ಕಡಿಮೆ     ವೆಚ್ಚದ     ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಶೆಡ್ಗೆ     ರೂ."+apiResponse.getContent().get(0).getAlreadyPaidAmount() +" ಗಳ      "+
-                            "ಸಹಾಯಧನ    ಪಡೆದುಕೊಂಡಿದ್ದು    ಸದರಿ     ಸಹಾಯಧನವನ್ನು    ಈಗ     ನೀಡುತ್ತಿರುವ    ಸಹಾಯಧನದಲ್ಲಿ     ಕಟಾಯಿಸಿ    ಉಳಿಕೆ   ಅರ್ಹವಿರುವ    ಸಹಾಯಧನವನ್ನು    ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದೆ.\n\n"+
-                    "              "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ     " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ     ರೈತರು    ಜಮೀನು     ಹೊಂದಿದ್ದು  ,  " +
-                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ     ಅಳತೆಯ    "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
-                    "ಚದರ     ಅಡಿ    ವಿಸ್ತೀರ್ಣದ     ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಾಣ    ಮಾಡಲು    ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕೇಂದ್ರ   ಪುರಸ್ಕೃತ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
+                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ   " +
+                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+") ,   ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan()+
+                           "   ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ   " +surveyText+
+                    "    ರಲ್ಲಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n\n" +
+                    "               ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ : " +createdDate+ "  ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ   "+apiResponse.getContent().get(0).getCreatedByDesignation()+" ,   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ   ಭೇಟಿ   ನೀಡಿ   " +
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "    ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   ಸರ್ವೆ   ನಂಬರು   "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ   " +
+                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ   " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ   ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು. " +
+                    "ಸದರಿ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ಈ   ಹಿಂದೆ   "+apiResponse.getContent().get(0).getNewFinancialYear() +"  ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕಡಿಮೆ   ವೆಚ್ಚದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಶೆಡ್ಗೆ   ರೂ."+apiResponse.getContent().get(0).getAlreadyPaidAmount() +" ಗಳ   "+
+                            "ಸಹಾಯಧನ   ಪಡೆದುಕೊಂಡಿದ್ದು   ಸದರಿ   ಸಹಾಯಧನವನ್ನು   ಈಗ   ನೀಡುತ್ತಿರುವ   ಸಹಾಯಧನದಲ್ಲಿ   ಕಟಾಯಿಸಿ   ಉಳಿಕೆ   ಅರ್ಹವಿರುವ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಬಹುದಾಗಿದೆ.\n\n"+
+                    "              "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ   ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು   ,   " +
+                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
+                    "ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
 
             response.setHeader5(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
             response.setHeader6("ಇವರಿಗೆ,\n" +
                     "   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation()+"   "+ apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n" +
-                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,  " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
-                    "   3. ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ ,   ರವರುಗಳಿಗೆ    ಮಾಹಿತಿಗಾಗಿ ");
-            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
+                    "   3. ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ ,   ರವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ ");
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
@@ -21137,32 +21137,32 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ       ವಿ
                 surveyText = "ಖಾತೆ ನಂ. " + kaneshNo;
             }
 
-            response.setHeader1("ಸಂಖ್ಯೆ  : ಕೇಂದ್ರ  ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
+            response.setHeader1("ಸಂಖ್ಯೆ   : ಕೇಂದ್ರ   ವಲಯ/"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"  /"  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ "/" +apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setHeader2("ದಿನಾಂಕ : " +formattedToDate );
-            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ    ಸಾಲಿನಲ್ಲಿ    “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
-                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ    ರೇಷ್ಮೆ   ಹುಳು    ಸಾಕಾಣಿಕೆ     ಮನೆ    ನಿರ್ಮಾಣಕ್ಕೆ     ಸಹಾಯಧನ    ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ     " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ     " +
-                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ    "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
-                    "   ವರ್ಗಕ್ಕೆ      ಸೇರಿದ       ಶ್ರೀಮತಿ/ಶ್ರೀ      " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+") ,   ಬಿನ್/ಕೋಂ    " +apiResponse.getContent().get(0).getFatherNameKan()+
-                    "   ಇವರು    "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ     " +surveyText+
-                    "    ರಲ್ಲಿ      ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಮನೆ     ನಿರ್ಮಿಸಲು    ನೋಂದಣಿ    ಅರ್ಜಿ    ಸಂಖ್ಯೆ  : "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.  \n\n" +
-                    "               ಮೇಲ್ಕಾಣಿಸಿದ      ಇವರ     ಜಮೀನಿಗೆ     ದಿನಾಂಕ : " +createdDate+ "  ರಂದು    "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
-                    "ಸೇರಿದ      "+apiResponse.getContent().get(0).getCreatedByDesignation()+"     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ     ಭೇಟಿ     ನೀಡಿ    " +
-                    "ಶ್ರೀ/ಶ್ರೀಮತಿ    " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ     " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
-                    "    ಇವರು     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ    ಸರ್ವೆ    ನಂಬರು     "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ      " +
-                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ    " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ    ವಿಸ್ತೀರ್ಣದ    ಪ್ರದೇಶದಲ್ಲಿ      ಬೆಳೆಸಿರುವ    ಹಿಪ್ಪುನೇರಳೆ     ತೋಟವನ್ನು     ಪರಿಶೀಲಿಸಲಾಯಿತು. " +
-                    "ಸದರಿ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ಈ    ಹಿಂದೆ     "+apiResponse.getContent().get(0).getNewFinancialYear() +" ನೇ    ಸಾಲಿನಲ್ಲಿ     ಕಡಿಮೆ     ವೆಚ್ಚದ     ರೇಷ್ಮೆ    ಹುಳು     ಸಾಕಾಣಿಕೆ     ಶೆಡ್ಗೆ     ರೂ."+apiResponse.getContent().get(0).getAlreadyPaidAmount() +" ಗಳ      "+
-                    "ಸಹಾಯಧನ    ಪಡೆದುಕೊಂಡಿದ್ದು    ಸದರಿ     ಸಹಾಯಧನವನ್ನು    ಈಗ     ನೀಡುತ್ತಿರುವ    ಸಹಾಯಧನದಲ್ಲಿ     ಕಟಾಯಿಸಿ    ಉಳಿಕೆ   ಅರ್ಹವಿರುವ    ಸಹಾಯಧನವನ್ನು     ಮಂಜೂರು    ಮಾಡಬಹುದಾಗಿದೆ.\n\n"+
-                    "              "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ     " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ಸರ್ವೆ    ನಂಬರಿನಲ್ಲಿ     ರೈತರು    ಜಮೀನು     ಹೊಂದಿದ್ದು  ,  " +
-                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ     ಅಳತೆಯ    "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
-                    "ಚದರ     ಅಡಿ    ವಿಸ್ತೀರ್ಣದ     ರೇಷ್ಮೆ    ಹುಳು    ಸಾಕಾಣಿಕೆ    ಮನೆ    ನಿರ್ಮಾಣ    ಮಾಡಲು    ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
+            response.setLineItemComment("              "+apiResponse.getContent().get(0).getFinancialYear() +"   ನೇ   ಸಾಲಿನಲ್ಲಿ   “"+apiResponse.getContent().get(0).getSchemeNameInKannada()+"“ " +
+                    "   ಯೋಜನೆ ("  +apiResponse.getContent().get(0).getCategoryNameInKannada()+ ") ಯಡಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣಕ್ಕೆ   ಸಹಾಯಧನ   ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+ "    ವ್ಯಾಪ್ತಿಯ   " +
+                    apiResponse.getContent().get(0).getVillageNameInKannada()+"   ಗ್ರಾಮದ   "+ apiResponse.getContent().get(0).getCategoryNameInKannada()+
+                    "   ವರ್ಗಕ್ಕೆ   ಸೇರಿದ   ಶ್ರೀಮತಿ/ಶ್ರೀ   " + apiResponse.getContent().get(0).getNameKan()+ " ("+apiResponse.getContent().get(0).getFruitsId()+") ,   ಬಿನ್/ಕೋಂ   " +apiResponse.getContent().get(0).getFatherNameKan()+
+                    "   ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"     ಗ್ರಾಮದ   " +surveyText+
+                    "    ರಲ್ಲಿ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಿಸಲು   ನೋಂದಣಿ   ಅರ್ಜಿ   ಸಂಖ್ಯೆ   : "+apiResponse.getContent().get(0).getArn()+"   ಸಲ್ಲಿಸಿರುತ್ತಾರೆ.   \n\n" +
+                    "               ಮೇಲ್ಕಾಣಿಸಿದ   ಇವರ   ಜಮೀನಿಗೆ   ದಿನಾಂಕ : " +createdDate+ "  ರಂದು   "+apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder()+  "       " +
+                    "ಸೇರಿದ   "+apiResponse.getContent().get(0).getCreatedByDesignation()+"     "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮಕ್ಕೆ   ಭೇಟಿ   ನೀಡಿ   " +
+                    "ಶ್ರೀ/ಶ್ರೀಮತಿ   " + apiResponse.getContent().get(0).getNameKan()+  "    ಬಿನ್/ಕೋಂ   " + apiResponse.getContent().get(0).getFatherNameKan()+  "  " +
+                    "    ಇವರು   "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   ಸರ್ವೆ   ನಂಬರು   "+ apiResponse.getContent().get(0).getSurveyNumber()  +"  ರಲ್ಲಿ   " +
+                    apiResponse.getContent().get(0).getDevAcre() + "  ಎಕರೆ   " +apiResponse.getContent().get(0).getDevGunta() + "   ಗುಂಟೆಗಳ   ವಿಸ್ತೀರ್ಣದ   ಪ್ರದೇಶದಲ್ಲಿ   ಬೆಳೆಸಿರುವ   ಹಿಪ್ಪುನೇರಳೆ   ತೋಟವನ್ನು   ಪರಿಶೀಲಿಸಲಾಯಿತು. " +
+                    "ಸದರಿ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರು   ಈ   ಹಿಂದೆ   "+apiResponse.getContent().get(0).getNewFinancialYear() +" ನೇ   ಸಾಲಿನಲ್ಲಿ   ಕಡಿಮೆ   ವೆಚ್ಚದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಶೆಡ್ಗೆ   ರೂ."+apiResponse.getContent().get(0).getAlreadyPaidAmount() +" ಗಳ   "+
+                    "ಸಹಾಯಧನ   ಪಡೆದುಕೊಂಡಿದ್ದು   ಸದರಿ   ಸಹಾಯಧನವನ್ನು   ಈಗ   ನೀಡುತ್ತಿರುವ   ಸಹಾಯಧನದಲ್ಲಿ   ಕಟಾಯಿಸಿ   ಉಳಿಕೆ   ಅರ್ಹವಿರುವ   ಸಹಾಯಧನವನ್ನು   ಮಂಜೂರು   ಮಾಡಬಹುದಾಗಿದೆ.\n\n"+
+                    "              "+apiResponse.getContent().get(0).getVillageNameInKannada()+"    ಗ್ರಾಮದ   " + apiResponse.getContent().get(0).getSurveyNumber()+  "    ಸರ್ವೆ   ನಂಬರಿನಲ್ಲಿ   ರೈತರು   ಜಮೀನು   ಹೊಂದಿದ್ದು   ,   " +
+                    "  "+stripDecimal(apiResponse.getContent().get(0).getLength())+" X "+stripDecimal(apiResponse.getContent().get(0).getBreadth())+" X "+stripDecimal(apiResponse.getContent().get(0).getHeight())+" , ಅಡಿ   ಅಳತೆಯ   "+apiResponse.getContent().get(0).getCalculatedSqft()+"    " +
+                    "ಚದರ   ಅಡಿ   ವಿಸ್ತೀರ್ಣದ   ರೇಷ್ಮೆ   ಹುಳು   ಸಾಕಾಣಿಕೆ   ಮನೆ   ನಿರ್ಮಾಣ   ಮಾಡಲು   ಕಾರ್ಯಾದೇಶ   ನೀಡಲಾಗಿದೆ.");
 
             response.setHeader5(apiResponse.getContent().get(0).getDesignationNameInKannada()+"\n" +
                     apiResponse.getContent().get(0).getDesignationNameInKannadaForSanctionOrder());
             response.setHeader6("ಇವರಿಗೆ,\n" +
                     "   1. "+apiResponse.getContent().get(0).getPreviousStepDesignation()+"   "+ apiResponse.getContent().get(0).getPreviousStepDesignationForSanctionOrder() +"\n" +
-                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,  " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
-                    "   3. ಸಂಬಂಧಿಸಿದ    ರೇಷ್ಮೆ     ಬೆಳೆಗಾರರಿಗೆ ,   ಇವರುಗಳಿಗೆ     ಮಾಹಿತಿಗಾಗಿ ");
-            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ  "+apiResponse.getContent().get(0).getFarmerFirstName());
+                    "   2. "+apiResponse.getContent().get(0).getCreatedByDesignation()+"  ,   " + apiResponse.getContent().get(0).getCreatedByDesignationForSanctionOrder() + " .\n" +
+                    "   3. ಸಂಬಂಧಿಸಿದ   ರೇಷ್ಮೆ   ಬೆಳೆಗಾರರಿಗೆ ,   ಇವರುಗಳಿಗೆ   ಮಾಹಿತಿಗಾಗಿ ");
+            response.setFarmerFirstName(" ಶ್ರೀ/ಶ್ರೀಮತಿ   "+apiResponse.getContent().get(0).getFarmerFirstName());
             response.setWorkOrderNumber(apiResponse.getContent().get(0).getWorkOrderNumber());
             response.setFarmerNumber(apiResponse.getContent().get(0).getFarmerNumber());
             response.setFarmerAddressText(apiResponse.getContent().get(0).getFarmerAddressText());
