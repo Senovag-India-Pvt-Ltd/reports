@@ -22328,7 +22328,7 @@ response.setHeader8("             ಪೀಠಿಕೆಯಲ್ಲಿ   ವಿವ�
                     "3.   "+apiResponse.getContent().get(0).getAssignedByUserDesignation() +" ,   "+ apiResponse.getContent().get(0).getAssignedByUserDesignationForSanctionOrder() +"   ಜಿಲ್ಲೆ   ರವರ   ಪ್ರಸ್ತಾವನೆ   ದಿನಾಂಕ :   "+  assignedByUserProposalDate+".\n"+
                     "4.   ರೇಷ್ಮೆ   ಕೃಷಿ   ಅಭಿವೃದ್ದಿ   ಆಯುಕ್ತರು   ಹಾಗೂ   ರೇಷ್ಮೆ   ನಿರ್ದೇಶಕರು,   ಬೆಂಗಳೂರು   ರವರ   ಪತ್ರದ   ಸಂಖ್ಯೆ :\n" +
                     "        " +apiResponse.getContent().get(0).getReleaseNo() + " ,  ದಿನಾಂಕ : " +releaseDate+".\n"+
-                    "3.   ಸರ್ಕಾರದ   ಆದೇಶ   ಸಂಖ್ಯೆ : " +apiResponse.getContent().get(0).getDeptDeleNo() + " ,  ದಿನಾಂಕ :   " +deptDeleDate);
+                    "5.   ಸರ್ಕಾರದ   ಆದೇಶ   ಸಂಖ್ಯೆ : " +apiResponse.getContent().get(0).getDeptDeleNo() + " ,  ದಿನಾಂಕ :   " +deptDeleDate);
                 response.setHeader4(
                         "    " + apiResponse.getContent().get(0).getFinancialYear() + "    ನೇ   ಸಾಲಿನಲ್ಲಿ   ರೇಷ್ಮೆ   ಇಲಾಖೆಯ   ವಿವಿಧ   ಕಾರ್ಯಕ್ರಮಗಳ   ಅನುಷ್ಠಾನಕ್ಕಾಗಿ   "+
                                 "ವಿವಿಧ   ಲೆಕ್ಕ   ಶೀರ್ಷಿಕೆಗಳಡಿ   ಉಲ್ಲೇಖ(1)ರಲ್ಲಿ   ಸರ್ಕಾರವು   ಆಡಳಿತಾತ್ಮಕ   ಅನುಮೋದನೆಯನ್ನು   ನೀಡಿದ್ದು   ,   ಉಲ್ಲೇಖ(2)ರಲ್ಲಿ   ರೇಷ್ಮೆ   ಹುಳು   "+
