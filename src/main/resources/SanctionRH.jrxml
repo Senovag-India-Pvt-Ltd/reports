@@ -81,33 +81,33 @@
 	<background>
 		<band height="1160">
 			<line>
-				<reportElement x="0" y="1159" width="802" height="1" uuid="e966bf02-c13b-4f4c-b207-a2299de363a4"/>
+				<reportElement x="0" y="1159" width="801" height="1" uuid="e966bf02-c13b-4f4c-b207-a2299de363a4"/>
 			</line>
 			<line>
-				<reportElement x="0" y="0" width="1" height="1160" uuid="724acbfe-44c0-45fe-b016-93e1e4c6bcb4"/>
+				<reportElement x="1" y="0" width="1" height="1160" uuid="724acbfe-44c0-45fe-b016-93e1e4c6bcb4"/>
 			</line>
 			<line>
 				<reportElement x="801" y="0" width="1" height="1160" uuid="9b9395f6-f33a-4caf-915b-a0ff54030c24"/>
 			</line>
 			<line>
-				<reportElement x="0" y="0" width="802" height="1" uuid="7fb841ca-5707-4409-8e72-d50415432be8"/>
+				<reportElement x="2" y="0" width="800" height="1" uuid="7fb841ca-5707-4409-8e72-d50415432be8"/>
 			</line>
 		</band>
 	</background>
 	<detail>
-		<band height="652" splitType="Stretch">
+		<band height="555" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
 				<reportElement positionType="Float" x="3" y="252" width="780" height="26" uuid="ba97f7e0-a946-4aa6-a8c1-08e4da8401fe"/>
 				<staticText>
-					<reportElement x="3" y="9" width="70" height="20" uuid="d7d96834-00b1-4266-b1e2-1b531c559ce6"/>
+					<reportElement x="23" y="9" width="53" height="20" uuid="d7d96834-00b1-4266-b1e2-1b531c559ce6"/>
 					<textElement textAlignment="Center">
 						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಪೀಠಿಕೆ :]]></text>
 				</staticText>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="73" y="9" width="696" height="36" uuid="d848aa8f-8fda-494d-a6c7-c293bef10ca5"/>
+					<reportElement positionType="Float" x="87" y="9" width="682" height="36" uuid="d848aa8f-8fda-494d-a6c7-c293bef10ca5"/>
 					<textElement textAlignment="Justified">
 						<font fontName="Noto Sans Kannada" size="11"/>
 						<paragraph lineSpacing="Double"/>
@@ -118,14 +118,14 @@
 			<frame>
 				<reportElement positionType="Float" x="0" y="206" width="780" height="23" uuid="1907978b-a3e9-4cab-a41b-410c04b4557d"/>
 				<staticText>
-					<reportElement x="0" y="0" width="80" height="20" uuid="dca80ff9-2803-4e09-857f-186dda0cbda8"/>
+					<reportElement x="12" y="0" width="70" height="20" uuid="dca80ff9-2803-4e09-857f-186dda0cbda8"/>
 					<textElement textAlignment="Center" verticalAlignment="Top">
 						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಉಲ್ಲೇಖ  :]]></text>
 				</staticText>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="80" y="0" width="700" height="20" uuid="1ed78154-8efc-4929-8790-92cac41c7d37"/>
+					<reportElement positionType="Float" x="90" y="0" width="690" height="20" uuid="1ed78154-8efc-4929-8790-92cac41c7d37"/>
 					<textElement textAlignment="Left">
 						<font fontName="Noto Sans Kannada" size="11"/>
 						<paragraph lineSpacing="Double"/>
@@ -182,7 +182,7 @@
 				</jr:QRCode>
 			</componentElement>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="73" y="302" width="696" height="21" uuid="5563c013-1199-4b9e-b909-6fad969125fc"/>
+				<reportElement positionType="Float" x="90" y="302" width="682" height="21" uuid="5563c013-1199-4b9e-b909-6fad969125fc"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="11" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
@@ -197,7 +197,7 @@
 				<textFieldExpression><![CDATA[$F{header7}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="74" y="400" width="695" height="32" uuid="afdf18e9-cef0-4c90-b3b3-3dc0c1105211"/>
+				<reportElement positionType="Float" x="90" y="400" width="682" height="32" uuid="afdf18e9-cef0-4c90-b3b3-3dc0c1105211"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="11"/>
 					<paragraph lineSpacing="Double"/>
@@ -213,7 +213,7 @@
 				<textFieldExpression><![CDATA[$F{header10}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="73" y="518" width="696" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
+				<reportElement positionType="Float" x="90" y="518" width="682" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
 				<textElement>
 					<font fontName="Noto Sans Kannada" size="10"/>
 					<paragraph lineSpacing="Double"/>
