@@ -128,8 +128,8 @@
 	</background>
 	<detail>
 		<band height="760" splitType="Stretch">
-			<textField>
-				<reportElement x="30" y="272" width="500" height="118" uuid="d7f48abc-53ba-42c0-8b82-0ceeb88094a1"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="272" width="500" height="38" uuid="d7f48abc-53ba-42c0-8b82-0ceeb88094a1"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
@@ -161,7 +161,7 @@
 				<reportElement x="1" y="3" width="1" height="756" uuid="cd06b6b8-9528-4da2-906f-5fefb5953a9e"/>
 			</line>
 			<line>
-				<reportElement x="0" y="3" width="558" height="1" uuid="d83bad38-931b-4555-a6b4-49362e4bc405"/>
+				<reportElement x="1" y="3" width="558" height="1" uuid="d83bad38-931b-4555-a6b4-49362e4bc405"/>
 			</line>
 			<line>
 				<reportElement x="559" y="2" width="1" height="757" uuid="4fe0fa66-16c8-473f-927c-76f3453f8672"/>
@@ -209,7 +209,7 @@
 				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
 			</image>
 			<componentElement>
-				<reportElement x="50" y="400" width="460" height="130" uuid="9f59efc3-5296-4032-9e6f-fcf27ed0cbda">
+				<reportElement positionType="Float" x="50" y="314" width="460" height="130" uuid="9f59efc3-5296-4032-9e6f-fcf27ed0cbda">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -565,8 +565,8 @@
 				</textElement>
 				<text><![CDATA[ಕಚೇರಿ   ಪ್ರತಿ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="350" y="540" width="200" height="81" uuid="080e3ea8-cd2b-4da3-912e-d987ace86403"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="350" y="479" width="200" height="81" uuid="080e3ea8-cd2b-4da3-912e-d987ace86403"/>
 				<textElement textAlignment="Center">
 					<font fontName="Noto Sans Kannada" size="8"/>
 					<paragraph lineSpacing="Double"/>
@@ -580,7 +580,7 @@
 				<imageExpression><![CDATA[$F{logurl}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="0" y="3" width="558" height="1" uuid="4fbb3798-2588-47e4-b5ab-f153f67990e6"/>
+				<reportElement x="1" y="3" width="558" height="1" uuid="4fbb3798-2588-47e4-b5ab-f153f67990e6"/>
 			</line>
 			<line>
 				<reportElement x="559" y="2" width="1" height="757" uuid="bc642d89-773a-43c2-96a7-8053fd94fb3b"/>
@@ -630,8 +630,8 @@
 			<line>
 				<reportElement x="1" y="3" width="1" height="756" uuid="993493ce-7b40-4dd8-a078-46b3cce6e15c"/>
 			</line>
-			<textField>
-				<reportElement x="30" y="272" width="500" height="118" uuid="8f77e498-82d2-47b7-8167-7c19915811c9"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="272" width="500" height="28" uuid="8f77e498-82d2-47b7-8167-7c19915811c9"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
@@ -653,7 +653,7 @@
 				<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="50" y="400" width="460" height="130" uuid="75bb21e5-f9ec-4c9b-8eab-b6aa810449fc">
+				<reportElement positionType="Float" x="50" y="305" width="460" height="130" uuid="75bb21e5-f9ec-4c9b-8eab-b6aa810449fc">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -1012,10 +1012,18 @@
 				</textElement>
 				<text><![CDATA[ಮಾರುಕಟ್ಟೆ / ರೈತರ  ಪ್ರತಿ ]]></text>
 			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="350" y="467" width="200" height="81" uuid="bd8dac3a-6861-4e49-9a4c-1d6d0d2845f2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Noto Sans Kannada" size="8"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="760">
 			<textField>
-				<reportElement x="30" y="272" width="500" height="118" uuid="fcb47486-c226-482d-bec1-8d3f18c5b74b"/>
+				<reportElement x="30" y="272" width="500" height="28" uuid="fcb47486-c226-482d-bec1-8d3f18c5b74b"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
@@ -1079,7 +1087,7 @@
 				<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="50" y="400" width="460" height="126" uuid="df6a487d-b673-4d4d-ba6d-989689c29f17">
+				<reportElement x="50" y="305" width="460" height="95" uuid="df6a487d-b673-4d4d-ba6d-989689c29f17">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -1306,8 +1314,8 @@
 					</jr:column>
 				</jr:table>
 			</componentElement>
-			<textField>
-				<reportElement x="350" y="540" width="200" height="81" uuid="3ff90a04-0973-44ee-8d38-b22bee55223d"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="350" y="435" width="200" height="81" uuid="3ff90a04-0973-44ee-8d38-b22bee55223d"/>
 				<textElement textAlignment="Center">
 					<font fontName="Noto Sans Kannada" size="8"/>
 					<paragraph lineSpacing="Double"/>
@@ -1331,7 +1339,7 @@
 				<reportElement x="559" y="2" width="1" height="757" uuid="2d06d14c-1760-4a18-9fb3-87bc621054ba"/>
 			</line>
 			<line>
-				<reportElement x="1" y="3" width="558" height="1" uuid="4ce71386-96bb-4ef5-8987-92a70a5a2317"/>
+				<reportElement x="2" y="3" width="558" height="1" uuid="4ce71386-96bb-4ef5-8987-92a70a5a2317"/>
 			</line>
 			<image>
 				<reportElement x="250" y="6" width="100" height="70" uuid="e9cee6f0-07a5-4799-9a9f-de5e41e09b06"/>
