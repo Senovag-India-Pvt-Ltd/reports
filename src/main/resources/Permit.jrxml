@@ -175,7 +175,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ಮೈಸೂರು  ರೇಷ್ಮೆ    ಬಿತ್ತನೆ  ಬೀಜ  ಮತ್ತು    ಗೂಡುಗಳ  ಉತ್ಪಾದನೆ,  ಸರಬರಾಜು ಮತ್ತು         ಹಂಚಿಕೆ ವಿನಿಮಯ  ನಿಯಮಾವಳಿ  1959]]></text>
+				<text><![CDATA[ಮೈಸೂರು  ರೇಷ್ಮೆ   ಬಿತ್ತನೆ  ಬೀಜ ಮತ್ತು  ಗೂಡುಗಳ  ಉತ್ಪಾದನೆ,  ಸರಬರಾಜು ಮತ್ತು  ಹಂಚಿಕೆ ವಿನಿಮಯ ನಿಯಮಾವಳಿ 1959]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="6" y="72" width="484" height="28" uuid="9555f87e-3a7f-4771-b50f-9a6846d449b7"/>
@@ -184,8 +184,8 @@
 				</textElement>
 				<text><![CDATA[ಬಿತ್ತನೆ ಗೂಡುಗಳ ಖರೀದಿಯ ಬಗ್ಗೆ   ಪ್ರಮಾಣ ಪತ್ರ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="20" y="174" width="470" height="140" uuid="95ccc3fe-f40c-4d43-b6d9-e3fa1ae42e9e"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="20" y="174" width="470" height="36" uuid="95ccc3fe-f40c-4d43-b6d9-e3fa1ae42e9e"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
 					<paragraph lineSpacing="Double"/>
@@ -208,7 +208,7 @@
 				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="10" y="310" width="480" height="50" uuid="f2265645-2837-460d-8c66-01bbeaa04cad">
+				<reportElement positionType="Float" x="10" y="216" width="480" height="50" uuid="f2265645-2837-460d-8c66-01bbeaa04cad">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -402,8 +402,16 @@
 			<line>
 				<reportElement x="2" y="14" width="1" height="894" uuid="37700f8e-1753-4e30-bb39-bcccc7b1a61c"/>
 			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="20" y="188" width="470" height="32" uuid="c47ca63e-6159-4961-85b3-df176513546c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
+			</textField>
 			<componentElement>
-				<reportElement x="9" y="326" width="482" height="60" uuid="aa59616c-3d1e-4d44-a91d-298bd55e3b19">
+				<reportElement positionType="Float" x="9" y="226" width="482" height="60" uuid="aa59616c-3d1e-4d44-a91d-298bd55e3b19">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 3_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 3_CH"/>
@@ -588,7 +596,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Noto Sans Kannada" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ಮೈಸೂರು  ರೇಷ್ಮೆ    ಬಿತ್ತನೆ  ಬೀಜ  ಮತ್ತು    ಗೂಡುಗಳ  ಉತ್ಪಾದನೆ,  ಸರಬರಾಜು ಮತ್ತು         ಹಂಚಿಕೆ ವಿನಿಮಯ  ನಿಯಮಾವಳಿ  1959]]></text>
+				<text><![CDATA[ಮೈಸೂರು  ರೇಷ್ಮೆ   ಬಿತ್ತನೆ  ಬೀಜ ಮತ್ತು  ಗೂಡುಗಳ  ಉತ್ಪಾದನೆ,  ಸರಬರಾಜು ಮತ್ತು  ಹಂಚಿಕೆ ವಿನಿಮಯ ನಿಯಮಾವಳಿ 1959]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="6" y="86" width="484" height="28" uuid="9df501fe-1cc4-4eb7-8e11-54ed079c98b6"/>
@@ -613,14 +621,6 @@
 					<font fontName="Noto Sans Kannada" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header3}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="20" y="188" width="470" height="140" uuid="c47ca63e-6159-4961-85b3-df176513546c"/>
-				<textElement textAlignment="Justified" verticalAlignment="Top">
-					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
-					<paragraph lineSpacing="Double"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{header}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="9" y="838" width="231" height="30" uuid="bb98f32e-aa8a-4169-b703-d0e8d7b73047"/>
