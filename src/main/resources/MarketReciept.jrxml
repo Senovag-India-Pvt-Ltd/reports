@@ -1022,7 +1022,7 @@
 			</textField>
 		</band>
 		<band height="760">
-			<textField>
+			<textField textAdjust="StretchHeight">
 				<reportElement x="30" y="272" width="500" height="28" uuid="fcb47486-c226-482d-bec1-8d3f18c5b74b"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="9" isBold="false"/>
@@ -1087,7 +1087,7 @@
 				<textFieldExpression><![CDATA[$F{header4}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="50" y="305" width="460" height="95" uuid="df6a487d-b673-4d4d-ba6d-989689c29f17">
+				<reportElement positionType="Float" x="50" y="305" width="460" height="95" uuid="df6a487d-b673-4d4d-ba6d-989689c29f17">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -1123,7 +1123,7 @@
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[2.]]></text>
+								<text><![CDATA[1.]]></text>
 							</staticText>
 						</jr:detailCell>
 					</jr:column>
@@ -1315,7 +1315,7 @@
 				</jr:table>
 			</componentElement>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="350" y="435" width="200" height="81" uuid="3ff90a04-0973-44ee-8d38-b22bee55223d"/>
+				<reportElement x="350" y="465" width="200" height="81" uuid="3ff90a04-0973-44ee-8d38-b22bee55223d"/>
 				<textElement textAlignment="Center">
 					<font fontName="Noto Sans Kannada" size="8"/>
 					<paragraph lineSpacing="Double"/>
@@ -1327,7 +1327,7 @@
 				<textElement textAlignment="Left">
 					<font fontName="Noto Sans Kannada" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[(ಮಾರುಕಟ್ಟೆ /ನೂಲು ಬಿಚ್ಚಾ ಣಿಕೆದಾರರ ಪ್ರತಿ)]]></text>
+				<text><![CDATA[(ಮಾರುಕಟ್ಟೆ /ನೂಲು ಬಿಚ್ಚಾಣಿಕೆದಾರರ ಪ್ರತಿ)]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="3" width="1" height="756" uuid="936c95be-b40f-4e89-882f-1d6d0ffe2d55"/>
