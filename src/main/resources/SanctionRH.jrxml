@@ -101,7 +101,7 @@
 				<reportElement positionType="Float" x="3" y="252" width="780" height="26" uuid="ba97f7e0-a946-4aa6-a8c1-08e4da8401fe"/>
 				<staticText>
 					<reportElement x="23" y="9" width="53" height="20" uuid="d7d96834-00b1-4266-b1e2-1b531c559ce6"/>
-					<textElement textAlignment="Center">
+					<textElement textAlignment="Justified">
 						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಪೀಠಿಕೆ :]]></text>
@@ -119,14 +119,14 @@
 				<reportElement positionType="Float" x="0" y="206" width="780" height="23" uuid="1907978b-a3e9-4cab-a41b-410c04b4557d"/>
 				<staticText>
 					<reportElement x="12" y="0" width="70" height="20" uuid="dca80ff9-2803-4e09-857f-186dda0cbda8"/>
-					<textElement textAlignment="Center" verticalAlignment="Top">
+					<textElement textAlignment="Justified" verticalAlignment="Top">
 						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಉಲ್ಲೇಖ  :]]></text>
 				</staticText>
 				<textField textAdjust="StretchHeight">
 					<reportElement positionType="Float" x="90" y="0" width="690" height="20" uuid="1ed78154-8efc-4929-8790-92cac41c7d37"/>
-					<textElement textAlignment="Left">
+					<textElement textAlignment="Justified">
 						<font fontName="Noto Sans Kannada" size="11"/>
 						<paragraph lineSpacing="Double"/>
 					</textElement>
@@ -135,7 +135,7 @@
 			</frame>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="90" y="150" width="670" height="50" uuid="f205d018-8b51-4c18-863e-4b617e944e03"/>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="11" isBold="false" isItalic="false"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
@@ -143,7 +143,7 @@
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="10" y="148" width="80" height="30" uuid="0d4173cc-2d51-400f-9b71-1877424fa5c2"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
+				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ವಿಷಯ  : ]]></text>
@@ -170,7 +170,7 @@
 			</image>
 			<textField>
 				<reportElement x="20" y="10" width="300" height="30" uuid="d4e48aee-2c2a-4f88-861c-5ecd19fc6b1c"/>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{header11}]]></textFieldExpression>
@@ -214,7 +214,7 @@
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="90" y="518" width="682" height="30" uuid="5436dab6-7b20-44d9-9b84-dbfbb32415a4"/>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="10"/>
 					<paragraph lineSpacing="Double"/>
 				</textElement>
@@ -225,29 +225,29 @@
 	<pageFooter>
 		<band height="33">
 			<staticText>
-				<reportElement positionType="Float" x="338" y="0" width="40" height="20" uuid="90453128-e7f7-4d2d-aea4-2a39d513c6bd"/>
-				<textElement textAlignment="Right">
+				<reportElement positionType="Float" x="350" y="0" width="28" height="20" uuid="90453128-e7f7-4d2d-aea4-2a39d513c6bd"/>
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<text><![CDATA[Page:]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="378" y="0" width="30" height="20" uuid="c930da66-9a14-4cab-a077-a35c68495ab0"/>
-				<textElement textAlignment="Right">
+				<reportElement positionType="Float" x="378" y="0" width="22" height="20" uuid="c930da66-9a14-4cab-a077-a35c68495ab0"/>
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="408" y="0" width="25" height="20" uuid="cb5ac4ac-9fd6-4d17-b1f6-c55e7a447b91"/>
-				<textElement textAlignment="Center">
+				<reportElement positionType="Float" x="401" y="0" width="25" height="20" uuid="cb5ac4ac-9fd6-4d17-b1f6-c55e7a447b91"/>
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<text><![CDATA[ of ]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement positionType="Float" x="433" y="0" width="30" height="20" uuid="73824e4b-c78a-41ee-88a5-eebefd1d3fdc"/>
-				<textElement textAlignment="Left">
+				<reportElement positionType="Float" x="425" y="0" width="30" height="20" uuid="73824e4b-c78a-41ee-88a5-eebefd1d3fdc"/>
+				<textElement textAlignment="Justified">
 					<font fontName="Noto Sans Kannada" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>

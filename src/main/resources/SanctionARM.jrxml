@@ -53,14 +53,14 @@
 ರೇಷ್ಮೆ    ಇಲಾಖೆ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="630" y="0" width="166" height="16" uuid="a1c2d3e4-5f60-47b8-9c1d-2e3f4a5b6c7d"/>
-				<textElement textAlignment="Right">
+				<reportElement x="650" y="10" width="144" height="16" uuid="a1c2d3e4-5f60-47b8-9c1d-2e3f4a5b6c7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Noto Sans Kannada" size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{armLandTypeTag}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="650" y="16" width="146" height="100" uuid="db02f53e-55c2-4200-b115-900a8ac78d49"/>
+				<reportElement x="650" y="27" width="146" height="100" uuid="db02f53e-55c2-4200-b115-900a8ac78d49"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[$F{status} == null ? "" : $F{status}]]></jr:codeExpression>
 				</jr:QRCode>
@@ -81,7 +81,7 @@
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="10" y="153" width="80" height="25" uuid="6e32614b-c52f-4283-af64-9fe9dc716dc6"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ವಿಷಯ  :]]></text>
@@ -95,18 +95,18 @@
 				<textFieldExpression><![CDATA[$F{header2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="330" y="258" width="140" height="15" uuid="f4724d01-ed7d-481d-8e67-d7ed38c8a2e8"/>
+				<reportElement positionType="Float" x="330" y="266" width="140" height="15" uuid="f4724d01-ed7d-481d-8e67-d7ed38c8a2e8"/>
 				<textElement textAlignment="Center">
 					<font fontName="Noto Sans Kannada" size="11"/>
 				</textElement>
 				<text><![CDATA[******]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="10" y="292" width="80" height="20" uuid="08743b8b-c2bd-473c-98da-307775e237f1"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
+				<reportElement positionType="Float" x="8" y="292" width="82" height="20" uuid="08743b8b-c2bd-473c-98da-307775e237f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Noto Sans Kannada" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ಪೀಠಿಕೆ :-]]></text>
+				<text><![CDATA[ಪೀಠಿಕೆ :]]></text>
 			</staticText>
 			<frame>
 				<reportElement positionType="Float" x="73" y="299" width="727" height="50" uuid="099ed8de-90c8-47f1-90a5-e2e630a2add8"/>
@@ -270,16 +270,16 @@
 				<textFieldExpression><![CDATA[$F{header9}]]></textFieldExpression>
 			</textField>
 			<frame>
-				<reportElement positionType="Float" x="0" y="214" width="780" height="40" uuid="bf107cf3-83f5-4a84-95ca-f815fb5d0436"/>
+				<reportElement positionType="Float" x="0" y="210" width="780" height="48" uuid="bf107cf3-83f5-4a84-95ca-f815fb5d0436"/>
 				<staticText>
-					<reportElement x="8" y="-22" width="82" height="20" uuid="99dc0f5f-6481-400d-b26e-1b67e0c3664b"/>
+					<reportElement x="8" y="-21" width="82" height="20" uuid="99dc0f5f-6481-400d-b26e-1b67e0c3664b"/>
 					<textElement textAlignment="Center" verticalAlignment="Top">
 						<font fontName="Noto Sans Kannada" size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ಉಲ್ಲೇಖ  :]]></text>
 				</staticText>
 				<textField textAdjust="StretchHeight">
-					<reportElement positionType="Float" x="90" y="-22" width="690" height="20" uuid="f5fc6556-40c8-4c54-bc00-0058f7529cf3"/>
+					<reportElement positionType="Float" x="90" y="-21" width="690" height="20" uuid="f5fc6556-40c8-4c54-bc00-0058f7529cf3"/>
 					<textElement textAlignment="Left">
 						<font fontName="Noto Sans Kannada" size="11"/>
 						<paragraph lineSpacing="Double"/>
